@@ -49,7 +49,7 @@ const Home = () => {
      <div className="flex-1">
       <HeroSection />
      </div>
-     {/* <HeroUserCard /> */}
+     <HeroUserCard />
     </div>
 
     <DealsSection />
@@ -70,9 +70,9 @@ const Home = () => {
 
     <RecommendedItems />
 
-    {/* <ExtraServices /> */}
+    <ExtraServices />
 
-    {/* <RegionSuppliers /> */}
+    <RegionSuppliers />
 
 
    </div>
