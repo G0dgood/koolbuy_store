@@ -1,8 +1,10 @@
-import React from "react";
+"use client";
+
+import React, { useId } from "react";
 import { motion } from "framer-motion";
 
 interface TabFilterProps {
-  id: string;
+  id?: string;
   tabs: string[];
   activeTab: string;
   onChange: (tab: string) => void;
@@ -18,6 +20,9 @@ export const TabFilter: React.FC<TabFilterProps> = ({
   containerClassName = "",
   fullWidth = false,
 }) => {
+  const generatedId = useId();
+  const filterId = id || generatedId;
+
   return (
     <div className={`flex bg-brand-blue-light p-1 rounded-[6px] relative ${fullWidth ? "w-full" : "w-fit"} ${containerClassName}`}>
       {tabs.map((tab) => (
@@ -31,7 +36,7 @@ export const TabFilter: React.FC<TabFilterProps> = ({
         >
           {activeTab === tab && (
             <motion.div
-              layoutId={`${id}-bg`}
+              layoutId={`${filterId}-bg`}
               className="absolute inset-0 bg-white rounded-[6px] shadow-sm -z-10"
               transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
             />
