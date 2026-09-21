@@ -9,52 +9,57 @@ const containerVariants: Variants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.1,
-      delayChildren: 0.1
-    }
-  }
+      delayChildren: 0.1,
+    },
+  },
 };
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: {
       type: "spring",
       stiffness: 100,
-      damping: 15
-    }
-  }
+      damping: 15,
+    },
+  },
 };
 
 const services = [
   {
     title: "Source from Industry Hubs",
     image: "/web_images/Mask group copy.png",
-    icon: "search"
+    icon: "search",
   },
   {
     title: "Customize Your Products",
     image: "/web_images/Mask group copy 2.png",
-    icon: "inventory_2"
+    icon: "inventory_2",
   },
   {
     title: "Fast, reliable shipping by ocean or air",
     image: "/web_images/Mask group copy 3.png",
-    icon: "send"
+    icon: "send",
   },
   {
     title: "Product monitoring and inspection",
     image: "/web_images/Mask group copy.png",
-    icon: "security"
-  }
+    icon: "security",
+  },
 ];
 
 const ExtraServices = () => {
   return (
-    <section className="w-full">
-      <h3 className="text-xl md:text-2xl font-bold mb-6 md:mb-8 text-gray-900">Extra services</h3>
-      <motion.div 
+    <section className="w-full flex flex-col gap-5">
+      {/* Section Header */}
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg md:text-xl font-bold uppercase tracking-wider text-gray-900">
+          Extra Services
+        </h3>
+      </div>
+      <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -62,17 +67,17 @@ const ExtraServices = () => {
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"
       >
         {services.map((service, idx) => (
-          <motion.div 
-            key={idx} 
+          <motion.div
+            key={idx}
             variants={itemVariants}
             className="bg-white border border-gray-200 rounded-lg overflow-hidden group hover:shadow-lg transition-all duration-300 cursor-pointer relative"
           >
             <div className="h-32 relative overflow-hidden">
-              <Image 
-                src={service.image} 
-                alt={service.title} 
-                fill 
-                className="object-cover transition-transform group-hover:scale-110 duration-500" 
+              <Image
+                src={service.image}
+                alt={service.title}
+                fill
+                className="object-cover transition-transform group-hover:scale-110 duration-500"
               />
               <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"></div>
             </div>

@@ -7,16 +7,23 @@ import { Button } from "@/app/components/Button";
 const Newsletter = () => {
   return (
     <section className="w-full bg-[#EFF2F4] py-12 px-6 text-center flex flex-col items-center gap-6 relative overflow-hidden">
-      <div className="max-w-[500px] flex flex-col items-center text-center gap-2 z-10">
-        <h3 className="text-xl md:text-2xl font-bold text-gray-900 truncate w-full">Subscribe to our newsletter</h3>
+      <div className="max-w-125 flex flex-col items-center text-center gap-2 z-10">
+        <h3 className="text-xl md:text-2xl font-bold text-gray-900 truncate w-full">
+          Subscribe to our newsletter
+        </h3>
         <p className="text-sm text-gray-500 leading-relaxed">
-          Get daily news on upcoming offers from many suppliers all over the world
+          Get daily news on upcoming offers from many suppliers all over the
+          world
         </p>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-2 w-full max-w-[400px] z-10 px-4 md:px-0">
+      <div className="flex flex-col md:flex-row gap-2 w-full max-w-100 z-10 px-4 md:px-0">
         <div className="flex-1 relative flex items-center group">
-          <Icon name="email" size="sm" className="absolute left-3 text-gray-400 group-focus-within:text-brand-blue transition-colors" />
+          <Icon
+            name="email"
+            size="sm"
+            className="absolute left-3 text-gray-400 group-focus-within:text-brand-blue transition-colors"
+          />
           <input
             type="email"
             placeholder="Email"

@@ -6,7 +6,10 @@ import { Footer } from "@/app/components/Footer";
 import { Icon } from "@/app/components/Icon";
 import { FilterSidebar } from "@/app/components/Products/FilterSidebar";
 import { ListingControlBar } from "@/app/components/Products/ListingControlBar";
-import { ProductGridItem, ProductListItem } from "@/app/components/Products/ProductItems";
+import {
+  ProductGridItem,
+  ProductListItem,
+} from "@/app/components/Products/ProductItems";
 import { ProductMobileHeader } from "@/app/components/Products/ProductMobileHeader";
 import { CategoryChips } from "@/app/components/Products/CategoryChips";
 import { RecommendedProducts } from "@/app/components/Products/RecommendedProducts";
@@ -27,13 +30,20 @@ const ProductsPage = () => {
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
   const [filters, setFilters] = useState<FilterState>({
     category: null,
-    brands: ["Bloom & Mist"], 
+    brands: ["Koolbuy Store"],
     priceRange: [150, 850],
     condition: "Any",
     ratings: [],
   });
 
-  const categories = ["Signature Fragrance", "Luxury Skincare", "Boutique Gift Sets", "Body & Bath", "Home Fragrance", "Men's Grooming"];
+  const categories = [
+    "Signature Fragrance",
+    "Luxury Skincare",
+    "Boutique Gift Sets",
+    "Body & Bath",
+    "Home Fragrance",
+    "Men's Grooming",
+  ];
 
   const products = [
     {
@@ -44,11 +54,12 @@ const ProductsPage = () => {
       rating: 4.9,
       orders: 842,
       shipping: "Express Shipping",
-      description: "A profound journey through the heart of artisanal perfumery. This discovery set features our flagship intense Oud, masterfully balanced with midnight bloom and rare spices for an unforgettable sensory trajectory.",
+      description:
+        "A profound journey through the heart of artisanal perfumery. This discovery set features our flagship intense Oud, masterfully balanced with midnight bloom and rare spices for an unforgettable sensory trajectory.",
       image: "/brandImage/product_1.png",
       category: "Signature Fragrance",
-      brand: "Bloom & Mist",
-      condition: "Intense"
+      brand: "Koolbuy Store",
+      condition: "Intense",
     },
     {
       id: "2",
@@ -57,11 +68,12 @@ const ProductsPage = () => {
       rating: 4.8,
       orders: 2310,
       shipping: "Free Shipping",
-      description: "A floral ambery fragrance that embraces the paradoxes of iconic ingredients to reveal new scented sensations. Featuring notes of Neroli, Amber, and Musk for a timeless yet avant-garde signature.",
+      description:
+        "A floral ambery fragrance that embraces the paradoxes of iconic ingredients to reveal new scented sensations. Featuring notes of Neroli, Amber, and Musk for a timeless yet avant-garde signature.",
       image: "/brandImage/product_2.png",
       category: "Signature Fragrance",
       brand: "Prada",
-      condition: "Essential"
+      condition: "Essential",
     },
     {
       id: "3",
@@ -71,11 +83,12 @@ const ProductsPage = () => {
       rating: 4.7,
       orders: 1540,
       shipping: "Fast Shipping",
-      description: "A high-fidelity skincare orchestration designed to materialize absolute radiance. This duo synchronizes the moisture-locking power of Hyaluronic Acid with the brightening intensity of stabilized Vitamin C.",
+      description:
+        "A high-fidelity skincare orchestration designed to materialize absolute radiance. This duo synchronizes the moisture-locking power of Hyaluronic Acid with the brightening intensity of stabilized Vitamin C.",
       image: "/brandImage/product_3.png",
       category: "Luxury Skincare",
-      brand: "Bloom & Mist",
-      condition: "Discovery"
+      brand: "Koolbuy Store",
+      condition: "Discovery",
     },
     {
       id: "4",
@@ -84,11 +97,12 @@ const ProductsPage = () => {
       rating: 4.6,
       orders: 450,
       shipping: "Free Shipping",
-      description: "A fragrance for a strong, passionate, self-confident man who is deeply in touch with his emotions. Characterized by strong contrasts in which the most noble and elegant ingredients enrich and enhance one another.",
+      description:
+        "A fragrance for a strong, passionate, self-confident man who is deeply in touch with his emotions. Characterized by strong contrasts in which the most noble and elegant ingredients enrich and enhance one another.",
       image: "/brandImage/product_4.png",
       category: "Men's Grooming",
       brand: "Versace",
-      condition: "Essential"
+      condition: "Essential",
     },
     {
       id: "5",
@@ -98,11 +112,12 @@ const ProductsPage = () => {
       rating: 4.8,
       orders: 210,
       shipping: "Express Delivery",
-      description: "Transform your daily ritual into a spa-level experience. Infused with midnight noir essences, this collection features a silk-texture body wash and a deep-hydration luxury lotion.",
+      description:
+        "Transform your daily ritual into a spa-level experience. Infused with midnight noir essences, this collection features a silk-texture body wash and a deep-hydration luxury lotion.",
       image: "/brandImage/product_5.png",
       category: "Body & Bath",
-      brand: "Bloom & Mist",
-      condition: "Essential"
+      brand: "Koolbuy Store",
+      condition: "Essential",
     },
     {
       id: "6",
@@ -111,28 +126,36 @@ const ProductsPage = () => {
       rating: 4.7,
       orders: 1200,
       shipping: "Fast Shipping",
-      description: "Created using a particular blend with a structure that remains unchanged from the first time it is applied to the skin. Leather accord and goldenwood are custom mixed with natural extract of the Nootka Cypress.",
+      description:
+        "Created using a particular blend with a structure that remains unchanged from the first time it is applied to the skin. Leather accord and goldenwood are custom mixed with natural extract of the Nootka Cypress.",
       image: "/brandImage/product_6.png",
       category: "Signature Fragrance",
       brand: "Gucci",
-      condition: "Intense"
-    }
+      condition: "Intense",
+    },
   ];
 
   const filteredProducts = React.useMemo(() => {
-    return products.filter(product => {
+    return products.filter((product) => {
       // Category filter
-      if (filters.category && product.category !== filters.category) return false;
+      if (filters.category && product.category !== filters.category)
+        return false;
 
       // Brand filter
-      if (filters.brands.length > 0 && !filters.brands.includes(product.brand)) return false;
+      if (filters.brands.length > 0 && !filters.brands.includes(product.brand))
+        return false;
 
       // Price filter
       const price = parseFloat(product.price.replace(/[₦$,]/g, ""));
-      if (price < filters.priceRange[0] || price > filters.priceRange[1]) return false;
+      if (price < filters.priceRange[0] || price > filters.priceRange[1])
+        return false;
 
       // Condition filter
-      if (filters.condition !== "Any" && product.condition !== filters.condition) return false;
+      if (
+        filters.condition !== "Any" &&
+        product.condition !== filters.condition
+      )
+        return false;
 
       // Rating filter (show all if none selected, or match any selected min rating)
       if (filters.ratings.length > 0) {
@@ -147,9 +170,7 @@ const ProductsPage = () => {
   return (
     <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
       {/* Desktop Header */}
-      <div className="hidden md:block">
-        <Header />
-      </div>
+      <Header className="hidden md:block" />
 
       {/* Mobile Header */}
       <ProductMobileHeader title={filters.category || "Mobile accessory"} />
@@ -159,17 +180,23 @@ const ProductsPage = () => {
         <CategoryChips
           categories={categories}
           selectedCategory={filters.category}
-          onSelect={(cat) => setFilters(prev => ({ ...prev, category: cat }))}
+          onSelect={(cat) => setFilters((prev) => ({ ...prev, category: cat }))}
           className="md:hidden"
         />
 
         {/* Breadcrumbs */}
         <div className="hidden md:flex items-center gap-2 text-sm text-gray-400 overflow-x-auto whitespace-nowrap scrollbar-none pb-2 px-4 md:px-0">
-          <Link href="/" className="hover:text-brand-blue">Home</Link>
+          <Link href="/" className="hover:text-brand-blue">
+            Home
+          </Link>
           <Icon name="chevron_right" size="xs" />
-          <Link href="#" className="hover:text-brand-blue">Clothings</Link>
+          <Link href="#" className="hover:text-brand-blue">
+            Clothings
+          </Link>
           <Icon name="chevron_right" size="xs" />
-          <Link href="#" className="hover:text-brand-blue">Men's wear</Link>
+          <Link href="#" className="hover:text-brand-blue">
+            Men's wear
+          </Link>
           <Icon name="chevron_right" size="xs" />
           <span className="text-gray-600 font-medium">Summer clothing</span>
         </div>
@@ -191,21 +218,31 @@ const ProductsPage = () => {
               onFilterClick={() => setIsFilterDrawerOpen(true)}
             />
 
-            <div className={`
-                ${viewMode === "grid"
-                ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 md:gap-5"
-                : "flex flex-col gap-3 md:gap-4"}
-              `}>
-              {filteredProducts.map(product => (
-                viewMode === "grid"
-                  ? <ProductGridItem key={product.id} product={product} />
-                  : <ProductListItem key={product.id} product={product} />
-              ))}
+            <div
+              className={`
+                ${
+                  viewMode === "grid"
+                    ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 md:gap-5"
+                    : "flex flex-col gap-3 md:gap-4"
+                }
+              `}
+            >
+              {filteredProducts.map((product) =>
+                viewMode === "grid" ? (
+                  <ProductGridItem key={product.id} product={product} />
+                ) : (
+                  <ProductListItem key={product.id} product={product} />
+                ),
+              )}
             </div>
 
             {/* Bottom Pagination */}
             <div className="mt-4 flex justify-end px-4 md:px-0">
-              <Pagination totalPages={5} currentPage={1} onPageChange={() => { }} />
+              <Pagination
+                totalPages={5}
+                currentPage={1}
+                onPageChange={() => {}}
+              />
             </div>
 
             {/* Recommended Products */}
@@ -215,31 +252,30 @@ const ProductsPage = () => {
                   id: "r1",
                   title: "Solid Backpack blue jeans large size",
                   price: "₦10.30",
-                  image: "/images/bag.jpg"
+                  image: "/images/bag.jpg",
                 },
                 {
                   id: "r2",
                   title: "T-shirts with multiple colors, for men",
                   price: "₦10.30",
-                  image: "/images/shirt.jpg"
+                  image: "/images/shirt.jpg",
                 },
                 {
                   id: "r3",
                   title: "Smart watch premium edition",
                   price: "₦10.30",
-                  image: "/images/watch.jpg"
+                  image: "/images/watch.jpg",
                 },
                 {
                   id: "r4",
                   title: "Leather wallet for men",
                   price: "₦10.30",
-                  image: "/images/wallet.jpg"
-                }
+                  image: "/images/wallet.jpg",
+                },
               ]}
             />
           </div>
         </div>
-
       </div>
 
       <Footer />

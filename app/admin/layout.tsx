@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import "./admin.css";
 import { AdminSidebar } from "../components/Admin/AdminSidebar";
 import { AdminHeader } from "../components/Admin/AdminHeader";
 import { UserProvider } from "../context/UserContext";

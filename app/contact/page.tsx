@@ -31,10 +31,16 @@ const ContactPage = () => {
                 transition={{ duration: 0.6 }}
                 className="flex flex-col gap-2"
               >
-                <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs md:text-sm">Bloom & Mist Support</span>
-                <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight">How can we <br /><span className="text-[#8CB7F5]">help you?</span></h1>
+                <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs md:text-sm">
+                  Koolbuy Store Support
+                </span>
+                <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight">
+                  How can we <br />
+                  <span className="text-[#8CB7F5]">help you?</span>
+                </h1>
                 <p className="text-white/80 text-sm md:text-base max-w-md mt-4 leading-relaxed">
-                  Whether you have a question about features, pricing, or anything else, our team is ready to answer all your questions.
+                  Whether you have a question about features, pricing, or
+                  anything else, our team is ready to answer all your questions.
                 </p>
               </motion.div>
             </div>
@@ -51,13 +57,23 @@ const ContactPage = () => {
               className="flex flex-col gap-10"
             >
               <div className="flex flex-col gap-3">
-                <h2 className="text-3xl font-black text-[#1D3557] tracking-tight text-inter">Send us a message</h2>
-                <p className="text-gray-500 text-sm md:text-base">Complete the form below and a member of our Bloom & Mist team will get back to you within 24 hours.</p>
+                <h2 className="text-3xl font-black text-[#1D3557] tracking-tight text-inter">
+                  Send us a message
+                </h2>
+                <p className="text-gray-500 text-sm md:text-base">
+                  Complete the form below and a member of our Koolbuy Store team
+                  will get back to you within 24 hours.
+                </p>
               </div>
 
-              <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={(e) => e.preventDefault()}>
+              <form
+                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                onSubmit={(e) => e.preventDefault()}
+              >
                 <div className="flex flex-col gap-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Full Name</label>
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                    Full Name
+                  </label>
                   <Input
                     type="text"
                     placeholder="John Doe"
@@ -65,7 +81,9 @@ const ContactPage = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Email Address</label>
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                    Email Address
+                  </label>
                   <Input
                     type="email"
                     placeholder="john@example.com"
@@ -73,15 +91,19 @@ const ContactPage = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-2 md:col-span-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Subject</label>
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                    Subject
+                  </label>
                   <Input
                     type="text"
-                    placeholder="Inquiry about Bloom & Mist services"
+                    placeholder="Inquiry about Koolbuy Store services"
                     className="h-12 border-gray-100 focus:border-brand-blue bg-gray-50/30"
                   />
                 </div>
                 <div className="flex flex-col gap-2 md:col-span-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Message</label>
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                    Message
+                  </label>
                   <Textarea
                     className="min-h-[160px] border-gray-100 focus:border-brand-blue bg-gray-50/30 shadow-none"
                     placeholder="Write your message here..."
@@ -111,9 +133,12 @@ const ContactPage = () => {
                     <HiMapPin size={24} />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h4 className="font-bold text-[#1D3557] text-lg">Visit Us</h4>
+                    <h4 className="font-bold text-[#1D3557] text-lg">
+                      Visit Us
+                    </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
-                      123 Bloom Street, Mist Valley,<br />
+                      123 Bloom Street, Mist Valley,
+                      <br />
                       Lagos, Nigeria 100001
                     </p>
                   </div>
@@ -124,9 +149,12 @@ const ContactPage = () => {
                     <HiPhone size={24} />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h4 className="font-bold text-[#1D3557] text-lg">Call Us</h4>
+                    <h4 className="font-bold text-[#1D3557] text-lg">
+                      Call Us
+                    </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
-                      Main Office: +234 800 BLOOM<br />
+                      Main Office: +234 800 BLOOM
+                      <br />
                       Support: +234 812 MIST CARE
                     </p>
                   </div>
@@ -137,9 +165,12 @@ const ContactPage = () => {
                     <HiEnvelope size={24} />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h4 className="font-bold text-[#1D3557] text-lg">Email Us</h4>
+                    <h4 className="font-bold text-[#1D3557] text-lg">
+                      Email Us
+                    </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
-                      General: hello@bloomandmist.com<br />
+                      General: hello@bloomandmist.com
+                      <br />
                       Support: support@bloomandmist.com
                     </p>
                   </div>
@@ -149,7 +180,7 @@ const ContactPage = () => {
               {/* Placeholder for Map */}
               <div className="w-full aspect-video rounded-md bg-gray-100 overflow-hidden relative group shadow-inner">
                 <iframe
-                  title="Bloom & Mist HQ Location"
+                  title="Koolbuy Store HQ Location"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126846.5056461955!2d3.310156!3d6.524379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8b2ae68280c1%3A0xdc9e8ef04e17e476!2sLagos!5e0!3m2!1sen!2sng!4v1713430000000!5m2!1sen!2sng"
                   width="100%"
                   height="100%"
@@ -161,7 +192,7 @@ const ContactPage = () => {
                 ></iframe>
                 <div className="absolute top-4 left-4 pointer-events-none">
                   <div className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-black uppercase tracking-tighter text-[#1D3557] shadow-sm border border-gray-100">
-                    Bloom & Mist HQ
+                    Koolbuy Store HQ
                   </div>
                 </div>
               </div>
@@ -169,7 +200,6 @@ const ContactPage = () => {
           </div>
         </div>
       </main>
-
 
       <Footer />
     </div>

@@ -1,113 +1,160 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, Variants } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/app/components/Button";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
-
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15
-    }
-  }
-};
-
-const bannerVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.98 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.8,
-      ease: [0.16, 1, 0.3, 1]
-    }
-  }
-};
-
-const textVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut"
-    }
-  }
-};
-
-const categories = [
-  "Signature Fragrance", "Clinical Skincare", "Boutique Gift Sets",
-  "Body & Bath", "Men's Grooming", "Home Fragrance",
-  "Travel Essentials", "Discovery Kits", "View All"
+const carouselSlides = [
+  {
+    id: 1,
+    image: "/images/koolboks/KOOLBOKS+538L+PLUS+PANEL+1920x800.png",
+    subtitle: "Latest trending",
+    title: "Koolboks 538L Solar Freezers",
+    highlight: "Solar Powered Cooling & Ice Storage",
+    link: "/products",
+    // buttonText: "Learn more",
+  },
+  {
+    id: 2,
+    image: "/images/koolboks/SCANFROST+-+600L+ALONE+1920+X+800.png",
+    subtitle: "Latest trending",
+    title: "Scanfrost 600L Commercial",
+    highlight: "Heavy-Duty Preservation & Coolers",
+    link: "/products",
+    // buttonText: "Learn more",
+  },
+  {
+    id: 3,
+    image: "/images/koolboks/THERMOCOOL+-+519L+ALONE+1920+x+800.png",
+    subtitle: "Latest trending",
+    title: "Thermocool 519L Deep Freezers",
+    highlight: "Instant Freeze & Energy Efficient",
+    link: "/products",
+    // buttonText: "Learn more",
+  },
 ];
 
 const HeroSection = () => {
-  return (
-    <section className="w-full bg-white border border-[#1C1C1C1A] rounded-[6px] p-0 md:p-5 flex flex-col lg:flex-row gap-5 overflow-hidden">
-      {/* Sidebar - Desktop Only */}
-      {/* <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="w-64 flex flex-col gap-1 hidden lg:flex"
-      >
-        {categories.map((cat, idx) => (
-          <motion.div key={idx} variants={itemVariants}>
-            <Button
-              variant="ghost"
-              className={`justify-start w-full px-4 py-2.5 text-sm rounded-lg transition-colors cursor-pointer border-none font-normal
-                ${idx === 0 ? "bg-[#E5F1FF] font-black text-gray-900" : "text-gray-600 hover:bg-gray-50"}`}
-            >
-              {cat}
-            </Button>
-          </motion.div>
-        ))}
-      </motion.div> */}
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [direction, setDirection] = useState(1);
 
-      {/* Banner */}
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={bannerVariants}
-        className="flex-1 relative md:rounded-md overflow-hidden min-h-[250px] md:min-h-[400px]"
-      >
-        <Image
-          src="/brandImage/brand_banner.png"
-          alt="Banner"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 p-6 md:p-12 flex flex-col justify-center gap-4 md:gap-6 bg-black/5">
+  const nextSlide = useCallback(() => {
+    setDirection(1);
+    setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setDirection(-1);
+    setCurrentSlide(
+      (prev) => (prev - 1 + carouselSlides.length) % carouselSlides.length,
+    );
+  }, []);
+
+  const goToSlide = (idx: number) => {
+    setDirection(idx > currentSlide ? 1 : -1);
+    setCurrentSlide(idx);
+  };
+
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [isPaused, nextSlide]);
+
+  const activeItem = carouselSlides[currentSlide];
+
+  return (
+    <section
+      className="w-full bg-white overflow-hidden"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      <div className="relative w-full h-95 sm:h-115 md:h-145 lg:h-165 xl:h-180 2xl:h-200 overflow-hidden">
+        <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
-            initial="hidden"
-            animate="visible"
-            transition={{ staggerChildren: 0.1, delayChildren: 0.4 }}
-            className="flex flex-col"
+            key={currentSlide}
+            custom={direction}
+            initial={{ opacity: 0, x: direction > 0 ? 50 : -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: direction > 0 ? -50 : 50 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute inset-0 w-full h-full"
           >
-            <motion.h2 variants={textVariants} className="text-xl md:text-3xl font-normal text-gray-900">Latest trending</motion.h2>
-            <motion.h1 variants={textVariants} className="text-2xl md:text-4xl font-bold text-gray-900">Boutique Collections</motion.h1>
-          </motion.div>
-          <motion.div variants={textVariants} initial="hidden" animate="visible" transition={{ delay: 0.7 }}>
-            <Link href="/products">
-              <Button
-                variant="ghost"
-                className="w-fit bg-white text-gray-900 hover:bg-gray-100 font-bold border-none shadow-md px-6 h-10 md:h-11"
+            <Image
+              src={activeItem.image}
+              alt={activeItem.title}
+              fill
+              className="object-cover object-center"
+              priority
+            />
+
+            {/* Gradient Overlay for text contrast */}
+            <div className="absolute inset-0 bg-linear-to-r flex flex-col justify-center px-6 sm:px-10 md:px-14">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="max-w-xl flex flex-col gap-2 md:gap-3 text-white bg-linear-to-r to-transparent p-5 sm:p-7"
               >
-                Learn more
-              </Button>
-            </Link>
+                {/* <div className="inline-flex items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary text-white uppercase tracking-wider shadow-sm">
+                    {activeItem.subtitle}
+                  </span>
+                </div> */}
+
+                {/* <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight drop-shadow-md leading-tight">
+                  {activeItem.title}
+                </h1>
+
+                <div className="flex items-center gap-4">
+                  <p className="text-sm sm:text-base text-gray-200 font-medium drop-shadow-sm line-clamp-2">
+                    {activeItem.highlight}
+                  </p>
+                </div> */}
+              </motion.div>
+            </div>
           </motion.div>
+        </AnimatePresence>
+
+        {/* Carousel Navigation Arrows */}
+        <button
+          onClick={prevSlide}
+          aria-label="Previous slide"
+          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition-all duration-200 z-20 cursor-pointer shadow-md active:scale-90"
+        >
+          <FiChevronLeft size={22} />
+        </button>
+
+        <button
+          onClick={nextSlide}
+          aria-label="Next slide"
+          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition-all duration-200 z-20 cursor-pointer shadow-md active:scale-90"
+        >
+          <FiChevronRight size={22} />
+        </button>
+
+        {/* Bottom Pagination Dots */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20 bg-black/30 backdrop-blur-md px-3 py-1.5 rounded-full">
+          {carouselSlides.map((slide, idx) => (
+            <button
+              key={slide.id}
+              onClick={() => goToSlide(idx)}
+              aria-label={`Go to slide ${idx + 1}`}
+              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                currentSlide === idx
+                  ? "w-7 bg-primary shadow-sm"
+                  : "w-2.5 bg-white/50 hover:bg-white/80"
+              }`}
+            />
+          ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

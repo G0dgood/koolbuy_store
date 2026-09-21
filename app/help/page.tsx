@@ -3,7 +3,14 @@
 import React from "react";
 import { Header } from "@/app/components/Header";
 import { Footer } from "@/app/components/Footer";
-import { HiQuestionMarkCircle, HiTruck, HiCreditCard, HiArrowPath, HiShieldCheck, HiChevronRight } from "react-icons/hi2";
+import {
+  HiQuestionMarkCircle,
+  HiTruck,
+  HiCreditCard,
+  HiArrowPath,
+  HiShieldCheck,
+  HiChevronRight,
+} from "react-icons/hi2";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,35 +22,39 @@ const HelpCenterPage = () => {
       title: "Getting Started",
       icon: <HiQuestionMarkCircle size={28} />,
       links: ["Set up your account", "First-time shopping", "Member benefits"],
-      color: "bg-blue-50 text-blue-600"
+      color: "bg-blue-50 text-blue-600",
     },
     {
       title: "Shipping & Delivery",
       icon: <HiTruck size={28} />,
-      links: ["Delivery timelines", "Free shipping policy", "International rates"],
+      links: [
+        "Delivery timelines",
+        "Free shipping policy",
+        "International rates",
+      ],
       color: "bg-emerald-50 text-emerald-600",
-      href: "/shipping"
+      href: "/shipping",
     },
     {
       title: "Payments & Pricing",
       icon: <HiCreditCard size={28} />,
       links: ["Accepted methods", "Currency options", "Voucher codes"],
-      color: "bg-purple-50 text-purple-600"
+      color: "bg-purple-50 text-purple-600",
     },
     {
       title: "Returns & Refunds",
       icon: <HiArrowPath size={28} />,
       links: ["Return policy", "Refund timelines", "Exchanges"],
       color: "bg-rose-50 text-rose-600",
-      href: "/refund"
-    }
+      href: "/refund",
+    },
   ];
 
   const popularFaqs = [
     "How do I track my atmospheric fragrance delivery?",
-    "What is the Bloom & Mist 'Sourced with Soul' guarantee?",
+    "What is the Koolbuy Store 'Sourced with Soul' guarantee?",
     "Can I cancel my artisanal gift set order?",
-    "How to manage my cookie and privacy preferences?"
+    "How to manage my cookie and privacy preferences?",
   ];
 
   return (
@@ -70,15 +81,21 @@ const HelpCenterPage = () => {
               className="flex flex-col gap-8 items-center text-center md:items-start md:text-left"
             >
               <div className="flex flex-col gap-4">
-                <span className="text-[#8CB7F5] font-black tracking-[0.4em] uppercase text-xs">Support Concierge</span>
+                <span className="text-[#8CB7F5] font-black tracking-[0.4em] uppercase text-xs">
+                  Support Concierge
+                </span>
                 <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none font-inter">
-                  How can we <br /><span className="text-[#8CB7F5]">help you?</span>
+                  How can we <br />
+                  <span className="text-[#8CB7F5]">help you?</span>
                 </h1>
               </div>
 
               {/* Search Bar Component */}
               <div className="w-full max-w-2xl relative group">
-                <HiSearch className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-brand-blue transition-colors" size={24} />
+                <HiSearch
+                  className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-brand-blue transition-colors"
+                  size={24}
+                />
                 <input
                   type="text"
                   placeholder="Search for articles, tracking, or policies..."
@@ -102,17 +119,29 @@ const HelpCenterPage = () => {
                 className="bg-white p-8 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all group lg:aspect-square flex flex-col justify-between"
               >
                 <div>
-                  <div className={`w-14 h-14 ${cat.color} rounded-2xl flex items-center justify-center mb-6`}>
+                  <div
+                    className={`w-14 h-14 ${cat.color} rounded-2xl flex items-center justify-center mb-6`}
+                  >
                     {cat.icon}
                   </div>
-                  <h3 className="text-xl font-black text-[#1D3557] mb-4">{cat.title}</h3>
+                  <h3 className="text-xl font-black text-[#1D3557] mb-4">
+                    {cat.title}
+                  </h3>
                   <div className="flex flex-col gap-2">
                     {cat.links.map((link, j) => (
-                      <span key={j} className="text-sm text-gray-400 font-medium hover:text-brand-blue cursor-pointer transition-colors">{link}</span>
+                      <span
+                        key={j}
+                        className="text-sm text-gray-400 font-medium hover:text-brand-blue cursor-pointer transition-colors"
+                      >
+                        {link}
+                      </span>
                     ))}
                   </div>
                 </div>
-                <Link href={cat.href || "#"} className="mt-8 flex items-center justify-between text-xs font-black uppercase tracking-widest text-brand-blue opacity-0 group-hover:opacity-100 transition-opacity">
+                <Link
+                  href={cat.href || "#"}
+                  className="mt-8 flex items-center justify-between text-xs font-black uppercase tracking-widest text-brand-blue opacity-0 group-hover:opacity-100 transition-opacity"
+                >
                   View More <HiChevronRight size={16} />
                 </Link>
               </motion.div>
@@ -123,13 +152,22 @@ const HelpCenterPage = () => {
           <div className="mt-40 grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div className="flex flex-col gap-10">
               <div className="flex flex-col gap-4">
-                <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs">Discovery</span>
-                <h2 className="text-4xl font-black text-[#1D3557] tracking-tight">Trending Questions.</h2>
+                <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs">
+                  Discovery
+                </span>
+                <h2 className="text-4xl font-black text-[#1D3557] tracking-tight">
+                  Trending Questions.
+                </h2>
               </div>
               <div className="flex flex-col gap-4">
                 {popularFaqs.map((faq, i) => (
-                  <div key={i} className="p-6 bg-gray-50 border border-transparent hover:border-brand-blue hover:bg-white rounded-2xl cursor-pointer transition-all flex items-center justify-between group">
-                    <span className="text-gray-600 font-medium group-hover:text-[#1D3557]">{faq}</span>
+                  <div
+                    key={i}
+                    className="p-6 bg-gray-50 border border-transparent hover:border-brand-blue hover:bg-white rounded-2xl cursor-pointer transition-all flex items-center justify-between group"
+                  >
+                    <span className="text-gray-600 font-medium group-hover:text-[#1D3557]">
+                      {faq}
+                    </span>
                     <HiChevronRight className="text-gray-300 group-hover:text-brand-blue group-hover:translate-x-1 transition-all" />
                   </div>
                 ))}
@@ -141,10 +179,19 @@ const HelpCenterPage = () => {
               <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-[#8CB7F5]">
                 <HiShieldCheck size={32} />
               </div>
-              <h3 className="text-3xl font-black text-white leading-tight">Can't find the <br /><span className="text-[#8CB7F5]">answer?</span></h3>
-              <p className="text-blue-100/40 text-lg">Our artisanal support curators are available from 9am to 6pm for a personalized consultation.</p>
+              <h3 className="text-3xl font-black text-white leading-tight">
+                Can't find the <br />
+                <span className="text-[#8CB7F5]">answer?</span>
+              </h3>
+              <p className="text-blue-100/40 text-lg">
+                Our artisanal support curators are available from 9am to 6pm for
+                a personalized consultation.
+              </p>
               <div className="pt-4">
-                <Link href="/contact" className="px-12 py-5 bg-brand-blue text-white rounded-2xl font-black uppercase tracking-widest text-sm shadow-2xl shadow-blue-500/20 hover:scale-105 transition-all inline-block">
+                <Link
+                  href="/contact"
+                  className="px-12 py-5 bg-brand-blue text-white rounded-2xl font-black uppercase tracking-widest text-sm shadow-2xl shadow-blue-500/20 hover:scale-105 transition-all inline-block"
+                >
                   Talk to a Human
                 </Link>
               </div>
@@ -152,7 +199,6 @@ const HelpCenterPage = () => {
           </div>
         </section>
       </main>
-
 
       <Footer />
     </div>

@@ -37,3 +37,27 @@
     padding: 0px 1rem;
   }
 }
+
+/* Advert Banner Marquee */
+@keyframes advertMarquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.advert-marquee {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: max-content;
+  animation: advertMarquee 30s linear infinite;
+  will-change: transform;
+}
+
+.advert-banner-container:hover .advert-marquee,
+.advert-banner-container:focus-within .advert-marquee {
+  animation-play-state: paused;
+}

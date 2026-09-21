@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { Header } from "@/app/components/Header";
 import { Footer } from "@/app/components/Footer";
 import { HeroSection } from "@/app/components/Home/HeroSection";
@@ -11,76 +13,143 @@ import { InquiryForm } from "@/app/components/Home/InquiryForm";
 import { ExtraServices } from "@/app/components/Home/ExtraServices";
 import { RegionSuppliers } from "@/app/components/Home/RegionSuppliers";
 import RecommendedItems from "./components/Home/RecommendedItems";
+import { RecommendedVendors } from "@/app/components/Home/RecommendedVendors";
+import { VendorshipSection } from "@/app/components/Home/VendorshipSection";
+import { PartnersCarousel } from "@/app/components/Home/PartnersCarousel";
+import { NewProductsSection } from "@/app/components/Home/NewProductsSection";
+import { IntroducingProducts } from "@/app/components/Home/IntroducingProducts";
+import { ColdFeaturesSection } from "@/app/components/Home/ColdFeaturesSection";
 
-
-const fragranceProducts = [
- { name: "Midnight Bloom", price: "85", image: "/brandImage/product_1.png" },
- { name: "Gucci Guilty", price: "155", image: "/brandImage/gucci_guilty.png" },
- { name: "Gucci Intense Oud", price: "165", image: "/brandImage/product_gucci.png" },
- { name: "Fendi Fan di Fendi", price: "135", image: "/brandImage/product_fendi_2.jpeg" },
- { name: "Amber Wood", price: "110", image: "/brandImage/product_5.png" },
- { name: "Fendi Furiosa", price: "155", image: "/brandImage/product_fendi_3.jpeg" },
- { name: "Jasmine Night", price: "88", image: "/brandImage/product_7.png" },
- { name: "Sandalwood Essence", price: "92", image: "/brandImage/product_8.png" }
+const newProducts = [
+  {
+    name: "Kool - Scanfrost 600L Inverter",
+    price: "1,406,000",
+    image: "/images/koolboks/items/5.webp",
+  },
+  {
+    name: "Kool Scanfrost 60ah Pedestal",
+    price: "1,287,600",
+    image: "/images/koolboks/items/1.webp",
+  },
+  {
+    name: "Kool Bruhm 60ah Pedestal",
+    price: "1,287,600",
+    image: "/images/koolboks/items/4.webp",
+  },
+  {
+    name: "200L AC Inverter Freezers",
+    price: "2,420,000",
+    image: "/images/koolboks/items/3.webp",
+  },
+  {
+    name: "Koolboks 600L AC Inverter",
+    price: "1,468,000",
+    image: "/images/koolboks/items/6.webp",
+  },
+  {
+    name: "Koolboks 538L Refurbished",
+    price: "1,538,000",
+    image: "/images/koolboks/items/2.webp",
+  },
+  {
+    name: "Koolboks 208L DC Freezer",
+    price: "1,950,000",
+    image: "/images/koolboks/items/3.webp",
+  },
+  {
+    name: "Koolboks 100Ah AC Battery",
+    price: "1,662,370",
+    image: "/images/koolboks/items/1.webp",
+  },
 ];
 
-const skincareProducts = [
- { name: "Hyaluronic Serum", price: "45", image: "/brandImage/product_9.png" },
- { name: "Retinol Cream", price: "58", image: "/brandImage/product_10.png" },
- { name: "Vitamin C Glow", price: "42", image: "/brandImage/product_11.png" },
- { name: "Cleansing Balm", price: "35", image: "/brandImage/product_12.png" },
- { name: "Eye Repair Gel", price: "38", image: "/brandImage/product_13.png" },
- { name: "Hydrating Mist", price: "28", image: "/brandImage/product_9.png" },
- { name: "SPF 50 Shield", price: "32", image: "/brandImage/product_10.png" },
- { name: "Night Recovery", price: "65", image: "/brandImage/product_11.png" }
+const onSaleProducts = [
+  {
+    name: "Koolboks 208L DC Freezer",
+    price: "1,950,000",
+    image: "/images/koolboks/items/3.webp",
+  },
+  {
+    name: "Koolboks 195L DC Ice Maker",
+    price: "3,235,000",
+    image: "/images/koolboks/items/6.webp",
+  },
+  {
+    name: "Koolboks 60Ah AC Battery",
+    price: "1,287,600",
+    image: "/images/koolboks/items/1.webp",
+  },
+  {
+    name: "Koolboks 100Ah AC Battery",
+    price: "1,662,370",
+    image: "/images/koolboks/items/4.webp",
+  },
+  {
+    name: "Koolboks 538L Maxi Freezer",
+    price: "3,607,000",
+    image: "/images/koolboks/items/6.webp",
+  },
+  {
+    name: "Hisense Deep Freezers 200L",
+    price: "370,000",
+    image: "/images/koolboks/items/5.webp",
+  },
+  {
+    name: "Kool - Scanfrost 600L Inverter",
+    price: "1,406,000",
+    image: "/images/koolboks/items/5.webp",
+  },
+  {
+    name: "Koolboks 538L Refurbished",
+    price: "1,538,000",
+    image: "/images/koolboks/items/2.webp",
+  },
 ];
-
-
 
 const Home = () => {
- return (
-  <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
-   <Header />
+  return (
+    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+      <Header />
 
-   <div className="flex-1 w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-4 md:py-8 flex flex-col gap-8">
-
-    {/* Top Hero Layout */}
-    <div className="flex flex-col xl:flex-row gap-5">
-     <div className="flex-1">
+      {/* Full-width Hero Carousel */}
       <HeroSection />
-     </div>
-     <HeroUserCard />
+
+      <main className="flex-1 w-full max-w-360 mx-auto px-6 md:px-10 lg:px-16 py-8 md:py-12 flex flex-col gap-8 md:gap-24">
+        {/* Introducing Our Products & Category Tabs */}
+        <div className="flex flex-col gap-8">
+          <IntroducingProducts />
+          <NewProductsSection />
+        </div>
+
+        {/* Promotional Banner */}
+        <div className="w-full relative rounded-lg overflow-hidden border border-[#1C1C1C1A] shadow-xs group bg-white">
+          <Link href="/products" className="block w-full">
+            <div className="relative w-full aspect-[3.3/1] min-h-35 sm:min-h-45 md:min-h-55">
+              <Image
+                src="/images/koolboks/banner-2.jpg"
+                alt="Koolbuy - Get a freezer for as low as ₦20,000 per month"
+                fill
+                className="object-cover group-hover:scale-[1.01] transition-transform duration-500"
+              />
+            </div>
+          </Link>
+        </div>
+        <DealsSection />
+        <ColdFeaturesSection />
+
+        {/* Become a Verified Vendor Section with Map */}
+        <VendorshipSection />
+
+        {/* Recommended Vendors Section */}
+        <RecommendedVendors />
+
+        {/* Meet Our Partners Carousel */}
+        <PartnersCarousel />
+      </main>
+
+      <Footer />
     </div>
-
-    <DealsSection />
-
-    <CategorySection
-     title="Signature Fragrance"
-     bannerImage="/brandImage/brand_banner.png"
-     products={fragranceProducts}
-    />
-
-    <CategorySection
-     title="Advanced Skincare"
-     bannerImage="/brandImage/serene_story.png"
-     products={skincareProducts}
-    />
-
-    <InquiryForm />
-
-    <RecommendedItems />
-
-    <ExtraServices />
-
-    <RegionSuppliers />
-
-
-   </div>
-
-
-   <Footer />
-  </div>
- );
+  );
 };
 
 export default Home;

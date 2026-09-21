@@ -2,7 +2,14 @@ import React from "react";
 import { Icon } from "../Icon";
 import { motion } from "framer-motion";
 
-type ButtonVariant = "primary" | "secondary" | "emerald" | "rose" | "outline" | "ghost";
+type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "blue"
+  | "emerald"
+  | "rose"
+  | "outline"
+  | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
 type ButtonShape = "rounded" | "rounded-sm" | "pill";
 
@@ -14,6 +21,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   iconRight?: React.ReactNode;
   showChevron?: boolean;
   isLoading?: boolean;
+  href?: string;
+  target?: string;
+  rel?: string;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -27,22 +37,33 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       iconRight,
       showChevron,
       isLoading,
+      href,
+      target,
+      rel,
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Base styles
-    const baseStyles = "inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 cursor-pointer";
+    const baseStyles =
+      "inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 cursor-pointer";
 
     // Variant styles
     const variants = {
-      primary: "bg-brand-blue text-white hover:bg-blue-600 active:bg-blue-700 focus:ring-brand-blue/50 border border-transparent ",
-      secondary: "bg-white text-brand-blue border border-brand-blue hover:bg-brand-blue/5 active:bg-brand-blue/10 focus:ring-brand-blue/50 ",
-      emerald: "bg-brand-blue text-white hover:bg-blue-600 active:bg-blue-700 focus:ring-brand-blue/50 border border-transparent shadow-sm",
+      primary:
+        "bg-primary text-white hover:bg-orange-300 active:bg-orange-700 focus:ring-brand-orange/50 border border-transparent ",
+      secondary:
+        "bg-white text-brand-blue border border-brand-blue hover:bg-brand-blue/5 active:bg-brand-blue/10 focus:ring-brand-blue/50 ",
+      blue:
+        "bg-brand-blue text-white hover:bg-brand-blue/90 active:bg-blue-700 focus:ring-brand-blue/50 border border-transparent shadow-sm shadow-brand-blue/20",
+      emerald:
+        "bg-brand-blue text-white hover:bg-blue-600 active:bg-blue-700 focus:ring-brand-blue/50 border border-transparent shadow-sm",
       rose: "bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white active:bg-rose-600 focus:ring-rose-500/50 border border-transparent shadow-sm transition-all",
-      outline: "bg-white text-[#1D3557] border border-gray-100 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-100/50 shadow-sm",
-      ghost: "bg-transparent text-brand-blue hover:bg-brand-blue/10 active:bg-brand-blue/20 focus:ring-brand-blue/50",
+      outline:
+        "bg-white text-[#1D3557] border border-gray-100 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-100/50 shadow-sm",
+      ghost:
+        "bg-transparent text-brand-blue hover:bg-brand-blue/10 active:bg-brand-blue/20 focus:ring-brand-blue/50",
     };
 
     // Size styles
@@ -66,15 +87,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       ${shapes[shape as keyof typeof shapes] || shapes.rounded}
       ${isLoading ? "opacity-70 cursor-not-allowed" : ""}
       ${className}
-    `.trim().replace(/\s+/g, " ");
+    `
+      .trim()
+      .replace(/\s+/g, " ");
 
-    return (
-      <button
-        ref={ref}
-        className={combinedClassName}
-        disabled={isLoading || props.disabled}
-        {...props}
-      >
+    const content = (
+      <>
         {isLoading && (
           <motion.span
             animate={{ rotate: 360 }}
@@ -104,9 +122,34 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             className={`ml-1.5 shrink-0 transition-transform ${props["aria-expanded"] ? "rotate-180" : ""}`}
           />
         )}
+      </>
+    );
+
+    if (href) {
+      return (
+        <a
+          href={href}
+          target={target}
+          rel={target === "_blank" ? rel || "noopener noreferrer" : rel}
+          className={combinedClassName}
+          {...(props as any)}
+        >
+          {content}
+        </a>
+      );
+    }
+
+    return (
+      <button
+        ref={ref}
+        className={combinedClassName}
+        disabled={isLoading || props.disabled}
+        {...props}
+      >
+        {content}
       </button>
     );
-  }
+  },
 );
 
 Button.displayName = "Button";

@@ -13,6 +13,7 @@ interface DropdownItemProps {
   showCheckbox?: boolean;
   checked?: boolean;
   onSelect?: () => void;
+  onClick?: () => void;
   isActive?: boolean;
   isDisabled?: boolean;
   hasSubmenu?: boolean;
@@ -27,15 +28,18 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
   showCheckbox = false,
   checked = false,
   onSelect,
+  onClick,
   isActive = false,
   isDisabled = false,
   hasSubmenu = false,
   className = "",
   href,
 }) => {
+  const handleClick = onSelect || onClick;
+
   const content = (
     <div
-      onClick={!isDisabled && !href ? onSelect : undefined}
+      onClick={!isDisabled && !href ? handleClick : undefined}
       className={`
         flex items-center gap-3 px-4 py-2.5 transition-all cursor-pointer w-full
         ${isDisabled ? "opacity-40 cursor-not-allowed" : "hover:bg-gray-50"}
@@ -87,7 +91,7 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
 
   if (href && !isDisabled) {
     return (
-      <Link href={href} onClick={onSelect} className="block w-full">
+      <Link href={href} onClick={handleClick} className="block w-full">
         {content}
       </Link>
     );

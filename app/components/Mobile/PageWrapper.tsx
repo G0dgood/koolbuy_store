@@ -7,7 +7,7 @@ const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isOpen, closeMenu } = useMobileMenu();
 
   return (
-    <div className="relative overflow-clip min-h-screen">
+    <div className={`relative min-h-screen ${isOpen ? "overflow-hidden" : ""}`}>
       {/* Backdrop for mobile menu */}
       <div 
         className={`fixed inset-0 bg-black/50 z-[90] transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
@@ -18,7 +18,7 @@ const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <div 
         className={`
           flex flex-col min-h-screen transition-transform duration-300 ease-in-out bg-[#F7FAFC]
-          ${isOpen ? "translate-x-[280px]" : "translate-x-0"}
+          ${isOpen ? "translate-x-[280px]" : ""}
         `}
       >
         {children}

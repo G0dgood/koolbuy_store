@@ -131,9 +131,9 @@ export function AddCouponModal({ isOpen, onClose }: AddCouponModalProps) {
             Cancel
           </Button>
           <Button 
-            variant="primary" 
+            variant="blue" 
             type="submit" 
-            className="px-8 h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest shadow-lg shadow-blue-100"
+            className="px-8 h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest shadow-sm shadow-brand-blue/20"
           >
             Create Coupon
           </Button>

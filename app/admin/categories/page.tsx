@@ -15,27 +15,93 @@ import { BulkActionsDrawer } from "../../components/Admin/BulkActionsDrawer";
 import { RowsPerPage } from "@/app/components/rows-per-page";
 
 const categories = [
-  { name: "Electronics", image: "/dashboardImage/Electronics.png" },
-  { name: "Fashion", image: "/dashboardImage/Fashion.png" },
-  { name: "Accessories", image: "/dashboardImage/Accessories.png" },
-  { name: "Home & Kitchen", image: "/dashboardImage/Home & Kitchen.png" },
-  { name: "Sports & Outdoors", image: "/dashboardImage/Sports & Outdoors.png" },
-  { name: "Toys & Games", image: "/dashboardImage/Toys & Games.png" },
-  { name: "Health & Fitness", image: "/dashboardImage/Health & Fitness.png" },
-  { name: "Books", image: "/dashboardImage/Books.png" },
+  { name: "Chest Freezers", image: "/images/koolboks/items/5.webp" },
+  { name: "Solar Freezers", image: "/images/koolboks/items/4.webp" },
+  {
+    name: "Single Door Chest Freezers",
+    image: "/images/koolboks/items/1.webp",
+  },
+  {
+    name: "Double Door Chest Freezers",
+    image: "/images/koolboks/items/2.webp",
+  },
+  { name: "Commercial Freezers", image: "/images/koolboks/items/3.webp" },
+  { name: "Inverter Freezers", image: "/images/koolboks/items/5.webp" },
+  { name: "Upright Freezers", image: "/images/koolboks/items/6.webp" },
+  { name: "Ice Makers", image: "/images/koolboks/items/3.webp" },
 ];
 
 const products = [
-  { id: 1, name: "Wireless Bluetooth Headphones", image: "/dashboardImage/Headphones.png", date: "01-01-2025", order: 25 },
-  { id: 2, name: "Men's T-Shirt", image: "/dashboardImage/T-Shirt.png", date: "01-01-2025", order: 20 },
-  { id: 3, name: "Men's Leather Wallet", image: "/dashboardImage/Wallet.png", date: "01-01-2025", order: 35 },
-  { id: 4, name: "Memory Foam Pillow", image: "/dashboardImage/Pillow.png", date: "01-01-2025", order: 40 },
-  { id: 5, name: "Coffee Maker", image: "/dashboardImage/Coffee Maker.png", date: "01-01-2025", order: 45 },
-  { id: 6, name: "Casual Baseball Cap", image: "/dashboardImage/Cap.png", date: "01-01-2025", order: 55 },
-  { id: 7, name: "Full HD Webcam", image: "/dashboardImage/Webcam.png", date: "01-01-2025", order: 20 },
-  { id: 8, name: "Smart LED Color Bulb", image: "/dashboardImage/Bulb.png", date: "01-01-2025", order: 16 },
-  { id: 9, name: "Men's T-Shirt", image: "/dashboardImage/T-Shirt.png", date: "01-01-2025", order: 10 },
-  { id: 10, name: "Men's Leather Wallet", image: "/dashboardImage/Wallet.png", date: "01-01-2025", order: 35 },
+  {
+    id: 1,
+    name: "Kool - Scanfrost 600L Inverter Chest Freezer",
+    image: "/images/koolboks/items/5.webp",
+    date: "01-01-2025",
+    order: 25,
+  },
+  {
+    id: 2,
+    name: "Kool Bruhm 100ah Solar Pedestal Freezer",
+    image: "/images/koolboks/items/4.webp",
+    date: "01-01-2025",
+    order: 20,
+  },
+  {
+    id: 3,
+    name: "Kool-242L Somotex Glass Door Display Freezer",
+    image: "/images/koolboks/items/3.webp",
+    date: "01-01-2025",
+    order: 35,
+  },
+  {
+    id: 4,
+    name: "Kool Scanfrost 60ah Single Door Chest Freezer",
+    image: "/images/koolboks/items/1.webp",
+    date: "01-01-2025",
+    order: 40,
+  },
+  {
+    id: 5,
+    name: "200L AC Inverter Deep Freezer",
+    image: "/images/koolboks/items/2.webp",
+    date: "01-01-2025",
+    order: 45,
+  },
+  {
+    id: 6,
+    name: "230L Hisense High-Efficiency Deep Freezer",
+    image: "/images/koolboks/items/6.webp",
+    date: "01-01-2025",
+    order: 55,
+  },
+  {
+    id: 7,
+    name: "Kool Thermocool 100ah Solar Inverter Freezer",
+    image: "/images/koolboks/items/4.webp",
+    date: "01-01-2025",
+    order: 20,
+  },
+  {
+    id: 8,
+    name: "Kool Bruhm 60ah Pedestal Solar Freezer",
+    image: "/images/koolboks/items/1.webp",
+    date: "01-01-2025",
+    order: 16,
+  },
+  {
+    id: 9,
+    name: "Kool - Scanfrost 600L Inverter Chest Freezer",
+    image: "/images/koolboks/items/5.webp",
+    date: "01-01-2025",
+    order: 10,
+  },
+  {
+    id: 10,
+    name: "Kool-242L Somotex Glass Door Display Freezer",
+    image: "/images/koolboks/items/3.webp",
+    date: "01-01-2025",
+    order: 35,
+  },
 ];
 
 export default function CategoriesPage() {
@@ -56,13 +122,13 @@ export default function CategoriesPage() {
     if (selectedIds.length === products.length) {
       setSelectedIds([]);
     } else {
-      setSelectedIds(products.map(p => p.id));
+      setSelectedIds(products.map((p) => p.id));
     }
   };
 
   const toggleItem = (id: number) => {
-    setSelectedIds(prev =>
-      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
     );
   };
 
@@ -71,13 +137,13 @@ export default function CategoriesPage() {
       const scrollAmount = 300;
       scrollContainerRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }
   };
 
   return (
-    <div className="flex flex-col gap-6 max-w-[1600px] mx-auto pb-12">
+    <div className="flex flex-col gap-6 max-w-400 mx-auto pb-12">
       {/* Header Section */}
       <div className="flex flex-col sm:flex-row justify-end items-center gap-3">
         <div className="flex gap-3 w-full sm:w-auto">
@@ -105,7 +171,7 @@ export default function CategoriesPage() {
       {/* Categories Horizontal Scroll */}
       <div className="relative group">
         <button
-          className="absolute left-[-20px] top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-gray-100 rounded-full flex items-center justify-center shadow-lg text-gray-400 hover:text-gray-900 z-10 opacity-0 group-hover:opacity-100 transition-opacity hover:border-brand-blue/30"
+          className="absolute -left-5 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-gray-100 rounded-full flex items-center justify-center shadow-lg text-gray-400 hover:text-gray-900 z-10 opacity-0 group-hover:opacity-100 transition-opacity hover:border-brand-blue/30"
           onClick={() => scroll("left")}
         >
           <Icon name="chevron_left" folder="icon" size="sm" />
@@ -116,17 +182,26 @@ export default function CategoriesPage() {
           className="flex gap-4 overflow-x-auto pb-2 no-scrollbar scroll-smooth px-1"
         >
           {categories.map((cat, i) => (
-            <div key={i} className="flex-shrink-0 w-[220px] bg-white p-3 rounded-[6px] flex items-center gap-3 hover:shadow-md transition-shadow cursor-pointer hover:border-brand-blue/30 group/item border border-[#1C1C1C1A]">
+            <div
+              key={i}
+              className="shrink-0 w-55 bg-white p-3 rounded-[6px] flex items-center gap-3 hover:shadow-md transition-shadow cursor-pointer hover:border-brand-blue/30 group/item border border-[#1C1C1C1A]"
+            >
               <div className="w-12 h-12 rounded-[6px] overflow-hidden bg-gray-50 flex items-center justify-center p-1 group-hover/item:bg-brand-blue-light transition-colors">
-                <img src={cat.image} alt={cat.name} className="w-full h-full object-contain" />
+                <img
+                  src={cat.image}
+                  alt={cat.name}
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <span className="text-sm font-bold text-[#1D3557] group-hover/item:text-brand-blue transition-colors">{cat.name}</span>
+              <span className="text-sm font-bold text-[#1D3557] group-hover/item:text-brand-blue transition-colors">
+                {cat.name}
+              </span>
             </div>
           ))}
         </div>
 
         <button
-          className="absolute right-[-20px] top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-gray-100 rounded-full flex items-center justify-center shadow-lg text-gray-400 hover:text-gray-900 z-10 opacity-0 group-hover:opacity-100 transition-opacity hover:border-brand-blue/30"
+          className="absolute -right-5 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-gray-100 rounded-full flex items-center justify-center shadow-lg text-gray-400 hover:text-gray-900 z-10 opacity-0 group-hover:opacity-100 transition-opacity hover:border-brand-blue/30"
           onClick={() => scroll("right")}
         >
           <Icon name="chevron_right" folder="icon" size="sm" />
@@ -138,7 +213,12 @@ export default function CategoriesPage() {
         {/* Fill Tabs & Controls */}
         <div className="px-6 flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
           <TabFilter
-            tabs={["All Product (145)", "Featured Products", "On Sale", "Out of Stock"]}
+            tabs={[
+              "All Product (145)",
+              "Featured Products",
+              "On Sale",
+              "Out of Stock",
+            ]}
             activeTab={activeTab}
             onChange={setActiveTab}
           />
@@ -149,27 +229,34 @@ export default function CategoriesPage() {
               placeholder="Search your product"
               containerClassName="flex-1 md:w-96"
               className="bg-white border-gray-100 placeholder:text-gray-400 text-xs font-medium"
-              suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-gray-400" />}
+              suffixElement={
+                <Icon
+                  name="search-01"
+                  folder="dashboardIcon"
+                  size="sm"
+                  className="text-gray-400"
+                />
+              }
             />
             <RowsPerPage value={rowsPerPage} onChange={setRowsPerPage} />
             <Button
               variant="outline"
               shape="rounded-sm"
-              className="!p-2 text-gray-400 shadow-sm"
+              className="p-2! text-gray-400 shadow-sm"
             >
               <Icon name="sort" folder="dashboardIcon" size="sm" />
             </Button>
             <Button
               variant="outline"
               shape="rounded-sm"
-              className="!p-2 text-gray-400 shadow-sm"
+              className="p-2! text-gray-400 shadow-sm"
             >
               <Icon name="circle-plus" folder="dashboardIcon" size="sm" />
             </Button>
             <Button
               variant="outline"
               shape="rounded-sm"
-              className="!p-2 text-gray-400 shadow-sm"
+              className="p-2! text-gray-400 shadow-sm"
             >
               <Icon name="DotsHorizontal" folder="dashboardIcon" size="sm" />
             </Button>
@@ -183,7 +270,10 @@ export default function CategoriesPage() {
               <tr>
                 <th className="pl-6 w-12">
                   <Checkbox
-                    checked={selectedIds.length === products.length && products.length > 0}
+                    checked={
+                      selectedIds.length === products.length &&
+                      products.length > 0
+                    }
                     onChange={toggleAll}
                   />
                 </th>
@@ -208,29 +298,41 @@ export default function CategoriesPage() {
                   </td>
                   <td className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-[6px] overflow-hidden bg-gray-50 border border-gray-100 p-1">
-                      <img src={p.image} alt="" className="w-full h-full object-contain" />
+                      <img
+                        src={p.image}
+                        alt=""
+                        className="w-full h-full object-contain"
+                      />
                     </div>
-                    <span className="text-sm font-bold text-gray-900 leading-tight block truncate max-w-[200px]">{p.name}</span>
+                    <span className="text-sm font-bold text-gray-900 leading-tight block truncate max-w-50">
+                      {p.name}
+                    </span>
                   </td>
                   <td className="text-sm font-bold text-gray-900">{p.date}</td>
-                  <td className="text-sm font-bold text-gray-900 text-center">{p.order}</td>
+                  <td className="text-sm font-bold text-gray-900 text-center">
+                    {p.order}
+                  </td>
                   <td className="text-right">
                     <div className="flex justify-end gap-2 px-2">
                       <Button
                         variant="outline"
                         shape="rounded-sm"
-                        className="!p-1.5 text-gray-400 hover:text-blue-500 hover:bg-brand-blue-light transition-all"
+                        className="p-1.5! text-gray-400 hover:text-blue-500 hover:bg-brand-blue-light transition-all"
                         onClick={() => {
-                          setCategoryToEdit(p); 
+                          setCategoryToEdit(p);
                           setIsEditDrawerOpen(true);
                         }}
                       >
-                        <Icon name="settings" folder="dashboardIcon" size="sm" />
+                        <Icon
+                          name="settings"
+                          folder="dashboardIcon"
+                          size="sm"
+                        />
                       </Button>
                       <Button
                         variant="outline"
                         shape="rounded-sm"
-                        className="!p-1.5 text-gray-400 hover:text-rose-500 hover:bg-rose-50 transition-all"
+                        className="p-1.5! text-gray-400 hover:text-rose-500 hover:bg-rose-50 transition-all"
                         onClick={() => {
                           setCategoryToDelete(p);
                           setIsDeleteModalOpen(true);
