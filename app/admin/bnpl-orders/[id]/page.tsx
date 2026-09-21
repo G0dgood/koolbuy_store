@@ -90,7 +90,7 @@ export default function BnplOrderDetails() {
   };
 
   return (
-    <div className="flex flex-col gap-8 max-w-6xl mx-auto pb-12">
+    <div className="flex flex-col gap-8 mx-auto pb-12">
       {/* Header & Breadcrumbs */}
       <div className="flex flex-col gap-4">
         <Breadcrumbs
@@ -143,7 +143,7 @@ export default function BnplOrderDetails() {
         {/* Main 2 Cols */}
         <div className="lg:col-span-2 flex flex-col gap-8">
           {/* BNPL Summary Card */}
-          <div className="bg-linear-to-r from-blue-50/70 via-white to-blue-50/40 rounded-2xl border border-blue-100 p-6 shadow-sm flex flex-col gap-4">
+          <div className="bg-linear-to-r from-blue-50/70 via-white to-blue-50/40 rounded-lg border border-blue-100 p-6 shadow-sm flex flex-col gap-4">
             <div className="flex justify-between items-center">
               <div>
                 <span className="text-[11px] font-extrabold uppercase tracking-widest text-brand-blue">
@@ -198,7 +198,7 @@ export default function BnplOrderDetails() {
           </div>
 
           {/* Repayment Schedule */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <div className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden">
             <div className="p-6 border-b border-gray-50 flex justify-between items-center">
               <h3 className="font-black text-gray-900 text-base">
                 Installment Repayment Schedule
@@ -258,7 +258,7 @@ export default function BnplOrderDetails() {
           </div>
 
           {/* Purchased Items */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <div className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden">
             <div className="p-6 border-b border-gray-50">
               <h3 className="font-black text-gray-900 text-base">
                 Order Product
@@ -292,7 +292,7 @@ export default function BnplOrderDetails() {
         {/* Customer & Shipping Sidebar */}
         <div className="flex flex-col gap-8">
           {/* Customer Profile & Credit Rating */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col gap-4">
+          <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-6 flex flex-col gap-4">
             <h3 className="font-black text-gray-900 text-base">
               Customer & Credit
             </h3>
@@ -334,7 +334,7 @@ export default function BnplOrderDetails() {
           </div>
 
           {/* Delivery Address */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col gap-3">
+          <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-6 flex flex-col gap-3">
             <h3 className="font-black text-gray-900 text-base">
               Delivery Location
             </h3>

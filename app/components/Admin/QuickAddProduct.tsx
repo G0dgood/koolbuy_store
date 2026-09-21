@@ -36,9 +36,9 @@ const defaultCategories: Category[] = [
   {
     name: "Chest Freezers",
     data: [40, 60, 45, 80, 50, 95, 60],
-    color: "#2196F3",
-    bgColor: "bg-blue-50/50",
-    icon: <HiOutlineCube className="w-5 h-5 text-blue-500" />,
+    color: "#00BCD4",
+    bgColor: "bg-cyan-50/50",
+    icon: <HiOutlineCube className="w-5 h-5 text-cyan-600" />,
   },
   {
     name: "Solar Freezers",
@@ -61,7 +61,7 @@ const defaultProducts: Product[] = [
     name: "Kool Bruhm 60Ah Solar Freezer",
     price: "₦1,287,600",
     data: [30, 45, 35, 60, 45, 75, 80],
-    color: "#2196F3",
+    color: "#00BCD4",
   },
   {
     name: "Scanfrost 200L Inverter Freezer",

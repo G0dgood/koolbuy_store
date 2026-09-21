@@ -199,7 +199,7 @@ export default function VendorsPage() {
           <title>${title}</title>
           <style>
             body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 32px; color: #111827; }
-            .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #2196F3; padding-bottom: 16px; margin-bottom: 24px; }
+            .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #00BCD4; padding-bottom: 16px; margin-bottom: 24px; }
             h1 { font-size: 22px; font-weight: 800; color: #1D3557; margin: 0; }
             p { font-size: 12px; color: #6b7280; margin: 4px 0 0 0; }
             table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
@@ -216,7 +216,7 @@ export default function VendorsPage() {
               <h1>${title}</h1>
               <p>Generated on ${new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })} • Total Records: ${filteredVendors.length}</p>
             </div>
-            <div style="font-weight: 900; font-size: 18px; color: #2196F3;">KOOLBUY</div>
+            <div style="font-weight: 900; font-size: 18px; color: #00BCD4;">KOOLBUY</div>
           </div>
           <table>
             <thead>
@@ -253,12 +253,12 @@ export default function VendorsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-gray-900 tracking-tight">
+          {/* <h1 className="text-xl font-bold text-gray-900 tracking-tight">
             Vendors Management
           </h1>
           <p className="text-xs text-gray-500 mt-1">
             Manage verified suppliers, merchant accounts, and payouts.
-          </p>
+          </p> */}
         </div>
         <div className="flex items-center gap-3">
           <Button
@@ -289,7 +289,7 @@ export default function VendorsPage() {
 
       {/* Stats row */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-2xs flex flex-col gap-1">
+        <div className="bg-white p-5 rounded-lg border border-gray-100 shadow-2xs flex flex-col gap-1">
           <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
             Total Vendors
           </span>
@@ -300,7 +300,7 @@ export default function VendorsPage() {
             +12% this month
           </span>
         </div>
-        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-2xs flex flex-col gap-1">
+        <div className="bg-white p-5 rounded-lg border border-gray-100 shadow-2xs flex flex-col gap-1">
           <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
             Active Vendors
           </span>
@@ -311,7 +311,7 @@ export default function VendorsPage() {
             Fully verified
           </span>
         </div>
-        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-2xs flex flex-col gap-1">
+        <div className="bg-white p-5 rounded-lg border border-gray-100 shadow-2xs flex flex-col gap-1">
           <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
             Awaiting Approval
           </span>
@@ -325,7 +325,7 @@ export default function VendorsPage() {
       </div>
 
       {/* Table Card */}
-      <div className="bg-white border border-gray-100 rounded-2xl shadow-2xs flex flex-col overflow-hidden">
+      <div className="bg-white border border-gray-100 rounded-lg shadow-2xs flex flex-col overflow-hidden">
         {/* Filter and Search Bar */}
         <div className="p-4 border-b border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
           {/* Custom 3-Tab Toggle Filter */}

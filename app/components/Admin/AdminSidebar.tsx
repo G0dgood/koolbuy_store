@@ -27,12 +27,12 @@ const DashboardIcon = ({ active }: { active?: boolean }) => (
       width="19"
       height="17"
       rx="3"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.8"
     />
     <path
       d="M2.5 8.5H21.5"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.8"
     />
     <rect
@@ -41,7 +41,7 @@ const DashboardIcon = ({ active }: { active?: boolean }) => (
       width="5"
       height="6"
       rx="1"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.5"
     />
     <rect
@@ -92,7 +92,7 @@ const OrderFulfilmentIcon = ({ active }: { active?: boolean }) => (
     />
     <path
       d="M9.5 14L11.5 16L15 12"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.8"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -125,13 +125,13 @@ const VendorsIcon = ({ active }: { active?: boolean }) => (
     />
     <path
       d="M10.5 13.5L12 16.5L13.5 13.5"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.6"
       strokeLinejoin="round"
     />
     <path
       d="M11.3 16.5H12.7L12 20.5L11.3 16.5Z"
-      fill={active ? "currentColor" : "#2196F3"}
+      fill={active ? "currentColor" : "#00BCD4"}
     />
   </svg>
 );
@@ -164,7 +164,7 @@ const AccountingIcon = ({ active }: { active?: boolean }) => (
       width="10.5"
       height="12"
       rx="2"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.6"
       fill={active ? "none" : "white"}
     />
@@ -211,7 +211,7 @@ const AccountingIcon = ({ active }: { active?: boolean }) => (
       cx="18"
       cy="19.5"
       r="0.8"
-      fill={active ? "currentColor" : "#2196F3"}
+      fill={active ? "currentColor" : "#00BCD4"}
     />
   </svg>
 );
@@ -243,12 +243,12 @@ const CustomersIcon = ({ active }: { active?: boolean }) => (
       cx="16.5"
       cy="8"
       r="2.2"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.5"
     />
     <path
       d="M16 13.5C17.8 13.8 19.5 15.2 20 17.5"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.5"
       strokeLinecap="round"
     />
@@ -267,7 +267,7 @@ const WishlistLoveIcon = ({ active }: { active?: boolean }) => (
   >
     <path
       d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.69C2 5.6 4.49 3.1 7.56 3.1C9.38 3.1 10.99 3.98 12 5.34C13.01 3.98 14.63 3.1 16.44 3.1C19.51 3.1 22 5.6 22 8.69C22 15.69 15.52 19.82 12.62 20.81Z"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.8"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -297,7 +297,7 @@ const ReportsIcon = ({ active }: { active?: boolean }) => (
     />
     <path
       d="M7 15L10.5 11.5L13.5 14.5L17 9.5"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.8"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -306,7 +306,7 @@ const ReportsIcon = ({ active }: { active?: boolean }) => (
       cx="17"
       cy="9.5"
       r="1.2"
-      fill={active ? "currentColor" : "#2196F3"}
+      fill={active ? "currentColor" : "#00BCD4"}
     />
   </svg>
 );
@@ -325,7 +325,7 @@ const AdminServiceAreaIcon = ({ active }: { active?: boolean }) => (
       cx="12"
       cy="5"
       r="2.5"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.8"
     />
     <circle
@@ -377,7 +377,7 @@ const ProfileIcon = ({ active }: { active?: boolean }) => (
     />
     <path
       d="M6.8 17.5C7.8 15 9.8 13.5 12 13.5C14.2 13.5 16.2 15 17.2 17.5"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.6"
       strokeLinecap="round"
     />
@@ -402,12 +402,12 @@ const CustomizeIcon = ({ active }: { active?: boolean }) => (
     />
     <path
       d="M12.5 6.5L17.5 11.5"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.5"
     />
     <path
       d="M6.5 14.5L9.5 17.5"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.5"
       strokeLinecap="round"
     />
@@ -433,7 +433,7 @@ const StylingIcon = ({ active }: { active?: boolean }) => (
       cx="12"
       cy="12"
       r="3"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.6"
     />
   </svg>
@@ -468,12 +468,12 @@ const CMSIcon = ({ active }: { active?: boolean }) => (
       cx="12"
       cy="10"
       r="2"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.6"
     />
     <path
       d="M12 6.8V7.8M12 12.2V13.2M8.8 10H9.8M14.2 10H15.2M9.7 7.7L10.4 8.4M13.6 11.6L14.3 12.3M14.3 7.7L13.6 8.4M10.4 11.6L9.7 12.3"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.6"
       strokeLinecap="round"
     />
@@ -510,7 +510,7 @@ const CatalogIcon = ({ active }: { active?: boolean }) => (
       y1="10"
       x2="15.5"
       y2="10"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.5"
       strokeLinecap="round"
     />
@@ -528,7 +528,7 @@ const CatalogIcon = ({ active }: { active?: boolean }) => (
       y1="17"
       x2="12.5"
       y2="17"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.5"
       strokeLinecap="round"
     />
@@ -562,12 +562,12 @@ const ConfigurationsIcon = ({ active }: { active?: boolean }) => (
       cx="16"
       cy="7.5"
       r="2.5"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.6"
     />
     <path
       d="M16 4V5M16 10V11M12.5 7.5H13.5M18.5 7.5H19.5"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.4"
       strokeLinecap="round"
     />
@@ -604,11 +604,11 @@ const TaxIcon = ({ active }: { active?: boolean }) => (
       cx="9.5"
       cy="15.5"
       r="1"
-      fill={active ? "currentColor" : "#2196F3"}
+      fill={active ? "currentColor" : "#00BCD4"}
     />
     <path
       d="M8.5 18.5L14.5 13.5"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.4"
       strokeLinecap="round"
     />
@@ -616,7 +616,7 @@ const TaxIcon = ({ active }: { active?: boolean }) => (
       cx="13.5"
       cy="16.5"
       r="1"
-      fill={active ? "currentColor" : "#2196F3"}
+      fill={active ? "currentColor" : "#00BCD4"}
     />
   </svg>
 );
@@ -649,7 +649,7 @@ const PaymentOptionsIcon = ({ active }: { active?: boolean }) => (
       cx="7.5"
       cy="14.5"
       r="1.5"
-      fill={active ? "currentColor" : "#2196F3"}
+      fill={active ? "currentColor" : "#00BCD4"}
     />
     <line
       x1="12"
@@ -688,14 +688,14 @@ const ManageDeliveryIcon = ({ active }: { active?: boolean }) => (
       cx="7"
       cy="17"
       r="2"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.6"
     />
     <circle
       cx="17.5"
       cy="17"
       r="2"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.6"
     />
   </svg>
@@ -727,7 +727,7 @@ const ManageRolesIcon = ({ active }: { active?: boolean }) => (
     />
     <path
       d="M7.5 17.5C8.2 15 10 14 12 14C14 14 15.8 15 16.5 17.5"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.6"
       strokeLinecap="round"
     />
@@ -753,13 +753,13 @@ const CacheControlIcon = ({ active }: { active?: boolean }) => (
     />
     <path
       d="M12 7V12L15 13.5"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.6"
       strokeLinecap="round"
     />
     <path
       d="M16.5 7.5A6.5 6.5 0 0 0 7.5 7.5"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.5"
       strokeLinecap="round"
     />
@@ -790,7 +790,7 @@ const BannersIcon = ({ active }: { active?: boolean }) => (
     />
     <path
       d="M19 8.5C19.8 9.5 20.2 10.7 20.2 12C20.2 13.3 19.8 14.5 19 15.5"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.6"
       strokeLinecap="round"
     />
@@ -812,10 +812,10 @@ const PromocodeIcon = ({ active }: { active?: boolean }) => (
       stroke={active ? "currentColor" : "#94A3B8"}
       strokeWidth="1.8"
     />
-    <circle cx="9.5" cy="10" r="1" fill={active ? "currentColor" : "#2196F3"} />
+    <circle cx="9.5" cy="10" r="1" fill={active ? "currentColor" : "#00BCD4"} />
     <path
       d="M8.5 14L14.5 10"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.5"
       strokeLinecap="round"
     />
@@ -823,7 +823,7 @@ const PromocodeIcon = ({ active }: { active?: boolean }) => (
       cx="13.5"
       cy="14"
       r="1"
-      fill={active ? "currentColor" : "#2196F3"}
+      fill={active ? "currentColor" : "#00BCD4"}
     />
   </svg>
 );
@@ -885,9 +885,9 @@ const CampaignsIcon = ({ active }: { active?: boolean }) => (
     />
     <polygon
       points="12,5.5 13.2,8 16,8.3 13.9,10.1 14.5,13 12,11.5 9.5,13 10.1,10.1 8,8.3 10.8,8"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.2"
-      fill={active ? "currentColor" : "#2196F3"}
+      fill={active ? "currentColor" : "#00BCD4"}
       fillOpacity={active ? "1" : "0.2"}
       strokeLinejoin="round"
     />
@@ -923,7 +923,7 @@ const ErrorsHealthIcon = ({ active }: { active?: boolean }) => (
       y1="7.5"
       x2="12"
       y2="12.5"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.8"
       strokeLinecap="round"
     />
@@ -931,7 +931,7 @@ const ErrorsHealthIcon = ({ active }: { active?: boolean }) => (
       cx="12"
       cy="15.5"
       r="1"
-      fill={active ? "currentColor" : "#2196F3"}
+      fill={active ? "currentColor" : "#00BCD4"}
     />
   </svg>
 );
@@ -953,13 +953,13 @@ const ToolsIcon = ({ active }: { active?: boolean }) => (
     />
     <path
       d="M10.5 13.5L4 20L3 21L4 20L10.5 13.5Z"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.8"
       strokeLinecap="round"
     />
     <path
       d="M6 16L8 18"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.8"
       strokeLinecap="round"
     />
@@ -989,7 +989,7 @@ const KoolLogisticsIcon = ({ active }: { active?: boolean }) => (
     />
     <path
       d="M7.5 5.5L16 10"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.5"
       strokeLinecap="round"
     />
@@ -1026,7 +1026,7 @@ const DBAuditLogsIcon = ({ active }: { active?: boolean }) => (
     />
     <path
       d="M10.5 10.5H14.5M10.5 16.5H13.5"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.6"
       strokeLinecap="round"
     />
@@ -1064,14 +1064,14 @@ const LogisticsTruckIcon = ({ active }: { active?: boolean }) => (
       cx="6.5"
       cy="17.5"
       r="2"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.7"
     />
     <circle
       cx="17.5"
       cy="17.5"
       r="2"
-      stroke={active ? "currentColor" : "#2196F3"}
+      stroke={active ? "currentColor" : "#00BCD4"}
       strokeWidth="1.7"
     />
     <path
@@ -1116,7 +1116,7 @@ const navGroups: NavGroupConfig[] = [
       },
       {
         name: "Order Fulfilment",
-        href: "/admin/orders",
+        href: "/admin/order-fulfilment",
         icon: OrderFulfilmentIcon,
       },
       {
@@ -1136,10 +1136,10 @@ const navGroups: NavGroupConfig[] = [
           },
           { name: "BNPL Orders", href: "/admin/bnpl-orders" },
           { name: "Orders", href: "/admin/orders" },
-          { name: "Loyalty Cards", href: "/admin/loyalty-cards" },
-          { name: "Promo Codes", href: "/admin/coupons" },
-          { name: "Taxes", href: "/admin/tax" },
-          { name: "Vendors", href: "/admin/vendors" },
+          { name: "Loyalty Cards", href: "/admin/accounting-loyalty" },
+          { name: "Promo Codes", href: "/admin/accounting-promos" },
+          { name: "Taxes", href: "/admin/taxes" },
+          { name: "Vendors", href: "/admin/vendor-accounting" },
           { name: "Payout Requests", href: "/admin/refunds" },
           {
             name: "Subscription Discount",
@@ -1166,7 +1166,7 @@ const navGroups: NavGroupConfig[] = [
           { name: "Products Reviews", href: "/admin/reviews" },
           {
             name: "Products Performance Report",
-            href: "/admin/products?tab=performance",
+            href: "/admin/product-performance",
           },
         ],
       },
@@ -1192,7 +1192,7 @@ const navGroups: NavGroupConfig[] = [
       },
       {
         name: "Styling",
-        href: "/admin/configurations?tab=styling",
+        href: "/admin/app-styling",
         hasChevron: true,
         icon: StylingIcon,
         subItems: [
@@ -1208,16 +1208,16 @@ const navGroups: NavGroupConfig[] = [
       },
       {
         name: "CMS",
-        href: "/admin/advert",
+        href: "/admin/pages",
         hasChevron: true,
         icon: CMSIcon,
         subItems: [
-          { name: "Pages", href: "/admin/advert" },
-          { name: "BNPL Forms", href: "/admin/advert?tab=bnpl-forms" },
-          { name: "Emails", href: "/admin/notifications?tab=emails" },
+          { name: "Pages", href: "/admin/pages" },
+          { name: "BNPL Forms", href: "/admin/bnpl-forms" },
+          { name: "Emails", href: "/admin/emails" },
           { name: "Notifications", href: "/admin/notifications" },
-          { name: "SMS", href: "/admin/notifications?tab=sms" },
-          { name: "Reasons", href: "/admin/faq" },
+          { name: "SMS", href: "/admin/sms" },
+          { name: "Reasons", href: "/admin/reasons" },
         ],
       },
       {
@@ -1237,20 +1237,20 @@ const navGroups: NavGroupConfig[] = [
       },
       {
         name: "Payment Options",
-        href: "/admin/transactions?tab=payment-options",
+        href: "/admin/payment-options",
         icon: PaymentOptionsIcon,
       },
       {
         name: "Manage Delivery",
-        href: "/admin/orders?tab=delivery",
+        href: "/admin/delivery-options",
         hasChevron: true,
         icon: ManageDeliveryIcon,
         subItems: [
           {
             name: "Delivery Options",
-            href: "/admin/orders?tab=delivery-options",
+            href: "/admin/delivery-options",
           },
-          { name: "Delivery Slots", href: "/admin/orders?tab=delivery-slots" },
+          { name: "Delivery Slots", href: "/admin/delivery-slots" },
         ],
       },
       {
@@ -1260,7 +1260,7 @@ const navGroups: NavGroupConfig[] = [
       },
       {
         name: "Cache Control",
-        href: "/admin/configurations?tab=cache",
+        href: "/admin/cache",
         icon: CacheControlIcon,
       },
     ],
@@ -1335,10 +1335,7 @@ export const AdminSidebar: React.FC<SidenavProps> = ({
 }: SidenavProps) => {
   const pathname = usePathname();
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-  const [expandedMenus, setExpandedMenus] = useState<string[]>([
-    "Accounting",
-    "Reports",
-  ]);
+  const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
 
   // Automatically expand parent if currently on a child route
   useEffect(() => {
@@ -1371,6 +1368,23 @@ export const AdminSidebar: React.FC<SidenavProps> = ({
     if (item.href === "/admin") {
       return pathname === "/admin";
     }
+
+    // When on /admin/configurations, strictly only Configurations should be active
+    if (
+      pathname === "/admin/configurations" ||
+      pathname.startsWith("/admin/configurations/")
+    ) {
+      return item.name === "Configurations";
+    }
+
+    // If item has chevron and subitems, it is active if any subitem matches
+    if (item.hasChevron && item.subItems && item.subItems.length > 0) {
+      return item.subItems.some((sub) => {
+        const cleanSub = sub.href.split("?")[0];
+        return pathname === cleanSub || pathname.startsWith(cleanSub + "/");
+      });
+    }
+
     const cleanHref = item.href.split("?")[0];
     if (pathname === cleanHref || pathname.startsWith(cleanHref + "/")) {
       return true;

@@ -9,12 +9,6 @@ import { Pagination } from "../../components/Admin/Pagination";
 import { RowsPerPage } from "@/app/components/rows-per-page";
 import Checkbox from "@/app/components/Checkbox";
 import { ConfirmationModal } from "@/app/components/Admin/ConfirmationModal";
-import {
-  HiOutlineHeart,
-  HiOutlineUsers,
-  HiOutlineShoppingBag,
-  HiOutlineArrowTrendingUp,
-} from "react-icons/hi2";
 
 interface WishlistEntry {
   id: number;
@@ -204,17 +198,17 @@ export default function AdminWishlistPage() {
   };
 
   return (
-    <div className="flex flex-col gap-6 p-2 sm:p-4">
+    <div className="flex flex-col gap-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
+          {/* <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
             Wishlist Products
           </h1>
           <p className="text-sm text-gray-500">
             Monitor customer demand and track wishlisted items across your
             store.
-          </p>
+          </p> */}
         </div>
         <div className="flex items-center gap-3">
           <Link href="/admin/products">
@@ -228,71 +222,8 @@ export default function AdminWishlistPage() {
         </div>
       </div>
 
-      {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-2xs flex items-center justify-between">
-          <div>
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
-              Total Wishlists
-            </p>
-            <p className="text-2xl font-black text-gray-800 mt-1">155</p>
-            <span className="text-[11px] font-medium text-emerald-600 mt-1 inline-block">
-              ↑ 14.2% this month
-            </span>
-          </div>
-          <div className="w-12 h-12 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center">
-            <HiOutlineHeart size={24} />
-          </div>
-        </div>
-
-        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-2xs flex items-center justify-between">
-          <div>
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
-              Unique Customers
-            </p>
-            <p className="text-2xl font-black text-gray-800 mt-1">84</p>
-            <span className="text-[11px] font-medium text-emerald-600 mt-1 inline-block">
-              ↑ 8.5% this month
-            </span>
-          </div>
-          <div className="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center">
-            <HiOutlineUsers size={24} />
-          </div>
-        </div>
-
-        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-2xs flex items-center justify-between">
-          <div>
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
-              High Demand Items
-            </p>
-            <p className="text-2xl font-black text-gray-800 mt-1">12</p>
-            <span className="text-[11px] font-medium text-amber-600 mt-1 inline-block">
-              &gt;20 wishlists each
-            </span>
-          </div>
-          <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
-            <HiOutlineShoppingBag size={24} />
-          </div>
-        </div>
-
-        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-2xs flex items-center justify-between">
-          <div>
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
-              Wishlist Conversion
-            </p>
-            <p className="text-2xl font-black text-gray-800 mt-1">18.4%</p>
-            <span className="text-[11px] font-medium text-emerald-600 mt-1 inline-block">
-              Wishlist to Purchase
-            </span>
-          </div>
-          <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
-            <HiOutlineArrowTrendingUp size={24} />
-          </div>
-        </div>
-      </div>
-
       {/* Main Table Card */}
-      <div className="bg-white border border-gray-100 rounded-2xl shadow-2xs overflow-hidden flex flex-col">
+      <div className="bg-white border border-gray-100 rounded-lg shadow-2xs overflow-hidden flex flex-col">
         {/* Filter Bar */}
         <div className="p-4 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <TabFilter

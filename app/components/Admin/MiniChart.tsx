@@ -36,7 +36,7 @@ interface MiniChartProps {
 export const MiniChart: React.FC<MiniChartProps> = ({ 
   type, 
   data, 
-  color = "#2196F3", 
+  color = "#00BCD4", 
   width = "100%", 
   height = 40,
   className = ""

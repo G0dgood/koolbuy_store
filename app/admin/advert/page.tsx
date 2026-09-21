@@ -261,15 +261,15 @@ export default function AdvertManagement() {
       : config.backgroundImages[activeVisualIndex]?.featuredItems || [];
 
   return (
-    <div className="flex flex-col gap-8 max-w-350 mx-auto pb-20">
+    <div className="flex flex-col gap-8 mx-auto pb-20">
       <div className="flex justify-between items-center ">
         <div className="flex flex-col gap-1">
-          <h1 className="text-xl font-black text-[#1D3557]">
+          {/* <h1 className="text-xl font-black text-[#1D3557]">
             Advert Control Center
           </h1>
           <p className="text-sm text-gray-400 font-medium">
             Configure and deploy the interactive login marketing experience.
-          </p>
+          </p> */}
         </div>
 
         <div className="flex items-center gap-6">

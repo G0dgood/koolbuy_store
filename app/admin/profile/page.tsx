@@ -68,22 +68,10 @@ export default function OrganisationProfilePage() {
   };
 
   return (
-    <div className="flex flex-col gap-8 max-w-400 mx-auto pb-12 p-2 sm:p-4">
+    <div className="flex flex-col gap-8 mx-auto pb-12">
       {/* Top Banner & Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-100 pb-5">
-        <div>
-          {/* <div className="flex items-center gap-2.5"> */}
-          {/* <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Organisation Profile</h1>
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-50 text-brand-blue border border-blue-100">
-              <HiCheckBadge className="w-3.5 h-3.5 text-brand-blue" />
-              Verified Enterprise
-            </span> */}
-          {/* </div>
-          <p className="text-xs text-gray-500 mt-1">
-            Manage your legal business identity, official contact coordinates,
-            operational headquarters, and corporate branding
-          </p> */}
-        </div>
+        <div></div>
 
         <div className="flex items-center gap-3">
           {isEditMode ? (

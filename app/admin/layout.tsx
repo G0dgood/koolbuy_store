@@ -21,9 +21,16 @@ export default function AdminLayout({
     }
   }, [pathname]);
 
+  useEffect(() => {
+    document.body.classList.add("admin-theme");
+    return () => {
+      document.body.classList.remove("admin-theme");
+    };
+  }, []);
+
   return (
     <UserProvider>
-      <div id="page-wrapper" className={`overflow-x-hidden ${mobileMenuOpen ? "mobile-nav-open" : ""}`}>
+      <div id="page-wrapper" className={`admin-theme overflow-x-hidden ${mobileMenuOpen ? "mobile-nav-open" : ""}`}>
         <AdminHeader onOpenMenu={() => setMobileMenuOpen((prev) => !prev)}
           isOpen={mobileMenuOpen}
         />

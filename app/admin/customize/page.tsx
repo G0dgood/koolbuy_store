@@ -201,17 +201,17 @@ export default function CustomizePage() {
   ];
 
   return (
-    <div className="flex flex-col gap-6 max-w-400 mx-auto pb-16 p-2 sm:p-4">
+    <div className="flex flex-col gap-6 mx-auto pb-16">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-100 pb-5">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
+          {/* <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
             Platform Customization
           </h1>
           <p className="text-xs text-gray-500 mt-0.5">
             Configure system localization, vendor classifications, navigation
             links, naming terminology, onboarding flows, and legal policies.
-          </p>
+          </p> */}
         </div>
       </div>
 

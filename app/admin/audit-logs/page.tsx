@@ -403,7 +403,7 @@ export default function DBAuditLogsPage() {
       </div>
 
       {/* Main Filter & Search Bar */}
-      <div className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm space-y-4">
+      <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
           {/* Search */}
           <div className="lg:col-span-2">
@@ -535,7 +535,7 @@ export default function DBAuditLogsPage() {
       </div>
 
       {/* Main Audit Logs Table */}
-      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+      <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
         <div className="p-4 border-b border-gray-200 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <h3 className="font-bold text-gray-900 text-sm">
@@ -760,7 +760,7 @@ export default function DBAuditLogsPage() {
         >
           <div className="space-y-6">
             {/* Header Meta Overview */}
-            <div className="bg-gray-50 rounded-2xl p-4 border border-gray-200 space-y-3">
+            <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-mono font-black text-gray-900 bg-white px-2.5 py-1 rounded border border-gray-200">

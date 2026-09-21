@@ -95,13 +95,13 @@ export const AnalyticsOverview: React.FC = () => {
             datasets: [{
               label: 'Revenue',
               data: [18, 18.5, 17, 16, 11, 12, 11],
-              borderColor: '#2196F3',
+              borderColor: '#00BCD4',
               borderWidth: 3,
               fill: true,
               backgroundColor: 'rgba(33, 150, 243, 0.05)',
               tension: 0.4,
               pointRadius: (context: any) => context.dataIndex === 4 ? 6 : 0,
-              pointBackgroundColor: '#2196F3',
+              pointBackgroundColor: '#00BCD4',
               pointBorderColor: '#fff',
               pointBorderWidth: 2,
             }]

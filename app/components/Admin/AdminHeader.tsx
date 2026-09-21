@@ -98,12 +98,16 @@ export const AdminHeader: React.FC<HeaderProps> = ({
   const getPageTitle = () => {
     if (pathname === "/admin") return "Dashboard";
     if (pathname.startsWith("/admin/bnpl-orders")) return "BNPL Orders";
-    if (pathname.startsWith("/admin/orders")) return "Order Fulfilment";
+    if (pathname.startsWith("/admin/order-fulfilment")) return "Order Fulfilment";
+    if (pathname.startsWith("/admin/orders")) return "Orders";
+    if (pathname.startsWith("/admin/vendor-accounting")) return "Vendors Accounting";
     if (pathname.startsWith("/admin/vendors")) return "Vendors";
     if (pathname.startsWith("/admin/transactions")) return "Accounting";
     if (pathname.startsWith("/admin/customers")) return "Customers";
     if (pathname.startsWith("/admin/wishlist")) return "Wishlist Products";
     if (pathname.startsWith("/admin/reviews")) return "Products Reviews";
+    if (pathname.startsWith("/admin/product-performance"))
+      return "Products Performance Report";
     if (pathname.startsWith("/admin/reports")) return "Reports";
     if (pathname.startsWith("/admin/service-area")) return "Admin Service Area";
     if (pathname.startsWith("/admin/profile")) return "Profile";
@@ -111,13 +115,21 @@ export const AdminHeader: React.FC<HeaderProps> = ({
     if (pathname.startsWith("/admin/app-styling")) return "App Styling";
     if (pathname.startsWith("/admin/web-styling")) return "Web Styling";
     if (pathname.startsWith("/admin/styling")) return "Styling";
+    if (pathname.startsWith("/admin/pages")) return "CMS Pages";
+    if (pathname.startsWith("/admin/bnpl-forms")) return "BNPL Forms";
+    if (pathname.startsWith("/admin/emails")) return "Emails";
+    if (pathname.startsWith("/admin/sms")) return "SMS Templates";
+    if (pathname.startsWith("/admin/reasons")) return "Reasons";
     if (pathname.startsWith("/admin/advert")) return "CMS";
     if (pathname.startsWith("/admin/categories")) return "Catalog";
     if (pathname.startsWith("/admin/products")) return "Catalog";
     if (pathname.startsWith("/admin/brands")) return "Brands";
     if (pathname.startsWith("/admin/configurations")) return "Configurations";
+    if (pathname.startsWith("/admin/taxes")) return "Taxes";
     if (pathname.startsWith("/admin/tax")) return "Tax";
     if (pathname.startsWith("/admin/payment-options")) return "Payment Options";
+    if (pathname.startsWith("/admin/delivery-options")) return "Delivery Options";
+    if (pathname.startsWith("/admin/delivery-slots")) return "Delivery Slots";
     if (pathname.startsWith("/admin/delivery")) return "Manage Delivery";
     if (pathname.startsWith("/admin/roles")) return "Manage Roles";
     if (pathname.startsWith("/admin/permissions")) return "Permissions";
@@ -125,16 +137,21 @@ export const AdminHeader: React.FC<HeaderProps> = ({
     if (pathname.startsWith("/admin/banners")) return "Banners";
     if (pathname.startsWith("/admin/subscription-discounts"))
       return "Subscription Discount";
+    if (pathname.startsWith("/admin/accounting-promos")) return "Promo Codes";
+    if (pathname.startsWith("/admin/accounting-loyalty")) return "Loyalty Cards";
     if (pathname.startsWith("/admin/coupons")) return "Promocode";
+    if (pathname.startsWith("/admin/promocodes")) return "Promocode";
     if (pathname.startsWith("/admin/loyalty-cards")) return "Loyalty Cards";
     if (pathname.startsWith("/admin/deals")) return "Campaigns";
+    if (pathname.startsWith("/admin/campaigns")) return "Campaigns";
     if (pathname.startsWith("/admin/health")) return "Errors & Health";
     if (pathname.startsWith("/admin/tools")) return "Tools";
     if (pathname.startsWith("/admin/logistics")) return "Kool Logistics";
     if (pathname.startsWith("/admin/audit-logs")) return "DB Audit Logs";
     if (pathname.startsWith("/admin/notifications")) return "Notifications";
     if (pathname.startsWith("/admin/faq")) return "FAQ";
-    if (pathname.startsWith("/admin/refunds")) return "Refunds";
+    if (pathname.startsWith("/admin/payout-requests")) return "Payout Requests";
+    if (pathname.startsWith("/admin/refunds")) return "Payout Requests";
     if (pathname.startsWith("/admin/support")) return "Support";
     if (pathname.startsWith("/admin/users")) return "Users";
 

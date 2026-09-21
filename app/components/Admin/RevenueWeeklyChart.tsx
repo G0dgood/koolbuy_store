@@ -37,14 +37,14 @@ export const RevenueWeeklyChart: React.FC = () => {
       {
         label: "Current Week",
         data: currentWeekData,
-        borderColor: "#2196F3", // Brand blue from screenshot
-        backgroundColor: "rgba(33, 150, 243, 0.06)",
+        borderColor: "#00BCD4", // Primary color #00BCD4
+        backgroundColor: "rgba(0, 188, 212, 0.08)",
         borderWidth: 2.5,
         fill: true,
         tension: 0.45,
         pointRadius: 0,
         pointHoverRadius: 6,
-        pointBackgroundColor: "#2196F3",
+        pointBackgroundColor: "#00BCD4",
         pointBorderColor: "#fff",
         pointBorderWidth: 2,
       },
@@ -101,7 +101,7 @@ export const RevenueWeeklyChart: React.FC = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between">
+    <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-xs flex flex-col justify-between">
       {/* Top Header & Legend */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3">
         <div>

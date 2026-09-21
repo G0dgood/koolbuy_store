@@ -314,7 +314,7 @@ export default function AdminToolsPage() {
       {/* ========================================================================= */}
       {activeTab === "upload-files" && (
         <div className="space-y-6">
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm space-y-6">
+          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
               <div>
                 <h2 className="text-lg font-bold text-gray-900">Upload Multiple Files Tool</h2>
@@ -342,9 +342,9 @@ export default function AdminToolsPage() {
             {/* Drag & Drop Zone */}
             <div
               onClick={handleSimulateAddFiles}
-              className="border-2 border-dashed border-gray-300 hover:border-blue-500 rounded-2xl p-8 sm:p-12 text-center cursor-pointer transition-all bg-gray-50/50 hover:bg-blue-50/20 group"
+              className="border-2 border-dashed border-gray-300 hover:border-blue-500 rounded-lg p-8 sm:p-12 text-center cursor-pointer transition-all bg-gray-50/50 hover:bg-blue-50/20 group"
             >
-              <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
                 <Icon name="upload" className="w-7 h-7" />
               </div>
               <h3 className="text-sm font-bold text-gray-900">
@@ -432,7 +432,7 @@ export default function AdminToolsPage() {
       {/* ========================================================================= */}
       {activeTab === "catalog-copy" && (
         <div className="space-y-6">
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm space-y-6">
+          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-6">
             <div className="border-b border-gray-100 pb-4">
               <h2 className="text-lg font-bold text-gray-900">Catalog Copy Tool</h2>
               <p className="text-xs text-gray-500 mt-0.5">
@@ -550,7 +550,7 @@ export default function AdminToolsPage() {
       {/* ========================================================================= */}
       {activeTab === "tax-copy" && (
         <div className="space-y-6">
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm space-y-6">
+          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-6">
             <div className="border-b border-gray-100 pb-4">
               <h2 className="text-lg font-bold text-gray-900">Tax Copy Tool</h2>
               <p className="text-xs text-gray-500 mt-0.5">
@@ -645,7 +645,7 @@ export default function AdminToolsPage() {
       {/* ========================================================================= */}
       {activeTab === "reset-defaults" && (
         <div className="space-y-6">
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm space-y-6">
+          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-6">
             <div className="border-b border-gray-100 pb-4">
               <div className="flex items-center gap-2">
                 <h2 className="text-lg font-bold text-gray-900">Reset to Default Configuration Settings</h2>
@@ -748,7 +748,7 @@ export default function AdminToolsPage() {
       {/* ========================================================================= */}
       {activeTab === "product-integrity" && (
         <div className="space-y-6">
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm space-y-6">
+          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
               <div>
                 <h2 className="text-lg font-bold text-gray-900">Product Integrity Scanner</h2>
@@ -877,7 +877,7 @@ export default function AdminToolsPage() {
       <Modal isOpen={isCatalogCopyModalOpen} onClose={() => setIsCatalogCopyModalOpen(false)}>
         <ModalBody>
           <div className="space-y-4 pt-2">
-            <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
               <Icon name="copy" className="w-6 h-6" />
             </div>
             <div className="text-center">
@@ -922,7 +922,7 @@ export default function AdminToolsPage() {
       <Modal isOpen={isResetModalOpen} onClose={() => setIsResetModalOpen(false)}>
         <ModalBody>
           <div className="space-y-4 pt-2">
-            <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center mx-auto">
               <Icon name="trash" className="w-6 h-6" />
             </div>
             <div className="text-center">

@@ -157,10 +157,10 @@ export function OrderListingView({
   };
 
   return (
-    <div className="flex flex-col gap-6 max-w-400 mx-auto pb-12">
+    <div className="flex flex-col gap-6 mx-auto pb-12">
       {/* Header Action Area */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-        {title ? (
+        {/* {title ? (
           <div>
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
               {title}
@@ -173,7 +173,7 @@ export function OrderListingView({
           </div>
         ) : (
           <div />
-        )}
+        )} */}
 
         <div className="flex gap-3 w-full sm:w-auto ml-auto">
           <Button
@@ -207,10 +207,11 @@ export function OrderListingView({
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat, idx) => (
           <StatCard
             key={idx}
+            size="sm"
             title={stat.title}
             value={stat.value}
             trendValue={stat.trendValue}
@@ -220,7 +221,7 @@ export function OrderListingView({
       </div>
 
       {/* Main Filter & Table Card */}
-      <div className="bg-white rounded-[6px] border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+      <div className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden flex flex-col">
         {/* Filter Controls Row */}
         <div className="p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between border-b border-gray-50">
           <TabFilter

@@ -276,7 +276,7 @@ export default function ProductListing() {
                     </span>
                   </td>
                   <td>
-                    <span className="text-sm font-black text-[#2196F3]">
+                    <span className="text-sm font-black text-[#00BCD4]">
                       {product.price}
                     </span>
                   </td>

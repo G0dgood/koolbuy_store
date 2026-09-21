@@ -19,7 +19,7 @@ export function CustomerSideCard({ customer, onClose }: CustomerSideCardProps) {
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: "100%", opacity: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className="w-full lg:w-[380px] bg-white rounded-[6px] border border-gray-100 shadow-xl p-6 flex flex-col gap-8 sticky top-6 z-10"
+      className="w-full lg:w-[380px] bg-white rounded-lg border border-gray-100 shadow-xl p-6 flex flex-col gap-8 sticky top-6 z-10"
     >
       <div className="flex flex-col items-start gap-4">
         <div className="flex justify-between items-center w-full">
@@ -43,7 +43,7 @@ export function CustomerSideCard({ customer, onClose }: CustomerSideCardProps) {
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-gray-300 hover:text-gray-900 hover:bg-gray-50 rounded-[6px] transition-all"
+            className="p-2 text-gray-300 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all"
           >
             <Icon name="menu-close" folder="dashboardIcon" size="sm" />
           </button>
@@ -54,11 +54,11 @@ export function CustomerSideCard({ customer, onClose }: CustomerSideCardProps) {
         <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">
           Customer Info
         </span>
-        <div className="flex items-center gap-3 p-3 bg-white border border-gray-50 rounded-[6px] shadow-sm">
+        <div className="flex items-center gap-3 p-3 bg-white border border-gray-50 rounded-lg shadow-sm">
           <Icon name="ic_round-phone" folder="dashboardIcon" size="sm" className="text-gray-900" />
           <span className="text-sm font-semibold text-gray-700">{customer.phone}</span>
         </div>
-        <div className="flex items-center gap-3 p-3 bg-white border border-gray-50 rounded-[6px] shadow-sm">
+        <div className="flex items-center gap-3 p-3 bg-white border border-gray-50 rounded-lg shadow-sm">
           <Icon name="mdi_location (1)" folder="dashboardIcon" size="sm" className="text-gray-900" />
           <span className="text-sm font-semibold text-gray-700">{customer.address}</span>
         </div>
@@ -72,7 +72,7 @@ export function CustomerSideCard({ customer, onClose }: CustomerSideCardProps) {
           {["facebook", "whatsapp", "x", "linkedin", "instagram"].map((social) => (
             <button
               key={social}
-              className="w-9 h-9 rounded-[6px] flex items-center justify-center border border-gray-50 hover:bg-gray-50 hover:border-blue-100 transition-all text-[#1D3557]"
+              className="w-9 h-9 rounded-lg flex items-center justify-center border border-gray-50 hover:bg-gray-50 hover:border-blue-100 transition-all text-[#1D3557]"
             >
               <Icon name={social} folder="dashboardIcon" size="sm" />
             </button>
@@ -85,11 +85,11 @@ export function CustomerSideCard({ customer, onClose }: CustomerSideCardProps) {
           Activity
         </span>
         <div className="flex flex-col gap-3">
-          <div className="flex justify-between items-baseline p-2.5 bg-gray-50/30 rounded-[6px]">
+          <div className="flex justify-between items-baseline p-2.5 bg-gray-50/30 rounded-lg">
             <span className="text-xs font-medium text-gray-400">Registration:</span>
             <span className="text-xs font-bold text-gray-700">{customer.registration}</span>
           </div>
-          <div className="flex justify-between items-baseline p-2.5 bg-gray-50/30 rounded-[6px]">
+          <div className="flex justify-between items-baseline p-2.5 bg-gray-50/30 rounded-lg">
             <span className="text-xs font-medium text-gray-400">Last purchase:</span>
             <span className="text-xs font-bold text-gray-700">{customer.lastPurchase}</span>
           </div>
@@ -101,17 +101,17 @@ export function CustomerSideCard({ customer, onClose }: CustomerSideCardProps) {
           Order overview
         </span>
         <div className="grid grid-cols-3 gap-3">
-          <div className="p-3 bg-white border border-gray-50 rounded-[6px] flex flex-col items-center gap-1 shadow-sm">
+          <div className="p-3 bg-white border border-gray-50 rounded-lg flex flex-col items-center gap-1 shadow-sm">
             <span className="text-lg font-bold text-[#1D3557]">150</span>
             <span className="text-[9px] font-bold text-gray-400 uppercase">Total order</span>
           </div>
-          <div className="p-3 bg-white border border-gray-50 rounded-[6px] flex flex-col items-center gap-1 shadow-sm border-brand-blue-light">
+          <div className="p-3 bg-white border border-gray-50 rounded-lg flex flex-col items-center gap-1 shadow-sm border-brand-blue-light">
             <span className="text-lg font-bold text-blue-500">140</span>
             <span className="text-[9px] font-bold text-blue-500/60 uppercase text-center">
               Completed
             </span>
           </div>
-          <div className="p-3 bg-white border border-gray-50 rounded-[6px] flex flex-col items-center gap-1 shadow-sm border-rose-50">
+          <div className="p-3 bg-white border border-gray-50 rounded-lg flex flex-col items-center gap-1 shadow-sm border-rose-50">
             <span className="text-lg font-bold text-rose-500">10</span>
             <span className="text-[9px] font-bold text-rose-500/60 uppercase">Canceled</span>
           </div>

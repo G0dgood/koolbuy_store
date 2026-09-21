@@ -34,10 +34,10 @@ export const RevenueMonthlyChart: React.FC = () => {
       {
         label: "Revenue",
         data: monthlyData,
-        backgroundColor: "#2196F3",
+        backgroundColor: "#00BCD4",
         borderRadius: 4,
         barThickness: 8,
-        hoverBackgroundColor: "#1976D2",
+        hoverBackgroundColor: "#0097A7",
       },
     ],
   };
@@ -91,7 +91,7 @@ export const RevenueMonthlyChart: React.FC = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between h-full">
+    <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-xs flex flex-col justify-between h-full">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-base font-bold text-[#1D3557]">Revenue Monthly</h3>

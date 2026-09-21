@@ -58,7 +58,7 @@ export const TopProducts: React.FC<TopProductsProps> = ({
     <motion.div
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="bg-white p-8 border border-[#1C1C1C1A] rounded-[6px] flex flex-col gap-6 relative overflow-hidden group/card"
+      className="bg-white p-8 border border-[#1C1C1C1A] rounded-lg flex flex-col gap-6 relative overflow-hidden group/card"
     >
       {/* Instrumentation Backdrop Grid */}
       <div
@@ -111,7 +111,7 @@ export const TopProducts: React.FC<TopProductsProps> = ({
                   <MiniChart
                     type="sparkline"
                     data={p.data}
-                    color={i === 0 ? "#1D3557" : "#2196F3"}
+                    color={i === 0 ? "#1D3557" : "#00BCD4"}
                     height={32}
                   />
                 </div>

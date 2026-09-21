@@ -148,14 +148,14 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
                   backgroundColor: (context: any) => {
                     const chart = context.chart;
                     const { ctx, chartArea } = chart;
-                    if (!chartArea) return "#2196F3";
+                    if (!chartArea) return "#00BCD4";
                     const gradient = ctx.createLinearGradient(
                       0,
                       chartArea.bottom,
                       0,
                       chartArea.top,
                     );
-                    gradient.addColorStop(0, "#2196F3");
+                    gradient.addColorStop(0, "#00BCD4");
                     gradient.addColorStop(1, "#60A5FA");
                     return gradient;
                   },

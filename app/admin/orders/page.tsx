@@ -101,30 +101,30 @@ const standardOrdersData: OrderItem[] = [
   },
 ];
 
-const standardStats: StatItem[] = [
+const ordersStats: StatItem[] = [
   {
-    title: "Total Orders",
-    value: "1,240",
+    title: "Total Order Value",
+    value: "₦24,850,000",
     trendValue: "14.4%",
     trendIsUp: true,
   },
   {
-    title: "New Orders",
-    value: "240",
-    trendValue: "20%",
+    title: "Total Orders",
+    value: "1,240",
+    trendValue: "12.0%",
     trendIsUp: true,
   },
   {
-    title: "Completed Orders",
-    value: "960",
-    trendValue: "85%",
+    title: "Total Cash To Be Collected",
+    value: "₦8,450,000",
+    trendValue: "5.8%",
     trendIsUp: true,
   },
   {
-    title: "Canceled Orders",
-    value: "87",
-    trendValue: "5%",
-    trendIsUp: false,
+    title: "Total Delivery Fees",
+    value: "₦1,920,000",
+    trendValue: "3.2%",
+    trendIsUp: true,
   },
 ];
 
@@ -144,7 +144,8 @@ export default function OrderListing() {
   return (
     <OrderListingView
       pageType="standard"
-      stats={standardStats}
+      title="Orders"
+      stats={ordersStats}
       tabs={standardTabs}
       initialOrders={standardOrdersData}
       searchPlaceholder="Search order report"

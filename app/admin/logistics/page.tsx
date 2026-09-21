@@ -777,7 +777,7 @@ export default function KoolLogisticsPage() {
       {activeTab === "dropping-orders" && (
         <div className="space-y-4">
           {/* Filters Bar */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm space-y-4">
+          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="lg:col-span-2">
                 <Input
@@ -836,7 +836,7 @@ export default function KoolLogisticsPage() {
           </div>
 
           {/* Table */}
-          <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+          <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
             <div className="p-4 border-b border-gray-200 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <h3 className="font-bold text-gray-900 text-sm">
@@ -1006,7 +1006,7 @@ export default function KoolLogisticsPage() {
       {activeTab === "vendor-addresses" && (
         <div className="space-y-4">
           {/* Filters Bar */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm space-y-4">
+          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="lg:col-span-3">
                 <Input
@@ -1037,7 +1037,7 @@ export default function KoolLogisticsPage() {
           </div>
 
           {/* Table */}
-          <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+          <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
             <div className="p-4 border-b border-gray-200 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <h3 className="font-bold text-gray-900 text-sm">
@@ -1168,7 +1168,7 @@ export default function KoolLogisticsPage() {
       {activeTab === "delivery-prices" && (
         <div className="space-y-4">
           {/* Filters Bar */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm space-y-4">
+          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="lg:col-span-2">
                 <Input
@@ -1219,7 +1219,7 @@ export default function KoolLogisticsPage() {
           </div>
 
           {/* Table */}
-          <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+          <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
             <div className="p-4 border-b border-gray-200 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <h3 className="font-bold text-gray-900 text-sm">
@@ -1349,7 +1349,7 @@ export default function KoolLogisticsPage() {
           width="max-w-xl"
         >
           <div className="space-y-6">
-            <div className="bg-gray-50 rounded-2xl p-4 border border-gray-200 space-y-3">
+            <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="font-mono text-sm font-black text-gray-900">
                   {selectedDropOrder.id}
@@ -1481,7 +1481,7 @@ export default function KoolLogisticsPage() {
       >
         <ModalBody>
           <div className="space-y-4 pt-2">
-            <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
               <Icon name="plus" className="w-6 h-6" />
             </div>
             <div className="text-center">
@@ -1646,7 +1646,7 @@ export default function KoolLogisticsPage() {
       >
         <ModalBody>
           <div className="space-y-4 pt-2">
-            <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
               <Icon name="plus" className="w-6 h-6" />
             </div>
             <div className="text-center">
@@ -1799,7 +1799,7 @@ export default function KoolLogisticsPage() {
       >
         <ModalBody>
           <div className="space-y-4 pt-2">
-            <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
               <Icon name="settings" className="w-6 h-6" />
             </div>
             <div className="text-center">

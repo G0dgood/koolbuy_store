@@ -52,7 +52,7 @@ export function DashboardInsightsDrawer({ isOpen, onClose, activeSection }: Dash
                               {
                                  label: 'Actual',
                                  data: [20, 25, 40, 60, 80, 110],
-                                 borderColor: '#2196F3',
+                                 borderColor: '#00BCD4',
                                  borderWidth: 3,
                                  fill: true,
                                  backgroundColor: 'rgba(33, 150, 243, 0.1)',
@@ -125,7 +125,7 @@ export function DashboardInsightsDrawer({ isOpen, onClose, activeSection }: Dash
                               labels: ['Direct', 'Social', 'Other'],
                               datasets: [{
                                  data: [60, 30, 10],
-                                 backgroundColor: ['#2196F3', '#60A5FA', '#93C5FD'],
+                                 backgroundColor: ['#00BCD4', '#60A5FA', '#93C5FD'],
                                  borderWidth: 0,
                                  cutout: '75%',
                               }]
@@ -170,7 +170,7 @@ export function DashboardInsightsDrawer({ isOpen, onClose, activeSection }: Dash
                            datasets: [{
                               label: 'Revenue',
                               data: [120, 85, 45, 15],
-                              backgroundColor: '#2196F3',
+                              backgroundColor: '#00BCD4',
                               borderRadius: 4,
                               indexAxis: 'y',
                            }]

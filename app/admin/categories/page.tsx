@@ -4,6 +4,7 @@ import React, { useState, useRef } from "react";
 import { Icon } from "../../components/Icon";
 import { TabFilter } from "../../components/Admin/TabFilter";
 import { Pagination } from "../../components/Admin/Pagination";
+import { StatCard } from "../../components/Admin/StatCard";
 import { Button } from "@/app/components/Button";
 import { Input } from "../../components/Form/Inputs";
 import { AddCategoryModal } from "../../components/Admin/AddCategoryModal";
@@ -13,6 +14,12 @@ import Checkbox from "@/app/components/Checkbox";
 import { EditCategoryDrawer } from "../../components/Admin/EditCategoryDrawer";
 import { BulkActionsDrawer } from "../../components/Admin/BulkActionsDrawer";
 import { RowsPerPage } from "@/app/components/rows-per-page";
+import {
+  HiOutlineSquares2X2,
+  HiOutlineAdjustmentsHorizontal,
+  HiOutlineBuildingStorefront,
+  HiOutlineCube,
+} from "react-icons/hi2";
 
 const categories = [
   { name: "Chest Freezers", image: "/images/koolboks/items/5.webp" },
@@ -143,9 +150,19 @@ export default function CategoriesPage() {
   };
 
   return (
-    <div className="flex flex-col gap-6 max-w-400 mx-auto pb-12">
+    <div className="flex flex-col gap-6 mx-auto pb-12">
       {/* Header Section */}
-      <div className="flex flex-col sm:flex-row justify-end items-center gap-3">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          {/* <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
+            Catalog Overview
+          </h1>
+          <p className="text-xs text-gray-500 mt-1">
+            Manage product categories, variants, equipment brands, and accessory
+            addon sets
+          </p> */}
+        </div>
+
         <div className="flex gap-3 w-full sm:w-auto">
           <Button
             variant="primary"
@@ -168,6 +185,50 @@ export default function CategoriesPage() {
         </div>
       </div>
 
+      {/* The 4 Cards: Category, Variant, Brand, Addon Set */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatCard
+          size="sm"
+          title="Category"
+          value="8"
+          trendValue="Active"
+          trendIsUp={true}
+          subtitle="Cooling classifications"
+          badgeIcon={<HiOutlineSquares2X2 className="w-4 h-4 text-[#00BCD4]" />}
+        />
+        <StatCard
+          size="sm"
+          title="Variant"
+          value="45"
+          trendValue="+6 this month"
+          trendIsUp={true}
+          subtitle="Capacity, voltage & color"
+          badgeIcon={
+            <HiOutlineAdjustmentsHorizontal className="w-4 h-4 text-emerald-600" />
+          }
+        />
+        <StatCard
+          size="sm"
+          title="Brand"
+          value="12"
+          trendValue="Verified"
+          trendIsUp={true}
+          subtitle="Manufacturers & partners"
+          badgeIcon={
+            <HiOutlineBuildingStorefront className="w-4 h-4 text-purple-600" />
+          }
+        />
+        <StatCard
+          size="sm"
+          title="Addon Set"
+          value="16"
+          trendValue="Bundles"
+          trendIsUp={true}
+          subtitle="Solar panels & battery kits"
+          badgeIcon={<HiOutlineCube className="w-4 h-4 text-amber-500" />}
+        />
+      </div>
+
       {/* Categories Horizontal Scroll */}
       <div className="relative group">
         <button
@@ -184,9 +245,9 @@ export default function CategoriesPage() {
           {categories.map((cat, i) => (
             <div
               key={i}
-              className="shrink-0 w-55 bg-white p-3 rounded-[6px] flex items-center gap-3 hover:shadow-md transition-shadow cursor-pointer hover:border-brand-blue/30 group/item border border-[#1C1C1C1A]"
+              className="shrink-0 w-55 bg-white p-3 rounded-lg flex items-center gap-3 hover:shadow-md transition-shadow cursor-pointer hover:border-brand-blue/30 group/item border border-[#1C1C1C1A]"
             >
-              <div className="w-12 h-12 rounded-[6px] overflow-hidden bg-gray-50 flex items-center justify-center p-1 group-hover/item:bg-brand-blue-light transition-colors">
+              <div className="w-12 h-12 rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center p-1 group-hover/item:bg-brand-blue-light transition-colors">
                 <img
                   src={cat.image}
                   alt={cat.name}
@@ -208,8 +269,8 @@ export default function CategoriesPage() {
         </button>
       </div>
 
-      {/* Main Container */}
-      <div className="bg-white flex flex-col pt-4 border border-[#1C1C1C1A] rounded-[6px]">
+      {/* Main Table Container */}
+      <div className="bg-white flex flex-col pt-4 border border-[#1C1C1C1A] rounded-lg shadow-2xs">
         {/* Fill Tabs & Controls */}
         <div className="px-6 flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
           <TabFilter
@@ -226,7 +287,7 @@ export default function CategoriesPage() {
           <div className="flex items-center gap-3 w-full md:w-auto">
             <Input
               type="text"
-              placeholder="Search your product"
+              placeholder="Search your product..."
               containerClassName="flex-1 md:w-96"
               className="bg-white border-gray-100 placeholder:text-gray-400 text-xs font-medium"
               suffixElement={
@@ -294,10 +355,12 @@ export default function CategoriesPage() {
                     />
                   </td>
                   <td className="px-4">
-                    <span className="text-sm font-bold text-gray-900">1</span>
+                    <span className="text-sm font-bold text-gray-900">
+                      {idx + 1}
+                    </span>
                   </td>
                   <td className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-[6px] overflow-hidden bg-gray-50 border border-gray-100 p-1">
+                    <div className="w-10 h-10 rounded-lg overflow-hidden bg-gray-50 border border-gray-100 p-1">
                       <img
                         src={p.image}
                         alt=""

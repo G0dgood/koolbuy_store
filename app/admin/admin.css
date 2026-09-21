@@ -4,9 +4,22 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. Admin Grid & Layout Shell
+   1. Admin Grid & Layout Shell & Primary Color Theme (#00BCD4)
    -------------------------------------------------------------------------- */
+body:has(#page-wrapper),
+.admin-theme,
 #page-wrapper {
+  --brand-blue: #00BCD4;
+  --brand-blue-light: #E0F7FA;
+  --primary: #00BCD4;
+  --color-brand-blue: #00BCD4;
+  --color-brand-blue-light: #E0F7FA;
+  --color-primary: #00BCD4;
+  --sidebar-primary: #00BCD4;
+  --sidebar-accent: #E0F7FA;
+  --sidebar-ring: #00BCD4;
+  --ring: #00BCD4;
+  --chart-1: #00BCD4;
   display: grid;
   position: relative;
   height: 100dvh;
@@ -115,13 +128,55 @@
 }
 
 /* --------------------------------------------------------------------------
-   3. Scoped Admin Tables
+   3. Universal Card, Table & Chart Radius: rounded-lg (0.5rem)
+   -------------------------------------------------------------------------- */
+#page-wrapper .rounded-2xl,
+#page-wrapper .rounded-xl,
+#page-wrapper .rounded-3xl,
+#page-wrapper .rounded-\[6px\],
+#page-wrapper .rounded-\[8px\],
+#page-wrapper .rounded-\[16px\],
+#page-wrapper .rounded-\[20px\],
+.admin-theme .rounded-2xl,
+.admin-theme .rounded-xl,
+.admin-theme .rounded-3xl,
+.admin-theme .rounded-\[6px\],
+.admin-theme .rounded-\[8px\],
+.admin-theme .rounded-\[16px\],
+.admin-theme .rounded-\[20px\],
+body:has(#page-wrapper) .rounded-2xl,
+body:has(#page-wrapper) .rounded-xl,
+body:has(#page-wrapper) .rounded-3xl,
+body:has(#page-wrapper) .rounded-\[6px\],
+body:has(#page-wrapper) .rounded-\[8px\],
+body:has(#page-wrapper) .rounded-\[16px\],
+body:has(#page-wrapper) .rounded-\[20px\],
+#page-wrapper [class*="rounded-2xl"],
+#page-wrapper [class*="rounded-xl"],
+#page-wrapper [class*="rounded-3xl"],
+#page-wrapper [class*="rounded-[6px]"],
+#page-wrapper [class*="rounded-[8px]"],
+#page-wrapper [class*="rounded-[16px]"],
+#page-wrapper [class*="rounded-[20px]"] {
+  border-radius: 0.5rem !important;
+}
+
+/* Explicit Card, Table & Chart wrappers */
+#page-wrapper .admin-table-container,
+#page-wrapper .overflow-x-auto:has(table),
+#page-wrapper canvas {
+  border-radius: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   4. Scoped Admin Tables
    -------------------------------------------------------------------------- */
 .admin-table-container {
   padding: 0 1.5rem;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   width: 100%;
+  border-radius: 0.5rem;
 }
 
 .admin-table-container table {
@@ -135,13 +190,13 @@
 }
 
 .admin-table-container th:first-child {
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
 }
 
 .admin-table-container th:last-child {
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
 }
 
 .admin-table-container thead tr {
