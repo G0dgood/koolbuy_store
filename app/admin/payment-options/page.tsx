@@ -80,13 +80,13 @@ const initialGateways: PaymentGateway[] = [
       {
         label: "Secret Key",
         key: "secretKey",
-        value: "stripe_sec_demo_placeholder_key",
+        value: "",
         isSecret: true,
       },
       {
         label: "Publishable Key",
         key: "publishableKey",
-        value: "stripe_pub_demo_placeholder_key",
+        value: "",
         isSecret: false,
       },
     ],
@@ -102,13 +102,13 @@ const initialGateways: PaymentGateway[] = [
       {
         label: "Secret Key",
         key: "secretKey",
-        value: "paystack_sec_demo_placeholder_key",
+        value: "",
         isSecret: true,
       },
       {
         label: "Publishable Key",
         key: "publishableKey",
-        value: "paystack_pub_demo_placeholder_key",
+        value: "",
         isSecret: false,
       },
     ],
