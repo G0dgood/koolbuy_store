@@ -80,13 +80,13 @@ const initialGateways: PaymentGateway[] = [
       {
         label: "Secret Key",
         key: "secretKey",
-        value: "sk_live_51P8291048KoolbuyStripeKeySecret",
+        value: "stripe_sec_demo_placeholder_key",
         isSecret: true,
       },
       {
         label: "Publishable Key",
         key: "publishableKey",
-        value: "pk_live_51P8291048KoolbuyStripeKeyPub",
+        value: "stripe_pub_demo_placeholder_key",
         isSecret: false,
       },
     ],
@@ -102,13 +102,13 @@ const initialGateways: PaymentGateway[] = [
       {
         label: "Secret Key",
         key: "secretKey",
-        value: "sk_live_48291048194820194820194820194820",
+        value: "paystack_sec_demo_placeholder_key",
         isSecret: true,
       },
       {
         label: "Publishable Key",
         key: "publishableKey",
-        value: "pk_live_48291048194820194820194820194820",
+        value: "paystack_pub_demo_placeholder_key",
         isSecret: false,
       },
     ],
