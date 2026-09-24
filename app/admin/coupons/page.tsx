@@ -462,7 +462,7 @@ export default function MarketingPromocodePage() {
         {/* Table with EXACT requested headers:
             # | Image | Promo Code | Title | Description | Promo Types | Total Amount | Expiry Date | Action */}
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse min-w-[1050px]">
+          <table className="w-full text-left border-collapse min-w-262.5">
             <thead>
               <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
                 <th className="py-3.5 px-4 w-12 text-center">#</th>

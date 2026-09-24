@@ -322,7 +322,7 @@ export default function NotificationsManagementPage() {
           </div>
 
           {/* List Items */}
-          <div className="flex flex-col divide-y divide-gray-50 max-h-[640px] overflow-y-auto">
+          <div className="flex flex-col divide-y divide-gray-50 max-h-160 overflow-y-auto">
             {filteredList.map((item) => {
               const isSelected = item.id === currentNotification.id;
               return (

@@ -567,7 +567,7 @@ export default function CMSPagesManagement() {
       >
         <ModalBody className="flex flex-col gap-6 py-6 max-h-[70vh] overflow-y-auto">
           {/* Storefront Hero Preview */}
-          <div className="bg-gradient-to-br from-[#1D3557] to-[#0d1b2a] text-white p-8 rounded-lg flex flex-col gap-3">
+          <div className="bg-linear-to-br from-[#1D3557] to-[#0d1b2a] text-white p-8 rounded-lg flex flex-col gap-3">
             <span className="text-[11px] uppercase tracking-widest font-bold text-[#00BCD4]">
               Koolbuy Storefront
             </span>

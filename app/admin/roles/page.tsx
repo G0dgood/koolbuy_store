@@ -708,7 +708,7 @@ export default function RolesManagementPage() {
           </div>
 
           {/* List of the 14 Roles */}
-          <div className="flex flex-col divide-y divide-gray-100 max-h-[640px] overflow-y-auto">
+          <div className="flex flex-col divide-y divide-gray-100 max-h-160 overflow-y-auto">
             {filteredRoles.map((role) => {
               const isSelected = role.id === selectedRole.id;
 
@@ -931,7 +931,7 @@ export default function RolesManagementPage() {
 
               {/* Users Table */}
               <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse min-w-[600px]">
+                <table className="w-full text-left border-collapse min-w-150">
                   <thead>
                     <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
                       <th className="py-3 px-4 w-12 text-center">#</th>

@@ -27,7 +27,8 @@ const initialIssues: DiagnosticIssue[] = [
     id: "1",
     severity: "Warning",
     issue: "8280 Orphaned Products",
-    suggestedFix: "Products found without a valid Vendor. Delete them or assign a vendor.",
+    suggestedFix:
+      "Products found without a valid Vendor. Delete them or assign a vendor.",
     department: "Commercial Team",
     actionText: "Assign Vendor",
     actionHref: "/admin/products",
@@ -36,7 +37,8 @@ const initialIssues: DiagnosticIssue[] = [
     id: "2",
     severity: "Warning",
     issue: "615 Active Products without Images",
-    suggestedFix: "Products are live but have no images. Add images via Catalog.",
+    suggestedFix:
+      "Products are live but have no images. Add images via Catalog.",
     department: "Commercial Team",
     actionText: "Update Images",
     actionHref: "/admin/products",
@@ -45,7 +47,8 @@ const initialIssues: DiagnosticIssue[] = [
     id: "3",
     severity: "Critical",
     issue: "10 Active Vendors without Service Area",
-    suggestedFix: "Vendors are active but have no service area defined. They cannot receive orders.",
+    suggestedFix:
+      "Vendors are active but have no service area defined. They cannot receive orders.",
     department: "Commercial Team",
     actionText: "Define Service Area",
     actionHref: "/admin/service-area",
@@ -54,7 +57,9 @@ const initialIssues: DiagnosticIssue[] = [
 
 export default function ErrorAndHealthPage() {
   const [issues, setIssues] = useState<DiagnosticIssue[]>(initialIssues);
-  const [selectedIssue, setSelectedIssue] = useState<DiagnosticIssue | null>(null);
+  const [selectedIssue, setSelectedIssue] = useState<DiagnosticIssue | null>(
+    null,
+  );
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const showToast = (msg: string) => {
@@ -89,14 +94,15 @@ export default function ErrorAndHealthPage() {
             Diagnostic Results
           </h1>
           <p className="text-xs text-gray-500 mt-1">
-            The following table lists potential issues detected in the system configuration, database, or environment.
+            The following table lists potential issues detected in the system
+            configuration, database, or environment.
           </p>
         </div>
 
         {/* Table with EXACT requested headers:
             Severity | Issue | Suggested Fix | Department | Action */}
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse min-w-[850px]">
+          <table className="w-full text-left border-collapse min-w-212.5">
             <thead>
               <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
                 <th className="py-4 px-6 w-32">Severity</th>
@@ -176,12 +182,18 @@ export default function ErrorAndHealthPage() {
                 })
               ) : (
                 <tr>
-                  <td colSpan={5} className="py-12 text-center text-gray-400 text-xs">
+                  <td
+                    colSpan={5}
+                    className="py-12 text-center text-gray-400 text-xs"
+                  >
                     <div className="flex flex-col items-center justify-center gap-2">
                       <HiOutlineCheckCircle className="w-8 h-8 text-emerald-500" />
-                      <p className="font-bold text-gray-700">All Diagnostics Clear</p>
+                      <p className="font-bold text-gray-700">
+                        All Diagnostics Clear
+                      </p>
                       <p className="text-gray-400 text-[11px]">
-                        No configuration, database, or environment anomalies detected.
+                        No configuration, database, or environment anomalies
+                        detected.
                       </p>
                     </div>
                   </td>
@@ -194,10 +206,7 @@ export default function ErrorAndHealthPage() {
 
       {/* Resolution Details Modal */}
       {selectedIssue && (
-        <Modal
-          isOpen={!!selectedIssue}
-          onClose={() => setSelectedIssue(null)}
-        >
+        <Modal isOpen={!!selectedIssue} onClose={() => setSelectedIssue(null)}>
           <ModalBody>
             <div className="space-y-4 pt-1">
               <div className="flex items-center justify-between border-b border-gray-100 pb-3">
@@ -220,7 +229,8 @@ export default function ErrorAndHealthPage() {
                       {selectedIssue.issue}
                     </h3>
                     <p className="text-[11px] text-gray-400">
-                      Severity: {selectedIssue.severity} • Assigned: {selectedIssue.department}
+                      Severity: {selectedIssue.severity} • Assigned:{" "}
+                      {selectedIssue.department}
                     </p>
                   </div>
                 </div>

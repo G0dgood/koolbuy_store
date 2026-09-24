@@ -371,7 +371,7 @@ export default function MarketingCampaignsPage() {
         {/* Table with EXACT requested headers:
             # | Title | Type | URL Option | Send to | Schedule Time | Request User Count | Request Time Difference | Total Request Count | Live Count | Action */}
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse min-w-[1250px]">
+          <table className="w-full text-left border-collapse min-w-312.5">
             <thead>
               <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
                 <th className="py-3.5 px-4 w-12 text-center">#</th>
