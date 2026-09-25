@@ -23,7 +23,12 @@ type HeaderProps = {
   role?: string;
 };
 
-export const AdminHeader: React.FC<HeaderProps> = ({ onOpenMenu, className, isOpen, role }) => {
+export const AdminHeader: React.FC<HeaderProps> = ({
+  onOpenMenu,
+  className,
+  isOpen,
+  role,
+}) => {
   const { userImage } = useUser();
   const pathname = usePathname();
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
@@ -41,7 +46,10 @@ export const AdminHeader: React.FC<HeaderProps> = ({ onOpenMenu, className, isOp
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
 
-      if (notificationRef.current && !notificationRef.current.contains(target)) {
+      if (
+        notificationRef.current &&
+        !notificationRef.current.contains(target)
+      ) {
         setIsNotificationsOpen(false);
       }
 
@@ -88,52 +96,105 @@ export const AdminHeader: React.FC<HeaderProps> = ({ onOpenMenu, className, isOp
 
   // Dynamic title based on pathname
   const getPageTitle = () => {
-    if (pathname === "/admin") return "Dashboard Overview";
-    if (pathname.includes("/admin/orders")) return "Order Management";
-    if (pathname === "/admin/products") return "Product Inventory";
-    if (pathname.includes("/admin/products/media")) return "Media Library";
-    if (pathname.includes("/admin/products/new")) return "Add New Product";
-    if (pathname.includes("/admin/customers")) return "Customer Directory";
-    if (pathname.includes("/admin/users")) return "Staff Management";
-    if (pathname.includes("/admin/brands")) return "Brand Management";
-    if (pathname.includes("/admin/transactions")) return "Transaction History";
-    if (pathname.includes("/admin/refunds")) return "Refund Management";
-    if (pathname.includes("/admin/support")) return "Support Tickets";
-    if (pathname.includes("/admin/coupons")) return "Marketing Coupons";
-    if (pathname.includes("/admin/deals")) return "Deals & Offers";
-    if (pathname.includes("/admin/reviews")) return "Product Reviews";
-    if (pathname.includes("/admin/profile")) return "Personal Account";
-    if (pathname.includes("/admin/roles")) return "Governance & Roles";
-    if (pathname.includes("/admin/permissions")) return "Permissions";
-    if (pathname.includes("/admin/categories")) return "Category Management";
-    if (pathname.includes("/admin/notifications")) return "Notification Center";
-    if (pathname.includes("/admin/faq")) return "FAQ Library";
-    return "Administrative Panel";
+    if (pathname === "/admin") return "Dashboard";
+    if (pathname.startsWith("/admin/bnpl-orders")) return "BNPL Orders";
+    if (pathname.startsWith("/admin/order-fulfilment")) return "Order Fulfilment";
+    if (pathname.startsWith("/admin/orders")) return "Orders";
+    if (pathname.startsWith("/admin/vendor-accounting")) return "Vendors Accounting";
+    if (pathname.startsWith("/admin/vendors")) return "Vendors";
+    if (pathname.startsWith("/admin/transactions")) return "Accounting";
+    if (pathname.startsWith("/admin/customers")) return "Customers";
+    if (pathname.startsWith("/admin/wishlist")) return "Wishlist Products";
+    if (pathname.startsWith("/admin/reviews")) return "Products Reviews";
+    if (pathname.startsWith("/admin/product-performance"))
+      return "Products Performance Report";
+    if (pathname.startsWith("/admin/reports")) return "Reports";
+    if (pathname.startsWith("/admin/service-area")) return "Admin Service Area";
+    if (pathname.startsWith("/admin/profile")) return "Profile";
+    if (pathname.startsWith("/admin/customize")) return "Customize";
+    if (pathname.startsWith("/admin/app-styling")) return "App Styling";
+    if (pathname.startsWith("/admin/web-styling")) return "Web Styling";
+    if (pathname.startsWith("/admin/styling")) return "Styling";
+    if (pathname.startsWith("/admin/pages")) return "CMS Pages";
+    if (pathname.startsWith("/admin/bnpl-forms")) return "BNPL Forms";
+    if (pathname.startsWith("/admin/emails")) return "Emails";
+    if (pathname.startsWith("/admin/sms")) return "SMS Templates";
+    if (pathname.startsWith("/admin/reasons")) return "Reasons";
+    if (pathname.startsWith("/admin/advert")) return "CMS";
+    if (pathname.startsWith("/admin/categories")) return "Catalog";
+    if (pathname.startsWith("/admin/products")) return "Catalog";
+    if (pathname.startsWith("/admin/brands")) return "Brands";
+    if (pathname.startsWith("/admin/configurations")) return "Configurations";
+    if (pathname.startsWith("/admin/taxes")) return "Taxes";
+    if (pathname.startsWith("/admin/tax")) return "Tax";
+    if (pathname.startsWith("/admin/payment-options")) return "Payment Options";
+    if (pathname.startsWith("/admin/delivery-options")) return "Delivery Options";
+    if (pathname.startsWith("/admin/delivery-slots")) return "Delivery Slots";
+    if (pathname.startsWith("/admin/delivery")) return "Manage Delivery";
+    if (pathname.startsWith("/admin/roles")) return "Manage Roles";
+    if (pathname.startsWith("/admin/permissions")) return "Permissions";
+    if (pathname.startsWith("/admin/cache")) return "Cache Control";
+    if (pathname.startsWith("/admin/banners")) return "Banners";
+    if (pathname.startsWith("/admin/subscription-discounts"))
+      return "Subscription Discount";
+    if (pathname.startsWith("/admin/accounting-promos")) return "Promo Codes";
+    if (pathname.startsWith("/admin/accounting-loyalty")) return "Loyalty Cards";
+    if (pathname.startsWith("/admin/coupons")) return "Promocode";
+    if (pathname.startsWith("/admin/promocodes")) return "Promocode";
+    if (pathname.startsWith("/admin/loyalty-cards")) return "Loyalty Cards";
+    if (pathname.startsWith("/admin/deals")) return "Campaigns";
+    if (pathname.startsWith("/admin/campaigns")) return "Campaigns";
+    if (pathname.startsWith("/admin/health")) return "Errors & Health";
+    if (pathname.startsWith("/admin/tools")) return "Tools";
+    if (pathname.startsWith("/admin/logistics")) return "Kool Logistics";
+    if (pathname.startsWith("/admin/audit-logs")) return "DB Audit Logs";
+    if (pathname.startsWith("/admin/notifications")) return "Notifications";
+    if (pathname.startsWith("/admin/faq")) return "FAQ";
+    if (pathname.startsWith("/admin/payout-requests")) return "Payout Requests";
+    if (pathname.startsWith("/admin/refunds")) return "Payout Requests";
+    if (pathname.startsWith("/admin/support")) return "Support";
+    if (pathname.startsWith("/admin/users")) return "Users";
+
+    // Clean fallback from path segment if unknown route
+    const segment = pathname.replace(/^\/admin\/?/, "").split("/")[0];
+    if (segment) {
+      return segment
+        .split("-")
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(" ");
+    }
+    return "Dashboard";
   };
 
   return (
-    <header id="header" className={`  bg-white border-b border-gray-100 flex items-center justify-between px-4 sm:px-12 sticky top-0 z-30 ${className}`}>
+    <header
+      id="header"
+      className={`  bg-white border-b border-gray-100 flex items-center justify-between px-4 sm:px-12 sticky top-0 z-30 ${className}`}
+    >
       <div className="flex items-center gap-3">
         <button
           type="button"
           className="sm:hidden text-neutral-900 relative flex items-center justify-center w-8 h-8"
           onClick={onOpenMenu}
         >
-          <div className={`absolute inset-0 transition-all duration-300 ease-in-out flex items-center justify-center ${isOpen ? 'opacity-0 rotate-180 scale-0' : 'opacity-100 rotate-0 scale-100'}`}>
+          <div
+            className={`absolute inset-0 transition-all duration-300 ease-in-out flex items-center justify-center ${isOpen ? "opacity-0 rotate-180 scale-0" : "opacity-100 rotate-0 scale-100"}`}
+          >
             <RxHamburgerMenu size={20} />
           </div>
-          <div className={`absolute inset-0 transition-all duration-300 ease-in-out flex items-center justify-center ${isOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-180 scale-0'}`}>
+          <div
+            className={`absolute inset-0 transition-all duration-300 ease-in-out flex items-center justify-center ${isOpen ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-180 scale-0"}`}
+          >
             <IoMdClose size={20} />
           </div>
         </button>
-
       </div>
-      <div className="flex-shrink-0 mr-4 sm:mr-8 min-w-[140px] sm:min-w-[200px]">
+      <div className="shrink-0 mr-4 sm:mr-8 min-w-35 sm:min-w-50">
         <motion.h1
           key={pathname}
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
-          className="text-[16px] sm:text-[20px] font-black text-[#1D3557] tracking-tight truncate xl:max-w-none"
+          className="text-[16px] sm:text-[20px] font-black text-[#1D3557] tracking-tight uppercase truncate xl:max-w-none"
         >
           {getPageTitle()}
         </motion.h1>
@@ -142,7 +203,10 @@ export const AdminHeader: React.FC<HeaderProps> = ({ onOpenMenu, className, isOp
       {/* Right Actions Area */}
       <div className="flex-1 flex items-center justify-end gap-6 h-full">
         {/* Search Pill */}
-        <div className="relative hidden lg:flex w-full max-w-[480px]" ref={searchRef}>
+        <div
+          className="relative hidden lg:flex w-full max-w-120"
+          ref={searchRef}
+        >
           <Input
             type="text"
             placeholder="Search data, users, or reports"
@@ -153,7 +217,14 @@ export const AdminHeader: React.FC<HeaderProps> = ({ onOpenMenu, className, isOp
             className={`bg-white border-gray-100 placeholder:text-gray-400 text-xs font-medium transition-all
               ${isSearchOpen ? "ring-4 ring-blue-50 border-brand-blue/30 shadow-sm" : ""}
             `}
-            suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-gray-400" />}
+            suffixElement={
+              <Icon
+                name="search-01"
+                folder="dashboardIcon"
+                size="sm"
+                className="text-gray-400"
+              />
+            }
           />
 
           {isSearchOpen && <AdminSearchDropdown query={searchQuery} />}
@@ -168,8 +239,15 @@ export const AdminHeader: React.FC<HeaderProps> = ({ onOpenMenu, className, isOp
               `}
               onClick={toggleNotifications}
             >
-              <Icon name="Bell outline" folder="dashboardIcon" size="md" className={isNotificationsOpen ? "text-brand-blue" : "text-[#1D3557]"} />
-              <span className="absolute top-2 right-2 w-[7px] h-[7px] bg-red-500 rounded-full border border-white"></span>
+              <Icon
+                name="Bell outline"
+                folder="dashboardIcon"
+                size="md"
+                className={
+                  isNotificationsOpen ? "text-brand-blue" : "text-[#1D3557]"
+                }
+              />
+              <span className="absolute top-2 right-2 w-1.75 h-1.75 bg-red-500 rounded-full border border-white"></span>
             </button>
 
             {isNotificationsOpen && !isMobile && <AdminNotificationDropdown />}
@@ -182,7 +260,9 @@ export const AdminHeader: React.FC<HeaderProps> = ({ onOpenMenu, className, isOp
                 className="p-0"
                 size="md"
               >
-                <NotificationList onAction={() => setIsNotificationsOpen(false)} />
+                <NotificationList
+                  onAction={() => setIsNotificationsOpen(false)}
+                />
               </Modal>
             )}
           </div>
@@ -191,7 +271,12 @@ export const AdminHeader: React.FC<HeaderProps> = ({ onOpenMenu, className, isOp
           <div className="flex items-center">
             <button className="w-12 h-7 bg-brand-blue-light rounded-full p-1 flex items-center relative transition-colors cursor-pointer">
               <div className="w-5 h-5 bg-white rounded-full border border-[#1C1C1C1A] flex items-center justify-center transition-all transform">
-                <Icon name="Group" folder="dashboardIcon" size="xs" className="text-gray-400 opacity-60" />
+                <Icon
+                  name="Group"
+                  folder="dashboardIcon"
+                  size="xs"
+                  className="text-gray-400 opacity-60"
+                />
               </div>
             </button>
           </div>

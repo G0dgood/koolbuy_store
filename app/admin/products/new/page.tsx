@@ -351,7 +351,7 @@ export default function CreateProduct() {
         <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white scale-90 group-hover:scale-100 transition-transform">
          <Icon name="circle-plus" folder="dashboardIcon" size="xs" />
         </div>
-        <span className="text-[10px] font-bold text-[#2196F3]">Add More</span>
+        <span className="text-[10px] font-bold text-[#00BCD4]">Add More</span>
        </div>
       </div>
 

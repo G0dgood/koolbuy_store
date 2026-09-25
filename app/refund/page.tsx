@@ -3,22 +3,57 @@
 import React from "react";
 import { Header } from "@/app/components/Header";
 import { Footer } from "@/app/components/Footer";
-import { HiShieldCheck, HiArrowPath, HiClock, HiReceiptRefund, HiExclamationCircle, HiCheckCircle } from "react-icons/hi2";
+import {
+  HiShieldCheck,
+  HiArrowPath,
+  HiClock,
+  HiReceiptRefund,
+  HiExclamationCircle,
+  HiCheckCircle,
+} from "react-icons/hi2";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
 const RefundPage = () => {
   const steps = [
-    { title: "Initiate Request", desc: "Contact support or use the 'Initiate Return' button in your account dashboard.", icon: <HiReceiptRefund size={24} /> },
-    { title: "Quality Check", desc: "Ship the item back to our facility for a professional quality and condition inspection.", icon: <HiShieldCheck size={24} /> },
-    { title: "Processing", desc: "Once approved, we initiate the refund process through your original payment method.", icon: <HiArrowPath size={24} /> },
-    { title: "Refund Received", desc: "Funds typically appear in your account within 5-10 business days.", icon: <HiCheckCircle size={24} /> },
+    {
+      title: "Initiate Request",
+      desc: "Contact support or use the 'Initiate Return' button in your account dashboard.",
+      icon: <HiReceiptRefund size={24} />,
+    },
+    {
+      title: "Quality Check",
+      desc: "Ship the item back to our facility for a professional quality and condition inspection.",
+      icon: <HiShieldCheck size={24} />,
+    },
+    {
+      title: "Processing",
+      desc: "Once approved, we initiate the refund process through your original payment method.",
+      icon: <HiArrowPath size={24} />,
+    },
+    {
+      title: "Refund Received",
+      desc: "Funds typically appear in your account within 5-10 business days.",
+      icon: <HiCheckCircle size={24} />,
+    },
   ];
 
   const eligibility = [
-    { title: "30-Day Window", desc: "Refund requests must be submitted within 30 days of the delivery date.", icon: <HiClock size={24} /> },
-    { title: "Original Condition", desc: "Items must be unused, unwashed, and in their original packaging with all tags.", icon: <HiShieldCheck size={24} /> },
-    { title: "Proof of Purchase", desc: "A valid order number or digital receipt is required to process any refund.", icon: <HiReceiptRefund size={24} /> },
+    {
+      title: "30-Day Window",
+      desc: "Refund requests must be submitted within 30 days of the delivery date.",
+      icon: <HiClock size={24} />,
+    },
+    {
+      title: "Original Condition",
+      desc: "Items must be unused, unwashed, and in their original packaging with all tags.",
+      icon: <HiShieldCheck size={24} />,
+    },
+    {
+      title: "Proof of Purchase",
+      desc: "A valid order number or digital receipt is required to process any refund.",
+      icon: <HiReceiptRefund size={24} />,
+    },
   ];
 
   return (
@@ -54,7 +89,9 @@ const RefundPage = () => {
                   Transparent <span className="text-brand-blue">Refunds</span>
                 </h1>
                 <p className="text-blue-100/70 max-w-2xl text-base md:text-lg leading-relaxed font-medium mx-auto">
-                  At Bloom & Mist, we believe in blooming relationships built on trust. Our 30-day money-back guarantee is designed to give you peace of mind with every purchase.
+                  At Koolbuy Store, we believe in blooming relationships built
+                  on trust. Our 30-day money-back guarantee is designed to give
+                  you peace of mind with every purchase.
                 </p>
               </div>
             </motion.div>
@@ -65,26 +102,44 @@ const RefundPage = () => {
         <section className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-24 md:py-32">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-1 flex flex-col gap-6">
-              <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs">Policy Foundations</span>
-              <h2 className="text-3xl md:text-4xl font-black text-[#1D3557] tracking-tight leading-tight">Eligibility <br />Criteria</h2>
+              <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs">
+                Policy Foundations
+              </span>
+              <h2 className="text-3xl md:text-4xl font-black text-[#1D3557] tracking-tight leading-tight">
+                Eligibility <br />
+                Criteria
+              </h2>
               <p className="text-gray-500 text-sm md:text-base leading-relaxed">
-                To ensure a fair process for all customers, we maintain standardized criteria for all refund requests. Please verify your item meets these conditions before initiating.
+                To ensure a fair process for all customers, we maintain
+                standardized criteria for all refund requests. Please verify
+                your item meets these conditions before initiating.
               </p>
             </div>
             <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
               {eligibility.map((item, i) => (
-                <div key={i} className="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:border-brand-blue/30 transition-all group">
+                <div
+                  key={i}
+                  className="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:border-brand-blue/30 transition-all group"
+                >
                   <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-brand-blue shadow-sm mb-6 group-hover:scale-110 transition-transform">
                     {item.icon}
                   </div>
-                  <h4 className="text-lg font-bold text-[#1D3557] mb-2">{item.title}</h4>
-                  <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                  <h4 className="text-lg font-bold text-[#1D3557] mb-2">
+                    {item.title}
+                  </h4>
+                  <p className="text-gray-500 text-sm leading-relaxed">
+                    {item.desc}
+                  </p>
                 </div>
               ))}
               <div className="bg-[#E1EFFE] p-8 rounded-3xl flex items-center gap-5 border border-brand-blue/10">
-                <HiExclamationCircle className="text-brand-blue shrink-0" size={32} />
+                <HiExclamationCircle
+                  className="text-brand-blue shrink-0"
+                  size={32}
+                />
                 <p className="text-brand-blue text-sm font-bold leading-relaxed">
-                  Non-refundable items include clearance products, open personal care items, and gift cards.
+                  Non-refundable items include clearance products, open personal
+                  care items, and gift cards.
                 </p>
               </div>
             </div>
@@ -95,8 +150,13 @@ const RefundPage = () => {
         <section className="bg-gray-50 py-24 md:py-32">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16">
             <div className="text-center mb-20 flex flex-col items-center gap-4">
-              <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight">How the process works</h2>
-              <p className="text-gray-500 max-w-xl">A transparent, four-step journey from your request to the funds appearing in your account.</p>
+              <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight">
+                How the process works
+              </h2>
+              <p className="text-gray-500 max-w-xl">
+                A transparent, four-step journey from your request to the funds
+                appearing in your account.
+              </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
@@ -116,8 +176,12 @@ const RefundPage = () => {
                     {step.icon}
                   </div>
                   <div className="flex flex-col gap-2">
-                    <span className="text-brand-blue font-black text-xs uppercase tracking-[0.2em]">Step 0{i + 1}</span>
-                    <h4 className="text-xl font-bold text-[#1D3557]">{step.title}</h4>
+                    <span className="text-brand-blue font-black text-xs uppercase tracking-[0.2em]">
+                      Step 0{i + 1}
+                    </span>
+                    <h4 className="text-xl font-bold text-[#1D3557]">
+                      {step.title}
+                    </h4>
                     <p className="text-gray-500 text-sm leading-relaxed px-4 lg:px-0">
                       {step.desc}
                     </p>
@@ -134,8 +198,12 @@ const RefundPage = () => {
             <div className="w-full bg-[#E1EFFE] rounded-[40px] p-12 md:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/40 rounded-full filter blur-[80px] -translate-x-1/2 -translate-y-1/2" />
               <div className="flex flex-col gap-4 relative z-10 text-center lg:text-left">
-                <h2 className="text-3xl md:text-4xl font-black text-[#1D3557] tracking-tight">Need to start a refund?</h2>
-                <p className="text-brand-blue/80 font-medium">Our support team is ready to guide you through the process.</p>
+                <h2 className="text-3xl md:text-4xl font-black text-[#1D3557] tracking-tight">
+                  Need to start a refund?
+                </h2>
+                <p className="text-brand-blue/80 font-medium">
+                  Our support team is ready to guide you through the process.
+                </p>
               </div>
               <div className="flex items-center gap-4 relative z-10">
                 <button className="bg-brand-blue text-white px-10 py-4 rounded-xl font-black uppercase tracking-widest text-xs shadow-xl shadow-blue-200 hover:scale-105 transition-transform">
@@ -149,7 +217,6 @@ const RefundPage = () => {
           </div>
         </section>
       </main>
-
 
       <Footer />
     </div>

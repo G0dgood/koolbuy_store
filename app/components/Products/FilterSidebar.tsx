@@ -13,7 +13,11 @@ interface FilterSectionProps {
   defaultOpen?: boolean;
 }
 
-const FilterSection: React.FC<FilterSectionProps> = ({ title, children, defaultOpen = true }) => {
+const FilterSection: React.FC<FilterSectionProps> = ({
+  title,
+  children,
+  defaultOpen = true,
+}) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
@@ -22,7 +26,9 @@ const FilterSection: React.FC<FilterSectionProps> = ({ title, children, defaultO
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between mb-4 group"
       >
-        <h4 className="font-bold text-gray-900 text-sm group-hover:text-brand-blue transition-colors">{title}</h4>
+        <h4 className="font-bold text-gray-900 text-sm group-hover:text-brand-blue transition-colors">
+          {title}
+        </h4>
         <Icon
           name="expand_more"
           size="xs"
@@ -42,63 +48,101 @@ interface FilterSidebarProps {
     condition: string;
     ratings: number[];
   };
-  setFilters: React.Dispatch<React.SetStateAction<{
-    category: string | null;
-    brands: string[];
-    priceRange: [number, number];
-    condition: string;
-    ratings: number[];
-  }>>;
+  setFilters: React.Dispatch<
+    React.SetStateAction<{
+      category: string | null;
+      brands: string[];
+      priceRange: [number, number];
+      condition: string;
+      ratings: number[];
+    }>
+  >;
 }
 
-const FilterSidebar: React.FC<FilterSidebarProps> = ({ filters, setFilters }) => {
-  const handleCategoryClick = useCallback((category: string) => {
-    setFilters(prev => ({
-      ...prev,
-      category: prev.category === category ? null : category
-    }));
-  }, [setFilters]);
+const FilterSidebar: React.FC<FilterSidebarProps> = ({
+  filters,
+  setFilters,
+}) => {
+  const handleCategoryClick = useCallback(
+    (category: string) => {
+      setFilters((prev) => ({
+        ...prev,
+        category: prev.category === category ? null : category,
+      }));
+    },
+    [setFilters],
+  );
 
-  const handleBrandToggle = useCallback((brand: string) => {
-    setFilters(prev => ({
-      ...prev,
-      brands: prev.brands.includes(brand)
-        ? prev.brands.filter(b => b !== brand)
-        : [...prev.brands, brand]
-    }));
-  }, [setFilters]);
+  const handleBrandToggle = useCallback(
+    (brand: string) => {
+      setFilters((prev) => ({
+        ...prev,
+        brands: prev.brands.includes(brand)
+          ? prev.brands.filter((b) => b !== brand)
+          : [...prev.brands, brand],
+      }));
+    },
+    [setFilters],
+  );
 
-  const handleConditionChange = useCallback((condition: string) => {
-    setFilters(prev => ({ ...prev, condition }));
-  }, [setFilters]);
+  const handleConditionChange = useCallback(
+    (condition: string) => {
+      setFilters((prev) => ({ ...prev, condition }));
+    },
+    [setFilters],
+  );
 
-  const handleRatingToggle = useCallback((val: number) => {
-    setFilters(prev => ({
-      ...prev,
-      ratings: prev.ratings.includes(val)
-        ? prev.ratings.filter(r => r !== val)
-        : [...prev.ratings, val]
-    }));
-  }, [setFilters]);
+  const handleRatingToggle = useCallback(
+    (val: number) => {
+      setFilters((prev) => ({
+        ...prev,
+        ratings: prev.ratings.includes(val)
+          ? prev.ratings.filter((r) => r !== val)
+          : [...prev.ratings, val],
+      }));
+    },
+    [setFilters],
+  );
 
-  const handlePriceRangeChange = useCallback((val: [number, number]) => {
-    setFilters(prev => ({ ...prev, priceRange: val }));
-  }, [setFilters]);
+  const handlePriceRangeChange = useCallback(
+    (val: [number, number]) => {
+      setFilters((prev) => ({ ...prev, priceRange: val }));
+    },
+    [setFilters],
+  );
 
-  const handleMinPriceChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilters(prev => ({ ...prev, priceRange: [Number(e.target.value), prev.priceRange[1]] }));
-  }, [setFilters]);
+  const handleMinPriceChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFilters((prev) => ({
+        ...prev,
+        priceRange: [Number(e.target.value), prev.priceRange[1]],
+      }));
+    },
+    [setFilters],
+  );
 
-  const handleMaxPriceChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilters(prev => ({ ...prev, priceRange: [prev.priceRange[0], Number(e.target.value)] }));
-  }, [setFilters]);
+  const handleMaxPriceChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFilters((prev) => ({
+        ...prev,
+        priceRange: [prev.priceRange[0], Number(e.target.value)],
+      }));
+    },
+    [setFilters],
+  );
 
   return (
     <aside className="w-64 flex-shrink-0 flex flex-col gap-4">
       {/* Categories */}
       <FilterSection title="Category">
         <ul className="flex flex-col gap-2 text-sm">
-          {["Signature Fragrance", "Luxury Skincare", "Boutique Gift Sets", "Body & Bath", "Home Fragrance"].map((cat) => (
+          {[
+            "Signature Fragrance",
+            "Luxury Skincare",
+            "Boutique Gift Sets",
+            "Body & Bath",
+            "Home Fragrance",
+          ].map((cat) => (
             <li
               key={cat}
               onClick={() => handleCategoryClick(cat)}
@@ -107,13 +151,15 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ filters, setFilters }) =>
               {cat}
             </li>
           ))}
-          <li className="text-brand-blue font-medium mt-2 cursor-pointer">View all boutique</li>
+          <li className="text-brand-blue font-medium mt-2 cursor-pointer">
+            View all boutique
+          </li>
         </ul>
       </FilterSection>
 
       {/* Brands */}
       <FilterSection title="Artisanal Houses">
-        {["Bloom & Mist", "Prada", "Versace", "Gucci", "Dior"].map((brand) => (
+        {["Koolbuy Store", "Prada", "Versace", "Gucci", "Dior"].map((brand) => (
           <Checkbox
             key={brand}
             label={brand}
@@ -122,7 +168,9 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ filters, setFilters }) =>
             size="lg"
           />
         ))}
-        <span className="text-brand-blue text-sm font-medium mt-1 cursor-pointer">View all houses</span>
+        <span className="text-brand-blue text-sm font-medium mt-1 cursor-pointer">
+          View all houses
+        </span>
       </FilterSection>
 
       {/* Price Range */}
@@ -160,21 +208,27 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ filters, setFilters }) =>
 
       {/* Collection */}
       <FilterSection title="Collection Type">
-        {["Any", "Intense", "Discovery", "Essential", "Seasonal"].map((cond) => (
-          <Radio
-            key={cond}
-            name="condition"
-            label={cond}
-            checked={filters.condition === cond}
-            onChange={() => handleConditionChange(cond)}
-          />
-        ))}
+        {["Any", "Intense", "Discovery", "Essential", "Seasonal"].map(
+          (cond) => (
+            <Radio
+              key={cond}
+              name="condition"
+              label={cond}
+              checked={filters.condition === cond}
+              onChange={() => handleConditionChange(cond)}
+            />
+          ),
+        )}
       </FilterSection>
 
       {/* Ratings */}
       <FilterSection title="Ratings">
         {[5, 4, 3, 2].map((val) => (
-          <div key={val} className="flex items-center gap-2 group cursor-pointer" onClick={() => handleRatingToggle(val)}>
+          <div
+            key={val}
+            className="flex items-center gap-2 group cursor-pointer"
+            onClick={() => handleRatingToggle(val)}
+          >
             <Checkbox
               checked={filters.ratings.includes(val)}
               onChange={() => handleRatingToggle(val)}

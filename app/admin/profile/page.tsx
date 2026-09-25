@@ -4,366 +4,624 @@ import React, { useState } from "react";
 import { Icon } from "../../components/Icon";
 import { Button } from "../../components/Button";
 import { Input, Textarea } from "../../components/Form/Inputs";
-import { UploadAvatarModal } from "../../components/Admin/UploadAvatarModal";
 import Modal from "../../components/Modal/Modal";
 import ModalBody from "../../components/Modal/ModalBody";
 import ModalFooter from "../../components/Modal/ModalFooter";
 import { ConfirmationModal } from "@/app/components/Admin/ConfirmationModal";
-import { SecurityHelpDrawer } from "../../components/Admin/SecurityHelpDrawer";
-import { HiLockClosed, HiKey, HiShieldCheck, HiEye, HiEyeSlash, HiCalendarDays, HiUser } from "react-icons/hi2";
-import { useUser } from "../../context/UserContext";
+import {
+  HiBuildingOffice2,
+  HiCheckBadge,
+  HiGlobeAlt,
+  HiEnvelope,
+  HiPhone,
+  HiMapPin,
+  HiShieldCheck,
+  HiPencilSquare,
+  HiPhoto,
+  HiArrowTopRightOnSquare,
+} from "react-icons/hi2";
 
-export default function ProfilePage() {
- const { userImage, setUserImage } = useUser();
- const [showCurrentPassword, setShowCurrentPassword] = useState(false);
- const [showNewPassword, setShowNewPassword] = useState(false);
- const [showReenterPassword, setShowReenterPassword] = useState(false);
- const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
- const [isChangeSuccessOpen, setIsChangeSuccessOpen] = useState(false);
- const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
- const [isEditMode, setIsEditMode] = useState(false);
- const [isHelpDrawerOpen, setIsHelpDrawerOpen] = useState(false);
+export default function OrganisationProfilePage() {
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [isLogoModalOpen, setIsLogoModalOpen] = useState(false);
+  const [isSaveSuccessOpen, setIsSaveSuccessOpen] = useState(false);
+  const [orgLogo, setOrgLogo] = useState("/images/koolboks/koolbuy_logo.webp");
+  const [tempLogoUrl, setTempLogoUrl] = useState("");
 
- return (
-  <div className="flex flex-col gap-8 max-w-[1600px] mx-auto pb-12">
-   {/* Page Title */}
-   {/* <h1 className="text-xl font-bold text-[#1D3557]">About section</h1> */}
+  const [orgData, setOrgData] = useState({
+    legalName: "Koolboks Technologies Limited",
+    tradingName: "Koolbuy Store",
+    rcNumber: "RC-1648291",
+    tinNumber: "TIN-23948291-0001",
+    industry: "Solar Refrigeration & Clean Tech",
+    primaryEmail: "contact@koolboks.com",
+    supportEmail: "support@koolbuy.com",
+    primaryPhone: "+234 1 234 5678",
+    supportPhone: "+234 800 KOOLBOKS",
+    website: "https://koolbuy.com",
+    registeredAddress: "Plot 12B, Admiralty Way, Lekki Phase 1",
+    city: "Lagos",
+    state: "Lagos State",
+    country: "Nigeria",
+    postalCode: "105102",
+    operatingHours: "Monday – Saturday: 8:00 AM – 6:00 PM (WAT)",
+    description:
+      "Koolboks is dedicated to making eco-friendly solar refrigeration and clean energy freezing solutions accessible and affordable across Africa through innovative Pay-As-You-Go and Buy-Now-Pay-Later technology.",
+    bankName: "Access Bank Plc",
+    accountNumber: "0123456789",
+    accountName: "Koolboks Technologies Ltd - Storefront Settlement",
+    currency: "NGN (₦) - Nigerian Naira",
+  });
 
-   <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
-    {/* Left Column (33%) */}
-    <div className="xl:col-span-4 flex flex-col gap-6">
-     {/* Profile Summary Card */}
-     <div className="bg-white rounded-[6px] border border-gray-100 shadow-sm p-8 flex flex-col items-center text-center relative">
-      <div className="absolute top-6 right-6 flex gap-3 text-gray-400">
-       <Button variant="outline" shape="rounded-sm" className="!p-1.5 text-gray-400">
-        <Icon name="settings" folder="dashboardIcon" size="sm" />
-       </Button>
-       <Button variant="outline" shape="rounded-sm" className="!p-1.5 text-gray-400">
-        <Icon name="link-external" folder="dashboardIcon" size="sm" />
-       </Button>
-      </div>
+  const handleSave = () => {
+    setIsEditMode(false);
+    setIsSaveSuccessOpen(true);
+  };
 
-      <div className="w-24 h-24 rounded-full border-4 border-gray-50 overflow-hidden mb-4 shadow-sm bg-brand-blue-light flex items-center justify-center">
-       {userImage ? (
-        <img src={userImage} alt="Wade Warren" className="w-full h-full object-cover" />
-       ) : (
-        <HiUser className="w-12 h-12 text-brand-blue" />
-       )}
-      </div>
+  const handleLogoUpload = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (tempLogoUrl) {
+      setOrgLogo(tempLogoUrl);
+      setTempLogoUrl("");
+    }
+    setIsLogoModalOpen(false);
+  };
 
-      <h2 className="text-base font-bold text-[#1D3557]">Wade Warren</h2>
-      <div className="flex items-center gap-2 text-xs font-medium text-gray-400 mb-6">
-       <span>wade.warren@example.com</span>
-       <button className="text-brand-blue hover:scale-110 transition-transform">
-        <Icon name="Frame 4386" folder="dashboardIcon" size="xs" />
-       </button>
-      </div>
+  return (
+    <div className="flex flex-col gap-8 mx-auto pb-12">
+      {/* Top Banner & Header */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-100 pb-5">
+        <div></div>
 
-      <div className="w-full border-t border-gray-50 pt-6 flex flex-col gap-4">
-       <span className="text-[10px] font-bold text-gray-400">Linked with Social media</span>
-       <div className="flex items-center justify-center gap-4">
-        <div className="flex items-center gap-1.5 opacity-80">
-         <Icon name="facebook" folder="dashboardIcon" size="sm" className="text-[#1877F2]" />
-         <span className="text-[10px] text-gray-400 font-bold decoration-gray-200 underline underline-offset-2">Linked</span>
+        <div className="flex items-center gap-3">
+          {isEditMode ? (
+            <>
+              <Button
+                variant="outline"
+                className="text-gray-600"
+                onClick={() => setIsEditMode(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="blue"
+                iconLeft={<HiCheckBadge className="w-4 h-4" />}
+                onClick={handleSave}
+              >
+                Save Changes
+              </Button>
+            </>
+          ) : (
+            <Button
+              variant="blue"
+              iconLeft={<HiPencilSquare className="w-4 h-4" />}
+              onClick={() => setIsEditMode(true)}
+            >
+              Edit Organisation Details
+            </Button>
+          )}
         </div>
-        <div className="flex items-center gap-1.5 opacity-80">
-         <Icon name="linkedin" folder="dashboardIcon" size="sm" className="text-[#0077b5]" />
-         <span className="text-[10px] text-gray-400 font-bold decoration-gray-200 underline underline-offset-2">Linked</span>
-        </div>
-        <div className="flex items-center gap-1.5 opacity-80">
-         <Icon name="x" folder="dashboardIcon" size="sm" className="text-black" />
-         <span className="text-[10px] text-gray-400 font-bold decoration-gray-200 underline underline-offset-2">Linked</span>
-        </div>
-       </div>
-       <button className="mt-2 w-fit mx-auto flex items-center gap-2 px-4 py-2 border border-gray-100 rounded-[6px] text-[10px] font-bold text-[#1D3557] hover:bg-gray-50 transition-all shadow-sm">
-        <Icon name="circle-plus" folder="dashboardIcon" size="xs" />
-        Social media
-       </button>
-      </div>
-     </div>
-
-     {/* Change Password Card */}
-     <div className="bg-white rounded-[6px] border border-gray-100 shadow-sm p-8 flex flex-col gap-6 transition-all hover:shadow-md">
-      <div className="flex items-center justify-between">
-       <div className="flex items-center gap-3">
-        <div className="w-8 h-8 rounded-[6px] bg-brand-blue-light flex items-center justify-center">
-         <HiLockClosed className="text-brand-blue w-3 h-3" />
-        </div>
-        <h3 className="text-sm font-bold text-[#1D3557]">Change Password</h3>
-       </div>
-       <button
-        className="text-[10px] font-bold text-brand-blue underline underline-offset-2 hover:text-blue-600 transition-colors"
-        onClick={() => setIsHelpDrawerOpen(true)}
-       >
-        Need help? <Icon name="live_help" folder="icon" size="xs" className="inline ml-1" />
-       </button>
       </div>
 
-      <div className="flex flex-col gap-5">
-       <div className="flex flex-col gap-2">
-        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1">Current Password</label>
-        <Input
-         type={showCurrentPassword ? "text" : "password"}
-         placeholder="Enter current password"
-         className="bg-gray-50/80 border-gray-50 text-xs font-medium"
-         prefixElement={<HiLockClosed className="text-gray-400 w-3 h-3" />}
-         suffixElement={
-          <button
-           type="button"
-           onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-           className="text-gray-300 hover:text-brand-blue transition-colors"
-          >
-           {showCurrentPassword ? <HiEyeSlash className="w-3 h-3" /> : <HiEye className="w-3 h-3" />}
-          </button>
-         }
-        />
-        <button className="text-[10px] font-bold text-brand-blue w-fit hover:underline hover:scale-105 transition-transform">Forgot Current Password? Click here</button>
-       </div>
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
+        {/* Left Column: Brand & Legal Credentials (4 cols) */}
+        <div className="xl:col-span-4 flex flex-col gap-6">
+          {/* Brand Summary Card */}
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col items-center text-center relative overflow-hidden">
+            {/* Top Accent Pattern */}
+            <div className="absolute top-0 inset-x-0 h-24 bg-linear-to-r from-blue-600 via-brand-blue to-sky-500 opacity-90" />
 
-       <div className="flex flex-col gap-2">
-        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1">New Password</label>
-        <Input
-         type={showNewPassword ? "text" : "password"}
-         placeholder="Enter new password"
-         className="bg-gray-50/80 border-gray-50 text-xs font-medium"
-         prefixElement={<HiKey className="text-gray-400 w-3 h-3" />}
-         suffixElement={
-          <button
-           type="button"
-           onClick={() => setShowNewPassword(!showNewPassword)}
-           className="text-gray-300 hover:text-brand-blue transition-colors"
-          >
-           {showNewPassword ? <HiEyeSlash className="w-3 h-3" /> : <HiEye className="w-3 h-3" />}
-          </button>
-         }
-        />
-       </div>
+            {/* Logo Avatar */}
+            <div className="relative mt-8 mb-4 w-28 h-28 rounded-2xl border-4 border-white overflow-hidden shadow-md bg-white p-2 flex items-center justify-center">
+              <img
+                src={orgLogo}
+                alt="Organisation Logo"
+                className="w-full h-full object-contain"
+              />
+            </div>
 
-       <div className="flex flex-col gap-2">
-        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1">Re-enter Password</label>
-        <Input
-         type={showReenterPassword ? "text" : "password"}
-         placeholder="Confirm new password"
-         className="bg-gray-50/80 border-gray-50 text-xs font-medium"
-         prefixElement={<HiShieldCheck className="text-gray-400 w-3 h-3" />}
-         suffixElement={
-          <button
-           type="button"
-           onClick={() => setShowReenterPassword(!showReenterPassword)}
-           className="text-gray-300 hover:text-brand-blue transition-colors"
-          >
-           {showReenterPassword ? <HiEyeSlash className="w-3 h-3" /> : <HiEye className="w-3 h-3" />}
-          </button>
-         }
-        />
-       </div>
+            <h2 className="text-lg font-bold text-gray-900">
+              {orgData.legalName}
+            </h2>
+            <span className="text-xs font-semibold text-brand-blue mt-0.5">
+              Trading as: {orgData.tradingName}
+            </span>
 
-       <Button
-        variant="primary"
-        shape="rounded-sm"
-        className="w-full h-12 mt-2 shadow-lg shadow-blue-100 text-[11px] font-black uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all"
-        onClick={() => setIsChangeSuccessOpen(true)}
-       >
-        Save Change
-       </Button>
+            <div className="w-full border-t border-gray-100 my-5" />
+
+            {/* Quick Credentials List */}
+            <div className="w-full flex flex-col gap-3 text-left">
+              <div className="flex justify-between items-center text-xs py-1 border-b border-gray-50">
+                <span className="text-gray-400 font-medium">
+                  Registration No.
+                </span>
+                <span className="font-mono font-bold text-gray-800">
+                  {orgData.rcNumber}
+                </span>
+              </div>
+              <div className="flex justify-between items-center text-xs py-1 border-b border-gray-50">
+                <span className="text-gray-400 font-medium">Tax ID (TIN)</span>
+                <span className="font-mono font-bold text-gray-800">
+                  {orgData.tinNumber}
+                </span>
+              </div>
+              <div className="flex justify-between items-center text-xs py-1 border-b border-gray-50">
+                <span className="text-gray-400 font-medium">
+                  Industry Sector
+                </span>
+                <span className="font-medium text-gray-800 text-right">
+                  {orgData.industry}
+                </span>
+              </div>
+              <div className="flex justify-between items-center text-xs py-1 border-b border-gray-50">
+                <span className="text-gray-400 font-medium">
+                  Operating Currency
+                </span>
+                <span className="font-semibold text-gray-800">
+                  {orgData.currency}
+                </span>
+              </div>
+            </div>
+
+            {/* Change Logo Action */}
+            <Button
+              variant="outline"
+              className="mt-5 w-full text-xs font-semibold border-gray-200 text-gray-700 hover:text-brand-blue"
+              iconLeft={<HiPhoto className="w-4 h-4" />}
+              onClick={() => setIsLogoModalOpen(true)}
+            >
+              Update Brand Logo
+            </Button>
+          </div>
+
+          {/* Corporate Channels Card */}
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col gap-4">
+            <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+              <HiGlobeAlt className="w-4 h-4 text-brand-blue" />
+              Corporate Web Presence
+            </h3>
+
+            <div className="flex flex-col gap-3 text-xs">
+              <a
+                href={orgData.website}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-between p-3 rounded-xl bg-gray-50/70 hover:bg-blue-50/50 hover:text-brand-blue transition-colors group"
+              >
+                <div className="flex items-center gap-2">
+                  <HiGlobeAlt className="w-4 h-4 text-gray-400 group-hover:text-brand-blue" />
+                  <span className="font-semibold text-gray-800 group-hover:text-brand-blue">
+                    Official Website
+                  </span>
+                </div>
+                <HiArrowTopRightOnSquare className="w-3.5 h-3.5 text-gray-400" />
+              </a>
+
+              <div className="flex items-center justify-between p-3 rounded-xl bg-gray-50/70">
+                <span className="text-gray-500 font-medium">
+                  Customer Support Email
+                </span>
+                <a
+                  href={`mailto:${orgData.supportEmail}`}
+                  className="font-semibold text-gray-800 hover:text-brand-blue"
+                >
+                  {orgData.supportEmail}
+                </a>
+              </div>
+
+              <div className="flex items-center justify-between p-3 rounded-xl bg-gray-50/70">
+                <span className="text-gray-500 font-medium">
+                  Corporate Inquiries
+                </span>
+                <a
+                  href={`mailto:${orgData.primaryEmail}`}
+                  className="font-semibold text-gray-800 hover:text-brand-blue"
+                >
+                  {orgData.primaryEmail}
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Compliance & Regulatory Seal */}
+          <div className="bg-linear-to-br from-blue-50/80 via-white to-blue-50/40 rounded-2xl border border-blue-100 p-6 flex flex-col gap-3">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-brand-blue text-white flex items-center justify-center shrink-0 shadow-xs">
+                <HiShieldCheck className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="font-bold text-gray-900 text-xs">
+                  Corporate Compliance
+                </h4>
+                <p className="text-[11px] text-gray-500">
+                  CAC & Regulatory Status: Active
+                </p>
+              </div>
+            </div>
+            <p className="text-[11px] text-gray-600 leading-relaxed pt-1">
+              This organization account is verified and authorized for merchant
+              trade, BNPL financing, and payment aggregation on Koolbuy.
+            </p>
+          </div>
+        </div>
+
+        {/* Right Column: Detailed Organisation Profile & Coordinates (8 cols) */}
+        <div className="xl:col-span-8 flex flex-col gap-8">
+          {/* Main Business Details */}
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+            <div className="flex items-center justify-between border-b border-gray-50 pb-4">
+              <div className="flex items-center gap-2">
+                <HiBuildingOffice2 className="w-5 h-5 text-brand-blue" />
+                <h3 className="text-base font-bold text-gray-900">
+                  Legal Business Information
+                </h3>
+              </div>
+              <span className="text-xs font-semibold text-gray-400">
+                {isEditMode ? "Editing Enabled" : "Read Only"}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  Registered Legal Entity Name
+                </label>
+                <Input
+                  type="text"
+                  value={orgData.legalName}
+                  readOnly={!isEditMode}
+                  onChange={(e) =>
+                    setOrgData({ ...orgData, legalName: e.target.value })
+                  }
+                  className={`${
+                    !isEditMode
+                      ? "bg-gray-50 text-gray-800"
+                      : "bg-white text-gray-900"
+                  } font-semibold text-xs transition-colors`}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  Commercial / Trading Name
+                </label>
+                <Input
+                  type="text"
+                  value={orgData.tradingName}
+                  readOnly={!isEditMode}
+                  onChange={(e) =>
+                    setOrgData({ ...orgData, tradingName: e.target.value })
+                  }
+                  className={`${
+                    !isEditMode
+                      ? "bg-gray-50 text-gray-800"
+                      : "bg-white text-gray-900"
+                  } font-semibold text-xs transition-colors`}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  Company Registration Number (RC)
+                </label>
+                <Input
+                  type="text"
+                  value={orgData.rcNumber}
+                  readOnly={!isEditMode}
+                  onChange={(e) =>
+                    setOrgData({ ...orgData, rcNumber: e.target.value })
+                  }
+                  className={`${
+                    !isEditMode
+                      ? "bg-gray-50 text-gray-800"
+                      : "bg-white text-gray-900"
+                  } font-mono font-semibold text-xs transition-colors`}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  Tax Identification Number (TIN)
+                </label>
+                <Input
+                  type="text"
+                  value={orgData.tinNumber}
+                  readOnly={!isEditMode}
+                  onChange={(e) =>
+                    setOrgData({ ...orgData, tinNumber: e.target.value })
+                  }
+                  className={`${
+                    !isEditMode
+                      ? "bg-gray-50 text-gray-800"
+                      : "bg-white text-gray-900"
+                  } font-mono font-semibold text-xs transition-colors`}
+                />
+              </div>
+            </div>
+
+            {/* Organisation Mission / Description */}
+            <div className="flex flex-col gap-2 pt-2">
+              <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                Organisation Overview & Purpose
+              </label>
+              <Textarea
+                rows={3}
+                value={orgData.description}
+                readOnly={!isEditMode}
+                onChange={(e) =>
+                  setOrgData({ ...orgData, description: e.target.value })
+                }
+                className={`${
+                  !isEditMode
+                    ? "bg-gray-50 text-gray-800"
+                    : "bg-white text-gray-900"
+                } text-xs font-medium leading-relaxed`}
+              />
+            </div>
+          </div>
+
+          {/* Headquarters Location & Operating Coordinates */}
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+            <div className="flex items-center gap-2 border-b border-gray-50 pb-4">
+              <HiMapPin className="w-5 h-5 text-brand-blue" />
+              <h3 className="text-base font-bold text-gray-900">
+                Corporate Headquarters & Address
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex flex-col gap-2 md:col-span-2">
+                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  Registered Physical Address
+                </label>
+                <Input
+                  type="text"
+                  value={orgData.registeredAddress}
+                  readOnly={!isEditMode}
+                  onChange={(e) =>
+                    setOrgData({
+                      ...orgData,
+                      registeredAddress: e.target.value,
+                    })
+                  }
+                  className={`${
+                    !isEditMode
+                      ? "bg-gray-50 text-gray-800"
+                      : "bg-white text-gray-900"
+                  } font-semibold text-xs`}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  City
+                </label>
+                <Input
+                  type="text"
+                  value={orgData.city}
+                  readOnly={!isEditMode}
+                  onChange={(e) =>
+                    setOrgData({ ...orgData, city: e.target.value })
+                  }
+                  className={`${
+                    !isEditMode
+                      ? "bg-gray-50 text-gray-800"
+                      : "bg-white text-gray-900"
+                  } font-semibold text-xs`}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  State / Region
+                </label>
+                <Input
+                  type="text"
+                  value={orgData.state}
+                  readOnly={!isEditMode}
+                  onChange={(e) =>
+                    setOrgData({ ...orgData, state: e.target.value })
+                  }
+                  className={`${
+                    !isEditMode
+                      ? "bg-gray-50 text-gray-800"
+                      : "bg-white text-gray-900"
+                  } font-semibold text-xs`}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  Country
+                </label>
+                <Input
+                  type="text"
+                  value={orgData.country}
+                  readOnly={!isEditMode}
+                  onChange={(e) =>
+                    setOrgData({ ...orgData, country: e.target.value })
+                  }
+                  className={`${
+                    !isEditMode
+                      ? "bg-gray-50 text-gray-800"
+                      : "bg-white text-gray-900"
+                  } font-semibold text-xs`}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  Postal / ZIP Code
+                </label>
+                <Input
+                  type="text"
+                  value={orgData.postalCode}
+                  readOnly={!isEditMode}
+                  onChange={(e) =>
+                    setOrgData({ ...orgData, postalCode: e.target.value })
+                  }
+                  className={`${
+                    !isEditMode
+                      ? "bg-gray-50 text-gray-800"
+                      : "bg-white text-gray-900"
+                  } font-semibold text-xs`}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Official Communication & Banking Settlement */}
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+            <div className="flex items-center gap-2 border-b border-gray-50 pb-4">
+              <HiPhone className="w-5 h-5 text-brand-blue" />
+              <h3 className="text-base font-bold text-gray-900">
+                Communication & Settlement Banking
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  Official Corporate Telephone
+                </label>
+                <Input
+                  type="text"
+                  value={orgData.primaryPhone}
+                  readOnly={!isEditMode}
+                  onChange={(e) =>
+                    setOrgData({ ...orgData, primaryPhone: e.target.value })
+                  }
+                  className={`${
+                    !isEditMode
+                      ? "bg-gray-50 text-gray-800"
+                      : "bg-white text-gray-900"
+                  } font-semibold text-xs`}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  Customer Support Toll-Free
+                </label>
+                <Input
+                  type="text"
+                  value={orgData.supportPhone}
+                  readOnly={!isEditMode}
+                  onChange={(e) =>
+                    setOrgData({ ...orgData, supportPhone: e.target.value })
+                  }
+                  className={`${
+                    !isEditMode
+                      ? "bg-gray-50 text-gray-800"
+                      : "bg-white text-gray-900"
+                  } font-semibold text-xs`}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  Primary Settlement Financial Institution
+                </label>
+                <Input
+                  type="text"
+                  value={orgData.bankName}
+                  readOnly={!isEditMode}
+                  onChange={(e) =>
+                    setOrgData({ ...orgData, bankName: e.target.value })
+                  }
+                  className={`${
+                    !isEditMode
+                      ? "bg-gray-50 text-gray-800"
+                      : "bg-white text-gray-900"
+                  } font-semibold text-xs`}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  Settlement Account Number
+                </label>
+                <Input
+                  type="text"
+                  value={orgData.accountNumber}
+                  readOnly={!isEditMode}
+                  onChange={(e) =>
+                    setOrgData({ ...orgData, accountNumber: e.target.value })
+                  }
+                  className={`${
+                    !isEditMode
+                      ? "bg-gray-50 text-gray-800"
+                      : "bg-white text-gray-900"
+                  } font-mono font-bold text-xs`}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-     </div>
+
+      {/* Upload Logo Modal */}
+      <Modal
+        isOpen={isLogoModalOpen}
+        onClose={() => setIsLogoModalOpen(false)}
+        title="Update Organisation Brand Logo"
+        size="md"
+      >
+        <form onSubmit={handleLogoUpload}>
+          <ModalBody className="flex flex-col gap-4">
+            <p className="text-xs text-gray-500 leading-relaxed">
+              Enter the image URL for the official organisation logo or select a
+              preset Koolbuy brand asset.
+            </p>
+            <div className="flex flex-col gap-2">
+              <label className="text-xs font-bold text-gray-600 uppercase">
+                Logo Image URL
+              </label>
+              <Input
+                placeholder="https://example.com/logo.png or /images/..."
+                value={tempLogoUrl}
+                onChange={(e) => setTempLogoUrl(e.target.value)}
+                required
+              />
+            </div>
+            <div className="p-3 bg-gray-50 rounded-xl flex items-center justify-between text-xs">
+              <span className="text-gray-500">Preset Default Logo:</span>
+              <button
+                type="button"
+                className="text-brand-blue font-bold hover:underline"
+                onClick={() =>
+                  setTempLogoUrl("/images/koolboks/koolbuy_logo.webp")
+                }
+              >
+                Use Koolbuy Logo
+              </button>
+            </div>
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              variant="outline"
+              type="button"
+              onClick={() => setIsLogoModalOpen(false)}
+            >
+              Cancel
+            </Button>
+            <Button variant="blue" type="submit">
+              Apply Logo
+            </Button>
+          </ModalFooter>
+        </form>
+      </Modal>
+
+      {/* Success Confirmation Modal */}
+      <ConfirmationModal
+        isOpen={isSaveSuccessOpen}
+        onClose={() => setIsSaveSuccessOpen(false)}
+        onConfirm={() => setIsSaveSuccessOpen(false)}
+        title="Organisation Profile Updated"
+        message="Your corporate organisation credentials, business identity, and operational address have been successfully updated across the Koolbuy platform."
+        confirmText="Done"
+        type="info"
+      />
     </div>
-
-    {/* Right Column (66%) */}
-    <div className="xl:col-span-8">
-     <div className="bg-white rounded-[6px] border border-gray-100 shadow-sm p-8 flex flex-col gap-8 relative">
-      <div className="flex items-center justify-between mb-2">
-       <h3 className="text-sm font-bold text-[#1D3557]">Profile Update</h3>
-       <button
-        className={`flex items-center gap-2 px-4 py-2 border rounded-[6px] text-xs font-bold transition-all shadow-sm
-                           ${isEditMode
-          ? "bg-brand-blue border-brand-blue text-white hover:bg-blue-600"
-          : "bg-white border-gray-100 text-gray-500 hover:bg-gray-50"}
-                        `}
-        onClick={() => {
-         if (isEditMode) {
-          setIsChangeSuccessOpen(true);
-         }
-         setIsEditMode(!isEditMode);
-        }}
-       >
-        <Icon name={isEditMode ? "verified" : "settings"} folder={isEditMode ? "icon" : "dashboardIcon"} size="xs" />
-        {isEditMode ? "Update Profile" : "Edit"}
-       </button>
-      </div>
-
-      {/* Avatar Management */}
-      <div className="flex items-center gap-4">
-       <div className="w-16 h-16 rounded-full overflow-hidden shadow-inner border border-gray-100 bg-brand-blue-light flex items-center justify-center">
-        {userImage ? (
-         <img src={userImage} alt="Avatar" className="w-full h-full object-cover" />
-        ) : (
-         <HiUser className="w-8 h-8 text-brand-blue" />
-        )}
-       </div>
-       <div className="flex gap-2">
-        <Button
-         variant="primary"
-         shape="rounded-sm"
-         className="px-5 py-2 text-[10px] shadow-sm"
-         onClick={() => setIsAvatarModalOpen(true)}
-        >
-         Upload New
-        </Button>
-        <Button
-         variant="outline"
-         shape="rounded-sm"
-         className="text-gray-400 px-5 py-2 text-[10px] font-bold shadow-sm"
-         onClick={() => setIsDeleteConfirmOpen(true)}
-        >
-         Delete
-        </Button>
-       </div>
-      </div>
-
-      {/* Update Form */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-       <div className="flex flex-col gap-2">
-        <label className="text-xs font-bold text-[#1D3557]">First Name</label>
-        <Input
-         type="text"
-         defaultValue="Wade"
-         readOnly={!isEditMode}
-         className={`${!isEditMode ? "bg-gray-50/50" : "bg-white"} border-gray-50 text-xs font-bold text-gray-900 transition-colors`}
-        />
-       </div>
-       <div className="flex flex-col gap-2">
-        <label className="text-xs font-bold text-[#1D3557]">Last Name</label>
-        <Input
-         type="text"
-         defaultValue="Warren"
-         readOnly={!isEditMode}
-         className={`${!isEditMode ? "bg-gray-50/50" : "bg-white"} border-gray-50 text-xs font-bold text-gray-900 transition-colors`}
-        />
-       </div>
-
-       <div className="flex flex-col gap-2">
-        <label className="text-xs font-bold text-[#1D3557]">Phone Number</label>
-        <Input
-         type="text"
-         defaultValue="(406) 555-0120"
-         readOnly={!isEditMode}
-         className={`${!isEditMode ? "bg-gray-50/50" : "bg-white"} border-gray-50 text-xs font-bold text-gray-900 transition-colors`}
-
-        />
-       </div>
-
-       <div className="flex flex-col gap-2">
-        <label className="text-xs font-bold text-[#1D3557]">E-mail</label>
-        <Input
-         type="email"
-         defaultValue="wade.warren@example.com"
-         readOnly={!isEditMode}
-         className={`${!isEditMode ? "bg-gray-50/50" : "bg-white"} border-gray-50 text-xs font-bold text-gray-900 transition-colors`}
-        />
-       </div>
-       <div className="flex flex-col gap-2">
-        <label className="text-xs font-bold text-[#1D3557]">Date of Birth</label>
-        <Input
-         type="text"
-         defaultValue="12- January- 1999"
-         className="bg-gray-50/80 border-gray-50 text-xs font-bold text-gray-900"
-         suffixElement={
-          <HiCalendarDays className="text-gray-300 w-3.5 h-3.5" />
-         }
-        />
-       </div>
-
-       <div className="md:col-span-2 flex flex-col gap-2">
-        <label className="text-xs font-bold text-[#1D3557]">Location</label>
-        <Input
-         type="text"
-         defaultValue="2972 Westheimer Rd. Santa Ana, Illinois 85486"
-         readOnly={!isEditMode}
-         className={`${!isEditMode ? "bg-gray-50/50" : "bg-white"} border-gray-50 text-xs font-bold text-gray-900 transition-colors`}
-        />
-       </div>
-
-
-
-       <div className="md:col-span-2 flex flex-col gap-2">
-        <label className="text-xs font-bold text-[#1D3557]">Biography</label>
-        <div className="relative group">
-         <Textarea
-          rows={4}
-          placeholder="Enter a biography about you"
-          readOnly={!isEditMode}
-          className={`${!isEditMode ? "bg-gray-50/50" : "bg-white"} border-gray-50 text-xs font-medium text-gray-700 resize-none leading-relaxed transition-colors`}
-         />
-         <div className="absolute bottom-4 right-4 flex gap-2 opacity-50 group-hover:opacity-100 transition-opacity">
-          <Icon name="settings" folder="dashboardIcon" size="xs" className="cursor-pointer hover:text-gray-900" />
-          <Icon name="star" folder="dashboardIcon" size="xs" className="cursor-pointer hover:text-gray-900" />
-         </div>
-        </div>
-       </div>
-      </div>
-     </div>
-    </div>
-   </div>
-
-   <UploadAvatarModal
-    isOpen={isAvatarModalOpen}
-    onClose={() => {
-     setIsAvatarModalOpen(false);
-    }}
-    onUploadSuccess={(newSrc) => {
-     setUserImage(newSrc);
-     setIsChangeSuccessOpen(true);
-    }}
-   />
-
-   <Modal
-    isOpen={isChangeSuccessOpen}
-    onClose={() => setIsChangeSuccessOpen(false)}
-    title=""
-    size="md"
-   >
-    <ModalBody className="flex flex-col items-center text-center py-10 gap-6">
-     <div className="w-20 h-20 rounded-full bg-blue-50 flex items-center justify-center text-brand-blue shadow-inner border border-blue-100">
-      <Icon name="verified" folder="icon" size="lg" className="w-10 h-10" />
-     </div>
-     <div className="flex flex-col gap-2">
-      <h2 className="text-xl font-black text-[#1D3557]">Update Successful!</h2>
-      <p className="text-sm font-medium text-gray-400 max-w-[280px] mx-auto leading-relaxed">
-       Your profile information has been securely updated and synchronized across the administrative system.
-      </p>
-     </div>
-    </ModalBody>
-    <ModalFooter className="flex flex-col gap-3 pb-8">
-     <Button
-      variant="primary"
-      className="w-full h-12 text-[11px] font-black uppercase tracking-widest shadow-lg shadow-blue-100"
-      onClick={() => setIsChangeSuccessOpen(false)}
-     >
-      Great, thank you
-     </Button>
-    </ModalFooter>
-   </Modal>
-
-   <ConfirmationModal
-    isOpen={isDeleteConfirmOpen}
-    onClose={() => setIsDeleteConfirmOpen(false)}
-    onConfirm={() => {
-     setUserImage(null);
-     setIsDeleteConfirmOpen(false);
-     setIsChangeSuccessOpen(true);
-    }}
-    title="Remove Photo"
-    message="Are you sure you want to remove your profile photo? You can upload a new one at any time."
-    confirmText="Yes, remove it"
-    type="danger"
-   />
-
-   <SecurityHelpDrawer
-    isOpen={isHelpDrawerOpen}
-    onClose={() => setIsHelpDrawerOpen(false)}
-   />
-  </div>
- );
+  );
 }
