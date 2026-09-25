@@ -130,7 +130,7 @@ const ordersStats: StatItem[] = [
 
 const standardTabs = ["All order (240)", "Completed", "Pending", "Canceled"];
 
-export default function OrderListing() {
+function OrderListingContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -152,5 +152,13 @@ export default function OrderListing() {
       addOrderButtonLabel="Add Order"
       baseDetailUrl="/admin/orders"
     />
+  );
+}
+
+export default function OrderListing() {
+  return (
+    <React.Suspense fallback={null}>
+      <OrderListingContent />
+    </React.Suspense>
   );
 }
