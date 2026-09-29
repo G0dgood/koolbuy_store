@@ -83,7 +83,7 @@ export const AdminSearchDropdown: React.FC<AdminSearchDropdownProps> = ({
       >
         <div className="px-5 py-4 border-b border-gray-50 flex justify-between items-center bg-gray-50/50">
           <div className="flex flex-col gap-0.5">
-            <span className="font-black text-[#1D3557] text-sm tracking-tight">
+            <span className="font-black text-ink text-sm tracking-tight">
               {query ? `Search results for "${query}"` : "Recent Searches"}
             </span>
             <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">
@@ -137,7 +137,7 @@ export const AdminSearchDropdown: React.FC<AdminSearchDropdownProps> = ({
                           )}
                         </div>
                         <div className="flex flex-col flex-1 min-w-0">
-                          <span className="text-[13px] font-black text-[#1D3557] group-hover:text-brand-blue truncate">
+                          <span className="text-[13px] font-black text-ink group-hover:text-brand-blue truncate">
                             {item.title}
                           </span>
                           <span className="text-[11px] font-bold text-gray-400 truncate">
@@ -170,7 +170,7 @@ export const AdminSearchDropdown: React.FC<AdminSearchDropdownProps> = ({
                 <Icon name="search-01" folder="dashboardIcon" size="lg" />
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-black text-[#1D3557]">
+                <span className="text-sm font-black text-ink">
                   No matches found
                 </span>
                 <span className="text-xs font-bold text-gray-400 max-w-50">
@@ -182,7 +182,7 @@ export const AdminSearchDropdown: React.FC<AdminSearchDropdownProps> = ({
         </div>
 
         <button className="h-14 border-t border-gray-50 flex items-center justify-center gap-2 group hover:bg-gray-50 transition-all">
-          <span className="text-[11px] font-black text-[#1D3557] group-hover:text-brand-blue uppercase tracking-widest">
+          <span className="text-[11px] font-black text-ink group-hover:text-brand-blue uppercase tracking-widest">
             View All Search Results
           </span>
           <Icon

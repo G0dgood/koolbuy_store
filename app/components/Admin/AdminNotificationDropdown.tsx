@@ -63,7 +63,7 @@ export const NotificationList: React.FC<{ onAction?: () => void }> = ({ onAction
     <div className="flex flex-col">
       <div className="px-5 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/30">
         <div className="flex flex-col gap-0.5">
-          <span className="font-black text-[#1D3557] text-sm tracking-tight">System Notifications</span>
+          <span className="font-black text-ink text-sm tracking-tight">System Notifications</span>
           <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Platform Events</span>
         </div>
         <button 
@@ -89,7 +89,7 @@ export const NotificationList: React.FC<{ onAction?: () => void }> = ({ onAction
             
             <div className="flex-1 flex flex-col min-w-0 pr-6">
               <div className="flex justify-between items-start gap-2">
-                <span className={`text-[13px] tracking-tight truncate ${!item.isRead ? "font-black text-[#1D3557]" : "font-bold text-gray-600"}`}>
+                <span className={`text-[13px] tracking-tight truncate ${!item.isRead ? "font-black text-ink" : "font-bold text-gray-600"}`}>
                   {item.title}
                 </span>
                 <span className="text-[10px] font-bold text-gray-400 whitespace-nowrap pt-0.5 uppercase tracking-tighter">{item.time}</span>

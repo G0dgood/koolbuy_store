@@ -59,10 +59,10 @@ const RecommendedItems = () => {
 
         <Link
           href="/products"
-          className="inline-flex items-center gap-1.5 text-xs md:text-sm font-semibold text-gray-600 hover:text-brand-orange group transition-colors"
+          className="kb-btn kb-btn-ghost h-10 px-4 text-xs md:text-sm group shrink-0"
         >
-          <span>See All</span>
-          <span className="w-5 h-5 rounded-full bg-[#FF7A00] text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+          <span>See all</span>
+          <span className="w-6 h-6 rounded-full bg-brand-orange text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
             <FiChevronRight size={14} />
           </span>
         </Link>
@@ -72,7 +72,7 @@ const RecommendedItems = () => {
           <Link
             key={idx}
             href="/products/detail"
-            className="bg-white border border-[#1C1C1C1A] rounded-[6px] p-4 flex flex-col gap-3 hover:shadow-md transition-shadow cursor-pointer group"
+            className="bg-white border border-gray-100 rounded-[6px] p-4 flex flex-col gap-3 hover:shadow-md transition-shadow cursor-pointer group"
           >
             <div className="w-full aspect-square relative mb-2">
               <Image

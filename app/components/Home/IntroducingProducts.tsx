@@ -80,13 +80,16 @@ export const IntroducingProducts: React.FC<IntroducingProductsProps> = ({
   return (
     <section className="w-full flex flex-col items-center gap-6 pt-2">
       {/* Section Title */}
-      <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1E293B] text-center tracking-tight">
-        Introducing Our Products
-      </h2>
+      <div className="flex flex-col items-center gap-3">
+        <span className="kb-sticker">Keep it kool</span>
+        <h2 className="kb-title kb-squiggle text-3xl sm:text-4xl text-center [&::after]:left-1/2 [&::after]:-translate-x-1/2">
+          Introducing Our Products
+        </h2>
+      </div>
 
       {/* Categories Tabs Bar */}
       <div className="w-full max-w-full overflow-x-auto scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden py-1">
-        <div className="flex items-center justify-start md:justify-center min-w-max mx-auto px-4 gap-1 sm:gap-2">
+        <div className="flex items-center justify-start md:justify-center min-w-max mx-auto px-4 gap-2">
           {categories.map((cat, idx) => {
             const isActive = activeTab === cat.id;
 
@@ -98,28 +101,30 @@ export const IntroducingProducts: React.FC<IntroducingProductsProps> = ({
                   className="group relative"
                 >
                   <motion.div
-                    whileHover={{ y: -2, scale: 1.04 }}
+                    whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.97 }}
                     transition={{ type: "spring", stiffness: 350, damping: 22 }}
-                    className={`relative px-3.5 sm:px-4 py-2.5 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-200 outline-none ${
-                      isActive ? "bg-orange-50/7" : "hover:bg-orange-50/50"
+                    className={`relative px-4 sm:px-5 py-2.5 min-h-12 rounded-full border-[1.5px] flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-200 outline-none ${
+                      isActive
+                        ? "bg-ink border-ink shadow-[0_8px_20px_-10px_rgba(15,61,46,0.7)]"
+                        : "bg-white border-gray-200 hover:border-brand-orange/40 hover:bg-brand-orange-light"
                     }`}
                   >
                     <span
                       className={`text-xs sm:text-sm whitespace-pre-line leading-tight transition-colors duration-200 ${
                         isActive
-                          ? "text-[#FF7A00] font-bold"
-                          : "text-gray-600 font-medium group-hover:text-[#FF7A00]"
+                          ? "text-white font-bold"
+                          : "text-ink font-semibold group-hover:text-brand-orange-hover"
                       }`}
                     >
                       {cat.name}
                     </span>
 
-                    {/* Active Orange Underline */}
+                    {/* Active dot */}
                     {isActive && (
                       <motion.div
                         layoutId="activeTabUnderline"
-                        className="absolute -bottom-0.5 w-8 sm:w-10 h-0.75 bg-[#FF7A00] rounded-full"
+                        className="absolute -top-1 -right-0.5 w-3 h-3 bg-mustard border-2 border-white rounded-full"
                         transition={{
                           type: "spring",
                           stiffness: 350,
@@ -131,9 +136,7 @@ export const IntroducingProducts: React.FC<IntroducingProductsProps> = ({
                 </Link>
 
                 {/* Vertical Divider between items */}
-                {idx < categories.length - 1 && (
-                  <div className="h-6 w-px bg-gray-200 mx-0.5 shrink-0 self-center opacity-60" />
-                )}
+                {/* spacing handled by gap */}
               </React.Fragment>
             );
           })}

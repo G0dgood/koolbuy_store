@@ -23,8 +23,8 @@ const Alert: React.FC<AlertProps> = ({
       bg: "bg-brand-blue-light",
       border: "border-blue-100",
       icon: "task_alt",
-      iconColor: "text-[#2196F3]",
-      titleColor: "text-[#1D3557]",
+      iconColor: "text-ink",
+      titleColor: "text-ink",
     },
     error: {
       bg: "bg-[#FEE2E2]",

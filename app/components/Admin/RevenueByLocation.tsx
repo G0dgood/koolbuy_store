@@ -41,10 +41,10 @@ export const RevenueByLocation: React.FC = () => {
           onMouseLeave={() => setHoveredLocation(null)}
         >
           <span className="animate-ping absolute inline-flex h-9 w-9 rounded-full bg-cyan-400 opacity-40"></span>
-          <span className="relative inline-flex rounded-full h-4 w-4 bg-[#00BCD4] border-2 border-white shadow-md"></span>
+          <span className="relative inline-flex rounded-full h-4 w-4 bg-brand-orange border-2 border-white shadow-md"></span>
 
           {/* Interactive Tooltip Badge */}
-          <div className="absolute -top-8 px-2.5 py-1 bg-[#1D3557] text-white text-[10px] font-bold rounded-lg whitespace-nowrap shadow-md pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <div className="absolute -top-8 px-2.5 py-1 bg-ink text-white text-[10px] font-bold rounded-lg whitespace-nowrap shadow-md pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             Nigeria Hub • ₦11.25M
           </div>
         </div>
@@ -66,7 +66,7 @@ export const RevenueByLocation: React.FC = () => {
                 initial={{ width: 0 }}
                 animate={{ width: `${loc.percentage}%` }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
-                className="bg-[#00BCD4] h-full rounded-full"
+                className="bg-brand-orange h-full rounded-full"
               />
             </div>
           </div>

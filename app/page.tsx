@@ -108,28 +108,28 @@ const onSaleProducts = [
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-cream flex flex-col font-sans text-ink">
       <Header />
 
       {/* Full-width Hero Carousel */}
       <HeroSection />
 
-      <main className="flex-1 w-full max-w-360 mx-auto px-6 md:px-10 lg:px-16 py-8 md:py-12 flex flex-col gap-8 md:gap-24">
+      <main className="flex-1 w-full max-w-360 mx-auto px-6 md:px-10 lg:px-16 py-8 md:py-12 flex flex-col gap-14 md:gap-24">
         {/* Introducing Our Products & Category Tabs */}
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-10">
           <IntroducingProducts />
           <NewProductsSection />
         </div>
 
         {/* Promotional Banner */}
-        <div className="w-full relative rounded-lg overflow-hidden border border-[#1C1C1C1A] shadow-xs group bg-white">
+        <div className="w-full relative rounded-[2rem] overflow-hidden shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-lift)] transition-shadow duration-300 group bg-white">
           <Link href="/products" className="block w-full">
             <div className="relative w-full aspect-[3.3/1] min-h-35 sm:min-h-45 md:min-h-55">
               <Image
                 src="/images/koolboks/banner-2.jpg"
                 alt="Koolbuy - Get a freezer for as low as ₦20,000 per month"
                 fill
-                className="object-cover group-hover:scale-[1.01] transition-transform duration-500"
+                className="object-cover group-hover:scale-[1.02] transition-transform duration-700"
               />
             </div>
           </Link>

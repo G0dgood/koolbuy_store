@@ -199,8 +199,8 @@ export default function VendorsPage() {
           <title>${title}</title>
           <style>
             body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 32px; color: #111827; }
-            .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #00BCD4; padding-bottom: 16px; margin-bottom: 24px; }
-            h1 { font-size: 22px; font-weight: 800; color: #1D3557; margin: 0; }
+            .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #FF7A00; padding-bottom: 16px; margin-bottom: 24px; }
+            h1 { font-size: 22px; font-weight: 800; color: #0F3D2E; margin: 0; }
             p { font-size: 12px; color: #6b7280; margin: 4px 0 0 0; }
             table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
             th { background-color: #f8fafc; padding: 10px 14px; font-weight: 700; border-bottom: 2px solid #e2e8f0; color: #475569; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
@@ -216,7 +216,7 @@ export default function VendorsPage() {
               <h1>${title}</h1>
               <p>Generated on ${new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })} • Total Records: ${filteredVendors.length}</p>
             </div>
-            <div style="font-weight: 900; font-size: 18px; color: #00BCD4;">KOOLBUY</div>
+            <div style="font-weight: 900; font-size: 18px; color: #FF7A00;">KOOLBUY</div>
           </div>
           <table>
             <thead>

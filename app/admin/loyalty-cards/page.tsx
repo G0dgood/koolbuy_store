@@ -247,7 +247,7 @@ export default function MarketingLoyaltyCardsPage() {
       )}
 
       {/* Top Header & Program Configuration Card (NO metric/stat cards as requested) */}
-      <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-5 flex flex-col gap-5">
+      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-5 flex flex-col gap-5">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             {/* <div className="flex items-center gap-2.5">
@@ -271,7 +271,7 @@ export default function MarketingLoyaltyCardsPage() {
               <span>Accounting Audit</span>
             </Link>
             <Button
-              className="h-9 px-4 text-xs font-bold bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white rounded-lg shadow-xs cursor-pointer"
+              className="h-9 px-4 text-xs font-bold bg-brand-orange hover:bg-brand-orange/90 text-white rounded-lg shadow-xs cursor-pointer"
               iconLeft={<HiOutlinePlus className="w-3.5 h-3.5" />}
               onClick={handleOpenAddModal}
             >
@@ -295,7 +295,7 @@ export default function MarketingLoyaltyCardsPage() {
                   );
                 }}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer focus:outline-none ${
-                  loyaltyEnabled ? "bg-[#00BCD4]" : "bg-gray-300"
+                  loyaltyEnabled ? "bg-brand-orange" : "bg-gray-300"
                 }`}
                 title={
                   loyaltyEnabled
@@ -321,13 +321,13 @@ export default function MarketingLoyaltyCardsPage() {
               <span className="text-xs font-bold text-gray-700 whitespace-nowrap">
                 Redemption Value
               </span>
-              <div className="flex items-center gap-1.5 bg-white border border-gray-200 rounded-lg px-2.5 py-1 text-xs">
+              <div className="flex items-center gap-1.5 bg-white border border-gray-100 rounded-3xl shadow-sm px-2.5 py-1 text-xs">
                 <span className="font-mono font-bold text-gray-900">1 ₦ =</span>
                 <input
                   type="text"
                   value={redemptionValue}
                   onChange={(e) => setRedemptionValue(e.target.value)}
-                  className="w-16 font-mono font-bold text-xs text-brand-blue bg-transparent outline-none border-b border-transparent focus:border-[#00BCD4] text-center"
+                  className="w-16 font-mono font-bold text-xs text-brand-blue bg-transparent outline-none border-b border-transparent focus:border-brand-orange text-center"
                   placeholder="0.05"
                 />
                 <span className="text-[11px] text-gray-400 font-semibold">
@@ -446,7 +446,7 @@ export default function MarketingLoyaltyCardsPage() {
                           href={plan.linkUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-1.5 text-brand-blue hover:text-[#00BCD4] hover:underline font-bold text-xs group"
+                          className="inline-flex items-center gap-1.5 text-brand-blue hover:text-brand-orange hover:underline font-bold text-xs group"
                         >
                           <span>{plan.name}</span>
                           <HiOutlineArrowTopRightOnSquare className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
@@ -495,7 +495,7 @@ export default function MarketingLoyaltyCardsPage() {
                           <button
                             type="button"
                             onClick={() => handleOpenEditModal(plan)}
-                            className="p-1.5 text-gray-400 hover:text-[#00BCD4] hover:bg-brand-blue-light/50 rounded-lg transition-colors cursor-pointer"
+                            className="p-1.5 text-gray-400 hover:text-brand-orange hover:bg-brand-blue-light/50 rounded-lg transition-colors cursor-pointer"
                             title="Edit Loyalty Plan"
                           >
                             <HiOutlinePencilSquare className="w-4 h-4" />
@@ -760,7 +760,7 @@ export default function MarketingLoyaltyCardsPage() {
                 <Button
                   type="submit"
                   size="sm"
-                  className="bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white rounded-lg text-xs font-semibold"
+                  className="bg-brand-orange hover:bg-brand-orange/90 text-white rounded-lg text-xs font-semibold"
                 >
                   {planToEdit ? "Update Plan" : "Create Plan"}
                 </Button>

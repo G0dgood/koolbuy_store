@@ -147,16 +147,16 @@ export const PartnersCarousel: React.FC = () => {
     >
       {/* Section Header */}
       <div className="flex items-center justify-between">
-        <h3 className="text-lg md:text-xl font-bold tracking-wider text-gray-900">
+        <h3 className="kb-title kb-squiggle text-2xl md:text-[1.75rem]">
           Meet Our Partners
         </h3>
 
         <Link
           href="/brands"
-          className="inline-flex items-center gap-1.5 text-xs md:text-sm font-semibold text-gray-600 hover:text-brand-orange group transition-colors"
+          className="kb-btn kb-btn-ghost h-10 px-4 text-xs md:text-sm group shrink-0"
         >
-          <span>See All</span>
-          <span className="w-5 h-5 rounded-full bg-[#FF7A00] text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+          <span>See all</span>
+          <span className="w-6 h-6 rounded-full bg-brand-orange text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
             <FiChevronRight size={14} />
           </span>
         </Link>
@@ -168,7 +168,7 @@ export const PartnersCarousel: React.FC = () => {
         <button
           onClick={scrollPrev}
           aria-label="Previous partners"
-          className="absolute -left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
+          className="absolute -left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white border border-gray-100 shadow-[var(--shadow-lift)] flex items-center justify-center text-ink hover:text-brand-orange hover:scale-105 active:scale-95 transition-all cursor-pointer"
         >
           <FiChevronLeft size={18} />
         </button>
@@ -182,7 +182,7 @@ export const PartnersCarousel: React.FC = () => {
             <Link
               key={partner.id}
               href={partner.link}
-              className="shrink-0 w-40 sm:w-48 md:w-56 h-20 sm:h-24 flex items-center justify-cente hover:border-gray-300 transition-all group"
+              className="shrink-0 w-40 sm:w-48 md:w-56 h-20 sm:h-24 px-5 flex items-center justify-center bg-white border border-gray-100 rounded-2xl shadow-[var(--shadow-soft)] hover:-translate-y-1 hover:shadow-[var(--shadow-lift)] transition-all group"
             >
               <div className="relative w-full h-full flex items-center justify-center">
                 <Image
@@ -200,7 +200,7 @@ export const PartnersCarousel: React.FC = () => {
         <button
           onClick={scrollNext}
           aria-label="Next partners"
-          className="absolute -right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
+          className="absolute -right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white border border-gray-100 shadow-[var(--shadow-lift)] flex items-center justify-center text-ink hover:text-brand-orange hover:scale-105 active:scale-95 transition-all cursor-pointer"
         >
           <FiChevronRight size={18} />
         </button>

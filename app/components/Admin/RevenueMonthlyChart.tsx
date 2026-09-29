@@ -34,7 +34,7 @@ export const RevenueMonthlyChart: React.FC = () => {
       {
         label: "Revenue",
         data: monthlyData,
-        backgroundColor: "#00BCD4",
+        backgroundColor: "#FF7A00",
         borderRadius: 4,
         barThickness: 8,
         hoverBackgroundColor: "#0097A7",
@@ -50,7 +50,7 @@ export const RevenueMonthlyChart: React.FC = () => {
         display: false,
       },
       tooltip: {
-        backgroundColor: "#1D3557",
+        backgroundColor: "#0F3D2E",
         titleFont: { size: 12, weight: "bold" as const, family: "Inter" },
         bodyFont: { size: 11, family: "Inter" },
         padding: 10,
@@ -65,7 +65,7 @@ export const RevenueMonthlyChart: React.FC = () => {
       x: {
         grid: { display: false },
         ticks: {
-          color: "#94A3B8",
+          color: "#A8A096",
           font: { size: 10, weight: "bold" as const },
         },
         border: { display: false },
@@ -75,7 +75,7 @@ export const RevenueMonthlyChart: React.FC = () => {
         max: 320000000,
         ticks: {
           stepSize: 80000000,
-          color: "#94A3B8",
+          color: "#A8A096",
           font: { size: 9, weight: "bold" as const },
           callback: (value: any) => {
             if (value === 0) return "₦0";
@@ -94,7 +94,7 @@ export const RevenueMonthlyChart: React.FC = () => {
     <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-xs flex flex-col justify-between h-full">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-base font-bold text-[#1D3557]">Revenue Monthly</h3>
+        <h3 className="text-base font-bold text-ink">Revenue Monthly</h3>
         <button
           className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
           title="Chart Options"

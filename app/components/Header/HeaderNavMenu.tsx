@@ -76,15 +76,15 @@ export const HeaderNavMenu: React.FC = () => {
           }}
           className={`flex items-center gap-1 cursor-pointer transition-colors py-1.5 outline-none ${
             isLanguageOpen
-              ? "text-[#FF7A00] font-bold"
-              : "text-gray-700 hover:text-[#FF7A00]"
+              ? "text-brand-orange font-bold"
+              : "text-gray-700 hover:text-brand-orange"
           }`}
           aria-expanded={isLanguageOpen}
         >
           <span>Language</span>
           <FiChevronDown
             className={`text-xs text-gray-400 transition-transform duration-200 ${
-              isLanguageOpen ? "rotate-180 text-[#FF7A00]" : ""
+              isLanguageOpen ? "rotate-180 text-brand-orange" : ""
             }`}
           />
         </button>
@@ -128,15 +128,15 @@ export const HeaderNavMenu: React.FC = () => {
           }}
           className={`flex items-center gap-1 cursor-pointer transition-colors py-1.5 outline-none ${
             isHelpOpen
-              ? "text-[#FF7A00] font-bold"
-              : "text-gray-700 hover:text-[#FF7A00]"
+              ? "text-brand-orange font-bold"
+              : "text-gray-700 hover:text-brand-orange"
           }`}
           aria-expanded={isHelpOpen}
         >
           <span>Help</span>
           <FiChevronDown
             className={`text-xs text-gray-400 transition-transform duration-200 ${
-              isHelpOpen ? "rotate-180 text-[#FF7A00]" : ""
+              isHelpOpen ? "rotate-180 text-brand-orange" : ""
             }`}
           />
         </button>
@@ -155,7 +155,7 @@ export const HeaderNavMenu: React.FC = () => {
                       label={link.label}
                       href={link.href}
                       onSelect={() => setIsHelpOpen(false)}
-                      className="text-gray-700 hover:text-[#FF7A00] font-medium"
+                      className="text-gray-700 hover:text-brand-orange font-medium"
                     />
                   ))}
                 </div>
@@ -164,7 +164,7 @@ export const HeaderNavMenu: React.FC = () => {
                 <div className="p-4 border-t border-gray-100 bg-gray-50/50 flex flex-col gap-2.5">
                   <Button
                     className="w-full text-white h-10 shadow-sm active:scale-95 transition-all hover:opacity-90 text-xs"
-                    style={{ backgroundColor: "#2196F3" }}
+                    style={{ backgroundColor: "#0F3D2E" }}
                     iconLeft={<Icon name="chat" size="sm" />}
                   >
                     Live Chat
@@ -195,15 +195,15 @@ export const HeaderNavMenu: React.FC = () => {
           }}
           className={`flex items-center gap-1 cursor-pointer transition-colors py-1.5 outline-none ${
             isCurrencyOpen
-              ? "text-[#FF7A00] font-bold"
-              : "text-gray-700 hover:text-[#FF7A00]"
+              ? "text-brand-orange font-bold"
+              : "text-gray-700 hover:text-brand-orange"
           }`}
           aria-expanded={isCurrencyOpen}
         >
           <span>Currency</span>
           <FiChevronDown
             className={`text-xs text-gray-400 transition-transform duration-200 ${
-              isCurrencyOpen ? "rotate-180 text-[#FF7A00]" : ""
+              isCurrencyOpen ? "rotate-180 text-brand-orange" : ""
             }`}
           />
         </button>

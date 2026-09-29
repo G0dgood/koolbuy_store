@@ -55,7 +55,7 @@ export function EditProductDrawer({ isOpen, onClose, product }: EditProductDrawe
                 <img src={product.image} alt="" className="w-full h-full object-contain" />
              </div>
              <div className="flex flex-col gap-0.5">
-                <span className="text-sm font-black text-[#1D3557] truncate max-w-[200px]">{product.name}</span>
+                <span className="text-sm font-black text-ink truncate max-w-[200px]">{product.name}</span>
                 <span className="text-[10px] font-bold text-gray-400">SKU: {product.sku}</span>
              </div>
           </div>

@@ -10,7 +10,7 @@ export default function NotFound() {
   const particles = Array.from({ length: 15 });
 
   return (
-    <div className="relative min-h-[100dvh] w-full flex items-center justify-center overflow-hidden bg-[#1D3557]">
+    <div className="relative min-h-[100dvh] w-full flex items-center justify-center overflow-hidden bg-ink">
       {/* Immersive Background Layer */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -20,7 +20,7 @@ export default function NotFound() {
           className="object-cover blur-[20px] scale-110 opacity-60 grayscale brightness-50"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1D3557]/80 via-transparent to-[#1D3557]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-transparent to-ink" />
       </div>
 
       {/* Floating Particles Micro-animations */}
@@ -68,7 +68,7 @@ export default function NotFound() {
             <div className="flex flex-col gap-2 -mt-16 md:-mt-24">
               <span className="text-brand-blue font-black tracking-[0.6em] uppercase text-xs">Environment Alert</span>
               <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-tight font-inter">
-                Lost in the <br /><span className="text-[#8CB7F5]">Mist.</span>
+                Lost in the <br /><span className="text-mustard">Mist.</span>
               </h1>
             </div>
           </div>
@@ -87,21 +87,21 @@ export default function NotFound() {
             </Link>
 
             <Link href="/brands" className="group flex flex-col items-center gap-3 p-6 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/20 transition-all">
-              <div className="w-10 h-10 rounded-2xl bg-[#8CB7F5] flex items-center justify-center text-[#1D3557] shadow-lg group-hover:scale-110 transition-transform">
+              <div className="w-10 h-10 rounded-2xl bg-mustard flex items-center justify-center text-ink shadow-lg group-hover:scale-110 transition-transform">
                 <HiSparkles size={20} />
               </div>
               <span className="text-[10px] font-black uppercase tracking-widest text-white/60 group-hover:text-white transition-colors">Brands</span>
             </Link>
 
             <Link href="/contact" className="group flex flex-col items-center gap-3 p-6 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/20 transition-all">
-              <div className="w-10 h-10 rounded-2xl bg-white flex items-center justify-center text-[#1D3557] shadow-lg group-hover:scale-110 transition-transform">
+              <div className="w-10 h-10 rounded-2xl bg-white flex items-center justify-center text-ink shadow-lg group-hover:scale-110 transition-transform">
                 <HiChatBubbleLeftRight size={20} />
               </div>
               <span className="text-[10px] font-black uppercase tracking-widest text-white/60 group-hover:text-white transition-colors">Support</span>
             </Link>
           </div>
 
-          <Link href="/" className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] text-[#8CB7F5] hover:text-white transition-all group">
+          <Link href="/" className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] text-mustard hover:text-white transition-all group">
             Teleport to Safety <HiChevronRight className="group-hover:translate-x-2 transition-transform" size={16} />
           </Link>
         </div>

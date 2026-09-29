@@ -260,7 +260,7 @@ export default function MarketingCampaignsPage() {
   const getTypeBadge = (type: MarketingCampaign["type"]) => {
     switch (type) {
       case "Push Notification":
-        return "bg-cyan-50 text-[#00BCD4] border-cyan-200";
+        return "bg-cyan-50 text-brand-orange border-cyan-200";
       case "Email":
         return "bg-purple-50 text-purple-700 border-purple-200";
       case "SMS":
@@ -301,7 +301,7 @@ export default function MarketingCampaignsPage() {
 
         <div className="flex items-center gap-3 w-full sm:w-auto">
           <Button
-            className="h-9 px-4 text-xs font-bold bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white rounded-lg shadow-xs cursor-pointer"
+            className="h-9 px-4 text-xs font-bold bg-brand-orange hover:bg-brand-orange/90 text-white rounded-lg shadow-xs cursor-pointer"
             iconLeft={<HiOutlinePlus className="w-3.5 h-3.5" />}
             onClick={handleOpenAddModal}
           >
@@ -477,7 +477,7 @@ export default function MarketingCampaignsPage() {
                           <button
                             type="button"
                             onClick={() => handleOpenEditModal(c)}
-                            className="p-1.5 text-gray-400 hover:text-[#00BCD4] hover:bg-brand-blue-light/50 rounded-lg transition-colors cursor-pointer"
+                            className="p-1.5 text-gray-400 hover:text-brand-orange hover:bg-brand-blue-light/50 rounded-lg transition-colors cursor-pointer"
                             title="Edit Campaign"
                           >
                             <HiOutlinePencilSquare className="w-4 h-4" />
@@ -776,7 +776,7 @@ export default function MarketingCampaignsPage() {
                 <Button
                   type="submit"
                   size="sm"
-                  className="bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white rounded-lg text-xs font-semibold"
+                  className="bg-brand-orange hover:bg-brand-orange/90 text-white rounded-lg text-xs font-semibold"
                 >
                   {campaignToEdit ? "Update Campaign" : "Schedule Campaign"}
                 </Button>

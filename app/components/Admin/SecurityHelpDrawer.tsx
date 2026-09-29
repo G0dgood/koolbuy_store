@@ -42,7 +42,7 @@ export function SecurityHelpDrawer({ isOpen, onClose }: SecurityHelpDrawerProps)
               <Icon name="live_help" folder="icon" size="sm" />
            </div>
            <div className="flex flex-col gap-0.5">
-              <span className="text-[13px] font-black text-[#1D3557]">Need immediate assistance?</span>
+              <span className="text-[13px] font-black text-ink">Need immediate assistance?</span>
               <span className="text-[11px] font-medium text-blue-600 leading-tight">Our security team is available 24/7 for account emergencies.</span>
            </div>
         </div>
@@ -58,7 +58,7 @@ export function SecurityHelpDrawer({ isOpen, onClose }: SecurityHelpDrawerProps)
                       <Icon name={item.icon} folder="icon" size="xs" />
                    </div>
                    <div className="flex flex-col gap-1">
-                      <span className="text-[12px] font-black text-[#1D3557] group-hover:text-brand-blue transition-colors">{item.title}</span>
+                      <span className="text-[12px] font-black text-ink group-hover:text-brand-blue transition-colors">{item.title}</span>
                       <span className="text-[11px] font-medium text-gray-400 leading-relaxed">{item.description}</span>
                    </div>
                 </div>

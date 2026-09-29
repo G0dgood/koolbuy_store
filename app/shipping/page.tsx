@@ -48,12 +48,12 @@ const ShippingPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-cream flex flex-col font-sans text-black">
       <Header />
 
       <main className="flex-1 w-full bg-white">
         {/* Step 74: Global Logistics Hero section */}
-        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-[#1D3557] overflow-hidden">
+        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-ink overflow-hidden">
           <Image
             src="/brandImage/shipping_banner.png"
             alt="Shipping Banner"
@@ -61,7 +61,7 @@ const ShippingPage = () => {
             className="object-cover opacity-100"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1D3557] via-[#1D3557]/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-transparent" />
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue rounded-full filter blur-[140px] opacity-10 translate-x-1/2 -translate-y-1/2" />
 
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 relative z-10">
@@ -79,7 +79,7 @@ const ShippingPage = () => {
               </div>
               <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter font-inter leading-none">
                 Delivering Excellence <br />
-                to Your <span className="text-[#8CB7F5]">Doorstep.</span>
+                to Your <span className="text-mustard">Doorstep.</span>
               </h1>
               <p className="text-blue-100/60 max-w-2xl text-base md:text-xl leading-relaxed font-medium">
                 Koolbuy Store partners with top-tier global carriers to ensure
@@ -105,7 +105,7 @@ const ShippingPage = () => {
                 <div className="w-16 h-16 bg-brand-blue-light rounded-3xl flex items-center justify-center text-brand-blue mb-8 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-500">
                   {method.icon}
                 </div>
-                <h3 className="text-2xl font-black text-[#1D3557] mb-4">
+                <h3 className="text-2xl font-black text-ink mb-4">
                   {method.title}
                 </h3>
                 <div className="flex flex-col gap-1 mb-6">
@@ -140,7 +140,7 @@ const ShippingPage = () => {
 
           <div className="mt-20 flex flex-col lg:flex-row gap-12 items-center bg-gray-50 rounded-[40px] p-10 md:p-16 border border-gray-100">
             <div className="flex-1 flex flex-col gap-6">
-              <h2 className="text-3xl font-black text-[#1D3557] tracking-tight">
+              <h2 className="text-3xl font-black text-ink tracking-tight">
                 Regional Estimates
               </h2>
               <p className="text-gray-500 leading-relaxed">
@@ -154,7 +154,7 @@ const ShippingPage = () => {
                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
                       {region.region}
                     </span>
-                    <span className="font-black text-[#1D3557] text-xl">
+                    <span className="font-black text-ink text-xl">
                       {region.days}
                     </span>
                   </div>
@@ -173,7 +173,7 @@ const ShippingPage = () => {
         </section>
 
         {/* Step 76: Implement Tracking Journey and Packaging commitments */}
-        <section className="bg-[#1D3557] py-24 md:py-32 relative overflow-hidden">
+        <section className="bg-ink py-24 md:py-32 relative overflow-hidden">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center relative z-10">
             <div className="flex flex-col gap-10">
               <div className="flex flex-col gap-4">
@@ -233,7 +233,7 @@ const ShippingPage = () => {
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1D3557]/80 to-transparent flex items-end p-8">
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 to-transparent flex items-end p-8">
                   <div className="flex flex-col gap-1">
                     <span className="text-[10px] font-black uppercase tracking-widest text-brand-blue">
                       Real-time Dashboard
@@ -251,7 +251,7 @@ const ShippingPage = () => {
         {/* FAQ Anchor CTA */}
         <section className="py-24 md:py-32 bg-white">
           <div className="max-w-[1440px] mx-auto px-6 text-center">
-            <h2 className="text-3xl font-black text-[#1D3557] mb-6 tracking-tight">
+            <h2 className="text-3xl font-black text-ink mb-6 tracking-tight">
               Still have shipping questions?
             </h2>
             <p className="text-gray-500 mb-10 max-w-xl mx-auto italic">
@@ -260,7 +260,7 @@ const ShippingPage = () => {
             </p>
             <button
               onClick={() => (window.location.href = "/faq")}
-              className="px-10 py-4 bg-gray-50 border border-gray-100 rounded-xl text-[#1D3557] font-black uppercase tracking-widest text-xs hover:bg-white hover:border-brand-blue hover:text-brand-blue transition-all"
+              className="px-10 py-4 bg-gray-50 border border-gray-100 rounded-xl text-ink font-black uppercase tracking-widest text-xs hover:bg-white hover:border-brand-blue hover:text-brand-blue transition-all"
             >
               Visit Help Center
             </button>

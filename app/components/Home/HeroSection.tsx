@@ -71,11 +71,11 @@ const HeroSection = () => {
 
   return (
     <section
-      className="w-full bg-white overflow-hidden"
+      className="w-full bg-cream px-3 sm:px-6 md:px-10 lg:px-16 pt-3 sm:pt-5 md:pt-6"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <div className="relative w-full h-95 sm:h-115 md:h-145 lg:h-165 xl:h-180 2xl:h-200 overflow-hidden">
+      <div className="relative max-w-328 mx-auto w-full h-72 sm:h-auto sm:aspect-[12/5] overflow-hidden rounded-[1.75rem] md:rounded-[2.25rem] bg-ink shadow-[var(--shadow-lift)] ring-1 ring-black/5">
         <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
             key={currentSlide}
@@ -126,7 +126,7 @@ const HeroSection = () => {
         <button
           onClick={prevSlide}
           aria-label="Previous slide"
-          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition-all duration-200 z-20 cursor-pointer shadow-md active:scale-90"
+          className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 hover:bg-white text-ink hover:text-brand-orange backdrop-blur-md flex items-center justify-center transition-all duration-200 z-20 cursor-pointer shadow-[var(--shadow-lift)] hover:scale-105 active:scale-90"
         >
           <FiChevronLeft size={22} />
         </button>
@@ -134,13 +134,13 @@ const HeroSection = () => {
         <button
           onClick={nextSlide}
           aria-label="Next slide"
-          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition-all duration-200 z-20 cursor-pointer shadow-md active:scale-90"
+          className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 hover:bg-white text-ink hover:text-brand-orange backdrop-blur-md flex items-center justify-center transition-all duration-200 z-20 cursor-pointer shadow-[var(--shadow-lift)] hover:scale-105 active:scale-90"
         >
           <FiChevronRight size={22} />
         </button>
 
         {/* Bottom Pagination Dots */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20 bg-black/30 backdrop-blur-md px-3 py-1.5 rounded-full">
+        <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20 bg-white/85 backdrop-blur-md px-3.5 py-2 rounded-full shadow-[var(--shadow-soft)]">
           {carouselSlides.map((slide, idx) => (
             <button
               key={slide.id}
@@ -148,8 +148,8 @@ const HeroSection = () => {
               aria-label={`Go to slide ${idx + 1}`}
               className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
                 currentSlide === idx
-                  ? "w-7 bg-primary shadow-sm"
-                  : "w-2.5 bg-white/50 hover:bg-white/80"
+                  ? "w-8 bg-brand-orange"
+                  : "w-2.5 bg-ink/20 hover:bg-ink/40"
               }`}
             />
           ))}

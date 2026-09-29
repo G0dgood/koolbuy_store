@@ -264,7 +264,7 @@ export default function AdvertManagement() {
     <div className="flex flex-col gap-8 mx-auto pb-20">
       <div className="flex justify-between items-center ">
         <div className="flex flex-col gap-1">
-          {/* <h1 className="text-xl font-black text-[#1D3557]">
+          {/* <h1 className="text-xl font-black text-ink">
             Advert Control Center
           </h1>
           <p className="text-sm text-gray-400 font-medium">
@@ -315,7 +315,7 @@ export default function AdvertManagement() {
           {/* Section 1: Copywriting & Timing */}
           <section className="bg-white p-8 rounded-[6px] border border-gray-100 shadow-sm flex flex-col gap-8">
             <div className="flex justify-between items-center">
-              <h3 className="text-lg font-black text-[#1D3557] flex items-center gap-2">
+              <h3 className="text-lg font-black text-ink flex items-center gap-2">
                 <span className="w-8 h-8 rounded-[6px] bg-blue-50 text-blue-500 flex items-center justify-center text-xs">
                   01
                 </span>
@@ -563,7 +563,7 @@ export default function AdvertManagement() {
 
               <div className="bg-gray-50 p-6 rounded-[6px] border border-gray-100 flex flex-col gap-6 justify-center">
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-black text-[#1D3557] uppercase tracking-widest">
+                  <label className="text-xs font-black text-ink uppercase tracking-widest">
                     {activeVisualIndex === null
                       ? "Global Cycle Duration"
                       : `Atmosphere ${activeVisualIndex + 1} Timing Override`}
@@ -615,7 +615,7 @@ export default function AdvertManagement() {
           {/* Section 2: Background Orchestration */}
           <section className="bg-white p-8 rounded-[6px] border border-gray-100 shadow-sm flex flex-col gap-6">
             <div className="flex justify-between items-center">
-              <h3 className="text-lg font-black text-[#1D3557] flex items-center gap-2">
+              <h3 className="text-lg font-black text-ink flex items-center gap-2">
                 <span className="w-8 h-8 rounded-[6px] bg-indigo-50 text-indigo-500 flex items-center justify-center text-xs">
                   02
                 </span>
@@ -691,7 +691,7 @@ export default function AdvertManagement() {
                                 setRefiningAssetIndex(i);
                                 setIsRefineModalOpen(true);
                               }}
-                              className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-[#1D3557] hover:bg-brand-blue hover:text-white transition-all shadow-lg text-lg"
+                              className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-ink hover:bg-brand-blue hover:text-white transition-all shadow-lg text-lg"
                               title="Edit Focal Point"
                             >
                               <LuPencilLine />
@@ -701,7 +701,7 @@ export default function AdvertManagement() {
                                 setReplacingAssetIndex(i);
                                 setIsBackgroundModalOpen(true);
                               }}
-                              className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-[#1D3557] hover:bg-brand-blue hover:text-white transition-all shadow-lg text-lg"
+                              className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-ink hover:bg-brand-blue hover:text-white transition-all shadow-lg text-lg"
                               title="Replace Image"
                             >
                               <LuArrowLeftRight />
@@ -711,7 +711,7 @@ export default function AdvertManagement() {
                                 setRefiningAssetIndex(i);
                                 setIsRefineModalOpen(true);
                               }}
-                              className="px-4 py-1.5 bg-white rounded-lg text-[10px] font-black uppercase tracking-widest text-[#1D3557] hover:bg-brand-blue hover:text-white transition-all shadow-lg"
+                              className="px-4 py-1.5 bg-white rounded-lg text-[10px] font-black uppercase tracking-widest text-ink hover:bg-brand-blue hover:text-white transition-all shadow-lg"
                             >
                               Edit Visual
                             </button>
@@ -777,7 +777,7 @@ export default function AdvertManagement() {
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
             {/* Section 3: Featured Items Picker */}
             <section className="bg-white p-8 rounded-[6px] border border-gray-100 shadow-sm flex flex-col gap-6 xl:col-span-2">
-              <h3 className="text-lg font-black text-[#1D3557] flex flex-col gap-6">
+              <h3 className="text-lg font-black text-ink flex flex-col gap-6">
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center gap-2 text-emerald-500">
                     <span className="w-8 h-8 rounded-[6px] bg-emerald-50 flex items-center justify-center text-xs">
@@ -920,7 +920,7 @@ export default function AdvertManagement() {
                         </div>
                       </div>
                       <div className="flex flex-col text-left">
-                        <span className="text-[11px] font-bold text-[#1D3557] truncate">
+                        <span className="text-[11px] font-bold text-ink truncate">
                           {product.name}
                         </span>
                         <span className="text-[9px] font-black text-brand-blue uppercase">
@@ -935,7 +935,7 @@ export default function AdvertManagement() {
 
             {/* Section 4: Item Arrangement */}
             <section className="bg-white p-8 rounded-[6px] border border-gray-100 shadow-sm flex flex-col gap-6 xl:col-span-1">
-              <h3 className="text-lg font-black text-[#1D3557] flex items-center gap-2">
+              <h3 className="text-lg font-black text-ink flex items-center gap-2">
                 <span className="w-8 h-8 rounded-[6px] bg-orange-50 text-orange-500 flex items-center justify-center text-xs">
                   04
                 </span>
@@ -1015,7 +1015,7 @@ export default function AdvertManagement() {
                             />
                           </div>
                           <div className="flex flex-col">
-                            <span className="text-sm font-bold text-[#1D3557]">
+                            <span className="text-sm font-bold text-ink">
                               {item.name}
                             </span>
                           </div>
@@ -1165,7 +1165,7 @@ export default function AdvertManagement() {
                         )}
                       </div>
                       <div className="flex flex-col text-left px-1">
-                        <span className="text-[10px] font-bold text-[#1D3557] truncate">
+                        <span className="text-[10px] font-bold text-ink truncate">
                           {product.name}
                         </span>
                         <span className="text-[8px] font-black text-brand-blue uppercase">
@@ -1184,7 +1184,7 @@ export default function AdvertManagement() {
                   <Icon name="link-external" folder="dashboardIcon" size="lg" />
                 </div>
                 <div className="flex flex-col gap-2 text-center max-w-sm">
-                  <h4 className="text-base font-black text-[#1D3557]">
+                  <h4 className="text-base font-black text-ink">
                     Import Remote Visual
                   </h4>
                   <p className="text-xs text-gray-400 font-medium">
@@ -1287,7 +1287,7 @@ export default function AdvertManagement() {
                     <Icon name="cloud_upload" folder="icon" size="md" />
                   </div>
                   <div className="flex flex-col items-center gap-1 text-center">
-                    <span className="text-sm font-black text-[#1D3557]">
+                    <span className="text-sm font-black text-ink">
                       Click or drag to upload from device
                     </span>
                     <span className="text-[10px] font-bold text-gray-400 italic">
@@ -1397,7 +1397,7 @@ export default function AdvertManagement() {
         >
           <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-1">
-              <h4 className="text-sm font-black text-[#1D3557] uppercase tracking-widest">
+              <h4 className="text-sm font-black text-ink uppercase tracking-widest">
                 Master Your Framing
               </h4>
               <p className="text-xs text-gray-400 font-medium">

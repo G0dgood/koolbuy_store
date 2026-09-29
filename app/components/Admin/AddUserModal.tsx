@@ -71,7 +71,7 @@ export function AddUserModal({ isOpen, onClose }: AddUserModalProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-[#1D3557] uppercase tracking-widest">Full Name</label>
+              <label className="text-[10px] font-black text-ink uppercase tracking-widest">Full Name</label>
               <Input
                 placeholder="e.g. Eleanor Pena"
                 value={formData.name}
@@ -82,7 +82,7 @@ export function AddUserModal({ isOpen, onClose }: AddUserModalProps) {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-[#1D3557] uppercase tracking-widest">Email Address</label>
+              <label className="text-[10px] font-black text-ink uppercase tracking-widest">Email Address</label>
               <Input
                 type="email"
                 placeholder="e.g. penna@dealport.com"
@@ -96,7 +96,7 @@ export function AddUserModal({ isOpen, onClose }: AddUserModalProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-[#1D3557] uppercase tracking-widest">Gender</label>
+              <label className="text-[10px] font-black text-ink uppercase tracking-widest">Gender</label>
               <Select
                 options={genderOptions}
                 value={formData.gender}
@@ -106,7 +106,7 @@ export function AddUserModal({ isOpen, onClose }: AddUserModalProps) {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-[#1D3557] uppercase tracking-widest">Date of Birth</label>
+              <label className="text-[10px] font-black text-ink uppercase tracking-widest">Date of Birth</label>
               <Input
                 type="date"
                 value={formData.dob}
@@ -119,7 +119,7 @@ export function AddUserModal({ isOpen, onClose }: AddUserModalProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-[#1D3557] uppercase tracking-widest">System Role</label>
+              <label className="text-[10px] font-black text-ink uppercase tracking-widest">System Role</label>
               <Select
                 options={roleOptions}
                 value={formData.role}
@@ -129,7 +129,7 @@ export function AddUserModal({ isOpen, onClose }: AddUserModalProps) {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-[#1D3557] uppercase tracking-widest">Department</label>
+              <label className="text-[10px] font-black text-ink uppercase tracking-widest">Department</label>
               <Select
                 options={departmentOptions}
                 value={formData.department}

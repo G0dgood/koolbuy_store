@@ -60,12 +60,12 @@ const CookiePreferencesPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-cream flex flex-col font-sans text-black">
       <Header />
 
       <main className="flex-1 w-full bg-white">
         {/* Privacy Hero */}
-        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-[#1D3557] overflow-hidden">
+        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-ink overflow-hidden">
           <Image
             src="/brandImage/cat_body.png"
             alt="Privacy Framework"
@@ -73,7 +73,7 @@ const CookiePreferencesPage = () => {
             className="object-cover opacity-100 grayscale brightness-50"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1D3557] via-[#1D3557]/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-transparent" />
 
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 relative z-10">
             <motion.div
@@ -82,12 +82,12 @@ const CookiePreferencesPage = () => {
               transition={{ duration: 0.7 }}
               className="flex flex-col gap-6"
             >
-              <span className="text-[#8CB7F5] font-black tracking-[0.4em] uppercase text-xs">
+              <span className="text-mustard font-black tracking-[0.4em] uppercase text-xs">
                 Privacy Orchestration
               </span>
               <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none font-inter">
                 Cookie <br />
-                <span className="text-[#8CB7F5]">Preferences.</span>
+                <span className="text-mustard">Preferences.</span>
               </h1>
               <p className="text-blue-100/60 max-w-2xl text-lg md:text-xl font-medium">
                 Your digital footprint is as unique as your sensory profile. At
@@ -103,7 +103,7 @@ const CookiePreferencesPage = () => {
             {/* Policy Narrative */}
             <div className="lg:col-span-5 flex flex-col gap-10">
               <div className="flex flex-col gap-6">
-                <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight">
+                <h2 className="text-3xl md:text-5xl font-black text-ink tracking-tight">
                   Our Integrity.
                 </h2>
                 <p className="text-gray-500 leading-relaxed text-lg">
@@ -117,7 +117,7 @@ const CookiePreferencesPage = () => {
               <div className="bg-blue-50/50 p-10 rounded-[40px] border border-blue-50 flex flex-col gap-6">
                 <div className="flex items-center gap-4 text-brand-blue">
                   <HiShieldCheck size={32} />
-                  <h4 className="text-xl font-black text-[#1D3557]">
+                  <h4 className="text-xl font-black text-ink">
                     Data Sovereignty
                   </h4>
                 </div>
@@ -138,11 +138,11 @@ const CookiePreferencesPage = () => {
                     className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-10 border-b border-gray-50 last:border-0 last:pb-0"
                   >
                     <div className="flex items-start gap-6 flex-1">
-                      <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-[#1D3557] shrink-0">
+                      <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-ink shrink-0">
                         {cookie.icon}
                       </div>
                       <div className="flex flex-col gap-1">
-                        <h4 className="font-black text-[#1D3557] uppercase tracking-tighter">
+                        <h4 className="font-black text-ink uppercase tracking-tighter">
                           {cookie.title}
                         </h4>
                         <p className="text-xs text-gray-400 leading-relaxed max-w-md">
@@ -188,13 +188,13 @@ const CookiePreferencesPage = () => {
                 <div className="flex gap-4 w-full md:w-auto">
                   <Button
                     variant="ghost"
-                    className="flex-1 md:flex-none border-gray-200 text-[#1D3557] px-10 h-14 font-black uppercase tracking-widest text-sm"
+                    className="flex-1 md:flex-none border-gray-200 text-ink px-10 h-14 font-black uppercase tracking-widest text-sm"
                   >
                     Reject All
                   </Button>
                   <Button
                     variant="primary"
-                    className="flex-1 md:flex-none bg-[#1D3557] text-white px-10 h-14 font-black uppercase tracking-widest text-sm"
+                    className="flex-1 md:flex-none bg-ink text-white px-10 h-14 font-black uppercase tracking-widest text-sm"
                   >
                     Accept All
                   </Button>

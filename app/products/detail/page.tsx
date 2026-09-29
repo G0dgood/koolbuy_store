@@ -48,26 +48,26 @@ export default function ProductDetailPage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F7FAFC]">
+    <div className="flex flex-col min-h-screen bg-cream">
       <Header />
 
       <div className="flex-1 max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-4 md:py-6 flex flex-col gap-6 md:gap-8 w-full">
         {/* Breadcrumbs */}
         <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-400 overflow-x-auto whitespace-nowrap scrollbar-none pb-1">
-          <Link href="/" className="hover:text-[#FF7A00] transition-colors">
+          <Link href="/" className="hover:text-brand-orange transition-colors">
             Home
           </Link>
           <Icon name="chevron_right" size="xs" />
           <Link
             href="/products"
-            className="hover:text-[#FF7A00] transition-colors"
+            className="hover:text-brand-orange transition-colors"
           >
             Products
           </Link>
           <Icon name="chevron_right" size="xs" />
           <Link
             href="/products?category=Single+Door+Chest+Freezers"
-            className="hover:text-[#FF7A00] transition-colors"
+            className="hover:text-brand-orange transition-colors"
           >
             Single Door Chest Freezers
           </Link>

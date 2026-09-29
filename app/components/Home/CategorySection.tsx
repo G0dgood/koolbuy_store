@@ -67,7 +67,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
   };
 
   return (
-    <section className={`w-full bg-white border border-[#1C1C1C1A] rounded-[6px] flex flex-col md:flex-row overflow-hidden ${reverse ? "md:flex-row-reverse" : ""}`}>
+    <section className={`w-full bg-white border border-gray-100 rounded-[6px] flex flex-col md:flex-row overflow-hidden ${reverse ? "md:flex-row-reverse" : ""}`}>
       {/* Category Banner */}
       <div className="w-full md:w-72 relative min-h-[150px] md:min-h-0 group overflow-hidden">
         <Image

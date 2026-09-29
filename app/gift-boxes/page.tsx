@@ -69,7 +69,7 @@ const GiftBoxesPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-cream flex flex-col font-sans text-black">
       <Header />
 
       <main className="flex-1 w-full bg-white">
@@ -82,7 +82,7 @@ const GiftBoxesPage = () => {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1D3557]/90 via-[#1D3557]/60 to-transparent flex items-center">
+          <div className="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/60 to-transparent flex items-center">
             <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 w-full">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -90,12 +90,12 @@ const GiftBoxesPage = () => {
                 transition={{ duration: 0.8 }}
                 className="flex flex-col gap-4 md:gap-6 max-w-2xl"
               >
-                <span className="text-[#8CB7F5] font-black tracking-[0.4em] uppercase text-xs md:text-sm">
+                <span className="text-mustard font-black tracking-[0.4em] uppercase text-xs md:text-sm">
                   Boutique Curations
                 </span>
                 <h1 className="text-5xl md:text-8xl font-black text-white tracking-tighter leading-none font-inter">
                   Artisanal <br />
-                  <span className="text-[#8CB7F5]">Gifts.</span>
+                  <span className="text-mustard">Gifts.</span>
                 </h1>
                 <p className="text-white/80 text-sm md:text-xl leading-relaxed font-medium mt-2">
                   Elevate the art of giving with our meticulously curated
@@ -103,7 +103,7 @@ const GiftBoxesPage = () => {
                   Koolbuy Store packaging.
                 </p>
                 <div className="pt-4 flex flex-col md:flex-row gap-4">
-                  <Button className="bg-[#8CB7F5] text-[#1D3557] font-black uppercase tracking-widest px-10 py-5 h-auto rounded-xl">
+                  <Button className="bg-mustard text-ink font-black uppercase tracking-widest px-10 py-5 h-auto rounded-xl">
                     Shop All Sets
                   </Button>
                   <Button
@@ -124,7 +124,7 @@ const GiftBoxesPage = () => {
             <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs">
               The Seasonal Edit
             </span>
-            <h2 className="text-4xl md:text-6xl font-black text-[#1D3557] tracking-tight">
+            <h2 className="text-4xl md:text-6xl font-black text-ink tracking-tight">
               Hand-Wrapped <br />
               Excellence.
             </h2>
@@ -149,21 +149,21 @@ const GiftBoxesPage = () => {
                   />
                   {/* Glassmorphism Badge */}
                   <div className="absolute top-8 left-8">
-                    <div className="px-5 py-2 bg-white/70 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest text-[#1D3557] border border-white/40 shadow-sm">
+                    <div className="px-5 py-2 bg-white/70 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest text-ink border border-white/40 shadow-sm">
                       {set.tag}
                     </div>
                   </div>
                   {/* Hover Action Overlay */}
-                  <div className="absolute inset-0 bg-[#1D3557]/5 group-hover:bg-[#1D3557]/10 transition-colors" />
+                  <div className="absolute inset-0 bg-ink/5 group-hover:bg-ink/10 transition-colors" />
                   <div className="absolute bottom-8 left-8 right-8 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                    <button className="w-full py-5 bg-white text-[#1D3557] font-black uppercase tracking-widest text-[10px] rounded-2xl shadow-xl flex items-center justify-center gap-2">
+                    <button className="w-full py-5 bg-white text-ink font-black uppercase tracking-widest text-[10px] rounded-2xl shadow-xl flex items-center justify-center gap-2">
                       <HiShoppingBag size={14} /> Add To Cart
                     </button>
                   </div>
                 </div>
                 <div className="flex flex-col gap-2 px-2">
                   <div className="flex justify-between items-start">
-                    <h3 className="text-2xl font-black text-[#1D3557] tracking-tight group-hover:text-brand-blue transition-colors">
+                    <h3 className="text-2xl font-black text-ink tracking-tight group-hover:text-brand-blue transition-colors">
                       {set.title}
                     </h3>
                     <span className="text-xl font-bold text-gray-900">
@@ -179,7 +179,7 @@ const GiftBoxesPage = () => {
           </div>
 
           {/* Step 120: Implement 'Bespoke Concierge' CTA section */}
-          <div className="mt-40 md:mt-60 bg-[#F7FAFC] rounded-[64px] p-10 md:p-24 overflow-hidden relative">
+          <div className="mt-40 md:mt-60 bg-cream rounded-[64px] p-10 md:p-24 overflow-hidden relative">
             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-blue/5 rounded-full filter blur-[100px] translate-x-1/2 -translate-y-1/2" />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
@@ -188,7 +188,7 @@ const GiftBoxesPage = () => {
                   <div className="w-16 h-16 bg-brand-blue rounded-3xl flex items-center justify-center text-white shadow-xl shadow-blue-500/20">
                     <HiSparkles size={32} />
                   </div>
-                  <h2 className="text-4xl md:text-6xl font-black text-[#1D3557] tracking-tight leading-[1.1]">
+                  <h2 className="text-4xl md:text-6xl font-black text-ink tracking-tight leading-[1.1]">
                     The Bespoke <br />
                     <span className="text-brand-blue">Choice.</span>
                   </h2>
@@ -200,7 +200,7 @@ const GiftBoxesPage = () => {
                 </p>
                 <div className="flex flex-col md:flex-row gap-6">
                   <div className="flex flex-col gap-1">
-                    <span className="text-xs font-black uppercase tracking-widest text-[#1D3557]">
+                    <span className="text-xs font-black uppercase tracking-widest text-ink">
                       Corporate Gifting
                     </span>
                     <p className="text-sm text-gray-500">
@@ -209,7 +209,7 @@ const GiftBoxesPage = () => {
                   </div>
                   <div className="w-px h-12 bg-gray-200 hidden md:block" />
                   <div className="flex flex-col gap-1">
-                    <span className="text-xs font-black uppercase tracking-widest text-[#1D3557]">
+                    <span className="text-xs font-black uppercase tracking-widest text-ink">
                       Wedding Suites
                     </span>
                     <p className="text-sm text-gray-500">
@@ -219,7 +219,7 @@ const GiftBoxesPage = () => {
                 </div>
                 <Link
                   href="/contact"
-                  className="w-full md:w-auto px-12 py-5 bg-[#1D3557] text-white rounded-2xl font-black uppercase tracking-widest text-sm shadow-2xl shadow-blue-900/20 hover:scale-105 transition-all inline-block md:text-center"
+                  className="w-full md:w-auto px-12 py-5 bg-ink text-white rounded-2xl font-black uppercase tracking-widest text-sm shadow-2xl shadow-blue-900/20 hover:scale-105 transition-all inline-block md:text-center"
                 >
                   Consult a Curator
                 </Link>
@@ -235,7 +235,7 @@ const GiftBoxesPage = () => {
                       className="object-cover rounded-[32px] opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-24 h-24 bg-white/80 backdrop-blur-xl rounded-full flex items-center justify-center text-[#1D3557] shadow-2xl">
+                      <div className="w-24 h-24 bg-white/80 backdrop-blur-xl rounded-full flex items-center justify-center text-ink shadow-2xl">
                         <HiGift size={40} />
                       </div>
                     </div>

@@ -23,7 +23,7 @@ export const RelatedProducts: React.FC<RelatedProductsProps> = ({ products }) =>
           <Link 
             key={idx} 
             href="/products/detail" 
-            className="bg-white border border-gray-200 rounded-lg p-4 flex flex-col gap-4 hover:shadow-md transition-shadow cursor-pointer group"
+            className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 flex flex-col gap-4 hover:shadow-md transition-shadow cursor-pointer group"
           >
             <div className="w-full aspect-square relative border border-gray-50 rounded flex items-center justify-center p-2">
               <div className="relative w-full h-full transition-transform duration-300 group-hover:scale-110">

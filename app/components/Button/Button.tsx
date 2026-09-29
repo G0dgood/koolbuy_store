@@ -32,7 +32,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       className = "",
       variant = "primary",
       size = "md",
-      shape = "rounded",
+      shape = "pill",
       iconLeft,
       iconRight,
       showChevron,
@@ -47,35 +47,35 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     // Base styles
     const baseStyles =
-      "inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 cursor-pointer";
+      "inline-flex items-center justify-center font-semibold transition-all duration-200 ease-[cubic-bezier(0.2,0.8,0.2,1)] focus:outline-none focus-visible:ring-4 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer active:translate-y-px";
 
     // Variant styles
     const variants = {
       primary:
-        "bg-primary text-white hover:bg-orange-300 active:bg-orange-700 focus:ring-brand-orange/50 border border-transparent ",
+        "bg-brand-orange text-white hover:bg-brand-orange-hover hover:-translate-y-px focus-visible:ring-brand-orange/25 border border-transparent shadow-[var(--shadow-pop)]",
       secondary:
-        "bg-white text-brand-blue border border-brand-blue hover:bg-brand-blue/5 active:bg-brand-blue/10 focus:ring-brand-blue/50 ",
+        "bg-white text-ink border-[1.5px] border-ink/15 hover:border-ink/30 hover:bg-cream focus-visible:ring-ink/15",
       blue:
-        "bg-brand-blue text-white hover:bg-brand-blue/90 active:bg-blue-700 focus:ring-brand-blue/50 border border-transparent shadow-sm shadow-brand-blue/20",
+        "bg-ink text-white hover:bg-ink-soft hover:-translate-y-px focus-visible:ring-ink/20 border border-transparent shadow-[0_8px_20px_-10px_rgba(15,61,46,0.7)]",
       emerald:
-        "bg-brand-blue text-white hover:bg-blue-600 active:bg-blue-700 focus:ring-brand-blue/50 border border-transparent shadow-sm",
+        "bg-ink text-white hover:bg-ink-soft hover:-translate-y-px focus-visible:ring-ink/20 border border-transparent shadow-sm",
       rose: "bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white active:bg-rose-600 focus:ring-rose-500/50 border border-transparent shadow-sm transition-all",
       outline:
-        "bg-white text-[#1D3557] border border-gray-100 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-100/50 shadow-sm",
+        "bg-white text-ink border-[1.5px] border-gray-200 hover:bg-cream hover:border-gray-300 focus-visible:ring-gray-200 shadow-xs",
       ghost:
-        "bg-transparent text-brand-blue hover:bg-brand-blue/10 active:bg-brand-blue/20 focus:ring-brand-blue/50",
+        "bg-transparent text-ink hover:bg-cream focus-visible:ring-ink/15",
     };
 
     // Size styles
     const sizes = {
       sm: "px-2.5 py-1 text-xs gap-1.5",
-      md: "px-3.5 py-1.5 text-sm gap-2 font-semibold",
-      lg: "px-5 py-2.5 text-base gap-3 font-bold",
+      md: "px-4 py-2 text-sm gap-2 font-bold",
+      lg: "px-6 py-3 text-base gap-3 font-extrabold",
     };
 
     // Shape styles
     const shapes = {
-      rounded: "rounded-lg",
+      rounded: "rounded-xl",
       "rounded-sm": "rounded-[6px]",
       pill: "rounded-full",
     };

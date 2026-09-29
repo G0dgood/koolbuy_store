@@ -375,8 +375,8 @@ export default function TaxPage() {
     <div className="flex flex-col gap-6 mx-auto pb-16">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 right-8 z-50 bg-[#1D3557] text-white text-xs px-4 py-3 rounded-lg shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
-          <HiOutlineCheckCircle className="w-4 h-4 text-[#00BCD4]" />
+        <div className="fixed top-20 right-8 z-50 bg-ink text-white text-xs px-4 py-3 rounded-lg shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
+          <HiOutlineCheckCircle className="w-4 h-4 text-brand-orange" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -388,7 +388,7 @@ export default function TaxPage() {
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
               Tax Configuration
             </h1>
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-[#00BCD4]/20">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-brand-orange/20">
               Tax Policies
             </span>
           </div>
@@ -402,13 +402,13 @@ export default function TaxPage() {
       {/* =========================================================================
           PROMINENT TOGGLE: PRICE INCLUSIVE OF TAX
           ========================================================================= */}
-      <div className="bg-white rounded-lg border border-gray-100 p-5 shadow-2xs">
+      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-5 shadow-2xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-start gap-3.5">
             <div
               className={`w-11 h-11 rounded-lg flex items-center justify-center shrink-0 border ${
                 priceInclusiveOfTax
-                  ? "bg-brand-blue-light border-[#00BCD4]/20 text-[#00BCD4]"
+                  ? "bg-brand-blue-light border-brand-orange/20 text-brand-orange"
                   : "bg-gray-100 border-gray-200 text-gray-400"
               }`}
             >
@@ -452,7 +452,7 @@ export default function TaxPage() {
               onChange={(e) => handleToggleInclusive(e.target.checked)}
               className="sr-only peer"
             />
-            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#00BCD4]" />
+            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-orange" />
           </label>
         </div>
 
@@ -485,11 +485,11 @@ export default function TaxPage() {
           {/* Header */}
           <div className="p-4 sm:p-5 border-b border-gray-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-gray-50/50">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-brand-blue-light border border-[#00BCD4]/20 text-[#00BCD4] flex items-center justify-center shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-brand-blue-light border border-brand-orange/20 text-brand-orange flex items-center justify-center shrink-0">
                 <HiOutlineTag className="w-4 h-4" />
               </div>
               <div>
-                <h2 className="text-sm font-bold text-[#1D3557] uppercase tracking-wider">
+                <h2 className="text-sm font-bold text-ink uppercase tracking-wider">
                   Tax Category
                 </h2>
                 <span className="text-[11px] text-gray-400 font-medium">
@@ -501,7 +501,7 @@ export default function TaxPage() {
             <Button
               variant="primary"
               shape="rounded-sm"
-              className="bg-[#00BCD4] hover:bg-[#00acc1] text-white flex items-center gap-1 text-xs font-semibold px-3 py-1.5 cursor-pointer shadow-xs"
+              className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1 text-xs font-semibold px-3 py-1.5 cursor-pointer shadow-xs"
               onClick={handleOpenAddCategory}
             >
               <HiOutlinePlus className="w-3.5 h-3.5" />
@@ -517,7 +517,7 @@ export default function TaxPage() {
                 placeholder="Search tax category name or code..."
                 value={categorySearch}
                 onChange={(e) => setCategorySearch(e.target.value)}
-                className="w-full text-xs pl-8 pr-3 py-1.5 bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                className="w-full text-xs pl-8 pr-3 py-1.5 bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange text-gray-800"
               />
               <HiOutlineMagnifyingGlass className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
             </div>
@@ -564,7 +564,7 @@ export default function TaxPage() {
                   <button
                     type="button"
                     onClick={() => handleOpenEditCategory(cat)}
-                    className="p-1.5 text-gray-400 hover:text-[#00BCD4] hover:bg-brand-blue-light/50 rounded-lg transition-colors cursor-pointer"
+                    className="p-1.5 text-gray-400 hover:text-brand-orange hover:bg-brand-blue-light/50 rounded-lg transition-colors cursor-pointer"
                     title="Edit Category"
                   >
                     <HiOutlinePencilSquare className="w-4 h-4" />
@@ -602,11 +602,11 @@ export default function TaxPage() {
           {/* Header */}
           <div className="p-4 sm:p-5 border-b border-gray-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-gray-50/50">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-brand-blue-light border border-[#00BCD4]/20 text-[#00BCD4] flex items-center justify-center shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-brand-blue-light border border-brand-orange/20 text-brand-orange flex items-center justify-center shrink-0">
                 <HiOutlineReceiptPercent className="w-4 h-4" />
               </div>
               <div>
-                <h2 className="text-sm font-bold text-[#1D3557] uppercase tracking-wider">
+                <h2 className="text-sm font-bold text-ink uppercase tracking-wider">
                   Tax Rate
                 </h2>
                 <span className="text-[11px] text-gray-400 font-medium">
@@ -618,7 +618,7 @@ export default function TaxPage() {
             <Button
               variant="primary"
               shape="rounded-sm"
-              className="bg-[#00BCD4] hover:bg-[#00acc1] text-white flex items-center gap-1 text-xs font-semibold px-3 py-1.5 cursor-pointer shadow-xs"
+              className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1 text-xs font-semibold px-3 py-1.5 cursor-pointer shadow-xs"
               onClick={handleOpenAddRate}
             >
               <HiOutlinePlus className="w-3.5 h-3.5" />
@@ -634,7 +634,7 @@ export default function TaxPage() {
                 placeholder="Search tax rate or category..."
                 value={rateSearch}
                 onChange={(e) => setRateSearch(e.target.value)}
-                className="w-full text-xs pl-8 pr-3 py-1.5 bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                className="w-full text-xs pl-8 pr-3 py-1.5 bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange text-gray-800"
               />
               <HiOutlineMagnifyingGlass className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
             </div>
@@ -652,7 +652,7 @@ export default function TaxPage() {
                     <h4 className="text-xs font-bold text-gray-900">
                       {rate.name}
                     </h4>
-                    <span className="text-xs font-black text-brand-blue bg-brand-blue-light/60 px-2 py-0.5 rounded-md border border-[#00BCD4]/20 font-mono">
+                    <span className="text-xs font-black text-brand-blue bg-brand-blue-light/60 px-2 py-0.5 rounded-md border border-brand-orange/20 font-mono">
                       {rate.rate}%
                     </span>
                     <button
@@ -686,7 +686,7 @@ export default function TaxPage() {
                   <button
                     type="button"
                     onClick={() => handleOpenEditRate(rate)}
-                    className="p-1.5 text-gray-400 hover:text-[#00BCD4] hover:bg-brand-blue-light/50 rounded-lg transition-colors cursor-pointer"
+                    className="p-1.5 text-gray-400 hover:text-brand-orange hover:bg-brand-blue-light/50 rounded-lg transition-colors cursor-pointer"
                     title="Edit Tax Rate"
                   >
                     <HiOutlinePencilSquare className="w-4 h-4" />
@@ -756,7 +756,7 @@ export default function TaxPage() {
                       name: e.target.value,
                     }))
                   }
-                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                 />
               </div>
 
@@ -774,7 +774,7 @@ export default function TaxPage() {
                       code: e.target.value,
                     }))
                   }
-                  className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                  className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                 />
               </div>
 
@@ -792,7 +792,7 @@ export default function TaxPage() {
                       description: e.target.value,
                     }))
                   }
-                  className="w-full text-xs p-3 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800 leading-relaxed"
+                  className="w-full text-xs p-3 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800 leading-relaxed"
                 />
               </div>
 
@@ -806,7 +806,7 @@ export default function TaxPage() {
                       status: e.target.value as "Active" | "Inactive",
                     }))
                   }
-                  className="text-xs font-semibold px-2.5 py-1 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                  className="text-xs font-semibold px-2.5 py-1 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange text-gray-800"
                 >
                   <option value="Active">Active</option>
                   <option value="Inactive">Inactive</option>
@@ -827,7 +827,7 @@ export default function TaxPage() {
                   type="submit"
                   variant="primary"
                   shape="rounded-sm"
-                  className="bg-[#00BCD4] hover:bg-[#00acc1] text-white text-xs font-semibold px-4 py-1.5 cursor-pointer shadow-xs"
+                  className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold px-4 py-1.5 cursor-pointer shadow-xs"
                 >
                   {categoryToEdit ? "Update Category" : "Create Category"}
                 </Button>
@@ -869,7 +869,7 @@ export default function TaxPage() {
                   onChange={(e) =>
                     setRateForm((prev) => ({ ...prev, name: e.target.value }))
                   }
-                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                 />
               </div>
 
@@ -885,7 +885,7 @@ export default function TaxPage() {
                       categoryName: e.target.value,
                     }))
                   }
-                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                 >
                   {categories.map((c) => (
                     <option key={c.id} value={c.name}>
@@ -911,7 +911,7 @@ export default function TaxPage() {
                     onChange={(e) =>
                       setRateForm((prev) => ({ ...prev, rate: e.target.value }))
                     }
-                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                   />
                 </div>
 
@@ -927,7 +927,7 @@ export default function TaxPage() {
                         type: e.target.value as "Percentage" | "Fixed",
                       }))
                     }
-                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                   >
                     <option value="Percentage">Percentage (%)</option>
                     <option value="Fixed">Fixed Amount</option>
@@ -950,7 +950,7 @@ export default function TaxPage() {
                         priority: e.target.value,
                       }))
                     }
-                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                   />
                 </div>
 
@@ -966,7 +966,7 @@ export default function TaxPage() {
                         status: e.target.value as "Active" | "Inactive",
                       }))
                     }
-                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                   >
                     <option value="Active">Active</option>
                     <option value="Inactive">Inactive</option>
@@ -988,7 +988,7 @@ export default function TaxPage() {
                   type="submit"
                   variant="primary"
                   shape="rounded-sm"
-                  className="bg-[#00BCD4] hover:bg-[#00acc1] text-white text-xs font-semibold px-4 py-1.5 cursor-pointer shadow-xs"
+                  className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold px-4 py-1.5 cursor-pointer shadow-xs"
                 >
                   {rateToEdit ? "Update Tax Rate" : "Create Tax Rate"}
                 </Button>

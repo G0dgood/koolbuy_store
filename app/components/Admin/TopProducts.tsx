@@ -58,19 +58,19 @@ export const TopProducts: React.FC<TopProductsProps> = ({
     <motion.div
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="bg-white p-8 border border-[#1C1C1C1A] rounded-lg flex flex-col gap-6 relative overflow-hidden group/card"
+      className="bg-white p-8 border border-gray-100 rounded-lg flex flex-col gap-6 relative overflow-hidden group/card"
     >
       {/* Instrumentation Backdrop Grid */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(#1D3557 1px, transparent 1px)`,
+          backgroundImage: `radial-gradient(#0F3D2E 1px, transparent 1px)`,
           backgroundSize: "20px 20px",
         }}
       />
 
       <div className="flex justify-between items-center relative z-10">
-        <h3 className="text-[14px] font-black text-[#1D3557] uppercase tracking-[0.2em] opacity-80">
+        <h3 className="text-[14px] font-black text-ink uppercase tracking-[0.2em] opacity-80">
           Top Performers
         </h3>
         <button
@@ -111,7 +111,7 @@ export const TopProducts: React.FC<TopProductsProps> = ({
                   <MiniChart
                     type="sparkline"
                     data={p.data}
-                    color={i === 0 ? "#1D3557" : "#00BCD4"}
+                    color={i === 0 ? "#0F3D2E" : "#FF7A00"}
                     height={32}
                   />
                 </div>
@@ -119,7 +119,7 @@ export const TopProducts: React.FC<TopProductsProps> = ({
                 <div
                   className={`absolute -top-2 -left-2 w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-black border shadow-sm z-10 ${
                     i === 0
-                      ? "bg-[#1D3557] text-white border-[#1D3557]"
+                      ? "bg-ink text-white border-ink"
                       : "bg-white text-gray-400 border-gray-100"
                   }`}
                 >
@@ -128,7 +128,7 @@ export const TopProducts: React.FC<TopProductsProps> = ({
               </div>
 
               <div className="flex flex-col min-w-0">
-                <span className="text-[12px] font-black text-[#1D3557] truncate max-w-37.5 transition-colors leading-tight">
+                <span className="text-[12px] font-black text-ink truncate max-w-37.5 transition-colors leading-tight">
                   {p.name}
                 </span>
                 <div className="flex items-center gap-2 mt-1">
@@ -149,7 +149,7 @@ export const TopProducts: React.FC<TopProductsProps> = ({
             </div>
 
             <div className="flex flex-col items-end gap-0.5">
-              <span className="text-[13px] font-black text-[#1D3557] tabular-nums">
+              <span className="text-[13px] font-black text-ink tabular-nums">
                 {p.price}
               </span>
               <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest opacity-60">

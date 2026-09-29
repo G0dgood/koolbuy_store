@@ -37,14 +37,14 @@ export const RevenueWeeklyChart: React.FC = () => {
       {
         label: "Current Week",
         data: currentWeekData,
-        borderColor: "#00BCD4", // Primary color #00BCD4
+        borderColor: "#FF7A00", // Primary color #FF7A00
         backgroundColor: "rgba(0, 188, 212, 0.08)",
         borderWidth: 2.5,
         fill: true,
         tension: 0.45,
         pointRadius: 0,
         pointHoverRadius: 6,
-        pointBackgroundColor: "#00BCD4",
+        pointBackgroundColor: "#FF7A00",
         pointBorderColor: "#fff",
         pointBorderWidth: 2,
       },
@@ -59,7 +59,7 @@ export const RevenueWeeklyChart: React.FC = () => {
         display: false,
       },
       tooltip: {
-        backgroundColor: "#1D3557",
+        backgroundColor: "#0F3D2E",
         titleFont: { size: 12, weight: "bold" as const, family: "Inter" },
         bodyFont: { size: 11, family: "Inter" },
         padding: 10,
@@ -75,7 +75,7 @@ export const RevenueWeeklyChart: React.FC = () => {
       x: {
         grid: { display: false },
         ticks: {
-          color: "#94A3B8",
+          color: "#A8A096",
           font: { size: 10, weight: "bold" as const },
         },
         border: { display: false },
@@ -85,7 +85,7 @@ export const RevenueWeeklyChart: React.FC = () => {
         max: 6000000,
         ticks: {
           stepSize: 1000000,
-          color: "#94A3B8",
+          color: "#A8A096",
           font: { size: 9, weight: "bold" as const },
           callback: (value: any) => {
             if (value === 0) return "₦0";
@@ -105,7 +105,7 @@ export const RevenueWeeklyChart: React.FC = () => {
       {/* Top Header & Legend */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3">
         <div>
-          <h3 className="text-base font-bold text-[#1D3557]">Revenue Weekly</h3>
+          <h3 className="text-base font-bold text-ink">Revenue Weekly</h3>
         </div>
 
         {/* Legend stats */}

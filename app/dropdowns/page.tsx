@@ -21,7 +21,7 @@ export default function DropdownDemo() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F0F7FF] p-12 font-sans">
+    <div className="min-h-screen bg-cream p-12 font-sans">
       <div className="max-w-7xl mx-auto bg-white rounded-xl  p-16">
         <h1 className="text-5xl font-bold mb-16 text-black">Dropdown selection</h1>
 

@@ -31,7 +31,7 @@ export function SelectionSummary({
           <div className="w-8 h-8 rounded-lg bg-brand-blue text-white flex items-center justify-center font-black text-xs">
             {selectedIds.length}
           </div>
-          <span className="text-[13px] font-black text-[#1D3557]">{title}</span>
+          <span className="text-[13px] font-black text-ink">{title}</span>
         </div>
         <button
           onClick={onClear}

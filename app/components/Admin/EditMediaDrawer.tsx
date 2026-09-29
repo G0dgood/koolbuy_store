@@ -46,17 +46,17 @@ export function EditMediaDrawer({ isOpen, onClose, media }: EditMediaDrawerProps
                 {media.type === "video" && (
                    <div className="absolute inset-0 flex items-center justify-center bg-black/5">
                       <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                         <Icon name="play_circle_filled" folder="icon" size="sm" className="text-[#1D3557]" />
+                         <Icon name="play_circle_filled" folder="icon" size="sm" className="text-ink" />
                       </div>
                    </div>
                 )}
-                <div className="absolute bottom-4 right-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-[6px] text-[10px] font-black text-[#1D3557] shadow-sm uppercase tracking-widest border border-gray-100/50">
+                <div className="absolute bottom-4 right-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-[6px] text-[10px] font-black text-ink shadow-sm uppercase tracking-widest border border-gray-100/50">
                    {media.type}
                 </div>
              </div>
              <div className="flex items-center justify-between px-1">
                 <div className="flex flex-col gap-0.5">
-                   <h4 className="text-[13px] font-black text-[#1D3557] truncate max-w-[240px]">{media.name}</h4>
+                   <h4 className="text-[13px] font-black text-ink truncate max-w-[240px]">{media.name}</h4>
                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.1em]">{media.size} • {media.date}</span>
                 </div>
                 <button 
@@ -78,7 +78,7 @@ export function EditMediaDrawer({ isOpen, onClose, media }: EditMediaDrawerProps
                 placeholder="e.g. product_hero_main"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="h-12 border-gray-100 font-bold text-[#1D3557]"
+                className="h-12 border-gray-100 font-bold text-ink"
                 required
               />
             </div>
@@ -103,15 +103,15 @@ export function EditMediaDrawer({ isOpen, onClose, media }: EditMediaDrawerProps
              <div className="grid grid-cols-2 gap-y-4 gap-x-8">
                 <div className="flex flex-col gap-1">
                    <span className="text-[10px] font-bold text-gray-400">Resolution</span>
-                   <span className="text-xs font-black text-[#1D3557]">1920 × 1080 (HD)</span>
+                   <span className="text-xs font-black text-ink">1920 × 1080 (HD)</span>
                 </div>
                 <div className="flex flex-col gap-1">
                    <span className="text-[10px] font-bold text-gray-400">MIME Type</span>
-                   <span className="text-xs font-black text-[#1D3557] uppercase">{media.type === 'video' ? 'video/mp4' : 'image/png'}</span>
+                   <span className="text-xs font-black text-ink uppercase">{media.type === 'video' ? 'video/mp4' : 'image/png'}</span>
                 </div>
                 <div className="flex flex-col gap-1">
                    <span className="text-[10px] font-bold text-gray-400">Storage Class</span>
-                   <span className="text-xs font-black text-[#1D3557]">Standard Multi-Regional</span>
+                   <span className="text-xs font-black text-ink">Standard Multi-Regional</span>
                 </div>
                 <div className="flex flex-col gap-1">
                    <span className="text-[10px] font-bold text-gray-400">Optimized</span>

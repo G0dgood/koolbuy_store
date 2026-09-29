@@ -86,7 +86,7 @@ const staffData = [
 ];
 
 const roleColors = {
-  "Super Admin": "text-[#1D3557] bg-gray-100",
+  "Super Admin": "text-ink bg-gray-100",
   Editor: "text-blue-500 bg-blue-50",
   "Order Manager": "text-emerald-500 bg-emerald-50",
   Support: "text-amber-500 bg-amber-50",
@@ -145,7 +145,7 @@ export default function UsersManagement() {
           Add User
         </Button>
       </div>
-      <div className="bg-white rounded-lg border border-[#1C1C1C1A] overflow-hidden flex flex-col min-h-150">
+      <div className="bg-white rounded-lg border border-gray-100 overflow-hidden flex flex-col min-h-150">
         {/* Filter Controls Bar */}
         <div className="p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between border-b border-gray-50">
           <TabFilter
@@ -233,7 +233,7 @@ export default function UsersManagement() {
                         />
                       </div>
                       <div className="flex flex-col min-w-0">
-                        <span className="text-sm font-black text-[#1D3557] group-hover:text-brand-blue transition-colors truncate">
+                        <span className="text-sm font-black text-ink group-hover:text-brand-blue transition-colors truncate">
                           {user.name}
                         </span>
                         <span className="text-[10px] font-medium text-gray-400 truncate tracking-tight">
@@ -256,7 +256,7 @@ export default function UsersManagement() {
                   </td>
                   <td>
                     <div className="flex flex-col gap-0.5">
-                      <span className="text-xs font-black text-[#1D3557]">
+                      <span className="text-xs font-black text-ink">
                         {user.lastActive}
                       </span>
                       <span className="text-[9px] font-bold text-gray-400 uppercase tracking-tighter opacity-70">

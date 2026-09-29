@@ -68,7 +68,7 @@ const BrandsPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-cream flex flex-col font-sans text-black">
       <Header />
 
       <main className="flex-1 w-full bg-white">
@@ -85,7 +85,7 @@ const BrandsPage = () => {
               <span className="text-brand-blue font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs">
                 Artisanal Houses
               </span>
-              <h1 className="text-4xl md:text-7xl font-black text-[#1D3557] tracking-tighter leading-none font-inter">
+              <h1 className="text-4xl md:text-7xl font-black text-ink tracking-tighter leading-none font-inter">
                 The <span className="text-brand-blue">Brands.</span>
               </h1>
               <p className="text-gray-500 max-w-xl mx-auto text-sm md:text-lg mt-6 leading-relaxed font-medium">
@@ -125,12 +125,12 @@ const BrandsPage = () => {
                       <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-lg">
                         {brand.icon}
                       </div>
-                      <span className="text-[10px] font-black uppercase tracking-widest text-[#1D3557] opacity-60">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-ink opacity-60">
                         Signature House
                       </span>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <h3 className="text-3xl font-black text-[#1D3557] tracking-tight">
+                      <h3 className="text-3xl font-black text-ink tracking-tight">
                         {brand.title}
                       </h3>
                       <p className="text-sm text-gray-500 leading-relaxed font-medium max-w-sm">
@@ -151,7 +151,7 @@ const BrandsPage = () => {
         </div>
 
         {/* Brands Concierge section */}
-        <section className="bg-[#1D3557] py-24 relative overflow-hidden">
+        <section className="bg-ink py-24 relative overflow-hidden">
           <Image
             src="/brandImage/brand_banner.png"
             alt="Background"
@@ -165,7 +165,7 @@ const BrandsPage = () => {
               </span>
               <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-none font-inter">
                 Looking for a specific{" "}
-                <span className="text-[#8CB7F5]">Creator?</span>
+                <span className="text-mustard">Creator?</span>
               </h2>
             </div>
             <p className="text-blue-100/40 text-sm md:text-lg max-w-2xl font-medium">

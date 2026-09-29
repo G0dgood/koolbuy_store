@@ -31,7 +31,7 @@ export function RefundDetailDrawer({ isOpen, onClose, refund, onUpdateStatus }: 
           <div className="flex justify-between items-start">
              <div className="flex flex-col gap-1">
                 <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Refund ID</span>
-                <span className="text-sm font-black text-[#1D3557]">{refund.refundId || "#RFD_98273645"}</span>
+                <span className="text-sm font-black text-ink">{refund.refundId || "#RFD_98273645"}</span>
              </div>
              <div className={`px-3 py-1 rounded-full ${currentStatus.bg} text-white text-[10px] font-black uppercase tracking-wider shadow-sm`}>
                 {refund.status}
@@ -39,19 +39,19 @@ export function RefundDetailDrawer({ isOpen, onClose, refund, onUpdateStatus }: 
           </div>
           <div className="flex flex-col">
              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Refund Amount</span>
-             <span className="text-3xl font-black text-[#1D3557] tracking-tight">{refund.total}</span>
+             <span className="text-3xl font-black text-ink tracking-tight">{refund.total}</span>
           </div>
         </div>
 
         {/* Original Transaction */}
         <div className="flex flex-col gap-4">
            <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Original Transaction</h4>
-           <div className="bg-white border border-gray-100 rounded-xl p-4 flex items-center gap-4">
+           <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 flex items-center gap-4">
               <div className="w-12 h-12 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center p-2">
                  <Icon name="Payment Card" folder="dashboardIcon" size="md" />
               </div>
               <div className="flex-1 flex flex-col gap-0.5">
-                 <span className="text-[13px] font-black text-[#1D3557]">Transaction #TXN_00234</span>
+                 <span className="text-[13px] font-black text-ink">Transaction #TXN_00234</span>
                  <span className="text-[11px] font-bold text-gray-400">Total: ₦45,000 via {refund.method || "CC"}</span>
               </div>
            </div>
@@ -60,12 +60,12 @@ export function RefundDetailDrawer({ isOpen, onClose, refund, onUpdateStatus }: 
         {/* Customer Breakdown */}
         <div className="flex flex-col gap-4">
            <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Customer Details</h4>
-           <div className="bg-white border border-gray-100 rounded-xl p-4 flex items-center gap-4">
+           <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 flex items-center gap-4">
               <div className="w-12 h-12 rounded-full bg-blue-50 border-2 border-white shadow-sm flex items-center justify-center overflow-hidden">
                  <img src={refund.image || "https://ui-avatars.com/api/?name=" + refund.name} alt="" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1 flex flex-col gap-0.5">
-                 <span className="text-[13px] font-black text-[#1D3557]">{refund.name}</span>
+                 <span className="text-[13px] font-black text-ink">{refund.name}</span>
                  <span className="text-[11px] font-bold text-gray-400 text-brand-blue">{refund.custId}</span>
               </div>
               <button className="p-2 text-gray-400 hover:text-brand-blue transition-colors">
@@ -78,7 +78,7 @@ export function RefundDetailDrawer({ isOpen, onClose, refund, onUpdateStatus }: 
         <div className="flex flex-col gap-4">
            <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Refund Reason</h4>
            <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
-              <p className="text-xs font-bold text-[#1D3557] leading-relaxed">
+              <p className="text-xs font-bold text-ink leading-relaxed">
                  {refund.reason || "Customer requested cancellation due to delayed shipping."}
               </p>
            </div>
@@ -90,17 +90,17 @@ export function RefundDetailDrawer({ isOpen, onClose, refund, onUpdateStatus }: 
            <div className="flex flex-col gap-8 relative pl-6 before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-gray-100">
               <div className="relative flex flex-col gap-1">
                  <div className="absolute -left-[22px] top-1 w-3 h-3 rounded-full bg-blue-500 border-2 border-white ring-4 ring-blue-50"></div>
-                 <span className="text-[12px] font-black text-[#1D3557]">Refund Processed</span>
+                 <span className="text-[12px] font-black text-ink">Refund Processed</span>
                  <span className="text-[10px] font-bold text-gray-400">Just now • 10:15 AM</span>
               </div>
               <div className="relative flex flex-col gap-1 opacity-60">
                  <div className="absolute -left-[22px] top-1 w-3 h-3 rounded-full bg-gray-200 border-2 border-white"></div>
-                 <span className="text-[12px] font-black text-[#1D3557]">Refund Authorized</span>
+                 <span className="text-[12px] font-black text-ink">Refund Authorized</span>
                  <span className="text-[10px] font-bold text-gray-400">{refund.date} • 09:30 AM</span>
               </div>
               <div className="relative flex flex-col gap-1 opacity-60">
                  <div className="absolute -left-[22px] top-1 w-3 h-3 rounded-full bg-gray-200 border-2 border-white"></div>
-                 <span className="text-[12px] font-black text-[#1D3557]">Request Submitted</span>
+                 <span className="text-[12px] font-black text-ink">Request Submitted</span>
                  <span className="text-[10px] font-bold text-gray-400">{refund.date} • 08:45 AM</span>
               </div>
            </div>
@@ -115,7 +115,7 @@ export function RefundDetailDrawer({ isOpen, onClose, refund, onUpdateStatus }: 
            >
               Update Refund Status
            </Button>
-           <Button variant="outline" className="w-full h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest border-gray-200 text-gray-400 hover:text-[#1D3557]">
+           <Button variant="outline" className="w-full h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest border-gray-200 text-gray-400 hover:text-ink">
               Generate Refund Receipt
            </Button>
         </div>

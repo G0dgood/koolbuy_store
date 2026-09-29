@@ -272,14 +272,14 @@ export default function CMSPagesManagement() {
             className="flex items-center gap-1.5 text-xs font-semibold text-gray-700 hover:bg-gray-50 cursor-pointer"
             onClick={() => setIsPreviewOpen(true)}
           >
-            <HiOutlineEye className="w-4 h-4 text-[#00BCD4]" />
+            <HiOutlineEye className="w-4 h-4 text-brand-orange" />
             <span>Preview Page</span>
           </Button>
 
           <Button
             variant="primary"
             shape="rounded-sm"
-            className="bg-[#00BCD4] hover:bg-[#00acc1] text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
+            className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
             onClick={handleSave}
           >
             <HiOutlineCheck className="w-4 h-4" />
@@ -333,10 +333,10 @@ export default function CMSPagesManagement() {
         {/* Left 2 Columns: Main Page Content */}
         <div className="lg:col-span-2 flex flex-col gap-6">
           {/* Banner & Hero Settings */}
-          <div className="bg-white rounded-lg border border-gray-100 p-5 sm:p-6 shadow-2xs flex flex-col gap-4">
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-5 sm:p-6 shadow-2xs flex flex-col gap-4">
             <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
-              <HiOutlineDocumentText className="w-5 h-5 text-[#00BCD4]" />
-              <h3 className="text-sm font-bold text-[#1D3557]">
+              <HiOutlineDocumentText className="w-5 h-5 text-brand-orange" />
+              <h3 className="text-sm font-bold text-ink">
                 Page Header & Hero Banner
               </h3>
             </div>
@@ -366,7 +366,7 @@ export default function CMSPagesManagement() {
                     updateCurrentPage({ subheadline: e.target.value })
                   }
                   rows={2}
-                  className="w-full text-xs p-3 border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-700 leading-relaxed"
+                  className="w-full text-xs p-3 border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-700 leading-relaxed"
                   placeholder="Enter supporting subheadline..."
                 />
               </div>
@@ -374,23 +374,23 @@ export default function CMSPagesManagement() {
           </div>
 
           {/* Sections Editor */}
-          <div className="bg-white rounded-lg border border-gray-100 p-5 sm:p-6 shadow-2xs flex flex-col gap-4">
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-5 sm:p-6 shadow-2xs flex flex-col gap-4">
             <div className="flex items-center justify-between border-b border-gray-100 pb-3">
               <div className="flex items-center gap-2">
                 <Icon
                   name="layer"
                   folder="dashboardIcon"
                   size="sm"
-                  className="text-[#00BCD4]"
+                  className="text-brand-orange"
                 />
-                <h3 className="text-sm font-bold text-[#1D3557]">
+                <h3 className="text-sm font-bold text-ink">
                   Content Sections ({currentPage.sections.length})
                 </h3>
               </div>
               <Button
                 variant="outline"
                 shape="rounded-sm"
-                className="text-xs font-semibold text-[#00BCD4] border-[#00BCD4]/30 hover:bg-[#00BCD4]/10 flex items-center gap-1.5 cursor-pointer"
+                className="text-xs font-semibold text-brand-orange border-brand-orange/30 hover:bg-brand-orange/10 flex items-center gap-1.5 cursor-pointer"
                 onClick={handleAddSection}
               >
                 <HiOutlinePlus className="w-3.5 h-3.5" />
@@ -430,7 +430,7 @@ export default function CMSPagesManagement() {
                       onChange={(e) =>
                         handleUpdateSection(section.id, "title", e.target.value)
                       }
-                      className="w-full text-xs font-bold px-3 py-2 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-[#00BCD4]"
+                      className="w-full text-xs font-bold px-3 py-2 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange"
                     />
                   </div>
 
@@ -448,7 +448,7 @@ export default function CMSPagesManagement() {
                         )
                       }
                       rows={4}
-                      className="w-full text-xs p-3 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-[#00BCD4] text-gray-700 leading-relaxed font-normal"
+                      className="w-full text-xs p-3 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange text-gray-700 leading-relaxed font-normal"
                     />
                   </div>
                 </div>
@@ -460,8 +460,8 @@ export default function CMSPagesManagement() {
         {/* Right Column: Page Metadata, SEO & Publish Status */}
         <div className="flex flex-col gap-6">
           {/* Publishing Card */}
-          <div className="bg-white rounded-lg border border-gray-100 p-5 shadow-2xs flex flex-col gap-4">
-            <h3 className="text-sm font-bold text-[#1D3557] border-b border-gray-100 pb-2">
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-5 shadow-2xs flex flex-col gap-4">
+            <h3 className="text-sm font-bold text-ink border-b border-gray-100 pb-2">
               Publishing Controls
             </h3>
 
@@ -477,7 +477,7 @@ export default function CMSPagesManagement() {
                       status: e.target.value as "Published" | "Draft",
                     })
                   }
-                  className="w-full text-xs font-semibold px-3 py-2 border border-gray-200 rounded-lg bg-white focus:outline-none focus:border-[#00BCD4]"
+                  className="w-full text-xs font-semibold px-3 py-2 border border-gray-200 rounded-lg bg-white focus:outline-none focus:border-brand-orange"
                 >
                   <option value="Published">Published (Live to public)</option>
                   <option value="Draft">Draft (Internal review only)</option>
@@ -489,7 +489,7 @@ export default function CMSPagesManagement() {
                   Public URL Path
                 </label>
                 <div className="flex items-center gap-1.5 p-2 bg-gray-50 rounded-lg border border-gray-200 text-xs font-mono text-gray-700">
-                  <HiOutlineGlobeAlt className="w-4 h-4 text-[#00BCD4] shrink-0" />
+                  <HiOutlineGlobeAlt className="w-4 h-4 text-brand-orange shrink-0" />
                   <span className="truncate">{currentPage.slug}</span>
                   <a
                     href={currentPage.slug}
@@ -506,8 +506,8 @@ export default function CMSPagesManagement() {
           </div>
 
           {/* SEO Metadata Card */}
-          <div className="bg-white rounded-lg border border-gray-100 p-5 shadow-2xs flex flex-col gap-4">
-            <h3 className="text-sm font-bold text-[#1D3557] border-b border-gray-100 pb-2">
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-5 shadow-2xs flex flex-col gap-4">
+            <h3 className="text-sm font-bold text-ink border-b border-gray-100 pb-2">
               Search Engine Optimization (SEO)
             </h3>
 
@@ -533,7 +533,7 @@ export default function CMSPagesManagement() {
                     updateCurrentPage({ metaDescription: e.target.value })
                   }
                   rows={3}
-                  className="w-full text-xs p-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-700 leading-relaxed"
+                  className="w-full text-xs p-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-700 leading-relaxed"
                   placeholder="Enter meta description for search engines..."
                 />
                 <span className="text-[10px] text-gray-400">
@@ -546,7 +546,7 @@ export default function CMSPagesManagement() {
 
           {/* Page Info Card */}
           <div className="bg-blue-50/50 rounded-lg border border-blue-100 p-4 flex flex-col gap-2">
-            <span className="text-xs font-bold text-[#1D3557]">
+            <span className="text-xs font-bold text-ink">
               CMS Information
             </span>
             <p className="text-[11px] text-gray-600 leading-relaxed">
@@ -567,8 +567,8 @@ export default function CMSPagesManagement() {
       >
         <ModalBody className="flex flex-col gap-6 py-6 max-h-[70vh] overflow-y-auto">
           {/* Storefront Hero Preview */}
-          <div className="bg-linear-to-br from-[#1D3557] to-[#0d1b2a] text-white p-8 rounded-lg flex flex-col gap-3">
-            <span className="text-[11px] uppercase tracking-widest font-bold text-[#00BCD4]">
+          <div className="bg-linear-to-br from-ink to-[#0d1b2a] text-white p-8 rounded-lg flex flex-col gap-3">
+            <span className="text-[11px] uppercase tracking-widest font-bold text-brand-orange">
               Koolbuy Storefront
             </span>
             <h1 className="text-2xl font-black">{currentPage.headline}</h1>
@@ -584,7 +584,7 @@ export default function CMSPagesManagement() {
                 key={section.id}
                 className="flex flex-col gap-2 border-b border-gray-100 pb-4"
               >
-                <h3 className="text-base font-bold text-[#1D3557]">
+                <h3 className="text-base font-bold text-ink">
                   {section.title}
                 </h3>
                 <p className="text-xs text-gray-600 leading-relaxed whitespace-pre-line">

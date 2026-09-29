@@ -247,7 +247,7 @@ export default function WebStylingPage() {
 
           {/* 1. FAVICON */}
           {activeTab === "favicon" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
               <div className="flex justify-between items-center border-b border-gray-50 pb-4">
                 <div>
                   <h3 className="text-base font-bold text-gray-900">
@@ -330,7 +330,7 @@ export default function WebStylingPage() {
 
           {/* 2. SIGN IN / UP & ADMIN SIGN IN IMAGES */}
           {activeTab === "auth-images" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
               <div className="flex justify-between items-center border-b border-gray-50 pb-4">
                 <div>
                   <h3 className="text-base font-bold text-gray-900">
@@ -454,7 +454,7 @@ export default function WebStylingPage() {
 
           {/* 3. HOME PAGE STYLE (WEB) */}
           {activeTab === "home-page-style" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
               <div className="flex justify-between items-center border-b border-gray-50 pb-4">
                 <div>
                   <h3 className="text-base font-bold text-gray-900">
@@ -590,7 +590,7 @@ export default function WebStylingPage() {
 
           {/* 4. CONTACT US */}
           {activeTab === "contact-us" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
               <div className="flex justify-between items-center border-b border-gray-50 pb-4">
                 <div>
                   <h3 className="text-base font-bold text-gray-900">
@@ -706,7 +706,7 @@ export default function WebStylingPage() {
 
           {/* 5. PAYMENT METHOD ICONS */}
           {activeTab === "payment-icons" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
               <div className="flex justify-between items-center border-b border-gray-50 pb-4">
                 <div>
                   <h3 className="text-base font-bold text-gray-900">
@@ -767,7 +767,7 @@ export default function WebStylingPage() {
 
           {/* 6. ORDER DELIVERY STATUS ICONS */}
           {activeTab === "delivery-status-icons" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
               <div className="flex justify-between items-center border-b border-gray-50 pb-4">
                 <div>
                   <h3 className="text-base font-bold text-gray-900">
@@ -863,7 +863,7 @@ export default function WebStylingPage() {
               <div
                 className={`px-3 py-2 flex items-center justify-between border-b ${
                   homePageStyle.headerStyle === "brand-blue"
-                    ? "bg-[#2196F3] text-white"
+                    ? "bg-ink text-white"
                     : "bg-white text-gray-800 border-gray-100"
                 }`}
               >

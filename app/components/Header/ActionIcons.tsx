@@ -22,10 +22,12 @@ export const ActionIcons: React.FC = () => {
       <button
         type="button"
         onClick={openLogin}
-        className="flex flex-col items-center cursor-pointer group text-gray-700 hover:text-[#FF7A00] transition-colors outline-none"
+        className="flex flex-col items-center cursor-pointer group text-ink hover:text-brand-orange transition-colors outline-none"
       >
-        <Icon name="profile" size="md" />
-        <span className="text-[10px] font-medium mt-1 hidden md:block">
+        <span className="w-10 h-10 rounded-full bg-cream border border-gray-200 flex items-center justify-center group-hover:bg-brand-orange-light group-hover:border-brand-orange/30 transition-colors">
+          <Icon name="profile" size="md" />
+        </span>
+        <span className="text-[10px] font-bold mt-1 hidden md:block">
           Profile
         </span>
       </button>
@@ -35,19 +37,19 @@ export const ActionIcons: React.FC = () => {
         href="/cart"
         className={`relative flex flex-col items-center group transition-colors ${
           isActive("/cart")
-            ? "text-[#FF7A00] font-bold"
-            : "text-gray-700 hover:text-[#FF7A00]"
+            ? "text-brand-orange font-bold"
+            : "text-ink hover:text-brand-orange"
         }`}
       >
-        <div className="relative">
+        <div className={`relative w-10 h-10 rounded-full flex items-center justify-center transition-colors ${isActive("/cart") ? "bg-brand-orange-light border border-brand-orange/30" : "bg-cream border border-gray-200 group-hover:bg-brand-orange-light group-hover:border-brand-orange/30"}`}>
           <Icon name="My_cart" size="md" />
           {cartCount > 0 && (
-            <span className="absolute -top-1.5 -right-1.5 bg-[#FF7A00] text-white text-[10px] font-bold min-w-4 h-4 flex items-center justify-center rounded-full px-1 border-2 border-white shadow-xs">
+            <span className="absolute -top-1 -right-1 bg-tomato text-white text-[10px] font-extrabold min-w-5 h-5 flex items-center justify-center rounded-full px-1 border-2 border-white shadow-xs">
               {cartCount}
             </span>
           )}
         </div>
-        <span className="text-[10px] font-medium mt-1 hidden md:block">
+        <span className="text-[10px] font-bold mt-1 hidden md:block">
           My cart
         </span>
       </Link>

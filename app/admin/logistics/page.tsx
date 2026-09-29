@@ -777,7 +777,7 @@ export default function KoolLogisticsPage() {
       {activeTab === "dropping-orders" && (
         <div className="space-y-4">
           {/* Filters Bar */}
-          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
+          <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 shadow-sm space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="lg:col-span-2">
                 <Input
@@ -1006,7 +1006,7 @@ export default function KoolLogisticsPage() {
       {activeTab === "vendor-addresses" && (
         <div className="space-y-4">
           {/* Filters Bar */}
-          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
+          <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 shadow-sm space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="lg:col-span-3">
                 <Input
@@ -1168,7 +1168,7 @@ export default function KoolLogisticsPage() {
       {activeTab === "delivery-prices" && (
         <div className="space-y-4">
           {/* Filters Bar */}
-          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
+          <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 shadow-sm space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="lg:col-span-2">
                 <Input

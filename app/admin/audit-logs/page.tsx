@@ -403,7 +403,7 @@ export default function DBAuditLogsPage() {
       </div>
 
       {/* Main Filter & Search Bar */}
-      <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
+      <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 shadow-sm space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
           {/* Search */}
           <div className="lg:col-span-2">

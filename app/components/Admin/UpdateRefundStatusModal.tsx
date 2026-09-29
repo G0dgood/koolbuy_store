@@ -42,7 +42,7 @@ export const UpdateRefundStatusModal: React.FC<UpdateStatusModalProps> = ({
           </div>
           <div className="flex flex-col">
             <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Target Selection</span>
-            <span className="text-sm font-black text-[#1D3557]">
+            <span className="text-sm font-black text-ink">
               {isBulk ? `${target.count} Refund Requests` : `Refund for ${target.name}`}
             </span>
           </div>
@@ -70,7 +70,7 @@ export const UpdateRefundStatusModal: React.FC<UpdateStatusModalProps> = ({
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-xs font-black text-[#1D3557]">Approve</span>
+                <span className="text-xs font-black text-ink">Approve</span>
                 <p className="text-[10px] font-medium text-gray-500">Refund funds to customer</p>
               </div>
             </div>
@@ -93,7 +93,7 @@ export const UpdateRefundStatusModal: React.FC<UpdateStatusModalProps> = ({
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-xs font-black text-[#1D3557]">Reject</span>
+                <span className="text-xs font-black text-ink">Reject</span>
                 <p className="text-[10px] font-medium text-gray-500">Deny refund request</p>
               </div>
             </div>

@@ -36,7 +36,7 @@ const defaultCategories: Category[] = [
   {
     name: "Chest Freezers",
     data: [40, 60, 45, 80, 50, 95, 60],
-    color: "#00BCD4",
+    color: "#FF7A00",
     bgColor: "bg-cyan-50/50",
     icon: <HiOutlineCube className="w-5 h-5 text-cyan-600" />,
   },
@@ -61,7 +61,7 @@ const defaultProducts: Product[] = [
     name: "Kool Bruhm 60Ah Solar Freezer",
     price: "₦1,287,600",
     data: [30, 45, 35, 60, 45, 75, 80],
-    color: "#00BCD4",
+    color: "#FF7A00",
   },
   {
     name: "Scanfrost 200L Inverter Freezer",
@@ -87,19 +87,19 @@ export const QuickAddProduct: React.FC<QuickAddProductProps> = ({
     <motion.div
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="bg-white p-8 rounded-[6px] border border-[#1C1C1C1A] flex flex-col gap-6 relative overflow-hidden group/card shadow-[0_1px_2px_rgba(0,0,0,0.02)]"
+      className="bg-white p-8 rounded-[6px] border border-gray-100 flex flex-col gap-6 relative overflow-hidden group/card shadow-[0_1px_2px_rgba(0,0,0,0.02)]"
     >
       {/* Instrumentation Backdrop Grid */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(#1D3557 1px, transparent 1px)`,
+          backgroundImage: `radial-gradient(#0F3D2E 1px, transparent 1px)`,
           backgroundSize: "16px 16px",
         }}
       />
 
       <div className="flex justify-between items-center relative z-10">
-        <h3 className="text-[14px] font-black text-[#1D3557] uppercase tracking-[0.2em] opacity-80">
+        <h3 className="text-[14px] font-black text-ink uppercase tracking-[0.2em] opacity-80">
           Inventory Actions
         </h3>
         <button
@@ -134,7 +134,7 @@ export const QuickAddProduct: React.FC<QuickAddProductProps> = ({
                   {cat.icon}
                 </div>
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-[13px] font-black text-[#1D3557]">
+                  <span className="text-[13px] font-black text-ink">
                     {cat.name}
                   </span>
                   <div className="w-16 h-4 opacity-40 group-hover:opacity-100 transition-opacity">
@@ -150,7 +150,7 @@ export const QuickAddProduct: React.FC<QuickAddProductProps> = ({
               <Icon
                 name="chevron_right"
                 size="xs"
-                className="text-gray-300 group-hover:text-[#1D3557] group-hover:translate-x-1 transition-all"
+                className="text-gray-300 group-hover:text-ink group-hover:translate-x-1 transition-all"
               />
             </motion.div>
           ))}
@@ -188,7 +188,7 @@ export const QuickAddProduct: React.FC<QuickAddProductProps> = ({
                   </div>
                 </div>
                 <div className="flex flex-col min-w-0">
-                  <span className="text-[12px] font-black text-[#1D3557] leading-tight truncate max-w-35 group-hover/row:text-brand-blue transition-all">
+                  <span className="text-[12px] font-black text-ink leading-tight truncate max-w-35 group-hover/row:text-brand-blue transition-all">
                     {p.name}
                   </span>
                   <span

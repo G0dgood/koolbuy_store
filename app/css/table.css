@@ -22,14 +22,14 @@ th:last-child {
 }
 
 thead tr {
-  border-bottom: 1px solid #F3F4F6; /* border-gray-50 */
+  border-bottom: 1px solid #F5EFE6; /* border-gray-50 */
 }
 
 th {
   padding: 1rem 1.5rem; /* px-6 py-4 */
   font-size: 11px;
   font-weight: 700;
-  color: #1D3557; /* Primary Dark Blue */
+  color: #0F3D2E; /* Primary Dark Blue */
   text-transform: uppercase;
   letter-spacing: 0.05em; /* tracking-wider */
   white-space: nowrap;
@@ -41,7 +41,7 @@ tbody {
 }
 
 tbody tr {
-  border-bottom: 1px solid #F3F4F6; /* border-gray-50 */
+  border-bottom: 1px solid #F5EFE6; /* border-gray-50 */
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -53,7 +53,7 @@ tbody tr:hover {
 td {
   padding: 1rem 1.5rem; /* px-6 py-4 */
   font-size: 14px;
-  color: #111827; /* text-gray-900 */
+  color: #1C1917; /* text-gray-900 */
 }
 
 table > thead > tr > td,
@@ -84,7 +84,7 @@ table > tfoot > tr > td  {
   justify-content: space-between;
   align-items: center;
   background-color: white;
-  border-top: 1px solid #F3F4F6; /* border-gray-50 */
+  border-top: 1px solid #F5EFE6; /* border-gray-50 */
 }
 
 .admin-pagination-btn {
@@ -92,18 +92,18 @@ table > tfoot > tr > td  {
   align-items: center;
   gap: 0.5rem;
   padding: 0.625rem 1rem; /* py-2.5 px-4 */
-  border-radius: 6px;
-  border: 1px solid #F1F3F5; /* border-gray-100 */
+  border-radius: 9999px;
+  border: 1px solid #F0E6D8; /* border-gray-100 */
   font-size: 14px;
   font-weight: 700;
-  color: #4B5563; /* text-gray-600 */
+  color: #57534E; /* text-gray-600 */
   background-color: white;
   transition: all 0.2s;
   cursor: pointer;
 }
 
 .admin-pagination-btn:hover {
-  background-color: #F9FAFB; /* bg-gray-50 */
+  background-color: #FBF7F1; /* bg-gray-50 */
 }
 
 .admin-pagination-pages {
@@ -115,24 +115,24 @@ table > tfoot > tr > td  {
 .admin-pagination-page-btn {
   width: 2.5rem;
   height: 2.5rem;
-  border-radius: 6px;
+  border-radius: 9999px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
   font-weight: 700;
   transition: all 0.2s;
-  color: #9CA3AF; /* text-gray-400 */
+  color: #A8A096; /* text-gray-400 */
   cursor: pointer;
 }
 
 .admin-pagination-page-btn:hover {
-  color: #111827; /* text-gray-900 */
-  background-color: #F9FAFB;
+  color: #1C1917; /* text-gray-900 */
+  background-color: #FBF7F1;
 }
 
 .admin-pagination-page-btn.active {
   background-color: var(--brand-blue-light);
-  color: #2563EB; /* text-blue-600 */
+  color: #EA6A00; /* text-blue-600 */
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }

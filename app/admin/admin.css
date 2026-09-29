@@ -4,22 +4,22 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. Admin Grid & Layout Shell & Primary Color Theme (#00BCD4)
+   1. Admin Grid & Layout Shell & Primary Color Theme (Kool Orange, see DESIGN.md)
    -------------------------------------------------------------------------- */
 body:has(#page-wrapper),
 .admin-theme,
 #page-wrapper {
-  --brand-blue: #00BCD4;
-  --brand-blue-light: #E0F7FA;
-  --primary: #00BCD4;
-  --color-brand-blue: #00BCD4;
-  --color-brand-blue-light: #E0F7FA;
-  --color-primary: #00BCD4;
-  --sidebar-primary: #00BCD4;
-  --sidebar-accent: #E0F7FA;
-  --sidebar-ring: #00BCD4;
-  --ring: #00BCD4;
-  --chart-1: #00BCD4;
+  --brand-blue: #FF7A00;
+  --brand-blue-light: #FFF1E3;
+  --primary: #FF7A00;
+  --color-brand-blue: #FF7A00;
+  --color-brand-blue-light: #FFF1E3;
+  --color-primary: #FF7A00;
+  --sidebar-primary: #FF7A00;
+  --sidebar-accent: #FFF1E3;
+  --sidebar-ring: #FF7A00;
+  --ring: #FF7A00;
+  --chart-1: #FF7A00;
   display: grid;
   position: relative;
   height: 100dvh;
@@ -47,7 +47,7 @@ body:has(#page-wrapper),
   position: sticky;
   top: 0;
   z-index: 30;
-  border-bottom: 1px solid rgba(28, 28, 28, 0.1);
+  border-bottom: 1px solid #F0E6D8;
   transition: background-color 0.3s ease, border-color 0.3s ease;
   overflow: visible !important;
 }
@@ -61,9 +61,11 @@ body:has(#page-wrapper),
   grid-area: sidenav;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid rgba(28, 28, 28, 0.1);
+  border-right: 0;
   transition: background-color 0.3s ease, border-color 0.3s ease;
-  background-color: white;
+  background-color: var(--ink);
+  background-image: radial-gradient(rgba(255, 194, 61, 0.08) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
 }
 
 .dark #page-wrapper #sidenav {
@@ -200,14 +202,14 @@ body:has(#page-wrapper) .rounded-\[20px\],
 }
 
 .admin-table-container thead tr {
-  border-bottom: 1px solid #F3F4F6;
+  border-bottom: 1px solid #F5EFE6;
 }
 
 .admin-table-container th {
   padding: 1rem 1.5rem;
   font-size: 11px;
   font-weight: 700;
-  color: #1D3557;
+  color: #0F3D2E;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   white-space: nowrap;
@@ -218,7 +220,7 @@ body:has(#page-wrapper) .rounded-\[20px\],
 }
 
 .admin-table-container tbody tr {
-  border-bottom: 1px solid #F3F4F6;
+  border-bottom: 1px solid #F5EFE6;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -230,7 +232,7 @@ body:has(#page-wrapper) .rounded-\[20px\],
 .admin-table-container td {
   padding: 1rem 1.5rem;
   font-size: 14px;
-  color: #111827;
+  color: #1C1917;
 }
 
 .admin-table-container table > thead > tr > td,
@@ -252,7 +254,7 @@ body:has(#page-wrapper) .rounded-\[20px\],
   justify-content: space-between;
   align-items: center;
   background-color: white;
-  border-top: 1px solid #F3F4F6;
+  border-top: 1px solid #F5EFE6;
 }
 
 .admin-pagination-btn {
@@ -261,17 +263,17 @@ body:has(#page-wrapper) .rounded-\[20px\],
   gap: 0.5rem;
   padding: 0.625rem 1rem;
   border-radius: 6px;
-  border: 1px solid #F1F3F5;
+  border: 1px solid #F0E6D8;
   font-size: 14px;
   font-weight: 700;
-  color: #4B5563;
+  color: #57534E;
   background-color: white;
   transition: all 0.2s;
   cursor: pointer;
 }
 
 .admin-pagination-btn:hover {
-  background-color: #F9FAFB;
+  background-color: #FBF7F1;
 }
 
 .admin-pagination-pages {
@@ -290,17 +292,17 @@ body:has(#page-wrapper) .rounded-\[20px\],
   font-size: 14px;
   font-weight: 700;
   transition: all 0.2s;
-  color: #9CA3AF;
+  color: #A8A096;
   cursor: pointer;
 }
 
 .admin-pagination-page-btn:hover {
-  color: #111827;
-  background-color: #F9FAFB;
+  color: #1C1917;
+  background-color: #FBF7F1;
 }
 
 .admin-pagination-page-btn.active {
   background-color: var(--brand-blue-light);
-  color: #2563EB;
+  color: #EA6A00;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }

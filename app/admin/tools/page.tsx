@@ -314,7 +314,7 @@ export default function AdminToolsPage() {
       {/* ========================================================================= */}
       {activeTab === "upload-files" && (
         <div className="space-y-6">
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-6">
+          <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-6 shadow-sm space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
               <div>
                 <h2 className="text-lg font-bold text-gray-900">Upload Multiple Files Tool</h2>
@@ -432,7 +432,7 @@ export default function AdminToolsPage() {
       {/* ========================================================================= */}
       {activeTab === "catalog-copy" && (
         <div className="space-y-6">
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-6">
+          <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-6 shadow-sm space-y-6">
             <div className="border-b border-gray-100 pb-4">
               <h2 className="text-lg font-bold text-gray-900">Catalog Copy Tool</h2>
               <p className="text-xs text-gray-500 mt-0.5">
@@ -550,7 +550,7 @@ export default function AdminToolsPage() {
       {/* ========================================================================= */}
       {activeTab === "tax-copy" && (
         <div className="space-y-6">
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-6">
+          <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-6 shadow-sm space-y-6">
             <div className="border-b border-gray-100 pb-4">
               <h2 className="text-lg font-bold text-gray-900">Tax Copy Tool</h2>
               <p className="text-xs text-gray-500 mt-0.5">
@@ -645,7 +645,7 @@ export default function AdminToolsPage() {
       {/* ========================================================================= */}
       {activeTab === "reset-defaults" && (
         <div className="space-y-6">
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-6">
+          <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-6 shadow-sm space-y-6">
             <div className="border-b border-gray-100 pb-4">
               <div className="flex items-center gap-2">
                 <h2 className="text-lg font-bold text-gray-900">Reset to Default Configuration Settings</h2>
@@ -748,7 +748,7 @@ export default function AdminToolsPage() {
       {/* ========================================================================= */}
       {activeTab === "product-integrity" && (
         <div className="space-y-6">
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-6">
+          <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-6 shadow-sm space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
               <div>
                 <h2 className="text-lg font-bold text-gray-900">Product Integrity Scanner</h2>

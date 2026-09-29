@@ -76,7 +76,7 @@ export function UploadAvatarModal({ isOpen, onClose, onUploadSuccess }: UploadAv
                         <Icon name="photo_camera" folder="icon" size="sm" />
                     </div>
                     <div className="flex flex-col items-center gap-0.5 text-center px-4">
-                        <span className="text-[11px] font-black text-[#1D3557]">Pick a photo</span>
+                        <span className="text-[11px] font-black text-ink">Pick a photo</span>
                         <span className="text-[10px] font-medium text-gray-400">PNG, JPG up to 5MB</span>
                     </div>
                   </>

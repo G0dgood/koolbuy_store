@@ -87,7 +87,7 @@ export function OrdersMoreActionsDrawer({ isOpen, onClose, onBulkPrint }: Orders
                 <Icon name={action.icon} folder={action.folder as any} size="sm" />
               </div>
               <div className="flex flex-col">
-                <span className="text-[13px] font-black text-[#1D3557] group-hover:text-brand-blue transition-colors">
+                <span className="text-[13px] font-black text-ink group-hover:text-brand-blue transition-colors">
                   {action.title}
                 </span>
                 <span className="text-[11px] font-bold text-gray-500 mt-1 leading-relaxed">

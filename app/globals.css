@@ -49,40 +49,104 @@
   --color-brand-orange-light: var(--brand-orange-light);
   --color-brand-red: var(--brand-red);
 
-  --font-inter: var(--font-inter);
-  --font-outfit: var(--font-outfit);
-  --font-lato: var(--font-lato);
-  --font-sans: var(--font-lato);
-  --font-heading: var(--font-lato);
+  --color-brand-orange-hover: var(--brand-orange-hover);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-mustard: var(--mustard);
+  --color-tomato: var(--tomato);
+  --color-frost: var(--frost);
+  --color-mint: var(--mint);
+  --color-cream: var(--cream);
+  --color-cream-dark: var(--cream-dark);
+
+  /* Typography: Plus Jakarta Sans everywhere (legacy font utilities map to it) */
+  --font-inter: var(--font-jakarta);
+  --font-outfit: var(--font-jakarta);
+  --font-lato: var(--font-jakarta);
+  --font-sans: var(--font-jakarta);
+  --font-heading: var(--font-jakarta);
+
+  --shadow-soft: 0 1px 2px rgba(28, 25, 23, 0.04), 0 8px 24px -12px rgba(28, 25, 23, 0.12);
+  --shadow-lift: 0 2px 4px rgba(28, 25, 23, 0.04), 0 20px 40px -16px rgba(28, 25, 23, 0.22);
+  --shadow-pop: 0 10px 24px -8px rgba(255, 122, 0, 0.55);
+}
+
+/* Warm neutrals + Kool green scale (see DESIGN.md) */
+@theme {
+  --color-gray-50: #fbf7f1;
+  --color-gray-100: #f5efe6;
+  --color-gray-200: #eae2d6;
+  --color-gray-300: #d9d0c3;
+  --color-gray-400: #a8a096;
+  --color-gray-500: #78716c;
+  --color-gray-600: #57534e;
+  --color-gray-700: #44403c;
+  --color-gray-800: #292524;
+  --color-gray-900: #1c1917;
+  --color-gray-950: #0c0a09;
+
+  --color-slate-50: #fbf7f1;
+  --color-slate-100: #f5efe6;
+  --color-slate-200: #eae2d6;
+  --color-slate-300: #d9d0c3;
+  --color-slate-400: #a8a096;
+  --color-slate-500: #78716c;
+  --color-slate-600: #57534e;
+  --color-slate-700: #44403c;
+  --color-slate-800: #292524;
+  --color-slate-900: #1c1917;
+
+  --color-blue-50: #edf7f1;
+  --color-blue-100: #d5eddf;
+  --color-blue-200: #aedbc1;
+  --color-blue-300: #7dc29e;
+  --color-blue-400: #4ba57a;
+  --color-blue-500: #2a8a5f;
+  --color-blue-600: #1e6f4c;
+  --color-blue-700: #18583d;
+  --color-blue-800: #134632;
+  --color-blue-900: #0f3d2e;
+
+  --font-weight-heading: 800;
+
+  /* Warm, diffuse elevation (overrides Tailwind defaults) */
+  --shadow-2xs: 0 1px 0 rgba(28, 25, 23, 0.04);
+  --shadow-xs: 0 1px 2px rgba(28, 25, 23, 0.05);
+  --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.04), 0 6px 16px -10px rgba(28, 25, 23, 0.14);
+  --shadow: 0 1px 2px rgba(28, 25, 23, 0.04), 0 8px 24px -12px rgba(28, 25, 23, 0.14);
+  --shadow-md: 0 2px 4px rgba(28, 25, 23, 0.04), 0 12px 28px -14px rgba(28, 25, 23, 0.2);
+  --shadow-lg: 0 2px 6px rgba(28, 25, 23, 0.05), 0 20px 40px -18px rgba(28, 25, 23, 0.24);
+  --shadow-xl: 0 4px 10px rgba(28, 25, 23, 0.05), 0 28px 56px -24px rgba(28, 25, 23, 0.28);
+  --shadow-2xl: 0 8px 16px rgba(28, 25, 23, 0.06), 0 40px 80px -30px rgba(28, 25, 23, 0.35);
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(0.985 0.002 90);
-  --foreground: oklch(0.15 0 0);
+  --radius: 0.875rem;
+  --background: #fff8ef;
+  --foreground: #1c1917;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.15 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.15 0 0);
-  --primary: oklch(0.72 0.17 55);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.96 0 0);
-  --secondary-foreground: oklch(0.15 0 0);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.96 0 0);
-  --accent-foreground: oklch(0.15 0 0);
+  --primary: #ff7a00;
+  --primary-foreground: #ffffff;
+  --secondary: #f5efe6;
+  --secondary-foreground: #0f3d2e;
+  --muted: #f5efe6;
+  --muted-foreground: #78716c;
+  --accent: #fff1e3;
+  --accent-foreground: #0f3d2e;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.92 0 0);
-  --input: oklch(0.92 0 0);
-  --ring: oklch(0.72 0.17 55);
-  --chart-1: oklch(0.72 0.17 55);
+  --border: #f0e6d8;
+  --input: #eae2d6;
+  --ring: #ff7a00;
+  --chart-1: #ff7a00;
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0.002 90);
+  --sidebar: #fff8ef;
   --sidebar-foreground: oklch(0.2 0.02 260);
   --sidebar-primary: oklch(0.72 0.17 55);
   --sidebar-primary-foreground: oklch(1 0 0);
@@ -91,12 +155,22 @@
   --sidebar-border: oklch(0.92 0.01 90);
   --sidebar-ring: oklch(0.72 0.17 55);
 
-  /* Brand Colors */
-  --brand-blue: #2196F3;
-  --brand-blue-light: #E1EFFE;
-  --brand-orange: #FF7A00;
-  --brand-orange-light: #FFF3E0;
-  --brand-red: #F44336;
+  /* Brand Colors — see DESIGN.md. "brand-blue" is a legacy name: it is now Deep Kool ink. */
+  --brand-blue: #0f3d2e;
+  --brand-blue-light: #e7f3ec;
+  --brand-orange: #ff7a00;
+  --brand-orange-hover: #ea6a00;
+  --brand-orange-light: #fff1e3;
+  --brand-red: #f0533a;
+
+  --ink: #0f3d2e;
+  --ink-soft: #1e5a45;
+  --mustard: #ffc23d;
+  --tomato: #f0533a;
+  --frost: #d6eef8;
+  --mint: #e7f3ec;
+  --cream: #fff8ef;
+  --cream-dark: #f7ecdd;
 }
 
 .dark {
@@ -154,6 +228,124 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.02em;
+  }
+  h1, h2 {
+    font-weight: 800;
+  }
+
+  ::selection {
+    background: color-mix(in oklch, var(--brand-orange) 25%, transparent);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brand-orange);
+    outline-offset: 2px;
+  }
+
+  button, a {
+    transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+}
+
+/* ============================================================
+   Koolbuy "Kool & Delicious" utilities — see DESIGN.md
+   ============================================================ */
+@layer components {
+  .kb-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s;
+  }
+  .kb-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+    border-color: color-mix(in oklch, var(--brand-orange) 30%, var(--border));
+  }
+
+  .kb-sticker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.6875rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1;
+    background: var(--mustard);
+    color: var(--ink);
+    transform: rotate(-2deg);
+    box-shadow: 0 2px 0 rgba(15, 61, 46, 0.15);
+  }
+  .kb-sticker-tomato { background: var(--tomato); color: #fff; }
+  .kb-sticker-mint { background: var(--mint); color: var(--ink); }
+  .kb-sticker-ink { background: var(--ink); color: var(--mustard); }
+  .kb-sticker-orange { background: var(--brand-orange-light); color: var(--brand-orange-hover); }
+
+  .kb-title {
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+
+  /* Hand-drawn squiggle underline for section titles */
+  .kb-squiggle {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.55rem;
+  }
+  .kb-squiggle::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 72px;
+    height: 10px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 10' fill='none'%3E%3Cpath d='M2 6c6-5 10-5 16 0s10 5 16 0 10-5 16 0 10 5 16 0' stroke='%23FF7A00' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat left center / contain;
+  }
+
+  .kb-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s, background-color 0.2s, color 0.2s;
+  }
+  .kb-btn:active { transform: translateY(1px) scale(0.99); }
+  .kb-btn-primary {
+    background: var(--brand-orange);
+    color: #fff;
+    box-shadow: var(--shadow-pop);
+  }
+  .kb-btn-primary:hover { background: var(--brand-orange-hover); transform: translateY(-1px); }
+  .kb-btn-ink { background: var(--ink); color: #fff; }
+  .kb-btn-ink:hover { background: var(--ink-soft); transform: translateY(-1px); }
+  .kb-btn-ghost {
+    background: #fff;
+    color: var(--ink);
+    border: 1.5px solid var(--border);
+  }
+  .kb-btn-ghost:hover { background: var(--cream-dark); border-color: var(--cream-dark); }
+
+  /* Dotted "confetti" texture used behind dark sections */
+  .kb-dots {
+    background-image: radial-gradient(color-mix(in oklch, var(--mustard) 35%, transparent) 1.2px, transparent 1.2px);
+    background-size: 22px 22px;
   }
 }
 

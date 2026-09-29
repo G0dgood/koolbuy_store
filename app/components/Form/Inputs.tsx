@@ -19,7 +19,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           className={`
-            w-full bg-white border border-gray-200 rounded-md py-2.5 px-4 text-sm text-gray-900 
+            w-full bg-white border border-gray-100 rounded-3xl shadow-sm py-2.5 px-4 text-sm text-gray-900 
             placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue
             transition-all duration-200
             ${prefixElement ? "pl-10" : ""}
@@ -51,7 +51,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       <textarea
         ref={ref}
         className={`
-          w-full bg-white border border-gray-200 rounded-md py-2.5 px-4 text-sm text-gray-900 
+          w-full bg-white border border-gray-100 rounded-3xl shadow-sm py-2.5 px-4 text-sm text-gray-900 
           placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue
           transition-all duration-200 min-h-[100px] resize-y
           ${error ? "border-red-500 focus:ring-red-500/20 focus:border-red-500" : ""}

@@ -80,8 +80,8 @@ export default function ErrorAndHealthPage() {
     <div className="flex flex-col gap-6 pb-12">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 right-8 z-50 bg-[#1D3557] text-white text-xs px-4 py-3 rounded-lg shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
-          <HiOutlineCheckCircle className="w-4 h-4 text-[#00BCD4]" />
+        <div className="fixed top-20 right-8 z-50 bg-ink text-white text-xs px-4 py-3 rounded-lg shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
+          <HiOutlineCheckCircle className="w-4 h-4 text-brand-orange" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -162,7 +162,7 @@ export default function ErrorAndHealthPage() {
                         <div className="flex items-center justify-end gap-2">
                           <Link
                             href={item.actionHref}
-                            className="inline-flex items-center gap-1 text-xs font-bold text-brand-blue hover:text-[#00BCD4] px-2.5 py-1.5 rounded-lg hover:bg-brand-blue-light/40 transition-colors"
+                            className="inline-flex items-center gap-1 text-xs font-bold text-brand-blue hover:text-brand-orange px-2.5 py-1.5 rounded-lg hover:bg-brand-blue-light/40 transition-colors"
                           >
                             <span>{item.actionText}</span>
                             <HiOutlineArrowTopRightOnSquare className="w-3.5 h-3.5" />
@@ -263,7 +263,7 @@ export default function ErrorAndHealthPage() {
                 </Button>
                 <Link
                   href={selectedIssue.actionHref}
-                  className="inline-flex items-center gap-1.5 h-8 px-3 text-xs font-semibold rounded-lg bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white transition-colors"
+                  className="inline-flex items-center gap-1.5 h-8 px-3 text-xs font-semibold rounded-lg bg-brand-orange hover:bg-brand-orange/90 text-white transition-colors"
                 >
                   <span>Open {selectedIssue.actionText}</span>
                   <HiOutlineArrowTopRightOnSquare className="w-3.5 h-3.5" />

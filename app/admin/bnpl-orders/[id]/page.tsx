@@ -292,7 +292,7 @@ export default function BnplOrderDetails() {
         {/* Customer & Shipping Sidebar */}
         <div className="flex flex-col gap-8">
           {/* Customer Profile & Credit Rating */}
-          <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-6 flex flex-col gap-4">
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 flex flex-col gap-4">
             <h3 className="font-black text-gray-900 text-base">
               Customer & Credit
             </h3>
@@ -334,7 +334,7 @@ export default function BnplOrderDetails() {
           </div>
 
           {/* Delivery Address */}
-          <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-6 flex flex-col gap-3">
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 flex flex-col gap-3">
             <h3 className="font-black text-gray-900 text-base">
               Delivery Location
             </h3>

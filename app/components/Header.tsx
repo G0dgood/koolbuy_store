@@ -88,7 +88,7 @@ export const Header: React.FC<{ className?: string }> = ({
 
   return (
     <header
-      className={`w-full bg-white border-b border-gray-200 sticky top-0 z-80 ${className}`}
+      className={`w-full bg-white/90 backdrop-blur-xl border-b border-gray-100 shadow-[0_6px_24px_-18px_rgba(28,25,23,0.35)] sticky top-0 z-80 ${className}`}
       onMouseLeave={handleMouseLeaveDropdown}
     >
       {/* Top Main Header */}
@@ -123,7 +123,7 @@ export const Header: React.FC<{ className?: string }> = ({
         {/* Search Bar (Desktop) */}
         <form
           onSubmit={handleSearchSubmit}
-          className="flex-1 max-w-85 xl:max-w-115 h-10 xl:h-11 bg-white border border-gray-300 hover:border-gray-400 focus-within:border-[#FF7A00] focus-within:ring-2 focus-within:ring-[#FF7A00]/20 rounded-full hidden md:flex items-stretch relative z-50 transition-all shadow-xs"
+          className="flex-1 max-w-85 xl:max-w-115 h-11 xl:h-12 p-1 bg-cream border-[1.5px] border-gray-200 hover:border-gray-300 focus-within:bg-white focus-within:border-brand-orange focus-within:ring-4 focus-within:ring-brand-orange/15 rounded-full hidden md:flex items-stretch relative z-50 transition-all"
         >
           {/* Location Dropdown */}
           <div
@@ -136,10 +136,10 @@ export const Header: React.FC<{ className?: string }> = ({
                 e.stopPropagation();
                 setIsLocationOpen((prev) => !prev);
               }}
-              className="h-full flex items-center gap-1.5 pl-3.5 pr-2.5 hover:bg-gray-50 rounded-l-full transition-colors cursor-pointer border-r border-gray-200 text-left outline-none"
+              className="h-full flex items-center gap-1.5 pl-3.5 pr-2.5 hover:bg-white rounded-l-full transition-colors cursor-pointer border-r border-gray-200 text-left outline-none"
             >
-              <FiMapPin className="text-[#FF7A00] text-sm shrink-0" />
-              <span className="text-xs font-bold text-gray-800 max-w-20 xl:max-w-26 truncate">
+              <FiMapPin className="text-brand-orange text-sm shrink-0" />
+              <span className="text-xs font-bold text-ink max-w-20 xl:max-w-26 truncate">
                 {selectedLocation}
               </span>
               <FiChevronDown
@@ -156,7 +156,7 @@ export const Header: React.FC<{ className?: string }> = ({
                   className="absolute top-full left-0 pt-2 w-72 z-100"
                   onClick={() => setIsLocationOpen(false)}
                 >
-                  <div className="bg-white rounded-xl shadow-xl border border-gray-100 p-2 flex flex-col gap-1 text-sm">
+                  <div className="bg-white rounded-2xl shadow-[var(--shadow-lift)] border border-gray-100 p-2 flex flex-col gap-1 text-sm">
                     <div className="px-3 py-1.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider">
                       Delivery Location
                     </div>
@@ -165,9 +165,9 @@ export const Header: React.FC<{ className?: string }> = ({
                         key={loc.full}
                         type="button"
                         onClick={() => setSelectedLocation(loc.short)}
-                        className="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-gray-700 hover:bg-orange-50 hover:text-[#FF7A00] transition-colors flex items-center gap-2 cursor-pointer"
+                        className="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-gray-700 hover:bg-brand-orange-light hover:text-brand-orange-hover transition-colors flex items-center gap-2 cursor-pointer"
                       >
-                        <FiMapPin className="text-[#FF7A00] text-xs shrink-0" />
+                        <FiMapPin className="text-brand-orange text-xs shrink-0" />
                         <span className="truncate">{loc.full}</span>
                       </button>
                     ))}
@@ -182,14 +182,14 @@ export const Header: React.FC<{ className?: string }> = ({
             className="flex-1 flex items-center px-3 relative min-w-0"
             ref={searchRef}
           >
-            <FiSearch className="text-[#FF7A00] text-base shrink-0 mr-2" />
+            <FiSearch className="text-brand-orange text-base shrink-0 mr-2" />
             <input
               type="text"
-              placeholder="Koolboks..."
+              placeholder="Search freezers, solar kits, ice makers..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={() => setIsSearchFocused(true)}
-              className="w-full text-xs xl:text-sm text-gray-800 placeholder-gray-400 bg-transparent outline-none focus:outline-none"
+              className="w-full text-xs xl:text-sm font-medium text-ink placeholder-gray-400 bg-transparent outline-none focus:outline-none"
             />
 
             {/* Search Autocomplete Dropdown */}
@@ -202,7 +202,7 @@ export const Header: React.FC<{ className?: string }> = ({
           {/* Search Button */}
           <button
             type="submit"
-            className="bg-[#FF7A00] hover:bg-[#E86D00] active:bg-[#D46000] text-white font-bold text-xs xl:text-sm px-4 xl:px-6 flex items-center justify-center rounded-r-full transition-all cursor-pointer shrink-0 shadow-xs"
+            className="bg-brand-orange hover:bg-brand-orange-hover active:scale-[0.98] text-white font-bold text-xs xl:text-sm px-5 xl:px-6 flex items-center justify-center rounded-full transition-all cursor-pointer shrink-0 shadow-[var(--shadow-pop)]"
           >
             Search
           </button>
@@ -234,12 +234,12 @@ export const Header: React.FC<{ className?: string }> = ({
       <div className="md:hidden px-4 pb-3">
         <form
           onSubmit={handleSearchSubmit}
-          className="w-full h-11 bg-white rounded-full flex items-center px-4 gap-2.5 border border-gray-300 focus-within:border-[#FF7A00] shadow-xs"
+          className="w-full h-12 bg-cream rounded-full flex items-center px-4 gap-2.5 border-[1.5px] border-gray-200 focus-within:bg-white focus-within:border-brand-orange focus-within:ring-4 focus-within:ring-brand-orange/15"
         >
-          <FiSearch className="text-[#FF7A00] text-base shrink-0" />
+          <FiSearch className="text-brand-orange text-base shrink-0" />
           <input
             type="text"
-            placeholder="Koolboks..."
+            placeholder="Search Koolbuy..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="bg-transparent text-sm w-full outline-none text-gray-800 placeholder-gray-400"
@@ -272,7 +272,7 @@ export const Header: React.FC<{ className?: string }> = ({
                 clearTimeout(dropdownTimeoutRef.current);
             }}
             onMouseLeave={handleMouseLeaveDropdown}
-            className="absolute top-full left-0 w-full bg-white border-t border-b border-gray-200 shadow-2xl z-100"
+            className="absolute top-full left-0 w-full bg-white border-t border-b border-gray-100 shadow-[0_30px_60px_-30px_rgba(28,25,23,0.35)] rounded-b-3xl z-100"
           >
             <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-16 py-8 md:py-10 max-h-[calc(100vh-140px)] overflow-y-auto">
               {/* Columns Grid */}
@@ -288,7 +288,7 @@ export const Header: React.FC<{ className?: string }> = ({
                 {megaMenuContent[activeDropdown].columns.map((col, colIdx) => (
                   <div key={colIdx} className="flex flex-col gap-3">
                     {/* Column Header */}
-                    <h4 className="text-[12px] font-extrabold text-gray-900 tracking-wider uppercase pb-2 border-b border-gray-100 flex items-center justify-between">
+                    <h4 className="text-[12px] font-extrabold text-ink tracking-wider uppercase pb-2 border-b-2 border-brand-orange/20 flex items-center justify-between">
                       <span>{col.title}</span>
                     </h4>
 
@@ -299,13 +299,13 @@ export const Header: React.FC<{ className?: string }> = ({
                           <Link
                             href={item.href}
                             onClick={() => setActiveDropdown(null)}
-                            className="group inline-flex items-center gap-2 text-[13px] text-gray-600 hover:text-[#FF7A00] transition-colors py-0.5 leading-snug"
+                            className="group inline-flex items-center gap-2 text-[13px] text-gray-600 hover:text-brand-orange transition-colors py-0.5 leading-snug"
                           >
                             <span className="group-hover:translate-x-0.5 transition-transform duration-150">
                               {item.label}
                             </span>
                             {item.badge && (
-                              <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full bg-orange-100 text-[#FF7A00] uppercase tracking-wide">
+                              <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full bg-mustard text-ink uppercase tracking-wide">
                                 {item.badge}
                               </span>
                             )}
@@ -329,7 +329,7 @@ export const Header: React.FC<{ className?: string }> = ({
                 <Link
                   href="/products"
                   onClick={() => setActiveDropdown(null)}
-                  className="inline-flex items-center gap-1.5 font-bold text-[#FF7A00] hover:underline"
+                  className="inline-flex items-center gap-1.5 font-bold text-brand-orange hover:underline"
                 >
                   <span>Browse All Products in Catalog</span>
                   <FiArrowRight size={13} />
@@ -341,7 +341,7 @@ export const Header: React.FC<{ className?: string }> = ({
       </AnimatePresence>
 
       {/* Mobile Breadcrumb-like nav */}
-      <div className="w-full overflow-x-auto bg-white border-t border-gray-100 md:hidden flex items-center gap-4 px-4 h-11 scrollbar-none whitespace-nowrap">
+      <div className="w-full overflow-x-auto bg-white border-t border-gray-100 md:hidden flex items-center gap-2 px-4 h-12 scrollbar-none whitespace-nowrap">
         {[
           "Solar Freezers",
           "AC/DC Hybrid",
@@ -351,7 +351,7 @@ export const Header: React.FC<{ className?: string }> = ({
         ].map((item, idx) => (
           <span
             key={idx}
-            className="bg-gray-100 text-gray-800 text-sm px-3 py-1.5 rounded shrink-0 font-medium"
+            className={`${idx === 0 ? "bg-ink text-white" : "bg-cream text-ink border border-gray-200"} text-[13px] px-3.5 py-1.5 rounded-full shrink-0 font-semibold`}
           >
             {item}
           </span>

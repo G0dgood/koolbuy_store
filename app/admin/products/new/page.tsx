@@ -106,10 +106,10 @@ export default function CreateProduct() {
     <div className="xl:col-span-2 flex flex-col gap-6">
      {/* Basic Details */}
      <div className="bg-white rounded-[6px] border border-gray-100 shadow-sm p-8 flex flex-col gap-6">
-      <h3 className="text-base font-bold text-[#1D3557]">Basic Details</h3>
+      <h3 className="text-base font-bold text-ink">Basic Details</h3>
 
       <div className="flex flex-col gap-2.5">
-       <label className="text-xs font-bold text-[#1D3557]">Product Name</label>
+       <label className="text-xs font-bold text-ink">Product Name</label>
        <Input
         type="text"
         defaultValue="iPhone 15"
@@ -118,7 +118,7 @@ export default function CreateProduct() {
       </div>
 
       <div className="flex flex-col gap-2.5 relative">
-       <label className="text-xs font-bold text-[#1D3557]">Product Description</label>
+       <label className="text-xs font-bold text-ink">Product Description</label>
        <div className="relative group">
         <Textarea
          rows={6}
@@ -135,10 +135,10 @@ export default function CreateProduct() {
 
      {/* Pricing Section */}
      <div className="bg-white rounded-[6px] border border-gray-100 shadow-sm p-8 flex flex-col gap-6">
-      <h3 className="text-base font-bold text-[#1D3557]">Pricing</h3>
+      <h3 className="text-base font-bold text-ink">Pricing</h3>
 
       <div className="flex flex-col gap-2.5">
-       <label className="text-xs font-bold text-[#1D3557]">Product Price</label>
+       <label className="text-xs font-bold text-ink">Product Price</label>
        <Input
         type="text"
         defaultValue="$999.89"
@@ -165,13 +165,13 @@ export default function CreateProduct() {
        </div>
 
        <div className="flex flex-col gap-2.5">
-        <label className="text-xs font-bold text-[#1D3557]">Tax Included</label>
+        <label className="text-xs font-bold text-ink">Tax Included</label>
         <div className="flex items-center gap-6 py-3">
          <label className="flex items-center gap-2 cursor-pointer group">
           <div className="w-4 h-4 rounded-full border-2 border-brand-blue flex items-center justify-center p-0.5">
            <div className="w-full h-full bg-brand-blue rounded-full"></div>
           </div>
-          <span className="text-xs font-bold text-[#1D3557]">Yes</span>
+          <span className="text-xs font-bold text-ink">Yes</span>
          </label>
          <label className="flex items-center gap-2 cursor-pointer group">
           <div className="w-4 h-4 rounded-full border border-gray-200 group-hover:border-gray-300"></div>
@@ -182,7 +182,7 @@ export default function CreateProduct() {
       </div>
 
       <div className="flex flex-col gap-2.5">
-       <label className="text-xs font-bold text-[#1D3557]">Expiration</label>
+       <label className="text-xs font-bold text-ink">Expiration</label>
        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Input
          type="date"
@@ -202,11 +202,11 @@ export default function CreateProduct() {
 
      {/* Inventory Section */}
      <div className="bg-white rounded-[6px] border border-gray-100 shadow-sm p-8 flex flex-col gap-6">
-      <h3 className="text-sm font-bold text-[#1D3557]">Inventory</h3>
+      <h3 className="text-sm font-bold text-ink">Inventory</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
        <div className="flex flex-col gap-2.5">
-        <label className="text-xs font-bold text-[#1D3557]">Stock Quantity</label>
+        <label className="text-xs font-bold text-ink">Stock Quantity</label>
         <Input
          type="text"
          defaultValue="Unlimited"
@@ -215,7 +215,7 @@ export default function CreateProduct() {
        </div>
 
        <div className="flex flex-col gap-2.5">
-        <label className="text-xs font-bold text-[#1D3557]">Stock Status</label>
+        <label className="text-xs font-bold text-ink">Stock Status</label>
         <Select
          value={stockStatus}
          onChange={(val) => setStockStatus(val as string)}
@@ -244,7 +244,7 @@ export default function CreateProduct() {
       <div className="flex gap-3 justify-end mt-4 pt-6 border-t border-gray-50">
        <button
         type="button"
-        className="bg-white border border-gray-100 text-[#1D3557] px-6 py-2.5 rounded-[6px] text-xs font-bold hover:bg-gray-50 transition-all flex items-center gap-2"
+        className="bg-white border border-gray-100 text-ink px-6 py-2.5 rounded-[6px] text-xs font-bold hover:bg-gray-50 transition-all flex items-center gap-2"
         onClick={() => setIsDraftConfirmOpen(true)}
        >
         <Icon name="ticket" folder="dashboardIcon" size="xs" className="opacity-70" />
@@ -266,11 +266,11 @@ export default function CreateProduct() {
     <div className="flex flex-col gap-6">
      {/* Upload Media */}
      <div className="bg-white rounded-[6px] border border-gray-100 shadow-sm p-8 flex flex-col gap-6">
-      <h3 className="text-base font-bold text-[#1D3557]">Upload Product Image</h3>
+      <h3 className="text-base font-bold text-ink">Upload Product Image</h3>
 
       <div className="flex flex-col gap-4">
        <div className="flex items-center justify-between">
-        <label className="text-xs font-bold text-[#1D3557]">Product Image</label>
+        <label className="text-xs font-bold text-ink">Product Image</label>
         {stagedMedia.length > 0 && (
          <button
           onClick={() => removeMedia(0)}
@@ -351,7 +351,7 @@ export default function CreateProduct() {
         <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white scale-90 group-hover:scale-100 transition-transform">
          <Icon name="circle-plus" folder="dashboardIcon" size="xs" />
         </div>
-        <span className="text-[10px] font-bold text-[#00BCD4]">Add More</span>
+        <span className="text-[10px] font-bold text-brand-orange">Add More</span>
        </div>
       </div>
 
@@ -359,7 +359,7 @@ export default function CreateProduct() {
 
       <div className="flex flex-col gap-6">
        <div className="flex flex-col gap-2.5">
-        <label className="text-[11px] font-bold text-[#1D3557]">Product Categories</label>
+        <label className="text-[11px] font-bold text-ink">Product Categories</label>
         <Select
          value={category}
          onChange={(val) => setCategory(val as string)}
@@ -372,7 +372,7 @@ export default function CreateProduct() {
        </div>
 
        <div className="flex flex-col gap-2.5">
-        <label className="text-[11px] font-bold text-[#1D3557]">Product Tag</label>
+        <label className="text-[11px] font-bold text-ink">Product Tag</label>
         <Select
          value={tag}
          onChange={(val) => setTag(val as string)}
@@ -386,7 +386,7 @@ export default function CreateProduct() {
 
        <div className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
-         <label className="text-[11px] font-bold text-[#1D3557]">
+         <label className="text-[11px] font-bold text-ink">
           {editingColorIndex !== null ? "Edit selected color" : "Select your color"}
          </label>
          <button
@@ -405,7 +405,7 @@ export default function CreateProduct() {
           <div className="flex flex-col gap-2">
            <span className="text-[10px] font-medium text-gray-400">Modern Presets</span>
            <div className="flex flex-wrap gap-2">
-            {["#1D3557", "#457B9D", "#A8DADC", "#2A9D8F", "#E9C46A", "#F4A261", "#E76F51", "#264653"].map((preset) => (
+            {["#0F3D2E", "#457B9D", "#A8DADC", "#2A9D8F", "#E9C46A", "#F4A261", "#E76F51", "#264653"].map((preset) => (
              <button
               key={preset}
               className="w-6 h-6 rounded-full border border-white shadow-sm transition-transform hover:scale-125"
@@ -588,7 +588,7 @@ export default function CreateProduct() {
       <Icon name="task_alt" folder="icon" size="lg" className="w-10 h-10" />
      </div>
      <div className="flex flex-col gap-2">
-      <h2 className="text-xl font-black text-[#1D3557]">Product Published!</h2>
+      <h2 className="text-xl font-black text-ink">Product Published!</h2>
       <p className="text-sm font-medium text-gray-400 max-w-[280px] mx-auto leading-relaxed">
        Your new product has been successfully uploaded and is now live on the storefront.
       </p>
@@ -626,7 +626,7 @@ export default function CreateProduct() {
       <Icon name="drafts" folder="icon" size="lg" className="w-10 h-10" />
      </div>
      <div className="flex flex-col gap-2">
-      <h2 className="text-xl font-black text-[#1D3557]">Saved to Drafts</h2>
+      <h2 className="text-xl font-black text-ink">Saved to Drafts</h2>
       <p className="text-sm font-medium text-gray-400 max-w-[280px] mx-auto leading-relaxed">
        The product has been securely stored. You can find it in the "Draft" tab of the product listing.
       </p>

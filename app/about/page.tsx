@@ -61,7 +61,7 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-cream flex flex-col font-sans text-black">
       <Header />
 
       <main className="flex-1 w-full bg-white">
@@ -113,7 +113,7 @@ const AboutPage = () => {
               viewport={{ once: true }}
               className="flex flex-col gap-6"
             >
-              <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight leading-tight">
+              <h2 className="text-3xl md:text-5xl font-black text-ink tracking-tight leading-tight">
                 The intersection <br />
                 of scent and skin.
               </h2>
@@ -164,11 +164,11 @@ const AboutPage = () => {
               viewport={{ once: true }}
               className="flex flex-col gap-6 order-1 lg:order-2"
             >
-              <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight leading-tight">
+              <h2 className="text-3xl md:text-5xl font-black text-ink tracking-tight leading-tight">
                 Sourced with soul, <br />
                 crafted for life.
               </h2>
-              <div className="w-20 h-1.5 bg-[#8CB7F5] rounded-full" />
+              <div className="w-20 h-1.5 bg-mustard rounded-full" />
               <p className="text-gray-500 text-base md:text-xl leading-relaxed">
                 We travel the globe, not just for materials, but for stories.
                 Our sourcing team partners with local communities to ensure that
@@ -176,7 +176,7 @@ const AboutPage = () => {
               </p>
               <div className="flex items-center gap-6 mt-4">
                 <div className="flex flex-col">
-                  <span className="text-2xl font-black text-[#1D3557]">
+                  <span className="text-2xl font-black text-ink">
                     50+
                   </span>
                   <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
@@ -185,7 +185,7 @@ const AboutPage = () => {
                 </div>
                 <div className="h-10 w-px bg-gray-200" />
                 <div className="flex flex-col">
-                  <span className="text-2xl font-black text-[#1D3557]">
+                  <span className="text-2xl font-black text-ink">
                     100%
                   </span>
                   <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
@@ -204,7 +204,7 @@ const AboutPage = () => {
               <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs">
                 Our Foundations
               </span>
-              <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight">
+              <h2 className="text-3xl md:text-5xl font-black text-ink tracking-tight">
                 The Mist & Bloom Values
               </h2>
             </div>
@@ -222,7 +222,7 @@ const AboutPage = () => {
                     {v.icon}
                   </div>
                   <div className="flex flex-col gap-2">
-                    <h4 className="text-xl font-bold text-[#1D3557]">
+                    <h4 className="text-xl font-bold text-ink">
                       {v.title}
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
@@ -239,7 +239,7 @@ const AboutPage = () => {
         <section className="py-24 md:py-32">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16">
             <div className="flex flex-col items-start gap-4 mb-16">
-              <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight">
+              <h2 className="text-3xl md:text-5xl font-black text-ink tracking-tight">
                 Meet the Architects
               </h2>
               <p className="text-gray-500 max-w-xl">
@@ -277,7 +277,7 @@ const AboutPage = () => {
                     </div>
                   </div>
                   <div className="flex flex-col">
-                    <h5 className="font-bold text-[#1D3557] text-lg">
+                    <h5 className="font-bold text-ink text-lg">
                       {member.name}
                     </h5>
                     <span className="text-[10px] font-bold uppercase tracking-widest text-brand-blue">
@@ -291,9 +291,9 @@ const AboutPage = () => {
         </section>
 
         {/* Step 64: Trust/Stats Section */}
-        <section className="bg-[#1D3557] py-20 overflow-hidden relative">
+        <section className="bg-ink py-20 overflow-hidden relative">
           <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue rounded-full filter blur-[120px] opacity-20 translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#8CB7F5] rounded-full filter blur-[120px] opacity-10 -translate-x-1/2 translate-y-1/2" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-mustard rounded-full filter blur-[120px] opacity-10 -translate-x-1/2 translate-y-1/2" />
 
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 grid grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
             <div className="flex flex-col items-center lg:items-start gap-2">
@@ -306,7 +306,7 @@ const AboutPage = () => {
             </div>
             <div className="flex flex-col items-center lg:items-start gap-2">
               <span className="text-4xl md:text-6xl font-black text-white tracking-tighter">
-                5M<span className="text-[#8CB7F5]">+</span>
+                5M<span className="text-mustard">+</span>
               </span>
               <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">
                 Global Shipments
@@ -322,7 +322,7 @@ const AboutPage = () => {
             </div>
             <div className="flex flex-col items-center lg:items-start gap-2">
               <span className="text-4xl md:text-6xl font-black text-white tracking-tighter">
-                98<span className="text-[#8CB7F5]">%</span>
+                98<span className="text-mustard">%</span>
               </span>
               <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">
                 Customer Trust

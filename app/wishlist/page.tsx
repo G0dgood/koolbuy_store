@@ -36,7 +36,7 @@ const WishlistPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-cream flex flex-col font-sans text-black">
       <Header />
 
       <div className="flex-1 max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-4 md:py-8 flex flex-col gap-4 md:gap-8 w-full">
@@ -151,7 +151,7 @@ const WishlistPage = () => {
               <Link
                 href="/products/detail"
                 key={item.id}
-                className="bg-white border border-gray-200 rounded-lg p-3 flex flex-col gap-3 hover:shadow-md transition-all group"
+                className="bg-white border border-gray-100 rounded-3xl shadow-sm p-3 flex flex-col gap-3 hover:shadow-md transition-all group"
               >
                 <div className="aspect-square relative flex items-center justify-center p-2 bg-gray-50 rounded-md overflow-hidden">
                   <div className="relative w-full h-full transition-transform duration-300 group-hover:scale-110">

@@ -160,9 +160,9 @@ export default function TransactionsPage() {
         </div>
 
         {/* Payment Method Card (Right 2 columns) */}
-        <div className="xl:col-span-2 bg-white rounded-lg border border-[#1C1C1C1A] overflow-hidden flex flex-col p-6 gap-6">
+        <div className="xl:col-span-2 bg-white rounded-lg border border-gray-100 overflow-hidden flex flex-col p-6 gap-6">
           <div className="flex justify-between items-center">
-            <h3 className="text-sm font-bold text-[#1D3557]">Payment Method</h3>
+            <h3 className="text-sm font-bold text-ink">Payment Method</h3>
             <Button
               variant="ghost"
               className="text-gray-300 hover:text-gray-600 p-1!"
@@ -174,7 +174,7 @@ export default function TransactionsPage() {
           <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
             {/* Visual Card */}
             <div className="relative w-full max-w-[320px] h-45 rounded-3xl overflow-hidden shadow-xl shadow-blue-100 group">
-              <div className="absolute inset-0 bg-linear-to-br from-[#00BCD4] via-blue-400 to-[#1D3557]"></div>
+              <div className="absolute inset-0 bg-linear-to-br from-brand-orange via-blue-400 to-ink"></div>
               {/* Pattern overlay */}
               <div className="absolute inset-0 opacity-10 mix-blend-overlay bg-[url('/dashboardImage/image 270.png')] bg-cover"></div>
 
@@ -227,7 +227,7 @@ export default function TransactionsPage() {
                   <span className="text-xs font-bold text-gray-400">
                     Transactions:
                   </span>
-                  <span className="text-xs font-bold text-[#1D3557]">
+                  <span className="text-xs font-bold text-ink">
                     1,250
                   </span>
                 </div>
@@ -235,7 +235,7 @@ export default function TransactionsPage() {
                   <span className="text-xs font-bold text-gray-400">
                     Revenue:
                   </span>
-                  <span className="text-xs font-bold text-[#1D3557]">
+                  <span className="text-xs font-bold text-ink">
                     ₦50,000
                   </span>
                 </div>
@@ -271,7 +271,7 @@ export default function TransactionsPage() {
       </div>
 
       {/* Transaction History Card */}
-      <div className="bg-white rounded-lg overflow-hidden flex flex-col border border-[#1C1C1C1A]">
+      <div className="bg-white rounded-lg overflow-hidden flex flex-col border border-gray-100">
         {/* Controls Bar */}
         <div className="p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between border-b border-gray-50">
           <TabFilter

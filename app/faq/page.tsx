@@ -88,7 +88,7 @@ export default function FAQPage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-5xl font-black text-[#1D3557] mb-6 leading-tight"
+            className="text-3xl md:text-5xl font-black text-ink mb-6 leading-tight"
           >
             How can we help you?
           </motion.h1>
@@ -127,7 +127,7 @@ export default function FAQPage() {
         <div className="flex flex-col gap-8">
           {searchQuery && (
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-black text-[#1D3557]">Search Results</h2>
+              <h2 className="text-xl font-black text-ink">Search Results</h2>
               <button
                 onClick={() => setSearchQuery("")}
                 className="text-xs font-bold text-brand-blue hover:underline"
@@ -157,7 +157,7 @@ export default function FAQPage() {
       </section>
 
       {/* Contact CTA */}
-      <section className="bg-[#1D3557] py-20 relative overflow-hidden">
+      <section className="bg-ink py-20 relative overflow-hidden">
         <div className="max-w-[1440px] mx-auto px-6 relative z-10 flex flex-col items-center text-center">
           <h2 className="text-3xl font-black text-white mb-4">Still have questions?</h2>
           <p className="text-blue-200/70 text-base md:text-lg mb-10 max-w-xl font-medium">

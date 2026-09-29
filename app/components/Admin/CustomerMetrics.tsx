@@ -33,7 +33,7 @@ export function CustomerMetrics({ activeMetric, onMetricClick }: CustomerMetrics
           className="flex flex-col gap-1 items-start text-left transition-all group relative pr-4 md:border-r md:border-gray-100 last:border-r-0"
         >
           <span className={`text-2xl font-bold transition-colors ${
-            activeMetric === metric.id ? "text-blue-600" : "text-[#1D3557] group-hover:text-blue-500"
+            activeMetric === metric.id ? "text-blue-600" : "text-ink group-hover:text-blue-500"
           }`}>
             {metric.value}
           </span>

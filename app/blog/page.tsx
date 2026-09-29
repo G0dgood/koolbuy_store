@@ -71,7 +71,7 @@ const BlogPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-cream flex flex-col font-sans text-black">
       <Header />
 
       <main className="flex-1 w-full bg-white">
@@ -88,7 +88,7 @@ const BlogPage = () => {
               <span className="text-brand-blue font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs">
                 Koolbuy Store Journal
               </span>
-              <h1 className="text-4xl md:text-7xl font-black text-[#1D3557] tracking-tighter leading-none">
+              <h1 className="text-4xl md:text-7xl font-black text-ink tracking-tighter leading-none">
                 Insights <span className="text-brand-blue">&</span> Inspiration.
               </h1>
               <p className="text-gray-500 max-w-2xl text-sm md:text-lg mt-4 leading-relaxed font-medium">
@@ -114,7 +114,7 @@ const BlogPage = () => {
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-1000"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-[#1D3557] via-[#1D3557]/20 to-transparent flex items-end">
+              <div className="absolute inset-0 bg-linear-to-t from-ink via-ink/20 to-transparent flex items-end">
                 <div className="p-8 md:p-16 max-w-4xl flex flex-col gap-4">
                   <span className="px-4 py-1.5 bg-brand-blue rounded-full text-[10px] font-black uppercase tracking-[0.2em] text-white w-fit">
                     Featured Story
@@ -128,7 +128,7 @@ const BlogPage = () => {
                     architects.
                   </p>
                   <div className="flex items-center gap-4 pt-4">
-                    <button className="bg-white text-[#1D3557] px-8 py-3.5 rounded-xl font-black uppercase tracking-widest text-xs shadow-xl flex items-center gap-2 group-hover:bg-brand-blue group-hover:text-white transition-all">
+                    <button className="bg-white text-ink px-8 py-3.5 rounded-xl font-black uppercase tracking-widest text-xs shadow-xl flex items-center gap-2 group-hover:bg-brand-blue group-hover:text-white transition-all">
                       Read Feature <HiArrowLongRight size={18} />
                     </button>
                     <div className="flex items-center gap-4 text-white/40 text-xs font-bold uppercase tracking-widest">
@@ -148,7 +148,7 @@ const BlogPage = () => {
           {/* Step 82: Implement Responsive Journal Feed (Article Grid) */}
           <section className="flex flex-col gap-12">
             <div className="flex items-center justify-between">
-              <h3 className="text-2xl font-black text-[#1D3557] tracking-tight">
+              <h3 className="text-2xl font-black text-ink tracking-tight">
                 Recent Journal Entries
               </h3>
               <div className="flex items-center gap-3 text-brand-blue font-bold text-sm cursor-pointer group">
@@ -191,14 +191,14 @@ const BlogPage = () => {
                         <HiClock className="text-brand-blue" /> {post.readTime}
                       </span>
                     </div>
-                    <h4 className="text-xl font-black text-[#1D3557] leading-tight group-hover:text-brand-blue transition-colors duration-300 line-clamp-2">
+                    <h4 className="text-xl font-black text-ink leading-tight group-hover:text-brand-blue transition-colors duration-300 line-clamp-2">
                       {post.title}
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">
                       {post.excerpt}
                     </p>
                     <div className="pt-2">
-                      <div className="flex items-center gap-1 text-xs font-black uppercase tracking-widest text-[#1D3557] group-hover:text-brand-blue transition-colors">
+                      <div className="flex items-center gap-1 text-xs font-black uppercase tracking-widest text-ink group-hover:text-brand-blue transition-colors">
                         Read Story{" "}
                         <HiChevronRight
                           size={14}
@@ -212,7 +212,7 @@ const BlogPage = () => {
             </div>
 
             <div className="mt-16 flex justify-center">
-              <button className="px-12 py-4 border-2 border-gray-100 rounded-2xl text-[#1D3557] font-black uppercase tracking-widest text-xs hover:border-brand-blue hover:text-brand-blue transition-all">
+              <button className="px-12 py-4 border-2 border-gray-100 rounded-2xl text-ink font-black uppercase tracking-widest text-xs hover:border-brand-blue hover:text-brand-blue transition-all">
                 Load Older Stories
               </button>
             </div>

@@ -58,7 +58,7 @@ export const ProductGallery: React.FC = () => {
                 relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-xl overflow-hidden bg-white p-1.5 transition-all cursor-pointer shadow-xs
                 ${
                   activeImage === img
-                    ? "border-2 border-[#FF7A00] ring-2 ring-[#FF7A00]/20"
+                    ? "border-2 border-brand-orange ring-2 ring-brand-orange/20"
                     : "border border-gray-200 hover:border-gray-400 opacity-80 hover:opacity-100"
                 }
               `}

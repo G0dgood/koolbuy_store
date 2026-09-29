@@ -66,7 +66,7 @@ export default function Modal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/40 backdrop-blur-[2px] z-40"
+            className="fixed inset-0 bg-ink/40 backdrop-blur-sm z-40"
             onClick={onClose}
           />
 
@@ -76,7 +76,7 @@ export default function Modal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className={`relative bg-white rounded-2xl text-left overflow-hidden shadow-2xl ${sizeClasses[size]} w-[100%] md:w-full z-50 max-h-[85vh] flex flex-col`}
+            className={`relative bg-white rounded-[2rem] text-left overflow-hidden shadow-2xl ring-1 ring-black/5 ${sizeClasses[size]} w-[100%] md:w-full z-50 max-h-[85vh] flex flex-col`}
           >
             {header ? (
               header
@@ -92,7 +92,7 @@ export default function Modal({
             <div className="px-4 sm:px-8 py-6 overflow-y-auto flex-1">{children}</div>
 
             {footer && (
-              <div className="px-4 sm:px-8 py-6 bg-white border-t border-gray-50">
+              <div className="px-4 sm:px-8 py-5 bg-cream border-t border-gray-100">
                 {footer}
               </div>
             )}

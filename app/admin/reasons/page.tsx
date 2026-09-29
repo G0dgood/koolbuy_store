@@ -185,7 +185,7 @@ export default function ReasonsManagementPage() {
           <Button
             variant="primary"
             shape="rounded-sm"
-            className="bg-[#00BCD4] hover:bg-[#00acc1] text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
+            className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
             onClick={() => setIsAddModalOpen(true)}
           >
             <HiOutlinePlus className="w-4 h-4" />
@@ -457,7 +457,7 @@ function AddOrEditReasonModal({
             <select
               value={type}
               onChange={(e) => setType(e.target.value as any)}
-              className="w-full text-xs font-semibold px-3 py-2 border border-gray-200 rounded-md bg-white focus:outline-none focus:border-[#00BCD4]"
+              className="w-full text-xs font-semibold px-3 py-2 border border-gray-200 rounded-md bg-white focus:outline-none focus:border-brand-orange"
             >
               <option value="Order Cancel">Order Cancel</option>
               <option value="Refund">Refund</option>
@@ -474,7 +474,7 @@ function AddOrEditReasonModal({
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value as any)}
-              className="w-full text-xs font-semibold px-3 py-2 border border-gray-200 rounded-md bg-white focus:outline-none focus:border-[#00BCD4]"
+              className="w-full text-xs font-semibold px-3 py-2 border border-gray-200 rounded-md bg-white focus:outline-none focus:border-brand-orange"
             >
               <option value="Active">Active</option>
               <option value="Inactive">Inactive</option>
@@ -488,7 +488,7 @@ function AddOrEditReasonModal({
           <Button
             variant="primary"
             type="submit"
-            className="bg-[#00BCD4] hover:bg-[#00acc1] text-white"
+            className="bg-brand-orange hover:bg-brand-orange-hover text-white"
           >
             Save Reason
           </Button>

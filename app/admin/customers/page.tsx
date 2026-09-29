@@ -490,9 +490,9 @@ export default function CustomersListing() {
           />
         </div>
 
-        <div className="flex-1 bg-white rounded-lg border border-[#1C1C1C1A] p-6 flex flex-col gap-5">
+        <div className="flex-1 bg-white rounded-3xl border border-gray-100 shadow-sm p-6 flex flex-col gap-5">
           <div className="flex justify-between items-center">
-            <h3 className="text-lg font-bold text-[#1D3557]">
+            <h3 className="text-lg font-bold text-ink">
               Customer Overview
             </h3>
             <TabFilter
@@ -518,14 +518,14 @@ export default function CustomersListing() {
                       activeMetric.replace(/^\w/, (c) => c.toUpperCase()) +
                       (activeMetric === "conversion" ? "" : " Count"),
                     data: currentChartDataset,
-                    borderColor: "#00BCD4",
+                    borderColor: "#FF7A00",
                     borderWidth: 3,
                     fill: true,
                     backgroundColor: "rgba(33, 150, 243, 0.05)",
                     tension: 0.4,
                     pointRadius: (context: any) =>
                       context.dataIndex === 4 ? 6 : 0,
-                    pointBackgroundColor: "#00BCD4",
+                    pointBackgroundColor: "#FF7A00",
                     pointBorderColor: "#fff",
                     pointBorderWidth: 2,
                   },
@@ -563,7 +563,7 @@ export default function CustomersListing() {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-6 items-start overflow-hidden border border-[#1C1C1C1A] rounded-lg">
+      <div className="flex flex-col lg:flex-row gap-6 items-start overflow-hidden border border-gray-100 rounded-lg">
         {/* Table Column */}
         <motion.div
           layout
@@ -590,14 +590,14 @@ export default function CustomersListing() {
                     onClick={() => setIsDateDropdownOpen(!isDateDropdownOpen)}
                     className={`flex items-center gap-2 px-3 py-2 text-xs font-semibold rounded-lg border transition-all cursor-pointer ${
                       selectedDatePreset !== "all"
-                        ? "bg-[#00BCD4]/10 border-[#00BCD4] text-[#008ba3]"
+                        ? "bg-brand-orange/10 border-brand-orange text-brand-orange-hover"
                         : "bg-white border-gray-200 text-gray-700 hover:bg-gray-50"
                     }`}
                   >
                     <HiOutlineCalendar
                       className={`w-4 h-4 ${
                         selectedDatePreset !== "all"
-                          ? "text-[#00BCD4]"
+                          ? "text-brand-orange"
                           : "text-gray-400"
                       }`}
                     />
@@ -641,7 +641,7 @@ export default function CustomersListing() {
                               setCustomEndDate("");
                               setCurrentPage(1);
                             }}
-                            className="text-[11px] font-semibold text-[#00BCD4] hover:underline"
+                            className="text-[11px] font-semibold text-brand-orange hover:underline"
                           >
                             Reset
                           </button>
@@ -665,13 +665,13 @@ export default function CustomersListing() {
                               }}
                               className={`flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs transition-colors text-left cursor-pointer ${
                                 isSelected
-                                  ? "bg-[#00BCD4]/10 text-[#008ba3] font-bold"
+                                  ? "bg-brand-orange/10 text-brand-orange-hover font-bold"
                                   : "text-gray-700 hover:bg-gray-50 font-medium"
                               }`}
                             >
                               <span>{preset.label}</span>
                               {isSelected && (
-                                <HiCheck className="w-4 h-4 text-[#00BCD4]" />
+                                <HiCheck className="w-4 h-4 text-brand-orange" />
                               )}
                             </button>
                           );
@@ -699,7 +699,7 @@ export default function CustomersListing() {
                                   setSelectedDatePreset("date_range");
                                   setCurrentPage(1);
                                 }}
-                                className="w-full text-xs px-2 py-1.5 border border-gray-200 rounded-md focus:outline-none focus:border-[#00BCD4]"
+                                className="w-full text-xs px-2 py-1.5 border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange"
                               />
                             </div>
                             <div>
@@ -714,7 +714,7 @@ export default function CustomersListing() {
                                   setSelectedDatePreset("date_range");
                                   setCurrentPage(1);
                                 }}
-                                className="w-full text-xs px-2 py-1.5 border border-gray-200 rounded-md focus:outline-none focus:border-[#00BCD4]"
+                                className="w-full text-xs px-2 py-1.5 border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange"
                               />
                             </div>
                           </div>
@@ -725,7 +725,7 @@ export default function CustomersListing() {
                                 setSelectedDatePreset("date_range");
                                 setIsDateDropdownOpen(false);
                               }}
-                              className="px-3 py-1 bg-[#00BCD4] text-white text-xs font-semibold rounded-md hover:bg-[#00acc1] transition-colors cursor-pointer"
+                              className="px-3 py-1 bg-brand-orange text-white text-xs font-semibold rounded-md hover:bg-brand-orange-hover transition-colors cursor-pointer"
                             >
                               Apply Range
                             </button>
@@ -903,7 +903,7 @@ export default function CustomersListing() {
                             setCustomEndDate("");
                             setSearchQuery("");
                           }}
-                          className="text-xs font-semibold text-[#00BCD4] hover:underline cursor-pointer"
+                          className="text-xs font-semibold text-brand-orange hover:underline cursor-pointer"
                         >
                           Clear all filters
                         </button>

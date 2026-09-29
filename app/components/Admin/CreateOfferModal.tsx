@@ -121,7 +121,7 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
         <div className="flex-1 flex flex-col bg-white">
           <div className="p-6 border-b border-gray-50 flex items-center justify-between">
             <div className="flex flex-col">
-              <h3 className="text-sm font-black text-[#1D3557]">Selection Area</h3>
+              <h3 className="text-sm font-black text-ink">Selection Area</h3>
               <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Picking products from {selectedCategory}</span>
             </div>
             <span className="text-[11px] font-black text-brand-blue bg-brand-blue-light px-3 py-1 rounded-full uppercase">
@@ -144,7 +144,7 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
                   <img src={product.image} alt={product.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <h4 className="text-xs font-bold text-[#1D3557] line-clamp-1">{product.name}</h4>
+                  <h4 className="text-xs font-bold text-ink line-clamp-1">{product.name}</h4>
                   <span className="text-[10px] font-black text-brand-blue">₦{product.price.toLocaleString()}</span>
                 </div>
 
@@ -163,7 +163,7 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
         {/* Right: Summary & Discounts */}
         <div className="w-80 border-l border-gray-100 flex flex-col bg-gray-50/30">
           <div className="p-6 border-b border-gray-50">
-            <h3 className="text-sm font-black text-[#1D3557] uppercase tracking-wider">Summary List</h3>
+            <h3 className="text-sm font-black text-ink uppercase tracking-wider">Summary List</h3>
             <p className="text-[10px] text-gray-400 font-bold mt-1 uppercase leading-tight">Apply specific discounts for selected items</p>
           </div>
 
@@ -181,7 +181,7 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
                       <img src={p.image} alt="" className="w-full h-full object-contain" />
                     </div>
                     <div className="flex flex-col min-w-0 flex-1">
-                      <span className="text-[10px] font-black text-[#1D3557] truncate">{p.name}</span>
+                      <span className="text-[10px] font-black text-ink truncate">{p.name}</span>
                       <span className="text-[9px] font-bold text-gray-400">Orig. ₦{p.price.toLocaleString()}</span>
                     </div>
                     <button
@@ -197,7 +197,7 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
                       type="number"
                       value={selections[p.id]}
                       onChange={(e) => updateDiscount(p.id, parseInt(e.target.value) || 0)}
-                      className="w-full bg-transparent border-none text-xs font-black text-[#1D3557] focus:ring-0 p-0"
+                      className="w-full bg-transparent border-none text-xs font-black text-ink focus:ring-0 p-0"
                       min="1"
                       max="99"
                     />

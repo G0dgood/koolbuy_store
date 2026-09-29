@@ -27,12 +27,12 @@ const DashboardIcon = ({ active }: { active?: boolean }) => (
       width="19"
       height="17"
       rx="3"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.8"
     />
     <path
       d="M2.5 8.5H21.5"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.8"
     />
     <rect
@@ -41,7 +41,7 @@ const DashboardIcon = ({ active }: { active?: boolean }) => (
       width="5"
       height="6"
       rx="1"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.5"
     />
     <rect
@@ -50,7 +50,7 @@ const DashboardIcon = ({ active }: { active?: boolean }) => (
       width="5"
       height="2.5"
       rx="0.8"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.5"
     />
     <rect
@@ -59,7 +59,7 @@ const DashboardIcon = ({ active }: { active?: boolean }) => (
       width="5"
       height="2.5"
       rx="0.8"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.5"
     />
   </svg>
@@ -77,7 +77,7 @@ const OrderFulfilmentIcon = ({ active }: { active?: boolean }) => (
   >
     <path
       d="M8.5 7.5V6a3.5 3.5 0 1 1 7 0v1.5"
-      stroke={active ? "currentColor" : "#64748B"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
       strokeLinecap="round"
     />
@@ -87,12 +87,12 @@ const OrderFulfilmentIcon = ({ active }: { active?: boolean }) => (
       width="15"
       height="13"
       rx="3"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
     <path
       d="M9.5 14L11.5 16L15 12"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.8"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -114,24 +114,24 @@ const VendorsIcon = ({ active }: { active?: boolean }) => (
       cx="12"
       cy="7.5"
       r="3.5"
-      stroke={active ? "currentColor" : "#64748B"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
     <path
       d="M5.5 19.5C5.5 16.2 8.4 13.5 12 13.5C15.6 13.5 18.5 16.2 18.5 19.5"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
       strokeLinecap="round"
     />
     <path
       d="M10.5 13.5L12 16.5L13.5 13.5"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.6"
       strokeLinejoin="round"
     />
     <path
       d="M11.3 16.5H12.7L12 20.5L11.3 16.5Z"
-      fill={active ? "currentColor" : "#00BCD4"}
+      fill={active ? "currentColor" : "#FF7A00"}
     />
   </svg>
 );
@@ -148,13 +148,13 @@ const AccountingIcon = ({ active }: { active?: boolean }) => (
   >
     <path
       d="M4.5 4.5C4.5 3.4 5.4 2.5 6.5 2.5H13.5L18.5 7.5V17.5C18.5 18.6 17.6 19.5 16.5 19.5"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.6"
       strokeLinecap="round"
     />
     <path
       d="M8.5 6.5H12.5M8.5 9.5H11"
-      stroke={active ? "currentColor" : "#64748B"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.6"
       strokeLinecap="round"
     />
@@ -164,7 +164,7 @@ const AccountingIcon = ({ active }: { active?: boolean }) => (
       width="10.5"
       height="12"
       rx="2"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.6"
       fill={active ? "none" : "white"}
     />
@@ -174,44 +174,44 @@ const AccountingIcon = ({ active }: { active?: boolean }) => (
       width="6.5"
       height="2.5"
       rx="0.5"
-      stroke={active ? "currentColor" : "#64748B"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.2"
     />
     <circle
       cx="12.5"
       cy="16.5"
       r="0.8"
-      fill={active ? "currentColor" : "#94A3B8"}
+      fill={active ? "currentColor" : "#A8A096"}
     />
     <circle
       cx="15.2"
       cy="16.5"
       r="0.8"
-      fill={active ? "currentColor" : "#94A3B8"}
+      fill={active ? "currentColor" : "#A8A096"}
     />
     <circle
       cx="18"
       cy="16.5"
       r="0.8"
-      fill={active ? "currentColor" : "#94A3B8"}
+      fill={active ? "currentColor" : "#A8A096"}
     />
     <circle
       cx="12.5"
       cy="19.5"
       r="0.8"
-      fill={active ? "currentColor" : "#94A3B8"}
+      fill={active ? "currentColor" : "#A8A096"}
     />
     <circle
       cx="15.2"
       cy="19.5"
       r="0.8"
-      fill={active ? "currentColor" : "#94A3B8"}
+      fill={active ? "currentColor" : "#A8A096"}
     />
     <circle
       cx="18"
       cy="19.5"
       r="0.8"
-      fill={active ? "currentColor" : "#00BCD4"}
+      fill={active ? "currentColor" : "#FF7A00"}
     />
   </svg>
 );
@@ -230,12 +230,12 @@ const CustomersIcon = ({ active }: { active?: boolean }) => (
       cx="9"
       cy="7.5"
       r="3"
-      stroke={active ? "currentColor" : "#64748B"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
     <path
       d="M3.5 18.5C3.5 15.5 6 13.5 9 13.5C12 13.5 14.5 15.5 14.5 18.5"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
       strokeLinecap="round"
     />
@@ -243,12 +243,12 @@ const CustomersIcon = ({ active }: { active?: boolean }) => (
       cx="16.5"
       cy="8"
       r="2.2"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.5"
     />
     <path
       d="M16 13.5C17.8 13.8 19.5 15.2 20 17.5"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.5"
       strokeLinecap="round"
     />
@@ -267,7 +267,7 @@ const WishlistLoveIcon = ({ active }: { active?: boolean }) => (
   >
     <path
       d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.69C2 5.6 4.49 3.1 7.56 3.1C9.38 3.1 10.99 3.98 12 5.34C13.01 3.98 14.63 3.1 16.44 3.1C19.51 3.1 22 5.6 22 8.69C22 15.69 15.52 19.82 12.62 20.81Z"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.8"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -292,12 +292,12 @@ const ReportsIcon = ({ active }: { active?: boolean }) => (
       width="18"
       height="17"
       rx="3"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
     <path
       d="M7 15L10.5 11.5L13.5 14.5L17 9.5"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.8"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -306,7 +306,7 @@ const ReportsIcon = ({ active }: { active?: boolean }) => (
       cx="17"
       cy="9.5"
       r="1.2"
-      fill={active ? "currentColor" : "#00BCD4"}
+      fill={active ? "currentColor" : "#FF7A00"}
     />
   </svg>
 );
@@ -325,26 +325,26 @@ const AdminServiceAreaIcon = ({ active }: { active?: boolean }) => (
       cx="12"
       cy="5"
       r="2.5"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.8"
     />
     <circle
       cx="6"
       cy="18"
       r="2.5"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
     <circle
       cx="18"
       cy="18"
       r="2.5"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
     <path
       d="M12 7.5V11.5M12 11.5H6V15.5M12 11.5H18V15.5"
-      stroke={active ? "currentColor" : "#64748B"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.6"
       strokeLinecap="round"
     />
@@ -365,19 +365,19 @@ const ProfileIcon = ({ active }: { active?: boolean }) => (
       cx="12"
       cy="12"
       r="9"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
     <circle
       cx="12"
       cy="9"
       r="3"
-      stroke={active ? "currentColor" : "#64748B"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.6"
     />
     <path
       d="M6.8 17.5C7.8 15 9.8 13.5 12 13.5C14.2 13.5 16.2 15 17.2 17.5"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.6"
       strokeLinecap="round"
     />
@@ -396,18 +396,18 @@ const CustomizeIcon = ({ active }: { active?: boolean }) => (
   >
     <path
       d="M14.5 4.5L19.5 9.5L8.5 20.5H3.5V15.5L14.5 4.5Z"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.7"
       strokeLinejoin="round"
     />
     <path
       d="M12.5 6.5L17.5 11.5"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.5"
     />
     <path
       d="M6.5 14.5L9.5 17.5"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.5"
       strokeLinecap="round"
     />
@@ -426,14 +426,14 @@ const StylingIcon = ({ active }: { active?: boolean }) => (
   >
     <path
       d="M14.5 3.5C13.5 2.5 11.5 2.5 10.5 3.5L4 10C3 11 3 12.5 4 13.5L10.5 20C11.5 21 13 21 14 20L20.5 13.5C21.5 12.5 21.5 11 20.5 10L14.5 3.5Z"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.7"
     />
     <circle
       cx="12"
       cy="12"
       r="3"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.6"
     />
   </svg>
@@ -455,12 +455,12 @@ const CMSIcon = ({ active }: { active?: boolean }) => (
       width="18"
       height="13"
       rx="2.5"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
     <path
       d="M9.5 19.5H14.5M12 16.5V19.5"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
       strokeLinecap="round"
     />
@@ -468,12 +468,12 @@ const CMSIcon = ({ active }: { active?: boolean }) => (
       cx="12"
       cy="10"
       r="2"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.6"
     />
     <path
       d="M12 6.8V7.8M12 12.2V13.2M8.8 10H9.8M14.2 10H15.2M9.7 7.7L10.4 8.4M13.6 11.6L14.3 12.3M14.3 7.7L13.6 8.4M10.4 11.6L9.7 12.3"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.6"
       strokeLinecap="round"
     />
@@ -496,12 +496,12 @@ const CatalogIcon = ({ active }: { active?: boolean }) => (
       width="14"
       height="16"
       rx="2"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
     <path
       d="M9 3H15V6H9V3Z"
-      stroke={active ? "currentColor" : "#64748B"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.5"
       strokeLinejoin="round"
     />
@@ -510,7 +510,7 @@ const CatalogIcon = ({ active }: { active?: boolean }) => (
       y1="10"
       x2="15.5"
       y2="10"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.5"
       strokeLinecap="round"
     />
@@ -519,7 +519,7 @@ const CatalogIcon = ({ active }: { active?: boolean }) => (
       y1="13.5"
       x2="15.5"
       y2="13.5"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.5"
       strokeLinecap="round"
     />
@@ -528,7 +528,7 @@ const CatalogIcon = ({ active }: { active?: boolean }) => (
       y1="17"
       x2="12.5"
       y2="17"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.5"
       strokeLinecap="round"
     />
@@ -549,12 +549,12 @@ const ConfigurationsIcon = ({ active }: { active?: boolean }) => (
       cx="9.5"
       cy="13.5"
       r="3.5"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
     <path
       d="M9.5 8V9.5M9.5 17.5V19M4 13.5H5.5M13.5 13.5H15M5.6 9.6L6.7 10.7M12.3 16.3L13.4 17.4M5.6 17.4L6.7 16.3M12.3 10.7L13.4 9.6"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.5"
       strokeLinecap="round"
     />
@@ -562,12 +562,12 @@ const ConfigurationsIcon = ({ active }: { active?: boolean }) => (
       cx="16"
       cy="7.5"
       r="2.5"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.6"
     />
     <path
       d="M16 4V5M16 10V11M12.5 7.5H13.5M18.5 7.5H19.5"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.4"
       strokeLinecap="round"
     />
@@ -586,7 +586,7 @@ const TaxIcon = ({ active }: { active?: boolean }) => (
   >
     <path
       d="M5.5 4C5.5 3.2 6.2 2.5 7 2.5H14.5L18.5 6.5V20C18.5 20.8 17.8 21.5 17 21.5H7C6.2 21.5 5.5 20.8 5.5 20V4Z"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
     <text
@@ -595,7 +595,7 @@ const TaxIcon = ({ active }: { active?: boolean }) => (
       fontSize="6"
       fontWeight="900"
       fontFamily="sans-serif"
-      fill={active ? "currentColor" : "#64748B"}
+      fill={active ? "currentColor" : "#78716C"}
       letterSpacing="0.4"
     >
       TAX
@@ -604,11 +604,11 @@ const TaxIcon = ({ active }: { active?: boolean }) => (
       cx="9.5"
       cy="15.5"
       r="1"
-      fill={active ? "currentColor" : "#00BCD4"}
+      fill={active ? "currentColor" : "#FF7A00"}
     />
     <path
       d="M8.5 18.5L14.5 13.5"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.4"
       strokeLinecap="round"
     />
@@ -616,7 +616,7 @@ const TaxIcon = ({ active }: { active?: boolean }) => (
       cx="13.5"
       cy="16.5"
       r="1"
-      fill={active ? "currentColor" : "#00BCD4"}
+      fill={active ? "currentColor" : "#FF7A00"}
     />
   </svg>
 );
@@ -637,26 +637,26 @@ const PaymentOptionsIcon = ({ active }: { active?: boolean }) => (
       width="18"
       height="14"
       rx="2.5"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
     <path
       d="M3 9.5H21"
-      stroke={active ? "currentColor" : "#64748B"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.6"
     />
     <circle
       cx="7.5"
       cy="14.5"
       r="1.5"
-      fill={active ? "currentColor" : "#00BCD4"}
+      fill={active ? "currentColor" : "#FF7A00"}
     />
     <line
       x1="12"
       y1="14.5"
       x2="17"
       y2="14.5"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.6"
       strokeLinecap="round"
     />
@@ -675,12 +675,12 @@ const ManageDeliveryIcon = ({ active }: { active?: boolean }) => (
   >
     <path
       d="M3 6.5C3 5.4 3.9 4.5 5 4.5H14V16.5H3V6.5Z"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.7"
     />
     <path
       d="M14 9.5H18L21 12.5V16.5H14V9.5Z"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.7"
       strokeLinejoin="round"
     />
@@ -688,14 +688,14 @@ const ManageDeliveryIcon = ({ active }: { active?: boolean }) => (
       cx="7"
       cy="17"
       r="2"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.6"
     />
     <circle
       cx="17.5"
       cy="17"
       r="2"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.6"
     />
   </svg>
@@ -715,19 +715,19 @@ const ManageRolesIcon = ({ active }: { active?: boolean }) => (
       cx="12"
       cy="12"
       r="9"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
     <circle
       cx="12"
       cy="9.5"
       r="2.5"
-      stroke={active ? "currentColor" : "#64748B"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.6"
     />
     <path
       d="M7.5 17.5C8.2 15 10 14 12 14C14 14 15.8 15 16.5 17.5"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.6"
       strokeLinecap="round"
     />
@@ -748,18 +748,18 @@ const CacheControlIcon = ({ active }: { active?: boolean }) => (
       cx="12"
       cy="12"
       r="9"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
     <path
       d="M12 7V12L15 13.5"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.6"
       strokeLinecap="round"
     />
     <path
       d="M16.5 7.5A6.5 6.5 0 0 0 7.5 7.5"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.5"
       strokeLinecap="round"
     />
@@ -778,19 +778,19 @@ const BannersIcon = ({ active }: { active?: boolean }) => (
   >
     <path
       d="M4 11V6C4 5.4 4.4 5 5 5H6.5L16 2.5V17.5L6.5 15H5C4.4 15 4 14.6 4 14V11Z"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.7"
       strokeLinejoin="round"
     />
     <path
       d="M6.5 15V20"
-      stroke={active ? "currentColor" : "#64748B"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.7"
       strokeLinecap="round"
     />
     <path
       d="M19 8.5C19.8 9.5 20.2 10.7 20.2 12C20.2 13.3 19.8 14.5 19 15.5"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.6"
       strokeLinecap="round"
     />
@@ -809,13 +809,13 @@ const PromocodeIcon = ({ active }: { active?: boolean }) => (
   >
     <path
       d="M3.5 8C3.5 6.9 4.4 6 5.5 6H18.5C19.6 6 20.5 6.9 20.5 8C19.4 8 18.5 8.9 18.5 10C18.5 11.1 19.4 12 20.5 12C19.4 12 18.5 12.9 18.5 14C18.5 15.1 19.4 16 20.5 16C20.5 17.1 19.6 18 18.5 18H5.5C4.4 18 3.5 17.1 3.5 16C4.6 16 5.5 15.1 5.5 14C5.5 12.9 4.6 12 3.5 12C4.6 12 5.5 11.1 5.5 10C5.5 8.9 4.6 8 3.5 8Z"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
-    <circle cx="9.5" cy="10" r="1" fill={active ? "currentColor" : "#00BCD4"} />
+    <circle cx="9.5" cy="10" r="1" fill={active ? "currentColor" : "#FF7A00"} />
     <path
       d="M8.5 14L14.5 10"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.5"
       strokeLinecap="round"
     />
@@ -823,7 +823,7 @@ const PromocodeIcon = ({ active }: { active?: boolean }) => (
       cx="13.5"
       cy="14"
       r="1"
-      fill={active ? "currentColor" : "#00BCD4"}
+      fill={active ? "currentColor" : "#FF7A00"}
     />
   </svg>
 );
@@ -844,12 +844,12 @@ const LoyaltyCardsIcon = ({ active }: { active?: boolean }) => (
       width="18"
       height="14"
       rx="2.5"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
     <path
       d="M7.5 14H16.5L15.5 11L13.5 12.5L12 9.5L10.5 12.5L8.5 11L7.5 14Z"
-      stroke={active ? "currentColor" : "#FF7A00"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       fill={active ? "currentColor" : "#FFF3E0"}
       strokeWidth="1.3"
       strokeLinejoin="round"
@@ -859,7 +859,7 @@ const LoyaltyCardsIcon = ({ active }: { active?: boolean }) => (
       y1="16"
       x2="9"
       y2="16"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.3"
       strokeLinecap="round"
     />
@@ -880,20 +880,20 @@ const CampaignsIcon = ({ active }: { active?: boolean }) => (
       cx="12"
       cy="9.5"
       r="6.5"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
     <polygon
       points="12,5.5 13.2,8 16,8.3 13.9,10.1 14.5,13 12,11.5 9.5,13 10.1,10.1 8,8.3 10.8,8"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.2"
-      fill={active ? "currentColor" : "#00BCD4"}
+      fill={active ? "currentColor" : "#FF7A00"}
       fillOpacity={active ? "1" : "0.2"}
       strokeLinejoin="round"
     />
     <path
       d="M8.5 15.5L7.5 21L12 18.5L16.5 21L15.5 15.5"
-      stroke={active ? "currentColor" : "#64748B"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -915,7 +915,7 @@ const ErrorsHealthIcon = ({ active }: { active?: boolean }) => (
       cx="12"
       cy="12"
       r="9"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.8"
     />
     <line
@@ -923,7 +923,7 @@ const ErrorsHealthIcon = ({ active }: { active?: boolean }) => (
       y1="7.5"
       x2="12"
       y2="12.5"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.8"
       strokeLinecap="round"
     />
@@ -931,7 +931,7 @@ const ErrorsHealthIcon = ({ active }: { active?: boolean }) => (
       cx="12"
       cy="15.5"
       r="1"
-      fill={active ? "currentColor" : "#00BCD4"}
+      fill={active ? "currentColor" : "#FF7A00"}
     />
   </svg>
 );
@@ -948,18 +948,18 @@ const ToolsIcon = ({ active }: { active?: boolean }) => (
   >
     <path
       d="M14.7 4.3C15.5 5.1 15.5 6.4 14.7 7.2L13.8 8.1L15.9 10.2L16.8 9.3C17.6 8.5 18.9 8.5 19.7 9.3C20.5 10.1 20.5 11.4 19.7 12.2L18.2 13.7L15.4 10.9L16.3 10L14.2 7.9L13.3 8.8L10.5 6L12 4.5C12.8 3.7 14.1 3.7 14.7 4.3Z"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.6"
     />
     <path
       d="M10.5 13.5L4 20L3 21L4 20L10.5 13.5Z"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.8"
       strokeLinecap="round"
     />
     <path
       d="M6 16L8 18"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.8"
       strokeLinecap="round"
     />
@@ -978,18 +978,18 @@ const KoolLogisticsIcon = ({ active }: { active?: boolean }) => (
   >
     <path
       d="M12 3L3.5 7.5V16.5L12 21L20.5 16.5V7.5L12 3Z"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.7"
       strokeLinejoin="round"
     />
     <path
       d="M12 12L20.5 7.5M12 12V21M12 12L3.5 7.5"
-      stroke={active ? "currentColor" : "#64748B"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.6"
     />
     <path
       d="M7.5 5.5L16 10"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.5"
       strokeLinecap="round"
     />
@@ -1011,22 +1011,22 @@ const DBAuditLogsIcon = ({ active }: { active?: boolean }) => (
       cy="6"
       rx="7.5"
       ry="3"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.7"
     />
     <path
       d="M4.5 6V12C4.5 13.6 7.8 15 12 15C16.2 15 19.5 13.6 19.5 12V6"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.7"
     />
     <path
       d="M4.5 12V18C4.5 19.6 7.8 21 12 21C16.2 21 19.5 19.6 19.5 18V12"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.7"
     />
     <path
       d="M10.5 10.5H14.5M10.5 16.5H13.5"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.6"
       strokeLinecap="round"
     />
@@ -1051,12 +1051,12 @@ const LogisticsTruckIcon = ({ active }: { active?: boolean }) => (
       width="13"
       height="11"
       rx="2"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.7"
     />
     <path
       d="M15 8H19.2C19.7 8 20.2 8.3 20.4 8.7L22 12V16H15V8Z"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.7"
       strokeLinejoin="round"
     />
@@ -1064,19 +1064,19 @@ const LogisticsTruckIcon = ({ active }: { active?: boolean }) => (
       cx="6.5"
       cy="17.5"
       r="2"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.7"
     />
     <circle
       cx="17.5"
       cy="17.5"
       r="2"
-      stroke={active ? "currentColor" : "#00BCD4"}
+      stroke={active ? "currentColor" : "#FFC23D"}
       strokeWidth="1.7"
     />
     <path
       d="M8.5 17.5H15.5"
-      stroke={active ? "currentColor" : "#94A3B8"}
+      stroke={active ? "currentColor" : "rgba(255,255,255,0.62)"}
       strokeWidth="1.7"
     />
   </svg>
@@ -1409,7 +1409,7 @@ export const AdminSidebar: React.FC<SidenavProps> = ({
 
       <aside
         id="sidenav"
-        className={`w-64 h-full shrink-0 flex flex-col justify-between bg-white border-r border-gray-100 transition-transform duration-300 ease-in-out sm:translate-x-0 ${
+        className={`w-64 h-full shrink-0 flex flex-col justify-between bg-ink text-white border-r border-transparent transition-transform duration-300 ease-in-out sm:translate-x-0 ${
           isOpen
             ? "fixed inset-y-0 left-0 z-50 flex translate-x-0 shadow-2xl"
             : "hidden sm:flex"
@@ -1425,14 +1425,14 @@ export const AdminSidebar: React.FC<SidenavProps> = ({
               <img
                 src="/images/koolboks/koolbuy_logo.webp"
                 alt="Kool Buy"
-                className="h-16 w-auto object-contain transition-transform group-hover:scale-105"
+                className="h-12 w-auto object-contain transition-transform group-hover:scale-105 bg-white rounded-2xl px-3 py-1.5 box-content shadow-[0_8px_20px_-10px_rgba(0,0,0,0.5)]"
               />
             </Link>
 
             {/* Mobile Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 p-1 text-gray-400 hover:text-gray-600 sm:hidden"
+              className="absolute top-4 right-4 p-1 text-white/60 hover:text-white sm:hidden"
               aria-label="Close menu"
             >
               <HiXMark size={22} />
@@ -1444,7 +1444,7 @@ export const AdminSidebar: React.FC<SidenavProps> = ({
             {navGroups.map((group) => (
               <div key={group.title} className="flex flex-col">
                 {/* Group Title */}
-                <h4 className="text-[11px] font-extrabold uppercase tracking-wider text-[#1E293B] px-3.5 mb-2.5">
+                <h4 className="text-[10.5px] font-extrabold uppercase tracking-[0.14em] text-mustard/80 px-3.5 mb-2.5">
                   {group.title}
                 </h4>
 
@@ -1462,10 +1462,10 @@ export const AdminSidebar: React.FC<SidenavProps> = ({
                           <button
                             type="button"
                             onClick={() => toggleSubmenu(item.name)}
-                            className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-all text-[13.5px] font-medium w-full cursor-pointer ${
+                            className={`flex items-center justify-between px-3.5 py-2.5 rounded-full transition-all text-[13.5px] font-semibold w-full cursor-pointer ${
                               active
-                                ? "bg-brand-blue text-white shadow-md shadow-brand-blue/20"
-                                : "text-[#64748B] hover:bg-brand-blue-light/70 hover:text-brand-blue"
+                                ? "bg-brand-orange text-white shadow-[var(--shadow-pop)] font-bold"
+                                : "text-white/75 hover:bg-white/10 hover:text-white"
                             }`}
                           >
                             <div className="flex items-center gap-3">
@@ -1478,7 +1478,7 @@ export const AdminSidebar: React.FC<SidenavProps> = ({
                             </div>
                             <HiChevronDown
                               className={`text-xs transition-transform duration-200 ${
-                                active ? "text-white" : "text-gray-400"
+                                active ? "text-white" : "text-white/50"
                               } ${isExpanded ? "rotate-0" : "-rotate-90"}`}
                             />
                           </button>
@@ -1486,10 +1486,10 @@ export const AdminSidebar: React.FC<SidenavProps> = ({
                           <Link
                             href={item.href}
                             onClick={onClose}
-                            className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-all text-[13.5px] font-medium w-full ${
+                            className={`flex items-center justify-between px-3.5 py-2.5 rounded-full transition-all text-[13.5px] font-semibold w-full ${
                               active
-                                ? "bg-brand-blue text-white shadow-md shadow-brand-blue/20"
-                                : "text-[#64748B] hover:bg-brand-blue-light/70 hover:text-brand-blue"
+                                ? "bg-brand-orange text-white shadow-[var(--shadow-pop)] font-bold"
+                                : "text-white/75 hover:bg-white/10 hover:text-white"
                             }`}
                           >
                             <div className="flex items-center gap-3">
@@ -1527,15 +1527,15 @@ export const AdminSidebar: React.FC<SidenavProps> = ({
                                       onClick={onClose}
                                       className={`flex items-center gap-2.5 px-3 py-1.5 rounded-lg text-[13px] font-medium transition-colors group ${
                                         isSubActive
-                                          ? "text-brand-blue font-bold bg-brand-blue-light/50"
-                                          : "text-[#64748B] hover:text-brand-blue hover:bg-brand-blue-light/40"
+                                          ? "text-mustard font-bold bg-white/10"
+                                          : "text-white/65 hover:text-white hover:bg-white/5"
                                       }`}
                                     >
                                       <span
                                         className={`w-1.5 h-1.5 rounded-full border shrink-0 transition-colors ${
                                           isSubActive
-                                            ? "border-brand-blue bg-brand-blue"
-                                            : "border-[#94A3B8] group-hover:border-brand-blue"
+                                            ? "border-mustard bg-mustard"
+                                            : "border-white/40 group-hover:border-white"
                                         }`}
                                       />
                                       <span className="truncate">
@@ -1562,8 +1562,8 @@ export const AdminSidebar: React.FC<SidenavProps> = ({
                                   onClick={onClose}
                                   className={`px-3 py-1.5 rounded-lg text-[13px] font-medium transition-colors ${
                                     isSubActive
-                                      ? "text-brand-blue font-bold bg-brand-blue-light/50"
-                                      : "text-[#64748B] hover:text-brand-blue hover:bg-brand-blue-light/40"
+                                      ? "text-mustard font-bold bg-white/10"
+                                      : "text-white/65 hover:text-white hover:bg-white/5"
                                   }`}
                                 >
                                   {sub.name}
@@ -1582,12 +1582,12 @@ export const AdminSidebar: React.FC<SidenavProps> = ({
         </div>
 
         {/* Subtle Footer: Admin Profile & Logout */}
-        <div className="p-4 border-t border-gray-100 flex items-center justify-between">
+        <div className="p-4 m-3 mt-2 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
           <Link
             href="/admin/profile"
             className="flex items-center gap-2.5 min-w-0 group"
           >
-            <div className="w-8 h-8 rounded-full border border-gray-200 overflow-hidden shrink-0 shadow-2xs">
+            <div className="w-9 h-9 rounded-full border-2 border-mustard overflow-hidden shrink-0">
               <img
                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop"
                 alt="Admin"
@@ -1595,10 +1595,10 @@ export const AdminSidebar: React.FC<SidenavProps> = ({
               />
             </div>
             <div className="flex flex-col min-w-0">
-              <span className="text-xs font-bold text-gray-800 truncate group-hover:text-brand-blue transition-colors">
+              <span className="text-xs font-bold text-white truncate group-hover:text-mustard transition-colors">
                 Koolbuy Admin
               </span>
-              <span className="text-[10px] text-gray-400 truncate">
+              <span className="text-[10px] text-white/50 truncate">
                 Super Admin
               </span>
             </div>
@@ -1607,7 +1607,7 @@ export const AdminSidebar: React.FC<SidenavProps> = ({
           <button
             type="button"
             onClick={() => setIsLogoutModalOpen(true)}
-            className="p-1.5 text-gray-400 hover:text-rose-500 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer"
+            className="p-1.5 text-white/60 hover:text-white hover:bg-tomato rounded-lg transition-colors cursor-pointer"
             title="Logout"
             aria-label="Logout"
           >

@@ -6,38 +6,47 @@ import { Button } from "@/app/components/Button";
 
 const Newsletter = () => {
   return (
-    <section className="w-full bg-[#EFF2F4] py-12 px-6 text-center flex flex-col items-center gap-6 relative overflow-hidden">
-      <div className="max-w-125 flex flex-col items-center text-center gap-2 z-10">
-        <h3 className="text-xl md:text-2xl font-bold text-gray-900 truncate w-full">
-          Subscribe to our newsletter
-        </h3>
-        <p className="text-sm text-gray-500 leading-relaxed">
-          Get daily news on upcoming offers from many suppliers all over the
-          world
-        </p>
-      </div>
+    <section className="w-full bg-cream px-4 sm:px-6 md:px-10 lg:px-16 pt-8 pb-16 md:pb-20">
+      <div className="relative max-w-328 mx-auto overflow-hidden rounded-[2rem] md:rounded-[2.5rem] bg-brand-orange px-6 py-10 sm:px-10 md:px-16 md:py-14 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[var(--shadow-pop)]">
+        {/* Decorative shapes */}
+        <div aria-hidden className="absolute -top-20 -right-10 w-72 h-72 rounded-full bg-mustard/40 blur-2xl" />
+        <div aria-hidden className="absolute -bottom-24 -left-16 w-72 h-72 rounded-full bg-tomato/40 blur-2xl" />
+        <svg aria-hidden viewBox="0 0 120 40" className="absolute right-8 bottom-6 w-28 opacity-40 hidden md:block" fill="none">
+          <path d="M3 22c10-14 17-14 27 0s17 14 27 0 17-14 27 0 17 14 27 0" stroke="#fff" strokeWidth="5" strokeLinecap="round" />
+        </svg>
 
-      <div className="flex flex-col md:flex-row gap-2 w-full max-w-100 z-10 px-4 md:px-0">
-        <div className="flex-1 relative flex items-center group">
-          <Icon
-            name="email"
-            size="sm"
-            className="absolute left-3 text-gray-400 group-focus-within:text-brand-blue transition-colors"
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full h-10 border border-gray-300 rounded-lg pl-10 pr-3 outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue/20 transition-all bg-white"
-          />
+        <div className="relative z-10 flex flex-col items-center lg:items-start text-center lg:text-left gap-3 max-w-xl">
+          <span className="kb-sticker kb-sticker-ink">Never miss a deal</span>
+          <h3 className="text-3xl md:text-[2.5rem] font-extrabold text-white tracking-tight leading-[1.05]">
+            Fresh offers, straight to your inbox.
+          </h3>
+          <p className="text-sm md:text-base text-white/85 font-medium leading-relaxed">
+            Get daily news on upcoming offers from trusted suppliers all over the world.
+          </p>
         </div>
-        <Button className="h-10 bg-brand-blue text-white px-8 hover:bg-brand-blue/90 shadow-md active:scale-95 transition-all w-full md:w-fit font-bold">
-          Subscribe
-        </Button>
-      </div>
 
-      {/* Decorative background element */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-brand-blue/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-32 h-32 bg-brand-blue/5 rounded-full -ml-16 -mb-16 blur-3xl"></div>
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="relative z-10 w-full max-w-md flex flex-col sm:flex-row items-stretch gap-2 bg-white p-2 rounded-3xl sm:rounded-full shadow-[var(--shadow-lift)]"
+        >
+          <div className="flex-1 relative flex items-center group">
+            <Icon
+              name="email"
+              size="sm"
+              className="absolute left-4 text-gray-400 group-focus-within:text-brand-orange transition-colors"
+            />
+            <input
+              type="email"
+              placeholder="you@example.com"
+              aria-label="Email address"
+              className="w-full h-12 rounded-full pl-11 pr-3 outline-none bg-transparent text-ink font-medium placeholder-gray-400"
+            />
+          </div>
+          <Button type="submit" variant="blue" className="h-12 px-7 w-full sm:w-fit">
+            Subscribe
+          </Button>
+        </form>
+      </div>
     </section>
   );
 };

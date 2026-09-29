@@ -43,7 +43,7 @@ export function CustomerMessageDrawer({ isOpen, onClose, customer }: CustomerMes
              />
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-black text-[#1D3557]">{customer.name}</span>
+            <span className="text-sm font-black text-ink">{customer.name}</span>
             <span className="text-[11px] font-bold text-gray-400">{customer.email}</span>
           </div>
           <div className="ml-auto flex items-center gap-2">
@@ -66,7 +66,7 @@ export function CustomerMessageDrawer({ isOpen, onClose, customer }: CustomerMes
               <div 
                 className={`max-w-[85%] px-4 py-3 rounded-2xl text-[13px] font-medium leading-relaxed shadow-sm transition-all
                   ${msg.sender === "admin" 
-                    ? "bg-[#1D3557] text-white rounded-tr-none" 
+                    ? "bg-ink text-white rounded-tr-none" 
                     : "bg-white border border-gray-100 text-gray-700 rounded-tl-none"}
                 `}
               >
@@ -104,7 +104,7 @@ export function CustomerMessageDrawer({ isOpen, onClose, customer }: CustomerMes
           
           <Button 
             variant="primary" 
-            className="w-full h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest shadow-lg shadow-[#1D3557]/10"
+            className="w-full h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest shadow-lg shadow-ink/10"
             disabled={!messageText.trim()}
             iconRight={<Icon name="arrow_forward" folder="icon" size="sm" />}
             onClick={() => {

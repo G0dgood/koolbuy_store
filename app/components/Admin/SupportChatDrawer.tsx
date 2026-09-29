@@ -40,7 +40,7 @@ export function SupportChatDrawer({ isOpen, onClose, ticket }: SupportChatDrawer
         <Button
           variant="outline"
           shape="rounded-sm"
-          className="!py-1.5 !px-3 text-[10px] font-black uppercase tracking-wider border-gray-100 text-[#1D3557] gap-2 hover:bg-gray-50 transition-colors"
+          className="!py-1.5 !px-3 text-[10px] font-black uppercase tracking-wider border-gray-100 text-ink gap-2 hover:bg-gray-50 transition-colors"
           onClick={() => setIsStatusModalOpen(true)}
         >
           <BiSliderAlt size={14} className="text-brand-blue" />
@@ -58,7 +58,7 @@ export function SupportChatDrawer({ isOpen, onClose, ticket }: SupportChatDrawer
               <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></div>
            </div>
            <div className="flex flex-col">
-              <span className="text-sm font-black text-[#1D3557]">{ticket.customer}</span>
+              <span className="text-sm font-black text-ink">{ticket.customer}</span>
               <div className="flex items-center gap-1.5">
                  <div className="flex items-center gap-1 text-emerald-500">
                     <HiCheckBadge size={14} />
@@ -78,7 +78,7 @@ export function SupportChatDrawer({ isOpen, onClose, ticket }: SupportChatDrawer
                     <div className={`p-4 rounded-2xl text-xs font-bold leading-relaxed shadow-sm
                        ${msg.sender === "agent" 
                           ? "bg-brand-blue text-white rounded-tr-none" 
-                          : "bg-gray-100 text-[#1D3557] rounded-tl-none"}
+                          : "bg-gray-100 text-ink rounded-tl-none"}
                     `}>
                        {msg.text}
                     </div>
@@ -105,7 +105,7 @@ export function SupportChatDrawer({ isOpen, onClose, ticket }: SupportChatDrawer
                  value={message}
                  onChange={(e) => setMessage(e.target.value)}
                  placeholder="Type your message..."
-                 className="flex-1 bg-transparent border-none outline-none text-xs font-bold text-[#1D3557] placeholder:text-gray-400 py-2"
+                 className="flex-1 bg-transparent border-none outline-none text-xs font-bold text-ink placeholder:text-gray-400 py-2"
               />
               <button className="w-10 h-10 rounded-xl bg-brand-blue text-white flex items-center justify-center shadow-lg shadow-blue-100 hover:scale-105 active:scale-95 transition-all">
                  <IoSend size={18} />

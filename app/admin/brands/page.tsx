@@ -83,7 +83,7 @@ export default function BrandsListing() {
         </div>
       </div>
 
-      <div className="bg-white overflow-hidden flex flex-col border border-[#1C1C1C1A] rounded-[6px]">
+      <div className="bg-white overflow-hidden flex flex-col border border-gray-100 rounded-[6px]">
         {/* Filter Controls Row */}
         <div className="p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between border-b border-gray-50">
           <TabFilter
@@ -164,7 +164,7 @@ export default function BrandsListing() {
                       <div className="w-10 h-10 rounded-[6px] border border-gray-100 overflow-hidden bg-white p-1 ring-1 ring-gray-100 flex items-center justify-center">
                         <img src={brand.logo} alt={brand.name} className="w-full h-full object-contain" />
                       </div>
-                      <span className="text-sm font-bold text-[#1D3557] group-hover:text-blue-600 transition-colors">
+                      <span className="text-sm font-bold text-ink group-hover:text-blue-600 transition-colors">
                         {brand.name}
                       </span>
                     </div>
@@ -173,7 +173,7 @@ export default function BrandsListing() {
                   <td>
                     <div className="flex items-center gap-1.5">
                       <Icon name="star" folder="dashboardIcon" size="xs" className="text-amber-400" />
-                      <span className="text-xs font-bold text-[#1D3557]">{brand.rating}</span>
+                      <span className="text-xs font-bold text-ink">{brand.rating}</span>
                     </div>
                   </td>
                   <td>

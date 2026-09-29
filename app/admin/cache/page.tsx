@@ -134,8 +134,8 @@ export default function CacheControlPage() {
     <div className="flex flex-col gap-6 mx-auto pb-16">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 right-8 z-50 bg-[#1D3557] text-white text-xs px-4 py-3 rounded-lg shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
-          <HiOutlineCheckCircle className="w-4 h-4 text-[#00BCD4]" />
+        <div className="fixed top-20 right-8 z-50 bg-ink text-white text-xs px-4 py-3 rounded-lg shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
+          <HiOutlineCheckCircle className="w-4 h-4 text-brand-orange" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -147,7 +147,7 @@ export default function CacheControlPage() {
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
               Cache Control
             </h1>
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-[#00BCD4]/20">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-brand-orange/20">
               Redis Performance
             </span>
           </div>
@@ -175,12 +175,12 @@ export default function CacheControlPage() {
 
       {/* Redis Server Metrics Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white rounded-lg border border-gray-100 p-4 shadow-2xs">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 shadow-2xs">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
               Redis Status
             </span>
-            <HiOutlineServerStack className="w-4 h-4 text-[#00BCD4]" />
+            <HiOutlineServerStack className="w-4 h-4 text-brand-orange" />
           </div>
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -191,7 +191,7 @@ export default function CacheControlPage() {
           </span>
         </div>
 
-        <div className="bg-white rounded-lg border border-gray-100 p-4 shadow-2xs">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 shadow-2xs">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
               Memory Usage
@@ -204,7 +204,7 @@ export default function CacheControlPage() {
           </span>
         </div>
 
-        <div className="bg-white rounded-lg border border-gray-100 p-4 shadow-2xs">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 shadow-2xs">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
               Cache Hit Ratio
@@ -217,7 +217,7 @@ export default function CacheControlPage() {
           </span>
         </div>
 
-        <div className="bg-white rounded-lg border border-gray-100 p-4 shadow-2xs">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 shadow-2xs">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
               Active Modules
@@ -240,11 +240,11 @@ export default function CacheControlPage() {
         {/* Card Header */}
         <div className="p-4 sm:p-5 border-b border-gray-100 bg-gray-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-brand-blue-light border border-[#00BCD4]/20 text-[#00BCD4] flex items-center justify-center">
+            <div className="w-9 h-9 rounded-lg bg-brand-blue-light border border-brand-orange/20 text-brand-orange flex items-center justify-center">
               <HiOutlineServerStack className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-sm font-bold text-[#1D3557] uppercase tracking-wider">
+              <h2 className="text-sm font-bold text-ink uppercase tracking-wider">
                 Module-wise Cache Management
               </h2>
               <p className="text-xs text-gray-500 mt-0.5">
@@ -274,7 +274,7 @@ export default function CacheControlPage() {
                   <div
                     className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 border ${
                       mod.enabled
-                        ? "bg-brand-blue-light border-[#00BCD4]/20 text-[#00BCD4]"
+                        ? "bg-brand-blue-light border-brand-orange/20 text-brand-orange"
                         : "bg-gray-100 border-gray-200 text-gray-400"
                     }`}
                   >
@@ -343,7 +343,7 @@ export default function CacheControlPage() {
                         onChange={() => toggleModuleEnable(mod.id)}
                         className="sr-only peer"
                       />
-                      <div className="w-10 h-5.5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4.5 after:w-4.5 after:transition-all peer-checked:bg-[#00BCD4]" />
+                      <div className="w-10 h-5.5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4.5 after:w-4.5 after:transition-all peer-checked:bg-brand-orange" />
                     </label>
                   </div>
                 </div>

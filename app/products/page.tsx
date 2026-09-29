@@ -168,7 +168,7 @@ const ProductsPage = () => {
   }, [filters, products]);
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-cream flex flex-col font-sans text-black">
       {/* Desktop Header */}
       <Header className="hidden md:block" />
 

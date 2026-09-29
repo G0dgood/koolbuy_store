@@ -47,15 +47,15 @@ form select:disabled {
 }
 
 form input::-webkit-input-placeholder {
-  color: #d8d8d8;
+  color: #D9D0C3;
 }
 
 form input::-ms-input-placeholder {
-  color: #d8d8d8;
+  color: #D9D0C3;
 }
 
 form input::placeholder {
-  color: #d8d8d8;
+  color: #D9D0C3;
   font-size: 13px;
 }
 
@@ -112,15 +112,15 @@ form input[type="submit"] {
 }
 
 .input-group input::-webkit-input-placeholder {
-  color: #d8d8d8;
+  color: #D9D0C3;
 }
 
 .input-group input::-ms-input-placeholder {
-  color: #d8d8d8;
+  color: #D9D0C3;
 }
 
 .input-group input::placeholder {
-  color: #d8d8d8;
+  color: #D9D0C3;
 }
 
 .input-group input[type="button"],
@@ -222,8 +222,8 @@ input :hover {
 }
 
 .btn_choose {
-  border: 1px solid #2563EB;
-  background-color: #2563EB;
+  border: 1px solid #EA6A00;
+  background-color: #EA6A00;
   color: white;
   border-radius: var(--radius);
   font-style: normal;
@@ -325,7 +325,7 @@ button {
   justify-content: center;
   align-items: center;
   color: var(--accent-blue);
-  background-color: #EEE9FD;
+  background-color: #FFF1E3;
   border-radius: 0px;
   font-size: smaller;
   white-space: nowrap;
@@ -415,7 +415,7 @@ textarea {
   outline: none;
   margin-top: 3px;
   border-radius: var(--radius);
-  border: 1px solid #ccc;
+  border: 1px solid #EAE2D6;
   padding: 10px;
   font-size: 14px;
   transition: all 0.3s ease;

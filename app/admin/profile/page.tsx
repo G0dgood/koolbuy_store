@@ -107,7 +107,7 @@ export default function OrganisationProfilePage() {
         {/* Left Column: Brand & Legal Credentials (4 cols) */}
         <div className="xl:col-span-4 flex flex-col gap-6">
           {/* Brand Summary Card */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col items-center text-center relative overflow-hidden">
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 flex flex-col items-center text-center relative overflow-hidden">
             {/* Top Accent Pattern */}
             <div className="absolute top-0 inset-x-0 h-24 bg-linear-to-r from-blue-600 via-brand-blue to-sky-500 opacity-90" />
 
@@ -175,7 +175,7 @@ export default function OrganisationProfilePage() {
           </div>
 
           {/* Corporate Channels Card */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col gap-4">
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 flex flex-col gap-4">
             <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
               <HiGlobeAlt className="w-4 h-4 text-brand-blue" />
               Corporate Web Presence
@@ -248,7 +248,7 @@ export default function OrganisationProfilePage() {
         {/* Right Column: Detailed Organisation Profile & Coordinates (8 cols) */}
         <div className="xl:col-span-8 flex flex-col gap-8">
           {/* Main Business Details */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
             <div className="flex items-center justify-between border-b border-gray-50 pb-4">
               <div className="flex items-center gap-2">
                 <HiBuildingOffice2 className="w-5 h-5 text-brand-blue" />
@@ -361,7 +361,7 @@ export default function OrganisationProfilePage() {
           </div>
 
           {/* Headquarters Location & Operating Coordinates */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
             <div className="flex items-center gap-2 border-b border-gray-50 pb-4">
               <HiMapPin className="w-5 h-5 text-brand-blue" />
               <h3 className="text-base font-bold text-gray-900">
@@ -471,7 +471,7 @@ export default function OrganisationProfilePage() {
           </div>
 
           {/* Official Communication & Banking Settlement */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
             <div className="flex items-center gap-2 border-b border-gray-50 pb-4">
               <HiPhone className="w-5 h-5 text-brand-blue" />
               <h3 className="text-base font-bold text-gray-900">

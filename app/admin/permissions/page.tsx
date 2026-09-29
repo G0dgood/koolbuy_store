@@ -94,7 +94,7 @@ export default function PermissionsAccordion() {
    {/* Action Bar */}
    <div className="flex justify-between items-end gap-6 mb-2">
     <div className="flex flex-col gap-1">
-     <h2 className="text-xl font-black text-[#1D3557]">Administrative Permissions</h2>
+     <h2 className="text-xl font-black text-ink">Administrative Permissions</h2>
      <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest leading-none">Role Based Governance</p>
     </div>
     <div className="flex gap-3">
@@ -110,7 +110,7 @@ export default function PermissionsAccordion() {
    </div>
 
    {/* Global Filter Bar */}
-   <div className="bg-white rounded-[6px] border border-[#1C1C1C1A] p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between">
+   <div className="bg-white rounded-[6px] border border-gray-100 p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between">
     <div className="flex items-center gap-3 w-full lg:w-auto">
      <Dropdown
       options={[
@@ -151,7 +151,7 @@ export default function PermissionsAccordion() {
      const isExpanded = expandedRoleId === role.id;
 
      return (
-      <div key={role.id} className="bg-white rounded-[6px] border border-[#1C1C1C1A] overflow-hidden flex flex-col transition-all duration-300 hover:shadow-md">
+      <div key={role.id} className="bg-white rounded-[6px] border border-gray-100 overflow-hidden flex flex-col transition-all duration-300 hover:shadow-md">
        {/* Accordion Header */}
        <button
         onClick={() => setExpandedRoleId(isExpanded ? null : role.id)}
@@ -160,7 +160,7 @@ export default function PermissionsAccordion() {
         <div className="flex items-center gap-4">
          <div className={`w-3 h-3 rounded-full ${role.color} shadow-sm`} />
          <div className="flex flex-col gap-0.5">
-          <span className="text-base font-black text-[#1D3557]">{role.name}</span>
+          <span className="text-base font-black text-ink">{role.name}</span>
           <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{role.users} Active Users Assigned</span>
          </div>
         </div>
@@ -217,7 +217,7 @@ export default function PermissionsAccordion() {
               >
                <td className="py-4 pl-8">
                 <div className="flex flex-col">
-                 <span className="text-[13px] font-black text-[#1D3557]">{module.label}</span>
+                 <span className="text-[13px] font-black text-ink">{module.label}</span>
                  <span className="text-[9px] font-bold text-gray-300 uppercase tracking-widest">{module.category} Sector</span>
                 </div>
                </td>

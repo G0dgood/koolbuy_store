@@ -11,7 +11,7 @@ import { Breadcrumbs } from "@/app/components/Breadcrumbs";
 
 export default function CheckoutPage() {
   return (
-    <div className="min-h-screen flex flex-col font-sans relative overflow-hidden bg-[#F7FAFC]">
+    <div className="min-h-screen flex flex-col font-sans relative overflow-hidden bg-cream">
       {/* Custom Background Image */}
       <div className="absolute inset-0 w-full h-full -z-10">
         <Image

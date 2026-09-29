@@ -27,7 +27,7 @@ export const OrderSummary: React.FC = () => {
 
   return (
     <div className="w-full lg:w-[400px] xl:w-[450px] shrink-0 sticky top-28">
-      <section className="bg-white border border-[#1C1C1C1A] rounded-[6px] overflow-hidden transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
+      <section className="bg-white border border-gray-100 rounded-[6px] overflow-hidden transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
         <div className="p-6 md:p-8 bg-gray-50/50 border-b border-gray-100 flex items-center justify-between">
           <div>
             <h2 className="text-xl font-bold text-gray-900 tracking-tight">Order Summary</h2>
@@ -113,8 +113,8 @@ export const OrderSummary: React.FC = () => {
             </div>
 
             <div className="flex items-center justify-center gap-4 opacity-50 hover:opacity-100 transition-opacity">
-              <Image src="/payment/Payment=payment, Pay-type=visa.png" alt="Visa" width={32} height={20} className="object-contain grayscale hover:grayscale-0 transition-all cursor-crosshair" />
-              <Image src="/payment/Payment=payment, Pay-type=mastercard.png" alt="Mastercard" width={32} height={20} className="object-contain grayscale hover:grayscale-0 transition-all cursor-crosshair" />
+              <Image unoptimized src="/payment/Payment=payment, Pay-type=visa.png" alt="Visa" width={32} height={20} className="object-contain grayscale hover:grayscale-0 transition-all cursor-crosshair" />
+              <Image unoptimized src="/payment/Payment=payment, Pay-type=mastercard.png" alt="Mastercard" width={32} height={20} className="object-contain grayscale hover:grayscale-0 transition-all cursor-crosshair" />
               <div className="w-[1px] h-3 bg-gray-300 mx-1" />
               <Icon name="security" size="sm" className="text-gray-400" />
             </div>

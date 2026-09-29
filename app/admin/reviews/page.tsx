@@ -408,7 +408,7 @@ export default function ReviewListing() {
       </div>
 
       {/* Main Table Container */}
-      <div className="bg-white overflow-hidden flex flex-col border border-[#1C1C1C1A] rounded-lg shadow-2xs">
+      <div className="bg-white overflow-hidden flex flex-col border border-gray-100 rounded-lg shadow-2xs">
         {/* Toolbar Bar */}
         <div className="p-4 sm:p-5 flex flex-col sm:flex-row gap-4 items-center justify-between border-b border-gray-100">
           <div className="relative w-full sm:w-80">
@@ -524,13 +524,13 @@ export default function ReviewListing() {
                         <Button
                           variant="outline"
                           shape="rounded-sm"
-                          className="px-3 py-1.5 text-xs font-semibold text-[#00BCD4] border-[#00BCD4]/30 hover:bg-[#00BCD4]/10 transition-all flex items-center gap-1.5 cursor-pointer"
+                          className="px-3 py-1.5 text-xs font-semibold text-brand-orange border-brand-orange/30 hover:bg-brand-orange/10 transition-all flex items-center gap-1.5 cursor-pointer"
                           onClick={() => {
                             setSelectedProductForReviews(product);
                             setIsReviewsDrawerOpen(true);
                           }}
                         >
-                          <HiOutlineEye className="w-4 h-4 text-[#00BCD4]" />
+                          <HiOutlineEye className="w-4 h-4 text-brand-orange" />
                           <span>View Reviews</span>
                         </Button>
                       </td>
@@ -601,7 +601,7 @@ export default function ReviewListing() {
                 />
               </div>
               <div className="flex flex-col gap-1 min-w-0">
-                <h4 className="text-sm font-bold text-[#1D3557] truncate">
+                <h4 className="text-sm font-bold text-ink truncate">
                   {selectedProductForReviews.name}
                 </h4>
                 <div className="flex items-center gap-2">

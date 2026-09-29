@@ -43,7 +43,7 @@ export function BestSellingProductTable() {
  return (
   <div className="bg-white p-8 rounded-lg border border-gray-100 shadow-sm flex flex-col gap-6">
    <div className="flex justify-between items-center">
-    <h3 className="text-[18px] font-black text-[#1D3557]">Best selling product</h3>
+    <h3 className="text-[18px] font-black text-ink">Best selling product</h3>
     <Button
      variant="blue"
      iconRight={<Icon name="sort" folder="dashboardIcon" size="sm" />}
@@ -72,17 +72,17 @@ export function BestSellingProductTable() {
            src={p.image}
            className="w-10 h-10 rounded-[6px] object-contain bg-gray-50 border border-gray-100 p-1"
           />
-          <span className="text-[12px] font-black text-[#1D3557]">{p.name}</span>
+          <span className="text-[12px] font-black text-ink">{p.name}</span>
          </div>
         </td>
         <td className="text-[12px] font-bold text-gray-500">{p.orders}</td>
         <td>
          <div className="flex items-center gap-2">
           <span className={`w-2 h-2 rounded-full ${p.color}`}></span>
-          <span className="text-[12px] font-bold text-[#1D3557]">{p.status}</span>
+          <span className="text-[12px] font-bold text-ink">{p.status}</span>
          </div>
         </td>
-        <td className="text-[12px] font-black text-[#1D3557] text-right">{p.price}</td>
+        <td className="text-[12px] font-black text-ink text-right">{p.price}</td>
        </tr>
       ))}
      </tbody>

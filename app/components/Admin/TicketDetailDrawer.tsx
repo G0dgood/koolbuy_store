@@ -25,7 +25,7 @@ export function TicketDetailDrawer({ isOpen, onClose, ticket }: TicketDetailDraw
     <Drawer isOpen={isOpen} onClose={onClose} title="Ticket Details" width="max-w-md">
       <div className="flex flex-col gap-8 pb-8">
         {/* Header Summary */}
-        <div className="p-6 rounded-2xl bg-[#1D3557] text-white flex flex-col gap-4 shadow-lg shadow-blue-100/50 relative overflow-hidden">
+        <div className="p-6 rounded-2xl bg-ink text-white flex flex-col gap-4 shadow-lg shadow-blue-100/50 relative overflow-hidden">
           <div className="absolute top-0 right-0 p-8 opacity-10 rotate-12">
              <Icon name="tabler_message" folder="dashboardIcon" size="lg" className="w-24 h-24" />
           </div>
@@ -47,12 +47,12 @@ export function TicketDetailDrawer({ isOpen, onClose, ticket }: TicketDetailDraw
         {/* Customer Information */}
         <div className="flex flex-col gap-4">
            <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Customer Profile</h4>
-           <div className="bg-white border border-gray-100 rounded-xl p-4 flex items-center gap-4 shadow-sm">
+           <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 flex items-center gap-4 shadow-sm">
               <div className="w-12 h-12 rounded-full bg-blue-50 border-2 border-white shadow-sm flex items-center justify-center overflow-hidden">
                  <img src={"https://ui-avatars.com/api/?name=" + ticket.customer} alt="" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1 flex flex-col gap-0.5">
-                 <span className="text-[13px] font-black text-[#1D3557]">{ticket.customer}</span>
+                 <span className="text-[13px] font-black text-ink">{ticket.customer}</span>
                  <span className="text-[11px] font-bold text-gray-400">#USR_023456789</span>
               </div>
               <button className="p-2 text-gray-400 hover:text-brand-blue transition-colors">
@@ -67,7 +67,7 @@ export function TicketDetailDrawer({ isOpen, onClose, ticket }: TicketDetailDraw
            <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-2">
                  <div className="bg-gray-50 border border-gray-100 rounded-2xl rounded-tl-none p-4 shadow-sm">
-                    <p className="text-xs font-bold text-[#1D3557] leading-relaxed">
+                    <p className="text-xs font-bold text-ink leading-relaxed">
                        Hello support team, I'm having issues with my latest order. The status hasn't updated in three days though I've been charged. Please assist.
                     </p>
                  </div>
@@ -90,17 +90,17 @@ export function TicketDetailDrawer({ isOpen, onClose, ticket }: TicketDetailDraw
            <div className="flex flex-col gap-8 relative pl-6 before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-gray-100">
               <div className="relative flex flex-col gap-1">
                  <div className="absolute -left-[22px] top-1 w-3 h-3 rounded-full bg-blue-500 border-2 border-white ring-4 ring-blue-50"></div>
-                 <span className="text-[12px] font-black text-[#1D3557]">Last Activity Tracked</span>
+                 <span className="text-[12px] font-black text-ink">Last Activity Tracked</span>
                  <span className="text-[10px] font-bold text-gray-400">{ticket.activity}</span>
               </div>
               <div className="relative flex flex-col gap-1 opacity-60">
                  <div className="absolute -left-[22px] top-1 w-3 h-3 rounded-full bg-gray-200 border-2 border-white"></div>
-                 <span className="text-[12px] font-black text-[#1D3557]">Ticket Assigned to Agent</span>
+                 <span className="text-[12px] font-black text-ink">Ticket Assigned to Agent</span>
                  <span className="text-[10px] font-bold text-gray-400">1 hour ago</span>
               </div>
               <div className="relative flex flex-col gap-1 opacity-60">
                  <div className="absolute -left-[22px] top-1 w-3 h-3 rounded-full bg-gray-200 border-2 border-white"></div>
-                 <span className="text-[12px] font-black text-[#1D3557]">Ticket Created</span>
+                 <span className="text-[12px] font-black text-ink">Ticket Created</span>
                  <span className="text-[10px] font-bold text-gray-400">3 hours ago</span>
               </div>
            </div>
@@ -111,7 +111,7 @@ export function TicketDetailDrawer({ isOpen, onClose, ticket }: TicketDetailDraw
            <Button variant="primary" className="w-full h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest shadow-lg shadow-blue-100">
               Reply to Customer
            </Button>
-           <Button variant="outline" className="w-full h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest border-gray-200 text-gray-400 hover:text-[#1D3557]">
+           <Button variant="outline" className="w-full h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest border-gray-200 text-gray-400 hover:text-ink">
               Escalate Ticket
            </Button>
         </div>

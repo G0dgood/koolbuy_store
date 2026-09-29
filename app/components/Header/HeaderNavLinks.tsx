@@ -23,14 +23,14 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
   return (
     <div className="hidden lg:flex items-center h-full">
       {/* Navigation Buttons Row */}
-      <div className="flex items-center gap-4 xl:gap-6 text-xs xl:text-sm font-semibold text-gray-800 h-full">
+      <div className="flex items-center gap-1 xl:gap-2 text-xs xl:text-sm font-bold text-ink h-full">
         {/* Home */}
         <Link
           href="/"
-          className={`transition-colors py-2 whitespace-nowrap ${
+          className={`transition-colors px-3.5 py-2 rounded-full whitespace-nowrap ${
             isActive("/")
-              ? "text-[#FF7A00] font-bold"
-              : "text-gray-800 hover:text-[#FF7A00]"
+              ? "bg-brand-orange-light text-brand-orange-hover"
+              : "text-ink hover:bg-cream hover:text-brand-orange"
           }`}
         >
           Home
@@ -44,17 +44,17 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
           <button
             type="button"
             onClick={() => onToggleDropdown("categories")}
-            className={`flex items-center gap-1.5 h-full py-2 transition-colors cursor-pointer outline-none whitespace-nowrap ${
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-full transition-colors cursor-pointer outline-none whitespace-nowrap ${
               activeDropdown === "categories"
-                ? "text-[#FF7A00]"
-                : "text-gray-900 hover:text-[#FF7A00]"
+                ? "bg-brand-orange-light text-brand-orange-hover"
+                : "text-ink hover:bg-cream hover:text-brand-orange"
             }`}
           >
             <span>All categories</span>
             <FiChevronDown
               className={`text-xs transition-transform duration-200 ${
                 activeDropdown === "categories"
-                  ? "rotate-180 text-[#FF7A00]"
+                  ? "rotate-180 text-brand-orange"
                   : "text-gray-400"
               }`}
             />
@@ -70,7 +70,7 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
             href="https://kool-konnect-frontend.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="h-10 bg-brand-blue text-white px-8 hover:bg-brand-blue/90 shadow-md active:scale-95 transition-all w-full md:w-fit font-bold"
+            className="h-10 bg-ink text-white px-6 mx-1 rounded-full hover:bg-ink-soft hover:-translate-y-px shadow-[0_8px_20px_-10px_rgba(15,61,46,0.7)] active:scale-95 transition-all w-full md:w-fit font-bold"
           >
             Marketplace
           </Button>
@@ -84,17 +84,17 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
           <button
             type="button"
             onClick={() => onToggleDropdown("quickLinks")}
-            className={`flex items-center gap-1 transition-colors cursor-pointer py-2 outline-none whitespace-nowrap ${
+            className={`flex items-center gap-1 px-3.5 py-2 rounded-full transition-colors cursor-pointer outline-none whitespace-nowrap ${
               activeDropdown === "quickLinks"
-                ? "text-[#FF7A00] font-bold"
-                : "text-gray-800 hover:text-[#FF7A00]"
+                ? "bg-brand-orange-light text-brand-orange-hover"
+                : "text-ink hover:bg-cream hover:text-brand-orange"
             }`}
           >
             <span>Quick Links</span>
             <FiChevronDown
               className={`text-xs transition-transform duration-200 ${
                 activeDropdown === "quickLinks"
-                  ? "rotate-180 text-[#FF7A00]"
+                  ? "rotate-180 text-brand-orange"
                   : "text-gray-400"
               }`}
             />

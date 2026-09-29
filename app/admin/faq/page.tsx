@@ -97,7 +97,7 @@ export default function FAQManagementPage() {
       </div>
 
       {/* Table Section */}
-      <div className="bg-white overflow-hidden mb-8 border border-[#1C1C1C1A] rounded-[6px]">
+      <div className="bg-white overflow-hidden mb-8 border border-gray-100 rounded-[6px]">
         <div className="px-8 py-6 border-b border-gray-50 flex flex-col lg:flex-row lg:items-center justify-between gap-6 ">
           <div className="flex flex-col sm:flex-row items-center gap-6">
             <TabFilter
@@ -155,7 +155,7 @@ export default function FAQManagementPage() {
                       <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-brand-blue group-hover:bg-brand-blue/10 transition-colors">
                         <HiOutlineQuestionMarkCircle size={20} />
                       </div>
-                      <span className="text-xs font-bold text-[#1D3557] line-clamp-1 max-w-[300px]">{faq.question}</span>
+                      <span className="text-xs font-bold text-ink line-clamp-1 max-w-[300px]">{faq.question}</span>
                     </div>
                   </td>
                   <td>

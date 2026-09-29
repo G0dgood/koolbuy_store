@@ -241,7 +241,7 @@ export default function CustomizePage() {
 
       {/* TAB 1: LOCALIZATION */}
       {activeTab === "localization" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
           <div className="flex justify-between items-center border-b border-gray-50 pb-4">
             <div>
               <h3 className="text-base font-bold text-gray-900">
@@ -421,7 +421,7 @@ export default function CustomizePage() {
       {/* TAB 2: VENDOR TYPE */}
       {activeTab === "vendor-type" && (
         <div className="flex flex-col gap-6">
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-50 pb-4">
               <div>
                 <h3 className="text-base font-bold text-gray-900">
@@ -577,7 +577,7 @@ export default function CustomizePage() {
 
       {/* TAB 3: LINKS */}
       {activeTab === "links" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-50 pb-4">
             <div>
               <h3 className="text-base font-bold text-gray-900">
@@ -697,7 +697,7 @@ export default function CustomizePage() {
 
       {/* TAB 4: NOMENCLATURE */}
       {activeTab === "nomenclature" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
           <div className="flex justify-between items-center border-b border-gray-50 pb-4">
             <div>
               <h3 className="text-base font-bold text-gray-900">
@@ -852,7 +852,7 @@ export default function CustomizePage() {
 
       {/* TAB 5: USER ONBOARDING */}
       {activeTab === "user-onboarding" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
           <div className="flex justify-between items-center border-b border-gray-50 pb-4">
             <div>
               <h3 className="text-base font-bold text-gray-900">
@@ -967,7 +967,7 @@ export default function CustomizePage() {
 
       {/* TAB 6: MISCELLANEOUS */}
       {activeTab === "miscellaneous" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
           <div className="flex justify-between items-center border-b border-gray-50 pb-4">
             <div>
               <h3 className="text-base font-bold text-gray-900">
@@ -1077,7 +1077,7 @@ export default function CustomizePage() {
 
       {/* TAB 7: POLICY */}
       {activeTab === "policy" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
           <div className="flex justify-between items-center border-b border-gray-50 pb-4">
             <div>
               <h3 className="text-base font-bold text-gray-900">

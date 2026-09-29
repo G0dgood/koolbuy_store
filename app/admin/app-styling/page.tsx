@@ -69,13 +69,13 @@ export default function AppStylingPage() {
 
   // 2. Color Palette
   const [colors, setColors] = useState({
-    primary: "#2196F3",
+    primary: "#0F3D2E",
     secondary: "#0284C7",
     accent: "#F59E0B",
     background: "#F8FAFC",
     surface: "#FFFFFF",
     textPrimary: "#0F172A",
-    textSecondary: "#64748B",
+    textSecondary: "#78716C",
     success: "#10B981",
     danger: "#EF4444",
   });
@@ -84,8 +84,8 @@ export default function AppStylingPage() {
   const [tabBarStyle, setTabBarStyle] = useState({
     layout: "docked", // "docked" | "floating" | "pill"
     backgroundType: "glass", // "solid" | "glass" | "dark"
-    activeColor: "#2196F3",
-    inactiveColor: "#94A3B8",
+    activeColor: "#0F3D2E",
+    inactiveColor: "#A8A096",
     showLabels: true,
     showCenterActionButton: true,
     actionButtonIcon: "cart",
@@ -259,7 +259,7 @@ export default function AppStylingPage() {
 
           {/* 1. FONT STYLES */}
           {activeSection === "fonts" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
               <div className="flex justify-between items-center border-b border-gray-50 pb-4">
                 <div>
                   <h3 className="text-base font-bold text-gray-900">
@@ -400,7 +400,7 @@ export default function AppStylingPage() {
 
           {/* 2. COLOR PICKER */}
           {activeSection === "colors" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
               <div className="flex justify-between items-center border-b border-gray-50 pb-4">
                 <div>
                   <h3 className="text-base font-bold text-gray-900">
@@ -431,14 +431,14 @@ export default function AppStylingPage() {
                     onClick={() =>
                       setColors({
                         ...colors,
-                        primary: "#2196F3",
+                        primary: "#0F3D2E",
                         secondary: "#0284C7",
                         accent: "#F59E0B",
                       })
                     }
                     className="flex items-center gap-2 px-3 py-2 rounded-xl border border-gray-200 bg-white hover:border-brand-blue text-xs font-semibold cursor-pointer"
                   >
-                    <span className="w-4 h-4 rounded-full bg-[#2196F3]" />
+                    <span className="w-4 h-4 rounded-full bg-ink" />
                     <span>Kool Ocean Blue (Default)</span>
                   </button>
                   <button
@@ -619,7 +619,7 @@ export default function AppStylingPage() {
 
           {/* 3. TAB BAR STYLE */}
           {activeSection === "tab-bar" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
               <div className="flex justify-between items-center border-b border-gray-50 pb-4">
                 <div>
                   <h3 className="text-base font-bold text-gray-900">
@@ -799,7 +799,7 @@ export default function AppStylingPage() {
 
           {/* 4. TUTORIAL IMAGES (ONBOARDING SLIDES) */}
           {activeSection === "tutorial-images" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
               <div className="flex justify-between items-center border-b border-gray-50 pb-4">
                 <div>
                   <h3 className="text-base font-bold text-gray-900">
@@ -934,7 +934,7 @@ export default function AppStylingPage() {
 
           {/* 5. HOME PAGE STYLE */}
           {activeSection === "home-style" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
               <div className="flex justify-between items-center border-b border-gray-50 pb-4">
                 <div>
                   <h3 className="text-base font-bold text-gray-900">
@@ -1056,7 +1056,7 @@ export default function AppStylingPage() {
 
           {/* 6. HOME PAGE SECTIONS */}
           {activeSection === "home-sections" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
               <div className="flex justify-between items-center border-b border-gray-50 pb-4">
                 <div>
                   <h3 className="text-base font-bold text-gray-900">

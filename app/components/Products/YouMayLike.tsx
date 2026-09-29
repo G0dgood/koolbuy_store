@@ -31,7 +31,7 @@ const YouMayLike = () => {
   };
 
   return (
-    <div className="w-full lg:w-72 flex-shrink-0 bg-white border border-gray-200 rounded-lg p-5 flex flex-col gap-5">
+    <div className="w-full lg:w-72 flex-shrink-0 bg-white border border-gray-100 rounded-3xl shadow-sm p-5 flex flex-col gap-5">
       <h3 className="font-bold text-gray-900">You may like</h3>
       <div className="flex flex-col gap-6">
          {items.map((item, idx) => (

@@ -30,7 +30,7 @@ export function TransactionDetailDrawer({ isOpen, onClose, transaction }: Transa
           <div className="flex justify-between items-start">
              <div className="flex flex-col gap-1">
                 <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Transaction ID</span>
-                <span className="text-sm font-black text-[#1D3557]">#TXN_98273645</span>
+                <span className="text-sm font-black text-ink">#TXN_98273645</span>
              </div>
              <div className={`px-3 py-1 rounded-full ${currentStatus.bg} text-white text-[10px] font-black uppercase tracking-wider shadow-sm`}>
                 {transaction.status}
@@ -38,19 +38,19 @@ export function TransactionDetailDrawer({ isOpen, onClose, transaction }: Transa
           </div>
           <div className="flex flex-col">
              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Total Amount</span>
-             <span className="text-3xl font-black text-[#1D3557] tracking-tight">{transaction.total}</span>
+             <span className="text-3xl font-black text-ink tracking-tight">{transaction.total}</span>
           </div>
         </div>
 
         {/* Payment Method Detailed */}
         <div className="flex flex-col gap-4">
            <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Payment Information</h4>
-           <div className="bg-white border border-gray-100 rounded-xl p-4 flex items-center gap-4">
+           <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 flex items-center gap-4">
               <div className="w-12 h-12 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center p-2">
                  <Icon name="Payment Card" folder="dashboardIcon" size="md" />
               </div>
               <div className="flex-1 flex flex-col gap-0.5">
-                 <span className="text-[13px] font-black text-[#1D3557]">{transaction.method} Card</span>
+                 <span className="text-[13px] font-black text-ink">{transaction.method} Card</span>
                  <span className="text-[11px] font-bold text-gray-400">**** **** **** 2345</span>
               </div>
               <div className="text-right">
@@ -62,12 +62,12 @@ export function TransactionDetailDrawer({ isOpen, onClose, transaction }: Transa
         {/* Customer Breakdown */}
         <div className="flex flex-col gap-4">
            <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Customer Details</h4>
-           <div className="bg-white border border-gray-100 rounded-xl p-4 flex items-center gap-4">
+           <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 flex items-center gap-4">
               <div className="w-12 h-12 rounded-full bg-blue-50 border-2 border-white shadow-sm flex items-center justify-center overflow-hidden">
                  <img src={transaction.image || "https://ui-avatars.com/api/?name=" + transaction.name} alt="" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1 flex flex-col gap-0.5">
-                 <span className="text-[13px] font-black text-[#1D3557]">{transaction.name}</span>
+                 <span className="text-[13px] font-black text-ink">{transaction.name}</span>
                  <span className="text-[11px] font-bold text-gray-400">{transaction.custId}</span>
               </div>
               <button className="p-2 text-gray-400 hover:text-brand-blue transition-colors">
@@ -82,17 +82,17 @@ export function TransactionDetailDrawer({ isOpen, onClose, transaction }: Transa
            <div className="flex flex-col gap-8 relative pl-6 before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-gray-100">
               <div className="relative flex flex-col gap-1">
                  <div className="absolute -left-[22px] top-1 w-3 h-3 rounded-full bg-blue-500 border-2 border-white ring-4 ring-blue-50"></div>
-                 <span className="text-[12px] font-black text-[#1D3557]">Payment Completed</span>
+                 <span className="text-[12px] font-black text-ink">Payment Completed</span>
                  <span className="text-[10px] font-bold text-gray-400">Just now • 09:45 AM</span>
               </div>
               <div className="relative flex flex-col gap-1 opacity-60">
                  <div className="absolute -left-[22px] top-1 w-3 h-3 rounded-full bg-gray-200 border-2 border-white"></div>
-                 <span className="text-[12px] font-black text-[#1D3557]">Funds Captured</span>
+                 <span className="text-[12px] font-black text-ink">Funds Captured</span>
                  <span className="text-[10px] font-bold text-gray-400">01 Jan 2025 • 09:42 AM</span>
               </div>
               <div className="relative flex flex-col gap-1 opacity-60">
                  <div className="absolute -left-[22px] top-1 w-3 h-3 rounded-full bg-gray-200 border-2 border-white"></div>
-                 <span className="text-[12px] font-black text-[#1D3557]">Authorization Successful</span>
+                 <span className="text-[12px] font-black text-ink">Authorization Successful</span>
                  <span className="text-[10px] font-bold text-gray-400">01 Jan 2025 • 09:40 AM</span>
               </div>
            </div>

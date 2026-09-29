@@ -53,7 +53,7 @@ export function QuickActionsDrawer({
               
               <div className="flex flex-col gap-0.5">
                 <span className={`text-[13px] font-black tracking-tight ${
-                  action.variant === "danger" ? "text-rose-600" : "text-[#1D3557]"
+                  action.variant === "danger" ? "text-rose-600" : "text-ink"
                 }`}>
                   {action.label}
                 </span>

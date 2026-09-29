@@ -101,19 +101,19 @@ export function UpdateDealsTimerModal({ isOpen, onClose, initialValues, onUpdate
           <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Preview Display:</span>
           <div className="flex gap-2">
             <div className="flex flex-col items-center justify-center w-10 h-10 bg-white rounded-lg border border-gray-200">
-              <span className="text-xs font-black text-[#1D3557]">{formData.days || "00"}</span>
+              <span className="text-xs font-black text-ink">{formData.days || "00"}</span>
               <span className="text-[8px] text-gray-400 font-bold uppercase">Days</span>
             </div>
             <div className="flex flex-col items-center justify-center w-10 h-10 bg-white rounded-lg border border-gray-200">
-              <span className="text-xs font-black text-[#1D3557]">{formData.hours || "00"}</span>
+              <span className="text-xs font-black text-ink">{formData.hours || "00"}</span>
               <span className="text-[8px] text-gray-400 font-bold uppercase">Hrs</span>
             </div>
             <div className="flex flex-col items-center justify-center w-10 h-10 bg-white rounded-lg border border-gray-200">
-              <span className="text-xs font-black text-[#1D3557]">{formData.minutes || "00"}</span>
+              <span className="text-xs font-black text-ink">{formData.minutes || "00"}</span>
               <span className="text-[8px] text-gray-400 font-bold uppercase">Min</span>
             </div>
             <div className="flex flex-col items-center justify-center w-10 h-10 bg-white rounded-lg border border-gray-200">
-              <span className="text-xs font-black text-[#1D3557]">{formData.seconds || "00"}</span>
+              <span className="text-xs font-black text-ink">{formData.seconds || "00"}</span>
               <span className="text-[8px] text-gray-400 font-bold uppercase">Sec</span>
             </div>
           </div>
@@ -124,7 +124,7 @@ export function UpdateDealsTimerModal({ isOpen, onClose, initialValues, onUpdate
           <Button
             variant="outline"
             onClick={onClose}
-            className="flex-1 h-11 text-[11px] font-black uppercase tracking-widest border-gray-200 text-gray-400 hover:text-[#1D3557]"
+            className="flex-1 h-11 text-[11px] font-black uppercase tracking-widest border-gray-200 text-gray-400 hover:text-ink"
           >
             Cancel
           </Button>

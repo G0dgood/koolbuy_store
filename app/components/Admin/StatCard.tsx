@@ -96,7 +96,7 @@ export const StatCard: React.FC<StatCardProps> = ({
 
   return (
     <div
-      className={`bg-white rounded-lg border border-gray-100 flex flex-col justify-between relative group transition-all hover:shadow-md hover:border-brand-blue/20 ${
+      className={`bg-white rounded-3xl border border-gray-100 shadow-sm flex flex-col justify-between relative group transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:border-brand-orange/25 ${
         isSm ? "p-4 gap-2 shadow-2xs" : "p-6 gap-3"
       } ${className}`}
     >
@@ -163,8 +163,8 @@ export const StatCard: React.FC<StatCardProps> = ({
       <div className={`flex flex-col ${isSm ? "gap-1" : "gap-2"}`}>
         <h2
           className={`${
-            isSm ? "text-xl sm:text-2xl font-bold" : "text-3xl font-black"
-          } text-[#1D3557] tracking-tight leading-none`}
+            isSm ? "text-xl sm:text-2xl font-extrabold" : "text-3xl font-extrabold"
+          } text-ink tracking-tight leading-none`}
         >
           {value}
         </h2>
@@ -196,7 +196,7 @@ export const StatCard: React.FC<StatCardProps> = ({
             <MiniChart
               type="area"
               data={chartData}
-              color={trendIsUp ? "#00BCD4" : "#F43F5E"}
+              color={trendIsUp ? "#FF7A00" : "#F43F5E"}
               height={32}
             />
           </div>

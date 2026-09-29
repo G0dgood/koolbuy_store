@@ -87,7 +87,7 @@ export function TransactionTable() {
         transaction={selectedTransaction}
       />
       <div className="flex justify-between items-center">
-        <h3 className="text-[18px] font-black text-[#1D3557]">Transaction</h3>
+        <h3 className="text-[18px] font-black text-ink">Transaction</h3>
         <Button
           variant="blue"
           iconRight={<Icon name="sort" folder="dashboardIcon" size="sm" />}
@@ -112,10 +112,10 @@ export function TransactionTable() {
           <tbody>
             {transactionData.map((tx, i) => (
               <tr key={i} className="group">
-                <td className="text-[13px] font-black text-[#1D3557]">
+                <td className="text-[13px] font-black text-ink">
                   {i + 1}.
                 </td>
-                <td className="text-[13px] font-black text-[#1D3557]">
+                <td className="text-[13px] font-black text-ink">
                   #{tx.id}
                 </td>
                 <td className="text-[11px] font-bold text-gray-600">
@@ -124,12 +124,12 @@ export function TransactionTable() {
                 <td className="pl-4">
                   <div className="flex items-center gap-2">
                     <span className={`w-2 h-2 rounded-full ${tx.color}`}></span>
-                    <span className="text-[12px] font-bold text-[#1D3557]">
+                    <span className="text-[12px] font-bold text-ink">
                       {tx.status}
                     </span>
                   </div>
                 </td>
-                <td className="text-[13px] font-black text-[#1D3557] text-right">
+                <td className="text-[13px] font-black text-ink text-right">
                   {tx.amount}
                 </td>
                 <td className="text-right">

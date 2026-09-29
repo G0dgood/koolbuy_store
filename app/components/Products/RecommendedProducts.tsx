@@ -41,7 +41,7 @@ export const RecommendedProducts: React.FC<RecommendedProductsProps> = ({ produc
         {products.map((product) => (
           <div 
             key={product.id}
-            className="flex-shrink-0 w-[160px] bg-white border border-gray-200 rounded-lg p-3 flex flex-col gap-2 hover:shadow-md transition-all relative group cursor-pointer active:scale-[0.98]"
+            className="flex-shrink-0 w-[160px] bg-white border border-gray-100 rounded-3xl shadow-sm p-3 flex flex-col gap-2 hover:shadow-md transition-all relative group cursor-pointer active:scale-[0.98]"
           >
             <Link href={`/products/detail`} className="flex flex-col flex-1">
               <div className="w-full aspect-square relative mb-1">
