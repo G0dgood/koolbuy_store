@@ -36,7 +36,7 @@ const ContactPage = () => {
                 </span>
                 <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight">
                   How can we <br />
-                  <span className="text-mustard">help you?</span>
+                  <span className="text-action-on-dark">help you?</span>
                 </h1>
                 <p className="text-white/80 text-sm md:text-base max-w-md mt-4 leading-relaxed">
                   Whether you have a question about features, pricing, or

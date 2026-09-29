@@ -32,7 +32,7 @@ const CartSummary = () => {
                <input
                   type="text"
                   placeholder="Add coupon"
-                  className="flex-1 h-11 px-4 border-[1.5px] border-gray-200 bg-cream rounded-l-full outline-none focus:border-brand-orange focus:bg-white transition-colors text-sm text-gray-900 placeholder-gray-400"
+                  className="flex-1 h-11 px-4 border-[1.5px] border-gray-200 bg-cream rounded-l-full outline-none focus:border-action focus:bg-white transition-colors text-sm text-gray-900 placeholder-gray-400"
                />
                <Button variant="primary" className="h-11 px-5 border border-l-0 border-ink bg-ink text-white font-bold rounded-l-none rounded-r-full hover:bg-brand-blue/90 transition-colors text-sm shadow-none cursor-pointer">
                   Apply
@@ -82,7 +82,7 @@ const CartSummary = () => {
             <div className="flex items-center justify-center gap-3 pt-2">
                {["amex", "mastercard", "applepay", "visa", "pp"].map((pay, idx) => (
                   <div key={idx} className="w-9 h-6 relative grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer">
-                     <Image unoptimized src={`/payment/Payment=payment, Pay-type=${pay}.png`} alt={pay} fill className="object-contain" />
+                     <Image src={`/payment/${pay}.png`} alt={pay} fill className="object-contain" />
                   </div>
                ))}
             </div>

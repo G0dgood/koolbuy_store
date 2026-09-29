@@ -169,7 +169,7 @@ export const AdminHeader: React.FC<HeaderProps> = ({
   return (
     <header
       id="header"
-      className={`  bg-white/85 backdrop-blur-xl border-b border-gray-100 flex items-center justify-between px-4 sm:px-12 sticky top-0 z-30 ${className}`}
+      className={`  bg-white/80 backdrop-blur-xl backdrop-saturate-[1.8] border-b border-black/[0.08] flex items-center justify-between px-4 sm:px-12 sticky top-0 z-30 ${className}`}
     >
       <div className="flex items-center gap-3">
         <button
@@ -194,7 +194,7 @@ export const AdminHeader: React.FC<HeaderProps> = ({
           key={pathname}
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
-          className="text-[18px] sm:text-[24px] font-extrabold text-ink tracking-tight truncate xl:max-w-none capitalize"
+          className="text-[17px] sm:text-[21px] font-semibold text-ink tracking-[-0.01em] truncate xl:max-w-none capitalize"
         >
           {getPageTitle()}
         </motion.h1>

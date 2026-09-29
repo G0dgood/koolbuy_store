@@ -1031,7 +1031,7 @@ export default function ConfigurationsPage() {
       {/* Toast alert */}
       {saveToast && (
         <div className="fixed top-20 right-8 z-50 bg-ink text-white text-xs px-4 py-3 rounded-lg shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
-          <HiOutlineCheckCircle className="w-4 h-4 text-brand-orange" />
+          <HiOutlineCheckCircle className="w-4 h-4 text-action" />
           <span>{saveToast}</span>
         </div>
       )}
@@ -1043,7 +1043,7 @@ export default function ConfigurationsPage() {
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
               Configurations
             </h1>
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-brand-orange/20">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-action/20">
               System Settings
             </span>
           </div>
@@ -1060,7 +1060,7 @@ export default function ConfigurationsPage() {
               placeholder="Search configurations or mods..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full text-xs pl-8 pr-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange shadow-2xs"
+              className="w-full text-xs pl-8 pr-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action shadow-2xs"
             />
             <HiOutlineMagnifyingGlass className="w-4 h-4 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
           </div>
@@ -1075,7 +1075,7 @@ export default function ConfigurationsPage() {
             onClick={() => setActiveTab("cards")}
             className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
               activeTab === "cards"
-                ? "bg-brand-orange text-white shadow-xs"
+                ? "bg-action text-white shadow-xs"
                 : "text-gray-600 hover:bg-gray-50"
             }`}
           >
@@ -1097,7 +1097,7 @@ export default function ConfigurationsPage() {
             onClick={() => setActiveTab("mods")}
             className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
               activeTab === "mods"
-                ? "bg-brand-orange text-white shadow-xs"
+                ? "bg-action text-white shadow-xs"
                 : "text-gray-600 hover:bg-gray-50"
             }`}
           >
@@ -1132,7 +1132,7 @@ export default function ConfigurationsPage() {
                 onClick={() => setSelectedModCategory(cat)}
                 className={`px-2.5 py-1 rounded-md text-[11px] font-medium transition-colors cursor-pointer shrink-0 ${
                   selectedModCategory === cat
-                    ? "bg-brand-blue-light text-brand-blue font-bold border border-brand-orange/30"
+                    ? "bg-brand-blue-light text-brand-blue font-bold border border-action/30"
                     : "text-gray-500 hover:bg-gray-50 hover:text-gray-800 border border-transparent"
                 }`}
               >
@@ -1167,7 +1167,7 @@ export default function ConfigurationsPage() {
                       <div
                         className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 border ${
                           card.enabled
-                            ? "bg-brand-blue-light border-brand-orange/20 text-brand-orange"
+                            ? "bg-brand-blue-light border-action/20 text-action"
                             : "bg-gray-100 border-gray-200 text-gray-400"
                         }`}
                       >
@@ -1191,7 +1191,7 @@ export default function ConfigurationsPage() {
                         onChange={() => toggleCardEnabled(card.id)}
                         className="sr-only peer"
                       />
-                      <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-orange" />
+                      <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-action" />
                     </label>
                   </div>
 
@@ -1203,7 +1203,7 @@ export default function ConfigurationsPage() {
                   {/* Badge & Quick Details Preview */}
                   <div className="flex flex-wrap items-center gap-2 mb-4">
                     {card.badge && (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold bg-brand-orange/10 text-brand-blue border border-brand-orange/20">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold bg-action/10 text-brand-blue border border-action/20">
                         {card.badge}
                       </span>
                     )}
@@ -1233,7 +1233,7 @@ export default function ConfigurationsPage() {
                   <Button
                     variant="outline"
                     shape="rounded-sm"
-                    className="text-xs font-semibold px-3 py-1.5 border-gray-200 hover:border-brand-orange hover:text-brand-orange flex items-center gap-1.5 cursor-pointer"
+                    className="text-xs font-semibold px-3 py-1.5 border-gray-200 hover:border-action hover:text-action flex items-center gap-1.5 cursor-pointer"
                     onClick={() => handleOpenConfigModal(card)}
                   >
                     <HiOutlinePencilSquare className="w-3.5 h-3.5" />
@@ -1316,7 +1316,7 @@ export default function ConfigurationsPage() {
                     onChange={() => toggleModEnabled(mod.id)}
                     className="sr-only peer"
                   />
-                  <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-orange" />
+                  <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-action" />
                 </label>
               </div>
             ))}
@@ -1345,7 +1345,7 @@ export default function ConfigurationsPage() {
             {/* Modal Header */}
             <div className="p-5 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-brand-blue-light border border-brand-orange/20 text-brand-orange flex items-center justify-center">
+                <div className="w-9 h-9 rounded-lg bg-brand-blue-light border border-action/20 text-action flex items-center justify-center">
                   <HiOutlineCog6Tooth className="w-5 h-5" />
                 </div>
                 <div>
@@ -1404,7 +1404,7 @@ export default function ConfigurationsPage() {
                           }
                           className="sr-only peer"
                         />
-                        <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-orange" />
+                        <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-action" />
                       </label>
                     </div>
                   );
@@ -1424,7 +1424,7 @@ export default function ConfigurationsPage() {
                           [key]: e.target.value,
                         }))
                       }
-                      className="w-full text-xs font-semibold px-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
+                      className="w-full text-xs font-semibold px-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800"
                     />
                   </div>
                 );
@@ -1444,7 +1444,7 @@ export default function ConfigurationsPage() {
               <Button
                 variant="primary"
                 shape="rounded-sm"
-                className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold px-5 py-2 cursor-pointer shadow-xs"
+                className="bg-action hover:bg-action-hover text-white text-xs font-semibold px-5 py-2 cursor-pointer shadow-xs"
                 onClick={handleSaveCardSettings}
               >
                 Save Changes

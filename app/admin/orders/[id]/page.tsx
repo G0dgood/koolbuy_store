@@ -83,7 +83,7 @@ export default function OrderDetails() {
                   ? "bg-brand-blue-light text-brand-blue border-blue-100"
                   : currentStatus === "Shipped"
                     ? "bg-brand-blue-light text-brand-blue border-blue-100"
-                    : "bg-orange-50 text-brand-orange border-orange-100"
+                    : "bg-orange-50 text-action border-orange-100"
               }`}
             >
               {currentStatus}
@@ -339,7 +339,7 @@ export default function OrderDetails() {
               </div>
 
               <div className="flex gap-3">
-                <div className="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center text-brand-orange shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center text-action shrink-0">
                   <Icon name="local_shipping" size="sm" />
                 </div>
                 <div className="flex flex-col gap-1">

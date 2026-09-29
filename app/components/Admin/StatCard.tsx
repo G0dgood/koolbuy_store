@@ -96,7 +96,7 @@ export const StatCard: React.FC<StatCardProps> = ({
 
   return (
     <div
-      className={`bg-white rounded-3xl border border-gray-100 shadow-sm flex flex-col justify-between relative group transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:border-brand-orange/25 ${
+      className={`bg-white rounded-2xl border border-hairline flex flex-col justify-between relative group transition-colors duration-200 hover:border-gray-300 ${
         isSm ? "p-4 gap-2 shadow-2xs" : "p-6 gap-3"
       } ${className}`}
     >
@@ -163,7 +163,7 @@ export const StatCard: React.FC<StatCardProps> = ({
       <div className={`flex flex-col ${isSm ? "gap-1" : "gap-2"}`}>
         <h2
           className={`${
-            isSm ? "text-xl sm:text-2xl font-extrabold" : "text-3xl font-extrabold"
+            isSm ? "text-xl sm:text-[28px] font-semibold" : "text-[34px] font-semibold"
           } text-ink tracking-tight leading-none`}
         >
           {value}

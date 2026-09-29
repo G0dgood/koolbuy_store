@@ -81,12 +81,12 @@ const HelpCenterPage = () => {
               className="flex flex-col gap-8 items-center text-center md:items-start md:text-left"
             >
               <div className="flex flex-col gap-4">
-                <span className="text-mustard font-black tracking-[0.4em] uppercase text-xs">
+                <span className="text-action-on-dark font-black tracking-[0.4em] uppercase text-xs">
                   Support Concierge
                 </span>
                 <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none font-inter">
                   How can we <br />
-                  <span className="text-mustard">help you?</span>
+                  <span className="text-action-on-dark">help you?</span>
                 </h1>
               </div>
 
@@ -176,12 +176,12 @@ const HelpCenterPage = () => {
 
             <div className="bg-ink rounded-[48px] p-10 md:p-16 flex flex-col justify-center gap-8 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue rounded-full filter blur-[100px] opacity-10 translate-x-1/2 -translate-y-1/2" />
-              <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-mustard">
+              <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-action-on-dark">
                 <HiShieldCheck size={32} />
               </div>
               <h3 className="text-3xl font-black text-white leading-tight">
                 Can't find the <br />
-                <span className="text-mustard">answer?</span>
+                <span className="text-action-on-dark">answer?</span>
               </h3>
               <p className="text-blue-100/40 text-lg">
                 Our artisanal support curators are available from 9am to 6pm for

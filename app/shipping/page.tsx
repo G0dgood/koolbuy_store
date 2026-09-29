@@ -79,7 +79,7 @@ const ShippingPage = () => {
               </div>
               <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter font-inter leading-none">
                 Delivering Excellence <br />
-                to Your <span className="text-mustard">Doorstep.</span>
+                to Your <span className="text-action-on-dark">Doorstep.</span>
               </h1>
               <p className="text-blue-100/60 max-w-2xl text-base md:text-xl leading-relaxed font-medium">
                 Koolbuy Store partners with top-tier global carriers to ensure

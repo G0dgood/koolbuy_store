@@ -80,11 +80,13 @@ export const IntroducingProducts: React.FC<IntroducingProductsProps> = ({
   return (
     <section className="w-full flex flex-col items-center gap-6 pt-2">
       {/* Section Title */}
-      <div className="flex flex-col items-center gap-3">
-        <span className="kb-sticker">Keep it kool</span>
-        <h2 className="kb-title kb-squiggle text-3xl sm:text-4xl text-center [&::after]:left-1/2 [&::after]:-translate-x-1/2">
-          Introducing Our Products
+      <div className="flex flex-col items-center gap-2 text-center">
+        <h2 className="kb-title text-[34px] sm:text-[48px] leading-[1.07] tracking-[-0.025em]">
+          Introducing our products.
         </h2>
+        <p className="text-[19px] sm:text-[24px] text-gray-600 font-normal leading-snug tracking-[-0.01em]">
+          Solar cold storage, built for Nigerian business.
+        </p>
       </div>
 
       {/* Categories Tabs Bar */}
@@ -101,37 +103,25 @@ export const IntroducingProducts: React.FC<IntroducingProductsProps> = ({
                   className="group relative"
                 >
                   <motion.div
-                    whileHover={{ y: -2 }}
-                    whileTap={{ scale: 0.97 }}
+                    whileTap={{ scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 350, damping: 22 }}
-                    className={`relative px-4 sm:px-5 py-2.5 min-h-12 rounded-full border-[1.5px] flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-200 outline-none ${
+                    className={`relative px-4 py-3 min-h-11 rounded-full bg-white flex flex-col items-center justify-center text-center cursor-pointer transition-colors duration-200 outline-none ${
                       isActive
-                        ? "bg-ink border-ink shadow-[0_8px_20px_-10px_rgba(15,61,46,0.7)]"
-                        : "bg-white border-gray-200 hover:border-brand-orange/40 hover:bg-brand-orange-light"
+                        ? "border-2 border-[#0071e3] px-[15px]"
+                        : "border border-[#d2d2d7] hover:border-[#86868b]"
                     }`}
                   >
                     <span
-                      className={`text-xs sm:text-sm whitespace-pre-line leading-tight transition-colors duration-200 ${
+                      className={`text-[13px] sm:text-sm whitespace-pre-line leading-tight transition-colors duration-200 ${
                         isActive
-                          ? "text-white font-bold"
-                          : "text-ink font-semibold group-hover:text-brand-orange-hover"
+                          ? "text-ink font-semibold"
+                          : "text-ink"
                       }`}
                     >
                       {cat.name}
                     </span>
 
-                    {/* Active dot */}
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeTabUnderline"
-                        className="absolute -top-1 -right-0.5 w-3 h-3 bg-mustard border-2 border-white rounded-full"
-                        transition={{
-                          type: "spring",
-                          stiffness: 350,
-                          damping: 30,
-                        }}
-                      />
-                    )}
+
                   </motion.div>
                 </Link>
 

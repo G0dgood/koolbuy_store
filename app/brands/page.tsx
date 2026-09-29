@@ -165,7 +165,7 @@ const BrandsPage = () => {
               </span>
               <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-none font-inter">
                 Looking for a specific{" "}
-                <span className="text-mustard">Creator?</span>
+                <span className="text-action-on-dark">Creator?</span>
               </h2>
             </div>
             <p className="text-blue-100/40 text-sm md:text-lg max-w-2xl font-medium">

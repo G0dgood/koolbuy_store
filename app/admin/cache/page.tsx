@@ -135,7 +135,7 @@ export default function CacheControlPage() {
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed top-20 right-8 z-50 bg-ink text-white text-xs px-4 py-3 rounded-lg shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
-          <HiOutlineCheckCircle className="w-4 h-4 text-brand-orange" />
+          <HiOutlineCheckCircle className="w-4 h-4 text-action" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -147,7 +147,7 @@ export default function CacheControlPage() {
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
               Cache Control
             </h1>
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-brand-orange/20">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-action/20">
               Redis Performance
             </span>
           </div>
@@ -180,7 +180,7 @@ export default function CacheControlPage() {
             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
               Redis Status
             </span>
-            <HiOutlineServerStack className="w-4 h-4 text-brand-orange" />
+            <HiOutlineServerStack className="w-4 h-4 text-action" />
           </div>
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -240,7 +240,7 @@ export default function CacheControlPage() {
         {/* Card Header */}
         <div className="p-4 sm:p-5 border-b border-gray-100 bg-gray-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-brand-blue-light border border-brand-orange/20 text-brand-orange flex items-center justify-center">
+            <div className="w-9 h-9 rounded-lg bg-brand-blue-light border border-action/20 text-action flex items-center justify-center">
               <HiOutlineServerStack className="w-5 h-5" />
             </div>
             <div>
@@ -274,7 +274,7 @@ export default function CacheControlPage() {
                   <div
                     className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 border ${
                       mod.enabled
-                        ? "bg-brand-blue-light border-brand-orange/20 text-brand-orange"
+                        ? "bg-brand-blue-light border-action/20 text-action"
                         : "bg-gray-100 border-gray-200 text-gray-400"
                     }`}
                   >
@@ -343,7 +343,7 @@ export default function CacheControlPage() {
                         onChange={() => toggleModuleEnable(mod.id)}
                         className="sr-only peer"
                       />
-                      <div className="w-10 h-5.5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4.5 after:w-4.5 after:transition-all peer-checked:bg-brand-orange" />
+                      <div className="w-10 h-5.5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4.5 after:w-4.5 after:transition-all peer-checked:bg-action" />
                     </label>
                   </div>
                 </div>

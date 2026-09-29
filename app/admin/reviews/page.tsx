@@ -524,13 +524,13 @@ export default function ReviewListing() {
                         <Button
                           variant="outline"
                           shape="rounded-sm"
-                          className="px-3 py-1.5 text-xs font-semibold text-brand-orange border-brand-orange/30 hover:bg-brand-orange/10 transition-all flex items-center gap-1.5 cursor-pointer"
+                          className="px-3 py-1.5 text-xs font-semibold text-action border-action/30 hover:bg-action/10 transition-all flex items-center gap-1.5 cursor-pointer"
                           onClick={() => {
                             setSelectedProductForReviews(product);
                             setIsReviewsDrawerOpen(true);
                           }}
                         >
-                          <HiOutlineEye className="w-4 h-4 text-brand-orange" />
+                          <HiOutlineEye className="w-4 h-4 text-action" />
                           <span>View Reviews</span>
                         </Button>
                       </td>

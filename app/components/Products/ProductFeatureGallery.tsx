@@ -69,7 +69,7 @@ export const ProductFeatureGallery: React.FC = () => {
 
       {/* Feature 1 Header (After first image, before second image) */}
       <div className="text-center py-3 sm:py-5 max-w-3xl mx-auto px-4">
-        <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-brand-orange">
+        <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-action">
           Ultra-Powerful Inverter Compressor
         </span>
         <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-gray-900 mt-1.5 mb-2.5">
@@ -100,7 +100,7 @@ export const ProductFeatureGallery: React.FC = () => {
 
         {/* Feature 2 Header (Before the third showcase) */}
         <div className="text-center py-3 sm:py-5 max-w-3xl mx-auto px-4">
-          <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-brand-orange">
+          <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-action">
             Smart Inverter Technology
           </span>
           <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-gray-900 mt-1.5 mb-2.5">

@@ -64,7 +64,7 @@ const CancelOrderPage = () => {
               </span>
               <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none font-inter">
                 Order <br />
-                <span className="text-mustard">Cancellation.</span>
+                <span className="text-action-on-dark">Cancellation.</span>
               </h1>
               <p className="text-blue-100/60 max-w-2xl text-lg md:text-xl font-medium">
                 We understand that intentions change. Our cancellation framework

@@ -63,7 +63,7 @@ const PaymentOptionsPage = () => {
               </span>
               <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none font-inter">
                 Secure <br />
-                <span className="text-mustard">Orchestration.</span>
+                <span className="text-action-on-dark">Orchestration.</span>
               </h1>
               <p className="text-blue-100/60 max-w-2xl text-lg md:text-xl font-medium">
                 Your transactional integrity is our highest priority. We employ
@@ -139,7 +139,7 @@ const PaymentOptionsPage = () => {
 
               <div className="flex flex-col gap-8 bg-ink p-10 md:p-12 rounded-[48px] shadow-2xl relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue/10 rounded-full filter blur-[60px] group-hover:scale-110 transition-transform duration-700" />
-                <div className="flex items-center gap-4 text-mustard relative z-10">
+                <div className="flex items-center gap-4 text-action-on-dark relative z-10">
                   <HiShieldCheck size={32} />
                   <h4 className="text-xl font-black text-white">
                     Patron Assurance
@@ -155,7 +155,7 @@ const PaymentOptionsPage = () => {
                 <div className="flex items-center gap-3 relative z-10">
                   <div className="w-10 h-10 rounded-full bg-brand-blue" />
                   <div className="flex flex-col">
-                    <span className="text-[10px] font-black uppercase text-mustard tracking-widest">
+                    <span className="text-[10px] font-black uppercase text-action-on-dark tracking-widest">
                       Chief Security Officer
                     </span>
                     <span className="text-[10px] text-white/40 font-medium">

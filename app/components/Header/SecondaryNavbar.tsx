@@ -343,15 +343,15 @@ export const SecondaryNavbar: React.FC = () => {
               }
               className={`flex items-center gap-2 h-full font-bold text-sm border-r border-gray-200 pr-6 transition-colors cursor-pointer outline-none ${
                 activeDropdown === "categories"
-                  ? "text-brand-orange"
-                  : "text-gray-900 hover:text-brand-orange"
+                  ? "text-action"
+                  : "text-gray-900 hover:text-action"
               }`}
             >
               <span>All categories</span>
               <FiChevronDown
                 className={`text-xs transition-transform duration-200 ${
                   activeDropdown === "categories"
-                    ? "rotate-180 text-brand-orange"
+                    ? "rotate-180 text-action"
                     : "text-gray-400"
                 }`}
               />
@@ -365,8 +365,8 @@ export const SecondaryNavbar: React.FC = () => {
               href="/"
               className={`transition-colors py-2 ${
                 isActive("/")
-                  ? "text-brand-orange font-bold"
-                  : "text-gray-900 hover:text-brand-orange"
+                  ? "text-action font-bold"
+                  : "text-gray-900 hover:text-action"
               }`}
             >
               Home
@@ -381,15 +381,15 @@ export const SecondaryNavbar: React.FC = () => {
                 href="/products"
                 className={`flex items-center gap-1.5 transition-colors py-2 ${
                   isActive("/products") || activeDropdown === "marketplace"
-                    ? "text-brand-orange font-bold"
-                    : "text-gray-900 hover:text-brand-orange"
+                    ? "text-action font-bold"
+                    : "text-gray-900 hover:text-action"
                 }`}
               >
                 <span>Marketplace</span>
                 <FiChevronDown
                   className={`text-xs transition-transform duration-200 ${
                     activeDropdown === "marketplace"
-                      ? "rotate-180 text-brand-orange"
+                      ? "rotate-180 text-action"
                       : "text-gray-400"
                   }`}
                 />
@@ -410,15 +410,15 @@ export const SecondaryNavbar: React.FC = () => {
                 }
                 className={`flex items-center gap-1.5 transition-colors cursor-pointer py-2 outline-none ${
                   activeDropdown === "quickLinks"
-                    ? "text-brand-orange font-bold"
-                    : "text-gray-900 hover:text-brand-orange"
+                    ? "text-action font-bold"
+                    : "text-gray-900 hover:text-action"
                 }`}
               >
                 <span>Quick Links</span>
                 <FiChevronDown
                   className={`text-xs transition-transform duration-200 ${
                     activeDropdown === "quickLinks"
-                      ? "rotate-180 text-brand-orange"
+                      ? "rotate-180 text-action"
                       : "text-gray-400"
                   }`}
                 />
@@ -467,13 +467,13 @@ export const SecondaryNavbar: React.FC = () => {
                           <Link
                             href={item.href}
                             onClick={() => setActiveDropdown(null)}
-                            className="group inline-flex items-center gap-2 text-[13px] text-gray-600 hover:text-brand-orange transition-colors py-0.5 leading-snug"
+                            className="group inline-flex items-center gap-2 text-[13px] text-gray-600 hover:text-action transition-colors py-0.5 leading-snug"
                           >
                             <span className="group-hover:translate-x-0.5 transition-transform duration-150">
                               {item.label}
                             </span>
                             {item.badge && (
-                              <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full bg-orange-100 text-brand-orange uppercase tracking-wide">
+                              <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full bg-orange-100 text-action uppercase tracking-wide">
                                 {item.badge}
                               </span>
                             )}
@@ -497,7 +497,7 @@ export const SecondaryNavbar: React.FC = () => {
                 <Link
                   href="/products"
                   onClick={() => setActiveDropdown(null)}
-                  className="inline-flex items-center gap-1.5 font-bold text-brand-orange hover:underline"
+                  className="inline-flex items-center gap-1.5 font-bold text-action hover:underline"
                 >
                   <span>Browse All Products in Catalog</span>
                   <FiArrowRight size={13} />

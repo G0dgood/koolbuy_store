@@ -108,8 +108,8 @@ export const CheckoutForm: React.FC = () => {
                 onChange={() => setPaymentMethod("card")}
                 rightElement={
                   <div className="flex gap-2">
-                    <Image unoptimized src="/payment/Payment=payment, Pay-type=visa.png" alt="Visa" width={32} height={20} className="object-contain" />
-                    <Image unoptimized src="/payment/Payment=payment, Pay-type=mastercard.png" alt="Mastercard" width={32} height={20} className="object-contain" />
+                    <Image src="/payment/visa.png" alt="Visa" width={32} height={20} className="object-contain" />
+                    <Image src="/payment/mastercard.png" alt="Mastercard" width={32} height={20} className="object-contain" />
                   </div>
                 }
               />

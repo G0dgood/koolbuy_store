@@ -590,14 +590,14 @@ export default function CustomersListing() {
                     onClick={() => setIsDateDropdownOpen(!isDateDropdownOpen)}
                     className={`flex items-center gap-2 px-3 py-2 text-xs font-semibold rounded-lg border transition-all cursor-pointer ${
                       selectedDatePreset !== "all"
-                        ? "bg-brand-orange/10 border-brand-orange text-brand-orange-hover"
+                        ? "bg-action/10 border-action text-action-hover"
                         : "bg-white border-gray-200 text-gray-700 hover:bg-gray-50"
                     }`}
                   >
                     <HiOutlineCalendar
                       className={`w-4 h-4 ${
                         selectedDatePreset !== "all"
-                          ? "text-brand-orange"
+                          ? "text-action"
                           : "text-gray-400"
                       }`}
                     />
@@ -641,7 +641,7 @@ export default function CustomersListing() {
                               setCustomEndDate("");
                               setCurrentPage(1);
                             }}
-                            className="text-[11px] font-semibold text-brand-orange hover:underline"
+                            className="text-[11px] font-semibold text-action hover:underline"
                           >
                             Reset
                           </button>
@@ -665,13 +665,13 @@ export default function CustomersListing() {
                               }}
                               className={`flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs transition-colors text-left cursor-pointer ${
                                 isSelected
-                                  ? "bg-brand-orange/10 text-brand-orange-hover font-bold"
+                                  ? "bg-action/10 text-action-hover font-bold"
                                   : "text-gray-700 hover:bg-gray-50 font-medium"
                               }`}
                             >
                               <span>{preset.label}</span>
                               {isSelected && (
-                                <HiCheck className="w-4 h-4 text-brand-orange" />
+                                <HiCheck className="w-4 h-4 text-action" />
                               )}
                             </button>
                           );
@@ -699,7 +699,7 @@ export default function CustomersListing() {
                                   setSelectedDatePreset("date_range");
                                   setCurrentPage(1);
                                 }}
-                                className="w-full text-xs px-2 py-1.5 border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange"
+                                className="w-full text-xs px-2 py-1.5 border border-gray-200 rounded-md focus:outline-none focus:border-action"
                               />
                             </div>
                             <div>
@@ -714,7 +714,7 @@ export default function CustomersListing() {
                                   setSelectedDatePreset("date_range");
                                   setCurrentPage(1);
                                 }}
-                                className="w-full text-xs px-2 py-1.5 border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange"
+                                className="w-full text-xs px-2 py-1.5 border border-gray-200 rounded-md focus:outline-none focus:border-action"
                               />
                             </div>
                           </div>
@@ -725,7 +725,7 @@ export default function CustomersListing() {
                                 setSelectedDatePreset("date_range");
                                 setIsDateDropdownOpen(false);
                               }}
-                              className="px-3 py-1 bg-brand-orange text-white text-xs font-semibold rounded-md hover:bg-brand-orange-hover transition-colors cursor-pointer"
+                              className="px-3 py-1 bg-action text-white text-xs font-semibold rounded-md hover:bg-action-hover transition-colors cursor-pointer"
                             >
                               Apply Range
                             </button>
@@ -903,7 +903,7 @@ export default function CustomersListing() {
                             setCustomEndDate("");
                             setSearchQuery("");
                           }}
-                          className="text-xs font-semibold text-brand-orange hover:underline cursor-pointer"
+                          className="text-xs font-semibold text-action hover:underline cursor-pointer"
                         >
                           Clear all filters
                         </button>

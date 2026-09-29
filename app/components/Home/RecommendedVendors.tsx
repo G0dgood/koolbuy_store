@@ -106,18 +106,15 @@ export const RecommendedVendors: React.FC = () => {
     >
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h3 className="kb-title kb-squiggle text-2xl md:text-[1.75rem]">
+        <h3 className="kb-title text-[24px] md:text-[34px] tracking-[-0.02em]">
           Recommended Vendors
         </h3>
 
         <Link
           href="/products"
-          className="kb-btn kb-btn-ghost h-10 px-4 text-xs md:text-sm group shrink-0"
+          className="kb-link text-sm md:text-[17px] shrink-0 whitespace-nowrap"
         >
-          <span>See all</span>
-          <span className="w-6 h-6 rounded-full bg-brand-orange text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-            <FiChevronRight size={14} />
-          </span>
+          See all ›
         </Link>
       </div>
 
@@ -127,7 +124,7 @@ export const RecommendedVendors: React.FC = () => {
         <button
           onClick={scrollPrev}
           aria-label="Previous vendors"
-          className="absolute -left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white border border-gray-100 shadow-[var(--shadow-lift)] flex items-center justify-center text-ink hover:text-brand-orange hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          className="absolute -left-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[rgba(210,210,215,0.64)] hover:bg-[rgba(210,210,215,0.85)] backdrop-blur-xl flex items-center justify-center text-ink active:scale-95 transition-colors cursor-pointer"
         >
           <FiChevronLeft size={18} />
         </button>
@@ -144,27 +141,25 @@ export const RecommendedVendors: React.FC = () => {
             >
               <Link href={vendor.link} className="flex-1 flex flex-col">
                 <motion.div
-                  whileHover={{ y: -4 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="kb-card hover:shadow-[var(--shadow-lift)] p-2.5 flex flex-col h-full group cursor-pointer"
+                  className="kb-card kb-card-hover p-3 flex flex-col h-full group cursor-pointer"
                 >
                   {/* Vendor Image Banner */}
-                  <div className="w-full aspect-square relative overflow-hidden bg-brand-orange rounded-[1.1rem]">
+                  <div className="w-full aspect-square relative overflow-hidden bg-cream rounded-lg">
                     <Image
                       src={vendor.image}
                       alt={vendor.name}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
                     />
                   </div>
 
                   {/* Bottom Info */}
                   <div className="px-2 pt-3.5 pb-2 flex items-center justify-between text-left gap-2">
-                    <h4 className="text-[13px] sm:text-sm font-bold text-ink line-clamp-1 group-hover:text-brand-orange-hover transition-colors">
+                    <h4 className="text-[14px] sm:text-[15px] font-semibold text-ink line-clamp-1">
                       {vendor.name}
                     </h4>
-                    <span className="shrink-0 text-[11px] font-extrabold text-ink bg-mustard px-2.5 py-1 rounded-full uppercase tracking-wider group-hover:bg-brand-orange group-hover:text-white transition-colors">
-                      Shop
+                    <span className="shrink-0 text-[14px] text-action group-hover:underline">
+                      Shop ›
                     </span>
                   </div>
                 </motion.div>
@@ -177,7 +172,7 @@ export const RecommendedVendors: React.FC = () => {
         <button
           onClick={scrollNext}
           aria-label="Next vendors"
-          className="absolute -right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white border border-gray-100 shadow-[var(--shadow-lift)] flex items-center justify-center text-ink hover:text-brand-orange hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          className="absolute -right-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[rgba(210,210,215,0.64)] hover:bg-[rgba(210,210,215,0.85)] backdrop-blur-xl flex items-center justify-center text-ink active:scale-95 transition-colors cursor-pointer"
         >
           <FiChevronRight size={18} />
         </button>

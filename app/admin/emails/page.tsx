@@ -310,7 +310,7 @@ export default function EmailTemplatesPage() {
           <Button
             variant="primary"
             shape="rounded-sm"
-            className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
+            className="bg-action hover:bg-action-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
             onClick={handleSave}
           >
             <HiOutlineCheck className="w-4 h-4" />
@@ -361,7 +361,7 @@ export default function EmailTemplatesPage() {
                 placeholder="Search templates..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full text-xs pl-8 pr-3 py-1.5 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange"
+                className="w-full text-xs pl-8 pr-3 py-1.5 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-action"
               />
               <HiOutlineMagnifyingGlass className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
             </div>
@@ -378,14 +378,14 @@ export default function EmailTemplatesPage() {
                   onClick={() => setSelectedTemplateId(item.id)}
                   className={`flex items-center justify-between p-3.5 text-left transition-all cursor-pointer ${
                     isSelected
-                      ? "bg-brand-blue-light/60 border-l-4 border-l-brand-orange text-brand-blue font-bold"
+                      ? "bg-brand-blue-light/60 border-l-4 border-l-action text-brand-blue font-bold"
                       : "hover:bg-gray-50 text-gray-700 font-medium"
                   }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
                     <HiOutlineEnvelope
                       className={`w-4 h-4 shrink-0 ${
-                        isSelected ? "text-brand-orange" : "text-gray-400"
+                        isSelected ? "text-action" : "text-gray-400"
                       }`}
                     />
                     <span className="text-xs truncate">{item.name}</span>
@@ -430,7 +430,7 @@ export default function EmailTemplatesPage() {
                 onChange={(e) =>
                   handleUpdateCurrent({ enabled: e.target.checked })
                 }
-                className="w-4 h-4 rounded text-brand-orange focus:ring-brand-orange accent-brand-orange cursor-pointer"
+                className="w-4 h-4 rounded text-action focus:ring-action accent-action cursor-pointer"
               />
               <span className="text-xs font-bold text-gray-700">Enabled</span>
             </label>
@@ -450,7 +450,7 @@ export default function EmailTemplatesPage() {
                   handleUpdateCurrent({ subject: e.target.value })
                 }
                 placeholder="Enter email subject line..."
-                className="w-full text-xs font-semibold px-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
+                className="w-full text-xs font-semibold px-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800"
               />
             </div>
 
@@ -471,7 +471,7 @@ export default function EmailTemplatesPage() {
                   handleUpdateCurrent({ content: e.target.value })
                 }
                 placeholder="Write template message content..."
-                className="w-full text-xs font-mono p-3 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800 leading-relaxed"
+                className="w-full text-xs font-mono p-3 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800 leading-relaxed"
               />
             </div>
 
@@ -485,7 +485,7 @@ export default function EmailTemplatesPage() {
                   onChange={(e) =>
                     handleUpdateCurrent({ enabled: e.target.checked })
                   }
-                  className="w-4 h-4 rounded text-brand-orange focus:ring-brand-orange accent-brand-orange cursor-pointer"
+                  className="w-4 h-4 rounded text-action focus:ring-action accent-action cursor-pointer"
                 />
                 <label
                   htmlFor="enabled-checkbox"
@@ -513,11 +513,11 @@ export default function EmailTemplatesPage() {
                       type="button"
                       onClick={() => handleInsertTag(tag)}
                       title={`Click to insert ${tag}`}
-                      className="group inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-mono bg-gray-100 hover:bg-brand-orange/10 hover:text-brand-orange border border-gray-200 transition-colors cursor-pointer text-gray-700"
+                      className="group inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-mono bg-gray-100 hover:bg-action/10 hover:text-action border border-gray-200 transition-colors cursor-pointer text-gray-700"
                     >
                       <span>{tag}</span>
                       <HiOutlineClipboardDocument
-                        className="w-3 h-3 text-gray-400 group-hover:text-brand-orange"
+                        className="w-3 h-3 text-gray-400 group-hover:text-action"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleCopyTag(tag);
@@ -540,7 +540,7 @@ export default function EmailTemplatesPage() {
               <Button
                 variant="primary"
                 shape="rounded-sm"
-                className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
+                className="bg-action hover:bg-action-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
                 onClick={handleSave}
               >
                 <HiOutlineCheck className="w-4 h-4" />

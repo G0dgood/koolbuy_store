@@ -36,26 +36,26 @@ export const ProductGridItem: React.FC<{ product: ProductProps }> = ({ product }
    };
 
    return (
-      <div className="kb-card kb-card-hover p-2.5 overflow-hidden group flex flex-col h-full relative">
+      <div className="kb-card kb-card-hover p-4 overflow-hidden group flex flex-col h-full relative">
          <Link href="/products/detail" className="flex flex-col flex-1">
-            <div className="relative w-full aspect-square p-5 rounded-[1.1rem] bg-linear-to-b from-cream to-cream-dark overflow-hidden flex items-center justify-center">
-               <div className="relative w-full h-full transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:scale-[1.07]">
-                  <Image src={product.image} alt={product.title} fill className="object-contain" />
+            <div className="relative w-full aspect-square p-5 rounded-lg bg-cream overflow-hidden flex items-center justify-center">
+               <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
+                  <Image src={product.image} alt={product.title} fill className="object-contain kb-product-img" />
                </div>
                {/* Heart Icon (Overlay) */}
                <div className="absolute top-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
                   <FavoriteButton item={product as any} variant="outline" size="sm" />
                </div>
             </div>
-            <div className="px-2.5 pt-4 flex flex-col gap-2 pb-16"> {/* Add padding for buttons */}
+            <div className="pt-4 flex flex-col gap-1.5 pb-16"> {/* Add padding for buttons */}
                <div className="flex items-center justify-between">
-                  <span className="font-extrabold text-lg text-ink tracking-tight">{product.price}</span>
+                  <span className="text-[17px] text-ink">{product.price}</span>
                </div>
                <div className="flex items-center gap-2">
                   <Rating value={product.rating} />
-                  <span className="text-orange-500 text-sm font-medium">{product.rating}</span>
+                  <span className="text-gray-500 text-sm">{product.rating}</span>
                </div>
-               <span className="text-ink/80 text-sm leading-snug line-clamp-2 group-hover:text-brand-orange-hover transition-colors font-semibold">
+               <span className="text-ink text-[15px] leading-snug line-clamp-2 font-semibold">
                   {product.title}
                </span>
             </div>
@@ -105,9 +105,9 @@ export const ProductListItem: React.FC<{
    };
 
    return (
-      <div className="kb-card hover:shadow-[var(--shadow-lift)] p-3 md:p-4 flex gap-3 md:gap-6 relative group">
+      <div className="kb-card kb-card-hover p-4 md:p-6 flex gap-3 md:gap-6 relative group">
          {/* Product Image */}
-         <Link href="/products/detail" className="w-24 h-24 md:w-48 md:h-48 flex-shrink-0 rounded-2xl flex items-center justify-center p-2 md:p-4 bg-linear-to-b from-cream to-cream-dark cursor-pointer overflow-hidden">
+         <Link href="/products/detail" className="w-24 h-24 md:w-48 md:h-48 flex-shrink-0 rounded-lg flex items-center justify-center p-2 md:p-4 bg-cream cursor-pointer overflow-hidden">
             <div className="relative w-full h-full transition-transform duration-300 hover:scale-110">
                <Image src={product.image} alt={product.title} fill className="object-contain" />
             </div>
@@ -116,14 +116,14 @@ export const ProductListItem: React.FC<{
          {/* Product Content */}
          <div className="flex-1 flex flex-col gap-1 md:gap-3 pr-8 md:pr-0">
             <div className="flex items-start justify-between">
-               <Link href="/products/detail" className="text-sm md:text-base font-bold text-ink leading-snug hover:text-brand-orange-hover cursor-pointer transition-colors line-clamp-2 md:line-clamp-none">
+               <Link href="/products/detail" className="text-[15px] md:text-[17px] font-semibold text-ink leading-snug hover:text-action cursor-pointer transition-colors line-clamp-2 md:line-clamp-none">
                   {product.title}
                </Link>
             </div>
 
             <div className="flex flex-col gap-0.5 md:gap-1">
                <div className="flex items-center gap-2 md:gap-3">
-                  <span className="font-extrabold text-md md:text-xl text-ink tracking-tight">{product.price}</span>
+                  <span className="text-[17px] md:text-[21px] text-ink">{product.price}</span>
                   {product.originalPrice && (
                      <span className="text-gray-400 line-through text-xs md:text-sm font-medium">{product.originalPrice}</span>
                   )}
@@ -153,8 +153,8 @@ export const ProductListItem: React.FC<{
             </p>
 
             <div className="flex items-center gap-4 mt-auto pt-2">
-               <Link href="/products/detail" className="text-brand-orange-hover font-bold text-sm hover:underline cursor-pointer flex items-center gap-1">
-                  View details
+               <Link href="/products/detail" className="kb-link text-sm cursor-pointer flex items-center gap-1">
+                  Learn more ›
                </Link>
                <button 
                   onClick={handleAddToCart}

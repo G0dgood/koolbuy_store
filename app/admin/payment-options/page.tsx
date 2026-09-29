@@ -821,7 +821,7 @@ export default function PaymentOptionsPage() {
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed top-20 right-8 z-50 bg-ink text-white text-xs px-4 py-3 rounded-lg shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
-          <HiOutlineCheckCircle className="w-4 h-4 text-brand-orange" />
+          <HiOutlineCheckCircle className="w-4 h-4 text-action" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -833,7 +833,7 @@ export default function PaymentOptionsPage() {
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
               Payment Options
             </h1>
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-brand-orange/20">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-action/20">
               Payment Gateways & Payouts
             </span>
           </div>
@@ -850,7 +850,7 @@ export default function PaymentOptionsPage() {
               placeholder="Search payment gateway..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full text-xs pl-8 pr-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange shadow-2xs"
+              className="w-full text-xs pl-8 pr-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action shadow-2xs"
             />
             <HiOutlineMagnifyingGlass className="w-4 h-4 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
           </div>
@@ -880,7 +880,7 @@ export default function PaymentOptionsPage() {
               onClick={() => setActiveFilter(tab.id as any)}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
                 activeFilter === tab.id
-                  ? "bg-brand-orange text-white shadow-xs"
+                  ? "bg-action text-white shadow-xs"
                   : "text-gray-600 hover:bg-gray-50"
               }`}
             >
@@ -913,7 +913,7 @@ export default function PaymentOptionsPage() {
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <h2 className="text-sm font-bold text-ink uppercase tracking-wider flex items-center gap-2">
-              <HiOutlineCreditCard className="w-4 h-4 text-brand-orange" />
+              <HiOutlineCreditCard className="w-4 h-4 text-action" />
               <span>Payment Gateways ({filteredGateways.length})</span>
             </h2>
             <span className="text-xs text-gray-400">
@@ -967,7 +967,7 @@ export default function PaymentOptionsPage() {
                           onChange={() => toggleGatewayEnable(gateway.id)}
                           className="sr-only peer"
                         />
-                        <div className="w-8 h-4.5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-brand-orange" />
+                        <div className="w-8 h-4.5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-action" />
                       </label>
                     </div>
 
@@ -1001,7 +1001,7 @@ export default function PaymentOptionsPage() {
                   {gateway.credentials && gateway.credentials.length > 0 && (
                     <div className="flex flex-col gap-2 pt-2 border-t border-gray-100 mb-2">
                       <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1">
-                        <HiOutlineKey className="w-3 h-3 text-brand-orange" />
+                        <HiOutlineKey className="w-3 h-3 text-action" />
                         <span>API Credentials</span>
                       </span>
 
@@ -1029,7 +1029,7 @@ export default function PaymentOptionsPage() {
                                     e.target.value,
                                   )
                                 }
-                                className="w-full text-xs font-mono px-2.5 py-1.5 pr-8 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange text-gray-800"
+                                className="w-full text-xs font-mono px-2.5 py-1.5 pr-8 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-action text-gray-800"
                               />
                               {cred.isSecret && (
                                 <button
@@ -1091,7 +1091,7 @@ export default function PaymentOptionsPage() {
           <div className="flex items-center justify-between border-t border-gray-200 pt-6">
             <div>
               <h2 className="text-sm font-bold text-ink uppercase tracking-wider flex items-center gap-2">
-                <HiOutlineBuildingLibrary className="w-4 h-4 text-brand-orange" />
+                <HiOutlineBuildingLibrary className="w-4 h-4 text-action" />
                 <span>Payout Options ({filteredPayouts.length})</span>
               </h2>
               <p className="text-xs text-gray-500 mt-0.5">
@@ -1139,7 +1139,7 @@ export default function PaymentOptionsPage() {
                           onChange={() => togglePayoutEnable(payout.id)}
                           className="sr-only peer"
                         />
-                        <div className="w-8 h-4.5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-brand-orange" />
+                        <div className="w-8 h-4.5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-action" />
                       </label>
                     </div>
 

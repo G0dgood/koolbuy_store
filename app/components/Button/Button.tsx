@@ -45,37 +45,40 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    // Base styles
+    // Base styles (Apple grammar: 400 weight labels, press = scale 0.95, no shadows)
     const baseStyles =
-      "inline-flex items-center justify-center font-semibold transition-all duration-200 ease-[cubic-bezier(0.2,0.8,0.2,1)] focus:outline-none focus-visible:ring-4 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer active:translate-y-px";
+      "inline-flex items-center justify-center font-normal tracking-[-0.01em] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0071e3] focus-visible:ring-offset-2 disabled:opacity-40 cursor-pointer active:scale-95";
 
     // Variant styles
     const variants = {
+      // Blue pill — the one "click me" signal
       primary:
-        "bg-brand-orange text-white hover:bg-brand-orange-hover hover:-translate-y-px focus-visible:ring-brand-orange/25 border border-transparent shadow-[var(--shadow-pop)]",
+        "bg-action text-white hover:bg-action-hover border border-transparent",
+      // Ghost pill — second CTA next to a primary
       secondary:
-        "bg-white text-ink border-[1.5px] border-ink/15 hover:border-ink/30 hover:bg-cream focus-visible:ring-ink/15",
+        "bg-transparent text-action border border-action hover:bg-action hover:text-white",
       blue:
-        "bg-ink text-white hover:bg-ink-soft hover:-translate-y-px focus-visible:ring-ink/20 border border-transparent shadow-[0_8px_20px_-10px_rgba(15,61,46,0.7)]",
+        "bg-action text-white hover:bg-action-hover border border-transparent",
       emerald:
-        "bg-ink text-white hover:bg-ink-soft hover:-translate-y-px focus-visible:ring-ink/20 border border-transparent shadow-sm",
-      rose: "bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white active:bg-rose-600 focus:ring-rose-500/50 border border-transparent shadow-sm transition-all",
+        "bg-action text-white hover:bg-action-hover border border-transparent",
+      rose: "bg-transparent text-[#e30000] border border-[#e30000]/30 hover:bg-[#e30000] hover:text-white",
+      // Pearl capsule — quiet secondary on light surfaces
       outline:
-        "bg-white text-ink border-[1.5px] border-gray-200 hover:bg-cream hover:border-gray-300 focus-visible:ring-gray-200 shadow-xs",
+        "bg-pearl text-gray-800 border border-black/[0.08] hover:bg-cream",
       ghost:
-        "bg-transparent text-ink hover:bg-cream focus-visible:ring-ink/15",
+        "bg-transparent text-action hover:bg-action-light",
     };
 
-    // Size styles
+    // Size styles (44px touch target at md+)
     const sizes = {
-      sm: "px-2.5 py-1 text-xs gap-1.5",
-      md: "px-4 py-2 text-sm gap-2 font-bold",
-      lg: "px-6 py-3 text-base gap-3 font-extrabold",
+      sm: "px-3 py-1.5 text-xs gap-1.5",
+      md: "px-[18px] py-2 text-sm gap-2",
+      lg: "px-[22px] py-[11px] text-[17px] gap-2.5",
     };
 
     // Shape styles
     const shapes = {
-      rounded: "rounded-xl",
+      rounded: "rounded-lg",
       "rounded-sm": "rounded-[6px]",
       pill: "rounded-full",
     };

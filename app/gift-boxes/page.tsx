@@ -90,12 +90,12 @@ const GiftBoxesPage = () => {
                 transition={{ duration: 0.8 }}
                 className="flex flex-col gap-4 md:gap-6 max-w-2xl"
               >
-                <span className="text-mustard font-black tracking-[0.4em] uppercase text-xs md:text-sm">
+                <span className="text-action-on-dark font-black tracking-[0.4em] uppercase text-xs md:text-sm">
                   Boutique Curations
                 </span>
                 <h1 className="text-5xl md:text-8xl font-black text-white tracking-tighter leading-none font-inter">
                   Artisanal <br />
-                  <span className="text-mustard">Gifts.</span>
+                  <span className="text-action-on-dark">Gifts.</span>
                 </h1>
                 <p className="text-white/80 text-sm md:text-xl leading-relaxed font-medium mt-2">
                   Elevate the art of giving with our meticulously curated
@@ -103,7 +103,7 @@ const GiftBoxesPage = () => {
                   Koolbuy Store packaging.
                 </p>
                 <div className="pt-4 flex flex-col md:flex-row gap-4">
-                  <Button className="bg-mustard text-ink font-black uppercase tracking-widest px-10 py-5 h-auto rounded-xl">
+                  <Button className="px-[22px] py-[11px] h-auto text-[17px]">
                     Shop All Sets
                   </Button>
                   <Button

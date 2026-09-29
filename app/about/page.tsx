@@ -168,7 +168,7 @@ const AboutPage = () => {
                 Sourced with soul, <br />
                 crafted for life.
               </h2>
-              <div className="w-20 h-1.5 bg-mustard rounded-full" />
+              <div className="w-20 h-1.5 bg-action rounded-full" />
               <p className="text-gray-500 text-base md:text-xl leading-relaxed">
                 We travel the globe, not just for materials, but for stories.
                 Our sourcing team partners with local communities to ensure that
@@ -293,7 +293,7 @@ const AboutPage = () => {
         {/* Step 64: Trust/Stats Section */}
         <section className="bg-ink py-20 overflow-hidden relative">
           <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue rounded-full filter blur-[120px] opacity-20 translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-mustard rounded-full filter blur-[120px] opacity-10 -translate-x-1/2 translate-y-1/2" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-action rounded-full filter blur-[120px] opacity-10 -translate-x-1/2 translate-y-1/2" />
 
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 grid grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
             <div className="flex flex-col items-center lg:items-start gap-2">
@@ -306,7 +306,7 @@ const AboutPage = () => {
             </div>
             <div className="flex flex-col items-center lg:items-start gap-2">
               <span className="text-4xl md:text-6xl font-black text-white tracking-tighter">
-                5M<span className="text-mustard">+</span>
+                5M<span className="text-action-on-dark">+</span>
               </span>
               <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">
                 Global Shipments
@@ -322,7 +322,7 @@ const AboutPage = () => {
             </div>
             <div className="flex flex-col items-center lg:items-start gap-2">
               <span className="text-4xl md:text-6xl font-black text-white tracking-tighter">
-                98<span className="text-mustard">%</span>
+                98<span className="text-action-on-dark">%</span>
               </span>
               <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">
                 Customer Trust

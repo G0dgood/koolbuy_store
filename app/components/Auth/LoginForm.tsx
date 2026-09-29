@@ -25,7 +25,7 @@ export const LoginForm = () => {
       initial={{ opacity: 0, x: -30 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative z-10 w-full max-w-[380px] bg-white/70 backdrop-blur-xl rounded-[2rem] border border-white/60 shadow-[0_32px_80px_rgba(15,61,46,0.18)] overflow-hidden lg:mr-12"
+      className="relative z-10 w-full max-w-[380px] bg-white/70 backdrop-blur-xl rounded-2xl border border-white/60 shadow-2xl overflow-hidden lg:mr-12"
     >
       <div className="p-8 sm:p-10 flex flex-col gap-6">
         {/* Form Logo & Header */}
@@ -34,7 +34,7 @@ export const LoginForm = () => {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="w-12 h-12 rounded-2xl bg-brand-orange flex items-center justify-center p-2.5 shadow-[var(--shadow-pop)]"
+            className="w-12 h-12 rounded-2xl bg-action flex items-center justify-center p-2.5 "
           >
             <img src="/dashboardIcon/dashboardLogo.svg" alt="Logo" className="brightness-0 invert w-full h-full object-contain" />
           </motion.div>
@@ -86,7 +86,7 @@ export const LoginForm = () => {
             type="submit"
             variant="primary"
             shape="rounded-sm"
-            className="h-12 text-[10px] font-black uppercase tracking-[0.15em] mt-1 shadow-[var(--shadow-pop)]"
+            className="h-12 text-[10px] font-black uppercase tracking-[0.15em] mt-1 "
             isLoading={isLoading}
           >
             Initialize Command

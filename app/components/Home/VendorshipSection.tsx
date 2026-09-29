@@ -13,7 +13,7 @@ export const VendorshipSection = () => {
         <span className="kb-sticker mb-3">
           Recommended Vendors{" "}
         </span>
-        <p className="kb-title text-2xl md:text-[2rem] mt-1">
+        <p className="kb-title text-[28px] md:text-[40px] leading-[1.1] tracking-[-0.02em]">
           Verified Freezer Vendors You Can Trust For Consistent Quality,
           Performance, And Service
         </p>
@@ -22,18 +22,17 @@ export const VendorshipSection = () => {
       {/* Two-Column Grid */}
       <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         {/* Left Card: Become Our Verified Vendor */}
-        <div className="lg:col-span-5 relative overflow-hidden bg-ink kb-dots rounded-[2rem] p-7 sm:p-9 md:p-11 flex flex-col justify-center gap-5 shadow-[var(--shadow-lift)]">
-          <div aria-hidden className="absolute -right-16 -bottom-16 w-56 h-56 rounded-full bg-brand-orange/25 blur-2xl" />
-          <div className="kb-sticker self-start">
+        <div className="lg:col-span-5 relative overflow-hidden bg-tile rounded-2xl p-8 sm:p-10 md:p-12 flex flex-col justify-center gap-4">
+          <div className="inline-flex items-center gap-2 self-start text-[14px] font-semibold text-white/60">
             <FiBox className="text-base" />
             <span>Vendorship</span>
           </div>
 
-          <h3 className="relative text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-[1.08]">
+          <h3 className="relative text-[32px] sm:text-[40px] font-semibold text-white tracking-[-0.02em] leading-[1.1]">
             Become Our Verified Vendor
           </h3>
 
-          <p className="relative text-white/75 text-sm sm:text-base leading-relaxed max-w-sm">
+          <p className="relative text-[#cccccc] text-[17px] sm:text-[19px] leading-[1.4] max-w-sm">
             Partner with a clean-energy brand delivering reliable solar-powered
             cold storage.
           </p>
@@ -41,15 +40,15 @@ export const VendorshipSection = () => {
           <div className="pt-2 relative">
             <Link
               href="/register"
-              className="kb-btn kb-btn-primary px-7 py-3.5 text-sm"
+              className="kb-btn kb-btn-primary px-[22px] py-[11px] text-[17px]"
             >
-              Become a vendor →
+              Become a vendor
             </Link>
           </div>
         </div>
 
         {/* Right Card: Location Map */}
-        <div className="lg:col-span-7 bg-white border border-gray-100 rounded-[2rem] overflow-hidden shadow-[var(--shadow-soft)] relative min-h-75 sm:min-h-85">
+        <div className="lg:col-span-7 bg-white border border-hairline rounded-2xl overflow-hidden relative min-h-75 sm:min-h-85">
           {/* Google Maps Embed */}
           <iframe
             title="Koolbuy Vendor Location"
@@ -60,7 +59,7 @@ export const VendorshipSection = () => {
           />
 
           {/* Floating Location Card Overlay */}
-          <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-4 shadow-lg border border-gray-100 max-w-70 sm:max-w-xs z-10">
+          <div className="absolute top-4 left-4 bg-white/80 backdrop-blur-xl backdrop-saturate-[1.8] rounded-xl p-3 sm:p-4 shadow-lg border border-gray-100 max-w-70 sm:max-w-xs z-10">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <h4 className="text-xs sm:text-sm font-bold text-gray-900">
@@ -85,7 +84,7 @@ export const VendorshipSection = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Get Directions"
-                  className="p-1.5 bg-brand-blue text-white rounded-full hover:bg-brand-blue/90 shadow-sm transition-colors"
+                  className="p-1.5 bg-action text-white rounded-full hover:bg-action-hover transition-colors"
                 >
                   <FiNavigation className="text-xs" />
                 </a>

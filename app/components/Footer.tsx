@@ -61,171 +61,91 @@ import { Newsletter } from "./Home/Newsletter";
 //   </div>
 // );
 
+const footerHeading = "text-[12px] font-semibold text-ink mb-2";
+const footerLink = "text-[12px] text-gray-600 hover:text-ink hover:underline leading-[2.2]";
+
+// Apple-style footer: parchment, dense 12px link columns, hairline dividers.
 const Footer = () => {
   return (
     <>
       <Newsletter />
-      <footer className="w-full bg-ink text-white pt-16 md:pt-20 rounded-t-[2rem] md:rounded-t-[3rem] relative overflow-hidden">
-        <div aria-hidden className="absolute inset-0 kb-dots opacity-40 pointer-events-none" />
-        <div className="relative max-w-360 mx-auto px-6 md:px-10 lg:px-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-10 mb-16">
-          {/* Brand Column */}
-          <div className="lg:col-span-3 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center mb-4">
-                <div className="h-14 px-4 bg-white rounded-2xl overflow-hidden flex items-center shadow-[var(--shadow-soft)]">
-                  <img
-                    src="/images/koolboks/koolbuy_logo.webp"
-                    alt="Koolbuy Store"
-                    className="h-10 w-auto object-contain"
-                  />
-                </div>
-              </div>
-              <p className="text-white/70 text-sm leading-relaxed max-w-70">
-                <span className="block text-mustard font-extrabold text-lg mb-1">Keep it kool. ✦</span>
-                Nigeria&apos;s leading solar refrigeration and clean-tech
-                marketplace. 24/7 power, verified warranties, and flexible
-                payment plans.
+      <footer className="w-full bg-cream border-t border-hairline pt-10 md:pt-12">
+        <div className="max-w-245 mx-auto px-6 md:px-8">
+          {/* Brand + tagline */}
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-hairline">
+            <div className="flex items-center gap-4">
+              <img
+                src="/images/koolboks/koolbuy_logo.webp"
+                alt="Koolbuy Store"
+                className="h-8 w-auto object-contain"
+              />
+              <p className="text-[12px] text-gray-600 max-w-md leading-[1.5]">
+                Nigeria&apos;s solar refrigeration and clean-tech marketplace.
+                24/7 power, verified warranties and flexible payment plans.
               </p>
             </div>
-            <div className="flex items-center gap-3 mt-6">
-              <div className="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white cursor-pointer hover:bg-brand-orange hover:border-brand-orange hover:-translate-y-0.5 transition-all">
-                <Icon name="social/facebook" size="sm" />
-              </div>
-              <div className="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white cursor-pointer hover:bg-brand-orange hover:border-brand-orange hover:-translate-y-0.5 transition-all">
-                <Icon name="social/twitter" size="sm" />
-              </div>
-              <div className="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white cursor-pointer hover:bg-brand-orange hover:border-brand-orange hover:-translate-y-0.5 transition-all">
-                <Icon name="social/linkedin" size="sm" />
-              </div>
-              <div className="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white cursor-pointer hover:bg-brand-orange hover:border-brand-orange hover:-translate-y-0.5 transition-all">
-                <Icon name="social/instagram" size="sm" />
-              </div>
-              <div className="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white cursor-pointer hover:bg-brand-orange hover:border-brand-orange hover:-translate-y-0.5 transition-all">
-                <Icon name="social/youtube" size="sm" />
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Us Column */}
-          <div className="lg:col-span-3 flex flex-col gap-3">
-            <h4 className="font-extrabold text-mustard text-xs tracking-[0.12em] uppercase">
-              CONTACT US
-            </h4>
-            <div className="flex flex-col gap-3 text-sm text-white/75 mt-1">
-              <div className="flex items-start gap-2.5">
-                <FiMapPin className="text-brand-orange text-base shrink-0 mt-0.5" />
-                <span className="leading-snug">
-                  28A Adeola Raji Avenue, Gbagada, Lagos, Nigeria
+            <div className="flex items-center gap-2 text-gray-500">
+              {["facebook", "twitter", "linkedin", "instagram", "youtube"].map((n) => (
+                <span
+                  key={n}
+                  className="w-8 h-8 rounded-full flex items-center justify-center hover:text-ink hover:bg-black/5 cursor-pointer transition-colors"
+                >
+                  <Icon name={`social/${n}`} size="sm" />
                 </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Link columns */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 py-8">
+            <div className="flex flex-col">
+              <h4 className={footerHeading}>Contact Us</h4>
+              <span className="text-[12px] text-gray-600 leading-[1.6] mb-1 flex items-start gap-1.5">
+                <FiMapPin className="shrink-0 mt-0.5" />
+                28A Adeola Raji Avenue, Gbagada, Lagos, Nigeria
+              </span>
+              <a href="tel:+2349128413025" className={`${footerLink} flex items-center gap-1.5`}>
+                <FiPhone className="shrink-0" /> +234 912 841 3025
+              </a>
+              <a href="mailto:info@koolbuystore.com" className={`${footerLink} flex items-center gap-1.5`}>
+                <FiMail className="shrink-0" /> info@koolbuystore.com
+              </a>
+            </div>
+
+            <div className="flex flex-col">
+              <h4 className={footerHeading}>Quick Links</h4>
+              <Link href="/register" className={footerLink}>Vendor Registration</Link>
+              <Link href="/help" className={footerLink}>Privacy Policy</Link>
+              <Link href="/help/payment" className={footerLink}>Terms &amp; Conditions (BNPL)</Link>
+            </div>
+
+            <div className="flex flex-col">
+              <h4 className={footerHeading}>Payment Methods</h4>
+              <span className="text-[12px] text-gray-600 leading-[2.2]">Visa, Discover</span>
+              <span className="text-[12px] text-gray-600 leading-[2.2]">American Express</span>
+              <span className="text-[12px] text-gray-600 leading-[2.2]">Mastercard</span>
+              <div className="flex items-center gap-2 mt-2">
+                <Image src="/payment/visa.png" alt="Visa" width={32} height={20} className="h-5 w-auto object-contain" />
+                <Image src="/payment/mastercard.png" alt="Mastercard" width={32} height={20} className="h-5 w-auto object-contain" />
+                <Image src="/payment/amex.png" alt="Amex" width={32} height={20} className="h-5 w-auto object-contain" />
               </div>
-              <div className="flex items-center gap-2.5">
-                <FiPhone className="text-brand-orange text-base shrink-0" />
-                <a
-                  href="tel:+2349128413025"
-                  className="hover:text-mustard transition-colors"
-                >
-                  +2349128413025
-                </a>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <FiMail className="text-brand-orange text-base shrink-0" />
-                <a
-                  href="mailto:info@koolbuystore.com"
-                  className="hover:text-mustard transition-colors"
-                >
-                  info@koolbuystore.com
-                </a>
+            </div>
+
+            <div className="flex flex-col">
+              <h4 className={footerHeading}>Get the App</h4>
+              <div className="mt-1">
+                <StoreButtons orientation="vertical" />
               </div>
             </div>
           </div>
 
-          {/* Quick Links Column */}
-          <div className="lg:col-span-2 flex flex-col gap-3">
-            <h4 className="font-extrabold text-mustard text-xs tracking-[0.12em] uppercase">
-              QUICK LINKS
-            </h4>
-            <div className="flex flex-col gap-2.5 text-sm text-white/75 mt-1">
-              <Link
-                href="/register"
-                className="hover:text-mustard transition-colors"
-              >
-                Vendor Registration
-              </Link>
-              <Link
-                href="/help"
-                className="hover:text-mustard transition-colors"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                href="/help/payment"
-                className="hover:text-mustard transition-colors"
-              >
-                Terms & Conditions (BNPL)
-              </Link>
-            </div>
-          </div>
-
-          {/* Payment Methods Column */}
-          <div className="lg:col-span-2 flex flex-col gap-3">
-            <h4 className="font-extrabold text-mustard text-xs tracking-[0.12em] uppercase">
-              PAYMENT METHODS
-            </h4>
-            <div className="flex flex-col gap-2 text-xs font-semibold text-white/75 mt-1 uppercase tracking-wide">
-              <span>VISA DISCOVER</span>
-              <span>AMERICAN EXPRESS</span>
-              <span>MASTER CARD</span>
-            </div>
-            <div className="flex items-center gap-2 mt-2 flex-wrap [&>img]:bg-white [&>img]:rounded-md [&>img]:px-1.5 [&>img]:h-7 [&>img]:py-1">
-              <Image unoptimized
-                src="/payment/Payment=payment, Pay-type=visa.png"
-                alt="Visa"
-                width={32}
-                height={20}
-                className="h-5 w-auto object-contain"
-              />
-              <Image unoptimized
-                src="/payment/Payment=payment, Pay-type=mastercard.png"
-                alt="Mastercard"
-                width={32}
-                height={20}
-                className="h-5 w-auto object-contain"
-              />
-              <Image unoptimized
-                src="/payment/Payment=payment, Pay-type=amex.png"
-                alt="Amex"
-                width={32}
-                height={20}
-                className="h-5 w-auto object-contain"
-              />
-            </div>
-          </div>
-
-          {/* Find Our App On Mobile Column */}
-          <div className="lg:col-span-2 flex flex-col gap-3">
-            <h4 className="font-extrabold text-mustard text-xs tracking-[0.12em] uppercase">
-              FIND OUR APP ON MOBILE
-            </h4>
-            {/* <div className="flex items-center gap-3 mt-1">
-              <QrCodeBox label="iOS App" />
-              <QrCodeBox label="Android" />
-            </div> */}
-            <div className="mt-2">
-              <StoreButtons orientation="vertical" />
-            </div>
-          </div>
-        </div>
-
-        {/* Footer Bottom */}
-        <div className="relative w-full py-6 border-t border-white/10">
-          <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-16 flex items-center justify-between text-sm text-white/60">
-            <p>
-              © {new Date().getFullYear()} Koolbuy Store. All rights reserved.
-            </p>
-            <div className="flex items-center gap-2 cursor-pointer">
-              <span aria-hidden>🇳🇬</span>
+          {/* Legal row */}
+          <div className="py-5 border-t border-hairline flex flex-col md:flex-row md:items-center md:justify-between gap-2 text-[12px] text-gray-500">
+            <p>Copyright © {new Date().getFullYear()} Koolbuy Store. All rights reserved.</p>
+            <div className="flex items-center gap-1.5 text-ink cursor-pointer hover:underline">
+              <span>Nigeria</span>
+              <span className="text-gray-400">·</span>
               <span>English</span>
-              <Icon name="expand_less" size="xs" />
             </div>
           </div>
         </div>

@@ -82,12 +82,12 @@ const CookiePreferencesPage = () => {
               transition={{ duration: 0.7 }}
               className="flex flex-col gap-6"
             >
-              <span className="text-mustard font-black tracking-[0.4em] uppercase text-xs">
+              <span className="text-action-on-dark font-black tracking-[0.4em] uppercase text-xs">
                 Privacy Orchestration
               </span>
               <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none font-inter">
                 Cookie <br />
-                <span className="text-mustard">Preferences.</span>
+                <span className="text-action-on-dark">Preferences.</span>
               </h1>
               <p className="text-blue-100/60 max-w-2xl text-lg md:text-xl font-medium">
                 Your digital footprint is as unique as your sensory profile. At

@@ -4,22 +4,22 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. Admin Grid & Layout Shell & Primary Color Theme (Kool Orange, see DESIGN.md)
+   1. Admin Grid & Layout Shell & Primary Color Theme (Action Blue, see DESIGN.md)
    -------------------------------------------------------------------------- */
 body:has(#page-wrapper),
 .admin-theme,
 #page-wrapper {
-  --brand-blue: #FF7A00;
-  --brand-blue-light: #FFF1E3;
-  --primary: #FF7A00;
-  --color-brand-blue: #FF7A00;
-  --color-brand-blue-light: #FFF1E3;
-  --color-primary: #FF7A00;
-  --sidebar-primary: #FF7A00;
-  --sidebar-accent: #FFF1E3;
-  --sidebar-ring: #FF7A00;
-  --ring: #FF7A00;
-  --chart-1: #FF7A00;
+  --brand-blue: #0066CC;
+  --brand-blue-light: #F0F7FF;
+  --primary: #0066CC;
+  --color-brand-blue: #0066CC;
+  --color-brand-blue-light: #F0F7FF;
+  --color-primary: #0066CC;
+  --sidebar-primary: #0066CC;
+  --sidebar-accent: #F0F7FF;
+  --sidebar-ring: #0066CC;
+  --ring: #0066CC;
+  --chart-1: #0066CC;
   display: grid;
   position: relative;
   height: 100dvh;
@@ -37,7 +37,7 @@ body:has(#page-wrapper),
   overflow-y: auto;
   width: 100%;
   padding: 32px;
-  background-color: var(--background);
+  background-color: #f5f5f7;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -47,7 +47,7 @@ body:has(#page-wrapper),
   position: sticky;
   top: 0;
   z-index: 30;
-  border-bottom: 1px solid #F0E6D8;
+  border-bottom: 1px solid #E0E0E0;
   transition: background-color 0.3s ease, border-color 0.3s ease;
   overflow: visible !important;
 }
@@ -61,11 +61,10 @@ body:has(#page-wrapper),
   grid-area: sidenav;
   display: flex;
   flex-direction: column;
-  border-right: 0;
+  border-right: 1px solid #e0e0e0;
   transition: background-color 0.3s ease, border-color 0.3s ease;
-  background-color: var(--ink);
-  background-image: radial-gradient(rgba(255, 194, 61, 0.08) 1.2px, transparent 1.2px);
-  background-size: 22px 22px;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
 }
 
 .dark #page-wrapper #sidenav {
@@ -130,7 +129,7 @@ body:has(#page-wrapper),
 }
 
 /* --------------------------------------------------------------------------
-   3. Universal Card, Table & Chart Radius: rounded-lg (0.5rem)
+   3. Universal Card, Table & Chart Radius: 12px (Apple utility grammar)
    -------------------------------------------------------------------------- */
 #page-wrapper .rounded-2xl,
 #page-wrapper .rounded-xl,
@@ -160,7 +159,7 @@ body:has(#page-wrapper) .rounded-\[20px\],
 #page-wrapper [class*="rounded-[8px]"],
 #page-wrapper [class*="rounded-[16px]"],
 #page-wrapper [class*="rounded-[20px]"] {
-  border-radius: 0.5rem !important;
+  border-radius: 12px !important;
 }
 
 /* Explicit Card, Table & Chart wrappers */
@@ -202,14 +201,14 @@ body:has(#page-wrapper) .rounded-\[20px\],
 }
 
 .admin-table-container thead tr {
-  border-bottom: 1px solid #F5EFE6;
+  border-bottom: 1px solid #F0F0F0;
 }
 
 .admin-table-container th {
   padding: 1rem 1.5rem;
   font-size: 11px;
   font-weight: 700;
-  color: #0F3D2E;
+  color: #1D1D1F;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   white-space: nowrap;
@@ -220,7 +219,7 @@ body:has(#page-wrapper) .rounded-\[20px\],
 }
 
 .admin-table-container tbody tr {
-  border-bottom: 1px solid #F5EFE6;
+  border-bottom: 1px solid #F0F0F0;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -232,7 +231,7 @@ body:has(#page-wrapper) .rounded-\[20px\],
 .admin-table-container td {
   padding: 1rem 1.5rem;
   font-size: 14px;
-  color: #1C1917;
+  color: #1D1D1F;
 }
 
 .admin-table-container table > thead > tr > td,
@@ -254,7 +253,7 @@ body:has(#page-wrapper) .rounded-\[20px\],
   justify-content: space-between;
   align-items: center;
   background-color: white;
-  border-top: 1px solid #F5EFE6;
+  border-top: 1px solid #F0F0F0;
 }
 
 .admin-pagination-btn {
@@ -263,17 +262,17 @@ body:has(#page-wrapper) .rounded-\[20px\],
   gap: 0.5rem;
   padding: 0.625rem 1rem;
   border-radius: 6px;
-  border: 1px solid #F0E6D8;
+  border: 1px solid #E0E0E0;
   font-size: 14px;
   font-weight: 700;
-  color: #57534E;
+  color: #424245;
   background-color: white;
   transition: all 0.2s;
   cursor: pointer;
 }
 
 .admin-pagination-btn:hover {
-  background-color: #FBF7F1;
+  background-color: #FAFAFC;
 }
 
 .admin-pagination-pages {
@@ -292,17 +291,17 @@ body:has(#page-wrapper) .rounded-\[20px\],
   font-size: 14px;
   font-weight: 700;
   transition: all 0.2s;
-  color: #A8A096;
+  color: #86868B;
   cursor: pointer;
 }
 
 .admin-pagination-page-btn:hover {
-  color: #1C1917;
-  background-color: #FBF7F1;
+  color: #1D1D1F;
+  background-color: #FAFAFC;
 }
 
 .admin-pagination-page-btn.active {
   background-color: var(--brand-blue-light);
-  color: #EA6A00;
+  color: #0066CC;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }

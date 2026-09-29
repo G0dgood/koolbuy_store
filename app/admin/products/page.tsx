@@ -276,7 +276,7 @@ export default function ProductListing() {
                     </span>
                   </td>
                   <td>
-                    <span className="text-sm font-black text-brand-orange">
+                    <span className="text-sm font-black text-action">
                       {product.price}
                     </span>
                   </td>

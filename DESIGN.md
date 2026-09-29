@@ -1,140 +1,125 @@
-# Koolbuy Design System — "Kool & Delicious"
+# Koolbuy Design System: Apple-inspired
 
-> A Chowdeck-inspired visual language for Koolbuy.
-> Chowdeck's whole brand fits in one word: **delight**. Bold type, a warm,
-> saturated palette on a creamy canvas, big friendly rounded shapes, playful
-> sticker-style tags and little squiggle accents. We borrow that *feeling* and
-> apply it to Koolbuy's own identity (Kool Orange + solar-powered cold storage).
-> We do not copy Chowdeck's logo, illustrations or brand assets.
+> Adapted from the Apple DESIGN.md analysis in
+> [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/apple),
+> applied to Koolbuy. We borrow Apple's *grammar* (restraint, one accent, tight
+> type, hairlines, full-bleed tiles). We do not copy Apple's logos, product imagery
+> or copy.
+>
+> The previous Chowdeck-inspired system lives in git history (commit `bf7bb8f`).
 
-Everything below is implemented as tokens in `app/globals.css`. Use the tokens,
-not raw hex codes, in new code.
+Every token below is implemented in `app/globals.css` (storefront) and
+`app/admin/admin.css` (admin overrides). Use tokens, not raw hex codes.
 
 ---
 
 ## 1. Principles
 
-1. **Warm, not sterile.** The canvas is cream, never cold grey-blue. Neutrals are
-   warm (stone), borders are soft and barely there.
-2. **Bold type does the talking.** Headlines are heavy (800), tight, confident.
-   Body copy is calm and readable.
-3. **Round and friendly.** Generous radii everywhere; pills for actions and tags.
-4. **Two hero colors, used with intent.** Kool Orange = action. Deep Kool (forest ink) =
-   structure and trust. Mustard, tomato and frost are *accents*, used sparingly.
-5. **Soft depth.** Cards float on warm, diffuse shadows, and lift on hover.
-6. **Delight in the details.** Sticker badges, a squiggle under a section title,
-   springy hover states — small touches, never noise.
-
----
+1. **The product is the hero.** UI chrome recedes. Photography and product renders carry the page.
+2. **One accent.** Action Blue `#0066cc` is the only "click me" color: links, pill CTAs, focus, selection.
+3. **Flat by default.** Cards get a 1px hairline, never a shadow. Only floating layers (menus, modals) get a soft shadow.
+4. **Tight, quiet type.** Headlines weigh 600 with negative tracking. Body is 17px / 400 / 1.47.
+5. **The color change is the divider.** Sections alternate white, parchment `#f5f5f7` and near-black tiles instead of using borders.
+6. **Press = scale(0.95).** That is the only micro-interaction on buttons.
 
 ## 2. Color
 
-### Core
 | Token | Hex | Use |
 |---|---|---|
-| `--brand-orange` / `primary` | `#FF7A00` | Primary buttons, prices, active states, key highlights |
-| `--brand-orange-hover` | `#EA6A00` | Hover/pressed on orange |
-| `--brand-orange-light` | `#FFF1E3` | Orange tint backgrounds, chips |
-| `--ink` (Deep Kool) | `#0F3D2E` | Headings, dark sections, footer, admin sidebar, secondary buttons |
-| `--ink-soft` | `#1E5A45` | Hover on ink, secondary text on light |
-| `--brand-blue`* | `#0F3D2E` | *Legacy name*, now maps to Deep Kool |
-| `--brand-blue-light`* | `#E7F3EC` | *Legacy name*, now the Mint tint |
+| `action` | `#0066cc` | Every interactive element: pills, links, selection, focus root |
+| `action-hover` | `#0058b0` | Hover on blue pills |
+| `action-light` | `#f0f7ff` | Selected rows and sub-items (admin) |
+| `action-on-dark` | `#2997ff` | Links and accents on dark tiles only |
+| focus ring | `#0071e3` | 2px outline on keyboard focus; 2px border on selected chips |
+| `ink` | `#1d1d1f` | All text on light surfaces |
+| `gray-600` / `gray-500` | `#6e6e73` / `#86868b` | Secondary text, taglines, captions |
+| `cream` (parchment) | `#f5f5f7` | Page canvas, footer, image wells, admin canvas |
+| `pearl` | `#fafafc` | Quiet secondary button fill |
+| `white` | `#ffffff` | Cards, header glass, newsletter tile |
+| `tile` / `tile-2` | `#272729` / `#2a2a2c` | Near-black tiles (vendor block, dark sections) |
+| `hairline` | `#e0e0e0` | 1px card borders and dividers |
+| `eyebrow` | `#b64400` | "New" / "Save 8%" labels only. Text, never interactive. It nods to Koolbuy's orange logo. |
 
-### Accents (sparingly: badges, illustrations, category tiles)
-| Token | Hex | Use |
-|---|---|---|
-| `--mustard` | `#FFC23D` | "Hot deal" stickers, ratings, highlights |
-| `--tomato` | `#F0533A` | Discounts, sale badges, destructive |
-| `--frost` | `#D6EEF8` | Cold-chain / freezer cues, info tints |
-| `--mint` | `#E7F3EC` | Success tints, soft green panels |
-
-### Neutrals (warm)
-| Token | Hex | Use |
-|---|---|---|
-| `--cream` / `background` | `#FFF8EF` | Page canvas |
-| `--card` | `#FFFFFF` | Cards, inputs, popovers |
-| `--foreground` | `#1C1917` | Body text |
-| `--muted-foreground` | `#78716C` | Secondary text |
-| `--border` | `#F0E6D8` | Hairlines and card borders |
-
-Tailwind's `gray-*` and `slate-*` scales are re-tuned to warm stone tones, so
-existing `text-gray-500`, `bg-gray-50` etc. automatically feel warm.
-
-**Contrast:** body text on cream ≥ 12:1; white on orange is for bold/large text
-and buttons (use weight 700+). Never put orange text on mustard.
-
----
+Tailwind's `gray-*` and `slate-*` scales are remapped to Apple's neutrals and `blue-*` to the
+Action Blue scale, so existing utility classes follow the system. Legacy tokens (`brand-blue`,
+`brand-orange`, `mustard`, …) are aliased into this palette so older markup keeps working.
 
 ## 3. Typography
 
-**Family:** Plus Jakarta Sans (the open-source sibling of Chowdeck's Plus Jakarta
-Display) for everything. Geist Mono for codes/IDs only.
+**Stack:** `-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", Inter, …`
+SF Pro renders on Apple devices, and Inter (loaded via `next/font`) renders elsewhere.
 
-| Role | Size (desktop / mobile) | Weight | Tracking |
-|---|---|---|---|
-| Display (hero) | 56 / 36 px | 800 | -0.03em |
-| H1 | 40 / 30 px | 800 | -0.025em |
-| H2 (section title) | 28 / 22 px | 800 | -0.02em |
-| H3 (card title) | 18 / 16 px | 700 | -0.01em |
-| Body | 15–16 px | 500 | 0 |
-| Small / meta | 13 px | 500 | 0 |
-| Eyebrow / tag | 11–12 px | 800, UPPERCASE | 0.08em |
+| Role | Size (desktop / mobile) | Weight | Tracking | Where |
+|---|---|---|---|---|
+| Hero display | 48–56 / 32–34 px | 600 | -0.025em | "Introducing our products.", newsletter |
+| Display | 40 / 28 px | 600 | -0.02em | Tile headlines, product title |
+| Section head | 34 / 24 px | 600 | -0.02em | Two-tone shelf headers |
+| Tagline | 21–24 / 19 px | 400 | -0.01em | Grey sub-lines |
+| Body | 17 px | 400 | -0.015em | Default |
+| Card title | 15 px | 600 | — | Product names |
+| Caption | 12–14 px | 400/600 | — | Meta, eyebrows, footer |
 
-Section titles get the **squiggle underline** (`.kb-squiggle`) in orange.
+**Weight ladder is 300 / 400 / 600 / 700.** Tailwind's `font-medium` maps to 400,
+`font-bold`/`font-extrabold` to 600 and `font-black` to 700, so legacy classes stay inside the ladder.
 
----
+**Two-tone headline pattern** (store shelves):
+`<span class="text-ink">New products.</span> <span class="text-gray-500">Fresh from verified vendors.</span>`
 
-## 4. Shape & spacing
-
-- Base radius `--radius: 0.875rem` (14px). Scale: sm 8 · md 12 · lg 14 · xl 18 · 2xl 22 · 3xl 26.
-- Product and content cards: `rounded-3xl` feel (22–26px).
-- Buttons, search, chips, tags: **pill** (`rounded-full`).
-- Spacing on a 4px grid; section gap 64–96px desktop, 40px mobile.
-- Content max width 1440px, gutters 16 / 40 / 64px.
-
-## 5. Elevation
+## 4. Shape
 
 | Token | Value | Use |
 |---|---|---|
-| `--shadow-soft` | `0 1px 2px rgba(28,25,23,.04), 0 8px 24px -12px rgba(28,25,23,.12)` | Resting cards |
-| `--shadow-lift` | `0 2px 4px rgba(28,25,23,.04), 0 20px 40px -16px rgba(28,25,23,.22)` | Hover, popovers |
-| `--shadow-pop` | `0 10px 24px -8px rgba(255,122,0,.55)` | Primary CTA glow |
+| `rounded-sm` | 5px | Tiny chips |
+| `rounded-md` | 8px | Utility buttons, inner image wells |
+| `rounded-lg` | 11px | Inputs, small cards |
+| `rounded-2xl` / `3xl` | 18px | Store utility cards, feature tiles, modals |
+| `rounded-full` | pill | Every primary CTA, search, option chips |
+| none | 0 | Full-bleed hero and tiles |
 
-Utility classes: `.kb-card` (white, border, soft shadow, lifts on hover).
+Admin forces a single 12px card radius (see `admin.css` §3).
+
+## 5. Elevation
+
+- **Flat:** `shadow-xs`, `shadow-sm` and `shadow` resolve to `none`, and cards use a hairline.
+- **Floating layers:** `shadow-md` … `shadow-2xl` are whisper-soft, for menus, dropdowns and modals.
+- **Glass:** header, admin header and admin sidebar use `bg-white/80 + backdrop-blur-xl + saturate(180%)`.
+- **Product images** sit on a parchment well with `mix-blend-mode: multiply` (`.kb-product-img`), so
+  white-background photos blend into the well.
 
 ## 6. Components
 
-**Buttons**
-- Primary: orange fill, white 700 text, pill, orange glow; hover darker + lift 1px.
-- Secondary: Deep Kool fill, white text, pill.
-- Ghost: transparent, ink text, warm-border pill; hover cream-dark fill.
+**Buttons** (`Button.tsx`, default shape = pill)
+- `primary`: blue pill, white 400 label.
+- `secondary`: ghost pill (blue text and 1px blue border).
+- `outline`: pearl capsule.
+- `ghost`: blue text.
+- Press is `scale(0.95)`. Focus is a 2px `#0071e3` ring.
 
-**Product card:** white, 22px radius, 1px warm border, soft shadow; image area on a
-cream-tinted well with rounded corners; name 600, price 800 in ink; on hover the card
-lifts 4px and the image zooms 4%. Discount sticker in tomato, top-left, pill.
+**Text link:** `.kb-link`: blue, with a chevron in the copy ("See all ›", "Learn more ›").
 
-**Tags / stickers** (`.kb-sticker`): 800 uppercase 11px, pill, slight -2° rotation
-for "street-sign" personality (Chowdeck's restaurant tags idea). Colors: mustard/ink,
-tomato/white, mint/ink.
+**Header:** 56–64px frosted white bar with a hairline bottom and 13px text links. Its only
+colored element is the blue "Marketplace" pill. Above it sits a thin black announcement strip
+with a Sky Blue "Join now ›".
 
-**Header:** white with blur, soft bottom border; search is a pill field with the
-orange pill button nested inside. Marquee strip in Deep Kool with mustard highlights.
+**Hero:** full-bleed, no rounding. Controls are 44px translucent chips `rgba(210,210,215,.64)`.
 
-**Section header:** eyebrow sticker + H2 + squiggle; "See all" is a ghost pill with
-an arrow that nudges on hover.
+**Option chips** (categories): white pill, 1px `#d2d2d7`; selected = 2px `#0071e3` border.
 
-**Footer:** Deep Kool background, cream text, orange accents, rounded-top.
+**Store utility card** (`.kb-card`): white, 1px hairline, 18px radius, 16–20px padding.
+Image well is parchment with 8–11px radius. Content order: eyebrow (optional), then name (600),
+then vendor (12px grey), then price (400), then a small blue "Buy" pill.
 
-**Admin:** same tokens. Sidebar in Deep Kool with cream text; active item is an
-orange pill. Canvas cream, cards white with soft shadow, stat numbers 800 weight.
+**Dark tile:** `bg-tile`, white 600 headline, `#cccccc` body, blue pill CTA.
 
-## 7. Motion
+**Footer:** parchment, 12px dense link columns (line-height 2.2), hairline dividers, legal row.
 
-- Standard ease `cubic-bezier(.2,.8,.2,1)`, 200–300ms.
-- Hover: lift (translateY -2 to -4px) + shadow-lift. Buttons press down 1px on active.
-- Respect `prefers-reduced-motion`: all decorative animation off.
+**Admin:** macOS-style glass sidebar with 11px grey section labels, 13px items and a blue
+selected row. The canvas is parchment, with white hairline cards and 600-weight stat numbers.
 
-## 8. Voice
+## 7. Don'ts
 
-Warm, short, a little playful: "Keep it kool.", "Fresh deals, just landed",
-"Sell more, stress less." Avoid corporate filler.
+- No second accent color, no gradients, no decorative blobs, stickers or squiggles.
+- No shadows on cards, buttons or text.
+- Don't round full-bleed sections.
+- Don't use `action-on-dark` on light surfaces.
+- Avoid uppercase letter-spaced labels in new work. Apple sets labels in sentence case.

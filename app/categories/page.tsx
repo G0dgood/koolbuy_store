@@ -202,7 +202,7 @@ const CategoriesPage = () => {
         <section className="bg-ink py-20 relative overflow-hidden">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 flex flex-col items-center text-center gap-6 relative z-10">
             <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight font-inter">
-              Can't find your <span className="text-mustard">bloom?</span>
+              Can't find your <span className="text-action-on-dark">bloom?</span>
             </h2>
             <p className="text-blue-100/40 text-sm md:text-base max-w-xl">
               Our concierge sourcing team is always adding new collections to

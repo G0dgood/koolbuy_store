@@ -72,7 +72,7 @@ const RefundPage = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-transparent" />
           <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue rounded-full filter blur-[120px] opacity-20 translate-x-1/4 -translate-y-1/4" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-mustard rounded-full filter blur-[100px] opacity-10 -translate-x-1/4 translate-y-1/4" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-action rounded-full filter blur-[100px] opacity-10 -translate-x-1/4 translate-y-1/4" />
 
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 relative z-10 text-center">
             <motion.div

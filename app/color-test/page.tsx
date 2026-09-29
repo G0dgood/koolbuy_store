@@ -14,7 +14,7 @@ export default function DesignSystemVerificationPage() {
   const brands = [
     { name: 'brand-blue', class: 'bg-brand-blue', light: 'bg-brand-blue-light' },
     { name: 'brand-green', class: 'bg-brand-green', light: 'bg-brand-green-light' },
-    { name: 'brand-orange', class: 'bg-brand-orange', light: 'bg-brand-orange-light' },
+    { name: 'action', class: 'bg-action', light: 'bg-action-light' },
     { name: 'brand-red', class: 'bg-brand-red' },
   ];
 
@@ -93,7 +93,7 @@ export default function DesignSystemVerificationPage() {
             </div>
 
             <div className="space-y-3">
-              <p className="text-body-sm font-bold text-neutral-900 border-l-4 border-brand-orange pl-3 bg-brand-orange-light/20 py-1">Body micro - 12px</p>
+              <p className="text-body-sm font-bold text-neutral-900 border-l-4 border-action pl-3 bg-action-light/20 py-1">Body micro - 12px</p>
               <p className="text-body-xs leading-normal">
                 What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
@@ -142,7 +142,7 @@ export default function DesignSystemVerificationPage() {
       {/* Cursors Section */}
       <section className="space-y-8">
         <div className="flex items-center justify-between">
-          <h2 className="h2 text-neutral-900 underline decoration-brand-orange decoration-4 underline-offset-8">System Cursors</h2>
+          <h2 className="h2 text-neutral-900 underline decoration-action decoration-4 underline-offset-8">System Cursors</h2>
           <p className="text-sm font-medium text-neutral-500 italic">Hover to test cursor behavior</p>
         </div>
 

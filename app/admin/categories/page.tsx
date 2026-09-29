@@ -194,7 +194,7 @@ export default function CategoriesPage() {
           trendValue="Active"
           trendIsUp={true}
           subtitle="Cooling classifications"
-          badgeIcon={<HiOutlineSquares2X2 className="w-4 h-4 text-brand-orange" />}
+          badgeIcon={<HiOutlineSquares2X2 className="w-4 h-4 text-action" />}
         />
         <StatCard
           size="sm"

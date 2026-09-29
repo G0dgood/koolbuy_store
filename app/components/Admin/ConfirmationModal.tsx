@@ -37,8 +37,8 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     warning: {
       icon: "warning_amber",
       iconBg: "bg-orange-50",
-      iconColor: "text-brand-orange",
-      buttonBg: "bg-brand-orange hover:bg-orange-600",
+      iconColor: "text-action",
+      buttonBg: "bg-action hover:bg-orange-600",
       shadow: "shadow-orange-100",
     },
     success: {

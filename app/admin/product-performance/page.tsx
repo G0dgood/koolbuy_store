@@ -275,7 +275,7 @@ export default function ProductPerformancePage() {
           <Button
             variant="primary"
             shape="rounded-sm"
-            className="flex items-center gap-2 bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
+            className="flex items-center gap-2 bg-action hover:bg-action-hover text-white text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
             onClick={() => alert("Exporting Product Performance Report...")}
           >
             <HiOutlineDocumentArrowDown className="w-4 h-4" />

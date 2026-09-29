@@ -174,7 +174,7 @@ export default function TransactionsPage() {
           <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
             {/* Visual Card */}
             <div className="relative w-full max-w-[320px] h-45 rounded-3xl overflow-hidden shadow-xl shadow-blue-100 group">
-              <div className="absolute inset-0 bg-linear-to-br from-brand-orange via-blue-400 to-ink"></div>
+              <div className="absolute inset-0 bg-linear-to-br from-action via-blue-400 to-ink"></div>
               {/* Pattern overlay */}
               <div className="absolute inset-0 opacity-10 mix-blend-overlay bg-[url('/dashboardImage/image 270.png')] bg-cover"></div>
 

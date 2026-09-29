@@ -77,7 +77,7 @@ const TrackingPage = () => {
               </span>
               <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none font-inter">
                 Follow Your <br />
-                <span className="text-mustard">Journey.</span>
+                <span className="text-action-on-dark">Journey.</span>
               </h1>
               <p className="text-blue-100/60 max-w-xl text-lg font-medium">
                 Enter your order credentials to visualize the trajectory of your

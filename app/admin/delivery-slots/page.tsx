@@ -278,7 +278,7 @@ export default function DeliverySlotsPage() {
       {/* Toast */}
       {toastMessage && (
         <div className="fixed top-20 right-8 z-50 bg-ink text-white text-xs px-4 py-3 rounded-lg shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
-          <HiOutlineCheckCircle className="w-4 h-4 text-brand-orange" />
+          <HiOutlineCheckCircle className="w-4 h-4 text-action" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -290,7 +290,7 @@ export default function DeliverySlotsPage() {
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
               Delivery Slots
             </h1>
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-brand-orange/20">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-action/20">
               Fulfillment Windows
             </span>
           </div>
@@ -305,7 +305,7 @@ export default function DeliverySlotsPage() {
           <Button
             variant="primary"
             shape="rounded-sm"
-            className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-xs"
+            className="bg-action hover:bg-action-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-xs"
             onClick={handleOpenAddModal}
           >
             <HiOutlinePlus className="w-4 h-4" />
@@ -321,7 +321,7 @@ export default function DeliverySlotsPage() {
             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
               Total Slots
             </span>
-            <HiOutlineCalendarDays className="w-4 h-4 text-brand-orange" />
+            <HiOutlineCalendarDays className="w-4 h-4 text-action" />
           </div>
           <p className="text-xl font-black text-gray-900">{slots.length}</p>
           <span className="text-[10px] text-gray-500 font-semibold">
@@ -439,7 +439,7 @@ export default function DeliverySlotsPage() {
                     {/* 2. Title */}
                     <td className="py-3.5 px-4 font-bold text-gray-900">
                       <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-brand-orange shrink-0" />
+                        <div className="w-2 h-2 rounded-full bg-action shrink-0" />
                         <span>{slot.title}</span>
                       </div>
                     </td>
@@ -504,7 +504,7 @@ export default function DeliverySlotsPage() {
                         <button
                           type="button"
                           onClick={() => handleOpenEditModal(slot)}
-                          className="p-1.5 text-gray-400 hover:text-brand-orange hover:bg-brand-blue-light/50 rounded-lg transition-colors cursor-pointer"
+                          className="p-1.5 text-gray-400 hover:text-action hover:bg-brand-blue-light/50 rounded-lg transition-colors cursor-pointer"
                           title="Edit Delivery Slot"
                         >
                           <HiOutlinePencilSquare className="w-4 h-4" />
@@ -570,7 +570,7 @@ export default function DeliverySlotsPage() {
           <div className="bg-white rounded-lg border border-gray-100 shadow-2xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]">
             <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-brand-blue-light border border-brand-orange/20 text-brand-orange flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-brand-blue-light border border-action/20 text-action flex items-center justify-center">
                   <HiOutlineClock className="w-4 h-4" />
                 </div>
                 <h3 className="text-sm font-bold text-gray-900">
@@ -603,7 +603,7 @@ export default function DeliverySlotsPage() {
                   onChange={(e) =>
                     setFormData((prev) => ({ ...prev, title: e.target.value }))
                   }
-                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
+                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800"
                 />
               </div>
 
@@ -624,7 +624,7 @@ export default function DeliverySlotsPage() {
                         startTime: e.target.value,
                       }))
                     }
-                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
+                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800"
                   />
                 </div>
 
@@ -643,7 +643,7 @@ export default function DeliverySlotsPage() {
                         endTime: e.target.value,
                       }))
                     }
-                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
+                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800"
                   />
                 </div>
               </div>
@@ -665,7 +665,7 @@ export default function DeliverySlotsPage() {
                         price: e.target.value,
                       }))
                     }
-                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
+                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800"
                   />
                 </div>
 
@@ -685,7 +685,7 @@ export default function DeliverySlotsPage() {
                         durationInMinute: parseInt(e.target.value, 10) || 0,
                       }))
                     }
-                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
+                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800"
                   />
                 </div>
               </div>
@@ -706,7 +706,7 @@ export default function DeliverySlotsPage() {
                       cutOffTime: e.target.value,
                     }))
                   }
-                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
+                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800"
                 />
               </div>
 
@@ -721,7 +721,7 @@ export default function DeliverySlotsPage() {
                       status: e.target.value as "Active" | "Inactive",
                     }))
                   }
-                  className="text-xs font-semibold px-2.5 py-1 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange text-gray-800"
+                  className="text-xs font-semibold px-2.5 py-1 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-action text-gray-800"
                 >
                   <option value="Active">Active</option>
                   <option value="Inactive">Inactive</option>
@@ -743,7 +743,7 @@ export default function DeliverySlotsPage() {
                   type="submit"
                   variant="primary"
                   shape="rounded-sm"
-                  className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold px-4 py-1.5 cursor-pointer shadow-xs"
+                  className="bg-action hover:bg-action-hover text-white text-xs font-semibold px-4 py-1.5 cursor-pointer shadow-xs"
                 >
                   {slotToEdit ? "Update Slot" : "Create Delivery Slot"}
                 </Button>

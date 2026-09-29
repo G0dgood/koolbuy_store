@@ -59,12 +59,9 @@ const RecommendedItems = () => {
 
         <Link
           href="/products"
-          className="kb-btn kb-btn-ghost h-10 px-4 text-xs md:text-sm group shrink-0"
+          className="kb-link text-sm md:text-[17px] shrink-0 whitespace-nowrap"
         >
-          <span>See all</span>
-          <span className="w-6 h-6 rounded-full bg-brand-orange text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-            <FiChevronRight size={14} />
-          </span>
+          See all ›
         </Link>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-5">

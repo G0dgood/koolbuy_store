@@ -296,7 +296,7 @@ export default function AccountingPromoCodesPage() {
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
               Promo Codes (Accounting)
             </h1>
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-brand-orange/20">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-action/20">
               Accounting Audit
             </span>
           </div>
@@ -314,7 +314,7 @@ export default function AccountingPromoCodesPage() {
               className="border-gray-200 text-gray-800 shadow-2xs hover:bg-gray-50 px-3.5 py-2 text-xs font-semibold flex items-center gap-1.5"
             >
               <span>View Marketing Promocodes</span>
-              <HiOutlineArrowRight className="w-3.5 h-3.5 text-brand-orange" />
+              <HiOutlineArrowRight className="w-3.5 h-3.5 text-action" />
             </Button>
           </Link>
 
@@ -336,7 +336,7 @@ export default function AccountingPromoCodesPage() {
           <Button
             variant="blue"
             size="md"
-            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold shadow-sm shadow-brand-blue/20 bg-brand-orange hover:bg-brand-orange/90 text-white"
+            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold shadow-sm shadow-brand-blue/20 bg-action hover:bg-action/90 text-white"
             iconLeft={<HiOutlinePlus size={16} />}
             onClick={() => setIsAddReportModalOpen(true)}
           >
@@ -619,7 +619,7 @@ export default function AccountingPromoCodesPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-brand-orange text-white"
+                className="bg-action text-white"
                 onClick={() => setIsExportModalOpen(false)}
               >
                 Download CSV

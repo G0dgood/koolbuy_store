@@ -4,11 +4,11 @@ import { Icon } from "../Icon";
 // Custom SVG components for payment methods and stores
 const PaymentIcons = () => (
   <div className="flex items-center gap-4 py-2 px-4 border border-dashed border-purple-200 rounded-xl w-fit">
-    <Image unoptimized src="/payment/Payment=payment, Pay-type=amex.png" alt="Amex" width={32} height={20} className="h-5 object-contain" />
-    <Image unoptimized src="/payment/Payment=payment, Pay-type=mastercard.png" alt="Mastercard" width={32} height={20} className="h-5 object-contain" />
-    <Image unoptimized src="/payment/Payment=payment, Pay-type=pp.png" alt="PayPal" width={32} height={20} className="h-5 object-contain" />
-    <Image unoptimized src="/payment/Payment=payment, Pay-type=visa.png" alt="Visa" width={32} height={20} className="h-5 object-contain" />
-    <Image unoptimized src="/payment/Payment=payment, Pay-type=applepay.png" alt="Apple Pay" width={32} height={20} className="h-5 object-contain" />
+    <Image src="/payment/amex.png" alt="Amex" width={32} height={20} className="h-5 object-contain" />
+    <Image src="/payment/mastercard.png" alt="Mastercard" width={32} height={20} className="h-5 object-contain" />
+    <Image src="/payment/pp.png" alt="PayPal" width={32} height={20} className="h-5 object-contain" />
+    <Image src="/payment/visa.png" alt="Visa" width={32} height={20} className="h-5 object-contain" />
+    <Image src="/payment/applepay.png" alt="Apple Pay" width={32} height={20} className="h-5 object-contain" />
   </div>
 );
 
@@ -20,8 +20,8 @@ const StoreButtons = ({ orientation = "horizontal" }: { orientation?: "horizonta
       : "flex-col"}
   `}>
     <button className="hover:opacity-80 transition-opacity flex">
-      <Image unoptimized 
-        src="/store/type=Appstore.png" 
+      <Image 
+        src="/store/app-store.png" 
         alt="Download on the App Store" 
         width={124}
         height={42}
@@ -29,8 +29,8 @@ const StoreButtons = ({ orientation = "horizontal" }: { orientation?: "horizonta
       />
     </button>
     <button className="hover:opacity-80 transition-opacity flex">
-      <Image unoptimized 
-        src="/store/type=Google Play.png" 
+      <Image 
+        src="/store/google-play.png" 
         alt="Get it on Google Play" 
         width={124}
         height={42}
