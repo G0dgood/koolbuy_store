@@ -55,13 +55,13 @@ export function EditProductDrawer({ isOpen, onClose, product }: EditProductDrawe
                 <img src={product.image} alt="" className="w-full h-full object-contain" />
              </div>
              <div className="flex flex-col gap-0.5">
-                <span className="text-sm font-black text-ink truncate max-w-[200px]">{product.name}</span>
-                <span className="text-[10px] font-bold text-gray-400">SKU: {product.sku}</span>
+                <span className="text-sm font-semibold text-ink truncate max-w-[200px]">{product.name}</span>
+                <span className="text-[11px] font-bold text-gray-400">SKU: {product.sku}</span>
              </div>
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Price (₦)</label>
+            <label className="text-[11px] font-semibold text-gray-400">Price (₦)</label>
             <Input
               type="text"
               placeholder="e.g. 25000"
@@ -73,7 +73,7 @@ export function EditProductDrawer({ isOpen, onClose, product }: EditProductDrawe
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Stock Units</label>
+            <label className="text-[11px] font-semibold text-gray-400">Stock Units</label>
             <Input
               type="number"
               placeholder="e.g. 50"
@@ -85,7 +85,7 @@ export function EditProductDrawer({ isOpen, onClose, product }: EditProductDrawe
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Status</label>
+            <label className="text-[11px] font-semibold text-gray-400">Status</label>
             <Select
               options={statusOptions}
               value={formData.status}
@@ -98,7 +98,7 @@ export function EditProductDrawer({ isOpen, onClose, product }: EditProductDrawe
           <Button 
             variant="primary" 
             type="submit"
-            className="w-full h-12 text-[11px] font-black uppercase tracking-widest shadow-lg shadow-blue-100"
+            className="w-full h-12 text-[11px] font-semibold shadow-lg shadow-blue-100"
           >
             Update Catalog
           </Button>

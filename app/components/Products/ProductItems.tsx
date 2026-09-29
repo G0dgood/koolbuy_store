@@ -7,6 +7,8 @@ import { Rating, FavoriteButton } from "../Other";
 import { Button } from "../Button/Button";
 import { useCart } from "@/app/context/CartContext";
 import { toast } from "sonner";
+import { ProductCard } from "./ProductCard";
+import { getVendor, parsePrice } from "@/app/data/catalog";
 
 interface ProductProps {
    id: string;
@@ -20,64 +22,25 @@ interface ProductProps {
    image: string;
 }
 
-export const ProductGridItem: React.FC<{ product: ProductProps }> = ({ product }) => {
-   const { addToCart } = useCart();
-
-   const handleAddToCart = (e: React.MouseEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      addToCart({
-         id: product.id,
-         title: product.title,
-         price: product.price,
-         image: product.image,
-      });
-      toast.success("Added to cart");
-   };
+export const ProductGridItem: React.FC<{ product: ProductProps & { vendor?: string } }> = ({ product }) => {
+   const vendorName = getVendor(product.vendor)?.name;
+   const savePct = product.originalPrice
+      ? Math.round((1 - parsePrice(product.price) / parsePrice(product.originalPrice)) * 100)
+      : 0;
 
    return (
-      <div className="kb-card kb-card-hover p-4 overflow-hidden group flex flex-col h-full relative">
-         <Link href="/products/detail" className="flex flex-col flex-1">
-            <div className="relative w-full aspect-square p-5 rounded-lg bg-cream overflow-hidden flex items-center justify-center">
-               <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
-                  <Image src={product.image} alt={product.title} fill className="object-contain kb-product-img" />
-               </div>
-               {/* Heart Icon (Overlay) */}
-               <div className="absolute top-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <FavoriteButton item={product as any} variant="outline" size="sm" />
-               </div>
-            </div>
-            <div className="pt-4 flex flex-col gap-1.5 pb-16"> {/* Add padding for buttons */}
-               <div className="flex items-center justify-between">
-                  <span className="text-[17px] text-ink">{product.price}</span>
-               </div>
-               <div className="flex items-center gap-2">
-                  <Rating value={product.rating} />
-                  <span className="text-gray-500 text-sm">{product.rating}</span>
-               </div>
-               <span className="text-ink text-[15px] leading-snug line-clamp-2 font-semibold">
-                  {product.title}
-               </span>
-            </div>
-         </Link>
-
-         {/* Actions Footer */}
-         <div className="absolute bottom-0 left-0 right-0 p-3 bg-white/95 backdrop-blur flex gap-2 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0 duration-300">
-            <Link href="/products/detail" className="flex-1">
-               <Button variant="secondary" size="sm" className="w-full text-xs font-bold py-2 border-gray-200">
-                  View details
-               </Button>
-            </Link>
-            <Button 
-               onClick={handleAddToCart}
-               variant="primary" 
-               size="sm" 
-               className="flex-1 text-xs font-bold py-2 shadow-none"
-            >
-               Add to cart
-            </Button>
-         </div>
-      </div>
+      <ProductCard
+         variant="grid"
+         product={{
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            originalPrice: product.originalPrice,
+            image: product.image,
+            vendor: vendorName,
+            eyebrow: savePct > 0 ? `Save ${savePct}%` : undefined,
+         }}
+      />
    );
 };
 
@@ -108,7 +71,7 @@ export const ProductListItem: React.FC<{
       <div className="kb-card kb-card-hover p-4 md:p-6 flex gap-3 md:gap-6 relative group">
          {/* Product Image */}
          <Link href="/products/detail" className="w-24 h-24 md:w-48 md:h-48 flex-shrink-0 rounded-lg flex items-center justify-center p-2 md:p-4 bg-cream cursor-pointer overflow-hidden">
-            <div className="relative w-full h-full transition-transform duration-300 hover:scale-110">
+            <div className="relative w-full h-full transition-transform duration-300">
                <Image src={product.image} alt={product.title} fill className="object-contain" />
             </div>
          </Link>

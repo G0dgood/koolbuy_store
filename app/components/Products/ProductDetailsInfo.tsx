@@ -183,15 +183,15 @@ export const ProductDetailsInfo: React.FC = () => {
                 <div className="bg-cream rounded-xl py-3.5 px-4 text-center mt-1">
                   <p className="text-xs sm:text-sm text-gray-800 font-semibold leading-relaxed">
                     You will be paying{" "}
-                    <strong className="text-action font-extrabold">
+                    <strong className="text-action font-semibold">
                       ₦{currentMonthlyAmount}
                     </strong>{" "}
                     Monthly for{" "}
-                    <strong className="text-action font-extrabold">
+                    <strong className="text-action font-semibold">
                       {selectedInstallment}
                     </strong>{" "}
                     consecutive{" "}
-                    <strong className="text-action font-extrabold">
+                    <strong className="text-action font-semibold">
                       Months
                     </strong>
                     .
@@ -293,7 +293,7 @@ export const ProductDetailsInfo: React.FC = () => {
             onClick={handleAddToCart}
             className="flex-1 h-11 bg-action hover:bg-action-hover active:scale-95 text-white font-normal text-[17px] rounded-full flex items-center justify-center gap-2.5 transition-all cursor-pointer"
           >
-            <span>ADD TO CART</span>
+            <span>Add to cart</span>
             <FiShoppingCart size={16} />
           </button>
         </div>

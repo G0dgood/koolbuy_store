@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Suspense, useEffect, useMemo, useState } from "react";
+import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { Header } from "@/app/components/Header";
 import { Footer } from "@/app/components/Footer";
 import { Icon } from "@/app/components/Icon";
@@ -13,169 +15,90 @@ import {
 import { ProductMobileHeader } from "@/app/components/Products/ProductMobileHeader";
 import { CategoryChips } from "@/app/components/Products/CategoryChips";
 import { RecommendedProducts } from "@/app/components/Products/RecommendedProducts";
-import { Pagination } from "@/app/components/Navigation/Pagination";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  CATEGORIES,
+  PRICE_MAX,
+  PRICE_MIN,
+  PRODUCTS,
+  getVendor,
+  parsePrice,
+} from "@/app/data/catalog";
 
 interface FilterState {
   category: string | null;
-  brands: string[];
+  brands: string[]; // manufacturers (Koolboks, Scanfrost, ...)
   priceRange: [number, number];
-  condition: string;
+  condition: string; // power type
   ratings: number[];
 }
 
-const ProductsPage = () => {
-  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
+const ProductsPageContent = () => {
+  const searchParams = useSearchParams();
+  const vendorSlug = searchParams.get("vendor");
+  const categoryParam = searchParams.get("category");
+  const searchQuery = (searchParams.get("search") || "").trim().toLowerCase();
+  const vendor = getVendor(vendorSlug);
+
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
   const [filters, setFilters] = useState<FilterState>({
-    category: null,
-    brands: ["Koolbuy Store"],
-    priceRange: [150, 850],
+    category: categoryParam,
+    brands: [],
+    priceRange: [PRICE_MIN, PRICE_MAX],
     condition: "Any",
     ratings: [],
   });
 
-  const categories = [
-    "Signature Fragrance",
-    "Luxury Skincare",
-    "Boutique Gift Sets",
-    "Body & Bath",
-    "Home Fragrance",
-    "Men's Grooming",
-  ];
+  // Keep the category filter in sync when the URL changes (e.g. clicking a home-page category tab)
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setFilters((prev) => ({ ...prev, category: categoryParam }));
+  }, [categoryParam]);
 
-  const products = [
-    {
-      id: "1",
-      title: "Signature Oud Intense Discovery Set",
-      price: "₦285.00",
-      originalPrice: "₦320.00",
-      rating: 4.9,
-      orders: 842,
-      shipping: "Express Shipping",
-      description:
-        "A profound journey through the heart of artisanal perfumery. This discovery set features our flagship intense Oud, masterfully balanced with midnight bloom and rare spices for an unforgettable sensory trajectory.",
-      image: "/brandImage/product_1.png",
-      category: "Signature Fragrance",
-      brand: "Koolbuy Store",
-      condition: "Intense",
-    },
-    {
-      id: "2",
-      title: "Prada Paradoxe Eau de Parfum - Refillable",
-      price: "₦142.00",
-      rating: 4.8,
-      orders: 2310,
-      shipping: "Free Shipping",
-      description:
-        "A floral ambery fragrance that embraces the paradoxes of iconic ingredients to reveal new scented sensations. Featuring notes of Neroli, Amber, and Musk for a timeless yet avant-garde signature.",
-      image: "/brandImage/product_2.png",
-      category: "Signature Fragrance",
-      brand: "Prada",
-      condition: "Essential",
-    },
-    {
-      id: "3",
-      title: "Radiant Skin Ritual - Hyaluronic & Vitamin C Duo",
-      price: "₦195.00",
-      originalPrice: "₦240.00",
-      rating: 4.7,
-      orders: 1540,
-      shipping: "Fast Shipping",
-      description:
-        "A high-fidelity skincare orchestration designed to materialize absolute radiance. This duo synchronizes the moisture-locking power of Hyaluronic Acid with the brightening intensity of stabilized Vitamin C.",
-      image: "/brandImage/product_3.png",
-      category: "Luxury Skincare",
-      brand: "Koolbuy Store",
-      condition: "Discovery",
-    },
-    {
-      id: "4",
-      title: "Versace Eros Flame - Eau de Parfum Spray",
-      price: "₦110.00",
-      rating: 4.6,
-      orders: 450,
-      shipping: "Free Shipping",
-      description:
-        "A fragrance for a strong, passionate, self-confident man who is deeply in touch with his emotions. Characterized by strong contrasts in which the most noble and elegant ingredients enrich and enhance one another.",
-      image: "/brandImage/product_4.png",
-      category: "Men's Grooming",
-      brand: "Versace",
-      condition: "Essential",
-    },
-    {
-      id: "5",
-      title: "Midnight Noir Body & Bath Collection",
-      price: "₦165.00",
-      originalPrice: "₦185.00",
-      rating: 4.8,
-      orders: 210,
-      shipping: "Express Delivery",
-      description:
-        "Transform your daily ritual into a spa-level experience. Infused with midnight noir essences, this collection features a silk-texture body wash and a deep-hydration luxury lotion.",
-      image: "/brandImage/product_5.png",
-      category: "Body & Bath",
-      brand: "Koolbuy Store",
-      condition: "Essential",
-    },
-    {
-      id: "6",
-      title: "Gucci Guilty Absolute Pour Homme",
-      price: "₦125.00",
-      rating: 4.7,
-      orders: 1200,
-      shipping: "Fast Shipping",
-      description:
-        "Created using a particular blend with a structure that remains unchanged from the first time it is applied to the skin. Leather accord and goldenwood are custom mixed with natural extract of the Nootka Cypress.",
-      image: "/brandImage/product_6.png",
-      category: "Signature Fragrance",
-      brand: "Gucci",
-      condition: "Intense",
-    },
-  ];
+  const categories = CATEGORIES;
 
-  const filteredProducts = React.useMemo(() => {
-    return products.filter((product) => {
-      // Category filter
-      if (filters.category && product.category !== filters.category)
-        return false;
+  const filteredProducts = useMemo(() => {
+    return PRODUCTS.filter((product) => {
+      if (vendorSlug && vendor && product.vendor !== vendorSlug) return false;
+      if (searchQuery && !product.title.toLowerCase().includes(searchQuery)) return false;
+      if (filters.category && product.category !== filters.category) return false;
+      if (filters.brands.length > 0 && !filters.brands.includes(product.brand)) return false;
 
-      // Brand filter
-      if (filters.brands.length > 0 && !filters.brands.includes(product.brand))
-        return false;
+      const price = parsePrice(product.price);
+      if (price < filters.priceRange[0] || price > filters.priceRange[1]) return false;
 
-      // Price filter
-      const price = parseFloat(product.price.replace(/[₦$,]/g, ""));
-      if (price < filters.priceRange[0] || price > filters.priceRange[1])
-        return false;
+      if (filters.condition !== "Any" && product.power !== filters.condition) return false;
 
-      // Condition filter
-      if (
-        filters.condition !== "Any" &&
-        product.condition !== filters.condition
-      )
-        return false;
-
-      // Rating filter (show all if none selected, or match any selected min rating)
       if (filters.ratings.length > 0) {
         const minRating = Math.min(...filters.ratings);
         if (product.rating < minRating) return false;
       }
-
       return true;
     });
-  }, [filters, products]);
+  }, [filters, vendorSlug, vendor, searchQuery]);
+
+  const recommended = useMemo(
+    () =>
+      PRODUCTS.filter((p) => !filteredProducts.includes(p))
+        .slice(0, 4)
+        .map(({ id, title, price, image }) => ({ id, title, price, image })),
+    [filteredProducts],
+  );
+
+  const pageTitle = vendor?.name || filters.category || (searchQuery ? `Results for “${searchParams.get("search")}”` : "Shop");
+  const unknownVendor = Boolean(vendorSlug && !vendor);
 
   return (
-    <div className="min-h-screen bg-cream flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-cream flex flex-col font-sans text-ink">
       {/* Desktop Header */}
       <Header className="hidden md:block" />
 
       {/* Mobile Header */}
-      <ProductMobileHeader title={filters.category || "Mobile accessory"} />
+      <ProductMobileHeader title={vendor?.name || filters.category || "All products"} />
 
-      <div className="flex-1 max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-0 md:py-6 flex flex-col gap-0 md:gap-6 w-full">
+      <div className="flex-1 max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-0 md:py-8 flex flex-col gap-0 md:gap-8 w-full">
         {/* Category Chips (Mobile only) */}
         <CategoryChips
           categories={categories}
@@ -185,21 +108,57 @@ const ProductsPage = () => {
         />
 
         {/* Breadcrumbs */}
-        <div className="hidden md:flex items-center gap-2 text-sm text-gray-400 overflow-x-auto whitespace-nowrap scrollbar-none pb-2 px-4 md:px-0">
-          <Link href="/" className="hover:text-brand-blue">
+        <div className="hidden md:flex items-center gap-1.5 text-[12px] text-gray-500 overflow-x-auto whitespace-nowrap scrollbar-none pt-2 px-4 md:px-0">
+          <Link href="/" className="hover:text-ink hover:underline">
             Home
           </Link>
           <Icon name="chevron_right" size="xs" />
-          <Link href="#" className="hover:text-brand-blue">
-            Clothings
+          <Link href="/products" className="hover:text-ink hover:underline">
+            Products
           </Link>
-          <Icon name="chevron_right" size="xs" />
-          <Link href="#" className="hover:text-brand-blue">
-            Men's wear
-          </Link>
-          <Icon name="chevron_right" size="xs" />
-          <span className="text-gray-600 font-medium">Summer clothing</span>
+          {vendor && (
+            <>
+              <Icon name="chevron_right" size="xs" />
+              <span className="text-ink">{vendor.name}</span>
+            </>
+          )}
+          {!vendor && filters.category && (
+            <>
+              <Icon name="chevron_right" size="xs" />
+              <span className="text-ink">{filters.category}</span>
+            </>
+          )}
         </div>
+
+        {/* Apple store-style page headline */}
+        {vendor ? (
+          /* Vendor storefront header */
+          <div className="flex items-center gap-5 md:gap-6 px-4 md:px-0 pt-4 md:pt-0">
+            <div className="relative w-16 h-16 md:w-24 md:h-24 rounded-2xl overflow-hidden bg-cream shrink-0">
+              <Image src={vendor.image} alt={vendor.name} fill className="object-cover" />
+            </div>
+            <div className="flex flex-col gap-1 min-w-0">
+              <span className="text-[12px] md:text-[14px] font-semibold text-eyebrow">Verified vendor</span>
+              <h1 className="text-[28px] md:text-[48px] font-semibold text-ink tracking-[-0.025em] leading-[1.07] truncate">
+                {vendor.name}.
+              </h1>
+              <p className="text-[15px] md:text-[19px] text-gray-600">
+                {vendor.location} · {filteredProducts.length} {filteredProducts.length === 1 ? "product" : "products"}
+              </p>
+            </div>
+          </div>
+        ) : (
+          <h1 className="hidden md:block text-[40px] lg:text-[48px] font-semibold tracking-[-0.025em] leading-[1.07] px-4 md:px-0">
+            <span className="text-ink">{pageTitle}.</span>{" "}
+            <span className="text-gray-500">The best way to buy cold storage.</span>
+          </h1>
+        )}
+
+        {unknownVendor && (
+          <p className="mx-4 md:mx-0 rounded-xl bg-cream px-4 py-3 text-[14px] text-gray-600">
+            We couldn&apos;t find that vendor, so we&apos;re showing all products instead.
+          </p>
+        )}
 
         <div className="flex flex-col lg:flex-row gap-6 items-start px-4 md:px-0 mt-3 md:mt-0">
           {/* Sidebar (Desktop only) */}
@@ -222,7 +181,7 @@ const ProductsPage = () => {
               className={`
                 ${
                   viewMode === "grid"
-                    ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 md:gap-5"
+                    ? "grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6"
                     : "flex flex-col gap-3 md:gap-4"
                 }
               `}
@@ -236,44 +195,20 @@ const ProductsPage = () => {
               )}
             </div>
 
-            {/* Bottom Pagination */}
-            <div className="mt-4 flex justify-end px-4 md:px-0">
-              <Pagination
-                totalPages={5}
-                currentPage={1}
-                onPageChange={() => {}}
-              />
-            </div>
+            {filteredProducts.length === 0 && (
+              <div className="py-16 flex flex-col items-center text-center gap-3">
+                <h2 className="text-[24px] font-semibold text-ink tracking-[-0.02em]">No products match.</h2>
+                <p className="text-[17px] text-gray-600 max-w-md">
+                  Try removing a filter or widening the price range.
+                </p>
+                <Link href="/products" className="kb-link text-[17px]">
+                  See all products ›
+                </Link>
+              </div>
+            )}
 
             {/* Recommended Products */}
-            <RecommendedProducts
-              products={[
-                {
-                  id: "r1",
-                  title: "Solid Backpack blue jeans large size",
-                  price: "₦10.30",
-                  image: "/images/bag.jpg",
-                },
-                {
-                  id: "r2",
-                  title: "T-shirts with multiple colors, for men",
-                  price: "₦10.30",
-                  image: "/images/shirt.jpg",
-                },
-                {
-                  id: "r3",
-                  title: "Smart watch premium edition",
-                  price: "₦10.30",
-                  image: "/images/watch.jpg",
-                },
-                {
-                  id: "r4",
-                  title: "Leather wallet for men",
-                  price: "₦10.30",
-                  image: "/images/wallet.jpg",
-                },
-              ]}
-            />
+            <RecommendedProducts products={recommended} />
           </div>
         </div>
       </div>
@@ -313,7 +248,7 @@ const ProductsPage = () => {
               <div className="p-4 border-t border-gray-100 flex gap-3">
                 <button
                   onClick={() => setIsFilterDrawerOpen(false)}
-                  className="flex-1 py-3 bg-brand-blue text-white font-bold rounded-lg hover:bg-brand-blue/90"
+                  className="flex-1 py-3 bg-action text-white rounded-full hover:bg-action-hover"
                 >
                   Show Results
                 </button>
@@ -325,5 +260,11 @@ const ProductsPage = () => {
     </div>
   );
 };
+
+const ProductsPage = () => (
+  <Suspense fallback={<div className="min-h-screen bg-cream" />}>
+    <ProductsPageContent />
+  </Suspense>
+);
 
 export default ProductsPage;

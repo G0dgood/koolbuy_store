@@ -93,10 +93,10 @@ const CategoriesPage = () => {
               transition={{ duration: 0.6 }}
               className="flex flex-col gap-4"
             >
-              <span className="text-brand-blue font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs">
+              <span className="text-brand-blue font-bold text-[11px] md:text-xs">
                 Koolbuy Store Catalogs
               </span>
-              <h1 className="text-4xl md:text-6xl font-black text-ink tracking-tighter leading-none font-inter">
+              <h1 className="text-4xl md:text-6xl font-semibold text-ink tracking-tighter leading-none font-inter">
                 The <span className="text-brand-blue">Collections.</span>
               </h1>
               <p className="text-gray-500 max-w-xl mx-auto text-sm md:text-lg mt-4 leading-relaxed font-medium">
@@ -136,21 +136,21 @@ const CategoriesPage = () => {
                       <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
                         {col.icon}
                       </div>
-                      <span className="text-[10px] font-black uppercase tracking-widest text-ink opacity-60">
+                      <span className="text-[11px] font-semibold text-ink opacity-60">
                         Verified Collection
                       </span>
                     </div>
                     <div className="flex flex-col gap-1">
-                      <h3 className="text-2xl font-black text-ink tracking-tight">
+                      <h3 className="text-2xl font-semibold text-ink tracking-tight">
                         {col.title}
                       </h3>
-                      <span className="text-xs font-bold text-brand-blue uppercase tracking-widest">
+                      <span className="text-xs font-bold text-brand-blue">
                         {col.count}
                       </span>
                     </div>
                     <Link
                       href={col.link}
-                      className="flex items-center justify-between text-xs font-black uppercase tracking-widest text-ink group-hover:text-brand-blue pt-2 transition-colors"
+                      className="flex items-center justify-between text-xs font-semibold text-ink group-hover:text-brand-blue pt-2 transition-colors"
                     >
                       Explore Catalog{" "}
                       <HiChevronRight
@@ -168,10 +168,10 @@ const CategoriesPage = () => {
           <section className="mt-24 md:mt-40">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
               <div className="flex flex-col gap-2">
-                <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs">
+                <span className="text-brand-blue font-bold text-xs">
                   Deeper Discovery
                 </span>
-                <h2 className="text-3xl md:text-5xl font-black text-ink tracking-tight">
+                <h2 className="text-3xl md:text-5xl font-semibold text-ink tracking-tight">
                   Popular Verticals.
                 </h2>
               </div>
@@ -189,7 +189,7 @@ const CategoriesPage = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
-                  className="px-8 py-4 bg-gray-50 border border-gray-100 rounded-2xl hover:border-brand-blue hover:bg-white hover:text-brand-blue hover:shadow-xl hover:shadow-blue-900/5 transition-all text-sm font-black uppercase tracking-widest text-ink cursor-pointer"
+                  className="px-8 py-4 bg-gray-50 border border-gray-100 rounded-2xl hover:border-brand-blue hover:bg-white hover:text-brand-blue hover:shadow-xl hover:shadow-blue-900/5 transition-all text-sm font-semibold text-ink cursor-pointer"
                 >
                   {sub}
                 </motion.div>
@@ -201,7 +201,7 @@ const CategoriesPage = () => {
         {/* Featured Promotion / Collections Trust */}
         <section className="bg-ink py-20 relative overflow-hidden">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 flex flex-col items-center text-center gap-6 relative z-10">
-            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight font-inter">
+            <h2 className="text-3xl md:text-5xl font-semibold text-white tracking-tight font-inter">
               Can't find your <span className="text-action-on-dark">bloom?</span>
             </h2>
             <p className="text-blue-100/40 text-sm md:text-base max-w-xl">
@@ -211,7 +211,7 @@ const CategoriesPage = () => {
             </p>
             <Link
               href="/contact"
-              className="mt-4 px-12 py-5 bg-brand-blue text-white rounded-2xl font-black uppercase tracking-widest text-sm shadow-2xl shadow-blue-500/20 hover:scale-105 transition-all"
+              className="mt-4 px-12 py-5 bg-brand-blue text-white rounded-2xl font-semibold text-sm shadow-2xl shadow-blue-500/20 transition-all"
             >
               Request Curator Support
             </Link>

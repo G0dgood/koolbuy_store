@@ -45,7 +45,7 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(#0F3D2E 1px, transparent 1px)`,
+          backgroundImage: `radial-gradient(#1D1D1F 1px, transparent 1px)`,
           backgroundSize: "20px 20px",
         }}
       />
@@ -61,15 +61,15 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500 shadow-[0_0_8px_rgba(33,150,243,0.8)]"></span>
             </span>
-            <span className="text-[10px] font-black text-brand-blue uppercase tracking-widest">
+            <span className="text-[11px] font-semibold text-brand-blue">
               Realtime Monitor
             </span>
           </div>
 
-          <h3 className="text-5xl font-black text-ink tracking-[-0.04em] mt-3 tabular-nums drop-shadow-sm">
+          <h3 className="text-5xl font-semibold text-ink tracking-[-0.04em] mt-3 tabular-nums drop-shadow-sm">
             21,540
           </h3>
-          <p className="text-[11px] font-bold text-gray-400 mt-2 flex items-center gap-2 uppercase tracking-widest opacity-80">
+          <p className="text-[11px] font-bold text-gray-400 mt-2 flex items-center gap-2 opacity-80">
             <span className="w-4 h-px bg-gray-200"></span>
             Active Users Now
             <span className="w-4 h-px bg-gray-200"></span>
@@ -148,19 +148,19 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
                   backgroundColor: (context: any) => {
                     const chart = context.chart;
                     const { ctx, chartArea } = chart;
-                    if (!chartArea) return "#FF7A00";
+                    if (!chartArea) return "#0066CC";
                     const gradient = ctx.createLinearGradient(
                       0,
                       chartArea.bottom,
                       0,
                       chartArea.top,
                     );
-                    gradient.addColorStop(0, "#FF7A00");
+                    gradient.addColorStop(0, "#0066CC");
                     gradient.addColorStop(1, "#60A5FA");
                     return gradient;
                   },
                   borderRadius: 3,
-                  hoverBackgroundColor: "#0F3D2E",
+                  hoverBackgroundColor: "#1D1D1F",
                   barThickness: 4,
                   gap: 2,
                 },
@@ -177,10 +177,10 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
 
       <div className="flex flex-col gap-6 pt-6 mt-2 relative z-10">
         <div className="flex justify-between items-center bg-gray-50/50 p-2 rounded-lg border border-gray-100/50">
-          <h4 className="text-[12px] font-black text-ink uppercase tracking-widest pl-1">
+          <h4 className="text-[12px] font-semibold text-ink pl-1">
             Global Distribution
           </h4>
-          <span className="text-[10px] font-black text-brand-blue bg-white px-2 py-0.5 rounded border border-gray-100 shadow-sm">
+          <span className="text-[11px] font-semibold text-brand-blue bg-white px-2 py-0.5 rounded border border-gray-100 shadow-sm">
             ACTIVE
           </span>
         </div>
@@ -218,16 +218,16 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
                   {c.flag}
                 </div>
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-[11px] font-black text-ink tracking-tight">
+                  <span className="text-[11px] font-semibold text-ink tracking-tight">
                     {c.val}
                   </span>
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter opacity-70">
+                  <span className="text-[11px] font-bold text-gray-400 tracking-tighter opacity-70">
                     {c.country}
                   </span>
                 </div>
               </div>
               <div
-                className={`flex items-center gap-1 text-[10px] font-black px-2.5 py-1 rounded-lg border shadow-sm transition-all duration-300 ${c.isUp ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-rose-50 text-rose-500 border-rose-100"}`}
+                className={`flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1 rounded-lg border shadow-sm transition-all duration-300 ${c.isUp ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-rose-50 text-rose-500 border-rose-100"}`}
               >
                 <Icon
                   name={c.isUp ? "arrow_upward" : "arrow_downward"}
@@ -247,7 +247,7 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: isActive ? 1 : 0.1 }}
                     transition={{ delay: 0.5 + idx * 0.02 + i * 0.1 }}
-                    className={`h-full flex-1 rounded-[1px] ${isActive ? "bg-linear-to-b from-blue-400 to-brand-blue shadow-[0_0_5px_rgba(33,150,243,0.3)]" : "bg-gray-200"}`}
+                    className={`h-full flex-1 rounded-[1px] ${isActive ? "bg-action" : "bg-gray-200"}`}
                   />
                 );
               })}
@@ -264,7 +264,7 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
         <div className="absolute inset-0 bg-ink group-hover:bg-ink/90 transition-colors" />
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-linear-to-r from-transparent via-white/10 to-transparent skew-x-12 translate-x-full group-hover:translate-x-[-200%] duration-1000" />
 
-        <span className="relative z-10 text-[11px] font-black text-white uppercase tracking-[0.2em] flex items-center gap-3">
+        <span className="relative z-10 text-[11px] font-semibold text-white flex items-center gap-3">
           Deep Analysis
           <Icon
             name="arrow_forward"
@@ -274,7 +274,6 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
         </span>
 
         {/* Outer Glow on hover */}
-        <div className="absolute inset-x-4 inset-y-0 bg-brand-blue/30 blur-2xl group-hover:opacity-100 opacity-0 transition-opacity pointer-events-none" />
       </button>
 
       {/* Subtle border bottom glow */}

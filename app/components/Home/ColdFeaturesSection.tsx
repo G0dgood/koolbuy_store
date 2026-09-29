@@ -60,7 +60,7 @@ export const ColdFeaturesSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: idx * 0.15 }}
-            className="group relative rounded-2xl overflow-hidden min-h-105 sm:min-h-115 flex flex-col justify-between"
+            className="kb-card kb-card-hover group relative overflow-hidden min-h-105 sm:min-h-115 flex flex-col justify-between"
           >
             {/* Background Image */}
             <Image

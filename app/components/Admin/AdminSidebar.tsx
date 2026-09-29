@@ -131,7 +131,7 @@ const VendorsIcon = ({ active }: { active?: boolean }) => (
     />
     <path
       d="M11.3 16.5H12.7L12 20.5L11.3 16.5Z"
-      fill={active ? "currentColor" : "#FF7A00"}
+      fill={active ? "currentColor" : "#0066CC"}
     />
   </svg>
 );
@@ -181,37 +181,37 @@ const AccountingIcon = ({ active }: { active?: boolean }) => (
       cx="12.5"
       cy="16.5"
       r="0.8"
-      fill={active ? "currentColor" : "#A8A096"}
+      fill={active ? "currentColor" : "#86868B"}
     />
     <circle
       cx="15.2"
       cy="16.5"
       r="0.8"
-      fill={active ? "currentColor" : "#A8A096"}
+      fill={active ? "currentColor" : "#86868B"}
     />
     <circle
       cx="18"
       cy="16.5"
       r="0.8"
-      fill={active ? "currentColor" : "#A8A096"}
+      fill={active ? "currentColor" : "#86868B"}
     />
     <circle
       cx="12.5"
       cy="19.5"
       r="0.8"
-      fill={active ? "currentColor" : "#A8A096"}
+      fill={active ? "currentColor" : "#86868B"}
     />
     <circle
       cx="15.2"
       cy="19.5"
       r="0.8"
-      fill={active ? "currentColor" : "#A8A096"}
+      fill={active ? "currentColor" : "#86868B"}
     />
     <circle
       cx="18"
       cy="19.5"
       r="0.8"
-      fill={active ? "currentColor" : "#FF7A00"}
+      fill={active ? "currentColor" : "#0066CC"}
     />
   </svg>
 );
@@ -306,7 +306,7 @@ const ReportsIcon = ({ active }: { active?: boolean }) => (
       cx="17"
       cy="9.5"
       r="1.2"
-      fill={active ? "currentColor" : "#FF7A00"}
+      fill={active ? "currentColor" : "#0066CC"}
     />
   </svg>
 );
@@ -595,7 +595,7 @@ const TaxIcon = ({ active }: { active?: boolean }) => (
       fontSize="6"
       fontWeight="900"
       fontFamily="sans-serif"
-      fill={active ? "currentColor" : "#78716C"}
+      fill={active ? "currentColor" : "#6E6E73"}
       letterSpacing="0.4"
     >
       TAX
@@ -604,7 +604,7 @@ const TaxIcon = ({ active }: { active?: boolean }) => (
       cx="9.5"
       cy="15.5"
       r="1"
-      fill={active ? "currentColor" : "#FF7A00"}
+      fill={active ? "currentColor" : "#0066CC"}
     />
     <path
       d="M8.5 18.5L14.5 13.5"
@@ -616,7 +616,7 @@ const TaxIcon = ({ active }: { active?: boolean }) => (
       cx="13.5"
       cy="16.5"
       r="1"
-      fill={active ? "currentColor" : "#FF7A00"}
+      fill={active ? "currentColor" : "#0066CC"}
     />
   </svg>
 );
@@ -649,7 +649,7 @@ const PaymentOptionsIcon = ({ active }: { active?: boolean }) => (
       cx="7.5"
       cy="14.5"
       r="1.5"
-      fill={active ? "currentColor" : "#FF7A00"}
+      fill={active ? "currentColor" : "#0066CC"}
     />
     <line
       x1="12"
@@ -812,7 +812,7 @@ const PromocodeIcon = ({ active }: { active?: boolean }) => (
       stroke={active ? "currentColor" : "#86868B"}
       strokeWidth="1.8"
     />
-    <circle cx="9.5" cy="10" r="1" fill={active ? "currentColor" : "#FF7A00"} />
+    <circle cx="9.5" cy="10" r="1" fill={active ? "currentColor" : "#0066CC"} />
     <path
       d="M8.5 14L14.5 10"
       stroke={active ? "currentColor" : "#86868B"}
@@ -823,7 +823,7 @@ const PromocodeIcon = ({ active }: { active?: boolean }) => (
       cx="13.5"
       cy="14"
       r="1"
-      fill={active ? "currentColor" : "#FF7A00"}
+      fill={active ? "currentColor" : "#0066CC"}
     />
   </svg>
 );
@@ -887,7 +887,7 @@ const CampaignsIcon = ({ active }: { active?: boolean }) => (
       points="12,5.5 13.2,8 16,8.3 13.9,10.1 14.5,13 12,11.5 9.5,13 10.1,10.1 8,8.3 10.8,8"
       stroke={active ? "currentColor" : "#86868B"}
       strokeWidth="1.2"
-      fill={active ? "currentColor" : "#FF7A00"}
+      fill={active ? "currentColor" : "#0066CC"}
       fillOpacity={active ? "1" : "0.2"}
       strokeLinejoin="round"
     />
@@ -931,7 +931,7 @@ const ErrorsHealthIcon = ({ active }: { active?: boolean }) => (
       cx="12"
       cy="15.5"
       r="1"
-      fill={active ? "currentColor" : "#FF7A00"}
+      fill={active ? "currentColor" : "#0066CC"}
     />
   </svg>
 );

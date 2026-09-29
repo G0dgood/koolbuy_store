@@ -177,8 +177,8 @@ export default function ProductMediaListing() {
                       {item.name}
                     </h3>
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{item.size}</span>
-                      <span className="text-[10px] font-medium text-gray-300">{item.date}</span>
+                      <span className="text-[11px] font-bold text-gray-400">{item.size}</span>
+                      <span className="text-[11px] font-medium text-gray-300">{item.date}</span>
                     </div>
                   </div>
                 </div>
@@ -226,7 +226,7 @@ export default function ProductMediaListing() {
                             size="xs"
                             className="text-gray-400"
                           />
-                          <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">{item.type}</span>
+                          <span className="text-xs font-bold text-gray-400">{item.type}</span>
                         </div>
                       </td>
                       <td>

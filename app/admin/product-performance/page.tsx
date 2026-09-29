@@ -455,7 +455,7 @@ export default function ProductPerformancePage() {
                             </span>
                           </td>
                           <td>
-                            <span className="text-sm font-black text-gray-900">
+                            <span className="text-sm font-semibold text-gray-900">
                               {item.totalRevenue}
                             </span>
                           </td>

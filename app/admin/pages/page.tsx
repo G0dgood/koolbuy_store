@@ -343,7 +343,7 @@ export default function CMSPagesManagement() {
 
             <div className="flex flex-col gap-3">
               <div>
-                <label className="block text-[11px] font-bold text-gray-500 uppercase mb-1">
+                <label className="block text-[11px] font-bold text-gray-500 mb-1">
                   Main Headline
                 </label>
                 <Input
@@ -357,7 +357,7 @@ export default function CMSPagesManagement() {
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold text-gray-500 uppercase mb-1">
+                <label className="block text-[11px] font-bold text-gray-500 mb-1">
                   Subheadline / Summary
                 </label>
                 <textarea
@@ -405,7 +405,7 @@ export default function CMSPagesManagement() {
                   className="p-4 rounded-lg border border-gray-200 bg-gray-50/40 flex flex-col gap-3 relative group"
                 >
                   <div className="flex items-center justify-between gap-3">
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                    <span className="text-[11px] font-bold text-gray-400">
                       Section #{idx + 1}
                     </span>
                     {currentPage.sections.length > 1 && (
@@ -421,7 +421,7 @@ export default function CMSPagesManagement() {
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-bold text-gray-500 uppercase mb-1">
+                    <label className="block text-[11px] font-bold text-gray-500 mb-1">
                       Section Title
                     </label>
                     <input
@@ -435,7 +435,7 @@ export default function CMSPagesManagement() {
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-bold text-gray-500 uppercase mb-1">
+                    <label className="block text-[11px] font-bold text-gray-500 mb-1">
                       Section Body Content
                     </label>
                     <textarea
@@ -467,7 +467,7 @@ export default function CMSPagesManagement() {
 
             <div className="flex flex-col gap-3">
               <div>
-                <label className="block text-[11px] font-bold text-gray-500 uppercase mb-1">
+                <label className="block text-[11px] font-bold text-gray-500 mb-1">
                   Publication Status
                 </label>
                 <select
@@ -485,7 +485,7 @@ export default function CMSPagesManagement() {
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold text-gray-500 uppercase mb-1">
+                <label className="block text-[11px] font-bold text-gray-500 mb-1">
                   Public URL Path
                 </label>
                 <div className="flex items-center gap-1.5 p-2 bg-gray-50 rounded-lg border border-gray-200 text-xs font-mono text-gray-700">
@@ -513,7 +513,7 @@ export default function CMSPagesManagement() {
 
             <div className="flex flex-col gap-3">
               <div>
-                <label className="block text-[11px] font-bold text-gray-500 uppercase mb-1">
+                <label className="block text-[11px] font-bold text-gray-500 mb-1">
                   SEO Title
                 </label>
                 <Input
@@ -524,7 +524,7 @@ export default function CMSPagesManagement() {
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold text-gray-500 uppercase mb-1">
+                <label className="block text-[11px] font-bold text-gray-500 mb-1">
                   Meta Description
                 </label>
                 <textarea
@@ -536,7 +536,7 @@ export default function CMSPagesManagement() {
                   className="w-full text-xs p-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-700 leading-relaxed"
                   placeholder="Enter meta description for search engines..."
                 />
-                <span className="text-[10px] text-gray-400">
+                <span className="text-[11px] text-gray-400">
                   Recommended: 120-160 characters (
                   {currentPage.metaDescription.length} chars)
                 </span>
@@ -567,11 +567,11 @@ export default function CMSPagesManagement() {
       >
         <ModalBody className="flex flex-col gap-6 py-6 max-h-[70vh] overflow-y-auto">
           {/* Storefront Hero Preview */}
-          <div className="bg-linear-to-br from-ink to-[#0d1b2a] text-white p-8 rounded-lg flex flex-col gap-3">
-            <span className="text-[11px] uppercase tracking-widest font-bold text-action">
+          <div className="bg-tile text-white p-8 rounded-lg flex flex-col gap-3">
+            <span className="text-[11px] font-bold text-action">
               Koolbuy Storefront
             </span>
-            <h1 className="text-2xl font-black">{currentPage.headline}</h1>
+            <h1 className="text-2xl font-semibold">{currentPage.headline}</h1>
             <p className="text-xs text-gray-300 leading-relaxed max-w-2xl">
               {currentPage.subheadline}
             </p>

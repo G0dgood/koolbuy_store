@@ -54,7 +54,7 @@ export function MediaMoreActionsDrawer({ isOpen, onClose, onPurgeUnused }: Media
     <Drawer isOpen={isOpen} onClose={onClose} title="Media: More Actions">
       <div className="flex flex-col h-full gap-8">
         <div className="flex flex-col gap-2">
-          <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] px-4 mb-2">
+          <p className="text-[11px] font-semibold text-gray-400 px-4 mb-2">
             Library Governance
           </p>
           <div className="flex flex-col gap-1">
@@ -74,7 +74,7 @@ export function MediaMoreActionsDrawer({ isOpen, onClose, onPurgeUnused }: Media
                   <Icon name={action.icon} folder={action.folder} size="sm" />
                 </div>
                 <div className="flex flex-col gap-1 flex-1">
-                  <span className={`text-[13px] font-black transition-colors
+                  <span className={`text-[13px] font-semibold transition-colors
                     ${action.variant === "danger" ? "text-rose-600" : "text-ink"}
                   `}>
                     {action.title}
@@ -100,7 +100,7 @@ export function MediaMoreActionsDrawer({ isOpen, onClose, onPurgeUnused }: Media
                 <Icon name="verified" folder="icon" size="sm" />
              </div>
              <div className="flex flex-col gap-1">
-                <span className="text-[14px] font-black text-white">Asset Performance</span>
+                <span className="text-[14px] font-semibold text-white">Asset Performance</span>
                 <span className="text-[11px] font-medium text-blue-200/60 leading-relaxed">
                    Optimized media directly impacts conversion rates. Keep your catalog fast, clean, and SEO-friendly.
                 </span>

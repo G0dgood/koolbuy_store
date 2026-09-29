@@ -1082,7 +1082,7 @@ export default function ConfigurationsPage() {
             <HiOutlineCog6Tooth className="w-4 h-4" />
             <span>Integrations & Services</span>
             <span
-              className={`px-1.5 py-0.5 text-[10px] rounded-full font-semibold ${
+              className={`px-1.5 py-0.5 text-[11px] rounded-full font-semibold ${
                 activeTab === "cards"
                   ? "bg-white/20 text-white"
                   : "bg-gray-100 text-gray-600"
@@ -1104,7 +1104,7 @@ export default function ConfigurationsPage() {
             <HiOutlineAdjustmentsHorizontal className="w-4 h-4" />
             <span>Custom Mods</span>
             <span
-              className={`px-1.5 py-0.5 text-[10px] rounded-full font-semibold ${
+              className={`px-1.5 py-0.5 text-[11px] rounded-full font-semibold ${
                 activeTab === "mods"
                   ? "bg-white/20 text-white"
                   : "bg-gray-100 text-gray-600"
@@ -1174,7 +1174,7 @@ export default function ConfigurationsPage() {
                         <IconComponent className="w-5 h-5" />
                       </div>
                       <div>
-                        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">
+                        <span className="text-[11px] font-bold text-gray-400 block">
                           {card.category}
                         </span>
                         <h3 className="text-sm font-bold text-gray-900 leading-snug">
@@ -1203,12 +1203,12 @@ export default function ConfigurationsPage() {
                   {/* Badge & Quick Details Preview */}
                   <div className="flex flex-wrap items-center gap-2 mb-4">
                     {card.badge && (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold bg-action/10 text-brand-blue border border-action/20">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-bold bg-action/10 text-brand-blue border border-action/20">
                         {card.badge}
                       </span>
                     )}
                     <span
-                      className={`inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-semibold ${
+                      className={`inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold ${
                         card.enabled
                           ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
                           : "bg-gray-100 text-gray-600 border border-gray-200"
@@ -1266,7 +1266,7 @@ export default function ConfigurationsPage() {
           {/* Header Bar */}
           <div className="p-4 sm:p-5 border-b border-gray-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-gray-50/50">
             <div>
-              <h2 className="text-sm font-bold text-ink uppercase tracking-wider">
+              <h2 className="text-sm font-bold text-ink">
                 Custom Operational Mods ({filteredMods.length})
               </h2>
               <p className="text-xs text-gray-500 mt-0.5">
@@ -1294,11 +1294,11 @@ export default function ConfigurationsPage() {
                     <h4 className="text-xs font-bold text-gray-900 tracking-tight">
                       {mod.name}
                     </h4>
-                    <span className="text-[10px] px-2 py-0.2 rounded font-semibold bg-gray-100 text-gray-600 border border-gray-200">
+                    <span className="text-[11px] px-2 py-0.2 rounded font-semibold bg-gray-100 text-gray-600 border border-gray-200">
                       {mod.category}
                     </span>
                     {mod.enabled && (
-                      <span className="text-[10px] px-1.5 py-0.2 rounded font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">
+                      <span className="text-[11px] px-1.5 py-0.2 rounded font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">
                         Active
                       </span>
                     )}
@@ -1388,7 +1388,7 @@ export default function ConfigurationsPage() {
                         <h4 className="text-xs font-bold text-gray-800">
                           {label}
                         </h4>
-                        <span className="text-[10px] text-gray-400">
+                        <span className="text-[11px] text-gray-400">
                           Toggle feature enablement for {activeCardToEdit.title}
                         </span>
                       </div>
@@ -1412,7 +1412,7 @@ export default function ConfigurationsPage() {
 
                 return (
                   <div key={key} className="flex flex-col gap-1.5">
-                    <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                    <label className="text-xs font-bold text-gray-700">
                       {label}
                     </label>
                     <input

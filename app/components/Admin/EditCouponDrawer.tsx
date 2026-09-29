@@ -61,7 +61,7 @@ export function EditCouponDrawer({ isOpen, onClose, coupon }: EditCouponDrawerPr
       <form onSubmit={handleSubmit} className="flex flex-col h-full gap-8">
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Coupon Code</label>
+            <label className="text-[11px] font-semibold text-gray-400">Coupon Code</label>
             <Input
               placeholder="e.g. SUMMER25"
               value={formData.code}
@@ -73,7 +73,7 @@ export function EditCouponDrawer({ isOpen, onClose, coupon }: EditCouponDrawerPr
 
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Discount</label>
+              <label className="text-[11px] font-semibold text-gray-400">Discount</label>
               <Input
                 placeholder="20% or 10.00"
                 value={formData.discount}
@@ -83,7 +83,7 @@ export function EditCouponDrawer({ isOpen, onClose, coupon }: EditCouponDrawerPr
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Type</label>
+              <label className="text-[11px] font-semibold text-gray-400">Type</label>
               <Select
                 options={typeOptions}
                 value={formData.type}
@@ -94,7 +94,7 @@ export function EditCouponDrawer({ isOpen, onClose, coupon }: EditCouponDrawerPr
 
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Start Date</label>
+              <label className="text-[11px] font-semibold text-gray-400">Start Date</label>
               <Input
                 type="text"
                 placeholder="01-01-2025"
@@ -105,7 +105,7 @@ export function EditCouponDrawer({ isOpen, onClose, coupon }: EditCouponDrawerPr
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">End Date</label>
+              <label className="text-[11px] font-semibold text-gray-400">End Date</label>
               <Input
                 type="text"
                 placeholder="31-12-2025"
@@ -118,7 +118,7 @@ export function EditCouponDrawer({ isOpen, onClose, coupon }: EditCouponDrawerPr
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Status</label>
+            <label className="text-[11px] font-semibold text-gray-400">Status</label>
             <Select
               options={statusOptions}
               value={formData.status}
@@ -131,7 +131,7 @@ export function EditCouponDrawer({ isOpen, onClose, coupon }: EditCouponDrawerPr
           <Button 
             variant="primary" 
             type="submit" 
-            className="w-full h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest shadow-lg shadow-blue-100"
+            className="w-full h-10 sm:h-12 text-[11px] font-semibold shadow-lg shadow-blue-100"
           >
             Update Coupon
           </Button>

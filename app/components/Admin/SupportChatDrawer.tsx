@@ -40,7 +40,7 @@ export function SupportChatDrawer({ isOpen, onClose, ticket }: SupportChatDrawer
         <Button
           variant="outline"
           shape="rounded-sm"
-          className="!py-1.5 !px-3 text-[10px] font-black uppercase tracking-wider border-gray-100 text-ink gap-2 hover:bg-gray-50 transition-colors"
+          className="!py-1.5 !px-3 text-[11px] font-semibold border-gray-100 text-ink gap-2 hover:bg-gray-50 transition-colors"
           onClick={() => setIsStatusModalOpen(true)}
         >
           <BiSliderAlt size={14} className="text-brand-blue" />
@@ -58,14 +58,14 @@ export function SupportChatDrawer({ isOpen, onClose, ticket }: SupportChatDrawer
               <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></div>
            </div>
            <div className="flex flex-col">
-              <span className="text-sm font-black text-ink">{ticket.customer}</span>
+              <span className="text-sm font-semibold text-ink">{ticket.customer}</span>
               <div className="flex items-center gap-1.5">
                  <div className="flex items-center gap-1 text-emerald-500">
                     <HiCheckBadge size={14} />
-                    <span className="text-[10px] font-bold">Verified User</span>
+                    <span className="text-[11px] font-bold">Verified User</span>
                  </div>
-                 <span className="text-[10px] text-gray-300">•</span>
-                 <span className="text-[10px] font-bold text-gray-400">{ticket.ticketId}</span>
+                 <span className="text-[11px] text-gray-300">•</span>
+                 <span className="text-[11px] font-bold text-gray-400">{ticket.ticketId}</span>
               </div>
            </div>
         </div>
@@ -82,13 +82,13 @@ export function SupportChatDrawer({ isOpen, onClose, ticket }: SupportChatDrawer
                     `}>
                        {msg.text}
                     </div>
-                    <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">{msg.time}</span>
+                    <span className="text-[11px] font-bold text-gray-400">{msg.time}</span>
                  </div>
               </div>
            ))}
            
            <div className="flex justify-center">
-              <span className="px-3 py-1 bg-gray-50 rounded-full text-[9px] font-black text-gray-400 uppercase tracking-widest border border-gray-100">
+              <span className="px-3 py-1 bg-gray-50 rounded-full text-[11px] font-semibold text-gray-400 border border-gray-100">
                  Today
               </span>
            </div>
@@ -107,11 +107,11 @@ export function SupportChatDrawer({ isOpen, onClose, ticket }: SupportChatDrawer
                  placeholder="Type your message..."
                  className="flex-1 bg-transparent border-none outline-none text-xs font-bold text-ink placeholder:text-gray-400 py-2"
               />
-              <button className="w-10 h-10 rounded-xl bg-brand-blue text-white flex items-center justify-center shadow-lg shadow-blue-100 hover:scale-105 active:scale-95 transition-all">
+              <button className="w-10 h-10 rounded-xl bg-brand-blue text-white flex items-center justify-center shadow-lg shadow-blue-100 active:scale-95 transition-all">
                  <IoSend size={18} />
               </button>
            </div>
-           <p className="text-[10px] text-center text-gray-400 mt-3 font-medium italic">
+           <p className="text-[11px] text-center text-gray-400 mt-3 font-medium italic">
               Press Enter to send message
            </p>
         </div>

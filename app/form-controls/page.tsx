@@ -12,7 +12,7 @@ export default function FormControlsDemo() {
 
   return (
     <div className="min-h-screen bg-cream p-12 font-sans">
-      <div className="max-w-4xl mx-auto bg-white rounded-xl  p-16">
+      <div className="max-w-4xl mx-auto bg-white rounded-xl p-16">
         <h1 className="text-5xl font-bold mb-16 text-black">Form - checks & radios</h1>
 
         <div className="flex flex-col gap-16">
@@ -93,7 +93,7 @@ export default function FormControlsDemo() {
 
           {/* Base Components Footer */}
           <section>
-            <h3 className="text-gray-400 font-semibold mb-8 uppercase tracking-wider">Base components</h3>
+            <h3 className="text-gray-400 font-semibold mb-8">Base components</h3>
 
             <div className="flex items-center gap-12">
               <div className="flex items-center gap-6 p-6 border border-dashed border-purple-200 rounded-lg">

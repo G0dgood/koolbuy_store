@@ -85,7 +85,7 @@ const RefundPage = () => {
                 <HiShieldCheck size={40} />
               </div>
               <div className="flex flex-col gap-3">
-                <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter font-inter">
+                <h1 className="text-4xl md:text-6xl font-semibold text-white tracking-tighter font-inter">
                   Transparent <span className="text-brand-blue">Refunds</span>
                 </h1>
                 <p className="text-blue-100/70 max-w-2xl text-base md:text-lg leading-relaxed font-medium mx-auto">
@@ -102,10 +102,10 @@ const RefundPage = () => {
         <section className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-24 md:py-32">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-1 flex flex-col gap-6">
-              <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs">
+              <span className="text-brand-blue font-bold text-xs">
                 Policy Foundations
               </span>
-              <h2 className="text-3xl md:text-4xl font-black text-ink tracking-tight leading-tight">
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink tracking-tight leading-tight">
                 Eligibility <br />
                 Criteria
               </h2>
@@ -150,7 +150,7 @@ const RefundPage = () => {
         <section className="bg-gray-50 py-24 md:py-32">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16">
             <div className="text-center mb-20 flex flex-col items-center gap-4">
-              <h2 className="text-3xl md:text-5xl font-black text-ink tracking-tight">
+              <h2 className="text-3xl md:text-5xl font-semibold text-ink tracking-tight">
                 How the process works
               </h2>
               <p className="text-gray-500 max-w-xl">
@@ -176,7 +176,7 @@ const RefundPage = () => {
                     {step.icon}
                   </div>
                   <div className="flex flex-col gap-2">
-                    <span className="text-brand-blue font-black text-xs uppercase tracking-[0.2em]">
+                    <span className="text-brand-blue font-semibold text-xs">
                       Step 0{i + 1}
                     </span>
                     <h4 className="text-xl font-bold text-ink">
@@ -198,7 +198,7 @@ const RefundPage = () => {
             <div className="w-full bg-brand-blue-light rounded-[40px] p-12 md:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/40 rounded-full filter blur-[80px] -translate-x-1/2 -translate-y-1/2" />
               <div className="flex flex-col gap-4 relative z-10 text-center lg:text-left">
-                <h2 className="text-3xl md:text-4xl font-black text-ink tracking-tight">
+                <h2 className="text-3xl md:text-4xl font-semibold text-ink tracking-tight">
                   Need to start a refund?
                 </h2>
                 <p className="text-brand-blue/80 font-medium">
@@ -206,10 +206,10 @@ const RefundPage = () => {
                 </p>
               </div>
               <div className="flex items-center gap-4 relative z-10">
-                <button className="bg-brand-blue text-white px-10 py-4 rounded-xl font-black uppercase tracking-widest text-xs shadow-xl shadow-blue-200 hover:scale-105 transition-transform">
+                <button className="bg-brand-blue text-white px-10 py-4 rounded-xl font-semibold text-xs shadow-xl shadow-blue-200 transition-transform">
                   Initiate Now
                 </button>
-                <button className="bg-white text-ink px-10 py-4 rounded-xl font-black uppercase tracking-widest text-xs border border-blue-100 hover:bg-gray-50 transition-colors">
+                <button className="bg-white text-ink px-10 py-4 rounded-xl font-semibold text-xs border border-blue-100 hover:bg-gray-50 transition-colors">
                   View Orders
                 </button>
               </div>

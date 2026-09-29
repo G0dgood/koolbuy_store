@@ -472,7 +472,7 @@ export default function TaxesReportPage() {
                       Standard VAT calculation on taxable merchandise
                     </p>
                   </div>
-                  <span className="text-base font-black text-brand-blue">
+                  <span className="text-base font-semibold text-brand-blue">
                     {selectedRecord.taxAmount}
                   </span>
                 </div>

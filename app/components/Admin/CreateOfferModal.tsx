@@ -95,7 +95,7 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
         {/* Left: Categories */}
         <div className="w-64 border-r border-gray-100 flex flex-col pt-2 bg-gray-50/30">
           <div className="px-5 py-4 flex flex-col gap-1">
-            <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest px-1">Filter Categories</h4>
+            <h4 className="text-[11px] font-semibold text-gray-400 px-1">Filter Categories</h4>
           </div>
           <div className="flex flex-col gap-1 px-3">
             {categories.map((cat) => (
@@ -109,7 +109,7 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
                 `}
               >
                 <span>{cat.name}</span>
-                <span className={`text-[10px] ${selectedCategory === cat.name ? "text-blue-100" : "text-gray-400"}`}>
+                <span className={`text-[11px] ${selectedCategory === cat.name ? "text-blue-100" : "text-gray-400"}`}>
                   {cat.count}
                 </span>
               </button>
@@ -121,10 +121,10 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
         <div className="flex-1 flex flex-col bg-white">
           <div className="p-6 border-b border-gray-50 flex items-center justify-between">
             <div className="flex flex-col">
-              <h3 className="text-sm font-black text-ink">Selection Area</h3>
-              <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Picking products from {selectedCategory}</span>
+              <h3 className="text-sm font-semibold text-ink">Selection Area</h3>
+              <span className="text-[11px] text-gray-400 font-bold">Picking products from {selectedCategory}</span>
             </div>
-            <span className="text-[11px] font-black text-brand-blue bg-brand-blue-light px-3 py-1 rounded-full uppercase">
+            <span className="text-[11px] font-semibold text-brand-blue bg-brand-blue-light px-3 py-1 rounded-full">
               {filteredProducts.length} Products Found
             </span>
           </div>
@@ -145,7 +145,7 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
                 </div>
                 <div className="flex flex-col gap-1">
                   <h4 className="text-xs font-bold text-ink line-clamp-1">{product.name}</h4>
-                  <span className="text-[10px] font-black text-brand-blue">₦{product.price.toLocaleString()}</span>
+                  <span className="text-[11px] font-semibold text-brand-blue">₦{product.price.toLocaleString()}</span>
                 </div>
 
                 <div className="absolute top-4 right-4 z-10">
@@ -163,15 +163,15 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
         {/* Right: Summary & Discounts */}
         <div className="w-80 border-l border-gray-100 flex flex-col bg-gray-50/30">
           <div className="p-6 border-b border-gray-50">
-            <h3 className="text-sm font-black text-ink uppercase tracking-wider">Summary List</h3>
-            <p className="text-[10px] text-gray-400 font-bold mt-1 uppercase leading-tight">Apply specific discounts for selected items</p>
+            <h3 className="text-sm font-semibold text-ink">Summary List</h3>
+            <p className="text-[11px] text-gray-400 font-bold mt-1 leading-tight">Apply specific discounts for selected items</p>
           </div>
 
           <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 custom-scrollbar">
             {selectedProductList.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-center p-6 gap-4 opacity-40">
                 <HiOutlineTag size={40} className="text-gray-300" />
-                <p className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">No products selected for this offer feed</p>
+                <p className="text-[11px] font-bold text-gray-500">No products selected for this offer feed</p>
               </div>
             ) : (
               selectedProductList.map(p => (
@@ -181,8 +181,8 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
                       <img src={p.image} alt="" className="w-full h-full object-contain" />
                     </div>
                     <div className="flex flex-col min-w-0 flex-1">
-                      <span className="text-[10px] font-black text-ink truncate">{p.name}</span>
-                      <span className="text-[9px] font-bold text-gray-400">Orig. ₦{p.price.toLocaleString()}</span>
+                      <span className="text-[11px] font-semibold text-ink truncate">{p.name}</span>
+                      <span className="text-[11px] font-bold text-gray-400">Orig. ₦{p.price.toLocaleString()}</span>
                     </div>
                     <button
                       onClick={() => toggleProduct(p.id)}
@@ -197,11 +197,11 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
                       type="number"
                       value={selections[p.id]}
                       onChange={(e) => updateDiscount(p.id, parseInt(e.target.value) || 0)}
-                      className="w-full bg-transparent border-none text-xs font-black text-ink focus:ring-0 p-0"
+                      className="w-full bg-transparent border-none text-xs font-semibold text-ink focus:ring-0 p-0"
                       min="1"
                       max="99"
                     />
-                    <span className="text-[10px] font-black text-gray-400 uppercase">Discount</span>
+                    <span className="text-[11px] font-semibold text-gray-400">Discount</span>
                   </div>
                 </div>
               ))

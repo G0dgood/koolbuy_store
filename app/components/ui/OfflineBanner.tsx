@@ -99,11 +99,11 @@ const OfflineBanner: React.FC = () => {
 							/>
 						</svg>
 						<div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-							<span className="font-medium text-[10px] md:text-[12px] sm:text-base">
+							<span className="font-medium text-[11px] md:text-[12px] sm:text-base">
 								Connection restored!
 							</span>
 							{queueSize > 0 && (
-								<span className="text-[8px] md:text-[10px] sm:text-[10px] md:text-[12px] opacity-90">
+								<span className="text-[11px] md:text-[10px] sm:text-[10px] md:text-[12px] opacity-90">
 									Sending {queueSize} {queueSize === 1 ? 'message' : 'messages'}...
 								</span>
 							)}
@@ -111,7 +111,7 @@ const OfflineBanner: React.FC = () => {
 					</div>
 					<div className="flex items-center gap-2">
 						<div className="w-2 h-2 bg-white rounded-full"></div>
-						<span className="text-[8px] md:text-[10px] sm:text-[10px] md:text-[12px] opacity-90">Online</span>
+						<span className="text-[11px] md:text-[10px] sm:text-[10px] md:text-[12px] opacity-90">Online</span>
 					</div>
 				</div>
 			</div>
@@ -145,17 +145,17 @@ const OfflineBanner: React.FC = () => {
 							/>
 						</svg>
 						<div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-							<span className="font-medium text-[10px] md:text-[12px] sm:text-base">
+							<span className="font-medium text-[11px] md:text-[12px] sm:text-base">
 								Slow network connection detected
 							</span>
-							<span className="text-[8px] md:text-[10px] sm:text-[10px] md:text-[12px] opacity-90">
+							<span className="text-[11px] md:text-[10px] sm:text-[10px] md:text-[12px] opacity-90">
 								Some features may be slower than usual
 							</span>
 						</div>
 					</div>
 					<div className="flex items-center gap-2">
 						<div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-						<span className="text-[8px] md:text-[10px] sm:text-[10px] md:text-[12px] opacity-90">Slow</span>
+						<span className="text-[11px] md:text-[10px] sm:text-[10px] md:text-[12px] opacity-90">Slow</span>
 					</div>
 				</div>
 			</div>
@@ -189,11 +189,11 @@ const OfflineBanner: React.FC = () => {
 							/>
 						</svg>
 						<div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-							<span className="font-medium text-[10px] md:text-[12px] sm:text-base">
+							<span className="font-medium text-[11px] md:text-[12px] sm:text-base">
 								You&apos;re currently offline
 							</span>
 							{queueSize > 0 && (
-								<span className="text-[8px] md:text-[10px] sm:text-[10px] md:text-[12px] opacity-90">
+								<span className="text-[11px] md:text-[10px] sm:text-[10px] md:text-[12px] opacity-90">
 									{queueSize} {queueSize === 1 ? 'message' : 'messages'} queued
 								</span>
 							)}
@@ -201,7 +201,7 @@ const OfflineBanner: React.FC = () => {
 					</div>
 					<div className="flex items-center gap-2">
 						<div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-						<span className="text-[8px] md:text-[10px] sm:text-[10px] md:text-[12px] opacity-90">Reconnecting...</span>
+						<span className="text-[11px] md:text-[10px] sm:text-[10px] md:text-[12px] opacity-90">Reconnecting...</span>
 					</div>
 				</div>
 			</div>

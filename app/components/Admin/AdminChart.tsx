@@ -55,7 +55,7 @@ export const AdminChart: React.FC<AdminChartProps> = ({
         display: false,
       },
       tooltip: {
-        backgroundColor: '#0F3D2E',
+        backgroundColor: '#1D1D1F',
         titleFont: { size: 12, weight: 'bold', family: 'Inter' },
         bodyFont: { size: 11, family: 'Inter' },
         padding: 12,
@@ -67,7 +67,7 @@ export const AdminChart: React.FC<AdminChartProps> = ({
       x: {
         grid: { display: false },
         ticks: { 
-            color: '#A8A096', 
+            color: '#86868B', 
             font: { size: 10, weight: 'bold', family: 'Inter' } 
         },
         border: { display: false }
@@ -75,7 +75,7 @@ export const AdminChart: React.FC<AdminChartProps> = ({
       y: {
         grid: { color: '#F1F5F9' },
         ticks: { 
-            color: '#A8A096', 
+            color: '#86868B', 
             font: { size: 10, weight: 'bold', family: 'Inter' },
             callback: (value: any) => value >= 1000 ? `${value / 1000}k` : value
         },

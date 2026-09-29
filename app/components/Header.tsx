@@ -157,7 +157,7 @@ export const Header: React.FC<{ className?: string }> = ({
                   onClick={() => setIsLocationOpen(false)}
                 >
                   <div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-[var(--shadow-lift)] p-2 flex flex-col gap-1 text-sm">
-                    <div className="px-3 py-1.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                    <div className="px-3 py-1.5 text-[11px] font-bold text-gray-400">
                       Delivery Location
                     </div>
                     {deliveryLocations.map((loc) => (
@@ -305,7 +305,7 @@ export const Header: React.FC<{ className?: string }> = ({
                               {item.label}
                             </span>
                             {item.badge && (
-                              <span className="text-[9px] font-extrabold px-1.5 py-0.5 text-eyebrow normal-case tracking-wide">
+                              <span className="text-[11px] font-semibold px-1.5 py-0.5 text-eyebrow normal-case">
                                 {item.badge}
                               </span>
                             )}

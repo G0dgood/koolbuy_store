@@ -45,14 +45,14 @@ export const UpdateTicketStatusModal: React.FC<UpdateTicketStatusModalProps> = (
                   <Icon name="ticket" folder="dashboardIcon" size="sm" />
                </div>
                <div className="flex flex-col">
-                  <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Updating Ticket</span>
-                  <span className="text-sm font-black text-ink">{ticket.ticketId}</span>
+                  <span className="text-[11px] font-semibold text-gray-400">Updating Ticket</span>
+                  <span className="text-sm font-semibold text-ink">{ticket.ticketId}</span>
                </div>
             </div>
 
             {/* Status Selection */}
             <div className="flex flex-col gap-3">
-               <label className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Select Status</label>
+               <label className="text-[11px] font-semibold text-gray-400 px-1">Select Status</label>
                <Select
                   options={statusOptions}
                   value={selectedStatus}
@@ -63,7 +63,7 @@ export const UpdateTicketStatusModal: React.FC<UpdateTicketStatusModalProps> = (
 
             {/* Resolution Note */}
             <div className="flex flex-col gap-3">
-               <label className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Internal Note / Resolution</label>
+               <label className="text-[11px] font-semibold text-gray-400 px-1">Internal Note / Resolution</label>
                <Textarea
                   value={note}
                   onChange={(e) => setNote(e.target.value)}
@@ -74,12 +74,12 @@ export const UpdateTicketStatusModal: React.FC<UpdateTicketStatusModalProps> = (
 
             {/* Actions */}
             <div className="flex gap-3 pt-6 border-t border-gray-50">
-               <Button variant="ghost" className="flex-1 h-10 text-[10px] font-black uppercase tracking-widest text-gray-400" onClick={onClose}>
+               <Button variant="ghost" className="flex-1 h-10 text-[11px] font-semibold text-gray-400" onClick={onClose}>
                   Cancel
                </Button>
                <Button
                   variant="primary"
-                  className="flex-2 h-10 text-[10px] font-black uppercase tracking-widest shadow-md shadow-blue-100"
+                  className="flex-2 h-10 text-[11px] font-semibold shadow-md shadow-blue-100"
                   onClick={() => {
                      onConfirm(selectedStatus, note);
                      onClose();

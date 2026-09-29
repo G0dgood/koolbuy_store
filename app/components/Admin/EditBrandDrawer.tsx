@@ -57,7 +57,7 @@ export function EditBrandDrawer({ isOpen, onClose, brand }: EditBrandDrawerProps
       <form onSubmit={handleSubmit} className="flex flex-col h-full gap-8">
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Brand Name</label>
+            <label className="text-[11px] font-semibold text-gray-400">Brand Name</label>
             <Input
               placeholder="e.g. Apple"
               value={formData.name}
@@ -68,7 +68,7 @@ export function EditBrandDrawer({ isOpen, onClose, brand }: EditBrandDrawerProps
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Brand Logo Path</label>
+            <label className="text-[11px] font-semibold text-gray-400">Brand Logo Path</label>
             <div className="flex gap-4">
               <Input
                 placeholder="/dashboardImage/example.png"
@@ -90,7 +90,7 @@ export function EditBrandDrawer({ isOpen, onClose, brand }: EditBrandDrawerProps
 
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Category</label>
+              <label className="text-[11px] font-semibold text-gray-400">Category</label>
               <Select
                 options={categoryOptions}
                 value={formData.category}
@@ -98,7 +98,7 @@ export function EditBrandDrawer({ isOpen, onClose, brand }: EditBrandDrawerProps
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Status</label>
+              <label className="text-[11px] font-semibold text-gray-400">Status</label>
               <Select
                 options={statusOptions}
                 value={formData.status}
@@ -112,7 +112,7 @@ export function EditBrandDrawer({ isOpen, onClose, brand }: EditBrandDrawerProps
           <Button 
             variant="primary" 
             type="submit" 
-            className="w-full h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest shadow-lg shadow-blue-100"
+            className="w-full h-10 sm:h-12 text-[11px] font-semibold shadow-lg shadow-blue-100"
           >
             Update Brand
           </Button>

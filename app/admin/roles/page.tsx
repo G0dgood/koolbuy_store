@@ -673,7 +673,7 @@ export default function RolesManagementPage() {
                   <HiOutlineShieldCheck className="w-4 h-4" />
                 </div>
                 <div>
-                  <h2 className="text-sm font-bold text-ink uppercase tracking-wider">
+                  <h2 className="text-sm font-bold text-ink">
                     Roles and Permission
                   </h2>
                   <span className="text-[11px] text-gray-400 font-medium">
@@ -732,7 +732,7 @@ export default function RolesManagementPage() {
                         {role.name}
                       </span>
                       {role.id === "super-admin" && (
-                        <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-purple-50 text-purple-700 border border-purple-200 uppercase tracking-widest">
+                        <span className="text-[11px] font-bold px-1.5 py-0.2 rounded bg-purple-50 text-purple-700 border border-purple-200">
                           Master
                         </span>
                       )}
@@ -743,7 +743,7 @@ export default function RolesManagementPage() {
                   </div>
 
                   <div className="flex items-center gap-2 shrink-0">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 border border-gray-200">
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 border border-gray-200">
                       {role.userCount} {role.userCount === 1 ? "user" : "users"}
                     </span>
 
@@ -781,7 +781,7 @@ export default function RolesManagementPage() {
                   <h2 className="text-base font-bold text-ink">
                     {selectedRole.name}
                   </h2>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                     {selectedRole.status}
                   </span>
                 </div>
@@ -871,7 +871,7 @@ export default function RolesManagementPage() {
                         <h4 className="text-xs font-bold text-gray-900">
                           {perm.name}
                         </h4>
-                        <span className="text-[9px] px-1.5 py-0.2 rounded bg-gray-100 text-gray-600 font-medium">
+                        <span className="text-[11px] px-1.5 py-0.2 rounded bg-gray-100 text-gray-600 font-medium">
                           {perm.category}
                         </span>
                       </div>
@@ -933,7 +933,7 @@ export default function RolesManagementPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse min-w-150">
                   <thead>
-                    <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                    <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500">
                       <th className="py-3 px-4 w-12 text-center">#</th>
                       <th className="py-3 px-4">Member Name</th>
                       <th className="py-3 px-4">Email</th>
@@ -972,7 +972,7 @@ export default function RolesManagementPage() {
                           {user.assignedDate}
                         </td>
                         <td className="py-3 px-4 text-center">
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
                             {user.status}
                           </span>
                         </td>
@@ -1035,7 +1035,7 @@ export default function RolesManagementPage() {
 
             <form onSubmit={handleSaveRole} className="p-5 flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-700">
                   Role Name *
                 </label>
                 <input
@@ -1051,7 +1051,7 @@ export default function RolesManagementPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-700">
                   Department *
                 </label>
                 <input
@@ -1070,7 +1070,7 @@ export default function RolesManagementPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-700">
                   Description
                 </label>
                 <textarea
@@ -1152,7 +1152,7 @@ export default function RolesManagementPage() {
               className="p-5 flex flex-col gap-4"
             >
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-700">
                   Full Name *
                 </label>
                 <input
@@ -1171,7 +1171,7 @@ export default function RolesManagementPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-700">
                   Email Address *
                 </label>
                 <input
@@ -1190,7 +1190,7 @@ export default function RolesManagementPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-700">
                   Phone Number
                 </label>
                 <input

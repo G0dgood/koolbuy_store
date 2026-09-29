@@ -177,7 +177,7 @@ export default function BrandsListing() {
                     </div>
                   </td>
                   <td>
-                    <span className={`px-3 py-1.5 rounded-[6px] text-[10px] font-bold ${statusConfig[brand.status as keyof typeof statusConfig]}`}>
+                    <span className={`px-3 py-1.5 rounded-[6px] text-[11px] font-bold ${statusConfig[brand.status as keyof typeof statusConfig]}`}>
                       {brand.status}
                     </span>
                   </td>

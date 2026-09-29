@@ -456,7 +456,7 @@ export const SecondaryNavbar: React.FC = () => {
                 {megaMenuContent[activeDropdown].columns.map((col, colIdx) => (
                   <div key={colIdx} className="flex flex-col gap-3">
                     {/* Column Header */}
-                    <h4 className="text-[12px] font-extrabold text-gray-900 tracking-wider uppercase pb-2 border-b border-gray-100 flex items-center justify-between">
+                    <h4 className="text-[12px] font-semibold text-gray-900 pb-2 border-b border-gray-100 flex items-center justify-between">
                       <span>{col.title}</span>
                     </h4>
 
@@ -473,7 +473,7 @@ export const SecondaryNavbar: React.FC = () => {
                               {item.label}
                             </span>
                             {item.badge && (
-                              <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full bg-orange-100 text-action uppercase tracking-wide">
+                              <span className="text-[11px] font-semibold px-1.5 py-0.5 rounded-full bg-orange-100 text-action">
                                 {item.badge}
                               </span>
                             )}

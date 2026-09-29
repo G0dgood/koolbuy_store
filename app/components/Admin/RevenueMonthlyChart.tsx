@@ -34,7 +34,7 @@ export const RevenueMonthlyChart: React.FC = () => {
       {
         label: "Revenue",
         data: monthlyData,
-        backgroundColor: "#FF7A00",
+        backgroundColor: "#0066CC",
         borderRadius: 4,
         barThickness: 8,
         hoverBackgroundColor: "#0097A7",
@@ -50,7 +50,7 @@ export const RevenueMonthlyChart: React.FC = () => {
         display: false,
       },
       tooltip: {
-        backgroundColor: "#0F3D2E",
+        backgroundColor: "#1D1D1F",
         titleFont: { size: 12, weight: "bold" as const, family: "Inter" },
         bodyFont: { size: 11, family: "Inter" },
         padding: 10,
@@ -65,7 +65,7 @@ export const RevenueMonthlyChart: React.FC = () => {
       x: {
         grid: { display: false },
         ticks: {
-          color: "#A8A096",
+          color: "#86868B",
           font: { size: 10, weight: "bold" as const },
         },
         border: { display: false },
@@ -75,7 +75,7 @@ export const RevenueMonthlyChart: React.FC = () => {
         max: 320000000,
         ticks: {
           stepSize: 80000000,
-          color: "#A8A096",
+          color: "#86868B",
           font: { size: 9, weight: "bold" as const },
           callback: (value: any) => {
             if (value === 0) return "₦0";

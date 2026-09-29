@@ -34,7 +34,7 @@ export function ReviewReplyDrawer({ isOpen, onClose, review }: ReviewReplyDrawer
                  <img src={review.customer.avatar} alt="" className="w-full h-full object-cover" />
               </div>
               <div className="flex flex-col">
-                 <span className="text-sm font-black text-ink">{review.customer.name}</span>
+                 <span className="text-sm font-semibold text-ink">{review.customer.name}</span>
                  <div className="flex items-center gap-0.5">
                     {[1, 2, 3, 4, 5].map((star) => (
                        <Icon key={star} name="star" folder="dashboardIcon" size="xs" className={star <= review.rating ? "text-amber-400" : "text-gray-200"} />
@@ -50,7 +50,7 @@ export function ReviewReplyDrawer({ isOpen, onClose, review }: ReviewReplyDrawer
         {/* Reply Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
            <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Admin Response</label>
+              <label className="text-[11px] font-semibold text-gray-400">Admin Response</label>
               <Textarea
                 placeholder="Write your response to the customer..."
                 value={reply}
@@ -61,7 +61,7 @@ export function ReviewReplyDrawer({ isOpen, onClose, review }: ReviewReplyDrawer
            </div>
 
            <div className="mt-auto pt-8 border-t border-gray-50 flex flex-col gap-3">
-              <Button variant="primary" type="submit" className="w-full h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest shadow-lg shadow-blue-100">
+              <Button variant="primary" type="submit" className="w-full h-10 sm:h-12 text-[11px] font-semibold shadow-lg shadow-blue-100">
                  Publish Reply
               </Button>
               <Button variant="ghost" type="button" onClick={onClose} className="w-full h-10 sm:h-12 text-[11px] font-bold text-gray-400">

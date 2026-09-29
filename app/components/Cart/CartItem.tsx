@@ -40,17 +40,17 @@ const CartItem: React.FC<CartItemProps> = ({ id, title, price, image, quantity, 
    };
 
    return (
-      <div className="flex flex-col md:flex-row gap-4 py-6 border-b border-gray-100 last:border-0">
+      <div className="flex flex-col md:flex-row gap-6 py-8 border-b border-hairline last:border-0">
          {/* Item Image */}
-         <div className="w-20 h-20 flex-shrink-0 border border-gray-100 rounded-md p-2 flex items-center justify-center bg-white">
+         <div className="w-28 h-28 flex-shrink-0 rounded-xl p-3 flex items-center justify-center bg-cream">
             <div className="relative w-full h-full">
-               <Image src={image} alt={title} fill className="object-contain" />
+               <Image src={image} alt={title} fill className="object-contain kb-product-img" />
             </div>
          </div>
 
          {/* Item Details */}
          <div className="flex-1 flex flex-col gap-1.5">
-            <h3 className="text-gray-900 font-medium text-sm leading-tight hover:text-brand-blue cursor-pointer transition-colors max-w-md">
+            <h3 className="text-ink font-semibold text-[17px] md:text-[21px] leading-tight tracking-[-0.01em] cursor-pointer max-w-md">
                {title}
             </h3>
             <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-400">
@@ -63,14 +63,14 @@ const CartItem: React.FC<CartItemProps> = ({ id, title, price, image, quantity, 
                <Button
                   onClick={() => removeFromCart(id)}
                   variant="ghost"
-                  className="!text-[#EB001B] text-xs font-bold px-3 py-1.5 border border-gray-200 hover:bg-red-50 shadow-none h-auto"
+                  className="!text-action !bg-transparent !border-0 text-[14px] px-0 py-0 hover:underline h-auto"
                >
                   Remove
                </Button>
                <Button
                   onClick={handleSaveForLater}
                   variant="ghost"
-                  className="text-brand-blue text-xs font-bold px-3 py-1.5 border border-gray-200 hover:bg-brand-blue-light shadow-none h-auto"
+                  className="!text-action !bg-transparent !border-0 text-[14px] px-0 py-0 hover:underline h-auto"
                >
                   Save for later
                </Button>

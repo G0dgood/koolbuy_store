@@ -23,28 +23,28 @@ export const RevenueWeeklyChart: React.FC = () => {
       {
         label: "Previous Week",
         data: previousWeekData,
-        borderColor: "#10B981", // Emerald green from screenshot
+        borderColor: "#248a3d", // Emerald green from screenshot
         backgroundColor: "rgba(16, 185, 129, 0.06)",
         borderWidth: 2.5,
         fill: true,
         tension: 0.45,
         pointRadius: 0,
         pointHoverRadius: 6,
-        pointBackgroundColor: "#10B981",
+        pointBackgroundColor: "#248a3d",
         pointBorderColor: "#fff",
         pointBorderWidth: 2,
       },
       {
         label: "Current Week",
         data: currentWeekData,
-        borderColor: "#FF7A00", // Primary color #FF7A00
+        borderColor: "#0066CC", // Primary color #0066CC
         backgroundColor: "rgba(0, 188, 212, 0.08)",
         borderWidth: 2.5,
         fill: true,
         tension: 0.45,
         pointRadius: 0,
         pointHoverRadius: 6,
-        pointBackgroundColor: "#FF7A00",
+        pointBackgroundColor: "#0066CC",
         pointBorderColor: "#fff",
         pointBorderWidth: 2,
       },
@@ -59,7 +59,7 @@ export const RevenueWeeklyChart: React.FC = () => {
         display: false,
       },
       tooltip: {
-        backgroundColor: "#0F3D2E",
+        backgroundColor: "#1D1D1F",
         titleFont: { size: 12, weight: "bold" as const, family: "Inter" },
         bodyFont: { size: 11, family: "Inter" },
         padding: 10,
@@ -75,7 +75,7 @@ export const RevenueWeeklyChart: React.FC = () => {
       x: {
         grid: { display: false },
         ticks: {
-          color: "#A8A096",
+          color: "#86868B",
           font: { size: 10, weight: "bold" as const },
         },
         border: { display: false },
@@ -85,7 +85,7 @@ export const RevenueWeeklyChart: React.FC = () => {
         max: 6000000,
         ticks: {
           stepSize: 1000000,
-          color: "#A8A096",
+          color: "#86868B",
           font: { size: 9, weight: "bold" as const },
           callback: (value: any) => {
             if (value === 0) return "₦0";

@@ -30,14 +30,14 @@ const Alert: React.FC<AlertProps> = ({
       bg: "bg-[#FEE2E2]",
       border: "border-[#FECACA]",
       icon: "error",
-      iconColor: "text-[#EF4444]",
+      iconColor: "text-[#e30000]",
       titleColor: "text-[#991B1B]",
     },
     warning: {
       bg: "bg-[#FFF7ED]",
       border: "border-[#FFEDD5]",
       icon: "warning",
-      iconColor: "text-[#F59E0B]",
+      iconColor: "text-[#b64400]",
       titleColor: "text-[#9A3412]",
     },
   };

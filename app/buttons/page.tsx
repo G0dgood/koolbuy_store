@@ -13,7 +13,7 @@ const dropdownItems = [
 export default function ButtonsDemo() {
  return (
   <div className="min-h-screen bg-cream p-12 font-sans">
-   <div className="max-w-6xl mx-auto bg-white rounded-xl  p-16">
+   <div className="max-w-6xl mx-auto bg-white rounded-xl p-16">
     <h1 className="text-5xl font-bold mb-16 text-black">Buttons</h1>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
@@ -204,7 +204,7 @@ export default function ButtonsDemo() {
     </div>
 
     <div className="mt-24 pt-12 border-t border-gray-200">
-     <h3 className="text-gray-400 font-semibold mb-8 uppercase tracking-wider">Base components</h3>
+     <h3 className="text-gray-400 font-semibold mb-8">Base components</h3>
      <div className="flex flex-col gap-4">
       <Button variant="ghost" size="sm" className="w-fit">Button small</Button>
       <Button variant="ghost" className="w-fit">Button normal</Button>

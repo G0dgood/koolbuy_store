@@ -94,8 +94,8 @@ export default function PermissionsAccordion() {
    {/* Action Bar */}
    <div className="flex justify-between items-end gap-6 mb-2">
     <div className="flex flex-col gap-1">
-     <h2 className="text-xl font-black text-ink">Administrative Permissions</h2>
-     <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest leading-none">Role Based Governance</p>
+     <h2 className="text-xl font-semibold text-ink">Administrative Permissions</h2>
+     <p className="text-[11px] font-bold text-gray-400 leading-none">Role Based Governance</p>
     </div>
     <div className="flex gap-3">
      <Button
@@ -128,7 +128,7 @@ export default function PermissionsAccordion() {
       size="md"
       variant="minimal"
      />
-     <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest whitespace-nowrap hidden xl:block">:Filter Sector</span>
+     <span className="text-[11px] font-semibold text-gray-400 whitespace-nowrap hidden xl:block">:Filter Sector</span>
     </div>
 
     <div className="flex flex-wrap items-center gap-3 w-full xl:w-auto">
@@ -160,8 +160,8 @@ export default function PermissionsAccordion() {
         <div className="flex items-center gap-4">
          <div className={`w-3 h-3 rounded-full ${role.color} shadow-sm`} />
          <div className="flex flex-col gap-0.5">
-          <span className="text-base font-black text-ink">{role.name}</span>
-          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{role.users} Active Users Assigned</span>
+          <span className="text-base font-semibold text-ink">{role.name}</span>
+          <span className="text-[11px] font-bold text-gray-400">{role.users} Active Users Assigned</span>
          </div>
         </div>
         <div className="flex items-center gap-4">
@@ -194,15 +194,15 @@ export default function PermissionsAccordion() {
             <thead>
              <tr className="bg-gray-50/20 border-b border-gray-100">
               <th className="py-4 pl-8 text-left">
-               <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">System Module</span>
+               <span className="text-[11px] font-semibold text-gray-400">System Module</span>
               </th>
               {privileges.map(p => (
                <th key={p.id} className="py-4 text-center">
-                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{p.label}</span>
+                <span className="text-[11px] font-semibold text-gray-400">{p.label}</span>
                </th>
               ))}
               <th className="py-4 pr-8 text-right w-24">
-               <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Toggle All</span>
+               <span className="text-[11px] font-semibold text-gray-400">Toggle All</span>
               </th>
              </tr>
             </thead>
@@ -217,8 +217,8 @@ export default function PermissionsAccordion() {
               >
                <td className="py-4 pl-8">
                 <div className="flex flex-col">
-                 <span className="text-[13px] font-black text-ink">{module.label}</span>
-                 <span className="text-[9px] font-bold text-gray-300 uppercase tracking-widest">{module.category} Sector</span>
+                 <span className="text-[13px] font-semibold text-ink">{module.label}</span>
+                 <span className="text-[11px] font-bold text-gray-300">{module.category} Sector</span>
                 </div>
                </td>
                {privileges.map(p => (
@@ -248,7 +248,7 @@ export default function PermissionsAccordion() {
 
            {filteredModules.length === 0 && (
             <div className="flex flex-col items-center justify-center py-20">
-             <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest italic opacity-60">No modules found for current filters</span>
+             <span className="text-[11px] font-bold text-gray-400 italic opacity-60">No modules found for current filters</span>
             </div>
            )}
           </div>

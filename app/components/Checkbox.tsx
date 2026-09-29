@@ -90,7 +90,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 			{(label || children) && (
 				<label
 					htmlFor={id}
-					className={`font-sans font-normal text-[10px] md:text-[12px] leading-[23px] tracking-[-0.03em] text-[rgba(31,31,31,0.5)] cursor-pointer ${disabled ? 'opacity-50 cursor-not-allowed' : ''
+					className={`font-sans font-normal text-[11px] md:text-[12px] leading-[23px] tracking-[-0.03em] text-[rgba(31,31,31,0.5)] cursor-pointer ${disabled ? 'opacity-50 cursor-not-allowed' : ''
 						}`}
 					onClick={handleClick}
 				>

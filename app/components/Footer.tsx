@@ -57,7 +57,7 @@ import { Newsletter } from "./Home/Newsletter";
 //         <rect x="84" y="84" width="6" height="6" fill="currentColor" />
 //       </svg>
 //     </div>
-//     <span className="text-[10px] text-gray-500 font-medium">{label}</span>
+//     <span className="text-[11px] text-gray-500 font-medium">{label}</span>
 //   </div>
 // );
 

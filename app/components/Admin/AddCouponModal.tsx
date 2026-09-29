@@ -55,7 +55,7 @@ export function AddCouponModal({ isOpen, onClose }: AddCouponModalProps) {
       <form onSubmit={handleSubmit}>
         <ModalBody className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
-            <label className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Coupon Code</label>
+            <label className="text-[11px] sm:text-[10px] font-semibold text-gray-400">Coupon Code</label>
             <Input
               placeholder="e.g. FLASH50"
               value={formData.code}
@@ -67,7 +67,7 @@ export function AddCouponModal({ isOpen, onClose }: AddCouponModalProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-2">
-            <label className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Discount Amount</label>
+            <label className="text-[11px] sm:text-[10px] font-semibold text-gray-400">Discount Amount</label>
               <Input
                 placeholder="e.g. 50% or 20.00"
                 value={formData.discount}
@@ -77,7 +77,7 @@ export function AddCouponModal({ isOpen, onClose }: AddCouponModalProps) {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Discount Type</label>
+              <label className="text-[11px] font-semibold text-gray-400">Discount Type</label>
               <Select
                 options={typeOptions}
                 value={formData.type}
@@ -88,7 +88,7 @@ export function AddCouponModal({ isOpen, onClose }: AddCouponModalProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-2">
-            <label className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Start Date</label>
+            <label className="text-[11px] sm:text-[10px] font-semibold text-gray-400">Start Date</label>
               <Input
                 type="text"
                 placeholder="DD-MM-YYYY"
@@ -99,7 +99,7 @@ export function AddCouponModal({ isOpen, onClose }: AddCouponModalProps) {
               />
             </div>
             <div className="flex flex-col gap-2">
-            <label className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">End Date</label>
+            <label className="text-[11px] sm:text-[10px] font-semibold text-gray-400">End Date</label>
               <Input
                 type="text"
                 placeholder="DD-MM-YYYY"
@@ -112,7 +112,7 @@ export function AddCouponModal({ isOpen, onClose }: AddCouponModalProps) {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Initial Status</label>
+            <label className="text-[11px] font-semibold text-gray-400">Initial Status</label>
             <Select
               options={statusOptions}
               value={formData.status}
@@ -133,7 +133,7 @@ export function AddCouponModal({ isOpen, onClose }: AddCouponModalProps) {
           <Button 
             variant="blue" 
             type="submit" 
-            className="px-8 h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest shadow-sm shadow-brand-blue/20"
+            className="px-8 h-10 sm:h-12 text-[11px] font-semibold shadow-sm shadow-brand-blue/20"
           >
             Create Coupon
           </Button>

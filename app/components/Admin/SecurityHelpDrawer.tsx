@@ -14,7 +14,7 @@ export function SecurityHelpDrawer({ isOpen, onClose }: SecurityHelpDrawerProps)
   const helpItems = [
     {
       title: "Password Complexity",
-      description: "Passwords must be at least 12 characters long and include a mix of uppercase letters, numbers, and special symbols (@, #, $, etc.).",
+      description: "Passwords must be at least 12 characters long and include a mix of  letters, numbers, and special symbols (@, #, $, etc.).",
       icon: "lock",
     },
     {
@@ -42,13 +42,13 @@ export function SecurityHelpDrawer({ isOpen, onClose }: SecurityHelpDrawerProps)
               <Icon name="live_help" folder="icon" size="sm" />
            </div>
            <div className="flex flex-col gap-0.5">
-              <span className="text-[13px] font-black text-ink">Need immediate assistance?</span>
+              <span className="text-[13px] font-semibold text-ink">Need immediate assistance?</span>
               <span className="text-[11px] font-medium text-blue-600 leading-tight">Our security team is available 24/7 for account emergencies.</span>
            </div>
         </div>
 
         <div className="flex flex-col gap-2">
-           <p className="text-[10px] font-black text-gray-400 border-b border-gray-50 pb-2 uppercase tracking-[0.2em] px-2 mb-2">
+           <p className="text-[11px] font-semibold text-gray-400 border-b border-gray-50 pb-2 px-2 mb-2">
               Security Guidelines
            </p>
            <div className="flex flex-col gap-3">
@@ -58,7 +58,7 @@ export function SecurityHelpDrawer({ isOpen, onClose }: SecurityHelpDrawerProps)
                       <Icon name={item.icon} folder="icon" size="xs" />
                    </div>
                    <div className="flex flex-col gap-1">
-                      <span className="text-[12px] font-black text-ink group-hover:text-brand-blue transition-colors">{item.title}</span>
+                      <span className="text-[12px] font-semibold text-ink group-hover:text-brand-blue transition-colors">{item.title}</span>
                       <span className="text-[11px] font-medium text-gray-400 leading-relaxed">{item.description}</span>
                    </div>
                 </div>
@@ -69,7 +69,7 @@ export function SecurityHelpDrawer({ isOpen, onClose }: SecurityHelpDrawerProps)
         <div className="mt-auto flex flex-col gap-3 pb-8">
            <Button 
             variant="primary" 
-            className="w-full h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest shadow-lg shadow-blue-100"
+            className="w-full h-10 sm:h-12 text-[11px] font-semibold shadow-lg shadow-blue-100"
             onClick={() => {
               console.log("Escalating to support...");
               onClose();
@@ -77,7 +77,7 @@ export function SecurityHelpDrawer({ isOpen, onClose }: SecurityHelpDrawerProps)
            >
               Message Security Team
            </Button>
-           <p className="text-[10px] font-bold text-gray-400 text-center uppercase tracking-widest">
+           <p className="text-[11px] font-bold text-gray-400 text-center">
               Response time: ~5 minutes
            </p>
         </div>

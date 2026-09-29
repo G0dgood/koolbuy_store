@@ -289,7 +289,7 @@ export default function MarketingCampaignsPage() {
             <div className="w-8 h-8 rounded-lg bg-brand-blue-light text-brand-blue flex items-center justify-center">
               <HiOutlineMegaphone className="w-4 h-4" />
             </div>
-            <h1 className="text-xl font-black text-gray-900 tracking-tight">
+            <h1 className="text-xl font-semibold text-gray-900 tracking-tight">
               Campaigns
             </h1>
           </div>
@@ -373,7 +373,7 @@ export default function MarketingCampaignsPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-312.5">
             <thead>
-              <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+              <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500">
                 <th className="py-3.5 px-4 w-12 text-center">#</th>
                 <th className="py-3.5 px-4">Title</th>
                 <th className="py-3.5 px-4">Type</th>

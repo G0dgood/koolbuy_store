@@ -19,7 +19,7 @@ export default function FormDemo() {
 
   return (
     <div className="min-h-screen bg-cream p-12 font-sans">
-      <div className="max-w-6xl mx-auto bg-white rounded-xl  p-16">
+      <div className="max-w-6xl mx-auto bg-white rounded-xl p-16">
         <h1 className="text-5xl font-bold mb-16 text-black">Form - textfields</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-20">
@@ -111,7 +111,7 @@ export default function FormDemo() {
               <div>
                 <Label>Label</Label>
                 <div className="relative">
-                  <select className="w-full bg-white border border-gray-100 rounded-3xl shadow-sm py-2.5 px-4 text-sm text-gray-400 appearance-none focus:outline-none focus:ring-2 focus:ring-brand-blue/20">
+                  <select className="w-full bg-white border border-[#d2d2d7] rounded-xl py-3 px-4 text-[15px] text-gray-500 appearance-none focus:outline-none focus:ring-2 focus:ring-brand-blue/20">
                     <option>Select</option>
                   </select>
                   <Icon name="expand_more" size="sm" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -168,7 +168,7 @@ export default function FormDemo() {
 
         {/* Base Components Footer */}
         <div className="mt-24 pt-12 border-t border-gray-200">
-          <h3 className="text-gray-400 font-semibold mb-8 uppercase tracking-wider">Base components</h3>
+          <h3 className="text-gray-400 font-semibold mb-8">Base components</h3>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div className="flex flex-col gap-6">

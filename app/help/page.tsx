@@ -81,10 +81,10 @@ const HelpCenterPage = () => {
               className="flex flex-col gap-8 items-center text-center md:items-start md:text-left"
             >
               <div className="flex flex-col gap-4">
-                <span className="text-action-on-dark font-black tracking-[0.4em] uppercase text-xs">
+                <span className="text-action-on-dark font-semibold text-xs">
                   Support Concierge
                 </span>
-                <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none font-inter">
+                <h1 className="text-4xl md:text-7xl font-semibold text-white tracking-tighter leading-none font-inter">
                   How can we <br />
                   <span className="text-action-on-dark">help you?</span>
                 </h1>
@@ -116,7 +116,7 @@ const HelpCenterPage = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white p-8 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all group lg:aspect-square flex flex-col justify-between"
+                className="bg-white p-8 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-2xl transition-all group lg:aspect-square flex flex-col justify-between"
               >
                 <div>
                   <div
@@ -124,7 +124,7 @@ const HelpCenterPage = () => {
                   >
                     {cat.icon}
                   </div>
-                  <h3 className="text-xl font-black text-ink mb-4">
+                  <h3 className="text-xl font-semibold text-ink mb-4">
                     {cat.title}
                   </h3>
                   <div className="flex flex-col gap-2">
@@ -140,7 +140,7 @@ const HelpCenterPage = () => {
                 </div>
                 <Link
                   href={cat.href || "#"}
-                  className="mt-8 flex items-center justify-between text-xs font-black uppercase tracking-widest text-brand-blue opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="mt-8 flex items-center justify-between text-xs font-semibold text-brand-blue opacity-0 group-hover:opacity-100 transition-opacity"
                 >
                   View More <HiChevronRight size={16} />
                 </Link>
@@ -152,10 +152,10 @@ const HelpCenterPage = () => {
           <div className="mt-40 grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div className="flex flex-col gap-10">
               <div className="flex flex-col gap-4">
-                <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs">
+                <span className="text-brand-blue font-bold text-xs">
                   Discovery
                 </span>
-                <h2 className="text-4xl font-black text-ink tracking-tight">
+                <h2 className="text-4xl font-semibold text-ink tracking-tight">
                   Trending Questions.
                 </h2>
               </div>
@@ -179,7 +179,7 @@ const HelpCenterPage = () => {
               <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-action-on-dark">
                 <HiShieldCheck size={32} />
               </div>
-              <h3 className="text-3xl font-black text-white leading-tight">
+              <h3 className="text-3xl font-semibold text-white leading-tight">
                 Can't find the <br />
                 <span className="text-action-on-dark">answer?</span>
               </h3>
@@ -190,7 +190,7 @@ const HelpCenterPage = () => {
               <div className="pt-4">
                 <Link
                   href="/contact"
-                  className="px-12 py-5 bg-brand-blue text-white rounded-2xl font-black uppercase tracking-widest text-sm shadow-2xl shadow-blue-500/20 hover:scale-105 transition-all inline-block"
+                  className="px-12 py-5 bg-brand-blue text-white rounded-2xl font-semibold text-sm shadow-2xl shadow-blue-500/20 transition-all inline-block"
                 >
                   Talk to a Human
                 </Link>

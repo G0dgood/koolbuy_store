@@ -404,7 +404,7 @@ export default function VendorAccountingPage() {
                           <span className="font-bold text-xs text-gray-900 whitespace-nowrap">
                             {row.vendorName}
                           </span>
-                          <span className="text-[10px] font-mono text-gray-400">
+                          <span className="text-[11px] font-mono text-gray-400">
                             {row.orderId}
                           </span>
                         </div>
@@ -471,7 +471,7 @@ export default function VendorAccountingPage() {
                     </td>
 
                     {/* Vendor Earning */}
-                    <td className="font-black text-xs text-emerald-600 whitespace-nowrap">
+                    <td className="font-semibold text-xs text-emerald-600 whitespace-nowrap">
                       {row.vendorEarning}
                     </td>
                   </tr>
@@ -599,7 +599,7 @@ export default function VendorAccountingPage() {
                   <span className="font-bold text-emerald-900 text-xs">
                     Net Vendor Earning
                   </span>
-                  <span className="font-black text-emerald-600 text-sm">
+                  <span className="font-semibold text-emerald-600 text-sm">
                     {selectedSettlement.vendorEarning}
                   </span>
                 </div>

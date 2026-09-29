@@ -174,13 +174,13 @@ export default function TransactionsPage() {
           <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
             {/* Visual Card */}
             <div className="relative w-full max-w-[320px] h-45 rounded-3xl overflow-hidden shadow-xl shadow-blue-100 group">
-              <div className="absolute inset-0 bg-linear-to-br from-action via-blue-400 to-ink"></div>
+              <div className="absolute inset-0 bg-tile"></div>
               {/* Pattern overlay */}
               <div className="absolute inset-0 opacity-10 mix-blend-overlay bg-[url('/dashboardImage/image 270.png')] bg-cover"></div>
 
               <div className="relative h-full p-6 flex flex-col justify-between text-white">
                 <div className="flex justify-between items-start">
-                  <span className="text-xl font-black italic tracking-tighter">
+                  <span className="text-xl font-semibold italic tracking-tighter">
                     Finaci
                   </span>
                   <div className="flex gap-1 items-center">
@@ -193,19 +193,19 @@ export default function TransactionsPage() {
                   <p className="text-xs font-medium opacity-70">
                     Card Holder name
                   </p>
-                  <p className="text-sm font-bold tracking-widest uppercase">
+                  <p className="text-sm font-bold">
                     Noman Manzoor
                   </p>
                 </div>
 
                 <div className="flex justify-between items-end">
                   <div className="flex flex-col gap-1">
-                    <p className="text-lg font-bold tracking-[0.2em]">
+                    <p className="text-lg font-bold">
                       **** **** **** 2345
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-[10px] opacity-70">Expiry Date</p>
+                    <p className="text-[11px] opacity-70">Expiry Date</p>
                     <p className="text-xs font-bold">02/30</p>
                   </div>
                 </div>
@@ -242,7 +242,7 @@ export default function TransactionsPage() {
               </div>
               <Button
                 variant="ghost"
-                className="text-[11px] font-black text-brand-blue uppercase tracking-widest hover:underline px-0! justify-start!"
+                className="text-[11px] font-semibold text-brand-blue hover:underline px-0! justify-start!"
               >
                 View Transactions
               </Button>
@@ -335,7 +335,7 @@ export default function TransactionsPage() {
         </div>
 
         {/* Table */}
-        <div className="admin-table-container ">
+        <div className="admin-table-container">
           <table>
             <thead>
               <tr>

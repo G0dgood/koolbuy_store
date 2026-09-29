@@ -45,9 +45,9 @@ export default function CheckoutPage() {
                 <h1 className="text-xl md:text-2xl font-bold text-neutral-900 tracking-tight leading-none font-heading">Finalize Order</h1>
                 <div className="h-1.5 w-1.5 rounded-full bg-brand-blue mt-1" />
               </div>
-              <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest">Complete your purchase safely and securely</p>
+              <p className="text-[11px] font-bold text-neutral-500">Complete your purchase safely and securely</p>
             </div>
-            <div className="flex items-center gap-3 text-[10px] font-bold text-neutral-500 uppercase tracking-[0.2em] bg-neutral-100 px-5 py-3 rounded-lg border border-neutral-200">
+            <div className="flex items-center gap-3 text-[11px] font-bold text-neutral-500 bg-neutral-100 px-5 py-3 rounded-lg border border-neutral-200">
               <div className="w-1.5 h-1.5 bg-brand-green rounded-full animate-pulse" />
               Secure 256-bit Checkout
             </div>

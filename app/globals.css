@@ -303,16 +303,32 @@
    (Class names are kept from the previous system so markup stays stable.)
    ============================================================ */
 @layer components {
-  /* store-utility-card: white, 1px hairline, 18px radius, no shadow */
+  /* Apple Store card: white, 18px radius, whisper shadow; hover = subtle zoom + deeper shadow.
+     (apple.com/store is the one Apple surface where cards carry a shadow.) */
   .kb-card {
-    background: var(--card);
-    border: 1px solid var(--hairline);
+    background: #fff;
     border-radius: 18px;
-    transition: border-color 0.2s ease;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s cubic-bezier(0, 0, 0.5, 1), transform 0.3s cubic-bezier(0, 0, 0.5, 1);
   }
   .kb-card-hover:hover {
-    border-color: #d2d2d7;
+    box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.16);
+    transform: scale3d(1.01, 1.01, 1.01);
   }
+
+  /* Horizontal "shelf" of cards (apple.com/store "The latest.") */
+  .kb-shelf {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding: 12px 4px 40px;
+    margin: -12px -4px -40px;
+  }
+  .kb-shelf::-webkit-scrollbar { display: none; }
+  .kb-shelf > * { scroll-snap-align: start; flex-shrink: 0; }
 
   /* Eyebrow label ("New", "Hot deals") — plain text, never a badge */
   .kb-sticker,

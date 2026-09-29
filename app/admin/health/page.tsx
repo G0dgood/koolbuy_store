@@ -90,7 +90,7 @@ export default function ErrorAndHealthPage() {
       <div className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden">
         {/* Header section matching exact text */}
         <div className="p-6 border-b border-gray-100">
-          <h1 className="text-xl font-black text-gray-900 tracking-tight">
+          <h1 className="text-xl font-semibold text-gray-900 tracking-tight">
             Diagnostic Results
           </h1>
           <p className="text-xs text-gray-500 mt-1">
@@ -104,7 +104,7 @@ export default function ErrorAndHealthPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-212.5">
             <thead>
-              <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+              <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500">
                 <th className="py-4 px-6 w-32">Severity</th>
                 <th className="py-4 px-6">Issue</th>
                 <th className="py-4 px-6">Suggested Fix</th>

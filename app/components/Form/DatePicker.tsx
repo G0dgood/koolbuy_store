@@ -123,7 +123,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
           <div className="grid grid-cols-7 gap-1 text-center mb-2">
             {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((d) => (
-              <div key={d} className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{d}</div>
+              <div key={d} className="text-[11px] font-bold text-gray-400">{d}</div>
             ))}
           </div>
 

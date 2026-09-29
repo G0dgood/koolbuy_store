@@ -344,7 +344,7 @@ export default function DeliveryOptionsPage() {
             >
               <span>{tab.label}</span>
               <span
-                className={`px-1.5 py-0.2 text-[10px] rounded-full font-semibold ${
+                className={`px-1.5 py-0.2 text-[11px] rounded-full font-semibold ${
                   activeFilter === tab.id
                     ? "bg-white/20 text-white"
                     : "bg-gray-100 text-gray-600"
@@ -394,14 +394,14 @@ export default function DeliveryOptionsPage() {
                     <h3 className="text-sm font-bold text-gray-900 tracking-tight">
                       {opt.name}
                     </h3>
-                    <span className="text-[10px] text-gray-400 font-medium">
+                    <span className="text-[11px] text-gray-400 font-medium">
                       Courier & Logistics
                     </span>
                   </div>
                 </div>
 
                 {opt.enabled && (
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                     Active
                   </span>
                 )}
@@ -438,7 +438,7 @@ export default function DeliveryOptionsPage() {
                         Sandbox
                       </span>
                       {opt.sandbox && (
-                        <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-50 text-amber-700 border border-amber-200 font-mono">
+                        <span className="text-[11px] font-bold px-1.5 py-0.2 rounded bg-amber-50 text-amber-700 border border-amber-200 font-mono">
                           TEST MODE
                         </span>
                       )}
@@ -459,7 +459,7 @@ export default function DeliveryOptionsPage() {
               {/* Specific Credential Fields (e.g. D4B Dunzo, Borzoe) */}
               {opt.credentials && opt.credentials.length > 0 && (
                 <div className="flex flex-col gap-2.5 pt-2 border-t border-gray-100 mb-3">
-                  <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1">
+                  <span className="text-[11px] font-bold text-gray-400 flex items-center gap-1">
                     <HiOutlineKey className="w-3.5 h-3.5 text-action" />
                     <span>Configuration Parameters</span>
                   </span>

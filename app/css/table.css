@@ -8,7 +8,7 @@ table {
 
 /* Header Styles */
 thead {
-  background-color: var(--brand-blue-light);
+  background-color: transparent;
 }
 
 th:first-child {
@@ -22,16 +22,14 @@ th:last-child {
 }
 
 thead tr {
-  border-bottom: 1px solid #F0F0F0; /* border-gray-50 */
+  border-bottom: 1px solid #e0e0e0; /* hairline */
 }
 
 th {
-  padding: 1rem 1.5rem; /* px-6 py-4 */
-  font-size: 11px;
-  font-weight: 700;
-  color: #1D1D1F; /* Primary Dark Blue */
-  text-transform: uppercase;
-  letter-spacing: 0.05em; /* tracking-wider */
+  padding: 0.75rem 1.5rem;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6e6e73; /* Apple secondary label */
   white-space: nowrap;
 }
 
@@ -47,7 +45,7 @@ tbody tr {
 }
 
 tbody tr:hover {
-  background-color: rgba(243, 244, 246, 0.3); /* hover:bg-gray-50/30 */
+  background-color: #fafafc; /* pearl */
 } 
 
 td {
@@ -61,9 +59,9 @@ table > tbody > tr > td,
 table > tfoot > tr > td  { 
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 23px;  
-  color: rgba(31, 31, 31, 0.5); 
+  font-size: 13px;
+  line-height: 23px;
+  color: #1d1d1f;
 }
 
 

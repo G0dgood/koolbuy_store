@@ -177,57 +177,57 @@ export default function CacheControlPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 shadow-2xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-gray-400">
               Redis Status
             </span>
             <HiOutlineServerStack className="w-4 h-4 text-action" />
           </div>
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-            <p className="text-lg font-black text-gray-900">Connected</p>
+            <p className="text-lg font-semibold text-gray-900">Connected</p>
           </div>
-          <span className="text-[10px] text-gray-400 font-mono mt-0.5 block">
+          <span className="text-[11px] text-gray-400 font-mono mt-0.5 block">
             Port: 6379 (Redis 7.2)
           </span>
         </div>
 
         <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 shadow-2xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-gray-400">
               Memory Usage
             </span>
             <HiOutlineBolt className="w-4 h-4 text-purple-600" />
           </div>
-          <p className="text-lg font-black text-gray-900">42.8 MB</p>
-          <span className="text-[10px] text-purple-600 font-semibold">
+          <p className="text-lg font-semibold text-gray-900">42.8 MB</p>
+          <span className="text-[11px] text-purple-600 font-semibold">
             Peak allocation: 64 MB
           </span>
         </div>
 
         <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 shadow-2xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-gray-400">
               Cache Hit Ratio
             </span>
             <HiOutlineCircleStack className="w-4 h-4 text-emerald-600" />
           </div>
-          <p className="text-lg font-black text-gray-900">98.4%</p>
-          <span className="text-[10px] text-emerald-600 font-semibold">
+          <p className="text-lg font-semibold text-gray-900">98.4%</p>
+          <span className="text-[11px] text-emerald-600 font-semibold">
             Avg query latency: 1.2ms
           </span>
         </div>
 
         <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 shadow-2xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-gray-400">
               Active Modules
             </span>
             <HiOutlineCube className="w-4 h-4 text-amber-500" />
           </div>
-          <p className="text-lg font-black text-gray-900">
+          <p className="text-lg font-semibold text-gray-900">
             {enabledCount} of {modules.length}
           </p>
-          <span className="text-[10px] text-gray-500 font-semibold">
+          <span className="text-[11px] text-gray-500 font-semibold">
             Modules caching in Redis
           </span>
         </div>
@@ -244,7 +244,7 @@ export default function CacheControlPage() {
               <HiOutlineServerStack className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-sm font-bold text-ink uppercase tracking-wider">
+              <h2 className="text-sm font-bold text-ink">
                 Module-wise Cache Management
               </h2>
               <p className="text-xs text-gray-500 mt-0.5">
@@ -287,7 +287,7 @@ export default function CacheControlPage() {
                         {mod.name}
                       </h3>
                       <span
-                        className={`text-[10px] font-bold px-2 py-0.2 rounded ${
+                        className={`text-[11px] font-bold px-2 py-0.2 rounded ${
                           mod.enabled
                             ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
                             : "bg-gray-100 text-gray-500 border border-gray-200"

@@ -376,54 +376,54 @@ export default function MarketingPromocodePage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 shadow-2xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-gray-400">
               Total Campaigns
             </span>
             <HiOutlineTicket className="w-4 h-4 text-action" />
           </div>
-          <p className="text-xl font-black text-gray-900">
+          <p className="text-xl font-semibold text-gray-900">
             {promocodes.length}
           </p>
-          <span className="text-[10px] text-gray-400 font-semibold">
+          <span className="text-[11px] text-gray-400 font-semibold">
             {promocodes.filter((p) => p.status === "Active").length} active now
           </span>
         </div>
 
         <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 shadow-2xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-gray-400">
               Total Redemptions
             </span>
             <HiOutlineReceiptPercent className="w-4 h-4 text-emerald-600" />
           </div>
-          <p className="text-xl font-black text-gray-900">2,510</p>
-          <span className="text-[10px] text-emerald-600 font-semibold">
+          <p className="text-xl font-semibold text-gray-900">2,510</p>
+          <span className="text-[11px] text-emerald-600 font-semibold">
             ● 18.4% uplift this month
           </span>
         </div>
 
         <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 shadow-2xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-gray-400">
               Customer Savings
             </span>
             <HiOutlineCurrencyDollar className="w-4 h-4 text-purple-600" />
           </div>
-          <p className="text-xl font-black text-gray-900">₦18.4M</p>
-          <span className="text-[10px] text-purple-600 font-semibold">
+          <p className="text-xl font-semibold text-gray-900">₦18.4M</p>
+          <span className="text-[11px] text-purple-600 font-semibold">
             Absorbed discount value
           </span>
         </div>
 
         <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 shadow-2xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-gray-400">
               Expiring Soon
             </span>
             <HiOutlineClock className="w-4 h-4 text-amber-500" />
           </div>
-          <p className="text-xl font-black text-gray-900">2</p>
-          <span className="text-[10px] text-amber-600 font-semibold">
+          <p className="text-xl font-semibold text-gray-900">2</p>
+          <span className="text-[11px] text-amber-600 font-semibold">
             Within next 14 days
           </span>
         </div>
@@ -464,7 +464,7 @@ export default function MarketingPromocodePage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-262.5">
             <thead>
-              <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+              <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500">
                 <th className="py-3.5 px-4 w-12 text-center">#</th>
                 <th className="py-3.5 px-4 w-16">Image</th>
                 <th className="py-3.5 px-4">Promo Code</th>
@@ -505,7 +505,7 @@ export default function MarketingPromocodePage() {
                     {/* 3. Promo Code */}
                     <td className="py-3.5 px-4 font-mono font-bold whitespace-nowrap">
                       <div className="flex items-center gap-1.5">
-                        <span className="px-2.5 py-1 rounded-md text-xs bg-brand-blue-light/70 text-brand-blue border border-action/30 font-bold tracking-wider">
+                        <span className="px-2.5 py-1 rounded-md text-xs bg-brand-blue-light/70 text-brand-blue border border-action/30 font-bold">
                           {promo.promoCode}
                         </span>
                         <button
@@ -524,7 +524,7 @@ export default function MarketingPromocodePage() {
                       <div className="truncate font-semibold text-xs text-gray-900">
                         {promo.title}
                       </div>
-                      <span className="text-[10px] text-gray-400 font-normal">
+                      <span className="text-[11px] text-gray-400 font-normal">
                         Used {promo.usedCount} times
                       </span>
                     </td>
@@ -554,7 +554,7 @@ export default function MarketingPromocodePage() {
                     </td>
 
                     {/* 7. Total Amount */}
-                    <td className="py-3.5 px-4 font-black text-gray-900 font-mono text-xs whitespace-nowrap">
+                    <td className="py-3.5 px-4 font-semibold text-gray-900 font-mono text-xs whitespace-nowrap">
                       {promo.totalAmount}
                     </td>
 
@@ -571,7 +571,7 @@ export default function MarketingPromocodePage() {
                           {promo.expiryDate}
                         </span>
                         <span
-                          className={`text-[10px] font-bold ${
+                          className={`text-[11px] font-bold ${
                             isExpired ? "text-rose-600" : "text-emerald-600"
                           }`}
                         >
@@ -675,7 +675,7 @@ export default function MarketingPromocodePage() {
               {/* Promo Code & Total Amount */}
               <div className="grid grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-gray-700">
                     Promo Code *
                   </label>
                   <input
@@ -689,12 +689,12 @@ export default function MarketingPromocodePage() {
                         promoCode: e.target.value.toUpperCase(),
                       }))
                     }
-                    className="w-full text-xs font-mono font-bold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800 tracking-wider"
+                    className="w-full text-xs font-mono font-bold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800"
                   />
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-gray-700">
                     Total Amount *
                   </label>
                   <input
@@ -715,7 +715,7 @@ export default function MarketingPromocodePage() {
 
               {/* Title */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-700">
                   Campaign Title *
                 </label>
                 <input
@@ -732,7 +732,7 @@ export default function MarketingPromocodePage() {
 
               {/* Description */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-700">
                   Description
                 </label>
                 <textarea
@@ -752,7 +752,7 @@ export default function MarketingPromocodePage() {
               {/* Promo Types & Expiry Date */}
               <div className="grid grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-gray-700">
                     Promo Type
                   </label>
                   <select
@@ -775,7 +775,7 @@ export default function MarketingPromocodePage() {
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-gray-700">
                     Expiry Date *
                   </label>
                   <input
@@ -797,7 +797,7 @@ export default function MarketingPromocodePage() {
               {/* Image URL & Status */}
               <div className="grid grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-gray-700">
                     Image Asset
                   </label>
                   <select
@@ -832,7 +832,7 @@ export default function MarketingPromocodePage() {
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-gray-700">
                     Status
                   </label>
                   <select

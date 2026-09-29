@@ -109,7 +109,7 @@ export default function OrganisationProfilePage() {
           {/* Brand Summary Card */}
           <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 flex flex-col items-center text-center relative overflow-hidden">
             {/* Top Accent Pattern */}
-            <div className="absolute top-0 inset-x-0 h-24 bg-linear-to-r from-blue-600 via-brand-blue to-sky-500 opacity-90" />
+            <div className="absolute top-0 inset-x-0 h-24 bg-tile" />
 
             {/* Logo Avatar */}
             <div className="relative mt-8 mb-4 w-28 h-28 rounded-2xl border-4 border-white overflow-hidden shadow-md bg-white p-2 flex items-center justify-center">
@@ -224,7 +224,7 @@ export default function OrganisationProfilePage() {
           </div>
 
           {/* Compliance & Regulatory Seal */}
-          <div className="bg-linear-to-br from-blue-50/80 via-white to-blue-50/40 rounded-2xl border border-blue-100 p-6 flex flex-col gap-3">
+          <div className="bg-white rounded-2xl border border-hairline p-6 flex flex-col gap-3">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-brand-blue text-white flex items-center justify-center shrink-0 shadow-xs">
                 <HiShieldCheck className="w-5 h-5" />
@@ -263,7 +263,7 @@ export default function OrganisationProfilePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-600">
                   Registered Legal Entity Name
                 </label>
                 <Input
@@ -282,7 +282,7 @@ export default function OrganisationProfilePage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-600">
                   Commercial / Trading Name
                 </label>
                 <Input
@@ -301,7 +301,7 @@ export default function OrganisationProfilePage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-600">
                   Company Registration Number (RC)
                 </label>
                 <Input
@@ -320,7 +320,7 @@ export default function OrganisationProfilePage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-600">
                   Tax Identification Number (TIN)
                 </label>
                 <Input
@@ -341,7 +341,7 @@ export default function OrganisationProfilePage() {
 
             {/* Organisation Mission / Description */}
             <div className="flex flex-col gap-2 pt-2">
-              <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+              <label className="text-xs font-bold text-gray-600">
                 Organisation Overview & Purpose
               </label>
               <Textarea
@@ -371,7 +371,7 @@ export default function OrganisationProfilePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex flex-col gap-2 md:col-span-2">
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-600">
                   Registered Physical Address
                 </label>
                 <Input
@@ -393,7 +393,7 @@ export default function OrganisationProfilePage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-600">
                   City
                 </label>
                 <Input
@@ -412,7 +412,7 @@ export default function OrganisationProfilePage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-600">
                   State / Region
                 </label>
                 <Input
@@ -431,7 +431,7 @@ export default function OrganisationProfilePage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-600">
                   Country
                 </label>
                 <Input
@@ -450,7 +450,7 @@ export default function OrganisationProfilePage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-600">
                   Postal / ZIP Code
                 </label>
                 <Input
@@ -481,7 +481,7 @@ export default function OrganisationProfilePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-600">
                   Official Corporate Telephone
                 </label>
                 <Input
@@ -500,7 +500,7 @@ export default function OrganisationProfilePage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-600">
                   Customer Support Toll-Free
                 </label>
                 <Input
@@ -519,7 +519,7 @@ export default function OrganisationProfilePage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-600">
                   Primary Settlement Financial Institution
                 </label>
                 <Input
@@ -538,7 +538,7 @@ export default function OrganisationProfilePage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-600">
                   Settlement Account Number
                 </label>
                 <Input
@@ -574,7 +574,7 @@ export default function OrganisationProfilePage() {
               preset Koolbuy brand asset.
             </p>
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
+              <label className="text-xs font-bold text-gray-600">
                 Logo Image URL
               </label>
               <Input

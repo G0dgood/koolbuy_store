@@ -101,13 +101,13 @@ export default function BnplOrderDetails() {
         />
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="text-3xl font-black text-gray-900 tracking-tight">
+            <h1 className="text-3xl font-semibold text-gray-900 tracking-tight">
               {bnplOrder.id}
             </h1>
-            <span className="px-3 py-1.5 rounded-lg text-[10px] font-black border uppercase tracking-wider bg-brand-blue-light text-brand-blue border-blue-100">
+            <span className="px-3 py-1.5 rounded-lg text-[11px] font-semibold border bg-brand-blue-light text-brand-blue border-blue-100">
               {currentStatus}
             </span>
-            <span className="px-3 py-1.5 rounded-lg text-[10px] font-black border uppercase tracking-wider bg-amber-50 text-amber-700 border-amber-200">
+            <span className="px-3 py-1.5 rounded-lg text-[11px] font-semibold border bg-amber-50 text-amber-700 border-amber-200">
               {bnplOrder.paymentStatus}
             </span>
           </div>
@@ -143,10 +143,10 @@ export default function BnplOrderDetails() {
         {/* Main 2 Cols */}
         <div className="lg:col-span-2 flex flex-col gap-8">
           {/* BNPL Summary Card */}
-          <div className="bg-linear-to-r from-blue-50/70 via-white to-blue-50/40 rounded-lg border border-blue-100 p-6 shadow-sm flex flex-col gap-4">
+          <div className="bg-white rounded-lg border border-hairline p-6 flex flex-col gap-4">
             <div className="flex justify-between items-center">
               <div>
-                <span className="text-[11px] font-extrabold uppercase tracking-widest text-brand-blue">
+                <span className="text-[11px] font-semibold text-brand-blue">
                   BNPL Plan Summary
                 </span>
                 <h3 className="text-lg font-bold text-gray-900 mt-0.5">
@@ -200,7 +200,7 @@ export default function BnplOrderDetails() {
           {/* Repayment Schedule */}
           <div className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden">
             <div className="p-6 border-b border-gray-50 flex justify-between items-center">
-              <h3 className="font-black text-gray-900 text-base">
+              <h3 className="font-semibold text-gray-900 text-base">
                 Installment Repayment Schedule
               </h3>
               <span className="text-xs font-semibold text-gray-500">
@@ -260,7 +260,7 @@ export default function BnplOrderDetails() {
           {/* Purchased Items */}
           <div className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden">
             <div className="p-6 border-b border-gray-50">
-              <h3 className="font-black text-gray-900 text-base">
+              <h3 className="font-semibold text-gray-900 text-base">
                 Order Product
               </h3>
             </div>
@@ -282,7 +282,7 @@ export default function BnplOrderDetails() {
                   </span>
                 </div>
               </div>
-              <span className="font-extrabold text-gray-900 text-base">
+              <span className="font-semibold text-gray-900 text-base">
                 {bnplOrder.items[0].price}
               </span>
             </div>
@@ -293,7 +293,7 @@ export default function BnplOrderDetails() {
         <div className="flex flex-col gap-8">
           {/* Customer Profile & Credit Rating */}
           <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 flex flex-col gap-4">
-            <h3 className="font-black text-gray-900 text-base">
+            <h3 className="font-semibold text-gray-900 text-base">
               Customer & Credit
             </h3>
             <div className="flex items-center gap-3">
@@ -335,7 +335,7 @@ export default function BnplOrderDetails() {
 
           {/* Delivery Address */}
           <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 flex flex-col gap-3">
-            <h3 className="font-black text-gray-900 text-base">
+            <h3 className="font-semibold text-gray-900 text-base">
               Delivery Location
             </h3>
             <div className="text-xs text-gray-600 flex flex-col gap-1 leading-relaxed">

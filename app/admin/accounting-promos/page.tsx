@@ -437,7 +437,7 @@ export default function AccountingPromoCodesPage() {
         <div className="admin-table-container overflow-x-auto">
           <table className="w-full min-w-237.5">
             <thead>
-              <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+              <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500">
                 <th className="w-10 py-3 px-4">
                   <Checkbox
                     checked={

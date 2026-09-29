@@ -63,7 +63,7 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
 
         {/* Marketplace */}
         <div className="relative flex items-center">
-          {/* <Button className="font-bold hover:shadow-sm text-xs xl:text-sm ">
+          {/* <Button className="font-bold hover:shadow-sm text-xs xl:text-sm">
             Marketplace
           </Button> */}
           <Button

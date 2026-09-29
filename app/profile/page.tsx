@@ -81,23 +81,23 @@ export default function ProfilePage() {
               <div className="p-6 md:p-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                   <div className="flex flex-col gap-2">
-                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">First Name</label>
+                    <label className="text-xs font-bold text-gray-500">First Name</label>
                     <Input placeholder="Alex" defaultValue="Alex" className="h-12 bg-gray-50/50 border-gray-200 focus:bg-white transition-all shadow-none" />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Last Name</label>
+                    <label className="text-xs font-bold text-gray-500">Last Name</label>
                     <Input placeholder="John" defaultValue="John" className="h-12 bg-gray-50/50 border-gray-200 focus:bg-white transition-all shadow-none" />
                   </div>
                   <div className="flex flex-col gap-2 md:col-span-2">
-                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Email Address</label>
+                    <label className="text-xs font-bold text-gray-500">Email Address</label>
                     <Input placeholder="alex.john@example.com" defaultValue="alex.john@example.com" type="email" className="h-12 bg-gray-50/50 border-gray-200 focus:bg-white transition-all shadow-none" />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Phone Number</label>
+                    <label className="text-xs font-bold text-gray-500">Phone Number</label>
                     <Input placeholder="+1 234 567 8900" defaultValue="+1 234 567 8900" className="h-12 bg-gray-50/50 border-gray-200 focus:bg-white transition-all shadow-none" />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Country / Region</label>
+                    <label className="text-xs font-bold text-gray-500">Country / Region</label>
                     <div className="flex items-center justify-between px-4 border border-gray-200 rounded-lg bg-gray-50/50 h-12 w-full cursor-pointer hover:border-brand-blue transition-all group">
                       <span className="text-sm text-gray-900 font-medium">United States</span>
                       <Icon name="expand_more" size="xs" className="text-gray-400 group-hover:text-brand-blue transition-colors" />
@@ -123,7 +123,7 @@ export default function ProfilePage() {
             </motion.div>
 
             {/* Newsletter Section - Subtle */}
-            <motion.div variants={itemVariants} className="bg-gradient-to-r from-brand-blue to-blue-700 p-8 rounded-2xl shadow-lg flex flex-col md:flex-row items-center justify-between gap-6 text-white overflow-hidden relative">
+            <motion.div variants={itemVariants} className="bg-tile p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 text-white overflow-hidden relative">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
               <div className="z-10 text-center md:text-left">
                 <h3 className="text-xl font-bold mb-1">Stay updated on new deals!</h3>

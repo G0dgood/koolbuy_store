@@ -29,7 +29,7 @@ export function QuickActionsDrawer({
   return (
     <Drawer isOpen={isOpen} onClose={onClose} title={title} width="max-w-md">
       <div className="flex flex-col gap-2 pb-8">
-        <p className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.2em] px-1 mb-2">Available Actions</p>
+        <p className="text-[11px] font-bold text-gray-400 px-1 mb-2">Available Actions</p>
         
         <div className="flex flex-col gap-1">
           {actions.map((action) => (
@@ -52,7 +52,7 @@ export function QuickActionsDrawer({
               </div>
               
               <div className="flex flex-col gap-0.5">
-                <span className={`text-[13px] font-black tracking-tight ${
+                <span className={`text-[13px] font-semibold tracking-tight ${
                   action.variant === "danger" ? "text-rose-600" : "text-ink"
                 }`}>
                   {action.label}

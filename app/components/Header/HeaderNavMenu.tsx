@@ -96,7 +96,7 @@ export const HeaderNavMenu: React.FC = () => {
                 width="100%"
                 className="shadow-2xl border border-gray-100 rounded-xl overflow-hidden py-1"
               >
-                <div className="px-3 py-1.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100">
+                <div className="px-3 py-1.5 text-[11px] font-bold text-gray-400 border-b border-gray-100">
                   Select Language
                 </div>
                 {languages.map((lang) => (
@@ -164,7 +164,7 @@ export const HeaderNavMenu: React.FC = () => {
                 <div className="p-4 border-t border-gray-100 bg-gray-50/50 flex flex-col gap-2.5">
                   <Button
                     className="w-full text-white h-10 shadow-sm active:scale-95 transition-all hover:opacity-90 text-xs"
-                    style={{ backgroundColor: "#0F3D2E" }}
+                    style={{ backgroundColor: "#1D1D1F" }}
                     iconLeft={<Icon name="chat" size="sm" />}
                   >
                     Live Chat
@@ -172,7 +172,7 @@ export const HeaderNavMenu: React.FC = () => {
                   <Button
                     variant="secondary"
                     className="w-full h-10 border font-bold active:scale-95 transition-all text-xs"
-                    style={{ borderColor: "#00B517", color: "#00B517" }}
+                    style={{ borderColor: "#248a3d", color: "#248a3d" }}
                     iconLeft={<Icon name="social/whatsapp" size="sm" />}
                   >
                     WhatsApp
@@ -215,7 +215,7 @@ export const HeaderNavMenu: React.FC = () => {
                 width="100%"
                 className="shadow-2xl border border-gray-100 rounded-xl overflow-hidden py-1"
               >
-                <div className="px-3 py-1.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100">
+                <div className="px-3 py-1.5 text-[11px] font-bold text-gray-400 border-b border-gray-100">
                   Select Currency
                 </div>
                 {currencies.map((curr) => (

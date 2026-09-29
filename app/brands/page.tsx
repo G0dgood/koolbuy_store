@@ -82,10 +82,10 @@ const BrandsPage = () => {
               transition={{ duration: 0.6 }}
               className="flex flex-col gap-4"
             >
-              <span className="text-brand-blue font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs">
+              <span className="text-brand-blue font-bold text-[11px] md:text-xs">
                 Artisanal Houses
               </span>
-              <h1 className="text-4xl md:text-7xl font-black text-ink tracking-tighter leading-none font-inter">
+              <h1 className="text-4xl md:text-7xl font-semibold text-ink tracking-tighter leading-none font-inter">
                 The <span className="text-brand-blue">Brands.</span>
               </h1>
               <p className="text-gray-500 max-w-xl mx-auto text-sm md:text-lg mt-6 leading-relaxed font-medium">
@@ -125,12 +125,12 @@ const BrandsPage = () => {
                       <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-lg">
                         {brand.icon}
                       </div>
-                      <span className="text-[10px] font-black uppercase tracking-widest text-ink opacity-60">
+                      <span className="text-[11px] font-semibold text-ink opacity-60">
                         Signature House
                       </span>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <h3 className="text-3xl font-black text-ink tracking-tight">
+                      <h3 className="text-3xl font-semibold text-ink tracking-tight">
                         {brand.title}
                       </h3>
                       <p className="text-sm text-gray-500 leading-relaxed font-medium max-w-sm">
@@ -139,7 +139,7 @@ const BrandsPage = () => {
                     </div>
                     <Link
                       href={brand.link}
-                      className="flex items-center justify-between text-xs font-black uppercase tracking-widest text-brand-blue pt-2 group-hover:translate-x-2 transition-transform"
+                      className="flex items-center justify-between text-xs font-semibold text-brand-blue pt-2 group-hover:translate-x-2 transition-transform"
                     >
                       Discover Collection <HiChevronRight size={18} />
                     </Link>
@@ -160,10 +160,10 @@ const BrandsPage = () => {
           />
           <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-16 flex flex-col items-center text-center gap-8 relative z-10">
             <div className="flex flex-col gap-2">
-              <span className="text-brand-blue font-bold tracking-[0.4em] uppercase text-xs">
+              <span className="text-brand-blue font-bold text-xs">
                 Custom Procurement
               </span>
-              <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-none font-inter">
+              <h2 className="text-4xl md:text-6xl font-semibold text-white tracking-tighter leading-none font-inter">
                 Looking for a specific{" "}
                 <span className="text-action-on-dark">Creator?</span>
               </h2>
@@ -175,7 +175,7 @@ const BrandsPage = () => {
             </p>
             <Link
               href="/contact"
-              className="mt-4 px-16 py-6 bg-brand-blue text-white rounded-3xl font-black uppercase tracking-widest text-sm shadow-2xl shadow-blue-500/30 hover:scale-105 active:scale-95 transition-all"
+              className="mt-4 px-16 py-6 bg-brand-blue text-white rounded-3xl font-semibold text-sm shadow-2xl shadow-blue-500/30 active:scale-95 transition-all"
             >
               Consult a Brand Curator
             </Link>

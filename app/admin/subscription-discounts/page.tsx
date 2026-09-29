@@ -430,7 +430,7 @@ export default function SubscriptionDiscountsPage() {
                     {/* Total Subscription Discount */}
                     <td className="text-xs whitespace-nowrap">
                       {order.totalSubscriptionDiscount !== "₦0" ? (
-                        <span className="font-black text-gray-900 bg-gray-100 px-3 py-1 rounded-md border border-gray-200">
+                        <span className="font-semibold text-gray-900 bg-gray-100 px-3 py-1 rounded-md border border-gray-200">
                           {order.totalSubscriptionDiscount}
                         </span>
                       ) : (
@@ -534,7 +534,7 @@ export default function SubscriptionDiscountsPage() {
                   <p className="font-bold text-brand-blue mt-0.5 text-sm">
                     {selectedOrder.discountOnAdminAccount}
                   </p>
-                  <p className="text-[10px] text-gray-400 mt-0.5">
+                  <p className="text-[11px] text-gray-400 mt-0.5">
                     Platform funded absorption
                   </p>
                 </div>
@@ -546,7 +546,7 @@ export default function SubscriptionDiscountsPage() {
                   <p className="font-bold text-purple-700 mt-0.5 text-sm">
                     {selectedOrder.discountOnVendorAccount}
                   </p>
-                  <p className="text-[10px] text-gray-400 mt-0.5">
+                  <p className="text-[11px] text-gray-400 mt-0.5">
                     Merchant funded absorption
                   </p>
                 </div>
@@ -556,11 +556,11 @@ export default function SubscriptionDiscountsPage() {
                     <span className="font-bold text-gray-700">
                       Total Subscription Discount
                     </span>
-                    <p className="text-[10px] text-gray-500">
+                    <p className="text-[11px] text-gray-500">
                       Combined customer savings on order
                     </p>
                   </div>
-                  <span className="text-base font-black text-gray-900">
+                  <span className="text-base font-semibold text-gray-900">
                     {selectedOrder.totalSubscriptionDiscount}
                   </span>
                 </div>

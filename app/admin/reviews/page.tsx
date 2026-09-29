@@ -637,7 +637,7 @@ export default function ReviewListing() {
             {/* Customer Reviews List */}
             <div className="flex flex-col gap-4 overflow-y-auto pr-1">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <span className="text-xs font-bold text-gray-700">
                   Customer Reviews ({selectedProductForReviews.reviews.length})
                 </span>
               </div>
@@ -659,7 +659,7 @@ export default function ReviewListing() {
                           <span className="text-xs font-bold text-gray-800">
                             {rev.customer.name}
                           </span>
-                          <span className="text-[10px] text-gray-400 font-medium">
+                          <span className="text-[11px] text-gray-400 font-medium">
                             {rev.customer.email}
                           </span>
                         </div>

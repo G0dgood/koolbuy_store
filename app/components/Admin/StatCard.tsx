@@ -102,7 +102,7 @@ export const StatCard: React.FC<StatCardProps> = ({
     >
       <div className="flex justify-between items-start">
         <h3
-          className={`font-bold text-gray-500 tracking-wide leading-none ${
+          className={`font-bold text-gray-500  leading-none ${
             isSm ? "text-[11px]" : "text-xs"
           }`}
         >
@@ -196,7 +196,7 @@ export const StatCard: React.FC<StatCardProps> = ({
             <MiniChart
               type="area"
               data={chartData}
-              color={trendIsUp ? "#FF7A00" : "#F43F5E"}
+              color={trendIsUp ? "#0066CC" : "#e30000"}
               height={32}
             />
           </div>
@@ -205,7 +205,7 @@ export const StatCard: React.FC<StatCardProps> = ({
 
       {!isSm && (
         <div className="mt-1 pt-2 border-t border-gray-50 flex justify-between items-center group/btn">
-          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+          <span className="text-[11px] font-bold text-gray-400">
             {periodLabel}
           </span>
           <button
@@ -213,7 +213,7 @@ export const StatCard: React.FC<StatCardProps> = ({
               e.stopPropagation();
               onViewDetails?.();
             }}
-            className="flex items-center gap-1 text-[10px] font-black text-brand-blue uppercase hover:underline opacity-0 group-hover:opacity-100 transition-all duration-300"
+            className="flex items-center gap-1 text-[11px] font-semibold text-brand-blue hover:underline opacity-0 group-hover:opacity-100 transition-all duration-300"
           >
             Details
             <Icon

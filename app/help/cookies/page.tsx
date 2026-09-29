@@ -82,10 +82,10 @@ const CookiePreferencesPage = () => {
               transition={{ duration: 0.7 }}
               className="flex flex-col gap-6"
             >
-              <span className="text-action-on-dark font-black tracking-[0.4em] uppercase text-xs">
+              <span className="text-action-on-dark font-semibold text-xs">
                 Privacy Orchestration
               </span>
-              <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none font-inter">
+              <h1 className="text-4xl md:text-7xl font-semibold text-white tracking-tighter leading-none font-inter">
                 Cookie <br />
                 <span className="text-action-on-dark">Preferences.</span>
               </h1>
@@ -103,7 +103,7 @@ const CookiePreferencesPage = () => {
             {/* Policy Narrative */}
             <div className="lg:col-span-5 flex flex-col gap-10">
               <div className="flex flex-col gap-6">
-                <h2 className="text-3xl md:text-5xl font-black text-ink tracking-tight">
+                <h2 className="text-3xl md:text-5xl font-semibold text-ink tracking-tight">
                   Our Integrity.
                 </h2>
                 <p className="text-gray-500 leading-relaxed text-lg">
@@ -117,7 +117,7 @@ const CookiePreferencesPage = () => {
               <div className="bg-blue-50/50 p-10 rounded-[40px] border border-blue-50 flex flex-col gap-6">
                 <div className="flex items-center gap-4 text-brand-blue">
                   <HiShieldCheck size={32} />
-                  <h4 className="text-xl font-black text-ink">
+                  <h4 className="text-xl font-semibold text-ink">
                     Data Sovereignty
                   </h4>
                 </div>
@@ -142,7 +142,7 @@ const CookiePreferencesPage = () => {
                         {cookie.icon}
                       </div>
                       <div className="flex flex-col gap-1">
-                        <h4 className="font-black text-ink uppercase tracking-tighter">
+                        <h4 className="font-semibold text-ink tracking-tighter">
                           {cookie.title}
                         </h4>
                         <p className="text-xs text-gray-400 leading-relaxed max-w-md">
@@ -152,7 +152,7 @@ const CookiePreferencesPage = () => {
                     </div>
                     <div className="flex items-center gap-4">
                       {cookie.required ? (
-                        <span className="text-[10px] font-black uppercase tracking-widest text-brand-blue bg-brand-blue-light px-4 py-2 rounded-full">
+                        <span className="text-[11px] font-semibold text-brand-blue bg-brand-blue-light px-4 py-2 rounded-full">
                           Required
                         </span>
                       ) : (
@@ -188,13 +188,13 @@ const CookiePreferencesPage = () => {
                 <div className="flex gap-4 w-full md:w-auto">
                   <Button
                     variant="ghost"
-                    className="flex-1 md:flex-none border-gray-200 text-ink px-10 h-14 font-black uppercase tracking-widest text-sm"
+                    className="flex-1 md:flex-none border-gray-200 text-ink px-10 h-14 font-semibold text-sm"
                   >
                     Reject All
                   </Button>
                   <Button
                     variant="primary"
-                    className="flex-1 md:flex-none bg-ink text-white px-10 h-14 font-black uppercase tracking-widest text-sm"
+                    className="flex-1 md:flex-none bg-ink text-white px-10 h-14 font-semibold text-sm"
                   >
                     Accept All
                   </Button>

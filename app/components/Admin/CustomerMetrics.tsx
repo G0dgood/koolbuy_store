@@ -37,7 +37,7 @@ export function CustomerMetrics({ activeMetric, onMetricClick }: CustomerMetrics
           }`}>
             {metric.value}
           </span>
-          <span className={`text-[10px] font-medium uppercase tracking-wider transition-colors ${
+          <span className={`text-[11px] font-medium   transition-colors ${
             activeMetric === metric.id ? "text-blue-400" : "text-gray-400"
           }`}>
             {metric.label}

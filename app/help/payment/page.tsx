@@ -58,10 +58,10 @@ const PaymentOptionsPage = () => {
               transition={{ duration: 0.7 }}
               className="flex flex-col gap-6"
             >
-              <span className="text-brand-blue font-black tracking-[0.4em] uppercase text-xs">
+              <span className="text-brand-blue font-semibold text-xs">
                 Security Framework
               </span>
-              <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none font-inter">
+              <h1 className="text-4xl md:text-7xl font-semibold text-white tracking-tighter leading-none font-inter">
                 Secure <br />
                 <span className="text-action-on-dark">Orchestration.</span>
               </h1>
@@ -89,7 +89,7 @@ const PaymentOptionsPage = () => {
                 <div className="w-16 h-16 bg-brand-blue-light rounded-3xl flex items-center justify-center text-brand-blue mb-8 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-500">
                   {method.icon}
                 </div>
-                <h3 className="text-2xl font-black text-ink mb-4">
+                <h3 className="text-2xl font-semibold text-ink mb-4">
                   {method.title}
                 </h3>
                 <p className="text-gray-500 text-sm leading-relaxed">
@@ -106,10 +106,10 @@ const PaymentOptionsPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
               <div className="flex flex-col gap-8">
                 <div className="flex flex-col gap-4">
-                  <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs">
+                  <span className="text-brand-blue font-bold text-xs">
                     Technical Integrity
                   </span>
-                  <h2 className="text-3xl md:text-5xl font-black text-ink tracking-tight leading-tight">
+                  <h2 className="text-3xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">
                     Artisanal Encryption <br />
                     Standards.
                   </h2>
@@ -124,13 +124,13 @@ const PaymentOptionsPage = () => {
                 <div className="flex flex-wrap gap-6 pt-4">
                   <div className="flex items-center gap-3 text-ink">
                     <HiLockClosed className="text-brand-blue" size={24} />
-                    <span className="text-xs font-black uppercase tracking-widest">
+                    <span className="text-xs font-semibold">
                       SSL Secure
                     </span>
                   </div>
                   <div className="flex items-center gap-3 text-ink">
                     <HiCheckBadge className="text-brand-blue" size={24} />
-                    <span className="text-xs font-black uppercase tracking-widest">
+                    <span className="text-xs font-semibold">
                       PCI Compliant
                     </span>
                   </div>
@@ -141,7 +141,7 @@ const PaymentOptionsPage = () => {
                 <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue/10 rounded-full filter blur-[60px] group-hover:scale-110 transition-transform duration-700" />
                 <div className="flex items-center gap-4 text-action-on-dark relative z-10">
                   <HiShieldCheck size={32} />
-                  <h4 className="text-xl font-black text-white">
+                  <h4 className="text-xl font-semibold text-white">
                     Patron Assurance
                   </h4>
                 </div>
@@ -155,10 +155,10 @@ const PaymentOptionsPage = () => {
                 <div className="flex items-center gap-3 relative z-10">
                   <div className="w-10 h-10 rounded-full bg-brand-blue" />
                   <div className="flex flex-col">
-                    <span className="text-[10px] font-black uppercase text-action-on-dark tracking-widest">
+                    <span className="text-[11px] font-semibold text-action-on-dark">
                       Chief Security Officer
                     </span>
-                    <span className="text-[10px] text-white/40 font-medium">
+                    <span className="text-[11px] text-white/40 font-medium">
                       Boutique Compliance Suite
                     </span>
                   </div>

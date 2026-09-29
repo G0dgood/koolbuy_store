@@ -13,7 +13,7 @@ export const PriceTiers: React.FC<{ tiers: PriceTier[] }> = ({ tiers }) => {
     <div className="bg-[#FFF0DF] p-4 rounded-lg grid grid-cols-3 divide-x divide-gray-200">
       {tiers.map((tier, idx) => (
         <div key={idx} className="flex flex-col gap-1 px-4 first:pl-0 last:pr-0">
-          <span className={`text-xl font-bold ${tier.isActive ? "text-[#EB001B]" : "text-[#1C1C1C]"}`}>
+          <span className={`text-xl font-bold ${tier.isActive ? "text-[#e30000]" : "text-[#1C1C1C]"}`}>
             {tier.price}
           </span>
           <span className="text-xs text-gray-400">{tier.range}</span>

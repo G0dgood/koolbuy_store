@@ -26,7 +26,7 @@ const CartSummary = () => {
    return (
       <div className="w-full lg:w-[350px] flex flex-col gap-4">
          {/* Coupon Section */}
-         <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-5 flex flex-col gap-4 ">
+         <div className="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col gap-4">
             <span className="text-sm text-gray-400">Have a coupon?</span>
             <div className="flex">
                <input
@@ -41,7 +41,7 @@ const CartSummary = () => {
          </div>
 
          {/* Summary Section */}
-         <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-5 flex flex-col gap-4 ">
+         <div className="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col gap-4">
             <div className="flex flex-col gap-2 pb-4 border-b border-gray-100">
                <div className="flex justify-between text-gray-400 text-sm">
                   <span>Subtotal:</span>
@@ -59,7 +59,7 @@ const CartSummary = () => {
 
             <div className="flex justify-between items-center py-2">
                <span className="font-bold text-gray-900">Total:</span>
-               <span className="font-extrabold text-2xl text-ink tracking-tight">₦{total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+               <span className="font-semibold text-2xl text-ink tracking-tight">₦{total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </div>
 
             <div className="w-full">
@@ -67,7 +67,7 @@ const CartSummary = () => {
                   variant="ghost"
                   disabled={cartItems.length === 0}
                   className={`w-full text-white font-bold h-12 text-base transition-all ${cartItems.length === 0 ? "opacity-50 cursor-not-allowed bg-gray-400" : "hover:opacity-90 cursor-pointer"}`}
-                  style={{ backgroundColor: cartItems.length > 0 ? "#00B517" : undefined }}
+                  style={{ backgroundColor: cartItems.length > 0 ? "#248a3d" : undefined }}
                >
                   {cartItems.length > 0 ? (
                     <Link href="/checkout" className="w-full h-full flex items-center justify-center">

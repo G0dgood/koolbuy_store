@@ -44,7 +44,7 @@ export const RevenueByLocation: React.FC = () => {
           <span className="relative inline-flex rounded-full h-4 w-4 bg-action border-2 border-white shadow-md"></span>
 
           {/* Interactive Tooltip Badge */}
-          <div className="absolute -top-8 px-2.5 py-1 bg-ink text-white text-[10px] font-bold rounded-lg whitespace-nowrap shadow-md pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <div className="absolute -top-8 px-2.5 py-1 bg-ink text-white text-[11px] font-bold rounded-lg whitespace-nowrap shadow-md pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             Nigeria Hub • ₦11.25M
           </div>
         </div>

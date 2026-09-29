@@ -103,12 +103,12 @@ const HeroSection = () => {
                 className="max-w-xl flex flex-col gap-2 md:gap-3 text-white bg-linear-to-r to-transparent p-5 sm:p-7"
               >
                 {/* <div className="inline-flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary text-white uppercase tracking-wider shadow-sm">
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary text-white shadow-sm">
                     {activeItem.subtitle}
                   </span>
                 </div> */}
 
-                {/* <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight drop-shadow-md leading-tight">
+                {/* <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white tracking-tight drop-shadow-md leading-tight">
                   {activeItem.title}
                 </h1>
 

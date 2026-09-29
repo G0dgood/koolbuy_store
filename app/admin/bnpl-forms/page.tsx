@@ -481,14 +481,14 @@ export default function BNPLFormsPage() {
           <div className="flex flex-col gap-6 h-full overflow-y-auto pr-1">
             <div className="flex flex-col gap-2 p-4 bg-gray-50 rounded-lg border border-gray-200">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-gray-500 uppercase">
+                <span className="text-xs font-bold text-gray-500">
                   Form Identifier
                 </span>
                 <span className="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                   {formToView.status}
                 </span>
               </div>
-              <h3 className="text-base font-black text-ink">
+              <h3 className="text-base font-semibold text-ink">
                 {formToView.title}
               </h3>
               <div className="flex items-center gap-2 text-xs font-mono text-gray-600">
@@ -501,7 +501,7 @@ export default function BNPLFormsPage() {
             </div>
 
             <div className="flex items-center justify-between">
-              <h4 className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+              <h4 className="text-xs font-bold text-gray-700">
                 Configured Application Fields ({formToView.fields.length})
               </h4>
             </div>
@@ -513,7 +513,7 @@ export default function BNPLFormsPage() {
                   className="p-3 bg-white border border-gray-200 rounded-lg shadow-2xs flex items-center justify-between"
                 >
                   <div className="flex items-center gap-2.5">
-                    <span className="w-5 h-5 rounded-full bg-gray-100 text-gray-500 text-[10px] font-bold flex items-center justify-center">
+                    <span className="w-5 h-5 rounded-full bg-gray-100 text-gray-500 text-[11px] font-bold flex items-center justify-center">
                       {i + 1}
                     </span>
                     <span className="text-xs font-bold text-gray-800">
@@ -521,11 +521,11 @@ export default function BNPLFormsPage() {
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-gray-100 text-gray-600 font-semibold">
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-gray-100 text-gray-600 font-semibold">
                       {f.type}
                     </span>
                     {f.required && (
-                      <span className="text-[10px] font-bold text-rose-500 bg-rose-50 px-1.5 py-0.5 rounded">
+                      <span className="text-[11px] font-bold text-rose-500 bg-rose-50 px-1.5 py-0.5 rounded">
                         Required
                       </span>
                     )}
@@ -652,7 +652,7 @@ function CreateOrEditFormModalContent({
     <form onSubmit={handleSubmit}>
       <ModalBody className="flex flex-col gap-4 py-4">
         <div className="flex flex-col gap-2">
-          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+          <label className="text-xs font-bold text-gray-500">
             Form Title
           </label>
           <Input
@@ -665,7 +665,7 @@ function CreateOrEditFormModalContent({
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+          <label className="text-xs font-bold text-gray-500">
             Form Slug
           </label>
           <div className="flex items-center gap-1.5">
@@ -682,7 +682,7 @@ function CreateOrEditFormModalContent({
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+          <label className="text-xs font-bold text-gray-500">
             Description / Instructions
           </label>
           <textarea
@@ -695,7 +695,7 @@ function CreateOrEditFormModalContent({
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+          <label className="text-xs font-bold text-gray-500">
             Status
           </label>
           <select

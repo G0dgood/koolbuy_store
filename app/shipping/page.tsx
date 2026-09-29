@@ -73,11 +73,11 @@ const ShippingPage = () => {
             >
               <div className="flex items-center gap-3">
                 <span className="w-10 h-1 bg-brand-blue rounded-full" />
-                <span className="text-brand-blue font-bold tracking-[0.3em] uppercase text-xs">
+                <span className="text-brand-blue font-bold text-xs">
                   Global Logistics
                 </span>
               </div>
-              <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter font-inter leading-none">
+              <h1 className="text-4xl md:text-7xl font-semibold text-white tracking-tighter font-inter leading-none">
                 Delivering Excellence <br />
                 to Your <span className="text-action-on-dark">Doorstep.</span>
               </h1>
@@ -100,18 +100,18 @@ const ShippingPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white p-10 rounded-[40px] border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all group flex flex-col h-full"
+                className="bg-white p-10 rounded-[40px] border border-gray-100 shadow-sm hover:shadow-2xl transition-all group flex flex-col h-full"
               >
                 <div className="w-16 h-16 bg-brand-blue-light rounded-3xl flex items-center justify-center text-brand-blue mb-8 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-500">
                   {method.icon}
                 </div>
-                <h3 className="text-2xl font-black text-ink mb-4">
+                <h3 className="text-2xl font-semibold text-ink mb-4">
                   {method.title}
                 </h3>
                 <div className="flex flex-col gap-1 mb-6">
                   <div className="flex items-center gap-2 text-brand-blue">
                     <HiClock />
-                    <span className="text-sm font-bold uppercase tracking-widest">
+                    <span className="text-sm font-bold">
                       {method.time}
                     </span>
                   </div>
@@ -140,7 +140,7 @@ const ShippingPage = () => {
 
           <div className="mt-20 flex flex-col lg:flex-row gap-12 items-center bg-gray-50 rounded-[40px] p-10 md:p-16 border border-gray-100">
             <div className="flex-1 flex flex-col gap-6">
-              <h2 className="text-3xl font-black text-ink tracking-tight">
+              <h2 className="text-3xl font-semibold text-ink tracking-tight">
                 Regional Estimates
               </h2>
               <p className="text-gray-500 leading-relaxed">
@@ -151,10 +151,10 @@ const ShippingPage = () => {
               <div className="grid grid-cols-2 gap-6">
                 {regionalEstimates.map((region, i) => (
                   <div key={i} className="flex flex-col gap-1">
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                    <span className="text-[11px] font-bold text-gray-400">
                       {region.region}
                     </span>
-                    <span className="font-black text-ink text-xl">
+                    <span className="font-semibold text-ink text-xl">
                       {region.days}
                     </span>
                   </div>
@@ -177,10 +177,10 @@ const ShippingPage = () => {
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center relative z-10">
             <div className="flex flex-col gap-10">
               <div className="flex flex-col gap-4">
-                <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs">
+                <span className="text-brand-blue font-bold text-xs">
                   Stay Connected
                 </span>
-                <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">
+                <h2 className="text-3xl md:text-5xl font-semibold text-white tracking-tight leading-tight">
                   Follow Your Bloom <br />
                   Every Step of the Way.
                 </h2>
@@ -218,14 +218,13 @@ const ShippingPage = () => {
               </div>
 
               <div className="pt-4">
-                <button className="bg-brand-blue text-white px-12 py-5 rounded-2xl font-black uppercase tracking-widest text-sm shadow-2xl shadow-blue-500/20 hover:scale-105 transition-all">
+                <button className="bg-brand-blue text-white px-12 py-5 rounded-2xl font-semibold text-sm shadow-2xl shadow-blue-500/20 transition-all">
                   Track My Order
                 </button>
               </div>
             </div>
 
             <div className="relative group">
-              <div className="absolute -inset-4 bg-brand-blue/20 rounded-[50px] blur-2xl group-hover:bg-brand-blue/30 transition-all" />
               <div className="relative rounded-[40px] overflow-hidden border border-white/10 aspect-video shadow-2xl">
                 <Image
                   src="/web_images/Mask group copy 3.png"
@@ -235,7 +234,7 @@ const ShippingPage = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/80 to-transparent flex items-end p-8">
                   <div className="flex flex-col gap-1">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-brand-blue">
+                    <span className="text-[11px] font-semibold text-brand-blue">
                       Real-time Dashboard
                     </span>
                     <p className="text-white text-sm font-medium">
@@ -251,7 +250,7 @@ const ShippingPage = () => {
         {/* FAQ Anchor CTA */}
         <section className="py-24 md:py-32 bg-white">
           <div className="max-w-[1440px] mx-auto px-6 text-center">
-            <h2 className="text-3xl font-black text-ink mb-6 tracking-tight">
+            <h2 className="text-3xl font-semibold text-ink mb-6 tracking-tight">
               Still have shipping questions?
             </h2>
             <p className="text-gray-500 mb-10 max-w-xl mx-auto italic">
@@ -260,7 +259,7 @@ const ShippingPage = () => {
             </p>
             <button
               onClick={() => (window.location.href = "/faq")}
-              className="px-10 py-4 bg-gray-50 border border-gray-100 rounded-xl text-ink font-black uppercase tracking-widest text-xs hover:bg-white hover:border-brand-blue hover:text-brand-blue transition-all"
+              className="px-10 py-4 bg-gray-50 border border-gray-100 rounded-xl text-ink font-semibold text-xs hover:bg-white hover:border-brand-blue hover:text-brand-blue transition-all"
             >
               Visit Help Center
             </button>

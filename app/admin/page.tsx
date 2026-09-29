@@ -80,7 +80,7 @@ export default function AdminDashboard() {
           trendIsUp={true}
           subtitle="Since last month"
           periodLabel="Last 30 days"
-          badgeIcon={<span className="font-black text-sm">₦</span>}
+          badgeIcon={<span className="font-semibold text-sm">₦</span>}
           chartData={[45, 55, 60, 75, 70, 85, 95]}
           onViewDetails={() => setActiveInsightSection("revenue")}
         />

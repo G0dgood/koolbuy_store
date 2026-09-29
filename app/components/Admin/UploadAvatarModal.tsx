@@ -76,8 +76,8 @@ export function UploadAvatarModal({ isOpen, onClose, onUploadSuccess }: UploadAv
                         <Icon name="photo_camera" folder="icon" size="sm" />
                     </div>
                     <div className="flex flex-col items-center gap-0.5 text-center px-4">
-                        <span className="text-[11px] font-black text-ink">Pick a photo</span>
-                        <span className="text-[10px] font-medium text-gray-400">PNG, JPG up to 5MB</span>
+                        <span className="text-[11px] font-semibold text-ink">Pick a photo</span>
+                        <span className="text-[11px] font-medium text-gray-400">PNG, JPG up to 5MB</span>
                     </div>
                   </>
                 )}
@@ -95,7 +95,7 @@ export function UploadAvatarModal({ isOpen, onClose, onUploadSuccess }: UploadAv
         <div className="flex flex-col gap-4 w-full">
             <div className="flex items-center gap-3 p-4 bg-blue-50/50 border border-blue-100 rounded-xl">
                 <Icon name="verified" folder="icon" size="xs" className="text-brand-blue" />
-                <p className="text-[10px] font-medium text-blue-700 leading-relaxed">
+                <p className="text-[11px] font-medium text-blue-700 leading-relaxed">
                     A clear, professional photo helps team members identify you easily. Recommended size: 512x512px.
                 </p>
             </div>
@@ -114,7 +114,7 @@ export function UploadAvatarModal({ isOpen, onClose, onUploadSuccess }: UploadAv
           variant="primary" 
           onClick={handleUpload}
           disabled={isUploading || !previewUrl}
-          className="px-8 h-12 text-[11px] font-black uppercase tracking-widest shadow-lg shadow-blue-100"
+          className="px-8 h-12 text-[11px] font-semibold shadow-lg shadow-blue-100"
         >
           {isUploading ? "Uploading..." : "Save Photo"}
         </Button>

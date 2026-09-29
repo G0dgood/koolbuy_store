@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FiChevronRight } from "react-icons/fi";
+import { ProductCard } from "@/app/components/Products/ProductCard";
 
 const recommendedItems = [
   {
@@ -53,7 +54,7 @@ const RecommendedItems = () => {
     <section className="w-full flex flex-col gap-5">
       {/* Section Header */}
       <div className="flex items-center justify-between">
-        <h3 className="text-lg md:text-xl font-bold uppercase tracking-wider text-gray-900">
+        <h3 className="text-[24px] md:text-[34px] font-semibold text-ink tracking-[-0.02em]">
           Recommended Items
         </h3>
 
@@ -64,28 +65,14 @@ const RecommendedItems = () => {
           See all ›
         </Link>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
         {recommendedItems?.map((item, idx) => (
-          <Link
+          <ProductCard
             key={idx}
-            href="/products/detail"
-            className="bg-white border border-gray-100 rounded-[6px] p-4 flex flex-col gap-3 hover:shadow-md transition-shadow cursor-pointer group"
-          >
-            <div className="w-full aspect-square relative mb-2">
-              <Image
-                src={item.image}
-                alt={item.title}
-                fill
-                className="object-contain group-hover:scale-105 transition-transform"
-              />
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="font-bold text-gray-900">{item.price}</span>
-              <p className="text-sm text-gray-500 line-clamp-2 leading-tight group-hover:text-brand-blue transition-colors">
-                {item.title}
-              </p>
-            </div>
-          </Link>
+            variant="grid"
+            showAddToCart={false}
+            product={{ id: `rec-${idx}`, title: item.title, price: item.price, image: item.image }}
+          />
         ))}
       </div>
     </section>

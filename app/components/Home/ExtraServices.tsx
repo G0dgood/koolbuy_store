@@ -55,7 +55,7 @@ const ExtraServices = () => {
     <section className="w-full flex flex-col gap-5">
       {/* Section Header */}
       <div className="flex items-center justify-between">
-        <h3 className="text-lg md:text-xl font-bold uppercase tracking-wider text-gray-900">
+        <h3 className="text-lg md:text-xl font-bold text-gray-900">
           Extra Services
         </h3>
       </div>

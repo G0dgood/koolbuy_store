@@ -18,7 +18,7 @@ export default function ModalDemo() {
 
  return (
   <div className="min-h-screen bg-cream p-12 font-sans">
-   <div className="max-w-7xl mx-auto bg-white rounded-xl  p-16 text-black">
+   <div className="max-w-7xl mx-auto bg-white rounded-xl p-16 text-black">
     <h1 className="text-5xl font-bold mb-16">Modal</h1>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
@@ -44,11 +44,11 @@ export default function ModalDemo() {
        <ModalBody>
         <div className="flex gap-4 mb-6">
          <div className="flex-1">
-          <span className="text-[10px] uppercase font-bold text-gray-400 mb-2 block">Your name</span>
+          <span className="text-[11px] font-bold text-gray-400 mb-2 block">Your name</span>
           <Input placeholder="Type here" />
          </div>
          <div className="flex-1">
-          <span className="text-[10px] uppercase font-bold text-gray-400 mb-2 block">Country</span>
+          <span className="text-[11px] font-bold text-gray-400 mb-2 block">Country</span>
           <Select options={[]} placeholder="Select" />
          </div>
         </div>
@@ -102,7 +102,7 @@ export default function ModalDemo() {
 
     {/* Base Components Footer */}
     <div className="mt-24 pt-12 border-t border-gray-200">
-     <h3 className="text-gray-400 font-semibold mb-8 uppercase tracking-wider">Base components</h3>
+     <h3 className="text-gray-400 font-semibold mb-8">Base components</h3>
 
      <div className="flex flex-col gap-12 p-12 border border-dashed border-purple-200 rounded-xl">
       <div className="flex items-center gap-24">
@@ -114,7 +114,7 @@ export default function ModalDemo() {
        </div>
       </div>
 
-      <div className="w-[320px] bg-white border border-gray-100 rounded-xl overflow-hidden ">
+      <div className="w-[320px] bg-white border border-gray-100 rounded-xl overflow-hidden">
        <ModalFooter>
         <Button variant="ghost" size="sm">Button</Button>
         <Button size="sm">Button</Button>
@@ -141,11 +141,11 @@ export default function ModalDemo() {
     <ModalBody>
      <div className="flex gap-4 mb-6">
       <div className="flex-1">
-       <span className="text-[10px] uppercase font-bold text-gray-500 mb-2 block">Full Name</span>
+       <span className="text-[11px] font-bold text-gray-500 mb-2 block">Full Name</span>
        <Input placeholder="Enter your name" />
       </div>
       <div className="flex-1">
-       <span className="text-[10px] uppercase font-bold text-gray-500 mb-2 block">Location</span>
+       <span className="text-[11px] font-bold text-gray-500 mb-2 block">Location</span>
        <Select options={[{ value: "us", label: "United States" }]} placeholder="Choose country" />
       </div>
      </div>

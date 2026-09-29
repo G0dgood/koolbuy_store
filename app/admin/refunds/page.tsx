@@ -392,11 +392,11 @@ export default function PayoutRequestsPage() {
                 >
                   <span>{opt}</span>
                   <span
-                    className={`px-2 py-0.5 rounded-full text-[10px] ${
+                    className={`px-2 py-0.5 rounded-full text-[11px] ${
                       isActive
                         ? opt === "Pending"
-                          ? "bg-amber-50 text-amber-600 font-extrabold"
-                          : "bg-emerald-50 text-emerald-600 font-extrabold"
+                          ? "bg-amber-50 text-amber-600 font-semibold"
+                          : "bg-emerald-50 text-emerald-600 font-semibold"
                         : "bg-gray-200/60 text-gray-600"
                     }`}
                   >
@@ -476,7 +476,7 @@ export default function PayoutRequestsPage() {
                           <span className="font-bold text-xs text-gray-900 whitespace-nowrap">
                             {req.vendor}
                           </span>
-                          <span className="text-[10px] text-gray-400">
+                          <span className="text-[11px] text-gray-400">
                             {req.accountDetails.bankName} ••••{" "}
                             {req.accountDetails.accountNumber.slice(-4)}
                           </span>
@@ -497,7 +497,7 @@ export default function PayoutRequestsPage() {
                     </td>
 
                     {/* Amount */}
-                    <td className="font-black text-xs text-gray-900 whitespace-nowrap">
+                    <td className="font-semibold text-xs text-gray-900 whitespace-nowrap">
                       {req.amount}
                     </td>
 
@@ -679,7 +679,7 @@ export default function PayoutRequestsPage() {
                       Via {selectedRequest.payoutType}
                     </p>
                   </div>
-                  <span className="text-lg font-black text-gray-900">
+                  <span className="text-lg font-semibold text-gray-900">
                     {selectedRequest.amount}
                   </span>
                 </div>

@@ -187,7 +187,7 @@ body:has(#page-wrapper) .rounded-\[20px\],
 }
 
 .admin-table-container thead {
-  background-color: var(--brand-blue-light);
+  background-color: #fafafc;
 }
 
 .admin-table-container th:first-child {
@@ -201,16 +201,14 @@ body:has(#page-wrapper) .rounded-\[20px\],
 }
 
 .admin-table-container thead tr {
-  border-bottom: 1px solid #F0F0F0;
+  border-bottom: 1px solid #E0E0E0;
 }
 
 .admin-table-container th {
-  padding: 1rem 1.5rem;
-  font-size: 11px;
-  font-weight: 700;
-  color: #1D1D1F;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  padding: 0.75rem 1.5rem;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6e6e73;
   white-space: nowrap;
 }
 

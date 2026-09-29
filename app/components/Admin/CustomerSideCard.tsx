@@ -51,7 +51,7 @@ export function CustomerSideCard({ customer, onClose }: CustomerSideCardProps) {
       </div>
 
       <div className="flex flex-col gap-4">
-        <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">
+        <span className="text-[11px] font-bold text-gray-400">
           Customer Info
         </span>
         <div className="flex items-center gap-3 p-3 bg-white border border-gray-50 rounded-lg shadow-sm">
@@ -65,7 +65,7 @@ export function CustomerSideCard({ customer, onClose }: CustomerSideCardProps) {
       </div>
 
       <div className="flex flex-col gap-4">
-        <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">
+        <span className="text-[11px] font-bold text-gray-400">
           Social Media
         </span>
         <div className="flex items-center gap-3">
@@ -81,7 +81,7 @@ export function CustomerSideCard({ customer, onClose }: CustomerSideCardProps) {
       </div>
 
       <div className="flex flex-col gap-4">
-        <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">
+        <span className="text-[11px] font-bold text-gray-400">
           Activity
         </span>
         <div className="flex flex-col gap-3">
@@ -97,23 +97,23 @@ export function CustomerSideCard({ customer, onClose }: CustomerSideCardProps) {
       </div>
 
       <div className="flex flex-col gap-4 mt-auto">
-        <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">
+        <span className="text-[11px] font-bold text-gray-400">
           Order overview
         </span>
         <div className="grid grid-cols-3 gap-3">
           <div className="p-3 bg-white border border-gray-50 rounded-lg flex flex-col items-center gap-1 shadow-sm">
             <span className="text-lg font-bold text-ink">150</span>
-            <span className="text-[9px] font-bold text-gray-400 uppercase">Total order</span>
+            <span className="text-[11px] font-bold text-gray-400">Total order</span>
           </div>
           <div className="p-3 bg-white border border-gray-50 rounded-lg flex flex-col items-center gap-1 shadow-sm border-brand-blue-light">
             <span className="text-lg font-bold text-blue-500">140</span>
-            <span className="text-[9px] font-bold text-blue-500/60 uppercase text-center">
+            <span className="text-[11px] font-bold text-blue-500/60 text-center">
               Completed
             </span>
           </div>
           <div className="p-3 bg-white border border-gray-50 rounded-lg flex flex-col items-center gap-1 shadow-sm border-rose-50">
             <span className="text-lg font-bold text-rose-500">10</span>
-            <span className="text-[9px] font-bold text-rose-500/60 uppercase">Canceled</span>
+            <span className="text-[11px] font-bold text-rose-500/60">Canceled</span>
           </div>
         </div>
       </div>

@@ -22,14 +22,14 @@ export default function DropdownDemo() {
 
   return (
     <div className="min-h-screen bg-cream p-12 font-sans">
-      <div className="max-w-7xl mx-auto bg-white rounded-xl  p-16">
+      <div className="max-w-7xl mx-auto bg-white rounded-xl p-16">
         <h1 className="text-5xl font-bold mb-16 text-black">Dropdown selection</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
 
           {/* Section: Basic */}
           <section>
-            <h2 className="text-gray-400 font-semibold mb-6 uppercase tracking-wider text-xs">Basic</h2>
+            <h2 className="text-gray-400 font-semibold mb-6 text-xs">Basic</h2>
             <DropdownMenu className="w-full">
               <DropdownItem label="Item selection" />
               <DropdownItem label="Disabled option" isDisabled />
@@ -43,7 +43,7 @@ export default function DropdownDemo() {
 
           {/* Section: Multi Select */}
           <section>
-            <h2 className="text-gray-400 font-semibold mb-6 uppercase tracking-wider text-xs">Multi select</h2>
+            <h2 className="text-gray-400 font-semibold mb-6 text-xs">Multi select</h2>
             <DropdownMenu className="w-full">
               <DropdownItem label="Check label" showCheckbox />
               <DropdownItem label="Check label" showCheckbox />
@@ -58,7 +58,7 @@ export default function DropdownDemo() {
           {/* Section: With Search (Multiple versions) */}
           <section className="flex flex-col gap-12">
             <div>
-              <h2 className="text-gray-400 font-semibold mb-6 uppercase tracking-wider text-xs">With search</h2>
+              <h2 className="text-gray-400 font-semibold mb-6 text-xs">With search</h2>
               <DropdownMenu className="w-full">
                 <DropdownSearch value={searchValue} onChange={setSearchValue} />
                 <DropdownItem label="Item selection" />
@@ -72,7 +72,7 @@ export default function DropdownDemo() {
           </section>
 
           <section>
-            <h2 className="text-gray-400 font-semibold mb-6 uppercase tracking-wider text-xs opacity-0">Hidden Header</h2>
+            <h2 className="text-gray-400 font-semibold mb-6 text-xs opacity-0">Hidden Header</h2>
             <DropdownMenu className="w-full">
               <DropdownSearch value="" onChange={() => { }} />
               <DropdownItem label="Check label" showCheckbox />
@@ -89,7 +89,7 @@ export default function DropdownDemo() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
           {/* Section: Multi Text */}
           <section>
-            <h2 className="text-gray-400 font-semibold mb-6 uppercase tracking-wider text-xs">Multi text</h2>
+            <h2 className="text-gray-400 font-semibold mb-6 text-xs">Multi text</h2>
             <DropdownMenu className="w-full">
               <DropdownItem label="Selecting option" subtext="Extra informative text" />
               <DropdownItem label="Selecting option" subtext="Extra informative text" />
@@ -101,7 +101,7 @@ export default function DropdownDemo() {
 
           {/* Section: Not Found */}
           <section>
-            <h2 className="text-gray-400 font-semibold mb-6 uppercase tracking-wider text-xs">Not found</h2>
+            <h2 className="text-gray-400 font-semibold mb-6 text-xs">Not found</h2>
             <DropdownMenu className="w-full">
               <DropdownSearch
                 value={searchNotFound}
@@ -117,7 +117,7 @@ export default function DropdownDemo() {
         {/* Section: Hierarchical & Menus */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
           <section className="col-span-2">
-            <h2 className="text-gray-400 font-semibold mb-6 uppercase tracking-wider text-xs">Menu grouped</h2>
+            <h2 className="text-gray-400 font-semibold mb-6 text-xs">Menu grouped</h2>
             <div className="flex gap-4 items-start">
               <DropdownMenu width={240}>
                 <DropdownItem label="Item selection" hasSubmenu />
@@ -140,7 +140,7 @@ export default function DropdownDemo() {
           </section>
 
           <section>
-            <h2 className="text-gray-400 font-semibold mb-6 uppercase tracking-wider text-xs">Menu</h2>
+            <h2 className="text-gray-400 font-semibold mb-6 text-xs">Menu</h2>
             <DropdownMenu className="w-full">
               <DropdownItem label="Print" icon="print" />
               <DropdownItem label="Item hover" icon="archive" className="bg-gray-50" />
@@ -151,7 +151,7 @@ export default function DropdownDemo() {
           </section>
 
           <section>
-            <h2 className="text-gray-400 font-semibold mb-6 uppercase tracking-wider text-xs text-transparent">Menu grouped Alt</h2>
+            <h2 className="text-gray-400 font-semibold mb-6 text-xs text-transparent">Menu grouped Alt</h2>
             <DropdownMenu className="w-full">
               <DropdownItem label="Rename" icon="create" />
               <DropdownItem label="Item hover" icon="archive" className="bg-gray-50" />
@@ -164,7 +164,7 @@ export default function DropdownDemo() {
 
         {/* Base Components Footer */}
         <div className="mt-24 pt-12 border-t border-gray-200">
-          <h3 className="text-gray-400 font-semibold mb-8 uppercase tracking-wider">Base components</h3>
+          <h3 className="text-gray-400 font-semibold mb-8">Base components</h3>
 
           <div className="flex flex-col gap-12 p-12 border border-dashed border-purple-200 rounded-xl">
             <div className="flex items-center gap-12">

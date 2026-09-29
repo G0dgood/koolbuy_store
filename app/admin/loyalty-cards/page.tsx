@@ -254,7 +254,7 @@ export default function MarketingLoyaltyCardsPage() {
               <div className="w-8 h-8 rounded-lg bg-brand-blue-light text-brand-blue flex items-center justify-center">
                 <HiOutlineCreditCard className="w-4 h-4" />
               </div>
-              <h1 className="text-xl font-black text-gray-900 tracking-tight">
+              <h1 className="text-xl font-semibold text-gray-900 tracking-tight">
                 Loyalty Cards
               </h1>
             </div>
@@ -402,7 +402,7 @@ export default function MarketingLoyaltyCardsPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-225">
             <thead>
-              <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+              <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500">
                 <th className="py-3.5 px-4 w-12 text-center">#</th>
                 <th className="py-3.5 px-4 w-20">Image</th>
                 <th className="py-3.5 px-4">Name</th>
@@ -459,12 +459,12 @@ export default function MarketingLoyaltyCardsPage() {
                       </td>
 
                       {/* 5. Minimum Points */}
-                      <td className="py-3.5 px-4 font-black text-gray-900 font-mono text-xs whitespace-nowrap">
+                      <td className="py-3.5 px-4 font-semibold text-gray-900 font-mono text-xs whitespace-nowrap">
                         {plan.minimumPoints}
                       </td>
 
                       {/* 6. Earnings Per Order */}
-                      <td className="py-3.5 px-4 font-black text-gray-900 font-mono text-xs whitespace-nowrap">
+                      <td className="py-3.5 px-4 font-semibold text-gray-900 font-mono text-xs whitespace-nowrap">
                         {plan.earningsPerOrder}
                       </td>
 

@@ -62,7 +62,7 @@ export function OrdersMoreActionsDrawer({ isOpen, onClose, onBulkPrint }: Orders
   return (
     <Drawer isOpen={isOpen} onClose={onClose} title="More Actions">
       <div className="flex flex-col gap-4">
-        <p className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em] mb-2 px-1">
+        <p className="text-[11px] font-bold text-gray-400 mb-2 px-1">
           Available Operations
         </p>
         
@@ -87,7 +87,7 @@ export function OrdersMoreActionsDrawer({ isOpen, onClose, onBulkPrint }: Orders
                 <Icon name={action.icon} folder={action.folder as any} size="sm" />
               </div>
               <div className="flex flex-col">
-                <span className="text-[13px] font-black text-ink group-hover:text-brand-blue transition-colors">
+                <span className="text-[13px] font-semibold text-ink group-hover:text-brand-blue transition-colors">
                   {action.title}
                 </span>
                 <span className="text-[11px] font-bold text-gray-500 mt-1 leading-relaxed">
@@ -100,7 +100,7 @@ export function OrdersMoreActionsDrawer({ isOpen, onClose, onBulkPrint }: Orders
 
         <div className="mt-8 pt-8 border-t border-gray-100">
           <Button 
-            className="w-full h-12 text-[11px] font-black uppercase tracking-widest border border-gray-200 text-gray-500 hover:bg-gray-50 transition-all rounded-[6px]"
+            className="w-full h-12 text-[11px] font-semibold border border-gray-200 text-gray-500 hover:bg-gray-50 transition-all rounded-[6px]"
             onClick={onClose}
           >
             Cancel

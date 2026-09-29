@@ -489,7 +489,7 @@ export default function TaxPage() {
                 <HiOutlineTag className="w-4 h-4" />
               </div>
               <div>
-                <h2 className="text-sm font-bold text-ink uppercase tracking-wider">
+                <h2 className="text-sm font-bold text-ink">
                   Tax Category
                 </h2>
                 <span className="text-[11px] text-gray-400 font-medium">
@@ -535,13 +535,13 @@ export default function TaxPage() {
                     <h4 className="text-xs font-bold text-gray-900">
                       {cat.name}
                     </h4>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-gray-100 text-gray-600 border border-gray-200">
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-gray-100 text-gray-600 border border-gray-200">
                       {cat.code}
                     </span>
                     <button
                       type="button"
                       onClick={() => toggleCategoryStatus(cat.id)}
-                      className={`text-[10px] font-bold px-2 py-0.2 rounded cursor-pointer transition-colors ${
+                      className={`text-[11px] font-bold px-2 py-0.2 rounded cursor-pointer transition-colors ${
                         cat.status === "Active"
                           ? "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100"
                           : "bg-gray-100 text-gray-500 border border-gray-200 hover:bg-gray-200"
@@ -606,7 +606,7 @@ export default function TaxPage() {
                 <HiOutlineReceiptPercent className="w-4 h-4" />
               </div>
               <div>
-                <h2 className="text-sm font-bold text-ink uppercase tracking-wider">
+                <h2 className="text-sm font-bold text-ink">
                   Tax Rate
                 </h2>
                 <span className="text-[11px] text-gray-400 font-medium">
@@ -652,13 +652,13 @@ export default function TaxPage() {
                     <h4 className="text-xs font-bold text-gray-900">
                       {rate.name}
                     </h4>
-                    <span className="text-xs font-black text-brand-blue bg-brand-blue-light/60 px-2 py-0.5 rounded-md border border-action/20 font-mono">
+                    <span className="text-xs font-semibold text-brand-blue bg-brand-blue-light/60 px-2 py-0.5 rounded-md border border-action/20 font-mono">
                       {rate.rate}%
                     </span>
                     <button
                       type="button"
                       onClick={() => toggleRateStatus(rate.id)}
-                      className={`text-[10px] font-bold px-2 py-0.2 rounded cursor-pointer transition-colors ${
+                      className={`text-[11px] font-bold px-2 py-0.2 rounded cursor-pointer transition-colors ${
                         rate.status === "Active"
                           ? "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100"
                           : "bg-gray-100 text-gray-500 border border-gray-200 hover:bg-gray-200"
@@ -742,7 +742,7 @@ export default function TaxPage() {
               className="p-5 flex flex-col gap-4"
             >
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-700">
                   Category Name *
                 </label>
                 <input
@@ -761,7 +761,7 @@ export default function TaxPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-700">
                   Tax Code
                 </label>
                 <input
@@ -779,7 +779,7 @@ export default function TaxPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-700">
                   Description
                 </label>
                 <textarea
@@ -858,7 +858,7 @@ export default function TaxPage() {
 
             <form onSubmit={handleSaveRate} className="p-5 flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-700">
                   Rate Name *
                 </label>
                 <input
@@ -874,7 +874,7 @@ export default function TaxPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-700">
                   Tax Category *
                 </label>
                 <select
@@ -897,7 +897,7 @@ export default function TaxPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-gray-700">
                     Rate Value (%) *
                   </label>
                   <input
@@ -916,7 +916,7 @@ export default function TaxPage() {
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-gray-700">
                     Rate Type
                   </label>
                   <select
@@ -937,7 +937,7 @@ export default function TaxPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-gray-700">
                     Priority
                   </label>
                   <input
@@ -955,7 +955,7 @@ export default function TaxPage() {
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-gray-700">
                     Status
                   </label>
                   <select

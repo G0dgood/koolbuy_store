@@ -518,14 +518,14 @@ export default function CustomersListing() {
                       activeMetric.replace(/^\w/, (c) => c.toUpperCase()) +
                       (activeMetric === "conversion" ? "" : " Count"),
                     data: currentChartDataset,
-                    borderColor: "#FF7A00",
+                    borderColor: "#0066CC",
                     borderWidth: 3,
                     fill: true,
                     backgroundColor: "rgba(33, 150, 243, 0.05)",
                     tension: 0.4,
                     pointRadius: (context: any) =>
                       context.dataIndex === 4 ? 6 : 0,
-                    pointBackgroundColor: "#FF7A00",
+                    pointBackgroundColor: "#0066CC",
                     pointBorderColor: "#fff",
                     pointBorderWidth: 2,
                   },
@@ -683,12 +683,12 @@ export default function CustomersListing() {
                         customStartDate ||
                         customEndDate) && (
                         <div className="border-t border-gray-100 pt-2.5 flex flex-col gap-2">
-                          <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                          <span className="text-[11px] font-bold text-gray-500">
                             Date Range Selector
                           </span>
                           <div className="grid grid-cols-2 gap-2">
                             <div>
-                              <label className="block text-[10px] font-semibold text-gray-400 mb-1">
+                              <label className="block text-[11px] font-semibold text-gray-400 mb-1">
                                 From
                               </label>
                               <input
@@ -703,7 +703,7 @@ export default function CustomersListing() {
                               />
                             </div>
                             <div>
-                              <label className="block text-[10px] font-semibold text-gray-400 mb-1">
+                              <label className="block text-[11px] font-semibold text-gray-400 mb-1">
                                 To
                               </label>
                               <input

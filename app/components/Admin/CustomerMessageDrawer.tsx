@@ -43,19 +43,19 @@ export function CustomerMessageDrawer({ isOpen, onClose, customer }: CustomerMes
              />
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-black text-ink">{customer.name}</span>
+            <span className="text-sm font-semibold text-ink">{customer.name}</span>
             <span className="text-[11px] font-bold text-gray-400">{customer.email}</span>
           </div>
           <div className="ml-auto flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span className="text-[10px] font-black text-emerald-600 uppercase tracking-wider">Online</span>
+            <span className="text-[11px] font-semibold text-emerald-600">Online</span>
           </div>
         </div>
 
         {/* Message Feed */}
         <div className="flex-1 overflow-y-auto pr-2 flex flex-col gap-4">
           <div className="flex flex-col items-center py-4">
-             <span className="text-[10px] font-bold text-gray-300 uppercase tracking-[0.2em]">Today, Jan 15</span>
+             <span className="text-[11px] font-bold text-gray-300">Today, Jan 15</span>
           </div>
           
           {mockMessages.map((msg) => (
@@ -72,14 +72,14 @@ export function CustomerMessageDrawer({ isOpen, onClose, customer }: CustomerMes
               >
                 {msg.text}
               </div>
-              <span className="text-[10px] font-bold text-gray-300 px-1">{msg.time}</span>
+              <span className="text-[11px] font-bold text-gray-300 px-1">{msg.time}</span>
             </div>
           ))}
         </div>
 
         {/* Templates Area */}
         <div className="flex flex-col gap-3">
-          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest px-1">Quick Templates</span>
+          <span className="text-[11px] font-bold text-gray-400 px-1">Quick Templates</span>
           <div className="flex flex-wrap gap-2">
             {["Order Update", "Security Alert", "Greeting"].map((template) => (
               <button 
@@ -104,7 +104,7 @@ export function CustomerMessageDrawer({ isOpen, onClose, customer }: CustomerMes
           
           <Button 
             variant="primary" 
-            className="w-full h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest shadow-lg shadow-ink/10"
+            className="w-full h-10 sm:h-12 text-[11px] font-semibold shadow-lg shadow-ink/10"
             disabled={!messageText.trim()}
             iconRight={<Icon name="arrow_forward" folder="icon" size="sm" />}
             onClick={() => {

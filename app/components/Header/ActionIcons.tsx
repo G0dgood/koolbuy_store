@@ -25,7 +25,7 @@ export const ActionIcons: React.FC = () => {
         className="flex flex-col items-center cursor-pointer group text-ink hover:text-black/60 transition-colors outline-none"
       >
         <Icon name="profile" size="md" />
-        <span className="text-[10px] mt-1 hidden md:block">
+        <span className="text-[11px] mt-1 hidden md:block">
           Profile
         </span>
       </button>
@@ -42,13 +42,13 @@ export const ActionIcons: React.FC = () => {
         <div className="relative">
           <Icon name="My_cart" size="md" />
           {cartCount > 0 && (
-            <span className="absolute -top-1.5 -right-2 bg-ink text-white text-[10px] font-semibold min-w-4.5 h-4.5 flex items-center justify-center rounded-full px-1 border-2 border-white shadow-xs">
+            <span className="absolute -top-1.5 -right-2 bg-ink text-white text-[11px] font-semibold min-w-4.5 h-4.5 flex items-center justify-center rounded-full px-1 border-2 border-white shadow-xs">
               {cartCount}
             </span>
           )}
         </div>
-        <span className="text-[10px] mt-1 hidden md:block">
-          Bag
+        <span className="text-[11px] mt-1 hidden md:block">
+          Cart
         </span>
       </Link>
     </div>

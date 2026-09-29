@@ -80,7 +80,7 @@ Admin forces a single 12px card radius (see `admin.css` §3).
 
 ## 5. Elevation
 
-- **Flat:** `shadow-xs`, `shadow-sm` and `shadow` resolve to `none`, and cards use a hairline.
+- **Flat:** `shadow-xs`, `shadow-sm` and `shadow` resolve to `none`. Utility panels use a hairline, and store cards use the store shadow (see Components).
 - **Floating layers:** `shadow-md` … `shadow-2xl` are whisper-soft, for menus, dropdowns and modals.
 - **Glass:** header, admin header and admin sidebar use `bg-white/80 + backdrop-blur-xl + saturate(180%)`.
 - **Product images** sit on a parchment well with `mix-blend-mode: multiply` (`.kb-product-img`), so
@@ -105,9 +105,17 @@ with a Sky Blue "Join now ›".
 
 **Option chips** (categories): white pill, 1px `#d2d2d7`; selected = 2px `#0071e3` border.
 
-**Store utility card** (`.kb-card`): white, 1px hairline, 18px radius, 16–20px padding.
-Image well is parchment with 8–11px radius. Content order: eyebrow (optional), then name (600),
-then vendor (12px grey), then price (400), then a small blue "Buy" pill.
+**Store cards** (`ProductCard.tsx`, class `.kb-card`), modelled on apple.com/store:
+- Surface: white, 18px radius, shadow `2px 4px 12px rgba(0,0,0,.08)`. On hover the card scales to
+  1.01 and the shadow deepens to `2px 4px 16px rgba(0,0,0,.16)` (300ms, `cubic-bezier(0,0,.5,1)`).
+  The store is the one Apple surface where cards carry a shadow; everything else stays flat.
+- **Shelf card** (`variant="shelf"`): 313×460 (272×420 on phones). Top-left text stack: eyebrow,
+  then name (24px / 600), then "From ₦…" (14px), then vendor (12px grey). The product image fills the
+  bottom. Shelves (`ProductShelf`, `.kb-shelf`) scroll horizontally with snap, and have round grey
+  paddle buttons at the bottom right. Used for New products, On sale, Related, You may also like.
+- **Grid card** (`variant="grid"`): square image on white, then eyebrow, name (17px / 600), vendor,
+  price (17px / 400), and a small blue "Add to cart" pill. Used on the products page.
+- Eyebrows are `.kb-sticker` text in `#b64400` ("New", "Save 12%").
 
 **Dark tile:** `bg-tile`, white 600 headline, `#cccccc` body, blue pill CTA.
 
@@ -119,7 +127,7 @@ selected row. The canvas is parchment, with white hairline cards and 600-weight 
 ## 7. Don'ts
 
 - No second accent color, no gradients, no decorative blobs, stickers or squiggles.
-- No shadows on cards, buttons or text.
+- No shadows on buttons or text. Store cards are the only cards with a shadow.
 - Don't round full-bleed sections.
 - Don't use `action-on-dark` on light surfaces.
 - Avoid uppercase letter-spaced labels in new work. Apple sets labels in sentence case.

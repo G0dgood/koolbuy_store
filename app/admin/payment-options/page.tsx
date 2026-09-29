@@ -886,7 +886,7 @@ export default function PaymentOptionsPage() {
             >
               <span>{tab.label}</span>
               <span
-                className={`px-1.5 py-0.2 text-[10px] rounded-full font-semibold ${
+                className={`px-1.5 py-0.2 text-[11px] rounded-full font-semibold ${
                   activeFilter === tab.id
                     ? "bg-white/20 text-white"
                     : "bg-gray-100 text-gray-600"
@@ -912,7 +912,7 @@ export default function PaymentOptionsPage() {
       {activeFilter !== "Payout" && (
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-sm font-bold text-ink uppercase tracking-wider flex items-center gap-2">
+            <h2 className="text-sm font-bold text-ink flex items-center gap-2">
               <HiOutlineCreditCard className="w-4 h-4 text-action" />
               <span>Payment Gateways ({filteredGateways.length})</span>
             </h2>
@@ -940,13 +940,13 @@ export default function PaymentOptionsPage() {
                           {gateway.name}
                         </h3>
                         {gateway.enabled && (
-                          <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                          <span className="text-[11px] font-bold px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                             Active
                           </span>
                         )}
                       </div>
                       {gateway.category && (
-                        <span className="text-[10px] text-gray-400 font-medium">
+                        <span className="text-[11px] text-gray-400 font-medium">
                           {gateway.category}
                         </span>
                       )}
@@ -979,7 +979,7 @@ export default function PaymentOptionsPage() {
                             Sandbox
                           </span>
                           {gateway.sandbox && (
-                            <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-50 text-amber-700 border border-amber-200 font-mono">
+                            <span className="text-[11px] font-bold px-1.5 py-0.2 rounded bg-amber-50 text-amber-700 border border-amber-200 font-mono">
                               TEST MODE
                             </span>
                           )}
@@ -1000,7 +1000,7 @@ export default function PaymentOptionsPage() {
                   {/* Credentials Section (if present) */}
                   {gateway.credentials && gateway.credentials.length > 0 && (
                     <div className="flex flex-col gap-2 pt-2 border-t border-gray-100 mb-2">
-                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1">
+                      <span className="text-[11px] font-bold text-gray-400 flex items-center gap-1">
                         <HiOutlineKey className="w-3 h-3 text-action" />
                         <span>API Credentials</span>
                       </span>
@@ -1090,7 +1090,7 @@ export default function PaymentOptionsPage() {
         <div className="flex flex-col gap-4 mt-4">
           <div className="flex items-center justify-between border-t border-gray-200 pt-6">
             <div>
-              <h2 className="text-sm font-bold text-ink uppercase tracking-wider flex items-center gap-2">
+              <h2 className="text-sm font-bold text-ink flex items-center gap-2">
                 <HiOutlineBuildingLibrary className="w-4 h-4 text-action" />
                 <span>Payout Options ({filteredPayouts.length})</span>
               </h2>
@@ -1120,7 +1120,7 @@ export default function PaymentOptionsPage() {
                       {payout.name}
                     </h3>
                     {payout.enabled && (
-                      <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                      <span className="text-[11px] font-bold px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                         Active
                       </span>
                     )}
@@ -1151,7 +1151,7 @@ export default function PaymentOptionsPage() {
                             Sandbox
                           </span>
                           {payout.sandbox && (
-                            <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-50 text-amber-700 border border-amber-200 font-mono">
+                            <span className="text-[11px] font-bold px-1.5 py-0.2 rounded bg-amber-50 text-amber-700 border border-amber-200 font-mono">
                               TEST
                             </span>
                           )}

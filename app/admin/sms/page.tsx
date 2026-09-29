@@ -250,7 +250,7 @@ export default function SMSTemplatesPage() {
           {/* Header */}
           <div className="p-4 border-b border-gray-100 flex flex-col gap-3 bg-gray-50/50">
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-bold text-ink uppercase tracking-wider">
+              <h2 className="text-sm font-bold text-ink">
                 List
               </h2>
               <span className="text-xs font-medium text-gray-400">
@@ -258,7 +258,7 @@ export default function SMSTemplatesPage() {
               </span>
             </div>
 
-            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">
+            <span className="text-[11px] font-bold text-gray-400">
               Template Name
             </span>
 
@@ -300,7 +300,7 @@ export default function SMSTemplatesPage() {
                   </div>
 
                   <span
-                    className={`text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0 ml-2 ${
+                    className={`text-[11px] font-semibold px-2 py-0.5 rounded-full shrink-0 ml-2 ${
                       item.enabled
                         ? "bg-emerald-50 text-emerald-600"
                         : "bg-gray-100 text-gray-400"
@@ -319,7 +319,7 @@ export default function SMSTemplatesPage() {
           {/* Header */}
           <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
             <div>
-              <h2 className="text-sm font-bold text-ink uppercase tracking-wider">
+              <h2 className="text-sm font-bold text-ink">
                 Subjects
               </h2>
               <span className="text-xs text-gray-400 font-medium">
@@ -348,7 +348,7 @@ export default function SMSTemplatesPage() {
           <div className="p-5 sm:p-6 flex flex-col gap-5">
             {/* Subject Field */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+              <label className="text-xs font-bold text-gray-600">
                 Subject
               </label>
               <input
@@ -364,7 +364,7 @@ export default function SMSTemplatesPage() {
 
             {/* Template Id Field */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+              <label className="text-xs font-bold text-gray-600">
                 Template Id
               </label>
               <input
@@ -381,7 +381,7 @@ export default function SMSTemplatesPage() {
             {/* Content Field */}
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-600">
                   Content
                 </label>
                 <span className="text-[11px] text-gray-400 font-mono">
@@ -404,7 +404,7 @@ export default function SMSTemplatesPage() {
             <div className="flex flex-col gap-2.5 pt-2 border-t border-gray-100">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-gray-600">Tags:-</span>
-                <span className="text-[10px] text-gray-400">
+                <span className="text-[11px] text-gray-400">
                   Click tag to insert into content
                 </span>
               </div>
@@ -431,7 +431,7 @@ export default function SMSTemplatesPage() {
               </div>
 
               {copiedTag && (
-                <span className="text-[10px] font-semibold text-emerald-600 animate-in fade-in duration-150">
+                <span className="text-[11px] font-semibold text-emerald-600 animate-in fade-in duration-150">
                   Copied {copiedTag} to clipboard!
                 </span>
               )}

@@ -111,7 +111,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
                   <h4 className="text-xs md:text-sm font-medium text-gray-700 group-hover:text-brand-blue transition-colors leading-tight">
                     {item.name}
                   </h4>
-                  <p className="text-[10px] md:text-xs text-gray-400 mt-1">
+                  <p className="text-[11px] md:text-xs text-gray-400 mt-1">
                     From <br className="hidden md:block" />
                     <span className="font-bold text-gray-900">₦{item.price}</span>
                   </p>
@@ -132,7 +132,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
             {/* Overlay Actions */}
             <div className="absolute bottom-3 left-3 right-3 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity translate-y-1 group-hover:translate-y-0 duration-200">
               <Link href="/products/detail" className="flex-1">
-                <Button variant="ghost" size="sm" className="w-full text-[9px] h-7 font-bold border border-gray-100 px-0">
+                <Button variant="ghost" size="sm" className="w-full text-[11px] h-7 font-bold border border-gray-100 px-0">
                   View
                 </Button>
               </Link>
@@ -140,7 +140,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
                 onClick={(e) => handleAddToCart(e, item)}
                 variant="primary"
                 size="sm"
-                className="flex-1 text-[9px] h-7 font-bold shadow-none px-0"
+                className="flex-1 text-[11px] h-7 font-bold shadow-none px-0"
               >
                 + Cart
               </Button>

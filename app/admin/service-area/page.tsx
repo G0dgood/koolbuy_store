@@ -269,7 +269,7 @@ function AddServiceAreaModal({
       <form onSubmit={handleSubmit}>
         <ModalBody className="flex flex-col gap-4 py-4">
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+            <label className="text-xs font-bold text-gray-500">
               Service Area Name
             </label>
             <Input
@@ -326,7 +326,7 @@ function EditServiceAreaModal({
       <form onSubmit={handleSubmit}>
         <ModalBody className="flex flex-col gap-4 py-4">
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+            <label className="text-xs font-bold text-gray-500">
               Service Area Name
             </label>
             <Input

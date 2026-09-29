@@ -55,42 +55,42 @@ export function UpdateDealsTimerModal({ isOpen, onClose, initialValues, onUpdate
         {/* Input Grid */}
         <div className="grid grid-cols-4 gap-4">
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest px-1">Days</label>
+            <label className="text-[11px] font-semibold text-gray-400 px-1">Days</label>
             <Input
               placeholder="00"
               value={formData.days}
               onChange={(e) => handleInputChange("days", e.target.value)}
-              className="text-center font-black text-lg h-14 !rounded-xl"
+              className="text-center font-semibold text-lg h-14 !rounded-xl"
               maxLength={3}
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest px-1">Hours</label>
+            <label className="text-[11px] font-semibold text-gray-400 px-1">Hours</label>
             <Input
               placeholder="00"
               value={formData.hours}
               onChange={(e) => handleInputChange("hours", e.target.value)}
-              className="text-center font-black text-lg h-14 !rounded-xl"
+              className="text-center font-semibold text-lg h-14 !rounded-xl"
               maxLength={2}
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest px-1">Min</label>
+            <label className="text-[11px] font-semibold text-gray-400 px-1">Min</label>
             <Input
               placeholder="00"
               value={formData.minutes}
               onChange={(e) => handleInputChange("minutes", e.target.value)}
-              className="text-center font-black text-lg h-14 !rounded-xl"
+              className="text-center font-semibold text-lg h-14 !rounded-xl"
               maxLength={2}
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest px-1">Sec</label>
+            <label className="text-[11px] font-semibold text-gray-400 px-1">Sec</label>
             <Input
               placeholder="00"
               value={formData.seconds}
               onChange={(e) => handleInputChange("seconds", e.target.value)}
-              className="text-center font-black text-lg h-14 !rounded-xl"
+              className="text-center font-semibold text-lg h-14 !rounded-xl"
               maxLength={2}
             />
           </div>
@@ -98,23 +98,23 @@ export function UpdateDealsTimerModal({ isOpen, onClose, initialValues, onUpdate
 
         {/* Summary Preview */}
         <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100">
-          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Preview Display:</span>
+          <span className="text-[11px] font-bold text-gray-400">Preview Display:</span>
           <div className="flex gap-2">
             <div className="flex flex-col items-center justify-center w-10 h-10 bg-white rounded-lg border border-gray-200">
-              <span className="text-xs font-black text-ink">{formData.days || "00"}</span>
-              <span className="text-[8px] text-gray-400 font-bold uppercase">Days</span>
+              <span className="text-xs font-semibold text-ink">{formData.days || "00"}</span>
+              <span className="text-[11px] text-gray-400 font-bold">Days</span>
             </div>
             <div className="flex flex-col items-center justify-center w-10 h-10 bg-white rounded-lg border border-gray-200">
-              <span className="text-xs font-black text-ink">{formData.hours || "00"}</span>
-              <span className="text-[8px] text-gray-400 font-bold uppercase">Hrs</span>
+              <span className="text-xs font-semibold text-ink">{formData.hours || "00"}</span>
+              <span className="text-[11px] text-gray-400 font-bold">Hrs</span>
             </div>
             <div className="flex flex-col items-center justify-center w-10 h-10 bg-white rounded-lg border border-gray-200">
-              <span className="text-xs font-black text-ink">{formData.minutes || "00"}</span>
-              <span className="text-[8px] text-gray-400 font-bold uppercase">Min</span>
+              <span className="text-xs font-semibold text-ink">{formData.minutes || "00"}</span>
+              <span className="text-[11px] text-gray-400 font-bold">Min</span>
             </div>
             <div className="flex flex-col items-center justify-center w-10 h-10 bg-white rounded-lg border border-gray-200">
-              <span className="text-xs font-black text-ink">{formData.seconds || "00"}</span>
-              <span className="text-[8px] text-gray-400 font-bold uppercase">Sec</span>
+              <span className="text-xs font-semibold text-ink">{formData.seconds || "00"}</span>
+              <span className="text-[11px] text-gray-400 font-bold">Sec</span>
             </div>
           </div>
         </div>
@@ -124,14 +124,14 @@ export function UpdateDealsTimerModal({ isOpen, onClose, initialValues, onUpdate
           <Button
             variant="outline"
             onClick={onClose}
-            className="flex-1 h-11 text-[11px] font-black uppercase tracking-widest border-gray-200 text-gray-400 hover:text-ink"
+            className="flex-1 h-11 text-[11px] font-semibold border-gray-200 text-gray-400 hover:text-ink"
           >
             Cancel
           </Button>
           <Button
             type="submit"
             variant="primary"
-            className="flex-[2] h-11 text-[11px] font-black uppercase tracking-widest shadow-lg shadow-blue-100"
+            className="flex-[2] h-11 text-[11px] font-semibold shadow-lg shadow-blue-100"
           >
             Establish Timer
           </Button>

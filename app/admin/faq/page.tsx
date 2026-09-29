@@ -98,7 +98,7 @@ export default function FAQManagementPage() {
 
       {/* Table Section */}
       <div className="bg-white overflow-hidden mb-8 border border-gray-100 rounded-[6px]">
-        <div className="px-8 py-6 border-b border-gray-50 flex flex-col lg:flex-row lg:items-center justify-between gap-6 ">
+        <div className="px-8 py-6 border-b border-gray-50 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="flex flex-col sm:flex-row items-center gap-6">
             <TabFilter
               tabs={categories}
@@ -124,7 +124,7 @@ export default function FAQManagementPage() {
           </div>
         </div>
 
-        <div className="admin-table-container ">
+        <div className="admin-table-container">
           <table>
             <thead>
               <tr>
@@ -162,7 +162,7 @@ export default function FAQManagementPage() {
                     <span className="text-xs font-bold text-gray-500">{faq.category}</span>
                   </td>
                   <td className="text-center">
-                    <span className="px-3 py-1 bg-emerald-50 text-emerald-500 text-[10px] font-black rounded-full uppercase">
+                    <span className="px-3 py-1 bg-emerald-50 text-emerald-500 text-[11px] font-semibold rounded-full">
                       {faq.status}
                     </span>
                   </td>
@@ -204,7 +204,7 @@ export default function FAQManagementPage() {
               <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-gray-200 shadow-inner">
                 <HiMagnifyingGlass size={32} />
               </div>
-              <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">No FAQs found matching your criteria</p>
+              <p className="text-sm font-bold text-gray-400">No FAQs found matching your criteria</p>
             </div>
           )}
         </div>

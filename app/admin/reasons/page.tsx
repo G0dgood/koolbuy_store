@@ -438,7 +438,7 @@ function AddOrEditReasonModal({
       <form onSubmit={handleSubmit}>
         <ModalBody className="flex flex-col gap-4 py-4">
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+            <label className="text-xs font-bold text-gray-500">
               Reason Title
             </label>
             <Input
@@ -451,7 +451,7 @@ function AddOrEditReasonModal({
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+            <label className="text-xs font-bold text-gray-500">
               Reason Type
             </label>
             <select
@@ -468,7 +468,7 @@ function AddOrEditReasonModal({
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+            <label className="text-xs font-bold text-gray-500">
               Status
             </label>
             <select

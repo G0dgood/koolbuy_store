@@ -1,34 +1,8 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { motion, Variants } from "framer-motion";
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15,
-    },
-  },
-};
+import { ProductCard, ProductShelf } from "@/app/components/Products/ProductCard";
 
 const dealProducts = [
   {
@@ -81,7 +55,7 @@ const DealsSection = () => {
       {/* Section Header — Apple two-tone headline */}
       <div className="flex items-end justify-between gap-4">
         <h3 className="text-[24px] md:text-[34px] font-semibold tracking-[-0.02em] leading-[1.15]">
-          <span className="text-ink">On sale.</span> 
+          <span className="text-ink">On sale.</span>{" "}
           <span className="text-gray-500">Great prices on cold storage, today.</span>
         </h3>
 
@@ -93,51 +67,23 @@ const DealsSection = () => {
         </Link>
       </div>
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-5"
-      >
+      <ProductShelf label="On sale">
         {dealProducts.map((prod, idx) => (
-          <Link key={idx} href="/products/detail" className="flex flex-col">
-            <motion.div
-              variants={itemVariants}
-              className="kb-card kb-card-hover p-4 md:p-5 flex flex-col justify-between h-full group cursor-pointer"
-            >
-              {/* Product Image Area */}
-              <div className="w-full aspect-square relative mb-4 flex items-center justify-center rounded-lg bg-cream overflow-hidden">
-                <Image
-                  src={prod.image}
-                  alt={prod.name}
-                  fill
-                  className="object-contain p-4 kb-product-img group-hover:scale-[1.03] transition-transform duration-700 ease-out"
-                />
-              </div>
-
-              {/* Product Info */}
-              <div className="flex flex-col gap-0.5 text-left w-full">
-                <span className="kb-sticker">{`Save ${8 + idx * 3}%`}</span>
-                <h4 className="text-[14px] sm:text-[15px] font-semibold text-ink leading-snug line-clamp-2">
-                  {prod.name}
-                </h4>
-                <p className="text-[12px] text-gray-500 truncate">
-                  {prod.vendor}
-                </p>
-                <div className="flex items-center justify-between gap-2 mt-3">
-                  <span className="text-[14px] sm:text-[15px] text-ink">
-                    {prod.price}
-                  </span>
-                  <span className="kb-btn kb-btn-primary h-7 px-3.5 text-[12px] shrink-0">
-                    Buy
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          </Link>
+          <div role="listitem" key={prod.id}>
+            <ProductCard
+              variant="shelf"
+              product={{
+                id: prod.id,
+                title: prod.name.replace(/\s*\.\.\.$/, ""),
+                price: prod.price,
+                image: prod.image,
+                vendor: prod.vendor,
+                eyebrow: `Save ${8 + idx * 3}%`,
+              }}
+            />
+          </div>
         ))}
-      </motion.div>
+      </ProductShelf>
     </section>
   );
 };

@@ -29,7 +29,7 @@ export const AnalyticsOverview: React.FC = () => {
   return (
     <div className="bg-white p-6 sm:p-8 rounded-[6px] border border-gray-100 shadow-sm flex flex-col gap-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
-        <h3 className="text-[20px] font-black text-ink">Report for this week</h3>
+        <h3 className="text-[20px] font-semibold text-ink">Report for this week</h3>
         <div className="flex items-center justify-between w-full sm:w-auto gap-4">
           <TabFilter
             tabs={["This week", "Last week"]}
@@ -81,8 +81,8 @@ export const AnalyticsOverview: React.FC = () => {
           { label: "Revenue", val: "250k" },
         ].map((stat) => (
           <div key={stat.label} className="flex flex-col gap-1 lg:border-gray-100 lg:border-l lg:pl-4 first:border-l-0 first:pl-0">
-            <span className="text-[22px] font-black text-ink leading-none">{stat.val}</span>
-            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{stat.label}</span>
+            <span className="text-[22px] font-semibold text-ink leading-none">{stat.val}</span>
+            <span className="text-[11px] font-bold text-gray-400">{stat.label}</span>
           </div>
         ))}
       </div>
@@ -95,13 +95,13 @@ export const AnalyticsOverview: React.FC = () => {
             datasets: [{
               label: 'Revenue',
               data: [18, 18.5, 17, 16, 11, 12, 11],
-              borderColor: '#FF7A00',
+              borderColor: '#0066CC',
               borderWidth: 3,
               fill: true,
               backgroundColor: 'rgba(33, 150, 243, 0.05)',
               tension: 0.4,
               pointRadius: (context: any) => context.dataIndex === 4 ? 6 : 0,
-              pointBackgroundColor: '#FF7A00',
+              pointBackgroundColor: '#0066CC',
               pointBorderColor: '#fff',
               pointBorderWidth: 2,
             }]

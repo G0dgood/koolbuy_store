@@ -264,7 +264,7 @@ export default function ProductListing() {
                         <span className="text-sm font-bold text-ink leading-tight group-hover:text-blue-600 transition-colors">
                           {product.name}
                         </span>
-                        <span className="text-[10px] font-bold text-gray-400 mt-1 uppercase tracking-wider">
+                        <span className="text-[11px] font-bold text-gray-400 mt-1">
                           SKU: {product.sku}
                         </span>
                       </div>
@@ -276,7 +276,7 @@ export default function ProductListing() {
                     </span>
                   </td>
                   <td>
-                    <span className="text-sm font-black text-action">
+                    <span className="text-sm font-semibold text-action">
                       {product.price}
                     </span>
                   </td>
@@ -291,7 +291,7 @@ export default function ProductListing() {
                   </td>
                   <td>
                     <span
-                      className={`px-3 py-1.5 rounded-[6px] text-[10px] font-bold ${statusStyles[product.status as keyof typeof statusStyles]}`}
+                      className={`px-3 py-1.5 rounded-[6px] text-[11px] font-bold ${statusStyles[product.status as keyof typeof statusStyles]}`}
                     >
                       {product.status}
                     </span>
