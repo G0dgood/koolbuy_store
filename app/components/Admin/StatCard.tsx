@@ -96,13 +96,13 @@ export const StatCard: React.FC<StatCardProps> = ({
 
   return (
     <div
-      className={`bg-white rounded-lg border border-gray-100 flex flex-col justify-between relative group transition-all hover:shadow-md hover:border-brand-blue/20 ${
+      className={`bg-white rounded-2xl border border-hairline flex flex-col justify-between relative group transition-colors duration-200 hover:border-gray-300 ${
         isSm ? "p-4 gap-2 shadow-2xs" : "p-6 gap-3"
       } ${className}`}
     >
       <div className="flex justify-between items-start">
         <h3
-          className={`font-bold text-gray-500 tracking-wide leading-none ${
+          className={`font-bold text-gray-500  leading-none ${
             isSm ? "text-[11px]" : "text-xs"
           }`}
         >
@@ -163,8 +163,8 @@ export const StatCard: React.FC<StatCardProps> = ({
       <div className={`flex flex-col ${isSm ? "gap-1" : "gap-2"}`}>
         <h2
           className={`${
-            isSm ? "text-xl sm:text-2xl font-bold" : "text-3xl font-black"
-          } text-[#1D3557] tracking-tight leading-none`}
+            isSm ? "text-xl sm:text-[28px] font-semibold" : "text-[34px] font-semibold"
+          } text-ink tracking-tight leading-none`}
         >
           {value}
         </h2>
@@ -196,7 +196,7 @@ export const StatCard: React.FC<StatCardProps> = ({
             <MiniChart
               type="area"
               data={chartData}
-              color={trendIsUp ? "#00BCD4" : "#F43F5E"}
+              color={trendIsUp ? "#0066CC" : "#e30000"}
               height={32}
             />
           </div>
@@ -205,7 +205,7 @@ export const StatCard: React.FC<StatCardProps> = ({
 
       {!isSm && (
         <div className="mt-1 pt-2 border-t border-gray-50 flex justify-between items-center group/btn">
-          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+          <span className="text-[11px] font-bold text-gray-400">
             {periodLabel}
           </span>
           <button
@@ -213,7 +213,7 @@ export const StatCard: React.FC<StatCardProps> = ({
               e.stopPropagation();
               onViewDetails?.();
             }}
-            className="flex items-center gap-1 text-[10px] font-black text-brand-blue uppercase hover:underline opacity-0 group-hover:opacity-100 transition-all duration-300"
+            className="flex items-center gap-1 text-[11px] font-semibold text-brand-blue hover:underline opacity-0 group-hover:opacity-100 transition-all duration-300"
           >
             Details
             <Icon

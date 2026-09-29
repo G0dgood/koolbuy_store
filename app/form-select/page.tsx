@@ -29,8 +29,8 @@ export default function FormSelectDemo() {
  ];
 
  return (
-  <div className="min-h-screen bg-[#F0F7FF] p-12 font-sans">
-   <div className="max-w-4xl mx-auto bg-white rounded-xl  p-16">
+  <div className="min-h-screen bg-cream p-12 font-sans">
+   <div className="max-w-4xl mx-auto bg-white rounded-xl p-16">
     <h1 className="text-5xl font-bold mb-16 text-black">Form - select</h1>
 
     <div className="flex flex-col gap-20">
@@ -99,7 +99,7 @@ export default function FormSelectDemo() {
          </div>
          <div className="grid grid-cols-7 gap-1 text-center mb-2">
           {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map(d => (
-           <div key={d} className="text-[10px] font-bold text-gray-400">{d}</div>
+           <div key={d} className="text-[11px] font-bold text-gray-400">{d}</div>
           ))}
          </div>
          <div className="grid grid-cols-7 gap-1">
@@ -125,7 +125,7 @@ export default function FormSelectDemo() {
 
      {/* Base Components Footer */}
      <section className="mt-12 pt-12 border-t border-gray-200">
-      <h3 className="text-gray-400 font-semibold mb-8 uppercase tracking-wider">Base components</h3>
+      <h3 className="text-gray-400 font-semibold mb-8">Base components</h3>
       <div className="flex items-center gap-12">
        <span className="text-sm text-gray-400">30</span>
        <Tag label="Tag input" onRemove={() => { }} />

@@ -39,8 +39,8 @@ export function NotificationDetailDrawer({ isOpen, onClose, notification }: Noti
                  />
               </div>
               <div className="flex flex-col gap-1">
-                 <h2 className="text-xl font-black text-[#1D3557] tracking-tight">{notification.title}</h2>
-                 <span className={`text-[10px] font-black uppercase tracking-[0.2em] ${style.color}`}>
+                 <h2 className="text-xl font-semibold text-ink tracking-tight">{notification.title}</h2>
+                 <span className={`text-[11px] font-semibold   ${style.color}`}>
                     {notification.type} Event
                  </span>
               </div>
@@ -49,9 +49,9 @@ export function NotificationDetailDrawer({ isOpen, onClose, notification }: Noti
            {/* Event Breakdown */}
            <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-2">
-                 <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Detailed Log Message</h4>
+                 <h4 className="text-[11px] font-semibold text-gray-400 px-1">Detailed Log Message</h4>
                  <div className="bg-gray-50/50 rounded-xl border border-gray-100 p-5">
-                    <p className="text-sm font-bold text-[#1D3557] leading-relaxed">
+                    <p className="text-sm font-bold text-ink leading-relaxed">
                        {notification.description}
                     </p>
                  </div>
@@ -59,33 +59,33 @@ export function NotificationDetailDrawer({ isOpen, onClose, notification }: Noti
 
               <div className="grid grid-cols-2 gap-4">
                  <div className="flex flex-col gap-2">
-                    <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Audited Actor</h4>
-                    <div className="bg-white border border-gray-100 rounded-xl p-3 flex items-center gap-2">
+                    <h4 className="text-[11px] font-semibold text-gray-400 px-1">Audited Actor</h4>
+                    <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-3 flex items-center gap-2">
                        <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center">
                           <Icon name="user-profile-circle" folder="dashboardIcon" size="xs" className="text-brand-blue" />
                        </div>
-                       <span className="text-[11px] font-black text-[#1D3557] truncate">{notification.actor}</span>
+                       <span className="text-[11px] font-semibold text-ink truncate">{notification.actor}</span>
                     </div>
                  </div>
                  <div className="flex flex-col gap-2">
-                    <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Timestamp</h4>
-                    <div className="bg-white border border-gray-100 rounded-xl p-3 flex items-center gap-2 text-gray-400">
+                    <h4 className="text-[11px] font-semibold text-gray-400 px-1">Timestamp</h4>
+                    <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-3 flex items-center gap-2 text-gray-400">
                        <Icon name="info-circle" folder="dashboardIcon" size="xs" />
-                       <span className="text-[11px] font-black">{notification.time}</span>
+                       <span className="text-[11px] font-semibold">{notification.time}</span>
                     </div>
                  </div>
               </div>
 
               {/* Resolution Status */}
               <div className="flex flex-col gap-2">
-                 <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Management Status</h4>
-                 <div className="bg-white border border-gray-100 rounded-xl p-4 flex items-center justify-between">
+                 <h4 className="text-[11px] font-semibold text-gray-400 px-1">Management Status</h4>
+                 <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                        <div className={`w-2 h-2 rounded-full ${notification.isRead ? 'bg-gray-300' : 'bg-brand-blue animate-pulse'}`}></div>
                        <span className="text-xs font-bold text-gray-600">{notification.isRead ? 'Archived / Read' : 'Unresolved Event'}</span>
                     </div>
                     {!notification.isRead && (
-                       <button className="text-[10px] font-black text-brand-blue uppercase hover:underline">Mark Resolved</button>
+                       <button className="text-[11px] font-semibold text-brand-blue hover:underline">Mark Resolved</button>
                     )}
                  </div>
               </div>
@@ -96,7 +96,7 @@ export function NotificationDetailDrawer({ isOpen, onClose, notification }: Noti
         <div className="mt-auto pt-8 border-t border-gray-50 flex flex-col gap-3">
            <Button 
               variant="primary" 
-              className="w-full h-12 text-[11px] font-black uppercase tracking-widest shadow-lg shadow-blue-100"
+              className="w-full h-12 text-[11px] font-semibold shadow-lg shadow-blue-100"
               onClick={() => {
                  router.push(style.action);
                  onClose();

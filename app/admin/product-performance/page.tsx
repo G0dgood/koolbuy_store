@@ -275,7 +275,7 @@ export default function ProductPerformancePage() {
           <Button
             variant="primary"
             shape="rounded-sm"
-            className="flex items-center gap-2 bg-[#00BCD4] hover:bg-[#00acc1] text-white text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
+            className="flex items-center gap-2 bg-action hover:bg-action-hover text-white text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
             onClick={() => alert("Exporting Product Performance Report...")}
           >
             <HiOutlineDocumentArrowDown className="w-4 h-4" />
@@ -318,7 +318,7 @@ export default function ProductPerformancePage() {
       </div>
 
       {/* Main Table Card */}
-      <div className="bg-white overflow-hidden flex flex-col border border-[#1C1C1C1A] rounded-lg shadow-2xs">
+      <div className="bg-white overflow-hidden flex flex-col border border-gray-100 rounded-lg shadow-2xs">
         {/* Filter Controls Bar */}
         <div className="p-4 sm:p-5 flex flex-col lg:flex-row gap-4 items-center justify-between border-b border-gray-100">
           <TabFilter
@@ -455,7 +455,7 @@ export default function ProductPerformancePage() {
                             </span>
                           </td>
                           <td>
-                            <span className="text-sm font-black text-gray-900">
+                            <span className="text-sm font-semibold text-gray-900">
                               {item.totalRevenue}
                             </span>
                           </td>

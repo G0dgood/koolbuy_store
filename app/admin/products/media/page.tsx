@@ -141,7 +141,7 @@ export default function ProductMediaListing() {
                     {item.type === "video" && (
                       <div className="absolute inset-0 flex items-center justify-center bg-black/5 group-hover:bg-black/10 transition-colors">
                         <div className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center shadow-sm">
-                          <Icon name="play_circle_filled" folder="icon" size="sm" className="text-[#1D3557] ml-0.5" />
+                          <Icon name="play_circle_filled" folder="icon" size="sm" className="text-ink ml-0.5" />
                         </div>
                       </div>
                     )}
@@ -173,12 +173,12 @@ export default function ProductMediaListing() {
                   </div>
 
                   <div className="p-4 border-t border-gray-50 bg-white">
-                    <h3 className="text-sm font-bold text-[#1D3557] truncate mb-1" title={item.name}>
+                    <h3 className="text-sm font-bold text-ink truncate mb-1" title={item.name}>
                       {item.name}
                     </h3>
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{item.size}</span>
-                      <span className="text-[10px] font-medium text-gray-300">{item.date}</span>
+                      <span className="text-[11px] font-bold text-gray-400">{item.size}</span>
+                      <span className="text-[11px] font-medium text-gray-300">{item.date}</span>
                     </div>
                   </div>
                 </div>
@@ -205,13 +205,13 @@ export default function ProductMediaListing() {
                           <img src={item.url} alt={item.name} className="w-full h-full object-contain" />
                           {item.type === "video" && (
                             <div className="absolute inset-0 flex items-center justify-center bg-black/5">
-                              <Icon name="play_circle" folder="icon" size="xs" className="text-[#1D3557]" />
+                              <Icon name="play_circle" folder="icon" size="xs" className="text-ink" />
                             </div>
                           )}
                         </div>
                       </td>
                       <td>
-                        <span className="text-sm font-bold text-[#1D3557] truncate max-w-[200px] block group-hover:text-blue-600 transition-colors">
+                        <span className="text-sm font-bold text-ink truncate max-w-[200px] block group-hover:text-blue-600 transition-colors">
                           {item.name}
                         </span>
                       </td>
@@ -226,7 +226,7 @@ export default function ProductMediaListing() {
                             size="xs"
                             className="text-gray-400"
                           />
-                          <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">{item.type}</span>
+                          <span className="text-xs font-bold text-gray-400">{item.type}</span>
                         </div>
                       </td>
                       <td>

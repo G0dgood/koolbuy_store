@@ -19,15 +19,22 @@ export default function CartPage() {
   const [isClearModalOpen, setIsClearModalOpen] = React.useState(false);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F7FAFC]">
+    <div className="flex flex-col min-h-screen bg-white">
       <Header />
 
-      <div className="flex-1 max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-4 md:py-6 flex flex-col gap-6 md:gap-8 w-full">
-        <h2 className="text-xl md:text-2xl font-bold text-gray-900"> My cart ({cartItems.length})</h2>
+      <div className="flex-1 max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-8 md:py-14 flex flex-col gap-8 md:gap-10 w-full">
+        <div className="flex flex-col gap-2 md:items-center md:text-center">
+          <h1 className="kb-title text-[32px] md:text-[48px] leading-[1.07] tracking-[-0.025em]">
+            {cartItems.length > 0 ? "Review your cart." : "Your cart is empty."}
+          </h1>
+          <p className="text-[17px] text-gray-600">
+            {cartItems.length} {cartItems.length === 1 ? "item" : "items"}.
+          </p>
+        </div>
 
         <div className="flex flex-col lg:flex-row gap-6 md:gap-8 items-start">
           {/* Cart List Container */}
-          <div className="flex-1 bg-white border border-gray-200 md:rounded-lg p-4 md:p-6 flex flex-col w-full">
+          <div className="flex-1 bg-white md:border-t md:border-hairline flex flex-col w-full">
             {cartItems.length > 0 ? (
               cartItems.map((item) => (
                 <CartItem key={item.id} {...item} />
@@ -47,7 +54,7 @@ export default function CartPage() {
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8">
               <Link href="/products" className="w-full md:w-auto">
                 <Button
-                  className="w-full md:w-fit bg-brand-blue text-white px-8 h-10"
+                  className="w-full md:w-fit px-[22px] h-11"
                   iconLeft={<Icon name="arrow_back white" size="xs" />}
                 >
                   Back to shop
@@ -56,8 +63,8 @@ export default function CartPage() {
               {cartItems.length > 0 && (
                 <Button
                   onClick={() => setIsClearModalOpen(true)}
-                  variant="ghost"
-                  className="w-full md:w-auto text-brand-blue bg-white border border-gray-200 px-6 h-10 hover:bg-gray-50 transition-colors"
+                  variant="secondary"
+                  className="w-full md:w-auto px-[22px] h-11"
                 >
                   Remove all
                 </Button>

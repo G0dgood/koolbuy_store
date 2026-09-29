@@ -24,7 +24,7 @@ const Rating: React.FC<RatingProps> = ({
             key={i}
             name={isFull ? "star" : isHalf ? "star_half" : "star_border"}
             size="sm"
-            className={isFull || isHalf ? "text-[#F59E0B]" : "text-gray-200"}
+            className={isFull || isHalf ? "text-[#b64400]" : "text-gray-200"}
           />
         );
       })}

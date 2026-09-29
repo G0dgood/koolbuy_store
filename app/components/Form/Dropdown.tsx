@@ -145,7 +145,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   return (
     <div className={className}>
       {label && (
-        <label className="block md:text-[12px] text-[10px] !font-light !text-[#1F1F1F] mb-2">
+        <label className="block md:text-[12px] text-[11px] !font-light !text-[#1d1d1f] mb-2">
           {label}
           {required && (
             <span className="text-brand-red ml-1" aria-hidden="true">
@@ -168,7 +168,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         >
           <div className="flex items-center gap-2">
             <span
-              className={`font-work font-normal text-[12px] leading-[23px]   ${selectedOption ? "!text-[#1F1F1F]" : "text-[rgba(31,31,31,0.5)]"
+              className={`font-work font-normal text-[12px] leading-[23px]   ${selectedOption ? "!text-[#1d1d1f]" : "text-[rgba(31,31,31,0.5)]"
                 }`}
             >
               {selectedOption ? selectedOption.label : placeholder}
@@ -196,7 +196,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 <input
                   ref={searchInputRef}
                   type="text"
-                  className="w-full h-8 px-2 text-[10px] md:text-[12px] text-[#1F1F1F] placeholder:text-[rgba(31,31,31,0.5)] bg-neutral-50 border border-neutral-200 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-brand-blue/20 focus:border-brand-blue"
+                  className="w-full h-8 px-2 text-[11px] md:text-[12px] text-[#1d1d1f] placeholder:text-[rgba(31,31,31,0.5)] bg-neutral-50 border border-neutral-200 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-brand-blue/20 focus:border-brand-blue"
                   placeholder="Search..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
@@ -205,7 +205,7 @@ const Dropdown: React.FC<DropdownProps> = ({
               </div>
             )}
             {filteredOptions?.length === 0 ? (
-              <div className="px-4 py-3 text-center text-[10px] md:text-[12px] text-neutral-400 italic">
+              <div className="px-4 py-3 text-center text-[11px] md:text-[12px] text-neutral-400 italic">
                 No results found
               </div>
             ) : (
@@ -213,7 +213,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 {filteredOptions?.map((option) => (
                   <div
                     key={option.value}
-                    className="px-4 py-2 hover:bg-neutral-50 cursor-pointer text-[10px] md:text-[12px] leading-[23px] tracking-[-0.02em] text-[#1F1F1F] transition-colors"
+                    className="px-4 py-2 hover:bg-neutral-50 cursor-pointer text-[11px] md:text-[12px] leading-[23px] tracking-[-0.02em] text-[#1d1d1f] transition-colors"
                     onClick={() => handleOptionSelect(option.value)}
                     role="option"
                     aria-selected={value === option.value}

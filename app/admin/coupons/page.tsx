@@ -324,8 +324,8 @@ export default function MarketingPromocodePage() {
     <div className="flex flex-col gap-6 pb-16 mx-auto">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 right-8 z-50 bg-[#1D3557] text-white text-xs px-4 py-3 rounded-lg shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
-          <HiOutlineCheckCircle className="w-4 h-4 text-[#00BCD4]" />
+        <div className="fixed top-20 right-8 z-50 bg-ink text-white text-xs px-4 py-3 rounded-lg shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
+          <HiOutlineCheckCircle className="w-4 h-4 text-action" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -337,7 +337,7 @@ export default function MarketingPromocodePage() {
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
               Promocode
             </h1>
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-[#00BCD4]/20">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-action/20">
               Marketing Campaigns
             </span>
           </div>
@@ -356,14 +356,14 @@ export default function MarketingPromocodePage() {
               className="border-gray-200 text-gray-800 shadow-2xs hover:bg-gray-50 px-3.5 py-2 text-xs font-semibold flex items-center gap-1.5"
             >
               <span>View Accounting Promo Usage</span>
-              <HiOutlineArrowRight className="w-3.5 h-3.5 text-[#00BCD4]" />
+              <HiOutlineArrowRight className="w-3.5 h-3.5 text-action" />
             </Button>
           </Link>
 
           <Button
             variant="primary"
             shape="rounded-sm"
-            className="bg-[#00BCD4] hover:bg-[#00acc1] text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-xs"
+            className="bg-action hover:bg-action-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-xs"
             onClick={handleOpenAddModal}
           >
             <HiOutlinePlus className="w-4 h-4" />
@@ -374,56 +374,56 @@ export default function MarketingPromocodePage() {
 
       {/* Summary KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white rounded-lg border border-gray-100 p-4 shadow-2xs">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 shadow-2xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-gray-400">
               Total Campaigns
             </span>
-            <HiOutlineTicket className="w-4 h-4 text-[#00BCD4]" />
+            <HiOutlineTicket className="w-4 h-4 text-action" />
           </div>
-          <p className="text-xl font-black text-gray-900">
+          <p className="text-xl font-semibold text-gray-900">
             {promocodes.length}
           </p>
-          <span className="text-[10px] text-gray-400 font-semibold">
+          <span className="text-[11px] text-gray-400 font-semibold">
             {promocodes.filter((p) => p.status === "Active").length} active now
           </span>
         </div>
 
-        <div className="bg-white rounded-lg border border-gray-100 p-4 shadow-2xs">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 shadow-2xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-gray-400">
               Total Redemptions
             </span>
             <HiOutlineReceiptPercent className="w-4 h-4 text-emerald-600" />
           </div>
-          <p className="text-xl font-black text-gray-900">2,510</p>
-          <span className="text-[10px] text-emerald-600 font-semibold">
+          <p className="text-xl font-semibold text-gray-900">2,510</p>
+          <span className="text-[11px] text-emerald-600 font-semibold">
             ● 18.4% uplift this month
           </span>
         </div>
 
-        <div className="bg-white rounded-lg border border-gray-100 p-4 shadow-2xs">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 shadow-2xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-gray-400">
               Customer Savings
             </span>
             <HiOutlineCurrencyDollar className="w-4 h-4 text-purple-600" />
           </div>
-          <p className="text-xl font-black text-gray-900">₦18.4M</p>
-          <span className="text-[10px] text-purple-600 font-semibold">
+          <p className="text-xl font-semibold text-gray-900">₦18.4M</p>
+          <span className="text-[11px] text-purple-600 font-semibold">
             Absorbed discount value
           </span>
         </div>
 
-        <div className="bg-white rounded-lg border border-gray-100 p-4 shadow-2xs">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 shadow-2xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-gray-400">
               Expiring Soon
             </span>
             <HiOutlineClock className="w-4 h-4 text-amber-500" />
           </div>
-          <p className="text-xl font-black text-gray-900">2</p>
-          <span className="text-[10px] text-amber-600 font-semibold">
+          <p className="text-xl font-semibold text-gray-900">2</p>
+          <span className="text-[11px] text-amber-600 font-semibold">
             Within next 14 days
           </span>
         </div>
@@ -464,7 +464,7 @@ export default function MarketingPromocodePage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-262.5">
             <thead>
-              <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+              <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500">
                 <th className="py-3.5 px-4 w-12 text-center">#</th>
                 <th className="py-3.5 px-4 w-16">Image</th>
                 <th className="py-3.5 px-4">Promo Code</th>
@@ -505,7 +505,7 @@ export default function MarketingPromocodePage() {
                     {/* 3. Promo Code */}
                     <td className="py-3.5 px-4 font-mono font-bold whitespace-nowrap">
                       <div className="flex items-center gap-1.5">
-                        <span className="px-2.5 py-1 rounded-md text-xs bg-brand-blue-light/70 text-brand-blue border border-[#00BCD4]/30 font-bold tracking-wider">
+                        <span className="px-2.5 py-1 rounded-md text-xs bg-brand-blue-light/70 text-brand-blue border border-action/30 font-bold">
                           {promo.promoCode}
                         </span>
                         <button
@@ -524,7 +524,7 @@ export default function MarketingPromocodePage() {
                       <div className="truncate font-semibold text-xs text-gray-900">
                         {promo.title}
                       </div>
-                      <span className="text-[10px] text-gray-400 font-normal">
+                      <span className="text-[11px] text-gray-400 font-normal">
                         Used {promo.usedCount} times
                       </span>
                     </td>
@@ -554,7 +554,7 @@ export default function MarketingPromocodePage() {
                     </td>
 
                     {/* 7. Total Amount */}
-                    <td className="py-3.5 px-4 font-black text-gray-900 font-mono text-xs whitespace-nowrap">
+                    <td className="py-3.5 px-4 font-semibold text-gray-900 font-mono text-xs whitespace-nowrap">
                       {promo.totalAmount}
                     </td>
 
@@ -571,7 +571,7 @@ export default function MarketingPromocodePage() {
                           {promo.expiryDate}
                         </span>
                         <span
-                          className={`text-[10px] font-bold ${
+                          className={`text-[11px] font-bold ${
                             isExpired ? "text-rose-600" : "text-emerald-600"
                           }`}
                         >
@@ -586,7 +586,7 @@ export default function MarketingPromocodePage() {
                         <button
                           type="button"
                           onClick={() => handleOpenEditModal(promo)}
-                          className="p-1.5 text-gray-400 hover:text-[#00BCD4] hover:bg-brand-blue-light/50 rounded-lg transition-colors cursor-pointer"
+                          className="p-1.5 text-gray-400 hover:text-action hover:bg-brand-blue-light/50 rounded-lg transition-colors cursor-pointer"
                           title="Edit Promo Code"
                         >
                           <HiOutlinePencilSquare className="w-4 h-4" />
@@ -652,7 +652,7 @@ export default function MarketingPromocodePage() {
           <div className="bg-white rounded-lg border border-gray-100 shadow-2xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]">
             <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-brand-blue-light border border-[#00BCD4]/20 text-[#00BCD4] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-brand-blue-light border border-action/20 text-action flex items-center justify-center">
                   <HiOutlineTag className="w-4 h-4" />
                 </div>
                 <h3 className="text-sm font-bold text-gray-900">
@@ -675,7 +675,7 @@ export default function MarketingPromocodePage() {
               {/* Promo Code & Total Amount */}
               <div className="grid grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-gray-700">
                     Promo Code *
                   </label>
                   <input
@@ -689,12 +689,12 @@ export default function MarketingPromocodePage() {
                         promoCode: e.target.value.toUpperCase(),
                       }))
                     }
-                    className="w-full text-xs font-mono font-bold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800 tracking-wider"
+                    className="w-full text-xs font-mono font-bold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800"
                   />
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-gray-700">
                     Total Amount *
                   </label>
                   <input
@@ -708,14 +708,14 @@ export default function MarketingPromocodePage() {
                         totalAmount: e.target.value,
                       }))
                     }
-                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800"
                   />
                 </div>
               </div>
 
               {/* Title */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-700">
                   Campaign Title *
                 </label>
                 <input
@@ -726,13 +726,13 @@ export default function MarketingPromocodePage() {
                   onChange={(e) =>
                     setFormData((prev) => ({ ...prev, title: e.target.value }))
                   }
-                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800"
                 />
               </div>
 
               {/* Description */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-700">
                   Description
                 </label>
                 <textarea
@@ -745,14 +745,14 @@ export default function MarketingPromocodePage() {
                       description: e.target.value,
                     }))
                   }
-                  className="w-full text-xs p-3 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800 leading-relaxed"
+                  className="w-full text-xs p-3 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800 leading-relaxed"
                 />
               </div>
 
               {/* Promo Types & Expiry Date */}
               <div className="grid grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-gray-700">
                     Promo Type
                   </label>
                   <select
@@ -763,7 +763,7 @@ export default function MarketingPromocodePage() {
                         promoTypes: e.target.value as any,
                       }))
                     }
-                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800"
                   >
                     <option value="Percentage Discount">
                       Percentage Discount
@@ -775,7 +775,7 @@ export default function MarketingPromocodePage() {
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-gray-700">
                     Expiry Date *
                   </label>
                   <input
@@ -789,7 +789,7 @@ export default function MarketingPromocodePage() {
                         expiryDate: e.target.value,
                       }))
                     }
-                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800"
                   />
                 </div>
               </div>
@@ -797,7 +797,7 @@ export default function MarketingPromocodePage() {
               {/* Image URL & Status */}
               <div className="grid grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-gray-700">
                     Image Asset
                   </label>
                   <select
@@ -808,7 +808,7 @@ export default function MarketingPromocodePage() {
                         image: e.target.value,
                       }))
                     }
-                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800"
                   >
                     <option value="/images/koolboks/items/5.webp">
                       600L Inverter Freezer
@@ -832,7 +832,7 @@ export default function MarketingPromocodePage() {
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-gray-700">
                     Status
                   </label>
                   <select
@@ -843,7 +843,7 @@ export default function MarketingPromocodePage() {
                         status: e.target.value as any,
                       }))
                     }
-                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800"
                   >
                     <option value="Active">Active</option>
                     <option value="Inactive">Inactive</option>
@@ -867,7 +867,7 @@ export default function MarketingPromocodePage() {
                   type="submit"
                   variant="primary"
                   shape="rounded-sm"
-                  className="bg-[#00BCD4] hover:bg-[#00acc1] text-white text-xs font-semibold px-4 py-1.5 cursor-pointer shadow-xs"
+                  className="bg-action hover:bg-action-hover text-white text-xs font-semibold px-4 py-1.5 cursor-pointer shadow-xs"
                 >
                   {promoToEdit ? "Update Promo" : "Create Promo"}
                 </Button>

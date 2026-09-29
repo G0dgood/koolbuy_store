@@ -53,7 +53,7 @@ export function CouponsMoreActionsDrawer({ isOpen, onClose, onDeleteExpired }: C
   return (
     <Drawer isOpen={isOpen} onClose={onClose} title="More Actions">
       <div className="flex flex-col gap-2">
-        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest px-4 mb-4">
+        <p className="text-xs font-bold text-gray-400 px-4 mb-4">
           Bulk Management
         </p>
         <div className="flex flex-col gap-1">
@@ -73,8 +73,8 @@ export function CouponsMoreActionsDrawer({ isOpen, onClose, onDeleteExpired }: C
                 <Icon name={action.icon} folder={action.folder} size="sm" />
               </div>
               <div className="flex flex-col gap-1 flex-1">
-                <span className={`text-[13px] font-black transition-colors
-                  ${action.variant === "danger" ? "text-rose-600" : "text-[#1D3557]"}
+                <span className={`text-[13px] font-semibold transition-colors
+                  ${action.variant === "danger" ? "text-rose-600" : "text-ink"}
                 `}>
                   {action.title}
                 </span>
@@ -96,8 +96,8 @@ export function CouponsMoreActionsDrawer({ isOpen, onClose, onDeleteExpired }: C
                <Icon name="star" folder="dashboardIcon" size="sm" />
             </div>
             <div className="flex flex-col">
-               <span className="text-[11px] font-black text-[#1D3557]">Pro Tip</span>
-               <span className="text-[9px] font-bold text-gray-400">You can also schedule coupons for future dates.</span>
+               <span className="text-[11px] font-semibold text-ink">Pro Tip</span>
+               <span className="text-[11px] font-bold text-gray-400">You can also schedule coupons for future dates.</span>
             </div>
          </div>
       </div>

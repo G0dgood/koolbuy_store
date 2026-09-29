@@ -264,7 +264,7 @@ export default function NotificationsManagementPage() {
           <Button
             variant="primary"
             shape="rounded-sm"
-            className="bg-[#00BCD4] hover:bg-[#00acc1] text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
+            className="bg-action hover:bg-action-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
             onClick={handleSave}
           >
             <HiOutlineCheck className="w-4 h-4" />
@@ -296,7 +296,7 @@ export default function NotificationsManagementPage() {
           {/* Header */}
           <div className="p-4 border-b border-gray-100 flex flex-col gap-3 bg-gray-50/50">
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-bold text-[#1D3557] uppercase tracking-wider">
+              <h2 className="text-sm font-bold text-ink">
                 List
               </h2>
               <span className="text-xs font-medium text-gray-400">
@@ -304,7 +304,7 @@ export default function NotificationsManagementPage() {
               </span>
             </div>
 
-            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">
+            <span className="text-[11px] font-bold text-gray-400">
               Notification Name
             </span>
 
@@ -315,7 +315,7 @@ export default function NotificationsManagementPage() {
                 placeholder="Search notification name..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full text-xs pl-8 pr-3 py-1.5 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-[#00BCD4]"
+                className="w-full text-xs pl-8 pr-3 py-1.5 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-action"
               />
               <HiOutlineMagnifyingGlass className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
             </div>
@@ -332,21 +332,21 @@ export default function NotificationsManagementPage() {
                   onClick={() => setSelectedId(item.id)}
                   className={`flex items-center justify-between p-3.5 text-left transition-all cursor-pointer ${
                     isSelected
-                      ? "bg-brand-blue-light/60 border-l-4 border-l-[#00BCD4] text-brand-blue font-bold"
+                      ? "bg-brand-blue-light/60 border-l-4 border-l-action text-brand-blue font-bold"
                       : "hover:bg-gray-50 text-gray-700 font-medium"
                   }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
                     <HiOutlineBell
                       className={`w-4 h-4 shrink-0 ${
-                        isSelected ? "text-[#00BCD4]" : "text-gray-400"
+                        isSelected ? "text-action" : "text-gray-400"
                       }`}
                     />
                     <span className="text-xs truncate">{item.name}</span>
                   </div>
 
                   <span
-                    className={`text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0 ml-2 ${
+                    className={`text-[11px] font-semibold px-2 py-0.5 rounded-full shrink-0 ml-2 ${
                       item.enabled
                         ? "bg-emerald-50 text-emerald-600"
                         : "bg-gray-100 text-gray-400"
@@ -365,7 +365,7 @@ export default function NotificationsManagementPage() {
           {/* Header */}
           <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
             <div>
-              <h2 className="text-sm font-bold text-[#1D3557] uppercase tracking-wider">
+              <h2 className="text-sm font-bold text-ink">
                 Subjects
               </h2>
               <span className="text-xs text-gray-400 font-medium">
@@ -384,7 +384,7 @@ export default function NotificationsManagementPage() {
                 onChange={(e) =>
                   handleUpdateCurrent({ enabled: e.target.checked })
                 }
-                className="w-4 h-4 rounded text-[#00BCD4] focus:ring-[#00BCD4] accent-[#00BCD4] cursor-pointer"
+                className="w-4 h-4 rounded text-action focus:ring-action accent-action cursor-pointer"
               />
               <span className="text-xs font-bold text-gray-700">Enabled</span>
             </label>
@@ -394,7 +394,7 @@ export default function NotificationsManagementPage() {
           <div className="p-5 sm:p-6 flex flex-col gap-5">
             {/* Subject Input */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+              <label className="text-xs font-bold text-gray-600">
                 Subject
               </label>
               <input
@@ -404,14 +404,14 @@ export default function NotificationsManagementPage() {
                   handleUpdateCurrent({ subject: e.target.value })
                 }
                 placeholder="Enter notification subject / title..."
-                className="w-full text-xs font-semibold px-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                className="w-full text-xs font-semibold px-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800"
               />
             </div>
 
             {/* Content Textarea */}
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                <label className="text-xs font-bold text-gray-600">
                   Content
                 </label>
                 <span className="text-[11px] text-gray-400">
@@ -425,7 +425,7 @@ export default function NotificationsManagementPage() {
                   handleUpdateCurrent({ content: e.target.value })
                 }
                 placeholder="Write notification message content..."
-                className="w-full text-xs font-mono p-3 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800 leading-relaxed"
+                className="w-full text-xs font-mono p-3 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-action text-gray-800 leading-relaxed"
               />
             </div>
 
@@ -439,7 +439,7 @@ export default function NotificationsManagementPage() {
                   onChange={(e) =>
                     handleUpdateCurrent({ enabled: e.target.checked })
                   }
-                  className="w-4 h-4 rounded text-[#00BCD4] focus:ring-[#00BCD4] accent-[#00BCD4] cursor-pointer"
+                  className="w-4 h-4 rounded text-action focus:ring-action accent-action cursor-pointer"
                 />
                 <label
                   htmlFor="notif-enabled-checkbox"
@@ -455,7 +455,7 @@ export default function NotificationsManagementPage() {
                   <span className="text-xs font-bold text-gray-600">
                     Tags:-
                   </span>
-                  <span className="text-[10px] text-gray-400">
+                  <span className="text-[11px] text-gray-400">
                     Click tag to insert into content
                   </span>
                 </div>
@@ -467,11 +467,11 @@ export default function NotificationsManagementPage() {
                       type="button"
                       onClick={() => handleInsertTag(tag)}
                       title={`Click to insert ${tag}`}
-                      className="group inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-mono bg-gray-100 hover:bg-[#00BCD4]/10 hover:text-[#00BCD4] border border-gray-200 transition-colors cursor-pointer text-gray-700"
+                      className="group inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-mono bg-gray-100 hover:bg-action/10 hover:text-action border border-gray-200 transition-colors cursor-pointer text-gray-700"
                     >
                       <span>{tag}</span>
                       <HiOutlineClipboardDocument
-                        className="w-3 h-3 text-gray-400 group-hover:text-[#00BCD4]"
+                        className="w-3 h-3 text-gray-400 group-hover:text-action"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleCopyTag(tag);
@@ -482,7 +482,7 @@ export default function NotificationsManagementPage() {
                 </div>
 
                 {copiedTag && (
-                  <span className="text-[10px] font-semibold text-emerald-600 animate-in fade-in duration-150">
+                  <span className="text-[11px] font-semibold text-emerald-600 animate-in fade-in duration-150">
                     Copied {copiedTag} to clipboard!
                   </span>
                 )}
@@ -494,7 +494,7 @@ export default function NotificationsManagementPage() {
               <Button
                 variant="primary"
                 shape="rounded-sm"
-                className="bg-[#00BCD4] hover:bg-[#00acc1] text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
+                className="bg-action hover:bg-action-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
                 onClick={handleSave}
               >
                 <HiOutlineCheck className="w-4 h-4" />

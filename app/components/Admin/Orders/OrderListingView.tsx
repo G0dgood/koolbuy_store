@@ -397,7 +397,7 @@ export function OrderListingView({
                             ₦{order.price}
                           </span>
                           {order.deposit && (
-                            <span className="text-[10px] font-medium text-gray-400">
+                            <span className="text-[11px] font-medium text-gray-400">
                               Deposit: {order.deposit}
                             </span>
                           )}

@@ -6,6 +6,7 @@ import { Radio } from "@/app/components/Form";
 import Checkbox from "@/app/components/Checkbox";
 import { RangeSlider } from "../Form/RangeSlider";
 import { Rating } from "../Other/Rating";
+import { BRANDS, CATEGORIES, POWER_TYPES, PRICE_MAX, PRICE_MIN } from "@/app/data/catalog";
 
 interface FilterSectionProps {
   title: string;
@@ -21,12 +22,12 @@ const FilterSection: React.FC<FilterSectionProps> = ({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="border-t border-gray-200 py-4 first:border-t-0">
+    <div className="border-t border-hairline py-5 first:border-t-0 first:pt-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between mb-4 group"
       >
-        <h4 className="font-bold text-gray-900 text-sm group-hover:text-brand-blue transition-colors">
+        <h4 className="font-semibold text-ink text-[14px]">
           {title}
         </h4>
         <Icon
@@ -136,30 +137,21 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
       {/* Categories */}
       <FilterSection title="Category">
         <ul className="flex flex-col gap-2 text-sm">
-          {[
-            "Signature Fragrance",
-            "Luxury Skincare",
-            "Boutique Gift Sets",
-            "Body & Bath",
-            "Home Fragrance",
-          ].map((cat) => (
+          {CATEGORIES.map((cat) => (
             <li
               key={cat}
               onClick={() => handleCategoryClick(cat)}
-              className={`cursor-pointer transition-colors ${filters.category === cat ? "text-brand-blue font-bold" : "text-gray-600 hover:text-brand-blue"}`}
+              className={`cursor-pointer transition-colors ${filters.category === cat ? "text-ink font-semibold" : "text-gray-600 hover:text-ink"}`}
             >
               {cat}
             </li>
           ))}
-          <li className="text-brand-blue font-medium mt-2 cursor-pointer">
-            View all boutique
-          </li>
         </ul>
       </FilterSection>
 
       {/* Brands */}
-      <FilterSection title="Artisanal Houses">
-        {["Koolbuy Store", "Prada", "Versace", "Gucci", "Dior"].map((brand) => (
+      <FilterSection title="Brand">
+        {BRANDS.map((brand) => (
           <Checkbox
             key={brand}
             label={brand}
@@ -168,47 +160,44 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
             size="lg"
           />
         ))}
-        <span className="text-brand-blue text-sm font-medium mt-1 cursor-pointer">
-          View all houses
-        </span>
       </FilterSection>
 
       {/* Price Range */}
       <FilterSection title="Price range">
         <div className="px-1 pt-2 pb-6">
           <RangeSlider
-            min={0}
-            max={2000}
-            step={10}
+            min={PRICE_MIN}
+            max={PRICE_MAX}
+            step={50000}
             value={filters.priceRange}
             onChange={handlePriceRangeChange}
           />
         </div>
         <div className="flex gap-2">
           <div className="flex flex-col gap-1 flex-1">
-            <span className="text-xs text-gray-400">Min</span>
+            <span className="text-xs text-gray-500">Min (₦)</span>
             <input
               type="number"
               value={filters.priceRange[0]}
               onChange={handleMinPriceChange}
-              className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm outline-none focus:border-brand-blue"
+              className="w-full border border-[#d2d2d7] rounded-lg px-3 py-2 text-sm outline-none focus:border-[#0071e3] focus:ring-2 focus:ring-[#0071e3]/20"
             />
           </div>
           <div className="flex flex-col gap-1 flex-1">
-            <span className="text-xs text-gray-400">Max</span>
+            <span className="text-xs text-gray-500">Max (₦)</span>
             <input
               type="number"
               value={filters.priceRange[1]}
               onChange={handleMaxPriceChange}
-              className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm outline-none focus:border-brand-blue"
+              className="w-full border border-[#d2d2d7] rounded-lg px-3 py-2 text-sm outline-none focus:border-[#0071e3] focus:ring-2 focus:ring-[#0071e3]/20"
             />
           </div>
         </div>
       </FilterSection>
 
       {/* Collection */}
-      <FilterSection title="Collection Type">
-        {["Any", "Intense", "Discovery", "Essential", "Seasonal"].map(
+      <FilterSection title="Power type">
+        {POWER_TYPES.map(
           (cond) => (
             <Radio
               key={cond}

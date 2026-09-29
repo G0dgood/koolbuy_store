@@ -185,7 +185,7 @@ export default function ReasonsManagementPage() {
           <Button
             variant="primary"
             shape="rounded-sm"
-            className="bg-[#00BCD4] hover:bg-[#00acc1] text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
+            className="bg-action hover:bg-action-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
             onClick={() => setIsAddModalOpen(true)}
           >
             <HiOutlinePlus className="w-4 h-4" />
@@ -438,7 +438,7 @@ function AddOrEditReasonModal({
       <form onSubmit={handleSubmit}>
         <ModalBody className="flex flex-col gap-4 py-4">
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+            <label className="text-xs font-bold text-gray-500">
               Reason Title
             </label>
             <Input
@@ -451,13 +451,13 @@ function AddOrEditReasonModal({
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+            <label className="text-xs font-bold text-gray-500">
               Reason Type
             </label>
             <select
               value={type}
               onChange={(e) => setType(e.target.value as any)}
-              className="w-full text-xs font-semibold px-3 py-2 border border-gray-200 rounded-md bg-white focus:outline-none focus:border-[#00BCD4]"
+              className="w-full text-xs font-semibold px-3 py-2 border border-gray-200 rounded-md bg-white focus:outline-none focus:border-action"
             >
               <option value="Order Cancel">Order Cancel</option>
               <option value="Refund">Refund</option>
@@ -468,13 +468,13 @@ function AddOrEditReasonModal({
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+            <label className="text-xs font-bold text-gray-500">
               Status
             </label>
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value as any)}
-              className="w-full text-xs font-semibold px-3 py-2 border border-gray-200 rounded-md bg-white focus:outline-none focus:border-[#00BCD4]"
+              className="w-full text-xs font-semibold px-3 py-2 border border-gray-200 rounded-md bg-white focus:outline-none focus:border-action"
             >
               <option value="Active">Active</option>
               <option value="Inactive">Inactive</option>
@@ -488,7 +488,7 @@ function AddOrEditReasonModal({
           <Button
             variant="primary"
             type="submit"
-            className="bg-[#00BCD4] hover:bg-[#00acc1] text-white"
+            className="bg-action hover:bg-action-hover text-white"
           >
             Save Reason
           </Button>

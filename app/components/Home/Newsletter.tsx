@@ -1,43 +1,38 @@
 "use client";
 
 import React from "react";
-import { Icon } from "@/app/components/Icon";
 import { Button } from "@/app/components/Button";
 
+// Apple-style parchment tile: centered headline, one-line tagline, pill input + blue pill CTA.
 const Newsletter = () => {
   return (
-    <section className="w-full bg-[#EFF2F4] py-12 px-6 text-center flex flex-col items-center gap-6 relative overflow-hidden">
-      <div className="max-w-125 flex flex-col items-center text-center gap-2 z-10">
-        <h3 className="text-xl md:text-2xl font-bold text-gray-900 truncate w-full">
-          Subscribe to our newsletter
+    <section className="w-full bg-white px-6 py-16 md:py-20">
+      <div className="max-w-2xl mx-auto flex flex-col items-center text-center gap-3">
+        <h3 className="text-[32px] md:text-[48px] font-semibold text-ink tracking-[-0.025em] leading-[1.07]">
+          Never miss a deal.
         </h3>
-        <p className="text-sm text-gray-500 leading-relaxed">
-          Get daily news on upcoming offers from many suppliers all over the
-          world
+        <p className="text-[19px] md:text-[21px] text-gray-600 leading-snug">
+          Upcoming offers from trusted suppliers, straight to your inbox.
         </p>
-      </div>
 
-      <div className="flex flex-col md:flex-row gap-2 w-full max-w-100 z-10 px-4 md:px-0">
-        <div className="flex-1 relative flex items-center group">
-          <Icon
-            name="email"
-            size="sm"
-            className="absolute left-3 text-gray-400 group-focus-within:text-brand-blue transition-colors"
-          />
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="mt-6 w-full max-w-md flex flex-col sm:flex-row items-stretch gap-3"
+        >
           <input
             type="email"
-            placeholder="Email"
-            className="w-full h-10 border border-gray-300 rounded-lg pl-10 pr-3 outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue/20 transition-all bg-white"
+            placeholder="Email address"
+            aria-label="Email address"
+            className="flex-1 h-11 rounded-full px-5 bg-white border border-black/[0.08] outline-none text-[17px] text-ink placeholder-gray-500 focus:border-[#0071e3] focus:ring-2 focus:ring-[#0071e3]/20 transition-colors"
           />
-        </div>
-        <Button className="h-10 bg-brand-blue text-white px-8 hover:bg-brand-blue/90 shadow-md active:scale-95 transition-all w-full md:w-fit font-bold">
-          Subscribe
-        </Button>
+          <Button type="submit" variant="primary" className="h-11 px-[22px] text-[17px]">
+            Subscribe
+          </Button>
+        </form>
+        <p className="text-[12px] text-gray-500 mt-1">
+          You can unsubscribe at any time.
+        </p>
       </div>
-
-      {/* Decorative background element */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-brand-blue/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-32 h-32 bg-brand-blue/5 rounded-full -ml-16 -mb-16 blur-3xl"></div>
     </section>
   );
 };

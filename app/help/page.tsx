@@ -58,12 +58,12 @@ const HelpCenterPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-cream flex flex-col font-sans text-black">
       <Header />
 
       <main className="flex-1 w-full bg-white">
         {/* Help Center Hero */}
-        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-[#1D3557] overflow-hidden">
+        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-ink overflow-hidden">
           <Image
             src="/brandImage/brand_banner.png"
             alt="Support Banner"
@@ -71,7 +71,7 @@ const HelpCenterPage = () => {
             className="object-cover opacity-100"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1D3557] via-[#1D3557]/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-transparent" />
 
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 relative z-10">
             <motion.div
@@ -81,12 +81,12 @@ const HelpCenterPage = () => {
               className="flex flex-col gap-8 items-center text-center md:items-start md:text-left"
             >
               <div className="flex flex-col gap-4">
-                <span className="text-[#8CB7F5] font-black tracking-[0.4em] uppercase text-xs">
+                <span className="text-action-on-dark font-semibold text-xs">
                   Support Concierge
                 </span>
-                <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none font-inter">
+                <h1 className="text-4xl md:text-7xl font-semibold text-white tracking-tighter leading-none font-inter">
                   How can we <br />
-                  <span className="text-[#8CB7F5]">help you?</span>
+                  <span className="text-action-on-dark">help you?</span>
                 </h1>
               </div>
 
@@ -116,7 +116,7 @@ const HelpCenterPage = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white p-8 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all group lg:aspect-square flex flex-col justify-between"
+                className="bg-white p-8 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-2xl transition-all group lg:aspect-square flex flex-col justify-between"
               >
                 <div>
                   <div
@@ -124,7 +124,7 @@ const HelpCenterPage = () => {
                   >
                     {cat.icon}
                   </div>
-                  <h3 className="text-xl font-black text-[#1D3557] mb-4">
+                  <h3 className="text-xl font-semibold text-ink mb-4">
                     {cat.title}
                   </h3>
                   <div className="flex flex-col gap-2">
@@ -140,7 +140,7 @@ const HelpCenterPage = () => {
                 </div>
                 <Link
                   href={cat.href || "#"}
-                  className="mt-8 flex items-center justify-between text-xs font-black uppercase tracking-widest text-brand-blue opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="mt-8 flex items-center justify-between text-xs font-semibold text-brand-blue opacity-0 group-hover:opacity-100 transition-opacity"
                 >
                   View More <HiChevronRight size={16} />
                 </Link>
@@ -152,10 +152,10 @@ const HelpCenterPage = () => {
           <div className="mt-40 grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div className="flex flex-col gap-10">
               <div className="flex flex-col gap-4">
-                <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs">
+                <span className="text-brand-blue font-bold text-xs">
                   Discovery
                 </span>
-                <h2 className="text-4xl font-black text-[#1D3557] tracking-tight">
+                <h2 className="text-4xl font-semibold text-ink tracking-tight">
                   Trending Questions.
                 </h2>
               </div>
@@ -165,7 +165,7 @@ const HelpCenterPage = () => {
                     key={i}
                     className="p-6 bg-gray-50 border border-transparent hover:border-brand-blue hover:bg-white rounded-2xl cursor-pointer transition-all flex items-center justify-between group"
                   >
-                    <span className="text-gray-600 font-medium group-hover:text-[#1D3557]">
+                    <span className="text-gray-600 font-medium group-hover:text-ink">
                       {faq}
                     </span>
                     <HiChevronRight className="text-gray-300 group-hover:text-brand-blue group-hover:translate-x-1 transition-all" />
@@ -174,14 +174,14 @@ const HelpCenterPage = () => {
               </div>
             </div>
 
-            <div className="bg-[#1D3557] rounded-[48px] p-10 md:p-16 flex flex-col justify-center gap-8 relative overflow-hidden">
+            <div className="bg-ink rounded-[48px] p-10 md:p-16 flex flex-col justify-center gap-8 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue rounded-full filter blur-[100px] opacity-10 translate-x-1/2 -translate-y-1/2" />
-              <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-[#8CB7F5]">
+              <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-action-on-dark">
                 <HiShieldCheck size={32} />
               </div>
-              <h3 className="text-3xl font-black text-white leading-tight">
+              <h3 className="text-3xl font-semibold text-white leading-tight">
                 Can't find the <br />
-                <span className="text-[#8CB7F5]">answer?</span>
+                <span className="text-action-on-dark">answer?</span>
               </h3>
               <p className="text-blue-100/40 text-lg">
                 Our artisanal support curators are available from 9am to 6pm for
@@ -190,7 +190,7 @@ const HelpCenterPage = () => {
               <div className="pt-4">
                 <Link
                   href="/contact"
-                  className="px-12 py-5 bg-brand-blue text-white rounded-2xl font-black uppercase tracking-widest text-sm shadow-2xl shadow-blue-500/20 hover:scale-105 transition-all inline-block"
+                  className="px-12 py-5 bg-brand-blue text-white rounded-2xl font-semibold text-sm shadow-2xl shadow-blue-500/20 transition-all inline-block"
                 >
                   Talk to a Human
                 </Link>

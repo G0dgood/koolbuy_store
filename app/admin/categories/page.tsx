@@ -194,7 +194,7 @@ export default function CategoriesPage() {
           trendValue="Active"
           trendIsUp={true}
           subtitle="Cooling classifications"
-          badgeIcon={<HiOutlineSquares2X2 className="w-4 h-4 text-[#00BCD4]" />}
+          badgeIcon={<HiOutlineSquares2X2 className="w-4 h-4 text-action" />}
         />
         <StatCard
           size="sm"
@@ -245,7 +245,7 @@ export default function CategoriesPage() {
           {categories.map((cat, i) => (
             <div
               key={i}
-              className="shrink-0 w-55 bg-white p-3 rounded-lg flex items-center gap-3 hover:shadow-md transition-shadow cursor-pointer hover:border-brand-blue/30 group/item border border-[#1C1C1C1A]"
+              className="shrink-0 w-55 bg-white p-3 rounded-lg flex items-center gap-3 hover:shadow-md transition-shadow cursor-pointer hover:border-brand-blue/30 group/item border border-gray-100"
             >
               <div className="w-12 h-12 rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center p-1 group-hover/item:bg-brand-blue-light transition-colors">
                 <img
@@ -254,7 +254,7 @@ export default function CategoriesPage() {
                   className="w-full h-full object-contain"
                 />
               </div>
-              <span className="text-sm font-bold text-[#1D3557] group-hover/item:text-brand-blue transition-colors">
+              <span className="text-sm font-bold text-ink group-hover/item:text-brand-blue transition-colors">
                 {cat.name}
               </span>
             </div>
@@ -270,7 +270,7 @@ export default function CategoriesPage() {
       </div>
 
       {/* Main Table Container */}
-      <div className="bg-white flex flex-col pt-4 border border-[#1C1C1C1A] rounded-lg shadow-2xs">
+      <div className="bg-white flex flex-col pt-4 border border-gray-100 rounded-lg shadow-2xs">
         {/* Fill Tabs & Controls */}
         <div className="px-6 flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
           <TabFilter

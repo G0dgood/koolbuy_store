@@ -28,10 +28,10 @@ export const AdminProfileDropdown: React.FC = () => {
             )}
           </div>
           <div className="flex flex-col min-w-0">
-            <span className="text-sm font-black text-[#1D3557] truncate leading-tight">
+            <span className="text-sm font-semibold text-ink truncate leading-tight">
               Koolbuy Store Admin
             </span>
-            <span className="text-[10px] font-bold text-gray-400 truncate uppercase tracking-widest mt-0.5">
+            <span className="text-[11px] font-bold text-gray-400 truncate mt-0.5">
               Super Administrator
             </span>
           </div>
@@ -39,7 +39,7 @@ export const AdminProfileDropdown: React.FC = () => {
 
         {/* Action List */}
         <div className="p-2 flex flex-col">
-          <button className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-blue-light hover:text-brand-blue transition-all group text-[#1D3557]">
+          <button className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-blue-light hover:text-brand-blue transition-all group text-ink">
             <Icon
               name="user-profile-circle"
               folder="dashboardIcon"
@@ -49,7 +49,7 @@ export const AdminProfileDropdown: React.FC = () => {
             <span className="text-[13px] font-bold">View Profile</span>
           </button>
 
-          <button className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-blue-light hover:text-brand-blue transition-all group text-[#1D3557]">
+          <button className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-blue-light hover:text-brand-blue transition-all group text-ink">
             <Icon
               name="settings"
               folder="dashboardIcon"
@@ -59,7 +59,7 @@ export const AdminProfileDropdown: React.FC = () => {
             <span className="text-[13px] font-bold">Account Settings</span>
           </button>
 
-          <button className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-blue-light hover:text-brand-blue transition-all group text-[#1D3557]">
+          <button className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-blue-light hover:text-brand-blue transition-all group text-ink">
             <Icon
               name="security"
               folder="icon"
@@ -71,7 +71,7 @@ export const AdminProfileDropdown: React.FC = () => {
 
           <div className="h-px bg-gray-50 my-2 mx-4"></div>
 
-          <button className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-brand-blue transition-all group text-[#1D3557]">
+          <button className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-brand-blue transition-all group text-ink">
             <Icon
               name="info-circle"
               folder="dashboardIcon"

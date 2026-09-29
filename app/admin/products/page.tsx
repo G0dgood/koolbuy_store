@@ -171,7 +171,7 @@ export default function ProductListing() {
         </div>
       </div>
 
-      <div className="bg-white overflow-hidden flex flex-col border border-[#1C1C1C1A] rounded-[6px]">
+      <div className="bg-white overflow-hidden flex flex-col border border-gray-100 rounded-[6px]">
         {/* Filter Controls Bar */}
         <div className="p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between border-b border-gray-50">
           <TabFilter
@@ -212,7 +212,7 @@ export default function ProductListing() {
                 className="text-gray-400 flex items-center gap-2 px-4 shadow-sm"
               >
                 <Icon name="filter" folder="dashboardIcon" size="sm" />
-                <span className="text-xs font-bold text-[#1D3557]">
+                <span className="text-xs font-bold text-ink">
                   Filters
                 </span>
               </Button>
@@ -261,10 +261,10 @@ export default function ProductListing() {
                         />
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-sm font-bold text-[#1D3557] leading-tight group-hover:text-blue-600 transition-colors">
+                        <span className="text-sm font-bold text-ink leading-tight group-hover:text-blue-600 transition-colors">
                           {product.name}
                         </span>
-                        <span className="text-[10px] font-bold text-gray-400 mt-1 uppercase tracking-wider">
+                        <span className="text-[11px] font-bold text-gray-400 mt-1">
                           SKU: {product.sku}
                         </span>
                       </div>
@@ -276,7 +276,7 @@ export default function ProductListing() {
                     </span>
                   </td>
                   <td>
-                    <span className="text-sm font-black text-[#00BCD4]">
+                    <span className="text-sm font-semibold text-action">
                       {product.price}
                     </span>
                   </td>
@@ -291,7 +291,7 @@ export default function ProductListing() {
                   </td>
                   <td>
                     <span
-                      className={`px-3 py-1.5 rounded-[6px] text-[10px] font-bold ${statusStyles[product.status as keyof typeof statusStyles]}`}
+                      className={`px-3 py-1.5 rounded-[6px] text-[11px] font-bold ${statusStyles[product.status as keyof typeof statusStyles]}`}
                     >
                       {product.status}
                     </span>

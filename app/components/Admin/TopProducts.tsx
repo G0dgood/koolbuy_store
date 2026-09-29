@@ -58,24 +58,24 @@ export const TopProducts: React.FC<TopProductsProps> = ({
     <motion.div
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="bg-white p-8 border border-[#1C1C1C1A] rounded-lg flex flex-col gap-6 relative overflow-hidden group/card"
+      className="bg-white p-8 border border-gray-100 rounded-lg flex flex-col gap-6 relative overflow-hidden group/card"
     >
       {/* Instrumentation Backdrop Grid */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(#1D3557 1px, transparent 1px)`,
+          backgroundImage: `radial-gradient(#1D1D1F 1px, transparent 1px)`,
           backgroundSize: "20px 20px",
         }}
       />
 
       <div className="flex justify-between items-center relative z-10">
-        <h3 className="text-[14px] font-black text-[#1D3557] uppercase tracking-[0.2em] opacity-80">
+        <h3 className="text-[14px] font-semibold text-ink opacity-80">
           Top Performers
         </h3>
         <button
           onClick={onViewAll}
-          className="group flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-blue/5 text-brand-blue text-[10px] font-black uppercase tracking-widest hover:bg-brand-blue hover:text-white transition-all duration-300"
+          className="group flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-blue/5 text-brand-blue text-[11px] font-semibold hover:bg-brand-blue hover:text-white transition-all duration-300"
         >
           Inventory
           <Icon
@@ -107,19 +107,19 @@ export const TopProducts: React.FC<TopProductsProps> = ({
               {/* Rank & MiniChart Container */}
               <div className="relative">
                 <div className="w-16 h-12 bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden p-1 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-                  <div className="absolute inset-0 bg-linear-to-br from-brand-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 hidden" />
                   <MiniChart
                     type="sparkline"
                     data={p.data}
-                    color={i === 0 ? "#1D3557" : "#00BCD4"}
+                    color={i === 0 ? "#1D1D1F" : "#0066CC"}
                     height={32}
                   />
                 </div>
                 {/* Rank Badge */}
                 <div
-                  className={`absolute -top-2 -left-2 w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-black border shadow-sm z-10 ${
+                  className={`absolute -top-2 -left-2 w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-semibold border shadow-sm z-10 ${
                     i === 0
-                      ? "bg-[#1D3557] text-white border-[#1D3557]"
+                      ? "bg-ink text-white border-ink"
                       : "bg-white text-gray-400 border-gray-100"
                   }`}
                 >
@@ -128,15 +128,15 @@ export const TopProducts: React.FC<TopProductsProps> = ({
               </div>
 
               <div className="flex flex-col min-w-0">
-                <span className="text-[12px] font-black text-[#1D3557] truncate max-w-37.5 transition-colors leading-tight">
+                <span className="text-[12px] font-semibold text-ink truncate max-w-37.5 transition-colors leading-tight">
                   {p.name}
                 </span>
                 <div className="flex items-center gap-2 mt-1">
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter tabular-nums">
+                  <span className="text-[11px] font-bold text-gray-400 tracking-tighter tabular-nums">
                     ID: {p.itemCode}
                   </span>
                   <span
-                    className={`text-[9px] font-black px-1.5 py-0.5 rounded ${
+                    className={`text-[11px] font-semibold px-1.5 py-0.5 rounded ${
                       p.growth.includes("+")
                         ? "text-emerald-500 bg-emerald-50"
                         : "text-rose-500 bg-rose-50"
@@ -149,10 +149,10 @@ export const TopProducts: React.FC<TopProductsProps> = ({
             </div>
 
             <div className="flex flex-col items-end gap-0.5">
-              <span className="text-[13px] font-black text-[#1D3557] tabular-nums">
+              <span className="text-[13px] font-semibold text-ink tabular-nums">
                 {p.price}
               </span>
-              <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest opacity-60">
+              <span className="text-[11px] font-bold text-gray-400 opacity-60">
                 Revenue
               </span>
             </div>
@@ -161,7 +161,6 @@ export const TopProducts: React.FC<TopProductsProps> = ({
       </div>
 
       {/* Decorative Glow */}
-      <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-brand-blue/5 rounded-full blur-2xl group-hover/card:bg-brand-blue/10 transition-colors pointer-events-none" />
     </motion.div>
   );
 };

@@ -50,12 +50,12 @@ const TrackingPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-cream flex flex-col font-sans text-black">
       <Header />
 
       <main className="flex-1 w-full bg-white">
         {/* Tracking Hero Section */}
-        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-[#1D3557] overflow-hidden text-center md:text-left">
+        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-ink overflow-hidden text-center md:text-left">
           <Image
             src="/brandImage/regional_visual.png"
             alt="Logistics Network"
@@ -63,7 +63,7 @@ const TrackingPage = () => {
             className="object-cover opacity-60 grayscale"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1D3557] via-[#1D3557]/90 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/90 to-transparent" />
 
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 relative z-10">
             <motion.div
@@ -72,12 +72,12 @@ const TrackingPage = () => {
               transition={{ duration: 0.7 }}
               className="flex flex-col gap-6"
             >
-              <span className="text-brand-blue font-black tracking-[0.4em] uppercase text-xs">
+              <span className="text-brand-blue font-semibold text-xs">
                 Real-time Logistics
               </span>
-              <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none font-inter">
+              <h1 className="text-5xl md:text-7xl font-semibold text-white tracking-tighter leading-none font-inter">
                 Follow Your <br />
-                <span className="text-[#8CB7F5]">Journey.</span>
+                <span className="text-action-on-dark">Journey.</span>
               </h1>
               <p className="text-blue-100/60 max-w-xl text-lg font-medium">
                 Enter your order credentials to visualize the trajectory of your
@@ -96,7 +96,7 @@ const TrackingPage = () => {
                 className="flex flex-col gap-8 bg-gray-50 border border-gray-100 p-8 rounded-[6px] shadow-sm"
               >
                 <div className="flex flex-col gap-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-[#1D3557] opacity-60">
+                  <label className="text-[11px] font-semibold text-ink opacity-60">
                     Order ID
                   </label>
                   <Input
@@ -109,7 +109,7 @@ const TrackingPage = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-[#1D3557] opacity-60">
+                  <label className="text-[11px] font-semibold text-ink opacity-60">
                     Account Email
                   </label>
                   <Input
@@ -124,7 +124,7 @@ const TrackingPage = () => {
                 <Button
                   type="submit"
                   variant="primary"
-                  className="w-full h-14 bg-brand-blue text-white font-black uppercase tracking-widest text-sm shadow-xl shadow-blue-500/10"
+                  className="w-full h-14 bg-brand-blue text-white font-semibold text-sm shadow-xl shadow-blue-500/10"
                 >
                   Visualize Journey
                 </Button>
@@ -136,14 +136,14 @@ const TrackingPage = () => {
                     setEmail("guest@bloomandmist.com");
                     setIsTracking(true);
                   }}
-                  className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-blue/60 hover:text-brand-blue transition-colors text-center w-full"
+                  className="text-[11px] font-semibold text-brand-blue/60 hover:text-brand-blue transition-colors text-center w-full"
                 >
                   Try with Demo ID
                 </button>
               </form>
 
               <div className="flex flex-col gap-6 text-sm text-gray-500 bg-blue-50/30 p-8 rounded-[32px] border border-blue-50">
-                <div className="flex items-center gap-3 font-bold text-[#1D3557]">
+                <div className="flex items-center gap-3 font-bold text-ink">
                   <HiCubeTransparent size={20} className="text-brand-blue" />
                   <span>Packaging Note</span>
                 </div>
@@ -167,7 +167,7 @@ const TrackingPage = () => {
                   >
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-gray-100 pb-10">
                       <div className="flex flex-col gap-1">
-                        <h3 className="text-3xl font-black text-[#1D3557] tracking-tight">
+                        <h3 className="text-3xl font-semibold text-ink tracking-tight">
                           Status: Shipped
                         </h3>
                         <p className="text-gray-400 font-medium">
@@ -182,10 +182,10 @@ const TrackingPage = () => {
                           <HiTruck size={28} />
                         </div>
                         <div className="flex flex-col">
-                          <span className="text-[10px] font-black uppercase text-gray-400 tracking-widest">
+                          <span className="text-[11px] font-semibold text-gray-400">
                             Courier
                           </span>
-                          <span className="font-bold text-[#1D3557]">
+                          <span className="font-bold text-ink">
                             Global Express
                           </span>
                         </div>
@@ -208,10 +208,10 @@ const TrackingPage = () => {
                             {step.done ? <HiCheckCircle size={24} /> : i + 1}
                           </div>
                           <div className="flex flex-col md:items-center md:text-center gap-1">
-                            <span className="font-black text-xs text-[#1D3557] uppercase tracking-tighter">
+                            <span className="font-semibold text-xs text-ink tracking-tighter">
                               {step.status}
                             </span>
-                            <span className="text-[10px] text-gray-400 font-medium">
+                            <span className="text-[11px] text-gray-400 font-medium">
                               {step.time}
                             </span>
                           </div>
@@ -219,9 +219,9 @@ const TrackingPage = () => {
                       ))}
                     </div>
 
-                    <div className="bg-[#1D3557] rounded-[48px] p-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div className="bg-ink rounded-[48px] p-10 flex flex-col md:flex-row items-center justify-between gap-8">
                       <div className="flex flex-col gap-2 text-center md:text-left">
-                        <h4 className="text-2xl font-black text-white">
+                        <h4 className="text-2xl font-semibold text-white">
                           Need a custom update?
                         </h4>
                         <p className="text-blue-100/40 font-medium">
@@ -231,7 +231,7 @@ const TrackingPage = () => {
                       </div>
                       <Button
                         variant="ghost"
-                        className="text-white border-white/20 px-10 rounded-2xl h-14 font-black uppercase tracking-widest text-sm"
+                        className="text-white border-white/20 px-10 rounded-2xl h-14 font-semibold text-sm"
                       >
                         Request Detail
                       </Button>
@@ -248,7 +248,7 @@ const TrackingPage = () => {
                       <HiMagnifyingGlass size={48} />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <h3 className="text-2xl font-black text-gray-400">
+                      <h3 className="text-2xl font-semibold text-gray-400">
                         Visualization Awaiting
                       </h3>
                       <p className="text-gray-300 max-w-sm font-medium">

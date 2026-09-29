@@ -25,7 +25,7 @@ export const LoginForm = () => {
       initial={{ opacity: 0, x: -30 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative z-10 w-full max-w-[380px] bg-white/70 backdrop-blur-xl rounded-[6px] border border-white/40 shadow-[0_32px_80px_rgba(0,0,0,0.1)] overflow-hidden lg:mr-12"
+      className="relative z-10 w-full max-w-[380px] bg-white/70 backdrop-blur-xl rounded-2xl border border-white/60 shadow-2xl overflow-hidden lg:mr-12"
     >
       <div className="p-8 sm:p-10 flex flex-col gap-6">
         {/* Form Logo & Header */}
@@ -34,21 +34,21 @@ export const LoginForm = () => {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="w-10 h-10 rounded-xl bg-brand-blue flex items-center justify-center p-2 shadow-lg shadow-blue-500/20"
+            className="w-12 h-12 rounded-2xl bg-action flex items-center justify-center p-2.5"
           >
             <img src="/dashboardIcon/dashboardLogo.svg" alt="Logo" className="brightness-0 invert w-full h-full object-contain" />
           </motion.div>
 
           <div className="flex flex-col gap-1">
-            <h2 className="text-2xl font-black text-[#1D3557]">Admin Portal</h2>
-            <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest opacity-60">Control Authority Access</p>
+            <h2 className="text-2xl font-semibold text-ink">Admin Portal</h2>
+            <p className="text-[11px] font-bold text-gray-500 opacity-60">Control Authority Access</p>
           </div>
         </div>
 
         {/* Login Fields */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <div className="flex flex-col gap-1">
-            <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest ml-1">Administrative Email</label>
+            <label className="text-[11px] font-semibold text-gray-500 ml-1">Administrative Email</label>
             <Input
               type="email"
               placeholder="mark@dealport.com"
@@ -61,8 +61,8 @@ export const LoginForm = () => {
 
           <div className="flex flex-col gap-1">
             <div className="flex justify-between items-center ml-1">
-              <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Access Key</label>
-              <Link href="#" className="text-[9px] font-black text-brand-blue uppercase tracking-widest">Recovery</Link>
+              <label className="text-[11px] font-semibold text-gray-500">Access Key</label>
+              <Link href="#" className="text-[11px] font-semibold text-brand-blue">Recovery</Link>
             </div>
             <Input
               type="password"
@@ -76,7 +76,7 @@ export const LoginForm = () => {
 
           <div className="flex items-center justify-between mt-1 px-1">
             <Checkbox
-              label={<span className="text-[9px] font-black text-gray-500 uppercase tracking-[0.1em]">Remember for 30 days</span>}
+              label={<span className="text-[11px] font-semibold text-gray-500">Remember for 30 days</span>}
               checked={rememberMe}
               onChange={() => setRememberMe(!rememberMe)}
             />
@@ -86,7 +86,7 @@ export const LoginForm = () => {
             type="submit"
             variant="primary"
             shape="rounded-sm"
-            className="h-12 text-[10px] font-black uppercase tracking-[0.15em] mt-1 shadow-xl shadow-blue-500/20"
+            className="h-12 text-[11px] font-semibold mt-1"
             isLoading={isLoading}
           >
             Initialize Command
@@ -96,7 +96,7 @@ export const LoginForm = () => {
         {/* Footer */}
         <p className="text-center text-xs font-medium text-gray-400 mt-4">
           Don't have an administrative account? <br />
-          <Link href="#" className="text-brand-blue font-black uppercase tracking-widest text-[10px] ml-1 hover:underline">Contact System Admin</Link>
+          <Link href="#" className="text-brand-blue font-semibold text-[11px] ml-1 hover:underline">Contact System Admin</Link>
         </p>
       </div>
 

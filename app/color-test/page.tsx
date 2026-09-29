@@ -14,7 +14,7 @@ export default function DesignSystemVerificationPage() {
   const brands = [
     { name: 'brand-blue', class: 'bg-brand-blue', light: 'bg-brand-blue-light' },
     { name: 'brand-green', class: 'bg-brand-green', light: 'bg-brand-green-light' },
-    { name: 'brand-orange', class: 'bg-brand-orange', light: 'bg-brand-orange-light' },
+    { name: 'action', class: 'bg-action', light: 'bg-action-light' },
     { name: 'brand-red', class: 'bg-brand-red' },
   ];
 
@@ -52,23 +52,23 @@ export default function DesignSystemVerificationPage() {
       <section className="space-y-8">
         <div className="flex items-center justify-between">
           <h2 className="h2 text-neutral-900 underline decoration-brand-blue decoration-4 underline-offset-8">Typography Hierarchy</h2>
-          <span className="px-4 py-1.5 bg-neutral-100 text-neutral-700 rounded-full text-body-xs font-bold tracking-wider uppercase border border-neutral-200">System Fonts</span>
+          <span className="px-4 py-1.5 bg-neutral-100 text-neutral-700 rounded-full text-body-xs font-bold border border-neutral-200">System Fonts</span>
         </div>
 
         <div className="space-y-10 border rounded-3xl p-10 border-neutral-200 bg-neutral-50/30">
           <div className="space-y-2">
             <h1 className="h1">H1 Heading text</h1>
-            <p className="text-body-xs text-neutral-400 font-mono tracking-widest uppercase">Outfit Bold / 36px / -0.02em</p>
+            <p className="text-body-xs text-neutral-400 font-mono">Outfit Bold / 36px / -0.02em</p>
           </div>
 
           <div className="space-y-2">
             <h2 className="h2">H2 Heading text</h2>
-            <p className="text-body-xs text-neutral-400 font-mono tracking-widest uppercase">Outfit Bold / 30px / -0.01em</p>
+            <p className="text-body-xs text-neutral-400 font-mono">Outfit Bold / 30px / -0.01em</p>
           </div>
 
           <div className="space-y-2">
             <h3 className="h3">H3 Heading text</h3>
-            <p className="text-body-xs text-neutral-400 font-mono tracking-widest uppercase">Outfit Bold / 24px</p>
+            <p className="text-body-xs text-neutral-400 font-mono">Outfit Bold / 24px</p>
           </div>
 
           <div className="space-y-6 pt-10 border-t border-neutral-200">
@@ -93,12 +93,12 @@ export default function DesignSystemVerificationPage() {
             </div>
 
             <div className="space-y-3">
-              <p className="text-body-sm font-bold text-neutral-900 border-l-4 border-brand-orange pl-3 bg-brand-orange-light/20 py-1">Body micro - 12px</p>
+              <p className="text-body-sm font-bold text-neutral-900 border-l-4 border-action pl-3 bg-action-light/20 py-1">Body micro - 12px</p>
               <p className="text-body-xs leading-normal">
                 What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
               </p>
-              <p className="text-body-xs text-muted italic text-[10px] tracking-wider uppercase">Inter Regular / 12px</p>
+              <p className="text-body-xs text-muted italic text-[11px]">Inter Regular / 12px</p>
             </div>
           </div>
         </div>
@@ -116,7 +116,7 @@ export default function DesignSystemVerificationPage() {
                 <div className={`h-24 w-full rounded-2xl  transition-transform group-hover:scale-105 duration-200 ${color.class} ${color.border || ''}`} />
                 <div className="text-center px-1">
                   <p className="text-xs font-bold text-neutral-900 tracking-tight">{color.name}</p>
-                  <p className="text-[10px] font-mono text-neutral-400 uppercase">{color.hex}</p>
+                  <p className="text-[11px] font-mono text-neutral-400">{color.hex}</p>
                 </div>
               </div>
             ))}
@@ -132,7 +132,7 @@ export default function DesignSystemVerificationPage() {
                   <div className={`flex-1 rounded-xl ${color.class}`} />
                   {color.light && <div className={`w-12 rounded-xl border border-neutral-50 ${color.light}`} />}
                 </div>
-                <p className="text-sm font-black text-neutral-900 text-center tracking-widest uppercase">{color.name}</p>
+                <p className="text-sm font-semibold text-neutral-900 text-center">{color.name}</p>
               </div>
             ))}
           </div>
@@ -142,7 +142,7 @@ export default function DesignSystemVerificationPage() {
       {/* Cursors Section */}
       <section className="space-y-8">
         <div className="flex items-center justify-between">
-          <h2 className="h2 text-neutral-900 underline decoration-brand-orange decoration-4 underline-offset-8">System Cursors</h2>
+          <h2 className="h2 text-neutral-900 underline decoration-action decoration-4 underline-offset-8">System Cursors</h2>
           <p className="text-sm font-medium text-neutral-500 italic">Hover to test cursor behavior</p>
         </div>
 
@@ -152,7 +152,7 @@ export default function DesignSystemVerificationPage() {
               key={cursor.name}
               className={`flex flex-col items-center justify-center h-32 rounded-2xl border border-neutral-100 bg-neutral-50/50 hover:bg-white hover:border-brand-blue hover:shadow-lg transition-all group ${cursor.class}`}
             >
-              <p className="text-[10px] font-black text-neutral-400 uppercase tracking-widest group-hover:text-brand-blue mb-1">Cursor</p>
+              <p className="text-[11px] font-semibold text-neutral-400 group-hover:text-brand-blue mb-1">Cursor</p>
               <p className="text-sm font-bold text-neutral-900 group-hover:text-neutral-900">{cursor.name}</p>
               <div className="mt-4 w-6 h-6 rounded-full bg-neutral-200 group-hover:bg-brand-blue-light transition-colors" />
             </div>

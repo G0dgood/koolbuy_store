@@ -71,7 +71,7 @@ const BlogPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-cream flex flex-col font-sans text-black">
       <Header />
 
       <main className="flex-1 w-full bg-white">
@@ -85,10 +85,10 @@ const BlogPage = () => {
               transition={{ duration: 0.6 }}
               className="flex flex-col items-center gap-4"
             >
-              <span className="text-brand-blue font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs">
+              <span className="text-brand-blue font-bold text-[11px] md:text-xs">
                 Koolbuy Store Journal
               </span>
-              <h1 className="text-4xl md:text-7xl font-black text-[#1D3557] tracking-tighter leading-none">
+              <h1 className="text-4xl md:text-7xl font-semibold text-ink tracking-tighter leading-none">
                 Insights <span className="text-brand-blue">&</span> Inspiration.
               </h1>
               <p className="text-gray-500 max-w-2xl text-sm md:text-lg mt-4 leading-relaxed font-medium">
@@ -114,12 +114,12 @@ const BlogPage = () => {
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-1000"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-[#1D3557] via-[#1D3557]/20 to-transparent flex items-end">
+              <div className="absolute inset-0 bg-linear-to-t from-ink via-ink/20 to-transparent flex items-end">
                 <div className="p-8 md:p-16 max-w-4xl flex flex-col gap-4">
-                  <span className="px-4 py-1.5 bg-brand-blue rounded-full text-[10px] font-black uppercase tracking-[0.2em] text-white w-fit">
+                  <span className="px-4 py-1.5 bg-brand-blue rounded-full text-[11px] font-semibold text-white w-fit">
                     Featured Story
                   </span>
-                  <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">
+                  <h2 className="text-3xl md:text-5xl font-semibold text-white tracking-tight leading-tight">
                     Beyond the Interface: The Humanity of High-Fidelity Design
                   </h2>
                   <p className="text-blue-100/60 text-sm md:text-lg max-w-2xl leading-relaxed">
@@ -128,10 +128,10 @@ const BlogPage = () => {
                     architects.
                   </p>
                   <div className="flex items-center gap-4 pt-4">
-                    <button className="bg-white text-[#1D3557] px-8 py-3.5 rounded-xl font-black uppercase tracking-widest text-xs shadow-xl flex items-center gap-2 group-hover:bg-brand-blue group-hover:text-white transition-all">
+                    <button className="bg-white text-ink px-8 py-3.5 rounded-xl font-semibold text-xs shadow-xl flex items-center gap-2 group-hover:bg-brand-blue group-hover:text-white transition-all">
                       Read Feature <HiArrowLongRight size={18} />
                     </button>
-                    <div className="flex items-center gap-4 text-white/40 text-xs font-bold uppercase tracking-widest">
+                    <div className="flex items-center gap-4 text-white/40 text-xs font-bold">
                       <span className="flex items-center gap-1">
                         <HiCalendar /> Oct 20, 2023
                       </span>
@@ -148,7 +148,7 @@ const BlogPage = () => {
           {/* Step 82: Implement Responsive Journal Feed (Article Grid) */}
           <section className="flex flex-col gap-12">
             <div className="flex items-center justify-between">
-              <h3 className="text-2xl font-black text-[#1D3557] tracking-tight">
+              <h3 className="text-2xl font-semibold text-ink tracking-tight">
                 Recent Journal Entries
               </h3>
               <div className="flex items-center gap-3 text-brand-blue font-bold text-sm cursor-pointer group">
@@ -177,13 +177,13 @@ const BlogPage = () => {
                       className="object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-lg text-[10px] font-black uppercase tracking-widest text-brand-blue shadow-sm">
+                      <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-lg text-[11px] font-semibold text-brand-blue shadow-sm">
                         {post.category}
                       </span>
                     </div>
                   </div>
                   <div className="flex flex-col gap-3">
-                    <div className="flex items-center gap-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                    <div className="flex items-center gap-4 text-[11px] font-bold text-gray-400">
                       <span className="flex items-center gap-1">
                         <HiCalendar className="text-brand-blue" /> {post.date}
                       </span>
@@ -191,14 +191,14 @@ const BlogPage = () => {
                         <HiClock className="text-brand-blue" /> {post.readTime}
                       </span>
                     </div>
-                    <h4 className="text-xl font-black text-[#1D3557] leading-tight group-hover:text-brand-blue transition-colors duration-300 line-clamp-2">
+                    <h4 className="text-xl font-semibold text-ink leading-tight group-hover:text-brand-blue transition-colors duration-300 line-clamp-2">
                       {post.title}
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">
                       {post.excerpt}
                     </p>
                     <div className="pt-2">
-                      <div className="flex items-center gap-1 text-xs font-black uppercase tracking-widest text-[#1D3557] group-hover:text-brand-blue transition-colors">
+                      <div className="flex items-center gap-1 text-xs font-semibold text-ink group-hover:text-brand-blue transition-colors">
                         Read Story{" "}
                         <HiChevronRight
                           size={14}
@@ -212,7 +212,7 @@ const BlogPage = () => {
             </div>
 
             <div className="mt-16 flex justify-center">
-              <button className="px-12 py-4 border-2 border-gray-100 rounded-2xl text-[#1D3557] font-black uppercase tracking-widest text-xs hover:border-brand-blue hover:text-brand-blue transition-all">
+              <button className="px-12 py-4 border-2 border-gray-100 rounded-2xl text-ink font-semibold text-xs hover:border-brand-blue hover:text-brand-blue transition-all">
                 Load Older Stories
               </button>
             </div>

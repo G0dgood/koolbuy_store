@@ -88,18 +88,18 @@ export const Header: React.FC<{ className?: string }> = ({
 
   return (
     <header
-      className={`w-full bg-white border-b border-gray-200 sticky top-0 z-80 ${className}`}
+      className={`w-full bg-white/80 backdrop-blur-xl backdrop-saturate-[1.8] border-b border-black/[0.08] sticky top-0 z-80 ${className}`}
       onMouseLeave={handleMouseLeaveDropdown}
     >
       {/* Top Main Header */}
-      <div className="max-w-360 mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 h-16 md:h-20 flex items-center justify-between gap-3 md:gap-4 lg:gap-6 xl:gap-8">
+      <div className="max-w-360 mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 h-14 md:h-16 flex items-center justify-between gap-3 md:gap-4 lg:gap-6 xl:gap-8">
         {/* Mobile: Hamburger & Logo Group */}
         <div className="flex items-center gap-3 lg:hidden">
           <button onClick={toggleMenu} className="text-gray-900 p-1">
             <Icon name="menu" size="md" />
           </button>
           <Link href="/" className="shrink-0 flex items-center">
-            <div className="h-9 overflow-hidden flex items-center">
+            <div className="h-8 overflow-hidden flex items-center">
               <img
                 src="/images/koolboks/koolbuy_logo.webp"
                 alt="Koolbuy Store"
@@ -111,7 +111,7 @@ export const Header: React.FC<{ className?: string }> = ({
 
         {/* Desktop Logo */}
         <Link href="/" className="shrink-0 hidden lg:flex items-center">
-          <div className="h-10 xl:h-11 overflow-hidden flex items-center">
+          <div className="h-8 xl:h-9 overflow-hidden flex items-center">
             <img
               src="/images/koolboks/koolbuy_logo.webp"
               alt="Koolbuy Store"
@@ -123,7 +123,7 @@ export const Header: React.FC<{ className?: string }> = ({
         {/* Search Bar (Desktop) */}
         <form
           onSubmit={handleSearchSubmit}
-          className="flex-1 max-w-85 xl:max-w-115 h-10 xl:h-11 bg-white border border-gray-300 hover:border-gray-400 focus-within:border-[#FF7A00] focus-within:ring-2 focus-within:ring-[#FF7A00]/20 rounded-full hidden md:flex items-stretch relative z-50 transition-all shadow-xs"
+          className="flex-1 max-w-85 xl:max-w-115 h-10 xl:h-11 p-0.5 bg-cream border border-transparent hover:border-black/[0.08] focus-within:bg-white focus-within:border-black/15 rounded-full hidden md:flex items-stretch relative z-50 transition-colors"
         >
           {/* Location Dropdown */}
           <div
@@ -136,10 +136,10 @@ export const Header: React.FC<{ className?: string }> = ({
                 e.stopPropagation();
                 setIsLocationOpen((prev) => !prev);
               }}
-              className="h-full flex items-center gap-1.5 pl-3.5 pr-2.5 hover:bg-gray-50 rounded-l-full transition-colors cursor-pointer border-r border-gray-200 text-left outline-none"
+              className="h-full flex items-center gap-1.5 pl-3.5 pr-2.5 hover:bg-white rounded-l-full transition-colors cursor-pointer border-r border-gray-200 text-left outline-none"
             >
-              <FiMapPin className="text-[#FF7A00] text-sm shrink-0" />
-              <span className="text-xs font-bold text-gray-800 max-w-20 xl:max-w-26 truncate">
+              <FiMapPin className="text-gray-500 text-sm shrink-0" />
+              <span className="text-xs font-normal text-ink max-w-20 xl:max-w-26 truncate">
                 {selectedLocation}
               </span>
               <FiChevronDown
@@ -156,8 +156,8 @@ export const Header: React.FC<{ className?: string }> = ({
                   className="absolute top-full left-0 pt-2 w-72 z-100"
                   onClick={() => setIsLocationOpen(false)}
                 >
-                  <div className="bg-white rounded-xl shadow-xl border border-gray-100 p-2 flex flex-col gap-1 text-sm">
-                    <div className="px-3 py-1.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                  <div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-[var(--shadow-lift)] p-2 flex flex-col gap-1 text-sm">
+                    <div className="px-3 py-1.5 text-[11px] font-bold text-gray-400">
                       Delivery Location
                     </div>
                     {deliveryLocations.map((loc) => (
@@ -165,9 +165,9 @@ export const Header: React.FC<{ className?: string }> = ({
                         key={loc.full}
                         type="button"
                         onClick={() => setSelectedLocation(loc.short)}
-                        className="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-gray-700 hover:bg-orange-50 hover:text-[#FF7A00] transition-colors flex items-center gap-2 cursor-pointer"
+                        className="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-gray-700 hover:bg-cream hover:text-ink transition-colors flex items-center gap-2 cursor-pointer"
                       >
-                        <FiMapPin className="text-[#FF7A00] text-xs shrink-0" />
+                        <FiMapPin className="text-gray-500 text-xs shrink-0" />
                         <span className="truncate">{loc.full}</span>
                       </button>
                     ))}
@@ -182,14 +182,14 @@ export const Header: React.FC<{ className?: string }> = ({
             className="flex-1 flex items-center px-3 relative min-w-0"
             ref={searchRef}
           >
-            <FiSearch className="text-[#FF7A00] text-base shrink-0 mr-2" />
+            <FiSearch className="text-gray-500 text-base shrink-0 mr-2" />
             <input
               type="text"
-              placeholder="Koolboks..."
+              placeholder="Search freezers, solar kits, ice makers..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={() => setIsSearchFocused(true)}
-              className="w-full text-xs xl:text-sm text-gray-800 placeholder-gray-400 bg-transparent outline-none focus:outline-none"
+              className="w-full text-xs xl:text-sm text-ink placeholder-gray-500 bg-transparent outline-none focus:outline-none"
             />
 
             {/* Search Autocomplete Dropdown */}
@@ -202,7 +202,7 @@ export const Header: React.FC<{ className?: string }> = ({
           {/* Search Button */}
           <button
             type="submit"
-            className="bg-[#FF7A00] hover:bg-[#E86D00] active:bg-[#D46000] text-white font-bold text-xs xl:text-sm px-4 xl:px-6 flex items-center justify-center rounded-r-full transition-all cursor-pointer shrink-0 shadow-xs"
+            className="bg-action hover:bg-action-hover active:scale-95 text-white font-normal text-xs xl:text-sm px-4 xl:px-5 flex items-center justify-center rounded-full transition-colors cursor-pointer shrink-0"
           >
             Search
           </button>
@@ -234,12 +234,12 @@ export const Header: React.FC<{ className?: string }> = ({
       <div className="md:hidden px-4 pb-3">
         <form
           onSubmit={handleSearchSubmit}
-          className="w-full h-11 bg-white rounded-full flex items-center px-4 gap-2.5 border border-gray-300 focus-within:border-[#FF7A00] shadow-xs"
+          className="w-full h-11 bg-cream rounded-full flex items-center px-4 gap-2.5 border border-transparent focus-within:bg-white focus-within:border-black/15"
         >
-          <FiSearch className="text-[#FF7A00] text-base shrink-0" />
+          <FiSearch className="text-gray-500 text-base shrink-0" />
           <input
             type="text"
-            placeholder="Koolboks..."
+            placeholder="Search Koolbuy..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="bg-transparent text-sm w-full outline-none text-gray-800 placeholder-gray-400"
@@ -272,7 +272,7 @@ export const Header: React.FC<{ className?: string }> = ({
                 clearTimeout(dropdownTimeoutRef.current);
             }}
             onMouseLeave={handleMouseLeaveDropdown}
-            className="absolute top-full left-0 w-full bg-white border-t border-b border-gray-200 shadow-2xl z-100"
+            className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl backdrop-saturate-[1.8] border-b border-black/[0.08] z-100"
           >
             <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-16 py-8 md:py-10 max-h-[calc(100vh-140px)] overflow-y-auto">
               {/* Columns Grid */}
@@ -288,7 +288,7 @@ export const Header: React.FC<{ className?: string }> = ({
                 {megaMenuContent[activeDropdown].columns.map((col, colIdx) => (
                   <div key={colIdx} className="flex flex-col gap-3">
                     {/* Column Header */}
-                    <h4 className="text-[12px] font-extrabold text-gray-900 tracking-wider uppercase pb-2 border-b border-gray-100 flex items-center justify-between">
+                    <h4 className="text-[12px] font-normal text-gray-500 pb-1 flex items-center justify-between">
                       <span>{col.title}</span>
                     </h4>
 
@@ -299,13 +299,13 @@ export const Header: React.FC<{ className?: string }> = ({
                           <Link
                             href={item.href}
                             onClick={() => setActiveDropdown(null)}
-                            className="group inline-flex items-center gap-2 text-[13px] text-gray-600 hover:text-[#FF7A00] transition-colors py-0.5 leading-snug"
+                            className="group inline-flex items-center gap-2 text-[15px] font-semibold text-ink hover:text-action transition-colors py-0.5 leading-snug"
                           >
                             <span className="group-hover:translate-x-0.5 transition-transform duration-150">
                               {item.label}
                             </span>
                             {item.badge && (
-                              <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full bg-orange-100 text-[#FF7A00] uppercase tracking-wide">
+                              <span className="text-[11px] font-semibold px-1.5 py-0.5 text-eyebrow normal-case">
                                 {item.badge}
                               </span>
                             )}
@@ -318,7 +318,7 @@ export const Header: React.FC<{ className?: string }> = ({
               </div>
 
               {/* Bottom Quick Bar */}
-              <div className="mt-8 pt-4 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
+              <div className="mt-8 pt-4 flex items-center justify-between text-xs text-gray-500">
                 <div className="flex items-center gap-6">
                   {/* <span className="text-gray-400 font-medium">
                     ⚡ 24/7 Clean Solar Energy • Verified Warranties • Fast
@@ -329,7 +329,7 @@ export const Header: React.FC<{ className?: string }> = ({
                 <Link
                   href="/products"
                   onClick={() => setActiveDropdown(null)}
-                  className="inline-flex items-center gap-1.5 font-bold text-[#FF7A00] hover:underline"
+                  className="inline-flex items-center gap-1.5 text-sm text-action hover:underline"
                 >
                   <span>Browse All Products in Catalog</span>
                   <FiArrowRight size={13} />
@@ -341,7 +341,7 @@ export const Header: React.FC<{ className?: string }> = ({
       </AnimatePresence>
 
       {/* Mobile Breadcrumb-like nav */}
-      <div className="w-full overflow-x-auto bg-white border-t border-gray-100 md:hidden flex items-center gap-4 px-4 h-11 scrollbar-none whitespace-nowrap">
+      <div className="w-full overflow-x-auto bg-transparent md:hidden flex items-center gap-2 px-4 h-12 scrollbar-none whitespace-nowrap">
         {[
           "Solar Freezers",
           "AC/DC Hybrid",
@@ -351,7 +351,7 @@ export const Header: React.FC<{ className?: string }> = ({
         ].map((item, idx) => (
           <span
             key={idx}
-            className="bg-gray-100 text-gray-800 text-sm px-3 py-1.5 rounded shrink-0 font-medium"
+            className={`${idx === 0 ? "bg-ink text-white" : "bg-cream text-ink"} text-[13px] px-3.5 py-1.5 rounded-full shrink-0`}
           >
             {item}
           </span>

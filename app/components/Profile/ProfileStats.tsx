@@ -15,7 +15,7 @@ const StatCard: React.FC<StatProps> = ({ label, value, icon, color }) => (
     </div>
     <div className="flex flex-col">
       <span className="text-2xl font-bold text-gray-900">{value}</span>
-      <span className="text-xs font-medium text-gray-500 uppercase tracking-wider">{label}</span>
+      <span className="text-xs font-medium text-gray-500">{label}</span>
     </div>
   </div>
 );

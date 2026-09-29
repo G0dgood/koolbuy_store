@@ -11,7 +11,7 @@ const bestSellingData = [
   status: "Stock",
   price: "₦1,406,000",
   image: "/images/koolboks/items/5.webp",
-  color: "bg-[#4CAF50]",
+  color: "bg-[#248a3d]",
  },
  {
   name: "Kool Bruhm 100ah Pedestal Freezer",
@@ -27,7 +27,7 @@ const bestSellingData = [
   status: "Stock",
   price: "₦2,100,000",
   image: "/images/koolboks/items/3.webp",
-  color: "bg-[#4CAF50]",
+  color: "bg-[#248a3d]",
  },
  {
   name: "230L Hisense Deep Chest Freezer",
@@ -35,7 +35,7 @@ const bestSellingData = [
   status: "Stock",
   price: "₦430,000",
   image: "/images/koolboks/items/1.webp",
-  color: "bg-[#4CAF50]",
+  color: "bg-[#248a3d]",
  },
 ];
 
@@ -43,11 +43,11 @@ export function BestSellingProductTable() {
  return (
   <div className="bg-white p-8 rounded-lg border border-gray-100 shadow-sm flex flex-col gap-6">
    <div className="flex justify-between items-center">
-    <h3 className="text-[18px] font-black text-[#1D3557]">Best selling product</h3>
+    <h3 className="text-[18px] font-semibold text-ink">Best selling product</h3>
     <Button
      variant="blue"
      iconRight={<Icon name="sort" folder="dashboardIcon" size="sm" />}
-     className="text-[11px] font-black px-6 h-9 rounded-[6px]"
+     className="text-[11px] font-semibold px-6 h-9 rounded-[6px]"
     >
      Filter
     </Button>
@@ -57,10 +57,10 @@ export function BestSellingProductTable() {
     <table>
      <thead>
       <tr>
-       <th className="pl-4">PRODUCT</th>
-       <th>TOTAL ORDER</th>
-       <th>STATUS</th>
-       <th className="text-right">PRICE</th>
+       <th className="pl-4">Product</th>
+       <th>Total order</th>
+       <th>Status</th>
+       <th className="text-right">Price</th>
       </tr>
      </thead>
      <tbody>
@@ -72,17 +72,17 @@ export function BestSellingProductTable() {
            src={p.image}
            className="w-10 h-10 rounded-[6px] object-contain bg-gray-50 border border-gray-100 p-1"
           />
-          <span className="text-[12px] font-black text-[#1D3557]">{p.name}</span>
+          <span className="text-[12px] font-semibold text-ink">{p.name}</span>
          </div>
         </td>
         <td className="text-[12px] font-bold text-gray-500">{p.orders}</td>
         <td>
          <div className="flex items-center gap-2">
           <span className={`w-2 h-2 rounded-full ${p.color}`}></span>
-          <span className="text-[12px] font-bold text-[#1D3557]">{p.status}</span>
+          <span className="text-[12px] font-bold text-ink">{p.status}</span>
          </div>
         </td>
-        <td className="text-[12px] font-black text-[#1D3557] text-right">{p.price}</td>
+        <td className="text-[12px] font-semibold text-ink text-right">{p.price}</td>
        </tr>
       ))}
      </tbody>
@@ -92,7 +92,7 @@ export function BestSellingProductTable() {
    <div className="flex justify-end pt-2">
     <Button
      variant="blue"
-     className="text-[10px] font-black uppercase tracking-widest px-8 h-10 rounded-[6px]"
+     className="text-[11px] font-semibold px-8 h-10 rounded-[6px]"
     >
      Details
     </Button>

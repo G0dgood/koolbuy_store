@@ -50,7 +50,7 @@ export default function Drawer({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/30 backdrop-blur-[2px] z-40"
+            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
             onClick={onClose}
           />
 
@@ -64,7 +64,7 @@ export default function Drawer({
           >
             {/* Header */}
             <div className="flex items-center justify-between px-8 py-6 border-b border-gray-100 flex-shrink-0">
-              <h3 className="text-[18px] font-black text-[#1D3557]">{title}</h3>
+              <h3 className="text-[21px] font-semibold tracking-[-0.01em] text-ink">{title}</h3>
               <div className="flex items-center gap-3">
                 {rightElement && rightElement}
                 <button

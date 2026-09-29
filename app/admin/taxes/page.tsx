@@ -232,7 +232,7 @@ export default function TaxesReportPage() {
             variant="blue"
             size="md"
             iconLeft={<HiOutlineDocumentArrowDown size={18} />}
-            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold shadow-sm shadow-brand-blue/20 bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white"
+            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold shadow-sm shadow-brand-blue/20 bg-action hover:bg-action/90 text-white"
             onClick={() => setIsExportModalOpen(true)}
           >
             Export Tax Report
@@ -472,7 +472,7 @@ export default function TaxesReportPage() {
                       Standard VAT calculation on taxable merchandise
                     </p>
                   </div>
-                  <span className="text-base font-black text-brand-blue">
+                  <span className="text-base font-semibold text-brand-blue">
                     {selectedRecord.taxAmount}
                   </span>
                 </div>
@@ -481,7 +481,7 @@ export default function TaxesReportPage() {
               <div className="flex justify-end pt-2">
                 <Button
                   size="sm"
-                  className="bg-[#00BCD4] text-white"
+                  className="bg-action text-white"
                   onClick={() => setSelectedRecord(null)}
                 >
                   Close
@@ -521,7 +521,7 @@ export default function TaxesReportPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-[#00BCD4] text-white"
+                className="bg-action text-white"
                 onClick={() => setIsExportModalOpen(false)}
               >
                 Download CSV

@@ -79,7 +79,7 @@ export const LoginAdvert = () => {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.5 }}
               >
-                <h1 className="text-6xl xl:text-7xl font-black text-white leading-[1.1] drop-shadow-2xl">
+                <h1 className="text-6xl xl:text-7xl font-semibold text-white leading-[1.1] drop-shadow-2xl">
                   {config.showTitle && <span>{displayCopy.title} <br /></span>}
                   {config.showHighlight && <span className="text-brand-blue-light">{displayCopy.titleHighlight}</span>}
                 </h1>
@@ -120,13 +120,13 @@ export const LoginAdvert = () => {
                   className="flex items-center gap-6 justify-end group cursor-pointer"
                 >
                   <div className="flex flex-col items-end text-right">
-                    <span className="text-xs font-black uppercase tracking-[0.2em] text-white/50 group-hover:text-brand-blue-light transition-colors">
+                    <span className="text-xs font-semibold text-white/50 group-hover:text-brand-blue-light transition-colors">
                       {item.category}
                     </span>
                     <span className="text-lg font-bold text-white group-hover:text-blue-200 transition-colors">
                       {item.name}
                     </span>
-                    <span className="text-[10px] font-black text-white/40 group-hover:text-white/80 transition-opacity">
+                    <span className="text-[11px] font-semibold text-white/40 group-hover:text-white/80 transition-opacity">
                       FEATURED SELECTION • {item.price}
                     </span>
                   </div>
@@ -157,9 +157,9 @@ export const LoginAdvert = () => {
                     <img src={item.image} alt={item.name} className="w-full h-full object-contain group-hover:scale-125 transition-transform duration-500" />
                   </div>
                   <div className="flex flex-col text-right">
-                    <span className="text-[8px] font-black text-brand-blue-light uppercase tracking-widest">{item.category}</span>
+                    <span className="text-[11px] font-semibold text-brand-blue-light">{item.category}</span>
                     <span className="text-[11px] font-bold text-white truncate">{item.name}</span>
-                    <span className="text-[10px] font-black text-white/60">{item.price}</span>
+                    <span className="text-[11px] font-semibold text-white/60">{item.price}</span>
                   </div>
                 </motion.div>
               ))}
@@ -184,8 +184,8 @@ export const LoginAdvert = () => {
                       <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] font-bold text-white group-hover:text-brand-blue-light transition-colors">{item.name}</span>
-                      <span className="text-[8px] font-black text-white/40 uppercase">{item.price}</span>
+                      <span className="text-[11px] font-bold text-white group-hover:text-brand-blue-light transition-colors">{item.name}</span>
+                      <span className="text-[11px] font-semibold text-white/40">{item.price}</span>
                     </div>
                   </motion.div>
                 ))}
@@ -195,7 +195,7 @@ export const LoginAdvert = () => {
         )}
 
         {filteredItems.length === 0 && (
-          <p className="text-white/30 text-xs font-bold uppercase tracking-widest italic pt-10 text-right">
+          <p className="text-white/30 text-xs font-bold italic pt-10 text-right">
             No items in {activeCategory} category
           </p>
         )}
@@ -211,7 +211,7 @@ export const LoginAdvert = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-12 p-6 rounded-[6px] bg-white/5 border border-white/10 backdrop-blur-sm text-right max-w-sm"
           >
-            <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest leading-loose">
+            <p className="text-[11px] font-bold text-white/40 leading-loose">
               {displayCopy.stats}
             </p>
           </motion.div>

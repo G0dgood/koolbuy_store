@@ -343,15 +343,15 @@ export const SecondaryNavbar: React.FC = () => {
               }
               className={`flex items-center gap-2 h-full font-bold text-sm border-r border-gray-200 pr-6 transition-colors cursor-pointer outline-none ${
                 activeDropdown === "categories"
-                  ? "text-[#FF7A00]"
-                  : "text-gray-900 hover:text-[#FF7A00]"
+                  ? "text-action"
+                  : "text-gray-900 hover:text-action"
               }`}
             >
               <span>All categories</span>
               <FiChevronDown
                 className={`text-xs transition-transform duration-200 ${
                   activeDropdown === "categories"
-                    ? "rotate-180 text-[#FF7A00]"
+                    ? "rotate-180 text-action"
                     : "text-gray-400"
                 }`}
               />
@@ -365,8 +365,8 @@ export const SecondaryNavbar: React.FC = () => {
               href="/"
               className={`transition-colors py-2 ${
                 isActive("/")
-                  ? "text-[#FF7A00] font-bold"
-                  : "text-gray-900 hover:text-[#FF7A00]"
+                  ? "text-action font-bold"
+                  : "text-gray-900 hover:text-action"
               }`}
             >
               Home
@@ -381,15 +381,15 @@ export const SecondaryNavbar: React.FC = () => {
                 href="/products"
                 className={`flex items-center gap-1.5 transition-colors py-2 ${
                   isActive("/products") || activeDropdown === "marketplace"
-                    ? "text-[#FF7A00] font-bold"
-                    : "text-gray-900 hover:text-[#FF7A00]"
+                    ? "text-action font-bold"
+                    : "text-gray-900 hover:text-action"
                 }`}
               >
                 <span>Marketplace</span>
                 <FiChevronDown
                   className={`text-xs transition-transform duration-200 ${
                     activeDropdown === "marketplace"
-                      ? "rotate-180 text-[#FF7A00]"
+                      ? "rotate-180 text-action"
                       : "text-gray-400"
                   }`}
                 />
@@ -410,15 +410,15 @@ export const SecondaryNavbar: React.FC = () => {
                 }
                 className={`flex items-center gap-1.5 transition-colors cursor-pointer py-2 outline-none ${
                   activeDropdown === "quickLinks"
-                    ? "text-[#FF7A00] font-bold"
-                    : "text-gray-900 hover:text-[#FF7A00]"
+                    ? "text-action font-bold"
+                    : "text-gray-900 hover:text-action"
                 }`}
               >
                 <span>Quick Links</span>
                 <FiChevronDown
                   className={`text-xs transition-transform duration-200 ${
                     activeDropdown === "quickLinks"
-                      ? "rotate-180 text-[#FF7A00]"
+                      ? "rotate-180 text-action"
                       : "text-gray-400"
                   }`}
                 />
@@ -456,7 +456,7 @@ export const SecondaryNavbar: React.FC = () => {
                 {megaMenuContent[activeDropdown].columns.map((col, colIdx) => (
                   <div key={colIdx} className="flex flex-col gap-3">
                     {/* Column Header */}
-                    <h4 className="text-[12px] font-extrabold text-gray-900 tracking-wider uppercase pb-2 border-b border-gray-100 flex items-center justify-between">
+                    <h4 className="text-[12px] font-semibold text-gray-900 pb-2 border-b border-gray-100 flex items-center justify-between">
                       <span>{col.title}</span>
                     </h4>
 
@@ -467,13 +467,13 @@ export const SecondaryNavbar: React.FC = () => {
                           <Link
                             href={item.href}
                             onClick={() => setActiveDropdown(null)}
-                            className="group inline-flex items-center gap-2 text-[13px] text-gray-600 hover:text-[#FF7A00] transition-colors py-0.5 leading-snug"
+                            className="group inline-flex items-center gap-2 text-[13px] text-gray-600 hover:text-action transition-colors py-0.5 leading-snug"
                           >
                             <span className="group-hover:translate-x-0.5 transition-transform duration-150">
                               {item.label}
                             </span>
                             {item.badge && (
-                              <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full bg-orange-100 text-[#FF7A00] uppercase tracking-wide">
+                              <span className="text-[11px] font-semibold px-1.5 py-0.5 rounded-full bg-orange-100 text-action">
                                 {item.badge}
                               </span>
                             )}
@@ -497,7 +497,7 @@ export const SecondaryNavbar: React.FC = () => {
                 <Link
                   href="/products"
                   onClick={() => setActiveDropdown(null)}
-                  className="inline-flex items-center gap-1.5 font-bold text-[#FF7A00] hover:underline"
+                  className="inline-flex items-center gap-1.5 font-bold text-action hover:underline"
                 >
                   <span>Browse All Products in Catalog</span>
                   <FiArrowRight size={13} />

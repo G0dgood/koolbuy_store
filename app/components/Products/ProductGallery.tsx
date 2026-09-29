@@ -39,7 +39,7 @@ export const ProductGallery: React.FC = () => {
           type="button"
           onClick={scrollUp}
           aria-label="Scroll thumbnails up"
-          className="hidden sm:flex w-7 h-7 rounded-full bg-white hover:bg-gray-100 border border-gray-200 items-center justify-center text-gray-500 hover:text-gray-900 transition-colors cursor-pointer shadow-xs"
+          className="hidden sm:flex w-8 h-8 rounded-full bg-[rgba(210,210,215,0.64)] hover:bg-[rgba(210,210,215,0.85)] items-center justify-center text-gray-500 hover:text-gray-900 transition-colors cursor-pointer shadow-xs"
         >
           <FiChevronUp size={16} />
         </button>
@@ -55,11 +55,11 @@ export const ProductGallery: React.FC = () => {
               type="button"
               onClick={() => setActiveImage(img)}
               className={`
-                relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-xl overflow-hidden bg-white p-1.5 transition-all cursor-pointer shadow-xs
+                relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-lg overflow-hidden bg-cream p-1.5 transition-colors cursor-pointer
                 ${
                   activeImage === img
-                    ? "border-2 border-[#FF7A00] ring-2 ring-[#FF7A00]/20"
-                    : "border border-gray-200 hover:border-gray-400 opacity-80 hover:opacity-100"
+                    ? "border-2 border-[#0071e3]"
+                    : "border border-transparent hover:border-gray-300"
                 }
               `}
             >
@@ -80,19 +80,19 @@ export const ProductGallery: React.FC = () => {
           type="button"
           onClick={scrollDown}
           aria-label="Scroll thumbnails down"
-          className="hidden sm:flex w-7 h-7 rounded-full bg-white hover:bg-gray-100 border border-gray-200 items-center justify-center text-gray-500 hover:text-gray-900 transition-colors cursor-pointer shadow-xs"
+          className="hidden sm:flex w-8 h-8 rounded-full bg-[rgba(210,210,215,0.64)] hover:bg-[rgba(210,210,215,0.85)] items-center justify-center text-gray-500 hover:text-gray-900 transition-colors cursor-pointer shadow-xs"
         >
           <FiChevronDown size={16} />
         </button>
       </div>
 
       {/* Main Big Product View */}
-      <div className="relative w-full aspect-square bg-white border border-gray-200 rounded-2xl overflow-hidden flex items-center justify-center p-6 shadow-xs group">
+      <div className="relative w-full aspect-square bg-cream rounded-2xl overflow-hidden flex items-center justify-center p-10 group">
         <Image
           src={activeImage}
           alt="Koolbuy Solar Freezer Unit"
           fill
-          className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+          className="object-contain p-8 kb-product-img group-hover:scale-[1.02] transition-transform duration-700 ease-out"
           priority
         />
       </div>

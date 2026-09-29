@@ -241,7 +241,7 @@ export default function CustomizePage() {
 
       {/* TAB 1: LOCALIZATION */}
       {activeTab === "localization" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
           <div className="flex justify-between items-center border-b border-gray-50 pb-4">
             <div>
               <h3 className="text-base font-bold text-gray-900">
@@ -263,7 +263,7 @@ export default function CustomizePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
+              <label className="text-xs font-bold text-gray-600">
                 Default Language
               </label>
               <Select
@@ -286,7 +286,7 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
+              <label className="text-xs font-bold text-gray-600">
                 Primary Currency
               </label>
               <Select
@@ -308,7 +308,7 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
+              <label className="text-xs font-bold text-gray-600">
                 Secondary Supported Currencies
               </label>
               <Input
@@ -324,7 +324,7 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
+              <label className="text-xs font-bold text-gray-600">
                 System Timezone
               </label>
               <Select
@@ -354,7 +354,7 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
+              <label className="text-xs font-bold text-gray-600">
                 Date Display Format
               </label>
               <Select
@@ -387,7 +387,7 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
+              <label className="text-xs font-bold text-gray-600">
                 Number & Decimal Format
               </label>
               <Select
@@ -421,7 +421,7 @@ export default function CustomizePage() {
       {/* TAB 2: VENDOR TYPE */}
       {activeTab === "vendor-type" && (
         <div className="flex flex-col gap-6">
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-50 pb-4">
               <div>
                 <h3 className="text-base font-bold text-gray-900">
@@ -475,7 +475,7 @@ export default function CustomizePage() {
                       </td>
                       <td>
                         <span
-                          className={`px-2.5 py-1 rounded-md text-[10px] font-bold ${
+                          className={`px-2.5 py-1 rounded-md text-[11px] font-bold ${
                             vt.autoApproveProducts
                               ? "bg-emerald-50 text-emerald-600 border border-emerald-100"
                               : "bg-gray-100 text-gray-600"
@@ -487,7 +487,7 @@ export default function CustomizePage() {
                         </span>
                       </td>
                       <td>
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-brand-blue">
+                        <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-brand-blue">
                           {vt.status}
                         </span>
                       </td>
@@ -513,7 +513,7 @@ export default function CustomizePage() {
 
             {/* Add New Vendor Type Form */}
             <div className="bg-gray-50/60 rounded-xl p-5 border border-gray-100 flex flex-col gap-4">
-              <h4 className="text-xs font-bold text-gray-800 uppercase tracking-wider">
+              <h4 className="text-xs font-bold text-gray-800">
                 Create New Vendor Classification
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
@@ -577,7 +577,7 @@ export default function CustomizePage() {
 
       {/* TAB 3: LINKS */}
       {activeTab === "links" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-50 pb-4">
             <div>
               <h3 className="text-base font-bold text-gray-900">
@@ -650,7 +650,7 @@ export default function CustomizePage() {
 
           {/* Add Link */}
           <div className="bg-gray-50/60 rounded-xl p-5 border border-gray-100 flex flex-col gap-4">
-            <h4 className="text-xs font-bold text-gray-800 uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-gray-800">
               Add New External / System Link
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -697,7 +697,7 @@ export default function CustomizePage() {
 
       {/* TAB 4: NOMENCLATURE */}
       {activeTab === "nomenclature" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
           <div className="flex justify-between items-center border-b border-gray-50 pb-4">
             <div>
               <h3 className="text-base font-bold text-gray-900">
@@ -719,7 +719,7 @@ export default function CustomizePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
+              <label className="text-xs font-bold text-gray-600">
                 Vendor Term (Singular / Plural)
               </label>
               <div className="grid grid-cols-2 gap-3">
@@ -747,7 +747,7 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
+              <label className="text-xs font-bold text-gray-600">
                 Customer Term (Singular / Plural)
               </label>
               <div className="grid grid-cols-2 gap-3">
@@ -775,7 +775,7 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
+              <label className="text-xs font-bold text-gray-600">
                 Order Term (Singular / Plural)
               </label>
               <div className="grid grid-cols-2 gap-3">
@@ -803,7 +803,7 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
+              <label className="text-xs font-bold text-gray-600">
                 BNPL Terminology
               </label>
               <Input
@@ -816,7 +816,7 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
+              <label className="text-xs font-bold text-gray-600">
                 Installment Payment Milestone Term
               </label>
               <Input
@@ -832,7 +832,7 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
+              <label className="text-xs font-bold text-gray-600">
                 Loyalty Reward Points Term
               </label>
               <Input
@@ -852,7 +852,7 @@ export default function CustomizePage() {
 
       {/* TAB 5: USER ONBOARDING */}
       {activeTab === "user-onboarding" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
           <div className="flex justify-between items-center border-b border-gray-50 pb-4">
             <div>
               <h3 className="text-base font-bold text-gray-900">
@@ -947,7 +947,7 @@ export default function CustomizePage() {
 
             {/* Welcome Message */}
             <div className="flex flex-col gap-2 pt-4">
-              <label className="text-xs font-bold text-gray-600 uppercase">
+              <label className="text-xs font-bold text-gray-600">
                 Welcome Notification / Splash Text
               </label>
               <Textarea
@@ -967,7 +967,7 @@ export default function CustomizePage() {
 
       {/* TAB 6: MISCELLANEOUS */}
       {activeTab === "miscellaneous" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
           <div className="flex justify-between items-center border-b border-gray-50 pb-4">
             <div>
               <h3 className="text-base font-bold text-gray-900">
@@ -1046,7 +1046,7 @@ export default function CustomizePage() {
             {/* Thresholds */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-600 uppercase">
+                <label className="text-xs font-bold text-gray-600">
                   Low Stock Inventory Threshold (Units)
                 </label>
                 <Input
@@ -1059,7 +1059,7 @@ export default function CustomizePage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-600 uppercase">
+                <label className="text-xs font-bold text-gray-600">
                   Auto-Cancel Unpaid Orders After (Hours)
                 </label>
                 <Input
@@ -1077,7 +1077,7 @@ export default function CustomizePage() {
 
       {/* TAB 7: POLICY */}
       {activeTab === "policy" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
           <div className="flex justify-between items-center border-b border-gray-50 pb-4">
             <div>
               <h3 className="text-base font-bold text-gray-900">
@@ -1099,7 +1099,7 @@ export default function CustomizePage() {
 
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+              <label className="text-xs font-bold text-gray-700">
                 Terms & Conditions
               </label>
               <Textarea
@@ -1113,7 +1113,7 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+              <label className="text-xs font-bold text-gray-700">
                 Privacy & Data Protection Policy (NDPR Compliant)
               </label>
               <Textarea
@@ -1127,7 +1127,7 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+              <label className="text-xs font-bold text-gray-700">
                 Returns, Exchanges & Warranty Policy
               </label>
               <Textarea
@@ -1141,7 +1141,7 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+              <label className="text-xs font-bold text-gray-700">
                 BNPL Credit & Repossession Charter
               </label>
               <Textarea

@@ -25,12 +25,12 @@ export const CheckoutForm: React.FC = () => {
       >
         <div className="p-6 md:p-8 bg-gray-50/50 border-b border-gray-100 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-full bg-brand-blue text-white flex items-center justify-center font-black shadow-lg shadow-brand-blue/20">
+            <div className="w-10 h-10 rounded-full bg-brand-blue text-white flex items-center justify-center font-semibold shadow-lg shadow-brand-blue/20">
               1
             </div>
             <div>
               <h2 className="text-xl font-bold text-gray-900 tracking-tight">Shipping Details</h2>
-              <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mt-0.5">Where should we deliver?</p>
+              <p className="text-xs text-gray-400 font-bold mt-0.5">Where should we deliver?</p>
             </div>
           </div>
           <Icon name="local_shipping" size="md" className="text-brand-blue opacity-10" />
@@ -39,30 +39,30 @@ export const CheckoutForm: React.FC = () => {
         <div className="p-6 md:p-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">First Name</label>
+              <label className="text-[11px] font-semibold text-gray-400 ml-1">First Name</label>
               <Input placeholder="John" className="h-[52px] bg-gray-50/50 border-gray-100 focus:border-brand-blue focus:bg-white transition-all shadow-none rounded-xl" />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Last Name</label>
+              <label className="text-[11px] font-semibold text-gray-400 ml-1">Last Name</label>
               <Input placeholder="Doe" className="h-[52px] bg-gray-50/50 border-gray-100 focus:border-brand-blue focus:bg-white transition-all shadow-none rounded-xl" />
             </div>
             <div className="flex flex-col gap-2 md:col-span-2">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Email Address</label>
+              <label className="text-[11px] font-semibold text-gray-400 ml-1">Email Address</label>
               <Input placeholder="john.doe@example.com" type="email" className="h-[52px] bg-gray-50/50 border-gray-100 focus:border-brand-blue focus:bg-white transition-all shadow-none rounded-xl" />
             </div>
             <div className="flex flex-col gap-2 md:col-span-2">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Street Address</label>
+              <label className="text-[11px] font-semibold text-gray-400 ml-1">Street Address</label>
               <div className="relative flex items-center">
                 <Input placeholder="123 Shopping Avenue, Suite 456" className="h-[52px] bg-gray-50/50 border-gray-100 focus:border-brand-blue focus:bg-white transition-all shadow-none rounded-xl w-full" />
                 <Icon name="location_on" size="xs" className="absolute right-4 text-gray-300" />
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">City</label>
+              <label className="text-[11px] font-semibold text-gray-400 ml-1">City</label>
               <Input placeholder="San Francisco" className="h-[52px] bg-gray-50/50 border-gray-100 focus:border-brand-blue focus:bg-white transition-all shadow-none rounded-xl" />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Country</label>
+              <label className="text-[11px] font-semibold text-gray-400 ml-1">Country</label>
               <div className="flex items-center justify-between px-4 border border-gray-100 rounded-xl bg-gray-50/50 h-[52px] w-full cursor-pointer hover:border-brand-blue hover:bg-white transition-all group">
                 <span className="text-sm text-gray-900 font-semibold">United States</span>
                 <Icon name="expand_more" size="xs" className="text-gray-400 group-hover:text-brand-blue transition-colors" />
@@ -82,12 +82,12 @@ export const CheckoutForm: React.FC = () => {
       >
         <div className="p-6 md:p-8 bg-gray-50/50 border-b border-gray-100 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-full bg-brand-blue text-white flex items-center justify-center font-black shadow-lg shadow-brand-blue/20">
+            <div className="w-10 h-10 rounded-full bg-brand-blue text-white flex items-center justify-center font-semibold shadow-lg shadow-brand-blue/20">
               2
             </div>
             <div>
               <h2 className="text-xl font-bold text-gray-900 tracking-tight">Payment Selection</h2>
-              <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mt-0.5">Secure Transaction</p>
+              <p className="text-xs text-gray-400 font-bold mt-0.5">Secure Transaction</p>
             </div>
           </div>
           <Icon name="security" size="md" className="text-brand-blue opacity-10" />
@@ -108,14 +108,14 @@ export const CheckoutForm: React.FC = () => {
                 onChange={() => setPaymentMethod("card")}
                 rightElement={
                   <div className="flex gap-2">
-                    <Image src="/payment/Payment=payment, Pay-type=visa.png" alt="Visa" width={32} height={20} className="object-contain" />
-                    <Image src="/payment/Payment=payment, Pay-type=mastercard.png" alt="Mastercard" width={32} height={20} className="object-contain" />
+                    <Image src="/payment/visa.png" alt="Visa" width={32} height={20} className="object-contain" />
+                    <Image src="/payment/mastercard.png" alt="Mastercard" width={32} height={20} className="object-contain" />
                   </div>
                 }
               />
               <div className="relative z-10 pointer-events-none">
                 <span className={`font-bold text-[13px] block ${paymentMethod === "card" ? "text-gray-900" : "text-gray-500"}`}>Credit / Debit Card</span>
-                <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">Instant confirmation</span>
+                <span className="text-[11px] text-gray-400 font-bold mt-0.5">Instant confirmation</span>
               </div>
             </button>
 
@@ -135,7 +135,7 @@ export const CheckoutForm: React.FC = () => {
               />
               <div className="relative z-10 pointer-events-none">
                 <span className={`font-bold text-[13px] block ${paymentMethod === "paypal" ? "text-gray-900" : "text-gray-500"}`}>PayPal Express</span>
-                <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">Redirect to PayPal</span>
+                <span className="text-[11px] text-gray-400 font-bold mt-0.5">Redirect to PayPal</span>
               </div>
             </button>
           </div>
@@ -147,27 +147,27 @@ export const CheckoutForm: React.FC = () => {
               className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 md:p-8 bg-gray-50/80 rounded-2xl border border-gray-100"
             >
               <div className="flex flex-col gap-2 md:col-span-2">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Card Number</label>
+                <label className="text-[11px] font-semibold text-gray-400 ml-1">Card Number</label>
                 <div className="relative flex items-center">
                   <Input placeholder="0000 0000 0000 0000" className="h-[52px] pl-12 shadow-none border-gray-200 focus:border-brand-blue focus:bg-white rounded-xl" />
                   <Icon name="security" size="xs" className="absolute left-4 text-gray-400" />
                 </div>
               </div>
               <div className="flex flex-col gap-2 md:col-span-2">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Cardholder Name</label>
-                <Input placeholder="FULL NAME AS ON CARD" className="h-[52px] shadow-none border-gray-200 focus:border-brand-blue focus:bg-white rounded-xl uppercase placeholder:normal-case font-semibold text-sm" />
+                <label className="text-[11px] font-semibold text-gray-400 ml-1">Cardholder Name</label>
+                <Input placeholder="FULL NAME AS ON CARD" className="h-[52px] shadow-none border-gray-200 focus:border-brand-blue focus:bg-white rounded-xl placeholder:normal-case font-semibold text-sm" />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Expiry Date</label>
+                <label className="text-[11px] font-semibold text-gray-400 ml-1">Expiry Date</label>
                 <div className="relative flex items-center">
                   <Input placeholder="MM / YY" className="h-[52px] shadow-none border-gray-200 focus:border-brand-blue focus:bg-white rounded-xl text-center font-bold" />
                   <Icon name="calendar_today" size="xs" className="absolute left-4 text-gray-200 hidden md:block" />
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Security Code</label>
+                <label className="text-[11px] font-semibold text-gray-400 ml-1">Security Code</label>
                 <div className="relative flex items-center">
-                  <Input placeholder="CVV" type="password" className="h-[52px] shadow-none border-gray-200 focus:border-brand-blue focus:bg-white rounded-xl text-center font-bold tracking-widest" />
+                  <Input placeholder="CVV" type="password" className="h-[52px] shadow-none border-gray-200 focus:border-brand-blue focus:bg-white rounded-xl text-center font-bold" />
                   <Icon name="help" size="xs" className="absolute right-4 text-gray-300" />
                 </div>
               </div>

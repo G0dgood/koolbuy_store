@@ -28,10 +28,10 @@ export function SelectionSummary({
     <div className="flex flex-col gap-4 p-4 rounded-2xl bg-brand-blue-light/30 border border-brand-blue/10 animate-in fade-in slide-in-from-top-2 duration-300">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-brand-blue text-white flex items-center justify-center font-black text-xs">
+          <div className="w-8 h-8 rounded-lg bg-brand-blue text-white flex items-center justify-center font-semibold text-xs">
             {selectedIds.length}
           </div>
-          <span className="text-[13px] font-black text-[#1D3557]">{title}</span>
+          <span className="text-[13px] font-semibold text-ink">{title}</span>
         </div>
         <button
           onClick={onClear}

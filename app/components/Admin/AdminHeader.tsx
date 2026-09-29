@@ -169,7 +169,7 @@ export const AdminHeader: React.FC<HeaderProps> = ({
   return (
     <header
       id="header"
-      className={`  bg-white border-b border-gray-100 flex items-center justify-between px-4 sm:px-12 sticky top-0 z-30 ${className}`}
+      className={`  bg-white/80 backdrop-blur-xl backdrop-saturate-[1.8] border-b border-black/[0.08] flex items-center justify-between px-4 sm:px-12 sticky top-0 z-30 ${className}`}
     >
       <div className="flex items-center gap-3">
         <button
@@ -194,7 +194,7 @@ export const AdminHeader: React.FC<HeaderProps> = ({
           key={pathname}
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
-          className="text-[16px] sm:text-[20px] font-black text-[#1D3557] tracking-tight uppercase truncate xl:max-w-none"
+          className="text-[17px] sm:text-[21px] font-semibold text-ink tracking-[-0.01em] truncate xl:max-w-none capitalize"
         >
           {getPageTitle()}
         </motion.h1>
@@ -235,7 +235,7 @@ export const AdminHeader: React.FC<HeaderProps> = ({
           <div className="relative" ref={notificationRef}>
             <button
               className={`relative p-2 transition-colors group rounded-lg
-                ${isNotificationsOpen ? "bg-brand-blue-light text-brand-blue border border-[#1C1C1C1A]" : "text-gray-400 hover:text-brand-blue"}
+                ${isNotificationsOpen ? "bg-brand-blue-light text-brand-blue border border-gray-100" : "text-gray-400 hover:text-brand-blue"}
               `}
               onClick={toggleNotifications}
             >
@@ -244,7 +244,7 @@ export const AdminHeader: React.FC<HeaderProps> = ({
                 folder="dashboardIcon"
                 size="md"
                 className={
-                  isNotificationsOpen ? "text-brand-blue" : "text-[#1D3557]"
+                  isNotificationsOpen ? "text-brand-blue" : "text-ink"
                 }
               />
               <span className="absolute top-2 right-2 w-1.75 h-1.75 bg-red-500 rounded-full border border-white"></span>
@@ -270,7 +270,7 @@ export const AdminHeader: React.FC<HeaderProps> = ({
           {/* Theme Toggle Switch */}
           <div className="flex items-center">
             <button className="w-12 h-7 bg-brand-blue-light rounded-full p-1 flex items-center relative transition-colors cursor-pointer">
-              <div className="w-5 h-5 bg-white rounded-full border border-[#1C1C1C1A] flex items-center justify-center transition-all transform">
+              <div className="w-5 h-5 bg-white rounded-full border border-gray-100 flex items-center justify-center transition-all transform">
                 <Icon
                   name="Group"
                   folder="dashboardIcon"
@@ -284,7 +284,7 @@ export const AdminHeader: React.FC<HeaderProps> = ({
           {/* User Profile */}
           <div className="relative" ref={profileRef}>
             <div
-              className={`w-11 h-11 rounded-full border border-[#1C1C1C1A] overflow-hidden cursor-pointer transition-all flex items-center justify-center bg-brand-blue-light
+              className={`w-11 h-11 rounded-full border border-gray-100 overflow-hidden cursor-pointer transition-all flex items-center justify-center bg-brand-blue-light
                 ${isProfileOpen ? "border-brand-blue scale-105" : "hover:border-brand-blue/50"}
               `}
               onClick={toggleProfile}

@@ -303,7 +303,7 @@ export default function AdminToolsPage() {
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
           </svg>
           <span>Product Integrity</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[10px] font-black bg-rose-50 text-rose-700">
+          <span className="px-1.5 py-0.2 rounded-full text-[11px] font-semibold bg-rose-50 text-rose-700">
             {integrityIssues.filter((i) => i.status === "Open").length}
           </span>
         </button>
@@ -314,7 +314,7 @@ export default function AdminToolsPage() {
       {/* ========================================================================= */}
       {activeTab === "upload-files" && (
         <div className="space-y-6">
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-6">
+          <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-6 shadow-sm space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
               <div>
                 <h2 className="text-lg font-bold text-gray-900">Upload Multiple Files Tool</h2>
@@ -361,7 +361,7 @@ export default function AdminToolsPage() {
             {/* File List Queue */}
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <h3 className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <h3 className="text-xs font-bold text-gray-700">
                   Files in Queue ({fileList.length})
                 </h3>
                 {fileList.length > 0 && (
@@ -386,7 +386,7 @@ export default function AdminToolsPage() {
                       className="p-3.5 bg-gray-50/80 rounded-xl border border-gray-200 flex items-center justify-between gap-4"
                     >
                       <div className="flex items-center gap-3 min-w-0">
-                        <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-mono text-xs font-black uppercase shrink-0">
+                        <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-mono text-xs font-semibold shrink-0">
                           {file.name.split(".").pop()}
                         </div>
                         <div className="min-w-0">
@@ -401,12 +401,12 @@ export default function AdminToolsPage() {
 
                       <div className="flex items-center gap-4 shrink-0">
                         {file.status === "completed" && (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800">
                             Uploaded
                           </span>
                         )}
                         {file.status === "uploading" && (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800 animate-pulse">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-100 text-blue-800 animate-pulse">
                             {file.progress}% Uploading
                           </span>
                         )}
@@ -432,7 +432,7 @@ export default function AdminToolsPage() {
       {/* ========================================================================= */}
       {activeTab === "catalog-copy" && (
         <div className="space-y-6">
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-6">
+          <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-6 shadow-sm space-y-6">
             <div className="border-b border-gray-100 pb-4">
               <h2 className="text-lg font-bold text-gray-900">Catalog Copy Tool</h2>
               <p className="text-xs text-gray-500 mt-0.5">
@@ -443,7 +443,7 @@ export default function AdminToolsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Source Catalog */}
               <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-3">
-                <span className="text-xs font-black text-gray-700 uppercase tracking-wider block">
+                <span className="text-xs font-semibold text-gray-700 block">
                   Source Catalog (Origin)
                 </span>
                 <Select
@@ -464,7 +464,7 @@ export default function AdminToolsPage() {
 
               {/* Destination Catalog */}
               <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-3">
-                <span className="text-xs font-black text-gray-700 uppercase tracking-wider block">
+                <span className="text-xs font-semibold text-gray-700 block">
                   Destination Catalog (Target)
                 </span>
                 <Select
@@ -486,7 +486,7 @@ export default function AdminToolsPage() {
 
             {/* Copy Preferences */}
             <div className="p-4 bg-white border border-gray-200 rounded-xl space-y-3">
-              <h3 className="text-xs font-bold text-gray-800 uppercase tracking-wider">
+              <h3 className="text-xs font-bold text-gray-800">
                 Replication Rules & Data Scope
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
@@ -550,7 +550,7 @@ export default function AdminToolsPage() {
       {/* ========================================================================= */}
       {activeTab === "tax-copy" && (
         <div className="space-y-6">
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-6">
+          <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-6 shadow-sm space-y-6">
             <div className="border-b border-gray-100 pb-4">
               <h2 className="text-lg font-bold text-gray-900">Tax Copy Tool</h2>
               <p className="text-xs text-gray-500 mt-0.5">
@@ -560,7 +560,7 @@ export default function AdminToolsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-3">
-                <span className="text-xs font-black text-gray-700 uppercase tracking-wider block">
+                <span className="text-xs font-semibold text-gray-700 block">
                   Source Tax Schedule
                 </span>
                 <Select
@@ -576,7 +576,7 @@ export default function AdminToolsPage() {
               </div>
 
               <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-3">
-                <span className="text-xs font-black text-gray-700 uppercase tracking-wider block">
+                <span className="text-xs font-semibold text-gray-700 block">
                   Destination State / Region
                 </span>
                 <Select
@@ -595,7 +595,7 @@ export default function AdminToolsPage() {
             </div>
 
             <div className="p-4 bg-gray-50/70 border border-gray-200 rounded-xl space-y-4">
-              <h3 className="text-xs font-bold text-gray-800 uppercase tracking-wider">
+              <h3 className="text-xs font-bold text-gray-800">
                 Optional Overrides & Adjustments
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -645,11 +645,11 @@ export default function AdminToolsPage() {
       {/* ========================================================================= */}
       {activeTab === "reset-defaults" && (
         <div className="space-y-6">
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-6">
+          <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-6 shadow-sm space-y-6">
             <div className="border-b border-gray-100 pb-4">
               <div className="flex items-center gap-2">
                 <h2 className="text-lg font-bold text-gray-900">Reset to Default Configuration Settings</h2>
-                <span className="px-2 py-0.5 rounded text-[10px] font-black bg-amber-50 text-amber-700 border border-amber-200 uppercase">
+                <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
                   Admin Safe Reset
                 </span>
               </div>
@@ -671,7 +671,7 @@ export default function AdminToolsPage() {
 
             {/* Selectable Modules to Reset */}
             <div className="space-y-3">
-              <h3 className="text-xs font-bold text-gray-800 uppercase tracking-wider">
+              <h3 className="text-xs font-bold text-gray-800">
                 Select Configuration Modules to Restore
               </h3>
 
@@ -748,7 +748,7 @@ export default function AdminToolsPage() {
       {/* ========================================================================= */}
       {activeTab === "product-integrity" && (
         <div className="space-y-6">
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-6">
+          <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-6 shadow-sm space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
               <div>
                 <h2 className="text-lg font-bold text-gray-900">Product Integrity Scanner</h2>
@@ -770,34 +770,34 @@ export default function AdminToolsPage() {
             {/* Diagnostic Summary Cards */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
-                <span className="text-xs text-gray-500 font-semibold block uppercase">Total Scanned</span>
-                <span className="text-2xl font-black text-gray-900 mt-1 block">1,280 SKUs</span>
+                <span className="text-xs text-gray-500 font-semibold block">Total Scanned</span>
+                <span className="text-2xl font-semibold text-gray-900 mt-1 block">1,280 SKUs</span>
               </div>
               <div className="bg-rose-50/70 p-4 rounded-xl border border-rose-100">
-                <span className="text-xs text-rose-700 font-semibold block uppercase">Open Anomalies</span>
-                <span className="text-2xl font-black text-rose-600 mt-1 block">
+                <span className="text-xs text-rose-700 font-semibold block">Open Anomalies</span>
+                <span className="text-2xl font-semibold text-rose-600 mt-1 block">
                   {integrityIssues.filter((i) => i.status === "Open").length} Issues
                 </span>
               </div>
               <div className="bg-emerald-50/70 p-4 rounded-xl border border-emerald-100">
-                <span className="text-xs text-emerald-700 font-semibold block uppercase">Catalog Health</span>
-                <span className="text-2xl font-black text-emerald-600 mt-1 block">99.7%</span>
+                <span className="text-xs text-emerald-700 font-semibold block">Catalog Health</span>
+                <span className="text-2xl font-semibold text-emerald-600 mt-1 block">99.7%</span>
               </div>
               <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
-                <span className="text-xs text-gray-500 font-semibold block uppercase">Last Integrity Run</span>
+                <span className="text-xs text-gray-500 font-semibold block">Last Integrity Run</span>
                 <span className="text-sm font-bold text-gray-800 mt-2 block">10 mins ago</span>
               </div>
             </div>
 
             {/* Issue Table */}
             <div className="space-y-3">
-              <h3 className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+              <h3 className="text-xs font-bold text-gray-700">
                 Flagged Product Anomalies
               </h3>
 
               <div className="overflow-x-auto border border-gray-200 rounded-xl">
                 <table className="w-full text-left text-xs text-gray-700">
-                  <thead className="bg-gray-50 border-b border-gray-200 text-gray-500 uppercase font-semibold">
+                  <thead className="bg-gray-50 border-b border-gray-200 text-gray-500 font-semibold">
                     <tr>
                       <th className="py-3 px-4">SKU / Product</th>
                       <th className="py-3 px-4">Issue Description</th>
@@ -821,17 +821,17 @@ export default function AdminToolsPage() {
 
                         <td className="py-3 px-4">
                           {issue.severity === "High" && (
-                            <span className="px-2 py-0.5 rounded text-[10px] font-black bg-rose-100 text-rose-800">
+                            <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-100 text-rose-800">
                               HIGH
                             </span>
                           )}
                           {issue.severity === "Medium" && (
-                            <span className="px-2 py-0.5 rounded text-[10px] font-black bg-amber-100 text-amber-800">
+                            <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-100 text-amber-800">
                               MEDIUM
                             </span>
                           )}
                           {issue.severity === "Low" && (
-                            <span className="px-2 py-0.5 rounded text-[10px] font-black bg-slate-100 text-slate-800">
+                            <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-100 text-slate-800">
                               LOW
                             </span>
                           )}
@@ -928,7 +928,7 @@ export default function AdminToolsPage() {
             <div className="text-center">
               <h3 className="text-lg font-bold text-gray-900">Confirm Factory Configuration Reset</h3>
               <p className="text-xs text-gray-500 mt-1">
-                Type <span className="font-mono font-bold text-rose-600">RESET</span> below to confirm rolling back selected system settings to baseline defaults.
+                Type <span className="font-mono font-bold text-rose-600">Reset</span> below to confirm rolling back selected system settings to baseline defaults.
               </p>
             </div>
 
@@ -938,7 +938,7 @@ export default function AdminToolsPage() {
                 placeholder="Type RESET here"
                 value={confirmInput}
                 onChange={(e) => setConfirmInput(e.target.value)}
-                className="w-full text-center font-mono font-bold text-sm tracking-wider"
+                className="w-full text-center font-mono font-bold text-sm"
               />
             </div>
           </div>

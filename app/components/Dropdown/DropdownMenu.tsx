@@ -77,7 +77,7 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
           {label}
         </span>
         {subtext && (
-          <span className="text-[10px] text-gray-400 font-medium truncate">
+          <span className="text-[11px] text-gray-400 font-medium truncate">
             {subtext}
           </span>
         )}

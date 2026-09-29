@@ -57,12 +57,12 @@ const RefundPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-cream flex flex-col font-sans text-black">
       <Header />
 
       <main className="flex-1 w-full bg-white">
         {/* Step 68: Trust Hero with policy branding */}
-        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-[#1D3557] overflow-hidden">
+        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-ink overflow-hidden">
           <Image
             src="/brandImage/regional_visual.png"
             alt="Refund Banner"
@@ -70,9 +70,9 @@ const RefundPage = () => {
             className="object-cover opacity-100"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1D3557] via-[#1D3557]/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-transparent" />
           <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue rounded-full filter blur-[120px] opacity-20 translate-x-1/4 -translate-y-1/4" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#8CB7F5] rounded-full filter blur-[100px] opacity-10 -translate-x-1/4 translate-y-1/4" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-action rounded-full filter blur-[100px] opacity-10 -translate-x-1/4 translate-y-1/4" />
 
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 relative z-10 text-center">
             <motion.div
@@ -85,7 +85,7 @@ const RefundPage = () => {
                 <HiShieldCheck size={40} />
               </div>
               <div className="flex flex-col gap-3">
-                <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter font-inter">
+                <h1 className="text-4xl md:text-6xl font-semibold text-white tracking-tighter font-inter">
                   Transparent <span className="text-brand-blue">Refunds</span>
                 </h1>
                 <p className="text-blue-100/70 max-w-2xl text-base md:text-lg leading-relaxed font-medium mx-auto">
@@ -102,10 +102,10 @@ const RefundPage = () => {
         <section className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-24 md:py-32">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-1 flex flex-col gap-6">
-              <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs">
+              <span className="text-brand-blue font-bold text-xs">
                 Policy Foundations
               </span>
-              <h2 className="text-3xl md:text-4xl font-black text-[#1D3557] tracking-tight leading-tight">
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink tracking-tight leading-tight">
                 Eligibility <br />
                 Criteria
               </h2>
@@ -124,7 +124,7 @@ const RefundPage = () => {
                   <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-brand-blue shadow-sm mb-6 group-hover:scale-110 transition-transform">
                     {item.icon}
                   </div>
-                  <h4 className="text-lg font-bold text-[#1D3557] mb-2">
+                  <h4 className="text-lg font-bold text-ink mb-2">
                     {item.title}
                   </h4>
                   <p className="text-gray-500 text-sm leading-relaxed">
@@ -132,7 +132,7 @@ const RefundPage = () => {
                   </p>
                 </div>
               ))}
-              <div className="bg-[#E1EFFE] p-8 rounded-3xl flex items-center gap-5 border border-brand-blue/10">
+              <div className="bg-brand-blue-light p-8 rounded-3xl flex items-center gap-5 border border-brand-blue/10">
                 <HiExclamationCircle
                   className="text-brand-blue shrink-0"
                   size={32}
@@ -150,7 +150,7 @@ const RefundPage = () => {
         <section className="bg-gray-50 py-24 md:py-32">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16">
             <div className="text-center mb-20 flex flex-col items-center gap-4">
-              <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight">
+              <h2 className="text-3xl md:text-5xl font-semibold text-ink tracking-tight">
                 How the process works
               </h2>
               <p className="text-gray-500 max-w-xl">
@@ -176,10 +176,10 @@ const RefundPage = () => {
                     {step.icon}
                   </div>
                   <div className="flex flex-col gap-2">
-                    <span className="text-brand-blue font-black text-xs uppercase tracking-[0.2em]">
+                    <span className="text-brand-blue font-semibold text-xs">
                       Step 0{i + 1}
                     </span>
-                    <h4 className="text-xl font-bold text-[#1D3557]">
+                    <h4 className="text-xl font-bold text-ink">
                       {step.title}
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed px-4 lg:px-0">
@@ -195,10 +195,10 @@ const RefundPage = () => {
         {/* Contact CTA */}
         <section className="py-24 md:py-32">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16">
-            <div className="w-full bg-[#E1EFFE] rounded-[40px] p-12 md:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 relative overflow-hidden">
+            <div className="w-full bg-brand-blue-light rounded-[40px] p-12 md:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/40 rounded-full filter blur-[80px] -translate-x-1/2 -translate-y-1/2" />
               <div className="flex flex-col gap-4 relative z-10 text-center lg:text-left">
-                <h2 className="text-3xl md:text-4xl font-black text-[#1D3557] tracking-tight">
+                <h2 className="text-3xl md:text-4xl font-semibold text-ink tracking-tight">
                   Need to start a refund?
                 </h2>
                 <p className="text-brand-blue/80 font-medium">
@@ -206,10 +206,10 @@ const RefundPage = () => {
                 </p>
               </div>
               <div className="flex items-center gap-4 relative z-10">
-                <button className="bg-brand-blue text-white px-10 py-4 rounded-xl font-black uppercase tracking-widest text-xs shadow-xl shadow-blue-200 hover:scale-105 transition-transform">
+                <button className="bg-brand-blue text-white px-10 py-4 rounded-xl font-semibold text-xs shadow-xl shadow-blue-200 transition-transform">
                   Initiate Now
                 </button>
-                <button className="bg-white text-[#1D3557] px-10 py-4 rounded-xl font-black uppercase tracking-widest text-xs border border-blue-100 hover:bg-gray-50 transition-colors">
+                <button className="bg-white text-ink px-10 py-4 rounded-xl font-semibold text-xs border border-blue-100 hover:bg-gray-50 transition-colors">
                   View Orders
                 </button>
               </div>

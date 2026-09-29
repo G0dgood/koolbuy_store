@@ -72,15 +72,13 @@ export default function FAQPage() {
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 md:pt-32 md:pb-24 bg-gray-50 overflow-hidden">
         <div className="absolute inset-0 opacity-40 pointer-events-none">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-blue-100 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-emerald-100 rounded-full translate-x-1/2 translate-y-1/2 blur-3xl"></div>
         </div>
 
         <div className="max-w-[800px] mx-auto px-6 text-center relative z-10">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-block text-brand-blue font-black text-[10px] uppercase tracking-[0.2em] mb-4 bg-blue-50 px-4 py-1.5 rounded-full"
+            className="inline-block text-brand-blue font-semibold text-[11px] mb-4 bg-blue-50 px-4 py-1.5 rounded-full"
           >
             Help Center
           </motion.span>
@@ -88,7 +86,7 @@ export default function FAQPage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-5xl font-black text-[#1D3557] mb-6 leading-tight"
+            className="text-3xl md:text-5xl font-semibold text-ink mb-6 leading-tight"
           >
             How can we help you?
           </motion.h1>
@@ -127,7 +125,7 @@ export default function FAQPage() {
         <div className="flex flex-col gap-8">
           {searchQuery && (
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-black text-[#1D3557]">Search Results</h2>
+              <h2 className="text-xl font-semibold text-ink">Search Results</h2>
               <button
                 onClick={() => setSearchQuery("")}
                 className="text-xs font-bold text-brand-blue hover:underline"
@@ -147,7 +145,7 @@ export default function FAQPage() {
               <p className="text-gray-500 font-bold">No results found for "{searchQuery}"</p>
               <button
                 onClick={() => setSearchQuery("")}
-                className="text-sm font-black text-brand-blue hover:underline"
+                className="text-sm font-semibold text-brand-blue hover:underline"
               >
                 Try searching something else
               </button>
@@ -157,9 +155,9 @@ export default function FAQPage() {
       </section>
 
       {/* Contact CTA */}
-      <section className="bg-[#1D3557] py-20 relative overflow-hidden">
+      <section className="bg-ink py-20 relative overflow-hidden">
         <div className="max-w-[1440px] mx-auto px-6 relative z-10 flex flex-col items-center text-center">
-          <h2 className="text-3xl font-black text-white mb-4">Still have questions?</h2>
+          <h2 className="text-3xl font-semibold text-white mb-4">Still have questions?</h2>
           <p className="text-blue-200/70 text-base md:text-lg mb-10 max-w-xl font-medium">
             Contact our dedicated support team. We're here to help you solve any issues as quickly as possible.
           </p>
@@ -170,8 +168,8 @@ export default function FAQPage() {
                 <HiOutlineChatBubbleLeftRight size={24} />
               </div>
               <div className="flex flex-col">
-                <span className="text-white font-black text-lg">Live Chat</span>
-                <span className="text-blue-200/50 text-xs font-bold uppercase tracking-widest mt-1">Average wait: 2 mins</span>
+                <span className="text-white font-semibold text-lg">Live Chat</span>
+                <span className="text-blue-200/50 text-xs font-bold mt-1">Average wait: 2 mins</span>
               </div>
             </div>
 
@@ -180,8 +178,8 @@ export default function FAQPage() {
                 <HiOutlineEnvelope size={24} />
               </div>
               <div className="flex flex-col">
-                <span className="text-white font-black text-lg">Email Support</span>
-                <span className="text-blue-200/50 text-xs font-bold uppercase tracking-widest mt-1">Response within 24h</span>
+                <span className="text-white font-semibold text-lg">Email Support</span>
+                <span className="text-blue-200/50 text-xs font-bold mt-1">Response within 24h</span>
               </div>
             </div>
           </div>

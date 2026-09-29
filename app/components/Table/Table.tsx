@@ -96,7 +96,7 @@ const TableCell: React.FC<TableCellProps> = ({
     <Tag 
       className={`
         py-4 px-4 text-sm 
-        ${isHeader ? "font-bold text-gray-500 uppercase tracking-tight" : "text-gray-700 font-medium"}
+        ${isHeader ? "font-bold text-gray-500  tracking-tight" : "text-gray-700 font-medium"}
         ${alignment[align]}
         ${className}
       `}

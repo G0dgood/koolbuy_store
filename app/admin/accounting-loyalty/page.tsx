@@ -265,7 +265,7 @@ export default function AccountingLoyaltyCardsPage() {
             Export Logs
           </Button>
           <Button
-            className="flex-1 sm:flex-initial h-10 px-4 text-xs font-bold bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white shadow-xs"
+            className="flex-1 sm:flex-initial h-10 px-4 text-xs font-bold bg-action hover:bg-action/90 text-white shadow-xs"
             iconLeft={<HiOutlineGift className="w-4 h-4" />}
             onClick={() => setIsIssueModalOpen(true)}
           >
@@ -545,7 +545,7 @@ export default function AccountingLoyaltyCardsPage() {
               <div className="flex justify-end pt-2">
                 <Button
                   size="sm"
-                  className="bg-[#00BCD4] text-white"
+                  className="bg-action text-white"
                   onClick={() => setSelectedRecord(null)}
                 >
                   Close
@@ -585,7 +585,7 @@ export default function AccountingLoyaltyCardsPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-[#00BCD4] text-white"
+                className="bg-action text-white"
                 onClick={() => setIsExportModalOpen(false)}
               >
                 Download CSV
@@ -603,7 +603,7 @@ export default function AccountingLoyaltyCardsPage() {
         <ModalBody>
           <div className="space-y-4 pt-2">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-cyan-50 text-[#00BCD4] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-cyan-50 text-action flex items-center justify-center">
                 <HiOutlineGift className="w-5 h-5" />
               </div>
               <div>
@@ -659,7 +659,7 @@ export default function AccountingLoyaltyCardsPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-[#00BCD4] text-white"
+                className="bg-action text-white"
                 onClick={() => setIsIssueModalOpen(false)}
               >
                 Confirm & Issue

@@ -74,7 +74,7 @@ export function CreateFAQModal({
     >
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-1">
         <div className="flex flex-col gap-1.5">
-          <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+          <label className="text-[11px] font-semibold text-gray-400">
             FAQ Category
           </label>
           <div className="relative">
@@ -88,7 +88,7 @@ export function CreateFAQModal({
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Question</label>
+          <label className="text-[11px] font-semibold text-gray-400">Question</label>
           <Input
             placeholder="e.g. How do I track my order?"
             value={formData.question}
@@ -98,7 +98,7 @@ export function CreateFAQModal({
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Answer Content</label>
+          <label className="text-[11px] font-semibold text-gray-400">Answer Content</label>
           <Textarea
             placeholder="Provide a detailed answer for your customers..."
             value={formData.answer}

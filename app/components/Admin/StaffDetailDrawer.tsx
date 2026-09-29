@@ -32,22 +32,22 @@ export function StaffDetailDrawer({ isOpen, onClose, staff }: StaffDetailDrawerP
       <div className="flex flex-col gap-8 pb-12">
         {/* Profile Header Card */}
         <div className="bg-white rounded-2xl border border-gray-100 p-6 flex flex-col items-center text-center gap-4 relative overflow-hidden group shadow-sm">
-          <div className="absolute top-0 inset-x-0 h-20 bg-[#1D3557] opacity-[0.03] group-hover:opacity-[0.05] transition-opacity duration-500" />
+          <div className="absolute top-0 inset-x-0 h-20 bg-ink opacity-[0.03] group-hover:opacity-[0.05] transition-opacity duration-500" />
           
           <div className="w-24 h-24 rounded-full border-4 border-white shadow-xl overflow-hidden relative z-10 -mt-2 group-hover:scale-105 transition-transform duration-500">
             <img src={staff.avatar} alt={staff.name} className="w-full h-full object-cover" />
           </div>
 
           <div className="flex flex-col gap-1 relative z-10">
-            <h3 className="text-xl font-black text-[#1D3557] tracking-tight">{staff.name}</h3>
+            <h3 className="text-xl font-semibold text-ink tracking-tight">{staff.name}</h3>
             <p className="text-xs font-bold text-gray-400 truncate max-w-[200px]">{staff.email}</p>
           </div>
 
           <div className="flex gap-2 relative z-10">
-             <span className="px-3 py-1 bg-gray-100 rounded-[6px] text-[10px] font-black uppercase tracking-widest text-gray-500">
+             <span className="px-3 py-1 bg-gray-100 rounded-[6px] text-[11px] font-semibold text-gray-500">
                 {staff.role}
              </span>
-             <span className={`px-3 py-1 rounded-[6px] text-[10px] font-black uppercase tracking-widest ${staff.status === 'Active' ? 'bg-emerald-50 text-emerald-500' : 'bg-rose-50 text-rose-500'}`}>
+             <span className={`px-3 py-1 rounded-[6px] text-[11px] font-semibold   ${staff.status === 'Active' ? 'bg-emerald-50 text-emerald-500' : 'bg-rose-50 text-rose-500'}`}>
                 {staff.status}
              </span>
           </div>
@@ -56,32 +56,32 @@ export function StaffDetailDrawer({ isOpen, onClose, staff }: StaffDetailDrawerP
         {/* Organization Info */}
         <div className="grid grid-cols-2 gap-4">
            <div className="p-4 rounded-2xl bg-gray-50/50 border border-gray-100 flex flex-col gap-1">
-              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Department</span>
-              <span className="text-sm font-black text-[#1D3557]">{staff.department}</span>
+              <span className="text-[11px] font-semibold text-gray-400">Department</span>
+              <span className="text-sm font-semibold text-ink">{staff.department}</span>
            </div>
            <div className="p-4 rounded-2xl bg-gray-50/50 border border-gray-100 flex flex-col gap-1">
-              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Employee ID</span>
-              <span className="text-sm font-black text-[#1D3557]">STF-{staff.id?.toString().padStart(4, '0')}</span>
+              <span className="text-[11px] font-semibold text-gray-400">Employee ID</span>
+              <span className="text-sm font-semibold text-ink">STF-{staff.id?.toString().padStart(4, '0')}</span>
            </div>
         </div>
 
         {/* Personal Info */}
         <div className="grid grid-cols-2 gap-4">
            <div className="p-4 rounded-2xl bg-gray-50/50 border border-gray-100 flex flex-col gap-1">
-              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Gender</span>
-              <span className="text-sm font-black text-[#1D3557]">{staff.gender || "Not Specified"}</span>
+              <span className="text-[11px] font-semibold text-gray-400">Gender</span>
+              <span className="text-sm font-semibold text-ink">{staff.gender || "Not Specified"}</span>
            </div>
            <div className="p-4 rounded-2xl bg-gray-50/50 border border-gray-100 flex flex-col gap-1">
-              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Date of Birth</span>
-              <span className="text-sm font-black text-[#1D3557]">{staff.dob || "Not Specified"}</span>
+              <span className="text-[11px] font-semibold text-gray-400">Date of Birth</span>
+              <span className="text-sm font-semibold text-ink">{staff.dob || "Not Specified"}</span>
            </div>
         </div>
 
         {/* Permissions Section */}
         <div className="flex flex-col gap-4">
            <div className="flex items-center justify-between px-1">
-              <h4 className="text-[12px] font-black text-gray-400 uppercase tracking-[0.2em]">Module Access</h4>
-              <button className="text-[10px] font-black text-brand-blue uppercase tracking-widest hover:underline">Edit All</button>
+              <h4 className="text-[12px] font-semibold text-gray-400">Module Access</h4>
+              <button className="text-[11px] font-semibold text-brand-blue hover:underline">Edit All</button>
            </div>
            <div className="flex flex-col gap-2">
               {permissions.map((perm, i) => (
@@ -90,9 +90,9 @@ export function StaffDetailDrawer({ isOpen, onClose, staff }: StaffDetailDrawerP
                       <div className="w-9 h-9 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-brand-blue-light group-hover:text-brand-blue transition-colors">
                          <Icon name={perm.icon} folder={perm.icon === 'Cart' ? 'dashboardIcon' : 'icon'} size="xs" />
                       </div>
-                      <span className="text-[13px] font-bold text-[#1D3557]">{perm.label}</span>
+                      <span className="text-[13px] font-bold text-ink">{perm.label}</span>
                    </div>
-                   <span className="text-[10px] font-black text-gray-400 uppercase bg-gray-50 px-2 py-1 rounded">{perm.status}</span>
+                   <span className="text-[11px] font-semibold text-gray-400 bg-gray-50 px-2 py-1 rounded">{perm.status}</span>
                 </div>
               ))}
            </div>
@@ -100,7 +100,7 @@ export function StaffDetailDrawer({ isOpen, onClose, staff }: StaffDetailDrawerP
 
         {/* Recent Activity Timeline */}
         <div className="flex flex-col gap-4">
-           <h4 className="text-[12px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Recent Activity</h4>
+           <h4 className="text-[12px] font-semibold text-gray-400 px-1">Recent Activity</h4>
            <div className="flex flex-col gap-5 pl-2">
               {recentActivity.map((act, i) => (
                 <div key={i} className="flex gap-4 relative">
@@ -109,10 +109,10 @@ export function StaffDetailDrawer({ isOpen, onClose, staff }: StaffDetailDrawerP
                    )}
                    <div className="w-[16px] h-[16px] rounded-full bg-white border-2 border-brand-blue shadow-sm mt-1 z-10 shrink-0" />
                    <div className="flex flex-col gap-0.5">
-                      <span className="text-[11px] font-black text-[#1D3557] leading-tight">
+                      <span className="text-[11px] font-semibold text-ink leading-tight">
                          {act.action} <span className="text-gray-400 font-bold ml-1">{act.target}</span>
                       </span>
-                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">{act.time}</span>
+                      <span className="text-[11px] font-bold text-gray-400 tracking-tighter">{act.time}</span>
                    </div>
                 </div>
               ))}
@@ -121,10 +121,10 @@ export function StaffDetailDrawer({ isOpen, onClose, staff }: StaffDetailDrawerP
 
         {/* Footer Actions */}
         <div className="mt-auto flex gap-3 pt-4">
-           <Button variant="outline" className="flex-1 font-black text-xs h-12 uppercase tracking-widest">
+           <Button variant="outline" className="flex-1 font-semibold text-xs h-12">
               Lock Session
            </Button>
-           <Button variant="outline" className="flex-1 font-black text-xs h-12 uppercase tracking-widest text-rose-500 border-rose-100 bg-rose-50/30 hover:bg-rose-100">
+           <Button variant="outline" className="flex-1 font-semibold text-xs h-12 text-rose-500 border-rose-100 bg-rose-50/30 hover:bg-rose-100">
               Revoke Access
            </Button>
         </div>

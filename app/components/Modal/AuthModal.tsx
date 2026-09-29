@@ -78,7 +78,7 @@ const LoginForm = ({ onSwitch }: { onSwitch: () => void }) => {
           <div className="flex justify-end px-1">
             <button
               onClick={() => setView("forgotPassword")}
-              className="text-[10px] font-bold text-brand-blue hover:underline cursor-pointer"
+              className="text-[11px] font-bold text-brand-blue hover:underline cursor-pointer"
             >
               Forgot password?
             </button>
@@ -94,7 +94,7 @@ const LoginForm = ({ onSwitch }: { onSwitch: () => void }) => {
 
       <div className="relative flex items-center gap-4 my-2">
         <div className="flex-1 h-px bg-gray-100"></div>
-        <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest">
+        <span className="text-[11px] font-semibold text-gray-300">
           OR
         </span>
         <div className="flex-1 h-px bg-gray-100"></div>
@@ -105,7 +105,7 @@ const LoginForm = ({ onSwitch }: { onSwitch: () => void }) => {
           variant="secondary"
           className="w-full h-11 border-gray-200 text-gray-700 font-medium hover:bg-gray-50 active:bg-gray-100"
           iconLeft={
-            <div className="w-5 h-5 flex items-center justify-center bg-[#EA4335] text-white text-[10px] font-bold rounded-full">
+            <div className="w-5 h-5 flex items-center justify-center bg-[#EA4335] text-white text-[11px] font-bold rounded-full">
               G
             </div>
           }
@@ -192,7 +192,7 @@ const RegisterForm = ({
 
       <div className="relative flex items-center gap-4 my-2">
         <div className="flex-1 h-px bg-gray-100"></div>
-        <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest">
+        <span className="text-[11px] font-semibold text-gray-300">
           OR
         </span>
         <div className="flex-1 h-px bg-gray-100"></div>
@@ -202,7 +202,7 @@ const RegisterForm = ({
         variant="secondary"
         className="w-full h-11 border-gray-200 text-gray-700 font-medium hover:bg-gray-50 active:bg-gray-100"
         iconLeft={
-          <div className="w-5 h-5 flex items-center justify-center bg-[#EA4335] text-white text-[10px] font-bold rounded-full">
+          <div className="w-5 h-5 flex items-center justify-center bg-[#EA4335] text-white text-[11px] font-bold rounded-full">
             G
           </div>
         }

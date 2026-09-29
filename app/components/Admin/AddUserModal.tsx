@@ -65,13 +65,13 @@ export function AddUserModal({ isOpen, onClose }: AddUserModalProps) {
         <ModalBody className="flex flex-col gap-8 py-4">
           {/* Section Header */}
           <div className="flex flex-col gap-1 px-1">
-            <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Profile Information</h4>
+            <h4 className="text-[11px] font-semibold text-gray-400">Profile Information</h4>
             <p className="text-[11px] font-medium text-gray-400">Ensure the staff member's details are accurate for their administrative credentials.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-[#1D3557] uppercase tracking-widest">Full Name</label>
+              <label className="text-[11px] font-semibold text-ink">Full Name</label>
               <Input
                 placeholder="e.g. Eleanor Pena"
                 value={formData.name}
@@ -82,7 +82,7 @@ export function AddUserModal({ isOpen, onClose }: AddUserModalProps) {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-[#1D3557] uppercase tracking-widest">Email Address</label>
+              <label className="text-[11px] font-semibold text-ink">Email Address</label>
               <Input
                 type="email"
                 placeholder="e.g. penna@dealport.com"
@@ -96,7 +96,7 @@ export function AddUserModal({ isOpen, onClose }: AddUserModalProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-[#1D3557] uppercase tracking-widest">Gender</label>
+              <label className="text-[11px] font-semibold text-ink">Gender</label>
               <Select
                 options={genderOptions}
                 value={formData.gender}
@@ -106,7 +106,7 @@ export function AddUserModal({ isOpen, onClose }: AddUserModalProps) {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-[#1D3557] uppercase tracking-widest">Date of Birth</label>
+              <label className="text-[11px] font-semibold text-ink">Date of Birth</label>
               <Input
                 type="date"
                 value={formData.dob}
@@ -119,7 +119,7 @@ export function AddUserModal({ isOpen, onClose }: AddUserModalProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-[#1D3557] uppercase tracking-widest">System Role</label>
+              <label className="text-[11px] font-semibold text-ink">System Role</label>
               <Select
                 options={roleOptions}
                 value={formData.role}
@@ -129,7 +129,7 @@ export function AddUserModal({ isOpen, onClose }: AddUserModalProps) {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black text-[#1D3557] uppercase tracking-widest">Department</label>
+              <label className="text-[11px] font-semibold text-ink">Department</label>
               <Select
                 options={departmentOptions}
                 value={formData.department}
@@ -145,8 +145,8 @@ export function AddUserModal({ isOpen, onClose }: AddUserModalProps) {
               <Icon name="verified" folder="icon" size="sm" />
             </div>
             <div className="flex flex-col gap-0.5">
-              <span className="text-[12px] font-black text-emerald-800">Automated Invitation</span>
-              <p className="text-[10px] font-medium text-emerald-600 leading-relaxed">
+              <span className="text-[12px] font-semibold text-emerald-800">Automated Invitation</span>
+              <p className="text-[11px] font-medium text-emerald-600 leading-relaxed">
                 A secure invitation link will be sent to the email provided, allowing the user to set their password and verify their identity.
               </p>
             </div>

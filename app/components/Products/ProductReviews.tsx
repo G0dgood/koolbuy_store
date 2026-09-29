@@ -60,13 +60,13 @@ const ProductReviews = () => {
       {/* Rating Summary Section */}
       <div className="flex flex-col md:flex-row gap-8 md:items-center bg-gray-50/50 rounded-2xl p-6 md:p-8 border border-gray-100">
         <div className="flex flex-col items-center text-center md:border-r border-gray-200 md:pr-12">
-          <span className="text-5xl font-black text-gray-900 leading-none">4.8</span>
+          <span className="text-5xl font-semibold text-gray-900 leading-none">4.8</span>
           <div className="flex gap-1 my-3">
             {[1, 2, 3, 4, 5].map((star) => (
               <Icon key={star} name="star" size="sm" className={star <= 4 ? "text-orange-400" : "text-gray-300"} />
             ))}
           </div>
-          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Based on 124 reviews</p>
+          <p className="text-xs font-bold text-gray-400">Based on 124 reviews</p>
         </div>
 
         <div className="flex-1 flex flex-col gap-3">
@@ -125,13 +125,13 @@ const ProductReviews = () => {
                             <Icon key={star} name="star" size="xs" className={star <= review.rating ? "text-orange-400" : "text-gray-200"} />
                           ))}
                        </div>
-                       <span className="text-[10px] text-gray-400 font-medium">• {review.date}</span>
+                       <span className="text-[11px] text-gray-400 font-medium">• {review.date}</span>
                     </div>
                   </div>
                 </div>
 
                 {review.verified && (
-                  <div className="flex items-center gap-1.5 px-3 py-1 bg-brand-blue-light text-[10px] font-black text-blue-600 uppercase tracking-wider rounded-full border border-blue-100">
+                  <div className="flex items-center gap-1.5 px-3 py-1 bg-brand-blue-light text-[11px] font-semibold text-blue-600 rounded-full border border-blue-100">
                     <Icon name="check" size="xs" />
                     Verified
                   </div>

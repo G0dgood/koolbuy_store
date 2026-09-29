@@ -44,8 +44,8 @@ export default function TableDemo() {
   );
 
   return (
-    <div className="min-h-screen bg-[#F0F7FF] p-12 font-sans">
-      <div className="max-w-7xl mx-auto bg-white rounded-xl  p-16 text-black">
+    <div className="min-h-screen bg-cream p-12 font-sans">
+      <div className="max-w-7xl mx-auto bg-white rounded-xl p-16 text-black">
         <h1 className="text-5xl font-bold mb-16">Table</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20 mb-20">
@@ -121,7 +121,7 @@ export default function TableDemo() {
 
         {/* Base Components Footer */}
         <div className="mt-24 pt-12 border-t border-gray-200">
-          <h3 className="text-gray-400 font-semibold mb-8 uppercase tracking-wider">Base components</h3>
+          <h3 className="text-gray-400 font-semibold mb-8">Base components</h3>
 
           <div className="flex flex-col gap-12 p-12 border border-dashed border-purple-200 rounded-xl">
             <div className="flex items-center gap-12">

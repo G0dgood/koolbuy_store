@@ -32,7 +32,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       className = "",
       variant = "primary",
       size = "md",
-      shape = "rounded",
+      shape = "pill",
       iconLeft,
       iconRight,
       showChevron,
@@ -45,32 +45,35 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    // Base styles
+    // Base styles (Apple grammar: 400 weight labels, press = scale 0.95, no shadows)
     const baseStyles =
-      "inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 cursor-pointer";
+      "inline-flex items-center justify-center font-normal tracking-[-0.01em] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0071e3] focus-visible:ring-offset-2 disabled:opacity-40 cursor-pointer active:scale-95";
 
     // Variant styles
     const variants = {
+      // Blue pill — the one "click me" signal
       primary:
-        "bg-primary text-white hover:bg-orange-300 active:bg-orange-700 focus:ring-brand-orange/50 border border-transparent ",
+        "bg-action text-white hover:bg-action-hover border border-transparent",
+      // Ghost pill — second CTA next to a primary
       secondary:
-        "bg-white text-brand-blue border border-brand-blue hover:bg-brand-blue/5 active:bg-brand-blue/10 focus:ring-brand-blue/50 ",
+        "bg-transparent text-action border border-action hover:bg-action hover:text-white",
       blue:
-        "bg-brand-blue text-white hover:bg-brand-blue/90 active:bg-blue-700 focus:ring-brand-blue/50 border border-transparent shadow-sm shadow-brand-blue/20",
+        "bg-action text-white hover:bg-action-hover border border-transparent",
       emerald:
-        "bg-brand-blue text-white hover:bg-blue-600 active:bg-blue-700 focus:ring-brand-blue/50 border border-transparent shadow-sm",
-      rose: "bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white active:bg-rose-600 focus:ring-rose-500/50 border border-transparent shadow-sm transition-all",
+        "bg-action text-white hover:bg-action-hover border border-transparent",
+      rose: "bg-transparent text-[#e30000] border border-[#e30000]/30 hover:bg-[#e30000] hover:text-white",
+      // Pearl capsule — quiet secondary on light surfaces
       outline:
-        "bg-white text-[#1D3557] border border-gray-100 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-100/50 shadow-sm",
+        "bg-pearl text-gray-800 border border-black/[0.08] hover:bg-cream",
       ghost:
-        "bg-transparent text-brand-blue hover:bg-brand-blue/10 active:bg-brand-blue/20 focus:ring-brand-blue/50",
+        "bg-transparent text-action hover:bg-action-light",
     };
 
-    // Size styles
+    // Size styles (44px touch target at md+)
     const sizes = {
-      sm: "px-2.5 py-1 text-xs gap-1.5",
-      md: "px-3.5 py-1.5 text-sm gap-2 font-semibold",
-      lg: "px-5 py-2.5 text-base gap-3 font-bold",
+      sm: "px-3 py-1.5 text-xs gap-1.5",
+      md: "px-[18px] py-2 text-sm gap-2",
+      lg: "px-[22px] py-[11px] text-[17px] gap-2.5",
     };
 
     // Shape styles

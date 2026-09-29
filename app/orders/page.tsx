@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function OrdersPage() {
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-inter">
+    <div className="min-h-screen bg-cream flex flex-col font-inter">
       <Header />
 
       <div className="flex-1 w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-4 md:py-6 lg:py-8">

@@ -17,7 +17,7 @@ const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       {/* Pushed content wrapper */}
       <div 
         className={`
-          flex flex-col min-h-screen transition-transform duration-300 ease-in-out bg-[#F7FAFC]
+          flex flex-col min-h-screen transition-transform duration-300 ease-in-out bg-cream
           ${isOpen ? "translate-x-[280px]" : ""}
         `}
       >

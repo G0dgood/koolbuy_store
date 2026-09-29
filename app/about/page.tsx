@@ -61,7 +61,7 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-cream flex flex-col font-sans text-black">
       <Header />
 
       <main className="flex-1 w-full bg-white">
@@ -89,10 +89,10 @@ const AboutPage = () => {
               transition={{ duration: 0.8 }}
               className="flex flex-col items-center gap-4"
             >
-              <span className="px-4 py-1.5 bg-brand-blue rounded-full text-[10px] font-black uppercase tracking-[0.3em] text-white">
+              <span className="px-4 py-1.5 bg-brand-blue rounded-full text-[11px] font-semibold text-white">
                 Established 2015
               </span>
-              <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter font-inter leading-none">
+              <h1 className="text-4xl md:text-7xl font-semibold text-white tracking-tighter font-inter leading-none">
                 Cultivating <span className="text-brand-blue">Pure</span>{" "}
                 Excellence
               </h1>
@@ -113,7 +113,7 @@ const AboutPage = () => {
               viewport={{ once: true }}
               className="flex flex-col gap-6"
             >
-              <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight leading-tight">
+              <h2 className="text-3xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">
                 The intersection <br />
                 of scent and skin.
               </h2>
@@ -164,11 +164,11 @@ const AboutPage = () => {
               viewport={{ once: true }}
               className="flex flex-col gap-6 order-1 lg:order-2"
             >
-              <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight leading-tight">
+              <h2 className="text-3xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">
                 Sourced with soul, <br />
                 crafted for life.
               </h2>
-              <div className="w-20 h-1.5 bg-[#8CB7F5] rounded-full" />
+              <div className="w-20 h-1.5 bg-action rounded-full" />
               <p className="text-gray-500 text-base md:text-xl leading-relaxed">
                 We travel the globe, not just for materials, but for stories.
                 Our sourcing team partners with local communities to ensure that
@@ -176,19 +176,19 @@ const AboutPage = () => {
               </p>
               <div className="flex items-center gap-6 mt-4">
                 <div className="flex flex-col">
-                  <span className="text-2xl font-black text-[#1D3557]">
+                  <span className="text-2xl font-semibold text-ink">
                     50+
                   </span>
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                  <span className="text-[11px] font-bold text-gray-400">
                     Global Partners
                   </span>
                 </div>
                 <div className="h-10 w-px bg-gray-200" />
                 <div className="flex flex-col">
-                  <span className="text-2xl font-black text-[#1D3557]">
+                  <span className="text-2xl font-semibold text-ink">
                     100%
                   </span>
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                  <span className="text-[11px] font-bold text-gray-400">
                     Ethical Choice
                   </span>
                 </div>
@@ -201,10 +201,10 @@ const AboutPage = () => {
         <section className="bg-gray-50 py-24 md:py-32">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 text-center">
             <div className="flex flex-col items-center gap-4 mb-20 text-center">
-              <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs">
+              <span className="text-brand-blue font-bold text-xs">
                 Our Foundations
               </span>
-              <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight">
+              <h2 className="text-3xl md:text-5xl font-semibold text-ink tracking-tight">
                 The Mist & Bloom Values
               </h2>
             </div>
@@ -216,13 +216,13 @@ const AboutPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all text-left flex flex-col gap-6 group"
+                  className="bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition-all text-left flex flex-col gap-6 group"
                 >
                   <div className="w-14 h-14 bg-brand-blue-light rounded-2xl flex items-center justify-center group-hover:bg-brand-blue group-hover:text-white transition-colors">
                     {v.icon}
                   </div>
                   <div className="flex flex-col gap-2">
-                    <h4 className="text-xl font-bold text-[#1D3557]">
+                    <h4 className="text-xl font-bold text-ink">
                       {v.title}
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
@@ -239,7 +239,7 @@ const AboutPage = () => {
         <section className="py-24 md:py-32">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16">
             <div className="flex flex-col items-start gap-4 mb-16">
-              <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight">
+              <h2 className="text-3xl md:text-5xl font-semibold text-ink tracking-tight">
                 Meet the Architects
               </h2>
               <p className="text-gray-500 max-w-xl">
@@ -265,22 +265,22 @@ const AboutPage = () => {
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                       <div className="flex gap-3 text-white">
-                        <button className="hover:scale-120 transition-transform">
+                        <button className="transition-transform">
                           <HiStar size={18} />
                         </button>
-                        <button className="hover:scale-120 transition-transform">
+                        <button className="transition-transform">
                           <HiHeart size={18} />
                         </button>
                       </div>
                     </div>
                   </div>
                   <div className="flex flex-col">
-                    <h5 className="font-bold text-[#1D3557] text-lg">
+                    <h5 className="font-bold text-ink text-lg">
                       {member.name}
                     </h5>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-brand-blue">
+                    <span className="text-[11px] font-bold text-brand-blue">
                       {member.role}
                     </span>
                   </div>
@@ -291,40 +291,40 @@ const AboutPage = () => {
         </section>
 
         {/* Step 64: Trust/Stats Section */}
-        <section className="bg-[#1D3557] py-20 overflow-hidden relative">
+        <section className="bg-ink py-20 overflow-hidden relative">
           <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue rounded-full filter blur-[120px] opacity-20 translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#8CB7F5] rounded-full filter blur-[120px] opacity-10 -translate-x-1/2 translate-y-1/2" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-action rounded-full filter blur-[120px] opacity-10 -translate-x-1/2 translate-y-1/2" />
 
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 grid grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
             <div className="flex flex-col items-center lg:items-start gap-2">
-              <span className="text-4xl md:text-6xl font-black text-white tracking-tighter">
+              <span className="text-4xl md:text-6xl font-semibold text-white tracking-tighter">
                 10<span className="text-brand-blue">+</span>
               </span>
-              <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">
+              <span className="text-[12px] font-bold text-gray-400">
                 Years of Pursuit
               </span>
             </div>
             <div className="flex flex-col items-center lg:items-start gap-2">
-              <span className="text-4xl md:text-6xl font-black text-white tracking-tighter">
-                5M<span className="text-[#8CB7F5]">+</span>
+              <span className="text-4xl md:text-6xl font-semibold text-white tracking-tighter">
+                5M<span className="text-action-on-dark">+</span>
               </span>
-              <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">
+              <span className="text-[12px] font-bold text-gray-400">
                 Global Shipments
               </span>
             </div>
             <div className="flex flex-col items-center lg:items-start gap-2">
-              <span className="text-4xl md:text-6xl font-black text-white tracking-tighter">
+              <span className="text-4xl md:text-6xl font-semibold text-white tracking-tighter">
                 24<span className="text-brand-blue">/</span>7
               </span>
-              <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">
+              <span className="text-[12px] font-bold text-gray-400">
                 Expert Support
               </span>
             </div>
             <div className="flex flex-col items-center lg:items-start gap-2">
-              <span className="text-4xl md:text-6xl font-black text-white tracking-tighter">
-                98<span className="text-[#8CB7F5]">%</span>
+              <span className="text-4xl md:text-6xl font-semibold text-white tracking-tighter">
+                98<span className="text-action-on-dark">%</span>
               </span>
-              <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">
+              <span className="text-[12px] font-bold text-gray-400">
                 Customer Trust
               </span>
             </div>

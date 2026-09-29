@@ -107,7 +107,7 @@ export function UploadMediaModal({ isOpen, onClose, onUploadSuccess }: UploadMed
             <Icon name="cloud_upload" folder="icon" size="md" />
           </div>
           <div className="flex flex-col items-center gap-1 text-center">
-            <span className="text-sm font-black text-[#1D3557]">Click or drag to upload media</span>
+            <span className="text-sm font-semibold text-ink">Click or drag to upload media</span>
             <span className="text-[11px] font-bold text-gray-400">Support for JPG, PNG, and MP4 up to 50MB</span>
           </div>
         </div>
@@ -116,8 +116,8 @@ export function UploadMediaModal({ isOpen, onClose, onUploadSuccess }: UploadMed
         {stagedFiles.length > 0 && (
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-black text-[#1D3557] uppercase tracking-wider">Staged Files ({stagedFiles.length})</span>
-              <button onClick={() => setStagedFiles([])} className="text-[10px] font-bold text-red-500 hover:underline">Clear all</button>
+              <span className="text-xs font-semibold text-ink">Staged Files ({stagedFiles.length})</span>
+              <button onClick={() => setStagedFiles([])} className="text-[11px] font-bold text-red-500 hover:underline">Clear all</button>
             </div>
             <div className="grid grid-cols-1 gap-2 max-h-[160px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-200">
               {stagedFiles.map((file, idx) => (
@@ -128,7 +128,7 @@ export function UploadMediaModal({ isOpen, onClose, onUploadSuccess }: UploadMed
                     </div>
                     <div className="flex flex-col">
                       <span className="text-[11px] font-bold text-gray-900 truncate max-w-[200px]">{file.name}</span>
-                      <span className="text-[10px] font-medium text-gray-400">{(file.size / (1024 * 1024)).toFixed(2)} MB</span>
+                      <span className="text-[11px] font-medium text-gray-400">{(file.size / (1024 * 1024)).toFixed(2)} MB</span>
                     </div>
                   </div>
                   <button
@@ -152,8 +152,8 @@ export function UploadMediaModal({ isOpen, onClose, onUploadSuccess }: UploadMed
             <div key={i} className="flex items-start gap-3 p-4 bg-white border border-gray-50 rounded-xl">
               <Icon name={req.icon} folder="icon" size="xs" className="text-brand-blue mt-0.5" />
               <div className="flex flex-col gap-0.5">
-                <span className="text-[11px] font-black text-[#1D3557]">{req.label}</span>
-                <span className="text-[10px] font-bold text-gray-400 leading-tight">{req.text}</span>
+                <span className="text-[11px] font-semibold text-ink">{req.label}</span>
+                <span className="text-[11px] font-bold text-gray-400 leading-tight">{req.text}</span>
               </div>
             </div>
           ))}

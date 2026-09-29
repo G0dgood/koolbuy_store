@@ -67,7 +67,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
               </button>
             ))}
           </div>
-          <span className="text-xs font-black text-gray-400 uppercase tracking-widest">
+          <span className="text-xs font-semibold text-gray-400">
             {rating === 0 ? "Select a rating" : `${rating} - ${["Poor", "Fair", "Good", "Very Good", "Excellent"][rating - 1]}`}
           </span>
         </div>
@@ -79,7 +79,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
           />
           
           <div className="flex flex-col gap-1.5">
-            <label className="text-[11px] font-black text-gray-400 uppercase tracking-widest px-1">
+            <label className="text-[11px] font-semibold text-gray-400 px-1">
               Your Review
             </label>
             <textarea

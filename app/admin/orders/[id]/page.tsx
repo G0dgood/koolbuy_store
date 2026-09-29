@@ -74,21 +74,21 @@ export default function OrderDetails() {
         />
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <h1 className="text-3xl font-black text-gray-900 tracking-tight">
+            <h1 className="text-3xl font-semibold text-gray-900 tracking-tight">
               {order.id}
             </h1>
             <span
-              className={`px-3 py-1.5 rounded-lg text-[10px] font-black border uppercase tracking-tighter ${
+              className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold border  tracking-tighter ${
                 currentStatus === "Delivered"
                   ? "bg-brand-blue-light text-brand-blue border-blue-100"
                   : currentStatus === "Shipped"
                     ? "bg-brand-blue-light text-brand-blue border-blue-100"
-                    : "bg-orange-50 text-brand-orange border-orange-100"
+                    : "bg-orange-50 text-action border-orange-100"
               }`}
             >
               {currentStatus}
             </span>
-            <span className="px-3 py-1.5 rounded-lg text-[10px] font-black border uppercase tracking-tighter bg-brand-blue-light text-brand-blue border-blue-100">
+            <span className="px-3 py-1.5 rounded-lg text-[11px] font-semibold border tracking-tighter bg-brand-blue-light text-brand-blue border-blue-100">
               {order.paymentStatus}
             </span>
           </div>
@@ -126,7 +126,7 @@ export default function OrderDetails() {
           {/* Order Items Table */}
           <div className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden">
             <div className="p-8 border-b border-gray-50 flex items-center justify-between">
-              <h3 className="text-xl font-black text-gray-900">
+              <h3 className="text-xl font-semibold text-gray-900">
                 Purchased Items
               </h3>
               <span className="text-sm font-bold text-gray-400">
@@ -156,7 +156,7 @@ export default function OrderDetails() {
                                 className="w-full h-full object-cover"
                               />
                             </div>
-                            <span className="text-sm font-black text-gray-900 leading-tight">
+                            <span className="text-sm font-semibold text-gray-900 leading-tight">
                               {item.name}
                             </span>
                           </div>
@@ -167,7 +167,7 @@ export default function OrderDetails() {
                         <td className="text-sm font-bold text-gray-900">
                           {item.quantity}
                         </td>
-                        <td className="text-sm font-black text-gray-900 text-right pr-12">
+                        <td className="text-sm font-semibold text-gray-900 text-right pr-12">
                           {item.total}
                         </td>
                       </tr>
@@ -193,7 +193,7 @@ export default function OrderDetails() {
                   <span>{order.totals.tax}</span>
                 </div>
                 <div className="h-px bg-gray-200 my-2"></div>
-                <div className="flex justify-between text-xl font-black text-gray-900">
+                <div className="flex justify-between text-xl font-semibold text-gray-900">
                   <span>Total Paid</span>
                   <span className="text-brand-blue">
                     {order.totals.grandTotal}
@@ -205,7 +205,7 @@ export default function OrderDetails() {
 
           {/* Activity Logs */}
           <div className="bg-white p-8 rounded-lg border border-gray-100 shadow-sm flex flex-col gap-6">
-            <h3 className="text-xl font-black text-gray-900">
+            <h3 className="text-xl font-semibold text-gray-900">
               Operational Timeline
             </h3>
             <div className="flex flex-col gap-6 relative">
@@ -245,11 +245,11 @@ export default function OrderDetails() {
                   </div>
                   <div className="flex flex-col gap-1">
                     <p
-                      className={`text-sm font-black ${log.active ? "text-gray-900" : "text-gray-500"}`}
+                      className={`text-sm font-semibold ${log.active ? "text-gray-900" : "text-gray-500"}`}
                     >
                       {log.title}
                     </p>
-                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none">
+                    <p className="text-[11px] font-semibold text-gray-400 leading-none">
                       {log.date}
                     </p>
                     <p className="text-xs font-medium text-gray-400 mt-1">
@@ -266,7 +266,7 @@ export default function OrderDetails() {
         <div className="flex flex-col gap-8">
           {/* Customer Card */}
           <div className="bg-white p-8 rounded-lg border border-gray-100 shadow-sm flex flex-col gap-6">
-            <h3 className="text-lg font-black text-gray-900">
+            <h3 className="text-lg font-semibold text-gray-900">
               Customer Profiles
             </h3>
             <div className="flex items-center gap-4">
@@ -276,7 +276,7 @@ export default function OrderDetails() {
                 className="w-14 h-14 rounded-lg object-cover shadow-lg shadow-blue-50 border-2 border-white"
               />
               <div className="flex flex-col">
-                <p className="text-md font-black text-gray-900 leading-none">
+                <p className="text-md font-semibold text-gray-900 leading-none">
                   {order.customer.name}
                 </p>
                 <p className="text-xs font-bold text-gray-400 mt-2">
@@ -288,13 +288,13 @@ export default function OrderDetails() {
             <div className="flex flex-col gap-4 pt-6 border-t border-gray-50">
               <div className="flex gap-3">
                 <Icon name="mail_outline" size="xs" className="text-gray-300" />
-                <span className="text-xs font-black text-gray-600">
+                <span className="text-xs font-semibold text-gray-600">
                   {order.customer.email}
                 </span>
               </div>
               <div className="flex gap-3">
                 <Icon name="phone" size="xs" className="text-gray-300" />
-                <span className="text-xs font-black text-gray-600">
+                <span className="text-xs font-semibold text-gray-600">
                   {order.customer.phone}
                 </span>
               </div>
@@ -302,7 +302,7 @@ export default function OrderDetails() {
 
             <Button
               variant="ghost"
-              className="w-full text-brand-blue font-black hover:bg-brand-blue-light py-3 rounded-xl transition-all"
+              className="w-full text-brand-blue font-semibold hover:bg-brand-blue-light py-3 rounded-xl transition-all"
             >
               View Full Profile
             </Button>
@@ -311,7 +311,7 @@ export default function OrderDetails() {
           {/* Shipping Address */}
           <div className="bg-white p-8 rounded-lg border border-gray-100 shadow-sm flex flex-col gap-6">
             <div className="flex justify-between items-center">
-              <h3 className="text-lg font-black text-gray-900">
+              <h3 className="text-lg font-semibold text-gray-900">
                 Shipping Info
               </h3>
               <Icon
@@ -327,7 +327,7 @@ export default function OrderDetails() {
                   <Icon name="location_on" size="sm" />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <p className="text-xs font-black text-gray-700 leading-tight">
+                  <p className="text-xs font-semibold text-gray-700 leading-tight">
                     Delivery Address
                   </p>
                   <p className="text-xs font-bold text-gray-400 leading-relaxed italic">
@@ -339,11 +339,11 @@ export default function OrderDetails() {
               </div>
 
               <div className="flex gap-3">
-                <div className="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center text-brand-orange shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center text-action shrink-0">
                   <Icon name="local_shipping" size="sm" />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <p className="text-xs font-black text-gray-700 leading-tight">
+                  <p className="text-xs font-semibold text-gray-700 leading-tight">
                     Courier Method
                   </p>
                   <p className="text-xs font-bold text-gray-400 leading-relaxed italic">

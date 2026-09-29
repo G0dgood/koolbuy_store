@@ -42,7 +42,7 @@ export function EditCategoryDrawer({ isOpen, onClose, category }: EditCategoryDr
       <form onSubmit={handleSubmit} className="flex flex-col h-full gap-8">
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Category Name</label>
+            <label className="text-[11px] font-semibold text-gray-400">Category Name</label>
             <Input
               placeholder="e.g. Electronics"
               value={formData.name}
@@ -53,7 +53,7 @@ export function EditCategoryDrawer({ isOpen, onClose, category }: EditCategoryDr
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Category Image Path</label>
+            <label className="text-[11px] font-semibold text-gray-400">Category Image Path</label>
             <div className="flex gap-4">
               <Input
                 placeholder="/dashboardImage/example.png"
@@ -74,7 +74,7 @@ export function EditCategoryDrawer({ isOpen, onClose, category }: EditCategoryDr
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Description (Optional)</label>
+            <label className="text-[11px] font-semibold text-gray-400">Description (Optional)</label>
             <Textarea
               placeholder="Provide a brief description of this category..."
               value={formData.description}
@@ -88,7 +88,7 @@ export function EditCategoryDrawer({ isOpen, onClose, category }: EditCategoryDr
           <Button 
             variant="primary" 
             type="submit" 
-            className="w-full h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest shadow-lg shadow-blue-100"
+            className="w-full h-10 sm:h-12 text-[11px] font-semibold shadow-lg shadow-blue-100"
           >
             Update Category
           </Button>

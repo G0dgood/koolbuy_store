@@ -403,7 +403,7 @@ export default function DBAuditLogsPage() {
       </div>
 
       {/* Main Filter & Search Bar */}
-      <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
+      <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 shadow-sm space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
           {/* Search */}
           <div className="lg:col-span-2">
@@ -559,7 +559,7 @@ export default function DBAuditLogsPage() {
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs text-gray-700">
-            <thead className="bg-gray-50/75 border-b border-gray-200 text-gray-500 uppercase tracking-wider font-semibold">
+            <thead className="bg-gray-50/75 border-b border-gray-200 text-gray-500 font-semibold">
               <tr>
                 <th className="py-3.5 px-4">Log ID & Time</th>
                 <th className="py-3.5 px-4">Table</th>
@@ -621,22 +621,22 @@ export default function DBAuditLogsPage() {
                       {/* Action */}
                       <td className="py-3.5 px-4">
                         {log.action === "INSERT" && (
-                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-800 border border-emerald-200">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">
                             INSERT
                           </span>
                         )}
                         {log.action === "UPDATE" && (
-                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-blue-100 text-blue-800 border border-blue-200">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-800 border border-blue-200">
                             UPDATE
                           </span>
                         )}
                         {log.action === "STATUS_CHANGE" && (
-                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-100 text-amber-800 border border-amber-200">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
                             STATUS CHANGE
                           </span>
                         )}
                         {log.action === "DELETE" && (
-                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-100 text-rose-800 border border-rose-200">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-100 text-rose-800 border border-rose-200">
                             DELETE
                           </span>
                         )}
@@ -655,7 +655,7 @@ export default function DBAuditLogsPage() {
                           {log.actor.name}
                         </div>
                         <div className="flex items-center gap-1.5 mt-0.5">
-                          <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-gray-100 text-gray-600">
+                          <span className="text-[11px] font-bold px-1.5 py-0.2 rounded bg-gray-100 text-gray-600">
                             {log.actor.role}
                           </span>
                         </div>
@@ -677,7 +677,7 @@ export default function DBAuditLogsPage() {
                           {log.changedFields.map((field) => (
                             <span
                               key={field}
-                              className="font-mono text-[10px] bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded"
+                              className="font-mono text-[11px] bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded"
                             >
                               {field}
                             </span>
@@ -688,17 +688,17 @@ export default function DBAuditLogsPage() {
                       {/* Severity */}
                       <td className="py-3.5 px-4">
                         {log.severity === "INFO" && (
-                          <span className="text-[10px] font-bold text-gray-500">
+                          <span className="text-[11px] font-bold text-gray-500">
                             INFO
                           </span>
                         )}
                         {log.severity === "WARN" && (
-                          <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200">
+                          <span className="text-[11px] font-semibold px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200">
                             WARN
                           </span>
                         )}
                         {log.severity === "CRITICAL" && (
-                          <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 animate-pulse">
+                          <span className="text-[11px] font-semibold px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 animate-pulse">
                             CRITICAL
                           </span>
                         )}
@@ -763,7 +763,7 @@ export default function DBAuditLogsPage() {
             <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-black text-gray-900 bg-white px-2.5 py-1 rounded border border-gray-200">
+                  <span className="text-xs font-mono font-semibold text-gray-900 bg-white px-2.5 py-1 rounded border border-gray-200">
                     {selectedLog.id}
                   </span>
                   <span className="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
@@ -787,7 +787,7 @@ export default function DBAuditLogsPage() {
                   <span className="font-bold text-gray-900">
                     {selectedLog.actor.name}
                   </span>
-                  <span className="text-[10px] text-gray-500 block">
+                  <span className="text-[11px] text-gray-500 block">
                     ({selectedLog.actor.role})
                   </span>
                 </div>
@@ -796,7 +796,7 @@ export default function DBAuditLogsPage() {
                   <span className="font-mono font-bold text-gray-800">
                     {selectedLog.ipAddress}
                   </span>
-                  <span className="text-[10px] text-gray-500 block">
+                  <span className="text-[11px] text-gray-500 block">
                     {selectedLog.location}
                   </span>
                 </div>
@@ -805,7 +805,7 @@ export default function DBAuditLogsPage() {
                   <span className="font-bold text-gray-800">
                     {selectedLog.timestamp}
                   </span>
-                  <span className="text-[10px] text-gray-500 block">
+                  <span className="text-[11px] text-gray-500 block">
                     {selectedLog.relativeTime}
                   </span>
                 </div>
@@ -823,7 +823,7 @@ export default function DBAuditLogsPage() {
 
             {/* Changed Fields Summary */}
             <div>
-              <h4 className="text-xs font-black uppercase tracking-wider text-gray-400 mb-2">
+              <h4 className="text-xs font-semibold text-gray-400 mb-2">
                 Modified Columns ({selectedLog.changedFields.length})
               </h4>
               <div className="flex flex-wrap gap-1.5">
@@ -884,12 +884,12 @@ export default function DBAuditLogsPage() {
                 {/* Before / Old State */}
                 <div className="bg-rose-50/40 rounded-xl p-4 border border-rose-200/80">
                   <div className="flex items-center justify-between mb-3 pb-2 border-b border-rose-200">
-                    <span className="text-xs font-black text-rose-800 uppercase tracking-wider flex items-center gap-1.5">
+                    <span className="text-xs font-semibold text-rose-800 flex items-center gap-1.5">
                       <span className="w-2 h-2 rounded-full bg-rose-500"></span>
                       Before (Old State)
                     </span>
                     {selectedLog.oldData === null && (
-                      <span className="text-[10px] font-bold text-rose-600">
+                      <span className="text-[11px] font-bold text-rose-600">
                         (None - New Record)
                       </span>
                     )}
@@ -908,12 +908,12 @@ export default function DBAuditLogsPage() {
                 {/* After / New State */}
                 <div className="bg-emerald-50/40 rounded-xl p-4 border border-emerald-200/80">
                   <div className="flex items-center justify-between mb-3 pb-2 border-b border-emerald-200">
-                    <span className="text-xs font-black text-emerald-800 uppercase tracking-wider flex items-center gap-1.5">
+                    <span className="text-xs font-semibold text-emerald-800 flex items-center gap-1.5">
                       <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
                       After (New State)
                     </span>
                     {selectedLog.newData === null && (
-                      <span className="text-[10px] font-bold text-rose-600">
+                      <span className="text-[11px] font-bold text-rose-600">
                         (None - Record Deleted)
                       </span>
                     )}

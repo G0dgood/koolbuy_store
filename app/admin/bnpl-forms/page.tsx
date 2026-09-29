@@ -307,7 +307,7 @@ export default function BNPLFormsPage() {
           <Button
             variant="primary"
             shape="rounded-sm"
-            className="bg-[#00BCD4] hover:bg-[#00acc1] text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
+            className="bg-action hover:bg-action-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
             onClick={() => setIsAddModalOpen(true)}
           >
             <HiOutlinePlus className="w-4 h-4" />
@@ -397,7 +397,7 @@ export default function BNPLFormsPage() {
                       {/* Slug */}
                       <td>
                         <div className="flex items-center gap-1.5 font-mono text-xs text-gray-600 bg-gray-50 px-2.5 py-1 rounded-md border border-gray-200 w-fit">
-                          <HiOutlineGlobeAlt className="w-3.5 h-3.5 text-[#00BCD4]" />
+                          <HiOutlineGlobeAlt className="w-3.5 h-3.5 text-action" />
                           <span>/{form.slug}</span>
                         </div>
                       </td>
@@ -408,7 +408,7 @@ export default function BNPLFormsPage() {
                           <Button
                             variant="outline"
                             shape="rounded-sm"
-                            className="px-2.5 py-1.5 text-xs font-semibold text-[#00BCD4] border-[#00BCD4]/30 hover:bg-[#00BCD4]/10 transition-all flex items-center gap-1 cursor-pointer"
+                            className="px-2.5 py-1.5 text-xs font-semibold text-action border-action/30 hover:bg-action/10 transition-all flex items-center gap-1 cursor-pointer"
                             onClick={() => setFormToView(form)}
                             title="View Form Preview"
                           >
@@ -481,18 +481,18 @@ export default function BNPLFormsPage() {
           <div className="flex flex-col gap-6 h-full overflow-y-auto pr-1">
             <div className="flex flex-col gap-2 p-4 bg-gray-50 rounded-lg border border-gray-200">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-gray-500 uppercase">
+                <span className="text-xs font-bold text-gray-500">
                   Form Identifier
                 </span>
                 <span className="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                   {formToView.status}
                 </span>
               </div>
-              <h3 className="text-base font-black text-[#1D3557]">
+              <h3 className="text-base font-semibold text-ink">
                 {formToView.title}
               </h3>
               <div className="flex items-center gap-2 text-xs font-mono text-gray-600">
-                <HiOutlineGlobeAlt className="w-4 h-4 text-[#00BCD4]" />
+                <HiOutlineGlobeAlt className="w-4 h-4 text-action" />
                 <span>koolbuy.com/apply/{formToView.slug}</span>
               </div>
               <p className="text-xs text-gray-500 leading-relaxed mt-1">
@@ -501,7 +501,7 @@ export default function BNPLFormsPage() {
             </div>
 
             <div className="flex items-center justify-between">
-              <h4 className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+              <h4 className="text-xs font-bold text-gray-700">
                 Configured Application Fields ({formToView.fields.length})
               </h4>
             </div>
@@ -513,7 +513,7 @@ export default function BNPLFormsPage() {
                   className="p-3 bg-white border border-gray-200 rounded-lg shadow-2xs flex items-center justify-between"
                 >
                   <div className="flex items-center gap-2.5">
-                    <span className="w-5 h-5 rounded-full bg-gray-100 text-gray-500 text-[10px] font-bold flex items-center justify-center">
+                    <span className="w-5 h-5 rounded-full bg-gray-100 text-gray-500 text-[11px] font-bold flex items-center justify-center">
                       {i + 1}
                     </span>
                     <span className="text-xs font-bold text-gray-800">
@@ -521,11 +521,11 @@ export default function BNPLFormsPage() {
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-gray-100 text-gray-600 font-semibold">
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-gray-100 text-gray-600 font-semibold">
                       {f.type}
                     </span>
                     {f.required && (
-                      <span className="text-[10px] font-bold text-rose-500 bg-rose-50 px-1.5 py-0.5 rounded">
+                      <span className="text-[11px] font-bold text-rose-500 bg-rose-50 px-1.5 py-0.5 rounded">
                         Required
                       </span>
                     )}
@@ -652,7 +652,7 @@ function CreateOrEditFormModalContent({
     <form onSubmit={handleSubmit}>
       <ModalBody className="flex flex-col gap-4 py-4">
         <div className="flex flex-col gap-2">
-          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+          <label className="text-xs font-bold text-gray-500">
             Form Title
           </label>
           <Input
@@ -665,7 +665,7 @@ function CreateOrEditFormModalContent({
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+          <label className="text-xs font-bold text-gray-500">
             Form Slug
           </label>
           <div className="flex items-center gap-1.5">
@@ -675,14 +675,14 @@ function CreateOrEditFormModalContent({
               value={slug}
               onChange={(e) => setSlug(e.target.value)}
               placeholder="e.g. commercial-vendor-financing"
-              className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-[#00BCD4]"
+              className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-action"
               required
             />
           </div>
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+          <label className="text-xs font-bold text-gray-500">
             Description / Instructions
           </label>
           <textarea
@@ -690,18 +690,18 @@ function CreateOrEditFormModalContent({
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Brief purpose of this financing form..."
-            className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:outline-none focus:border-[#00BCD4] text-gray-700 leading-relaxed"
+            className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:outline-none focus:border-action text-gray-700 leading-relaxed"
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+          <label className="text-xs font-bold text-gray-500">
             Status
           </label>
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value as any)}
-            className="w-full text-xs font-semibold px-3 py-2 border border-gray-200 rounded-md bg-white focus:outline-none focus:border-[#00BCD4]"
+            className="w-full text-xs font-semibold px-3 py-2 border border-gray-200 rounded-md bg-white focus:outline-none focus:border-action"
           >
             <option value="Active">Active (Accepting Submissions)</option>
             <option value="Draft">Draft (Disabled)</option>
@@ -715,7 +715,7 @@ function CreateOrEditFormModalContent({
         <Button
           variant="primary"
           type="submit"
-          className="bg-[#00BCD4] hover:bg-[#00acc1] text-white"
+          className="bg-action hover:bg-action-hover text-white"
         >
           {initialData ? "Save Changes" : "Create Form"}
         </Button>

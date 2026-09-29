@@ -35,7 +35,7 @@ const FloatingInput = React.forwardRef<HTMLInputElement, FloatingInputProps>(
             }}
             placeholder=" "
             className={`
-              peer w-full bg-white border border-gray-200 rounded-md py-3 px-4 text-sm text-gray-900 
+              peer w-full bg-white border border-[#d2d2d7] rounded-xl py-3 px-4 text-[15px] text-ink 
               focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue
               placeholder:opacity-0 focus:placeholder:opacity-100 transition-all duration-200
               ${prefixElement ? "pl-11" : ""}
@@ -94,7 +94,7 @@ const FloatingTextarea = React.forwardRef<HTMLTextAreaElement, FloatingTextareaP
           }}
           placeholder=" "
           className={`
-            peer w-full bg-white border border-gray-200 rounded-md py-3 px-4 text-sm text-gray-900 
+            peer w-full bg-white border border-[#d2d2d7] rounded-xl py-3 px-4 text-[15px] text-ink 
             focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue
             placeholder:opacity-0 focus:placeholder:opacity-100 transition-all duration-200 min-h-[100px] resize-y
             ${error ? "border-red-500 focus:ring-red-500/20 focus:border-red-500" : ""}

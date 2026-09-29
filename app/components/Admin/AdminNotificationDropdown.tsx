@@ -63,11 +63,11 @@ export const NotificationList: React.FC<{ onAction?: () => void }> = ({ onAction
     <div className="flex flex-col">
       <div className="px-5 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/30">
         <div className="flex flex-col gap-0.5">
-          <span className="font-black text-[#1D3557] text-sm tracking-tight">System Notifications</span>
-          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Platform Events</span>
+          <span className="font-semibold text-ink text-sm tracking-tight">System Notifications</span>
+          <span className="text-[11px] font-bold text-gray-400">Platform Events</span>
         </div>
         <button 
-          className="text-[10px] font-black text-brand-blue uppercase hover:underline"
+          className="text-[11px] font-semibold text-brand-blue hover:underline"
           onClick={onAction}
         >
           Mark all as read
@@ -89,10 +89,10 @@ export const NotificationList: React.FC<{ onAction?: () => void }> = ({ onAction
             
             <div className="flex-1 flex flex-col min-w-0 pr-6">
               <div className="flex justify-between items-start gap-2">
-                <span className={`text-[13px] tracking-tight truncate ${!item.isRead ? "font-black text-[#1D3557]" : "font-bold text-gray-600"}`}>
+                <span className={`text-[13px] tracking-tight truncate ${!item.isRead ? "font-semibold text-ink" : "font-bold text-gray-600"}`}>
                   {item.title}
                 </span>
-                <span className="text-[10px] font-bold text-gray-400 whitespace-nowrap pt-0.5 uppercase tracking-tighter">{item.time}</span>
+                <span className="text-[11px] font-bold text-gray-400 whitespace-nowrap pt-0.5 tracking-tighter">{item.time}</span>
               </div>
               <p className={`text-[11px] leading-relaxed line-clamp-2 mt-1 ${!item.isRead ? "text-gray-900 font-bold" : "text-gray-400 font-medium"}`}>
                 {item.description}

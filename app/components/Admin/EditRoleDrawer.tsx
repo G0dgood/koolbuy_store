@@ -77,11 +77,11 @@ export function EditRoleDrawer({ isOpen, onClose, role }: EditRoleDrawerProps) {
       <form onSubmit={handleSubmit} className="flex flex-col h-full gap-8">
         <div className="flex flex-col gap-8">
           {/* Header Card */}
-          <div className="bg-[#1D3557] rounded-2xl p-6 text-white relative overflow-hidden shadow-xl">
+          <div className="bg-ink rounded-2xl p-6 text-white relative overflow-hidden shadow-xl">
              <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-[0.05] rounded-full -translate-y-12 translate-x-12" />
              <div className="flex flex-col gap-1 relative z-10">
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] opacity-60">Policy Governance</span>
-                <h3 className="text-xl font-black">{role.name}</h3>
+                <span className="text-[11px] font-semibold opacity-60">Policy Governance</span>
+                <h3 className="text-xl font-semibold">{role.name}</h3>
                 <p className="text-[11px] font-medium opacity-70 mt-1 max-w-[240px]">Define granular access rules for this administrative role across all system modules.</p>
              </div>
           </div>
@@ -89,11 +89,11 @@ export function EditRoleDrawer({ isOpen, onClose, role }: EditRoleDrawerProps) {
           <div className="flex flex-col gap-4">
             {/* Matrix Header */}
             <div className="grid grid-cols-12 gap-2 px-1 items-center">
-               <div className="col-span-5 text-[10px] font-black text-gray-400 uppercase tracking-widest">System Module</div>
+               <div className="col-span-5 text-[11px] font-semibold text-gray-400">System Module</div>
                {accessTypes.map(a => (
-                 <div key={a.id} className="col-span-1.5 text-center text-[10px] font-black text-gray-400 uppercase tracking-widest">{a.label}</div>
+                 <div key={a.id} className="col-span-1.5 text-center text-[11px] font-semibold text-gray-400">{a.label}</div>
                ))}
-               <div className="col-span-1 text-right text-[10px] font-black text-gray-400 uppercase tracking-widest">All</div>
+               <div className="col-span-1 text-right text-[11px] font-semibold text-gray-400">All</div>
             </div>
 
             <div className="flex flex-col gap-2">
@@ -103,7 +103,7 @@ export function EditRoleDrawer({ isOpen, onClose, role }: EditRoleDrawerProps) {
                   className="grid grid-cols-12 gap-2 items-center p-3 sm:p-4 bg-white border border-gray-100 rounded-2xl hover:border-blue-100 hover:shadow-md transition-all group"
                 >
                   <div className="col-span-5 flex flex-col gap-0.5">
-                    <span className="text-[13px] font-black text-[#1D3557] group-hover:text-brand-blue transition-colors">{module.label}</span>
+                    <span className="text-[13px] font-semibold text-ink group-hover:text-brand-blue transition-colors">{module.label}</span>
                   </div>
                   
                   {accessTypes.map(a => (
@@ -135,8 +135,8 @@ export function EditRoleDrawer({ isOpen, onClose, role }: EditRoleDrawerProps) {
                 <Icon name="ic_round-logout" folder="dashboardIcon" size="xs" className="rotate-90" />
              </div>
              <div className="flex flex-col gap-1">
-                <span className="text-[11px] font-black text-rose-800 uppercase tracking-wider">Elevation Warning</span>
-                <p className="text-[10px] font-medium text-rose-600 leading-relaxed">
+                <span className="text-[11px] font-semibold text-rose-800">Elevation Warning</span>
+                <p className="text-[11px] font-medium text-rose-600 leading-relaxed">
                    Changes to the access matrix are global. Elevated permissions will be applied to all members assigned to this role immediately upon synchronization.
                 </p>
              </div>
@@ -147,7 +147,7 @@ export function EditRoleDrawer({ isOpen, onClose, role }: EditRoleDrawerProps) {
           <Button 
             variant="primary" 
             type="submit"
-            className="w-full h-12 text-[11px] font-black uppercase tracking-widest shadow-xl shadow-blue-100 animate-pulse-subtle"
+            className="w-full h-12 text-[11px] font-semibold shadow-xl shadow-blue-100 animate-pulse-subtle"
           >
             Deploy Governance Update
           </Button>

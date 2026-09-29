@@ -44,7 +44,7 @@ const RegionSuppliers = () => {
     <section className="w-full flex flex-col gap-5">
       {/* Section Header */}
       <div className="flex items-center justify-between">
-        <h3 className="text-lg md:text-xl font-bold uppercase tracking-wider text-gray-900">
+        <h3 className="text-lg md:text-xl font-bold text-gray-900">
           Suppliers By Region
         </h3>
       </div>
@@ -66,7 +66,7 @@ const RegionSuppliers = () => {
               <span className="text-sm font-medium group-hover:text-brand-blue transition-colors truncate">
                 {region.name}
               </span>
-              <span className="text-[10px] text-gray-400 truncate">
+              <span className="text-[11px] text-gray-400 truncate">
                 {region.domain}
               </span>
             </div>

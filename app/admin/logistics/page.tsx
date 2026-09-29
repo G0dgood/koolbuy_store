@@ -682,7 +682,7 @@ export default function KoolLogisticsPage() {
             <line x1="12" y1="22.08" x2="12" y2="12" />
           </svg>
           <span>Dropping Orders Management</span>
-          <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-blue-50 text-blue-700">
+          <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-700">
             {droppingOrders.length}
           </span>
         </button>
@@ -707,7 +707,7 @@ export default function KoolLogisticsPage() {
             <circle cx="12" cy="10" r="3" />
           </svg>
           <span>Vendor addresses</span>
-          <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-gray-100 text-gray-600">
+          <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-gray-100 text-gray-600">
             {vendorAddresses.length}
           </span>
         </button>
@@ -732,7 +732,7 @@ export default function KoolLogisticsPage() {
             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
           </svg>
           <span>delivery prices per lga</span>
-          <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-gray-100 text-gray-600">
+          <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-gray-100 text-gray-600">
             {lgaPrices.length}
           </span>
         </button>
@@ -777,7 +777,7 @@ export default function KoolLogisticsPage() {
       {activeTab === "dropping-orders" && (
         <div className="space-y-4">
           {/* Filters Bar */}
-          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
+          <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 shadow-sm space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="lg:col-span-2">
                 <Input
@@ -858,7 +858,7 @@ export default function KoolLogisticsPage() {
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs text-gray-700">
-                <thead className="bg-gray-50/75 border-b border-gray-200 text-gray-500 uppercase tracking-wider font-semibold">
+                <thead className="bg-gray-50/75 border-b border-gray-200 text-gray-500 font-semibold">
                   <tr>
                     <th className="py-3.5 px-4">Drop ID & Order</th>
                     <th className="py-3.5 px-4">Customer & Phone</th>
@@ -935,7 +935,7 @@ export default function KoolLogisticsPage() {
                           <div className="font-medium text-gray-900">
                             {order.itemsSummary}
                           </div>
-                          <span className="inline-block mt-0.5 text-[10px] font-semibold bg-gray-100 px-1.5 py-0.2 rounded text-gray-600">
+                          <span className="inline-block mt-0.5 text-[11px] font-semibold bg-gray-100 px-1.5 py-0.2 rounded text-gray-600">
                             {order.itemType}
                           </span>
                         </td>
@@ -951,27 +951,27 @@ export default function KoolLogisticsPage() {
 
                         <td className="py-3.5 px-4">
                           {order.dropStatus === "Ready for Drop" && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-100 text-amber-800 border border-amber-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
                               READY FOR DROP
                             </span>
                           )}
                           {order.dropStatus === "Dispatched" && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-blue-100 text-blue-800 border border-blue-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-800 border border-blue-200">
                               DISPATCHED
                             </span>
                           )}
                           {order.dropStatus === "In Transit" && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-purple-100 text-purple-800 border border-purple-200 animate-pulse">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-purple-100 text-purple-800 border border-purple-200 animate-pulse">
                               IN TRANSIT
                             </span>
                           )}
                           {order.dropStatus === "Dropped Off" && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-800 border border-emerald-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">
                               DROPPED OFF
                             </span>
                           )}
                           {order.dropStatus === "Failed Handover" && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-100 text-rose-800 border border-rose-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-100 text-rose-800 border border-rose-200">
                               FAILED
                             </span>
                           )}
@@ -1006,7 +1006,7 @@ export default function KoolLogisticsPage() {
       {activeTab === "vendor-addresses" && (
         <div className="space-y-4">
           {/* Filters Bar */}
-          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
+          <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 shadow-sm space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="lg:col-span-3">
                 <Input
@@ -1059,7 +1059,7 @@ export default function KoolLogisticsPage() {
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs text-gray-700">
-                <thead className="bg-gray-50/75 border-b border-gray-200 text-gray-500 uppercase tracking-wider font-semibold">
+                <thead className="bg-gray-50/75 border-b border-gray-200 text-gray-500 font-semibold">
                   <tr>
                     <th className="py-3.5 px-4">Vendor & Code</th>
                     <th className="py-3.5 px-4">Contact Person</th>
@@ -1130,11 +1130,11 @@ export default function KoolLogisticsPage() {
 
                         <td className="py-3.5 px-4">
                           {ven.verificationStatus === "Verified" ? (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                               Verified
                             </span>
                           ) : (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
                               Pending Audit
                             </span>
                           )}
@@ -1168,7 +1168,7 @@ export default function KoolLogisticsPage() {
       {activeTab === "delivery-prices" && (
         <div className="space-y-4">
           {/* Filters Bar */}
-          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
+          <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 shadow-sm space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="lg:col-span-2">
                 <Input
@@ -1241,7 +1241,7 @@ export default function KoolLogisticsPage() {
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs text-gray-700">
-                <thead className="bg-gray-50/75 border-b border-gray-200 text-gray-500 uppercase tracking-wider font-semibold">
+                <thead className="bg-gray-50/75 border-b border-gray-200 text-gray-500 font-semibold">
                   <tr>
                     <th className="py-3.5 px-4">Local Government Area (LGA)</th>
                     <th className="py-3.5 px-4">State & Zone</th>
@@ -1287,7 +1287,7 @@ export default function KoolLogisticsPage() {
                           <div className="font-medium text-gray-900">
                             {lga.state}
                           </div>
-                          <span className="inline-block mt-0.5 text-[10px] font-semibold bg-slate-100 px-1.5 py-0.2 rounded text-slate-700">
+                          <span className="inline-block mt-0.5 text-[11px] font-semibold bg-slate-100 px-1.5 py-0.2 rounded text-slate-700">
                             {lga.zone}
                           </span>
                         </td>
@@ -1310,11 +1310,11 @@ export default function KoolLogisticsPage() {
 
                         <td className="py-3.5 px-4">
                           {lga.status === "Active" ? (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                               Active
                             </span>
                           ) : (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
                               Restricted
                             </span>
                           )}
@@ -1351,7 +1351,7 @@ export default function KoolLogisticsPage() {
           <div className="space-y-6">
             <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-sm font-black text-gray-900">
+                <span className="font-mono text-sm font-semibold text-gray-900">
                   {selectedDropOrder.id}
                 </span>
                 <span className="text-xs font-bold text-blue-600">
@@ -1382,7 +1382,7 @@ export default function KoolLogisticsPage() {
             </div>
 
             <div className="space-y-3">
-              <h4 className="text-xs font-black uppercase tracking-wider text-gray-400">
+              <h4 className="text-xs font-semibold text-gray-400">
                 Update Fulfillment Status
               </h4>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">

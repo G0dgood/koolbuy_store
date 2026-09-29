@@ -16,7 +16,7 @@ export const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({ searchQu
       {isVisible && searchQuery.length > 0 && (
         <div className="absolute top-full left-0 pt-2 w-full z-100">
           <DropdownMenu width="100%" className="shadow-2xl border border-gray-100 rounded-2xl overflow-hidden bg-white">
-            <div className="px-4 py-2 text-xs font-bold text-gray-400 border-b border-gray-50 uppercase tracking-wider">
+            <div className="px-4 py-2 text-xs font-bold text-gray-400 border-b border-gray-50">
               Top Results for "{searchQuery}"
             </div>
             <DropdownItem

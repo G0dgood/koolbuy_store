@@ -18,8 +18,8 @@ export default function FormOtherDemo() {
   const [radioValue, setRadioValue] = useState("second");
 
   return (
-    <div className="min-h-screen bg-[#F0F7FF] p-12 font-sans">
-      <div className="max-w-4xl mx-auto bg-white rounded-xl  p-16 text-black">
+    <div className="min-h-screen bg-cream p-12 font-sans">
+      <div className="max-w-4xl mx-auto bg-white rounded-xl p-16 text-black">
         <h1 className="text-5xl font-bold mb-16">Form - Other</h1>
 
         <div className="flex flex-col gap-20">

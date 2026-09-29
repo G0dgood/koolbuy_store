@@ -48,37 +48,37 @@ export default function ProductDetailPage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F7FAFC]">
+    <div className="flex flex-col min-h-screen bg-white">
       <Header />
 
-      <div className="flex-1 max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-4 md:py-6 flex flex-col gap-6 md:gap-8 w-full">
+      <div className="flex-1 max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-4 md:py-8 flex flex-col gap-8 md:gap-16 w-full">
         {/* Breadcrumbs */}
-        <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-400 overflow-x-auto whitespace-nowrap scrollbar-none pb-1">
-          <Link href="/" className="hover:text-[#FF7A00] transition-colors">
+        <div className="flex items-center gap-1.5 text-[12px] text-gray-500 overflow-x-auto whitespace-nowrap scrollbar-none pb-1">
+          <Link href="/" className="hover:text-ink hover:underline">
             Home
           </Link>
           <Icon name="chevron_right" size="xs" />
           <Link
             href="/products"
-            className="hover:text-[#FF7A00] transition-colors"
+            className="hover:text-ink hover:underline"
           >
             Products
           </Link>
           <Icon name="chevron_right" size="xs" />
           <Link
             href="/products?category=Single+Door+Chest+Freezers"
-            className="hover:text-[#FF7A00] transition-colors"
+            className="hover:text-ink hover:underline"
           >
             Single Door Chest Freezers
           </Link>
           <Icon name="chevron_right" size="xs" />
-          <span className="text-gray-600 font-medium truncate max-w-60 sm:max-w-md">
+          <span className="text-ink truncate max-w-60 sm:max-w-md">
             219L Thermocool Inverter Solar Freezer
           </span>
         </div>
 
         {/* Top Product Section (2-column layout matching reference) */}
-        <div className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 md:p-8 flex flex-col lg:flex-row gap-8 lg:gap-12 shadow-xs">
+        <div className="bg-white flex flex-col lg:flex-row gap-8 lg:gap-16">
           <ProductGallery />
           <ProductDetailsInfo />
         </div>

@@ -41,8 +41,8 @@ export const ProfileSidebar: React.FC = () => {
           </div>
         </div>
         <h3 className="text-xl font-bold text-gray-900 mb-0.5">Alex John</h3>
-        <p className="text-sm font-medium text-gray-400 mb-3 uppercase tracking-tighter">Premium Member</p>
-        <div className="px-3 py-1 bg-brand-blue-light text-brand-blue text-[10px] font-bold rounded-full uppercase tracking-wider">
+        <p className="text-sm font-medium text-gray-400 mb-3 tracking-tighter">Premium Member</p>
+        <div className="px-3 py-1 bg-brand-blue-light text-brand-blue text-[11px] font-bold rounded-full">
           Verified Buyer
         </div>
       </div>
@@ -70,7 +70,7 @@ export const ProfileSidebar: React.FC = () => {
               />
               <span className="flex-1">{item.label}</span>
               {item.badge && (
-                <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black transition-colors
+                <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-semibold transition-colors
                   ${isActive ? "bg-brand-blue text-white" : "bg-gray-200 text-gray-600 group-hover:bg-brand-blue group-hover:text-white"}`}>
                   {item.badge}
                 </span>

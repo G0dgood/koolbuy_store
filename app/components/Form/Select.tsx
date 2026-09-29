@@ -70,8 +70,8 @@ export const Select = <T extends boolean = false>({
           }
         }}
         className={`
-          flex items-center justify-between w-full bg-white border rounded-[6px] py-2.5 px-4 text-sm transition-all cursor-pointer outline-none
-          ${isOpen ? "border-brand-blue ring-2 ring-brand-blue/20" : "border-gray-200 hover:border-gray-300"}
+          flex items-center justify-between w-full bg-white border rounded-xl py-3 px-4 text-[15px] transition-colors cursor-pointer outline-none
+          ${isOpen ? "border-[#0071e3] ring-4 ring-[#0071e3]/15" : "border-[#d2d2d7] hover:border-gray-500"}
         `}
       >
         <div className="flex flex-wrap gap-1.5 flex-1 min-w-0">
@@ -88,7 +88,7 @@ export const Select = <T extends boolean = false>({
               <span className="text-gray-400 truncate">{placeholder}</span>
             )
           ) : (
-            <span className={`${selectedOptions ? "text-gray-900 font-bold" : "text-gray-400"} truncate`}>
+            <span className={`${selectedOptions ? "text-ink" : "text-gray-500"} truncate`}>
               {(selectedOptions as Option)?.label || placeholder}
             </span>
           )}
@@ -101,7 +101,7 @@ export const Select = <T extends boolean = false>({
       </div>
 
       {isOpen && (
-        <div className="absolute z-50 w-full mt-1 bg-white border border-gray-100 rounded-[6px] shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="absolute z-50 w-full mt-1.5 bg-white/95 backdrop-blur-xl border border-black/[0.06] rounded-xl shadow-xl p-1 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
           <ul className="max-h-60 overflow-y-auto">
             {options.map((option) => {
               const isSelected = isMulti
@@ -113,8 +113,8 @@ export const Select = <T extends boolean = false>({
                   <button
                     onClick={() => handleSelect(option)}
                     className={`
-                      w-full text-left px-4 py-3 text-sm transition-colors
-                      ${isSelected ? "bg-brand-blue-light text-brand-blue font-black" : "text-gray-700 hover:bg-gray-50"}
+                      w-full text-left px-3 py-2 rounded-lg text-[14px] transition-colors
+                      ${isSelected ? "bg-action text-white" : "text-ink hover:bg-black/[0.05]"}
                     `}
                   >
                     {option.label}

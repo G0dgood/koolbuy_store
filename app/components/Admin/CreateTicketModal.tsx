@@ -60,7 +60,7 @@ export function CreateTicketModal({ isOpen, onClose, onCreate }: CreateTicketMod
     {/* Input Fields */}
     <div className="flex flex-col gap-6">
      <div className="flex flex-col gap-3">
-      <label className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Case Subject</label>
+      <label className="text-[11px] font-semibold text-gray-400 px-1">Case Subject</label>
       <Input
        placeholder="e.g., Login issue after password reset"
        value={formData.subject}
@@ -70,7 +70,7 @@ export function CreateTicketModal({ isOpen, onClose, onCreate }: CreateTicketMod
      </div>
 
      <div className="flex flex-col gap-3">
-      <label className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Customer Name</label>
+      <label className="text-[11px] font-semibold text-gray-400 px-1">Customer Name</label>
       <div className="relative">
        <Input
         placeholder="Enter customer name"
@@ -86,7 +86,7 @@ export function CreateTicketModal({ isOpen, onClose, onCreate }: CreateTicketMod
      </div>
 
      <div className="flex flex-col gap-3">
-      <label className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Initial Priority</label>
+      <label className="text-[11px] font-semibold text-gray-400 px-1">Initial Priority</label>
       <Select
        options={priorityOptions}
        value={formData.priority}
@@ -95,8 +95,8 @@ export function CreateTicketModal({ isOpen, onClose, onCreate }: CreateTicketMod
       />
       <div className="flex flex-col gap-2 mt-1">
        <div className="flex justify-between items-center px-1">
-        <span className="text-[9px] font-black text-gray-400 tracking-widest uppercase">Severity Level</span>
-        <span className={`text-[9px] font-black tracking-widest uppercase ${priorityMap[formData.priority]?.color.replace('bg-', 'text-')}`}>
+        <span className="text-[11px] font-semibold text-gray-400">Severity Level</span>
+        <span className={`text-[11px] font-semibold   ${priorityMap[formData.priority]?.color.replace('bg-', 'text-')}`}>
          {priorityMap[formData.priority]?.label}
         </span>
        </div>
@@ -106,9 +106,9 @@ export function CreateTicketModal({ isOpen, onClose, onCreate }: CreateTicketMod
          initial={{ width: 0 }}
          animate={{
           width: `${priorityMap[formData.priority]?.percent || 0}%`,
-          backgroundColor: formData.priority === "Low" ? "#10b981" :
+          backgroundColor: formData.priority === "Low" ? "#248a3d" :
            formData.priority === "Medium" ? "#3b82f6" :
-            formData.priority === "High" ? "#f59e0b" : "#f43f5e"
+            formData.priority === "High" ? "#b64400" : "#e30000"
          }}
          transition={{ type: "spring", damping: 25, stiffness: 120 }}
          className="h-full rounded-full shadow-sm flex items-center justify-end px-2"
@@ -119,7 +119,7 @@ export function CreateTicketModal({ isOpen, onClose, onCreate }: CreateTicketMod
      </div>
 
      <div className="flex flex-col gap-3">
-      <label className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Detailed Description</label>
+      <label className="text-[11px] font-semibold text-gray-400 px-1">Detailed Description</label>
       <Textarea
        placeholder="Describe the issue in detail..."
        value={formData.description}

@@ -37,8 +37,8 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     warning: {
       icon: "warning_amber",
       iconBg: "bg-orange-50",
-      iconColor: "text-brand-orange",
-      buttonBg: "bg-brand-orange hover:bg-orange-600",
+      iconColor: "text-action",
+      buttonBg: "bg-action hover:bg-orange-600",
       shadow: "shadow-orange-100",
     },
     success: {
@@ -73,7 +73,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
         </div>
 
         <div className="flex flex-col gap-2 mt-2">
-          <h3 className="text-lg sm:text-xl font-black text-gray-900 leading-tight">{title}</h3>
+          <h3 className="text-lg sm:text-xl font-semibold text-gray-900 leading-tight">{title}</h3>
           <p className="text-[13px] sm:text-sm text-gray-500 font-medium leading-relaxed px-4">
             {message}
           </p>
@@ -88,7 +88,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
             {cancelText}
           </Button>
           <Button
-            className={`flex-1 h-10 sm:h-12 font-black text-white border-transparent shadow-lg ${config.shadow} transition-all active:scale-95 ${config.buttonBg}`}
+            className={`flex-1 h-10 sm:h-12 font-semibold text-white border-transparent shadow-lg ${config.shadow} transition-all active:scale-95 ${config.buttonBg}`}
             onClick={() => {
               onConfirm();
               onClose();

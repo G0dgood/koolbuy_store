@@ -24,7 +24,7 @@ const SavedForLater = () => {
 
   if (wishlistItems.length === 0) {
     return (
-      <section className="bg-white border border-gray-200 rounded-lg overflow-hidden ">
+      <section className="bg-white border border-gray-200 rounded-lg overflow-hidden">
         <div className="p-6 border-b border-gray-100">
           <h3 className="text-xl font-bold text-gray-900">Saved for later</h3>
         </div>
@@ -37,7 +37,7 @@ const SavedForLater = () => {
   }
 
   return (
-    <section className="bg-white border border-gray-200 rounded-lg overflow-hidden ">
+    <section className="bg-white border border-gray-200 rounded-lg overflow-hidden">
       <div className="p-6 border-b border-gray-100">
         <h3 className="text-xl font-bold text-gray-900">Saved for later ({wishlistItems.length})</h3>
       </div>
@@ -71,7 +71,7 @@ const SavedForLater = () => {
                   onClick={() => removeFromWishlist(item.id)}
                   variant="ghost" 
                   size="sm" 
-                  className="flex-1 !text-[#EB001B] font-medium border border-brand-blue-light hover:bg-red-50 shadow-none justify-center"
+                  className="flex-1 !text-[#e30000] font-medium border border-brand-blue-light hover:bg-red-50 shadow-none justify-center"
                 >
                   Remove
                 </Button>

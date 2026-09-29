@@ -23,7 +23,7 @@ const SupplierCard = () => {
 
    return (
       <div className="w-72 flex-shrink-0 flex flex-col gap-3">
-         <div className="bg-white border border-gray-200 rounded-lg p-5 flex flex-col gap-5 ">
+         <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-5 flex flex-col gap-5">
             {/* Vendor Header */}
             <div className="flex gap-3 pb-4 border-b border-gray-100 items-center">
                <div className="w-12 h-12 bg-[#DDF0FF] rounded flex items-center justify-center text-brand-blue font-bold text-xl">

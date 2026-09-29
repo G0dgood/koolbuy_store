@@ -277,7 +277,7 @@ export default function VendorAccountingPage() {
             variant="blue"
             size="md"
             iconLeft={<HiOutlineDocumentArrowDown size={18} />}
-            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold shadow-sm shadow-brand-blue/20 bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white"
+            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold shadow-sm shadow-brand-blue/20 bg-action hover:bg-action/90 text-white"
             onClick={() => setIsExportModalOpen(true)}
           >
             Export Settlements
@@ -404,7 +404,7 @@ export default function VendorAccountingPage() {
                           <span className="font-bold text-xs text-gray-900 whitespace-nowrap">
                             {row.vendorName}
                           </span>
-                          <span className="text-[10px] font-mono text-gray-400">
+                          <span className="text-[11px] font-mono text-gray-400">
                             {row.orderId}
                           </span>
                         </div>
@@ -471,7 +471,7 @@ export default function VendorAccountingPage() {
                     </td>
 
                     {/* Vendor Earning */}
-                    <td className="font-black text-xs text-emerald-600 whitespace-nowrap">
+                    <td className="font-semibold text-xs text-emerald-600 whitespace-nowrap">
                       {row.vendorEarning}
                     </td>
                   </tr>
@@ -599,7 +599,7 @@ export default function VendorAccountingPage() {
                   <span className="font-bold text-emerald-900 text-xs">
                     Net Vendor Earning
                   </span>
-                  <span className="font-black text-emerald-600 text-sm">
+                  <span className="font-semibold text-emerald-600 text-sm">
                     {selectedSettlement.vendorEarning}
                   </span>
                 </div>
@@ -608,7 +608,7 @@ export default function VendorAccountingPage() {
               <div className="flex justify-end pt-2">
                 <Button
                   size="sm"
-                  className="bg-[#00BCD4] text-white"
+                  className="bg-action text-white"
                   onClick={() => setSelectedSettlement(null)}
                 >
                   Close
@@ -648,7 +648,7 @@ export default function VendorAccountingPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-[#00BCD4] text-white"
+                className="bg-action text-white"
                 onClick={() => setIsExportModalOpen(false)}
               >
                 Download CSV

@@ -56,8 +56,8 @@ export function BulkActionsDrawer({
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 flex-shrink-0 bg-gray-50/50">
               <div className="flex flex-col">
-                <h3 className="text-[16px] font-black text-[#1D3557]">{title}</h3>
-                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">
+                <h3 className="text-[16px] font-semibold text-ink">{title}</h3>
+                <span className="text-[11px] font-bold text-gray-400 mt-0.5">
                   Batch Management
                 </span>
               </div>
@@ -82,7 +82,7 @@ export function BulkActionsDrawer({
 
               {actions.length > 0 && (
                 <div className="flex flex-col gap-3">
-                  <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">
+                  <p className="text-[11px] font-semibold text-gray-400 px-1">
                     Available Actions
                   </p>
                   <div className="flex flex-col gap-2">
@@ -93,7 +93,7 @@ export function BulkActionsDrawer({
                         className={`flex items-center gap-4 p-3.5 rounded-2xl transition-all text-left border border-transparent
                           ${action.variant === "danger"
                             ? "hover:bg-rose-50 hover:border-rose-100 text-rose-600"
-                            : "hover:bg-brand-blue-light hover:border-brand-blue/10 text-[#1D3557]"}
+                            : "hover:bg-brand-blue-light hover:border-brand-blue/10 text-ink"}
                         `}
                       >
                         <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0
@@ -103,7 +103,7 @@ export function BulkActionsDrawer({
                         `}>
                           <Icon name={action.icon} folder={action.folder} size="xs" />
                         </div>
-                        <span className="text-[12px] font-black">{action.title}</span>
+                        <span className="text-[12px] font-semibold">{action.title}</span>
                         <div className="ml-auto opacity-40">
                           <Icon name="arrow_forward" folder="icon" size="xs" />
                         </div>
@@ -119,8 +119,8 @@ export function BulkActionsDrawer({
                   <Icon name="verified" folder="icon" size="lg" className="text-white w-14 h-14" />
                 </div>
                 <div className="relative z-10 flex flex-col gap-2">
-                  <span className="text-[12px] font-black text-white">Efficiency Tip</span>
-                  <p className="text-[10px] font-medium text-gray-400 leading-relaxed">
+                  <span className="text-[12px] font-semibold text-white">Efficiency Tip</span>
+                  <p className="text-[11px] font-medium text-gray-400 leading-relaxed">
                     Batch actions apply instantly to all items in your selection list. Always double-check before confirming bulk deletions.
                   </p>
                 </div>

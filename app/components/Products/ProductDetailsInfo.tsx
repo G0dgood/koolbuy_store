@@ -75,25 +75,25 @@ export const ProductDetailsInfo: React.FC = () => {
     <div className="flex-1 flex flex-col gap-5 lg:w-1/2">
       {/* Title and Stock Row */}
       <div className="flex items-start justify-between gap-4">
-        <h1 className="text-xl sm:text-2xl font-extrabold text-gray-900 leading-snug tracking-tight uppercase">
+        <h1 className="text-[28px] sm:text-[40px] font-semibold text-ink leading-[1.1] tracking-[-0.02em]">
           219L THERMOCOOL INVERTER SOLAR FREEZER (MAXI (24V 60AH BATTERY + 40V
           PWM + 2 X 600W PANELS))
         </h1>
-        <span className="shrink-0 bg-[#FFF4ED] text-[#FF7A00] font-bold text-xs px-3 py-1 rounded-md">
+        <span className="shrink-0 kb-sticker">
           In Stock
         </span>
       </div>
 
       {/* Sold By */}
       <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-700">
-        <div className="w-5 h-5 rounded bg-[#FF7A00] flex items-center justify-center text-white shrink-0 shadow-xs">
+        <div className="w-5 h-5 rounded bg-action flex items-center justify-center text-white shrink-0 shadow-xs">
           <FiShoppingCart size={11} />
         </div>
         <span>
           Sold by:{" "}
           <Link
             href="/products?vendor=gworld"
-            className="font-bold text-gray-900 hover:text-[#FF7A00] transition-colors"
+            className="font-bold text-gray-900 hover:text-action transition-colors"
           >
             Koolbuy- GWORLD ELECTRONICS
           </Link>
@@ -101,24 +101,24 @@ export const ProductDetailsInfo: React.FC = () => {
       </div>
 
       {/* Buy for as low as monthly BNPL Dropdown Card */}
-      <div className="w-full border border-[#FF7A00] rounded-2xl overflow-hidden bg-white shadow-xs">
+      <div className="w-full border border-hairline rounded-2xl overflow-hidden bg-white">
         {/* Dropdown Header Trigger */}
         <button
           type="button"
           onClick={() => setIsBnplOpen((prev) => !prev)}
-          className="w-full px-5 py-4 flex items-center justify-between cursor-pointer outline-none bg-[#FFFBF7] hover:bg-[#FFF6ED] transition-colors text-left"
+          className="w-full px-5 py-4 flex items-center justify-between cursor-pointer outline-none bg-cream hover:bg-cream-dark transition-colors text-left"
         >
           <span className="text-base sm:text-lg text-gray-800 font-bold">
             Buy for as low as{" "}
-            <strong className="text-[#FF7A00] font-black text-lg sm:text-xl">
+            <strong className="text-ink font-semibold text-lg sm:text-xl">
               ₦89,000
             </strong>{" "}
             monthly
           </span>
           {isBnplOpen ? (
-            <FiChevronUp className="text-[#FF7A00] text-xl shrink-0" />
+            <FiChevronUp className="text-action text-xl shrink-0" />
           ) : (
-            <FiChevronDown className="text-[#FF7A00] text-xl shrink-0" />
+            <FiChevronDown className="text-action text-xl shrink-0" />
           )}
         </button>
 
@@ -146,8 +146,8 @@ export const ProductDetailsInfo: React.FC = () => {
                         onClick={() => handleSelectFrequency(freq)}
                         className={`px-6 py-2 rounded-full font-bold text-xs sm:text-sm cursor-pointer transition-all outline-none ${
                           selectedFrequency === freq
-                            ? "bg-[#FF7A00] text-white shadow-xs"
-                            : "border border-[#FF7A00] text-[#FF7A00] bg-white hover:bg-orange-50"
+                            ? "bg-action text-white shadow-xs"
+                            : "border border-action text-action bg-white hover:bg-orange-50"
                         }`}
                       >
                         {freq}
@@ -169,8 +169,8 @@ export const ProductDetailsInfo: React.FC = () => {
                         onClick={() => handleSelectInstallment(num)}
                         className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full font-bold text-xs sm:text-sm flex items-center justify-center cursor-pointer transition-all outline-none ${
                           selectedInstallment === num
-                            ? "bg-[#FF7A00] text-white shadow-xs"
-                            : "border border-[#FF7A00] text-[#FF7A00] bg-white hover:bg-orange-50"
+                            ? "bg-action text-white shadow-xs"
+                            : "border border-action text-action bg-white hover:bg-orange-50"
                         }`}
                       >
                         {num}
@@ -180,18 +180,18 @@ export const ProductDetailsInfo: React.FC = () => {
                 </div>
 
                 {/* Step 3: Calculation Summary Box */}
-                <div className="bg-[#F8F9FA] rounded-xl py-3.5 px-4 text-center border border-gray-100 mt-1">
+                <div className="bg-cream rounded-xl py-3.5 px-4 text-center mt-1">
                   <p className="text-xs sm:text-sm text-gray-800 font-semibold leading-relaxed">
                     You will be paying{" "}
-                    <strong className="text-[#FF7A00] font-extrabold">
+                    <strong className="text-action font-semibold">
                       ₦{currentMonthlyAmount}
                     </strong>{" "}
                     Monthly for{" "}
-                    <strong className="text-[#FF7A00] font-extrabold">
+                    <strong className="text-action font-semibold">
                       {selectedInstallment}
                     </strong>{" "}
                     consecutive{" "}
-                    <strong className="text-[#FF7A00] font-extrabold">
+                    <strong className="text-action font-semibold">
                       Months
                     </strong>
                     .
@@ -204,7 +204,7 @@ export const ProductDetailsInfo: React.FC = () => {
       </div>
 
       {/* Price */}
-      <div className="text-2xl sm:text-3xl font-extrabold text-gray-900">
+      <div className="text-[24px] sm:text-[28px] font-normal text-ink tracking-[-0.01em]">
         ₦2,155,000.00
       </div>
 
@@ -214,7 +214,7 @@ export const ProductDetailsInfo: React.FC = () => {
           <span className="font-semibold text-gray-900">Brand: </span>
           <Link
             href="/products?search=Koolbuy"
-            className="text-gray-700 hover:text-[#FF7A00] transition-colors"
+            className="text-gray-700 hover:text-action transition-colors"
           >
             Koolbuy- GWORLD ELECTRONICS
           </Link>
@@ -266,7 +266,7 @@ export const ProductDetailsInfo: React.FC = () => {
         </span>
         <div className="flex items-center gap-4">
           {/* Quantity Selector */}
-          <div className="h-11 sm:h-12 border border-gray-300 rounded-full px-4 flex items-center gap-4 bg-white shadow-xs">
+          <div className="h-11 border border-[#d2d2d7] rounded-full px-5 flex items-center gap-4 bg-white">
             <button
               type="button"
               onClick={handleDecrease}
@@ -291,9 +291,9 @@ export const ProductDetailsInfo: React.FC = () => {
           <button
             type="button"
             onClick={handleAddToCart}
-            className="flex-1 h-11 sm:h-12 bg-[#FF7A00] hover:bg-[#E86D00] active:scale-[0.98] text-white font-bold text-xs sm:text-sm uppercase tracking-wider rounded-full shadow-md flex items-center justify-center gap-2.5 transition-all cursor-pointer"
+            className="flex-1 h-11 bg-action hover:bg-action-hover active:scale-95 text-white font-normal text-[17px] rounded-full flex items-center justify-center gap-2.5 transition-all cursor-pointer"
           >
-            <span>ADD TO CART</span>
+            <span>Add to cart</span>
             <FiShoppingCart size={16} />
           </button>
         </div>
@@ -304,7 +304,7 @@ export const ProductDetailsInfo: React.FC = () => {
         <span className="font-semibold text-gray-900">Category: </span>
         <Link
           href="/products?category=Single+Door+Chest+Freezers"
-          className="text-gray-700 hover:text-[#FF7A00] transition-colors"
+          className="text-gray-700 hover:text-action transition-colors"
         >
           Single Door Chest Freezers
         </Link>

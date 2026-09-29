@@ -311,7 +311,7 @@ export default function PayoutRequestsPage() {
             variant="blue"
             size="md"
             iconLeft={<HiOutlineDocumentArrowDown size={18} />}
-            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold shadow-sm shadow-brand-blue/20 bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white"
+            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold shadow-sm shadow-brand-blue/20 bg-action hover:bg-action/90 text-white"
             onClick={() => setIsExportModalOpen(true)}
           >
             Export Payouts
@@ -392,11 +392,11 @@ export default function PayoutRequestsPage() {
                 >
                   <span>{opt}</span>
                   <span
-                    className={`px-2 py-0.5 rounded-full text-[10px] ${
+                    className={`px-2 py-0.5 rounded-full text-[11px] ${
                       isActive
                         ? opt === "Pending"
-                          ? "bg-amber-50 text-amber-600 font-extrabold"
-                          : "bg-emerald-50 text-emerald-600 font-extrabold"
+                          ? "bg-amber-50 text-amber-600 font-semibold"
+                          : "bg-emerald-50 text-emerald-600 font-semibold"
                         : "bg-gray-200/60 text-gray-600"
                     }`}
                   >
@@ -476,7 +476,7 @@ export default function PayoutRequestsPage() {
                           <span className="font-bold text-xs text-gray-900 whitespace-nowrap">
                             {req.vendor}
                           </span>
-                          <span className="text-[10px] text-gray-400">
+                          <span className="text-[11px] text-gray-400">
                             {req.accountDetails.bankName} ••••{" "}
                             {req.accountDetails.accountNumber.slice(-4)}
                           </span>
@@ -497,7 +497,7 @@ export default function PayoutRequestsPage() {
                     </td>
 
                     {/* Amount */}
-                    <td className="font-black text-xs text-gray-900 whitespace-nowrap">
+                    <td className="font-semibold text-xs text-gray-900 whitespace-nowrap">
                       {req.amount}
                     </td>
 
@@ -523,7 +523,7 @@ export default function PayoutRequestsPage() {
                                   action: "approve",
                                 })
                               }
-                              className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white rounded-md text-xs font-bold shadow-xs transition-colors"
+                              className="inline-flex items-center gap-1 px-3 py-1.5 bg-action hover:bg-action/90 text-white rounded-md text-xs font-bold shadow-xs transition-colors"
                               title="Approve and disburse payout"
                             >
                               <HiOutlineCheck size={14} />
@@ -679,7 +679,7 @@ export default function PayoutRequestsPage() {
                       Via {selectedRequest.payoutType}
                     </p>
                   </div>
-                  <span className="text-lg font-black text-gray-900">
+                  <span className="text-lg font-semibold text-gray-900">
                     {selectedRequest.amount}
                   </span>
                 </div>
@@ -696,7 +696,7 @@ export default function PayoutRequestsPage() {
                 {selectedRequest.status === "Pending" && (
                   <Button
                     size="sm"
-                    className="bg-[#00BCD4] text-white"
+                    className="bg-action text-white"
                     onClick={() => {
                       setActionConfirmRequest({
                         request: selectedRequest,
@@ -725,7 +725,7 @@ export default function PayoutRequestsPage() {
               <div
                 className={`w-12 h-12 rounded-lg flex items-center justify-center mx-auto ${
                   actionConfirmRequest.action === "approve"
-                    ? "bg-cyan-50 text-[#00BCD4]"
+                    ? "bg-cyan-50 text-action"
                     : "bg-rose-50 text-rose-600"
                 }`}
               >
@@ -761,7 +761,7 @@ export default function PayoutRequestsPage() {
                   size="sm"
                   className={`${
                     actionConfirmRequest.action === "approve"
-                      ? "bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white"
+                      ? "bg-action hover:bg-action/90 text-white"
                       : "bg-rose-600 hover:bg-rose-700 text-white"
                   }`}
                   onClick={handleConfirmAction}
@@ -805,7 +805,7 @@ export default function PayoutRequestsPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-[#00BCD4] text-white"
+                className="bg-action text-white"
                 onClick={() => setIsExportModalOpen(false)}
               >
                 Download CSV

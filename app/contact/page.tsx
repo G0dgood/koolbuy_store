@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 
 const ContactPage = () => {
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-cream flex flex-col font-sans text-black">
       <Header />
 
       <main className="flex-1 w-full bg-white">
@@ -23,7 +23,7 @@ const ContactPage = () => {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1D3557]/80 to-transparent flex items-center">
+          <div className="absolute inset-0 bg-gradient-to-r from-ink/80 to-transparent flex items-center">
             <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 w-full">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -31,12 +31,12 @@ const ContactPage = () => {
                 transition={{ duration: 0.6 }}
                 className="flex flex-col gap-2"
               >
-                <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs md:text-sm">
+                <span className="text-brand-blue font-bold text-xs md:text-sm">
                   Koolbuy Store Support
                 </span>
-                <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight">
+                <h1 className="text-4xl md:text-6xl font-semibold text-white tracking-tight">
                   How can we <br />
-                  <span className="text-[#8CB7F5]">help you?</span>
+                  <span className="text-action-on-dark">help you?</span>
                 </h1>
                 <p className="text-white/80 text-sm md:text-base max-w-md mt-4 leading-relaxed">
                   Whether you have a question about features, pricing, or
@@ -57,7 +57,7 @@ const ContactPage = () => {
               className="flex flex-col gap-10"
             >
               <div className="flex flex-col gap-3">
-                <h2 className="text-3xl font-black text-[#1D3557] tracking-tight text-inter">
+                <h2 className="text-3xl font-semibold text-ink tracking-tight text-inter">
                   Send us a message
                 </h2>
                 <p className="text-gray-500 text-sm md:text-base">
@@ -71,7 +71,7 @@ const ContactPage = () => {
                 onSubmit={(e) => e.preventDefault()}
               >
                 <div className="flex flex-col gap-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                  <label className="text-[11px] font-bold text-gray-400">
                     Full Name
                   </label>
                   <Input
@@ -81,7 +81,7 @@ const ContactPage = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                  <label className="text-[11px] font-bold text-gray-400">
                     Email Address
                   </label>
                   <Input
@@ -91,7 +91,7 @@ const ContactPage = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-2 md:col-span-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                  <label className="text-[11px] font-bold text-gray-400">
                     Subject
                   </label>
                   <Input
@@ -101,7 +101,7 @@ const ContactPage = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-2 md:col-span-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                  <label className="text-[11px] font-bold text-gray-400">
                     Message
                   </label>
                   <Textarea
@@ -112,7 +112,7 @@ const ContactPage = () => {
                 <div className="md:col-span-2 pt-4">
                   <Button
                     variant="primary"
-                    className="w-full md:w-auto px-12 py-4 h-auto text-sm font-black uppercase tracking-widest shadow-xl shadow-blue-100"
+                    className="w-full md:w-auto px-12 py-4 h-auto text-sm font-semibold shadow-xl shadow-blue-100"
                   >
                     Submit Inquiry
                   </Button>
@@ -133,7 +133,7 @@ const ContactPage = () => {
                     <HiMapPin size={24} />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h4 className="font-bold text-[#1D3557] text-lg">
+                    <h4 className="font-bold text-ink text-lg">
                       Visit Us
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
@@ -149,7 +149,7 @@ const ContactPage = () => {
                     <HiPhone size={24} />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h4 className="font-bold text-[#1D3557] text-lg">
+                    <h4 className="font-bold text-ink text-lg">
                       Call Us
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
@@ -165,7 +165,7 @@ const ContactPage = () => {
                     <HiEnvelope size={24} />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h4 className="font-bold text-[#1D3557] text-lg">
+                    <h4 className="font-bold text-ink text-lg">
                       Email Us
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
@@ -191,7 +191,7 @@ const ContactPage = () => {
                   className="grayscale hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100"
                 ></iframe>
                 <div className="absolute top-4 left-4 pointer-events-none">
-                  <div className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-black uppercase tracking-tighter text-[#1D3557] shadow-sm border border-gray-100">
+                  <div className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-[11px] font-semibold tracking-tighter text-ink shadow-sm border border-gray-100">
                     Koolbuy Store HQ
                   </div>
                 </div>

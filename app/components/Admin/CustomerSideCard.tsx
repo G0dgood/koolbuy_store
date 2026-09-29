@@ -32,7 +32,7 @@ export function CustomerSideCard({ customer, onClose }: CustomerSideCardProps) {
               />
             </div>
             <div>
-              <h4 className="text-xl font-bold text-[#1D3557]">{customer.name}</h4>
+              <h4 className="text-xl font-bold text-ink">{customer.name}</h4>
               <div className="flex items-center gap-2">
                 <span className="text-xs font-medium text-gray-400">{customer.email}</span>
                 <button className="text-gray-300 hover:text-brand-blue transition-colors">
@@ -51,7 +51,7 @@ export function CustomerSideCard({ customer, onClose }: CustomerSideCardProps) {
       </div>
 
       <div className="flex flex-col gap-4">
-        <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">
+        <span className="text-[11px] font-bold text-gray-400">
           Customer Info
         </span>
         <div className="flex items-center gap-3 p-3 bg-white border border-gray-50 rounded-lg shadow-sm">
@@ -65,14 +65,14 @@ export function CustomerSideCard({ customer, onClose }: CustomerSideCardProps) {
       </div>
 
       <div className="flex flex-col gap-4">
-        <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">
+        <span className="text-[11px] font-bold text-gray-400">
           Social Media
         </span>
         <div className="flex items-center gap-3">
           {["facebook", "whatsapp", "x", "linkedin", "instagram"].map((social) => (
             <button
               key={social}
-              className="w-9 h-9 rounded-lg flex items-center justify-center border border-gray-50 hover:bg-gray-50 hover:border-blue-100 transition-all text-[#1D3557]"
+              className="w-9 h-9 rounded-lg flex items-center justify-center border border-gray-50 hover:bg-gray-50 hover:border-blue-100 transition-all text-ink"
             >
               <Icon name={social} folder="dashboardIcon" size="sm" />
             </button>
@@ -81,7 +81,7 @@ export function CustomerSideCard({ customer, onClose }: CustomerSideCardProps) {
       </div>
 
       <div className="flex flex-col gap-4">
-        <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">
+        <span className="text-[11px] font-bold text-gray-400">
           Activity
         </span>
         <div className="flex flex-col gap-3">
@@ -97,23 +97,23 @@ export function CustomerSideCard({ customer, onClose }: CustomerSideCardProps) {
       </div>
 
       <div className="flex flex-col gap-4 mt-auto">
-        <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">
+        <span className="text-[11px] font-bold text-gray-400">
           Order overview
         </span>
         <div className="grid grid-cols-3 gap-3">
           <div className="p-3 bg-white border border-gray-50 rounded-lg flex flex-col items-center gap-1 shadow-sm">
-            <span className="text-lg font-bold text-[#1D3557]">150</span>
-            <span className="text-[9px] font-bold text-gray-400 uppercase">Total order</span>
+            <span className="text-lg font-bold text-ink">150</span>
+            <span className="text-[11px] font-bold text-gray-400">Total order</span>
           </div>
           <div className="p-3 bg-white border border-gray-50 rounded-lg flex flex-col items-center gap-1 shadow-sm border-brand-blue-light">
             <span className="text-lg font-bold text-blue-500">140</span>
-            <span className="text-[9px] font-bold text-blue-500/60 uppercase text-center">
+            <span className="text-[11px] font-bold text-blue-500/60 text-center">
               Completed
             </span>
           </div>
           <div className="p-3 bg-white border border-gray-50 rounded-lg flex flex-col items-center gap-1 shadow-sm border-rose-50">
             <span className="text-lg font-bold text-rose-500">10</span>
-            <span className="text-[9px] font-bold text-rose-500/60 uppercase">Canceled</span>
+            <span className="text-[11px] font-bold text-rose-500/60">Canceled</span>
           </div>
         </div>
       </div>

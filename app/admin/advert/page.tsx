@@ -262,9 +262,9 @@ export default function AdvertManagement() {
 
   return (
     <div className="flex flex-col gap-8 mx-auto pb-20">
-      <div className="flex justify-between items-center ">
+      <div className="flex justify-between items-center">
         <div className="flex flex-col gap-1">
-          {/* <h1 className="text-xl font-black text-[#1D3557]">
+          {/* <h1 className="text-xl font-semibold text-ink">
             Advert Control Center
           </h1>
           <p className="text-sm text-gray-400 font-medium">
@@ -274,7 +274,7 @@ export default function AdvertManagement() {
 
         <div className="flex items-center gap-6">
           <div className="flex flex-col items-end gap-1.5 mr-4">
-            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none">
+            <span className="text-[11px] font-semibold text-gray-400 leading-none">
               Layout Architecture
             </span>
             <TabFilter
@@ -315,15 +315,15 @@ export default function AdvertManagement() {
           {/* Section 1: Copywriting & Timing */}
           <section className="bg-white p-8 rounded-[6px] border border-gray-100 shadow-sm flex flex-col gap-8">
             <div className="flex justify-between items-center">
-              <h3 className="text-lg font-black text-[#1D3557] flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-ink flex items-center gap-2">
                 <span className="w-8 h-8 rounded-[6px] bg-blue-50 text-blue-500 flex items-center justify-center text-xs">
                   01
                 </span>
                 Feature Copy & Timing
               </h3>
               <div className="flex items-center gap-6">
-                <div className="flex flex-col items-end gap-1.5 ">
-                  <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest leading-none italic">
+                <div className="flex flex-col items-end gap-1.5">
+                  <span className="text-[11px] font-semibold text-gray-400 leading-none italic">
                     Targeting Atmosphere
                   </span>
                   <Dropdown
@@ -352,7 +352,7 @@ export default function AdvertManagement() {
                   <Button
                     variant="outline"
                     shape="rounded-sm"
-                    className="text-[10px] py-1 h-9 px-4"
+                    className="text-[11px] py-1 h-9 px-4"
                     onClick={() => {
                       const newBgs = [...config.backgroundImages];
                       newBgs[activeVisualIndex] = {
@@ -385,7 +385,7 @@ export default function AdvertManagement() {
                         size="md"
                       />
                       <Label
-                        className={`mb-0! text-[10px] font-black uppercase tracking-widest transition-opacity ${!config.showTitle ? "text-gray-300" : "text-brand-blue/60"}`}
+                        className={`mb-0! text-[11px] font-semibold   transition-opacity ${!config.showTitle ? "text-gray-300" : "text-brand-blue/60"}`}
                       >
                         Main Title
                       </Label>
@@ -430,7 +430,7 @@ export default function AdvertManagement() {
                         size="md"
                       />
                       <Label
-                        className={`mb-0! text-[10px] font-black uppercase tracking-widest transition-opacity ${!config.showHighlight ? "text-gray-300" : "text-brand-blue/60"}`}
+                        className={`mb-0! text-[11px] font-semibold   transition-opacity ${!config.showHighlight ? "text-gray-300" : "text-brand-blue/60"}`}
                       >
                         Highlighted Title
                       </Label>
@@ -479,7 +479,7 @@ export default function AdvertManagement() {
                       size="md"
                     />
                     <Label
-                      className={`mb-0! text-[10px] font-black uppercase tracking-widest transition-opacity ${!config.showDescription ? "text-gray-300" : "text-brand-blue/60"}`}
+                      className={`mb-0! text-[11px] font-semibold   transition-opacity ${!config.showDescription ? "text-gray-300" : "text-brand-blue/60"}`}
                     >
                       Description Text
                     </Label>
@@ -524,7 +524,7 @@ export default function AdvertManagement() {
                       size="md"
                     />
                     <Label
-                      className={`mb-0! text-[10px] font-black uppercase tracking-widest transition-opacity ${!config.showStats ? "text-gray-300" : "text-brand-blue/60"}`}
+                      className={`mb-0! text-[11px] font-semibold   transition-opacity ${!config.showStats ? "text-gray-300" : "text-brand-blue/60"}`}
                     >
                       Platform Stats
                     </Label>
@@ -563,12 +563,12 @@ export default function AdvertManagement() {
 
               <div className="bg-gray-50 p-6 rounded-[6px] border border-gray-100 flex flex-col gap-6 justify-center">
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-black text-[#1D3557] uppercase tracking-widest">
+                  <label className="text-xs font-semibold text-ink">
                     {activeVisualIndex === null
                       ? "Global Cycle Duration"
                       : `Atmosphere ${activeVisualIndex + 1} Timing Override`}
                   </label>
-                  <p className="text-[10px] text-gray-400 font-medium">
+                  <p className="text-[11px] text-gray-400 font-medium">
                     {activeVisualIndex === null
                       ? "How many seconds should each background image stay before cycling?"
                       : `Override the global timing for this specific atmosphere.`}
@@ -600,7 +600,7 @@ export default function AdvertManagement() {
                     }}
                     className="flex-1 accent-brand-blue"
                   />
-                  <span className="w-16 h-12 bg-white rounded-[6px] border border-gray-200 flex items-center justify-center font-black text-brand-blue text-lg">
+                  <span className="w-16 h-12 bg-white rounded-[6px] border border-gray-200 flex items-center justify-center font-semibold text-brand-blue text-lg">
                     {activeVisualIndex === null
                       ? config.cycleDuration
                       : config.backgroundImages[activeVisualIndex]?.duration ||
@@ -615,7 +615,7 @@ export default function AdvertManagement() {
           {/* Section 2: Background Orchestration */}
           <section className="bg-white p-8 rounded-[6px] border border-gray-100 shadow-sm flex flex-col gap-6">
             <div className="flex justify-between items-center">
-              <h3 className="text-lg font-black text-[#1D3557] flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-ink flex items-center gap-2">
                 <span className="w-8 h-8 rounded-[6px] bg-indigo-50 text-indigo-500 flex items-center justify-center text-xs">
                   02
                 </span>
@@ -667,7 +667,7 @@ export default function AdvertManagement() {
 
                         {/* Drag Handle */}
                         <div className="absolute top-2 left-2 flex items-center gap-1.5 z-20">
-                          <div className="w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center text-[10px] font-black text-white shadow-lg">
+                          <div className="w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center text-[11px] font-semibold text-white shadow-lg">
                             {i + 1}
                           </div>
                           <div className="w-6 h-6 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-400 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
@@ -680,7 +680,7 @@ export default function AdvertManagement() {
                         </div>
 
                         {bg.linkedCategory && (
-                          <div className="absolute top-2 right-2 px-2 py-0.5 bg-emerald-500 rounded-lg text-[8px] font-black text-white shadow-lg uppercase tracking-widest z-10 animate-in fade-in zoom-in duration-300">
+                          <div className="absolute top-2 right-2 px-2 py-0.5 bg-emerald-500 rounded-lg text-[11px] font-semibold text-white shadow-lg z-10 animate-in fade-in zoom-in duration-300">
                             {bg.linkedCategory}
                           </div>
                         )}
@@ -691,7 +691,7 @@ export default function AdvertManagement() {
                                 setRefiningAssetIndex(i);
                                 setIsRefineModalOpen(true);
                               }}
-                              className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-[#1D3557] hover:bg-brand-blue hover:text-white transition-all shadow-lg text-lg"
+                              className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-ink hover:bg-brand-blue hover:text-white transition-all shadow-lg text-lg"
                               title="Edit Focal Point"
                             >
                               <LuPencilLine />
@@ -701,7 +701,7 @@ export default function AdvertManagement() {
                                 setReplacingAssetIndex(i);
                                 setIsBackgroundModalOpen(true);
                               }}
-                              className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-[#1D3557] hover:bg-brand-blue hover:text-white transition-all shadow-lg text-lg"
+                              className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-ink hover:bg-brand-blue hover:text-white transition-all shadow-lg text-lg"
                               title="Replace Image"
                             >
                               <LuArrowLeftRight />
@@ -711,14 +711,14 @@ export default function AdvertManagement() {
                                 setRefiningAssetIndex(i);
                                 setIsRefineModalOpen(true);
                               }}
-                              className="px-4 py-1.5 bg-white rounded-lg text-[10px] font-black uppercase tracking-widest text-[#1D3557] hover:bg-brand-blue hover:text-white transition-all shadow-lg"
+                              className="px-4 py-1.5 bg-white rounded-lg text-[11px] font-semibold text-ink hover:bg-brand-blue hover:text-white transition-all shadow-lg"
                             >
                               Edit Visual
                             </button>
                           </div>
                           <button
                             onClick={() => toggleBackgroundSelection(bg.url)}
-                            className="text-[9px] font-bold text-white/70 hover:text-rose-400 transition-colors uppercase tracking-widest mt-1"
+                            className="text-[11px] font-bold text-white/70 hover:text-rose-400 transition-colors mt-1"
                           >
                             Remove
                           </button>
@@ -727,7 +727,7 @@ export default function AdvertManagement() {
 
                       {/* Category Link Selector */}
                       <div className="flex flex-col gap-1.5 pointer-events-auto">
-                        <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest px-1">
+                        <label className="text-[11px] font-semibold text-gray-400 px-1">
                           Linked Category
                         </label>
                         <Dropdown
@@ -767,7 +767,7 @@ export default function AdvertManagement() {
                   size="md"
                   className="text-gray-300 group-hover:text-indigo-400 transition-colors"
                 />
-                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest group-hover:text-indigo-500 transition-colors">
+                <span className="text-[11px] font-semibold text-gray-400 group-hover:text-indigo-500 transition-colors">
                   Add Visual
                 </span>
               </button>
@@ -777,7 +777,7 @@ export default function AdvertManagement() {
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
             {/* Section 3: Featured Items Picker */}
             <section className="bg-white p-8 rounded-[6px] border border-gray-100 shadow-sm flex flex-col gap-6 xl:col-span-2">
-              <h3 className="text-lg font-black text-[#1D3557] flex flex-col gap-6">
+              <h3 className="text-lg font-semibold text-ink flex flex-col gap-6">
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center gap-2 text-emerald-500">
                     <span className="w-8 h-8 rounded-[6px] bg-emerald-50 flex items-center justify-center text-xs">
@@ -786,8 +786,8 @@ export default function AdvertManagement() {
                     Featured Inventory
                   </div>
                   <div className="flex items-center gap-6">
-                    <div className="flex flex-col items-end gap-1.5 ">
-                      <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest leading-none italic">
+                    <div className="flex flex-col items-end gap-1.5">
+                      <span className="text-[11px] font-semibold text-gray-400 leading-none italic">
                         Targeting Atmosphere
                       </span>
                       <Dropdown
@@ -815,7 +815,7 @@ export default function AdvertManagement() {
                         className="min-w-45"
                       />
                     </div>
-                    <span className="text-[10px] font-black text-emerald-500 uppercase tracking-widest leading-tight">
+                    <span className="text-[11px] font-semibold text-emerald-500 leading-tight">
                       {activeFeaturedItems.length} Selected
                     </span>
                   </div>
@@ -823,7 +823,7 @@ export default function AdvertManagement() {
 
                 <div className="flex flex-col gap-2">
                   <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                    <span className="text-[11px] font-semibold text-gray-400">
                       {activeVisualIndex === null
                         ? "Global Display Preset"
                         : `Atmosphere ${activeVisualIndex + 1} Layout Override`}
@@ -831,7 +831,7 @@ export default function AdvertManagement() {
                     {activeVisualIndex !== null &&
                       config.backgroundImages[activeVisualIndex]
                         .inventoryLayout && (
-                        <span className="text-[9px] font-bold text-brand-blue-light uppercase tracking-widest bg-brand-blue/5 px-2 py-0.5 rounded-lg">
+                        <span className="text-[11px] font-bold text-brand-blue-light bg-brand-blue/5 px-2 py-0.5 rounded-lg">
                           Active Override
                         </span>
                       )}
@@ -920,10 +920,10 @@ export default function AdvertManagement() {
                         </div>
                       </div>
                       <div className="flex flex-col text-left">
-                        <span className="text-[11px] font-bold text-[#1D3557] truncate">
+                        <span className="text-[11px] font-bold text-ink truncate">
                           {product.name}
                         </span>
-                        <span className="text-[9px] font-black text-brand-blue uppercase">
+                        <span className="text-[11px] font-semibold text-brand-blue">
                           {product.category}
                         </span>
                       </div>
@@ -935,7 +935,7 @@ export default function AdvertManagement() {
 
             {/* Section 4: Item Arrangement */}
             <section className="bg-white p-8 rounded-[6px] border border-gray-100 shadow-sm flex flex-col gap-6 xl:col-span-1">
-              <h3 className="text-lg font-black text-[#1D3557] flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-ink flex items-center gap-2">
                 <span className="w-8 h-8 rounded-[6px] bg-orange-50 text-orange-500 flex items-center justify-center text-xs">
                   04
                 </span>
@@ -945,7 +945,7 @@ export default function AdvertManagement() {
                 <div className="flex flex-col gap-3">
                   {config.showTitle && (
                     <div className="flex flex-col gap-1">
-                      <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none">
+                      <span className="text-[11px] font-semibold text-gray-400 leading-none">
                         Main Header
                       </span>
                       <div className="p-3 bg-gray-50 border border-gray-100 rounded-lg text-xs font-bold text-brand-blue">
@@ -959,7 +959,7 @@ export default function AdvertManagement() {
 
                   {config.showStats && (
                     <div className="flex flex-col gap-1">
-                      <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none">
+                      <span className="text-[11px] font-semibold text-gray-400 leading-none">
                         Global Impact Stats
                       </span>
                       <div className="flex bg-gray-50 border border-gray-100 p-4 rounded-[6px] items-center gap-4">
@@ -969,7 +969,7 @@ export default function AdvertManagement() {
                           size="sm"
                           className="text-emerald-500"
                         />
-                        <span className="text-[10px] font-bold text-gray-500 leading-relaxed uppercase tracking-widest">
+                        <span className="text-[11px] font-bold text-gray-500 leading-relaxed">
                           {config.stats}
                         </span>
                       </div>
@@ -978,7 +978,7 @@ export default function AdvertManagement() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none">
+                  <span className="text-[11px] font-semibold text-gray-400 leading-none">
                     {activeVisualIndex === null
                       ? "Global Inventory Sequence"
                       : `Atmosphere ${activeVisualIndex + 1} Selection`}
@@ -1015,7 +1015,7 @@ export default function AdvertManagement() {
                             />
                           </div>
                           <div className="flex flex-col">
-                            <span className="text-sm font-bold text-[#1D3557]">
+                            <span className="text-sm font-bold text-ink">
                               {item.name}
                             </span>
                           </div>
@@ -1115,7 +1115,7 @@ export default function AdvertManagement() {
                             size="md"
                             className="p-0!"
                           />
-                          <span className="text-[10px] font-black uppercase">
+                          <span className="text-[11px] font-semibold">
                             {order}
                           </span>
                         </div>
@@ -1158,17 +1158,17 @@ export default function AdvertManagement() {
                               size="md"
                               className="p-0!"
                             />
-                            <span className="text-[9px] font-black uppercase">
+                            <span className="text-[11px] font-semibold">
                               {order}
                             </span>
                           </div>
                         )}
                       </div>
                       <div className="flex flex-col text-left px-1">
-                        <span className="text-[10px] font-bold text-[#1D3557] truncate">
+                        <span className="text-[11px] font-bold text-ink truncate">
                           {product.name}
                         </span>
-                        <span className="text-[8px] font-black text-brand-blue uppercase">
+                        <span className="text-[11px] font-semibold text-brand-blue">
                           {product.category}
                         </span>
                       </div>
@@ -1184,7 +1184,7 @@ export default function AdvertManagement() {
                   <Icon name="link-external" folder="dashboardIcon" size="lg" />
                 </div>
                 <div className="flex flex-col gap-2 text-center max-w-sm">
-                  <h4 className="text-base font-black text-[#1D3557]">
+                  <h4 className="text-base font-semibold text-ink">
                     Import Remote Visual
                   </h4>
                   <p className="text-xs text-gray-400 font-medium">
@@ -1217,7 +1217,7 @@ export default function AdvertManagement() {
 
                 {/* Preview of added URLs */}
                 <div className="w-full flex flex-col gap-4 mt-4">
-                  <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                  <span className="text-[11px] font-semibold text-gray-400">
                     Active URL Sources
                   </span>
                   <div className="grid grid-cols-2 gap-4">
@@ -1287,10 +1287,10 @@ export default function AdvertManagement() {
                     <Icon name="cloud_upload" folder="icon" size="md" />
                   </div>
                   <div className="flex flex-col items-center gap-1 text-center">
-                    <span className="text-sm font-black text-[#1D3557]">
+                    <span className="text-sm font-semibold text-ink">
                       Click or drag to upload from device
                     </span>
-                    <span className="text-[10px] font-bold text-gray-400 italic">
+                    <span className="text-[11px] font-bold text-gray-400 italic">
                       Max 5MB per image recommended
                     </span>
                   </div>
@@ -1299,7 +1299,7 @@ export default function AdvertManagement() {
                 {/* Preview of Uploaded Images */}
                 <div className="w-full flex flex-col gap-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                    <span className="text-[11px] font-semibold text-gray-400">
                       Recent Device Uploads
                     </span>
                     <button
@@ -1311,7 +1311,7 @@ export default function AdvertManagement() {
                           ),
                         })
                       }
-                      className="text-[9px] font-bold text-rose-500 hover:underline"
+                      className="text-[11px] font-bold text-rose-500 hover:underline"
                     >
                       Clear all uploads
                     </button>
@@ -1362,7 +1362,7 @@ export default function AdvertManagement() {
                   ],
                 })
               }
-              className="text-[10px] font-black text-rose-500 uppercase tracking-widest hover:text-rose-600 transition-colors"
+              className="text-[11px] font-semibold text-rose-500 hover:text-rose-600 transition-colors"
             >
               Reset to Default
             </button>
@@ -1397,7 +1397,7 @@ export default function AdvertManagement() {
         >
           <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-1">
-              <h4 className="text-sm font-black text-[#1D3557] uppercase tracking-widest">
+              <h4 className="text-sm font-semibold text-ink">
                 Master Your Framing
               </h4>
               <p className="text-xs text-gray-400 font-medium">
@@ -1471,7 +1471,7 @@ export default function AdvertManagement() {
               </motion.div>
 
               <div className="absolute bottom-4 right-4 z-20 flex flex-col items-end gap-2">
-                <span className="px-3 py-1 bg-black/60 backdrop-blur-md rounded-lg text-[10px] font-black text-white uppercase tracking-widest border border-white/10">
+                <span className="px-3 py-1 bg-black/60 backdrop-blur-md rounded-lg text-[11px] font-semibold text-white border border-white/10">
                   X:{" "}
                   {Math.round(
                     config.backgroundImages[refiningAssetIndex].positionX,

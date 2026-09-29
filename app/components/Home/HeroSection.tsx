@@ -71,11 +71,11 @@ const HeroSection = () => {
 
   return (
     <section
-      className="w-full bg-white overflow-hidden"
+      className="w-full bg-black"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <div className="relative w-full h-95 sm:h-115 md:h-145 lg:h-165 xl:h-180 2xl:h-200 overflow-hidden">
+      <div className="relative w-full h-80 sm:h-auto sm:aspect-[12/5] sm:max-h-[760px] overflow-hidden">
         <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
             key={currentSlide}
@@ -103,12 +103,12 @@ const HeroSection = () => {
                 className="max-w-xl flex flex-col gap-2 md:gap-3 text-white bg-linear-to-r to-transparent p-5 sm:p-7"
               >
                 {/* <div className="inline-flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary text-white uppercase tracking-wider shadow-sm">
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary text-white shadow-sm">
                     {activeItem.subtitle}
                   </span>
                 </div> */}
 
-                {/* <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight drop-shadow-md leading-tight">
+                {/* <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white tracking-tight drop-shadow-md leading-tight">
                   {activeItem.title}
                 </h1>
 
@@ -126,7 +126,7 @@ const HeroSection = () => {
         <button
           onClick={prevSlide}
           aria-label="Previous slide"
-          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition-all duration-200 z-20 cursor-pointer shadow-md active:scale-90"
+          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[rgba(210,210,215,0.64)] hover:bg-[rgba(210,210,215,0.8)] text-ink backdrop-blur-xl flex items-center justify-center transition-colors duration-200 z-20 cursor-pointer active:scale-95"
         >
           <FiChevronLeft size={22} />
         </button>
@@ -134,22 +134,22 @@ const HeroSection = () => {
         <button
           onClick={nextSlide}
           aria-label="Next slide"
-          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition-all duration-200 z-20 cursor-pointer shadow-md active:scale-90"
+          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[rgba(210,210,215,0.64)] hover:bg-[rgba(210,210,215,0.8)] text-ink backdrop-blur-xl flex items-center justify-center transition-colors duration-200 z-20 cursor-pointer active:scale-95"
         >
           <FiChevronRight size={22} />
         </button>
 
         {/* Bottom Pagination Dots */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20 bg-black/30 backdrop-blur-md px-3 py-1.5 rounded-full">
+        <div className="absolute bottom-5 md:bottom-7 left-1/2 -translate-x-1/2 flex items-center gap-2.5 z-20 bg-[rgba(210,210,215,0.64)] backdrop-blur-xl px-4 py-2.5 rounded-full">
           {carouselSlides.map((slide, idx) => (
             <button
               key={slide.id}
               onClick={() => goToSlide(idx)}
               aria-label={`Go to slide ${idx + 1}`}
-              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                 currentSlide === idx
-                  ? "w-7 bg-primary shadow-sm"
-                  : "w-2.5 bg-white/50 hover:bg-white/80"
+                  ? "w-8 bg-ink"
+                  : "w-2 bg-ink/35 hover:bg-ink/60"
               }`}
             />
           ))}

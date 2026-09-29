@@ -66,7 +66,7 @@ export default function Modal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/40 backdrop-blur-[2px] z-40"
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
             onClick={onClose}
           />
 
@@ -92,7 +92,7 @@ export default function Modal({
             <div className="px-4 sm:px-8 py-6 overflow-y-auto flex-1">{children}</div>
 
             {footer && (
-              <div className="px-4 sm:px-8 py-6 bg-white border-t border-gray-50">
+              <div className="px-4 sm:px-8 py-5 bg-cream border-t border-gray-100">
                 {footer}
               </div>
             )}

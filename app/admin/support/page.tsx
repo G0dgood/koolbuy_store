@@ -114,7 +114,7 @@ export default function SupportPage() {
       </div>
 
       {/* Ticket History Table Card */}
-      <div className="bg-white rounded-[6px] overflow-hidden flex flex-col border border-[#1C1C1C1A]">
+      <div className="bg-white rounded-[6px] overflow-hidden flex flex-col border border-gray-100">
         {/* Controls Bar */}
         <div className="p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between border-b border-gray-50">
           <TabFilter
@@ -181,8 +181,8 @@ export default function SupportPage() {
                   </td>
                   <td>
                     <div className="flex flex-col">
-                      <span className="text-xs font-bold text-[#1D3557]">{ticket.customer}</span>
-                      <span className="text-[10px] font-bold text-gray-400 italic">User ID: #USR_023</span>
+                      <span className="text-xs font-bold text-ink">{ticket.customer}</span>
+                      <span className="text-[11px] font-bold text-gray-400 italic">User ID: #USR_023</span>
                     </div>
                   </td>
                   <td>
@@ -190,7 +190,7 @@ export default function SupportPage() {
                   </td>
                   <td className="text-[11px] font-bold text-gray-400 text-center">{ticket.activity}</td>
                   <td className="text-center">
-                    <span className={`px-2 py-1 rounded-md text-[10px] font-black uppercase tracking-wider ${priorityStyles[ticket.priority as keyof typeof priorityStyles]}`}>
+                    <span className={`px-2 py-1 rounded-md text-[11px] font-semibold   ${priorityStyles[ticket.priority as keyof typeof priorityStyles]}`}>
                       {ticket.priority}
                     </span>
                   </td>
