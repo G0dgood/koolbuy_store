@@ -23,6 +23,8 @@ ChartJS.register(
   BarElement,
   Filler
 );
+// Every chart (axes, legends, tooltips) uses the app font, as in the CRM.
+ChartJS.defaults.font.family = "'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
 
 interface MiniChartProps {
   type: "sparkline" | "bar" | "area";
@@ -36,7 +38,7 @@ interface MiniChartProps {
 export const MiniChart: React.FC<MiniChartProps> = ({ 
   type, 
   data, 
-  color = "#00BCD4", 
+  color = "#F57E16", 
   width = "100%", 
   height = 40,
   className = ""

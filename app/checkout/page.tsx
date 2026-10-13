@@ -11,13 +11,13 @@ import { Breadcrumbs } from "@/app/components/Breadcrumbs";
 
 export default function CheckoutPage() {
   return (
-    <div className="min-h-screen flex flex-col font-sans relative overflow-hidden bg-[#F7FAFC]">
+    <div className="min-h-screen flex flex-col font-sans relative overflow-hidden bg-off-white">
       {/* Custom Background Image */}
       <div className="absolute inset-0 w-full h-full -z-10">
         <Image
           src="/web_images/twocolor_background.png"
           alt="Background"
-          fill
+          fill sizes="100vw"
           className="object-cover opacity-10"
         />
       </div>
@@ -43,7 +43,7 @@ export default function CheckoutPage() {
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
                 <h1 className="text-xl md:text-2xl font-bold text-neutral-900 tracking-tight leading-none font-heading">Finalize Order</h1>
-                <div className="h-1.5 w-1.5 rounded-full bg-brand-blue mt-1" />
+                <div className="h-1.5 w-1.5 rounded-full bg-brand-charcoal mt-1" />
               </div>
               <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest">Complete your purchase safely and securely</p>
             </div>

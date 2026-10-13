@@ -240,7 +240,7 @@ export default function AdminWishlistPage() {
                 setSearchQuery(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full h-10 pl-9 pr-3 rounded-xl bg-gray-50 border border-gray-200 text-xs focus:outline-none focus:border-brand-blue focus:bg-white transition-all"
+              className="w-full h-10 pl-9 pr-3 rounded-xl bg-gray-50 border border-gray-200 text-xs focus:outline-none focus:border-brand-orange focus:bg-white transition-all"
             />
             <Icon
               name="search"
@@ -289,7 +289,7 @@ export default function AdminWishlistPage() {
                     <tr
                       key={item.id}
                       className={`hover:bg-gray-50/60 transition-colors ${
-                        isChecked ? "bg-blue-50/30" : ""
+                        isChecked ? "bg-brand-orange-soft/30" : ""
                       }`}
                     >
                       <td>
@@ -316,7 +316,7 @@ export default function AdminWishlistPage() {
                             <span className="text-[11px] font-medium text-gray-400">
                               {item.sku}
                             </span>
-                            <span className="text-[11px] font-bold text-brand-blue">
+                            <span className="text-[11px] font-bold text-brand-orange-text">
                               {item.price}
                             </span>
                           </div>
@@ -337,7 +337,7 @@ export default function AdminWishlistPage() {
                       <td className="text-xs font-medium text-gray-600 whitespace-nowrap">
                         <a
                           href={`mailto:${item.userEmail}`}
-                          className="text-gray-700 hover:text-brand-blue transition-colors"
+                          className="text-gray-700 hover:text-brand-orange-text transition-colors"
                         >
                           {item.userEmail}
                         </a>
@@ -345,7 +345,7 @@ export default function AdminWishlistPage() {
                       <td className="text-xs font-medium text-gray-600 whitespace-nowrap">
                         <a
                           href={`tel:${item.userPhone}`}
-                          className="text-gray-700 hover:text-brand-blue transition-colors font-mono"
+                          className="text-gray-700 hover:text-brand-orange-text transition-colors font-mono"
                         >
                           {item.userPhone}
                         </a>

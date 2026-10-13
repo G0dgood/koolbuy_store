@@ -79,9 +79,9 @@ export const LoginAdvert = () => {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.5 }}
               >
-                <h1 className="text-6xl xl:text-7xl font-black text-white leading-[1.1] drop-shadow-2xl">
+                <h1 className="text-6xl xl:text-7xl font-bold text-white leading-[1.1] drop-shadow-md">
                   {config.showTitle && <span>{displayCopy.title} <br /></span>}
-                  {config.showHighlight && <span className="text-brand-blue-light">{displayCopy.titleHighlight}</span>}
+                  {config.showHighlight && <span className="text-light-gray">{displayCopy.titleHighlight}</span>}
                 </h1>
               </motion.div>
             )}
@@ -120,18 +120,18 @@ export const LoginAdvert = () => {
                   className="flex items-center gap-6 justify-end group cursor-pointer"
                 >
                   <div className="flex flex-col items-end text-right">
-                    <span className="text-xs font-black uppercase tracking-[0.2em] text-white/50 group-hover:text-brand-blue-light transition-colors">
+                    <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/50 group-hover:text-light-gray transition-colors">
                       {item.category}
                     </span>
-                    <span className="text-lg font-bold text-white group-hover:text-blue-200 transition-colors">
+                    <span className="text-lg font-bold text-white group-hover:text-light-gray transition-colors">
                       {item.name}
                     </span>
-                    <span className="text-[10px] font-black text-white/40 group-hover:text-white/80 transition-opacity">
+                    <span className="text-[10px] font-bold text-white/40 group-hover:text-white/80 transition-opacity">
                       FEATURED SELECTION • {item.price}
                     </span>
                   </div>
 
-                  <div className="w-16 h-16 rounded-[6px] bg-white/10 backdrop-blur-xl flex items-center justify-center border border-white/20 group-hover:bg-white/20 group-hover:scale-110 transition-all overflow-hidden p-2 shadow-2xl">
+                  <div className="w-16 h-16 rounded-lg bg-white/10 backdrop-blur-xl flex items-center justify-center border border-white/20 group-hover:bg-white/20 group-hover:scale-110 transition-all overflow-hidden p-2 shadow-md">
                     <img src={item.image} alt={item.name} className="w-full h-full object-contain drop-shadow-lg" />
                   </div>
                 </motion.div>
@@ -151,15 +151,15 @@ export const LoginAdvert = () => {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ delay: i * 0.05 }}
                   whileHover={{ y: -5, scale: 1.05 }}
-                  className="p-3 rounded-[6px] bg-white/10 backdrop-blur-md border border-white/20 flex flex-col gap-2 group cursor-pointer"
+                  className="p-3 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 flex flex-col gap-2 group cursor-pointer"
                 >
-                  <div className="aspect-[4/3] bg-white/10 rounded-[4px] p-2 flex items-center justify-center overflow-hidden">
+                  <div className="aspect-[4/3] bg-white/10 rounded-sm p-2 flex items-center justify-center overflow-hidden">
                     <img src={item.image} alt={item.name} className="w-full h-full object-contain group-hover:scale-125 transition-transform duration-500" />
                   </div>
                   <div className="flex flex-col text-right">
-                    <span className="text-[8px] font-black text-brand-blue-light uppercase tracking-widest">{item.category}</span>
+                    <span className="text-[8px] font-bold text-light-gray uppercase tracking-widest">{item.category}</span>
                     <span className="text-[11px] font-bold text-white truncate">{item.name}</span>
-                    <span className="text-[10px] font-black text-white/60">{item.price}</span>
+                    <span className="text-[10px] font-bold text-white/60">{item.price}</span>
                   </div>
                 </motion.div>
               ))}
@@ -184,8 +184,8 @@ export const LoginAdvert = () => {
                       <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] font-bold text-white group-hover:text-brand-blue-light transition-colors">{item.name}</span>
-                      <span className="text-[8px] font-black text-white/40 uppercase">{item.price}</span>
+                      <span className="text-[10px] font-bold text-white group-hover:text-light-gray transition-colors">{item.name}</span>
+                      <span className="text-[8px] font-bold text-white/40 uppercase">{item.price}</span>
                     </div>
                   </motion.div>
                 ))}
@@ -209,7 +209,7 @@ export const LoginAdvert = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-12 p-6 rounded-[6px] bg-white/5 border border-white/10 backdrop-blur-sm text-right max-w-sm"
+            className="mt-12 p-6 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm text-right max-w-sm"
           >
             <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest leading-loose">
               {displayCopy.stats}

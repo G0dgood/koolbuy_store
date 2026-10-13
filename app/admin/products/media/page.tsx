@@ -71,7 +71,7 @@ export default function ProductMediaListing() {
         </div>
       </div>
 
-      <div className="bg-white rounded-[6px] border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+      <div className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden flex flex-col">
         {/* Filter & Control Bar */}
         <div className="p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between border-b border-gray-50">
           <TabFilter
@@ -97,7 +97,7 @@ export default function ProductMediaListing() {
                 shape="rounded-sm"
                 className={`!p-2.5 w-10 h-10 transition-all
                   ${viewType === "grid"
-                    ? "border-brand-blue bg-brand-blue-light text-brand-blue shadow-sm"
+                    ? "border-brand-charcoal bg-brand-orange-soft text-brand-orange-text "
                     : "text-gray-400"}
                 `}
                 onClick={() => setViewType("grid")}
@@ -110,7 +110,7 @@ export default function ProductMediaListing() {
                 shape="rounded-sm"
                 className={`!p-2.5 w-10 h-10 transition-all
                   ${viewType === "list"
-                    ? "border-brand-blue bg-brand-blue-light text-brand-blue shadow-sm"
+                    ? "border-brand-charcoal bg-brand-orange-soft text-brand-orange-text "
                     : "text-gray-400"}
                 `}
                 onClick={() => setViewType("list")}
@@ -134,14 +134,14 @@ export default function ProductMediaListing() {
           {viewType === "grid" ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredMedia.map((item) => (
-                <div key={item.id} className="group relative bg-white border border-gray-100 rounded-[6px] overflow-hidden hover:shadow-md hover:border-blue-100 transition-all">
+                <div key={item.id} className="group relative bg-white border border-gray-100 rounded-lg overflow-hidden hover:shadow-md hover:border-brand-orange/15 transition-all">
                   <div className="relative aspect-video bg-gray-50 flex items-center justify-center p-4">
                     <img src={item.url} alt={item.name} className="w-full h-full object-contain transition-transform group-hover:scale-105" />
 
                     {item.type === "video" && (
                       <div className="absolute inset-0 flex items-center justify-center bg-black/5 group-hover:bg-black/10 transition-colors">
                         <div className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center shadow-sm">
-                          <Icon name="play_circle_filled" folder="icon" size="sm" className="text-[#1D3557] ml-0.5" />
+                          <Icon name="play_circle_filled" folder="icon" size="sm" className="text-brand-charcoal ml-0.5" />
                         </div>
                       </div>
                     )}
@@ -150,7 +150,7 @@ export default function ProductMediaListing() {
                       <Button
                         variant="outline"
                         shape="rounded-sm"
-                        className="w-8 h-8 text-gray-500 bg-white/95 shadow-sm hover:text-blue-500 hover:bg-white !p-0 transition-all cursor-pointer"
+                        className="w-8 h-8 text-gray-500 bg-white/95 hover:text-brand-orange-text hover:bg-white !p-0 transition-all cursor-pointer"
                         onClick={() => {
                           setMediaToEdit(item);
                           setIsEditDrawerOpen(true);
@@ -161,7 +161,7 @@ export default function ProductMediaListing() {
                       <Button
                         variant="outline"
                         shape="rounded-sm"
-                        className="w-8 h-8 bg-white/95 shadow-sm text-gray-500 hover:text-rose-500 hover:bg-white !p-0 transition-all cursor-pointer"
+                        className="w-8 h-8 bg-white/95 text-gray-500 hover:text-rose-500 hover:bg-white !p-0 transition-all cursor-pointer"
                         onClick={() => {
                           setMediaToDelete(item);
                           setIsDeleteModalOpen(true);
@@ -173,12 +173,12 @@ export default function ProductMediaListing() {
                   </div>
 
                   <div className="p-4 border-t border-gray-50 bg-white">
-                    <h3 className="text-sm font-bold text-[#1D3557] truncate mb-1" title={item.name}>
+                    <h3 className="text-sm font-bold text-brand-charcoal truncate mb-1" title={item.name}>
                       {item.name}
                     </h3>
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{item.size}</span>
-                      <span className="text-[10px] font-medium text-gray-300">{item.date}</span>
+                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{item.size}</span>
+                      <span className="text-[11px] font-medium text-gray-300">{item.date}</span>
                     </div>
                   </div>
                 </div>
@@ -201,17 +201,17 @@ export default function ProductMediaListing() {
                   {filteredMedia.map((item) => (
                     <tr key={item.id} className="group">
                       <td>
-                        <div className="w-16 h-10 rounded-[4px] border border-gray-100 overflow-hidden bg-white p-0.5 shadow-sm relative shrink-0">
+                        <div className="w-16 h-10 rounded-sm border border-gray-100 overflow-hidden bg-white p-0.5 shadow-sm relative shrink-0">
                           <img src={item.url} alt={item.name} className="w-full h-full object-contain" />
                           {item.type === "video" && (
                             <div className="absolute inset-0 flex items-center justify-center bg-black/5">
-                              <Icon name="play_circle" folder="icon" size="xs" className="text-[#1D3557]" />
+                              <Icon name="play_circle" folder="icon" size="xs" className="text-brand-charcoal" />
                             </div>
                           )}
                         </div>
                       </td>
                       <td>
-                        <span className="text-sm font-bold text-[#1D3557] truncate max-w-[200px] block group-hover:text-blue-600 transition-colors">
+                        <span className="text-sm font-bold text-brand-charcoal truncate max-w-[200px] block group-hover:text-brand-orange-text transition-colors">
                           {item.name}
                         </span>
                       </td>
@@ -237,7 +237,7 @@ export default function ProductMediaListing() {
                           <Button
                             variant="outline"
                             shape="rounded-sm"
-                            className="!p-1.5 text-gray-400 hover:text-blue-500 hover:bg-brand-blue-light transition-all"
+                            className="!p-1.5 text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft transition-all"
                             onClick={() => {
                               setMediaToEdit(item);
                               setIsEditDrawerOpen(true);

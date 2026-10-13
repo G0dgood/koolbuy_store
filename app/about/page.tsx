@@ -46,22 +46,22 @@ const AboutPage = () => {
     {
       title: "Uncompromising Quality",
       desc: "We believe that excellence is found in the details. Every product undergoes a rigorous curation process.",
-      icon: <HiStar className="text-brand-blue" size={24} />,
+      icon: <HiStar className="text-brand-orange-text" size={24} />,
     },
     {
       title: "Sustainable Innovation",
       desc: "Blooming without harming. We prioritize ethical sourcing and eco-friendly practices in everything we do.",
-      icon: <HiLightBulb className="text-brand-blue" size={24} />,
+      icon: <HiLightBulb className="text-brand-orange-text" size={24} />,
     },
     {
       title: "Community Growth",
       desc: "We don't just sell products; we cultivate a community of individuals who appreciate fine artistry.",
-      icon: <HiUserGroup className="text-brand-blue" size={24} />,
+      icon: <HiUserGroup className="text-brand-orange-text" size={24} />,
     },
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-off-white flex flex-col font-sans text-black">
       <Header />
 
       <main className="flex-1 w-full bg-white">
@@ -76,7 +76,7 @@ const AboutPage = () => {
             <Image
               src="/brandImage/brand_banner.png"
               alt="Koolbuy Store Background"
-              fill
+              fill sizes="100vw"
               className="object-cover"
               priority
             />
@@ -89,11 +89,11 @@ const AboutPage = () => {
               transition={{ duration: 0.8 }}
               className="flex flex-col items-center gap-4"
             >
-              <span className="px-4 py-1.5 bg-brand-blue rounded-full text-[10px] font-black uppercase tracking-[0.3em] text-white">
+              <span className="px-4 py-1.5 bg-brand-charcoal rounded-full text-[10px] font-bold uppercase tracking-[0.3em] text-white">
                 Established 2015
               </span>
-              <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter font-inter leading-none">
-                Cultivating <span className="text-brand-blue">Pure</span>{" "}
+              <h1 className="text-4xl md:text-7xl font-bold text-white tracking-tighter font-inter leading-none">
+                Cultivating <span className="text-white/60">Pure</span>{" "}
                 Excellence
               </h1>
               <p className="text-white/70 max-w-xl text-sm md:text-lg mt-2 leading-relaxed">
@@ -113,11 +113,11 @@ const AboutPage = () => {
               viewport={{ once: true }}
               className="flex flex-col gap-6"
             >
-              <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight leading-tight">
+              <h2 className="text-3xl md:text-5xl font-bold text-brand-charcoal tracking-tight leading-tight">
                 The intersection <br />
                 of scent and skin.
               </h2>
-              <div className="w-20 h-1.5 bg-brand-blue rounded-full" />
+              <div className="w-20 h-1.5 bg-brand-charcoal rounded-full" />
               <p className="text-gray-500 text-base md:text-xl leading-relaxed">
                 In a world of mass-produced beauty, we chose the path of the
                 artisan. Our journey began with a single botanical extract and a
@@ -133,12 +133,12 @@ const AboutPage = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative aspect-square rounded-[40px] overflow-hidden shadow-2xl"
+              className="relative aspect-square rounded-3xl overflow-hidden shadow-md"
             >
               <Image
                 src="/brandImage/serene_story.png"
                 alt="Aesthetic"
-                fill
+                fill sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
             </motion.div>
@@ -149,12 +149,12 @@ const AboutPage = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative aspect-square rounded-[40px] overflow-hidden shadow-2xl order-2 lg:order-1"
+              className="relative aspect-square rounded-3xl overflow-hidden shadow-md order-2 lg:order-1"
             >
               <Image
                 src="/brandImage/product_2.png"
                 alt="Quality"
-                fill
+                fill sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
             </motion.div>
@@ -164,11 +164,11 @@ const AboutPage = () => {
               viewport={{ once: true }}
               className="flex flex-col gap-6 order-1 lg:order-2"
             >
-              <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight leading-tight">
+              <h2 className="text-3xl md:text-5xl font-bold text-brand-charcoal tracking-tight leading-tight">
                 Sourced with soul, <br />
                 crafted for life.
               </h2>
-              <div className="w-20 h-1.5 bg-[#8CB7F5] rounded-full" />
+              <div className="w-20 h-1.5 bg-brand-orange rounded-full" />
               <p className="text-gray-500 text-base md:text-xl leading-relaxed">
                 We travel the globe, not just for materials, but for stories.
                 Our sourcing team partners with local communities to ensure that
@@ -176,7 +176,7 @@ const AboutPage = () => {
               </p>
               <div className="flex items-center gap-6 mt-4">
                 <div className="flex flex-col">
-                  <span className="text-2xl font-black text-[#1D3557]">
+                  <span className="text-2xl font-bold text-brand-charcoal">
                     50+
                   </span>
                   <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
@@ -185,7 +185,7 @@ const AboutPage = () => {
                 </div>
                 <div className="h-10 w-px bg-gray-200" />
                 <div className="flex flex-col">
-                  <span className="text-2xl font-black text-[#1D3557]">
+                  <span className="text-2xl font-bold text-brand-charcoal">
                     100%
                   </span>
                   <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
@@ -201,10 +201,10 @@ const AboutPage = () => {
         <section className="bg-gray-50 py-24 md:py-32">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 text-center">
             <div className="flex flex-col items-center gap-4 mb-20 text-center">
-              <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs">
+              <span className="text-brand-orange-text font-bold tracking-[0.2em] uppercase text-xs">
                 Our Foundations
               </span>
-              <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight">
+              <h2 className="text-3xl md:text-5xl font-bold text-brand-charcoal tracking-tight">
                 The Mist & Bloom Values
               </h2>
             </div>
@@ -216,13 +216,13 @@ const AboutPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all text-left flex flex-col gap-6 group"
+                  className="bg-white p-10 rounded-3xl shadow-sm hover:shadow-md hover:-translate-y-2 transition-all text-left flex flex-col gap-6 group"
                 >
-                  <div className="w-14 h-14 bg-brand-blue-light rounded-2xl flex items-center justify-center group-hover:bg-brand-blue group-hover:text-white transition-colors">
+                  <div className="w-14 h-14 bg-brand-orange-soft rounded-2xl flex items-center justify-center group-hover:bg-brand-charcoal group-hover:text-white transition-colors">
                     {v.icon}
                   </div>
                   <div className="flex flex-col gap-2">
-                    <h4 className="text-xl font-bold text-[#1D3557]">
+                    <h4 className="text-xl font-bold text-brand-charcoal">
                       {v.title}
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
@@ -239,7 +239,7 @@ const AboutPage = () => {
         <section className="py-24 md:py-32">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16">
             <div className="flex flex-col items-start gap-4 mb-16">
-              <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight">
+              <h2 className="text-3xl md:text-5xl font-bold text-brand-charcoal tracking-tight">
                 Meet the Architects
               </h2>
               <p className="text-gray-500 max-w-xl">
@@ -262,10 +262,10 @@ const AboutPage = () => {
                     <Image
                       src={member.image}
                       alt={member.name}
-                      fill
+                      fill sizes="(max-width: 768px) 50vw, 25vw"
                       className="object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                       <div className="flex gap-3 text-white">
                         <button className="hover:scale-120 transition-transform">
                           <HiStar size={18} />
@@ -277,10 +277,10 @@ const AboutPage = () => {
                     </div>
                   </div>
                   <div className="flex flex-col">
-                    <h5 className="font-bold text-[#1D3557] text-lg">
+                    <h5 className="font-bold text-brand-charcoal text-lg">
                       {member.name}
                     </h5>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-brand-blue">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-brand-orange-text">
                       {member.role}
                     </span>
                   </div>
@@ -291,38 +291,38 @@ const AboutPage = () => {
         </section>
 
         {/* Step 64: Trust/Stats Section */}
-        <section className="bg-[#1D3557] py-20 overflow-hidden relative">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue rounded-full filter blur-[120px] opacity-20 translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#8CB7F5] rounded-full filter blur-[120px] opacity-10 -translate-x-1/2 translate-y-1/2" />
+        <section className="bg-brand-charcoal py-20 overflow-hidden relative">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-orange rounded-full filter blur-[120px] opacity-20 translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-orange rounded-full filter blur-[120px] opacity-10 -translate-x-1/2 translate-y-1/2" />
 
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 grid grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
             <div className="flex flex-col items-center lg:items-start gap-2">
-              <span className="text-4xl md:text-6xl font-black text-white tracking-tighter">
-                10<span className="text-brand-blue">+</span>
+              <span className="text-4xl md:text-6xl font-bold text-white tracking-tighter">
+                10<span className="text-brand-orange">+</span>
               </span>
               <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">
                 Years of Pursuit
               </span>
             </div>
             <div className="flex flex-col items-center lg:items-start gap-2">
-              <span className="text-4xl md:text-6xl font-black text-white tracking-tighter">
-                5M<span className="text-[#8CB7F5]">+</span>
+              <span className="text-4xl md:text-6xl font-bold text-white tracking-tighter">
+                5M<span className="text-brand-orange">+</span>
               </span>
               <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">
                 Global Shipments
               </span>
             </div>
             <div className="flex flex-col items-center lg:items-start gap-2">
-              <span className="text-4xl md:text-6xl font-black text-white tracking-tighter">
-                24<span className="text-brand-blue">/</span>7
+              <span className="text-4xl md:text-6xl font-bold text-white tracking-tighter">
+                24<span className="text-brand-orange">/</span>7
               </span>
               <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">
                 Expert Support
               </span>
             </div>
             <div className="flex flex-col items-center lg:items-start gap-2">
-              <span className="text-4xl md:text-6xl font-black text-white tracking-tighter">
-                98<span className="text-[#8CB7F5]">%</span>
+              <span className="text-4xl md:text-6xl font-bold text-white tracking-tighter">
+                98<span className="text-brand-orange">%</span>
               </span>
               <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">
                 Customer Trust

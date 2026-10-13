@@ -134,8 +134,8 @@ export default function CacheControlPage() {
     <div className="flex flex-col gap-6 mx-auto pb-16">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 right-8 z-50 bg-[#1D3557] text-white text-xs px-4 py-3 rounded-lg shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
-          <HiOutlineCheckCircle className="w-4 h-4 text-[#00BCD4]" />
+        <div className="fixed top-20 right-8 z-50 bg-brand-charcoal text-white text-xs px-4 py-3 rounded-lg shadow-md flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
+          <HiOutlineCheckCircle className="w-4 h-4 text-brand-orange" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -147,7 +147,7 @@ export default function CacheControlPage() {
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
               Cache Control
             </h1>
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-[#00BCD4]/20">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-orange-soft text-brand-orange-text border border-brand-orange/20">
               Redis Performance
             </span>
           </div>
@@ -160,16 +160,18 @@ export default function CacheControlPage() {
         <Button
           variant="primary"
           shape="rounded-sm"
-          className="bg-rose-600 hover:bg-rose-700 text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-xs"
+          className="bg-rose-600 hover:bg-rose-700 text-white"
           onClick={handleFlushAllRedis}
           disabled={clearingKey !== null}
+          iconLeft={
+            clearingKey === "all" ? (
+              <HiOutlineArrowPath className="w-3.5 h-3.5 animate-spin" />
+            ) : (
+              <HiOutlineTrash className="w-3.5 h-3.5" />
+            )
+          }
         >
-          {clearingKey === "all" ? (
-            <HiOutlineArrowPath className="w-4 h-4 animate-spin" />
-          ) : (
-            <HiOutlineTrash className="w-4 h-4" />
-          )}
-          <span>Flush All Redis Cache</span>
+          Flush All Redis Cache
         </Button>
       </div>
 
@@ -180,13 +182,13 @@ export default function CacheControlPage() {
             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
               Redis Status
             </span>
-            <HiOutlineServerStack className="w-4 h-4 text-[#00BCD4]" />
+            <HiOutlineServerStack className="w-4 h-4 text-brand-orange-text" />
           </div>
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-            <p className="text-lg font-black text-gray-900">Connected</p>
+            <p className="text-lg font-bold text-gray-900">Connected</p>
           </div>
-          <span className="text-[10px] text-gray-400 font-mono mt-0.5 block">
+          <span className="text-[11px] text-gray-400 font-mono mt-0.5 block">
             Port: 6379 (Redis 7.2)
           </span>
         </div>
@@ -198,8 +200,8 @@ export default function CacheControlPage() {
             </span>
             <HiOutlineBolt className="w-4 h-4 text-purple-600" />
           </div>
-          <p className="text-lg font-black text-gray-900">42.8 MB</p>
-          <span className="text-[10px] text-purple-600 font-semibold">
+          <p className="text-lg font-bold text-gray-900">42.8 MB</p>
+          <span className="text-[11px] text-purple-600 font-semibold">
             Peak allocation: 64 MB
           </span>
         </div>
@@ -211,8 +213,8 @@ export default function CacheControlPage() {
             </span>
             <HiOutlineCircleStack className="w-4 h-4 text-emerald-600" />
           </div>
-          <p className="text-lg font-black text-gray-900">98.4%</p>
-          <span className="text-[10px] text-emerald-600 font-semibold">
+          <p className="text-lg font-bold text-gray-900">98.4%</p>
+          <span className="text-[11px] text-emerald-600 font-semibold">
             Avg query latency: 1.2ms
           </span>
         </div>
@@ -224,10 +226,10 @@ export default function CacheControlPage() {
             </span>
             <HiOutlineCube className="w-4 h-4 text-amber-500" />
           </div>
-          <p className="text-lg font-black text-gray-900">
+          <p className="text-lg font-bold text-gray-900">
             {enabledCount} of {modules.length}
           </p>
-          <span className="text-[10px] text-gray-500 font-semibold">
+          <span className="text-[11px] text-gray-500 font-semibold">
             Modules caching in Redis
           </span>
         </div>
@@ -240,11 +242,11 @@ export default function CacheControlPage() {
         {/* Card Header */}
         <div className="p-4 sm:p-5 border-b border-gray-100 bg-gray-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-brand-blue-light border border-[#00BCD4]/20 text-[#00BCD4] flex items-center justify-center">
+            <div className="w-9 h-9 rounded-lg bg-brand-orange-soft border border-brand-orange/20 text-brand-orange-text flex items-center justify-center">
               <HiOutlineServerStack className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-sm font-bold text-[#1D3557] uppercase tracking-wider">
+              <h2 className="text-sm font-bold text-brand-charcoal uppercase tracking-wider">
                 Module-wise Cache Management
               </h2>
               <p className="text-xs text-gray-500 mt-0.5">
@@ -274,7 +276,7 @@ export default function CacheControlPage() {
                   <div
                     className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 border ${
                       mod.enabled
-                        ? "bg-brand-blue-light border-[#00BCD4]/20 text-[#00BCD4]"
+                        ? "bg-brand-orange-soft border-brand-orange/20 text-brand-orange-text"
                         : "bg-gray-100 border-gray-200 text-gray-400"
                     }`}
                   >
@@ -287,7 +289,7 @@ export default function CacheControlPage() {
                         {mod.name}
                       </h3>
                       <span
-                        className={`text-[10px] font-bold px-2 py-0.2 rounded ${
+                        className={`text-[11px] font-bold px-2 py-0.2 rounded ${
                           mod.enabled
                             ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
                             : "bg-gray-100 text-gray-500 border border-gray-200"
@@ -343,7 +345,7 @@ export default function CacheControlPage() {
                         onChange={() => toggleModuleEnable(mod.id)}
                         className="sr-only peer"
                       />
-                      <div className="w-10 h-5.5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4.5 after:w-4.5 after:transition-all peer-checked:bg-[#00BCD4]" />
+                      <div className="w-10 h-5.5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4.5 after:w-4.5 after:transition-all peer-checked:bg-brand-orange" />
                     </label>
                   </div>
                 </div>

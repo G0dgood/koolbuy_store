@@ -12,10 +12,6 @@ import { Modal, ModalBody } from "@/app/components/Modal";
 import Checkbox from "@/app/components/Checkbox";
 import Link from "next/link";
 import {
-  HiOutlineTag,
-  HiOutlineBuildingStorefront,
-  HiOutlineTicket,
-  HiOutlineUsers,
   HiOutlineDocumentArrowDown,
   HiOutlinePlus,
   HiOutlineArrowRight,
@@ -189,8 +185,8 @@ const tabs = [
 
 const statusStyles = {
   Delivered: "bg-emerald-50 text-emerald-600 border border-emerald-100",
-  Completed: "bg-blue-50 text-brand-blue border border-blue-100",
-  Shipped: "bg-sky-50 text-sky-600 border border-sky-100",
+  Completed: "bg-success-soft text-success border border-success/20",
+  Shipped: "bg-success-soft text-success border border-success/20",
   Pending: "bg-amber-50 text-amber-600 border border-amber-100",
   Cancelled: "bg-rose-50 text-rose-600 border border-rose-100",
 };
@@ -296,7 +292,7 @@ export default function AccountingPromoCodesPage() {
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
               Promo Codes (Accounting)
             </h1>
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-[#00BCD4]/20">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-orange-soft text-brand-orange-text border border-brand-orange/20">
               Accounting Audit
             </span>
           </div>
@@ -311,10 +307,10 @@ export default function AccountingPromoCodesPage() {
             <Button
               variant="outline"
               size="md"
-              className="border-gray-200 text-gray-800 shadow-2xs hover:bg-gray-50 px-3.5 py-2 text-xs font-semibold flex items-center gap-1.5"
+              className="border-gray-200 text-gray-800 hover:bg-gray-50 px-3.5 py-2 text-xs font-semibold flex items-center gap-1.5"
             >
               <span>View Marketing Promocodes</span>
-              <HiOutlineArrowRight className="w-3.5 h-3.5 text-[#00BCD4]" />
+              <HiOutlineArrowRight className="w-3.5 h-3.5 text-brand-orange-text" />
             </Button>
           </Link>
 
@@ -324,10 +320,10 @@ export default function AccountingPromoCodesPage() {
             iconLeft={
               <HiOutlineDocumentArrowDown
                 size={18}
-                className="text-brand-blue"
+                className="text-brand-orange-text"
               />
             }
-            className="border-gray-200 text-gray-800 shadow-2xs hover:bg-gray-50 px-4 py-2 text-xs sm:text-sm font-semibold"
+            className="border-gray-200 text-gray-800 hover:bg-gray-50 px-4 py-2 text-xs sm:text-sm font-semibold"
             onClick={() => setIsExportModalOpen(true)}
           >
             Export Report
@@ -336,7 +332,7 @@ export default function AccountingPromoCodesPage() {
           <Button
             variant="blue"
             size="md"
-            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold shadow-sm shadow-brand-blue/20 bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white"
+            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold bg-brand-orange hover:bg-brand-orange/90 text-white"
             iconLeft={<HiOutlinePlus size={16} />}
             onClick={() => setIsAddReportModalOpen(true)}
           >
@@ -354,7 +350,6 @@ export default function AccountingPromoCodesPage() {
           trendValue="12.4%"
           trendIsUp={true}
           subtitle="Platform funded promos"
-          badgeIcon={<HiOutlineTag className="w-4 h-4" />}
         />
 
         <StatCard
@@ -364,7 +359,6 @@ export default function AccountingPromoCodesPage() {
           trendValue="18.2%"
           trendIsUp={true}
           subtitle="Merchant funded promos"
-          badgeIcon={<HiOutlineBuildingStorefront className="w-4 h-4" />}
         />
 
         <StatCard
@@ -374,7 +368,6 @@ export default function AccountingPromoCodesPage() {
           trendValue="15.0%"
           trendIsUp={true}
           subtitle="Total redemptions"
-          badgeIcon={<HiOutlineTicket className="w-4 h-4" />}
         />
 
         <StatCard
@@ -384,7 +377,6 @@ export default function AccountingPromoCodesPage() {
           trendValue="9.5%"
           trendIsUp={true}
           subtitle="Distinct customers"
-          badgeIcon={<HiOutlineUsers className="w-4 h-4" />}
         />
       </div>
 
@@ -476,7 +468,7 @@ export default function AccountingPromoCodesPage() {
                       </div>
                     </td>
 
-                    <td className="py-3.5 px-4 font-mono font-bold text-xs text-brand-blue whitespace-nowrap">
+                    <td className="py-3.5 px-4 font-mono font-bold text-xs text-brand-orange-text whitespace-nowrap">
                       {order.orderId}
                     </td>
 
@@ -517,7 +509,7 @@ export default function AccountingPromoCodesPage() {
 
                     <td className="py-3.5 px-4 text-xs whitespace-nowrap">
                       {order.adminPaidDiscount !== "-" ? (
-                        <span className="font-bold text-brand-blue bg-cyan-50 px-2 py-0.5 rounded-md border border-cyan-100">
+                        <span className="font-bold text-brand-orange-text bg-brand-orange-soft px-2 py-0.5 rounded-md border border-brand-orange/15">
                           {order.adminPaidDiscount}
                         </span>
                       ) : (
@@ -597,7 +589,7 @@ export default function AccountingPromoCodesPage() {
       >
         <ModalBody>
           <div className="space-y-4 pt-2 text-center">
-            <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center mx-auto">
               <HiOutlineDocumentArrowDown className="w-6 h-6" />
             </div>
             <div>
@@ -619,7 +611,7 @@ export default function AccountingPromoCodesPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-[#00BCD4] text-white"
+                className="bg-brand-orange text-white"
                 onClick={() => setIsExportModalOpen(false)}
               >
                 Download CSV

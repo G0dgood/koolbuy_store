@@ -66,7 +66,7 @@ const LoginForm = ({ onSwitch }: { onSwitch: () => void }) => {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="text-gray-400 hover:text-brand-blue transition-colors cursor-pointer"
+                className="text-gray-400 hover:text-brand-orange-text transition-colors cursor-pointer"
               >
                 <Icon
                   name={showPassword ? "visibility_off" : "visibility"}
@@ -78,7 +78,7 @@ const LoginForm = ({ onSwitch }: { onSwitch: () => void }) => {
           <div className="flex justify-end px-1">
             <button
               onClick={() => setView("forgotPassword")}
-              className="text-[10px] font-bold text-brand-blue hover:underline cursor-pointer"
+              className="text-[10px] font-bold text-brand-orange-text hover:underline cursor-pointer"
             >
               Forgot password?
             </button>
@@ -94,7 +94,7 @@ const LoginForm = ({ onSwitch }: { onSwitch: () => void }) => {
 
       <div className="relative flex items-center gap-4 my-2">
         <div className="flex-1 h-px bg-gray-100"></div>
-        <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest">
+        <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest">
           OR
         </span>
         <div className="flex-1 h-px bg-gray-100"></div>
@@ -118,7 +118,7 @@ const LoginForm = ({ onSwitch }: { onSwitch: () => void }) => {
         Don’t have an account?{" "}
         <button
           onClick={onSwitch}
-          className="text-brand-blue font-bold hover:underline cursor-pointer"
+          className="text-brand-orange-text font-bold hover:underline cursor-pointer"
         >
           Register now
         </button>
@@ -157,7 +157,7 @@ const RegisterForm = ({
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="text-gray-400 hover:text-brand-blue transition-colors cursor-pointer"
+              className="text-gray-400 hover:text-brand-orange-text transition-colors cursor-pointer"
             >
               <Icon
                 name={showPassword ? "visibility_off" : "visibility"}
@@ -177,7 +177,7 @@ const RegisterForm = ({
               <button
                 type="button"
                 onClick={onOpenTerms}
-                className="text-brand-blue hover:underline cursor-pointer"
+                className="text-brand-orange-text hover:underline cursor-pointer"
               >
                 Terms and Conditions
               </button>
@@ -192,7 +192,7 @@ const RegisterForm = ({
 
       <div className="relative flex items-center gap-4 my-2">
         <div className="flex-1 h-px bg-gray-100"></div>
-        <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest">
+        <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest">
           OR
         </span>
         <div className="flex-1 h-px bg-gray-100"></div>
@@ -214,7 +214,7 @@ const RegisterForm = ({
         Already have an account?{" "}
         <button
           onClick={onSwitch}
-          className="text-brand-blue font-bold hover:underline cursor-pointer"
+          className="text-brand-orange-text font-bold hover:underline cursor-pointer"
         >
           Log In
         </button>
@@ -248,7 +248,7 @@ const ForgotPasswordForm = ({ onBack }: { onBack: () => void }) => (
       Remember your password?{" "}
       <button
         onClick={onBack}
-        className="text-brand-blue font-bold hover:underline cursor-pointer"
+        className="text-brand-orange-text font-bold hover:underline cursor-pointer"
       >
         Back to Login
       </button>

@@ -1,77 +1,65 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
+import { ChartCard, naira } from "./DashboardUi";
+import { hasMapbox, type RevenuePoint } from "./RevenueMap";
 
-interface LocationData {
-  name: string;
-  value: number;
-  percentage: number;
-}
+// Mapbox needs the browser, so it loads on the client only.
+const RevenueMap = dynamic(() => import("./RevenueMap"), {
+  ssr: false,
+  loading: () => <div className="h-[260px] rounded-lg bg-off-white animate-pulse" aria-hidden />,
+});
 
-const locations: LocationData[] = [
-  { name: "Alimosho", value: 11075500, percentage: 78 },
-  { name: "Ifo", value: 172000, percentage: 14 },
+const locations: RevenuePoint[] = [
+  { name: "Alimosho", value: 11075500, lat: 6.6018, lng: 3.256 },
+  { name: "Ifo", value: 172000, lat: 6.815, lng: 3.195 },
 ];
 
-export const RevenueByLocation: React.FC = () => {
-  const [hoveredLocation, setHoveredLocation] = useState<string | null>(null);
+export const RevenueByLocation: React.FC<{ className?: string }> = ({ className }) => {
+  const total = locations.reduce((a, l) => a + l.value, 0);
+  const max = Math.max(...locations.map((l) => l.value), 1);
+  // Static map when there's no Mapbox token or Mapbox fails to load.
+  const [mapFailed, setMapFailed] = useState(false);
+  const showMapbox = hasMapbox() && !mapFailed;
 
   return (
-    <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-xs flex flex-col justify-between h-full">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-2">
-        <h3 className="text-base font-semibold text-gray-800">
-          Revenue By Location
-        </h3>
-      </div>
-
-      {/* World Map Illustration with Precision Country Outlines */}
-      <div className="relative w-full flex items-center justify-center overflow-hidden my-3 group">
-        <img
-          src="/images/world-map.svg"
-          alt="Revenue by Location Map"
-          className="w-full h-auto object-contain select-none"
-        />
-
-        {/* Pulsing Beacon Glow over Nigeria / West Africa */}
-        <div
-          className="absolute top-[58.5%] left-[50.2%] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center cursor-pointer"
-          onMouseEnter={() => setHoveredLocation("Nigeria Hub")}
-          onMouseLeave={() => setHoveredLocation(null)}
-        >
-          <span className="animate-ping absolute inline-flex h-9 w-9 rounded-full bg-cyan-400 opacity-40"></span>
-          <span className="relative inline-flex rounded-full h-4 w-4 bg-[#00BCD4] border-2 border-white shadow-md"></span>
-
-          {/* Interactive Tooltip Badge */}
-          <div className="absolute -top-8 px-2.5 py-1 bg-[#1D3557] text-white text-[10px] font-bold rounded-lg whitespace-nowrap shadow-md pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-            Nigeria Hub • ₦11.25M
-          </div>
+    <ChartCard title="Revenue by location" subtitle={`${naira(total)} across ${locations.length} areas`} className={className}>
+      {showMapbox ? (
+        <RevenueMap points={locations} onFail={() => setMapFailed(true)} />
+      ) : (
+      <div className="relative w-full flex items-center justify-center overflow-hidden group">
+        <img src="/images/world-map.svg" alt="" aria-hidden className="w-full h-auto object-contain select-none opacity-80" />
+        {/* Where the revenue comes from: Nigeria */}
+        <div className="absolute top-[58.5%] left-[50.2%] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+          <span className="animate-ping absolute inline-flex h-8 w-8 rounded-full bg-brand-orange opacity-30" />
+          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-brand-orange border-2 border-white shadow-sm" />
+          <span className="absolute -top-8 px-2 py-1 bg-brand-charcoal text-white text-[11px] font-medium rounded-md whitespace-nowrap pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+            Nigeria · {naira(total, true)}
+          </span>
         </div>
       </div>
+      )}
 
-      {/* Progress Bars Breakdown Matching User Spec */}
-      <div className="flex flex-col gap-4 mt-2 pt-4 border-t border-gray-50 text-sm">
+      <ul className="mt-4 pt-4 border-t border-light-gray space-y-4">
         {locations.map((loc) => (
-          <div key={loc.name} className="flex flex-col gap-1.5">
-            <div className="flex items-center justify-between">
-              <span className="font-medium text-gray-700">{loc.name}</span>
-              <span className="font-normal text-gray-700 tabular-nums">
-                {loc.value}
-              </span>
+          <li key={loc.name} className="space-y-1.5">
+            <div className="flex items-center justify-between text-[13px]">
+              <span className="font-medium text-brand-charcoal">{loc.name}</span>
+              <span className="text-subtle tabular-nums">{naira(loc.value)}</span>
             </div>
-            {/* Progress track */}
-            <div className="w-full bg-[#E2E8F0]/70 h-1.5 rounded-full overflow-hidden">
+            <div className="h-1.5 rounded-full overflow-hidden bg-off-white">
               <motion.div
                 initial={{ width: 0 }}
-                animate={{ width: `${loc.percentage}%` }}
-                transition={{ duration: 0.9, ease: "easeOut" }}
-                className="bg-[#00BCD4] h-full rounded-full"
+                animate={{ width: `${Math.max(2, (loc.value / max) * 100)}%` }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="h-full rounded-full bg-brand-orange"
               />
             </div>
-          </div>
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </ChartCard>
   );
 };

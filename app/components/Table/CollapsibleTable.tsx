@@ -50,7 +50,7 @@ const CollapsibleTable: React.FC<CollapsibleTableProps> = ({
           <React.Fragment key={group.id}>
             {/* Group Header */}
             <TableRow 
-              className="bg-brand-blue-light/10 cursor-pointer select-none border-b border-gray-100"
+              className="bg-brand-orange-soft/10 cursor-pointer select-none border-b border-gray-100"
               onClick={() => toggleGroup(group.id)}
             >
               <TableCell colSpan={columns ? columns.length - 1 : 1} className="py-3">
@@ -58,9 +58,9 @@ const CollapsibleTable: React.FC<CollapsibleTableProps> = ({
                   <Icon 
                     name="expand_more" 
                     size="sm" 
-                    className={`text-brand-blue transition-transform duration-200 ${expandedGroups[group.id] ? "" : "-rotate-90"}`} 
+                    className={`text-brand-orange-text transition-transform duration-200 ${expandedGroups[group.id] ? "" : "-rotate-90"}`} 
                   />
-                  <span className="text-sm font-bold text-brand-blue">{group.heading}</span>
+                  <span className="text-sm font-bold text-brand-orange-text">{group.heading}</span>
                 </div>
               </TableCell>
               <TableCell align="right" className="py-3">

@@ -44,7 +44,7 @@ export function AddRoleModal({ isOpen, onClose }: AddRoleModalProps) {
       <form onSubmit={handleSubmit}>
         <ModalBody className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
-            <label className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Role Name</label>
+            <label className="text-[11px] sm:text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em]">Role Name</label>
             <Input
               placeholder="e.g. Content Manager"
               value={formData.name}
@@ -55,7 +55,7 @@ export function AddRoleModal({ isOpen, onClose }: AddRoleModalProps) {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Description</label>
+            <label className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em]">Description</label>
             <Textarea
               placeholder="Describe the responsibilities and access level for this role..."
               value={formData.description}
@@ -67,7 +67,7 @@ export function AddRoleModal({ isOpen, onClose }: AddRoleModalProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-2 w-full">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Department</label>
+              <label className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em]">Department</label>
               <Select
                 options={departmentOptions}
                 value={formData.department}
@@ -76,7 +76,7 @@ export function AddRoleModal({ isOpen, onClose }: AddRoleModalProps) {
             </div>
 
             <div className="flex flex-col gap-2 w-full">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Initial Status</label>
+              <label className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em]">Initial Status</label>
               <Select
                 options={statusOptions}
                 value={formData.status}
@@ -98,7 +98,7 @@ export function AddRoleModal({ isOpen, onClose }: AddRoleModalProps) {
           <Button 
             variant="primary" 
             type="submit" 
-            className="px-8 h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest shadow-lg shadow-blue-100"
+            className="px-8 h-10 sm:h-12 text-[11px] font-bold uppercase tracking-wider "
           >
             Create Role
           </Button>

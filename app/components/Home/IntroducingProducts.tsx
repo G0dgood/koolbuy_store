@@ -80,7 +80,7 @@ export const IntroducingProducts: React.FC<IntroducingProductsProps> = ({
   return (
     <section className="w-full flex flex-col items-center gap-6 pt-2">
       {/* Section Title */}
-      <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1E293B] text-center tracking-tight">
+      <h2 className="text-2xl sm:text-3xl font-bold text-brand-charcoal text-center tracking-tight">
         Introducing Our Products
       </h2>
 
@@ -102,14 +102,14 @@ export const IntroducingProducts: React.FC<IntroducingProductsProps> = ({
                     whileTap={{ scale: 0.97 }}
                     transition={{ type: "spring", stiffness: 350, damping: 22 }}
                     className={`relative px-3.5 sm:px-4 py-2.5 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-200 outline-none ${
-                      isActive ? "bg-orange-50/7" : "hover:bg-orange-50/50"
+                      isActive ? "bg-brand-orange-soft/7" : "hover:bg-brand-orange-soft/50"
                     }`}
                   >
                     <span
                       className={`text-xs sm:text-sm whitespace-pre-line leading-tight transition-colors duration-200 ${
                         isActive
-                          ? "text-[#FF7A00] font-bold"
-                          : "text-gray-600 font-medium group-hover:text-[#FF7A00]"
+                          ? "text-brand-orange-text font-bold"
+                          : "text-gray-600 font-medium group-hover:text-brand-orange-text"
                       }`}
                     >
                       {cat.name}
@@ -119,7 +119,7 @@ export const IntroducingProducts: React.FC<IntroducingProductsProps> = ({
                     {isActive && (
                       <motion.div
                         layoutId="activeTabUnderline"
-                        className="absolute -bottom-0.5 w-8 sm:w-10 h-0.75 bg-[#FF7A00] rounded-full"
+                        className="absolute -bottom-0.5 w-8 sm:w-10 h-0.75 bg-brand-orange rounded-full"
                         transition={{
                           type: "spring",
                           stiffness: 350,

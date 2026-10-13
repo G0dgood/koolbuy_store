@@ -60,14 +60,14 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
                   size="lg"
                   className={
                     star <= (hoveredRating || rating)
-                      ? "text-orange-400"
+                      ? "text-brand-orange-text"
                       : "text-gray-300"
                   }
                 />
               </button>
             ))}
           </div>
-          <span className="text-xs font-black text-gray-400 uppercase tracking-widest">
+          <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">
             {rating === 0 ? "Select a rating" : `${rating} - ${["Poor", "Fair", "Good", "Very Good", "Excellent"][rating - 1]}`}
           </span>
         </div>
@@ -79,19 +79,19 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
           />
           
           <div className="flex flex-col gap-1.5">
-            <label className="text-[11px] font-black text-gray-400 uppercase tracking-widest px-1">
+            <label className="text-[11px] font-bold text-gray-400 uppercase tracking-widest px-1">
               Your Review
             </label>
             <textarea
-              className="w-full min-h-[120px] p-4 bg-white border border-gray-200 rounded-xl outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue/10 transition-all text-sm text-gray-700 resize-none"
+              className="w-full min-h-[120px] p-4 bg-white border border-gray-200 rounded-xl outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/10 transition-all text-sm text-gray-700 resize-none"
               placeholder="What did you like or dislike? How was the quality?"
             />
           </div>
         </div>
 
         {/* Image Upload Placeholder */}
-        <div className="border-2 border-dashed border-gray-100 rounded-2xl p-6 flex flex-col items-center justify-center gap-2 group hover:border-brand-blue/30 transition-colors cursor-pointer">
-          <div className="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-400 group-hover:text-brand-blue group-hover:bg-brand-blue/5 transition-colors">
+        <div className="border-2 border-dashed border-gray-100 rounded-2xl p-6 flex flex-col items-center justify-center gap-2 group hover:border-brand-charcoal/30 transition-colors cursor-pointer">
+          <div className="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-400 group-hover:text-brand-orange-text group-hover:bg-brand-charcoal/5 transition-colors">
             <Icon name="photo_camera" size="sm" />
           </div>
           <div className="flex flex-col items-center text-center">

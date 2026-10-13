@@ -168,7 +168,7 @@ const ProductsPage = () => {
   }, [filters, products]);
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-off-white flex flex-col font-sans text-black">
       {/* Desktop Header */}
       <Header className="hidden md:block" />
 
@@ -186,15 +186,15 @@ const ProductsPage = () => {
 
         {/* Breadcrumbs */}
         <div className="hidden md:flex items-center gap-2 text-sm text-gray-400 overflow-x-auto whitespace-nowrap scrollbar-none pb-2 px-4 md:px-0">
-          <Link href="/" className="hover:text-brand-blue">
+          <Link href="/" className="hover:text-brand-orange-text">
             Home
           </Link>
           <Icon name="chevron_right" size="xs" />
-          <Link href="#" className="hover:text-brand-blue">
+          <Link href="#" className="hover:text-brand-orange-text">
             Clothings
           </Link>
           <Icon name="chevron_right" size="xs" />
-          <Link href="#" className="hover:text-brand-blue">
+          <Link href="#" className="hover:text-brand-orange-text">
             Men's wear
           </Link>
           <Icon name="chevron_right" size="xs" />
@@ -296,7 +296,7 @@ const ProductsPage = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-y-0 right-0 w-[85%] max-w-sm bg-white z-[110] lg:hidden flex flex-col shadow-2xl"
+              className="fixed inset-y-0 right-0 w-[85%] max-w-sm bg-white z-[110] lg:hidden flex flex-col shadow-md"
             >
               <div className="flex items-center justify-between p-4 border-b border-gray-100">
                 <h2 className="text-lg font-bold">Filters</h2>
@@ -313,7 +313,7 @@ const ProductsPage = () => {
               <div className="p-4 border-t border-gray-100 flex gap-3">
                 <button
                   onClick={() => setIsFilterDrawerOpen(false)}
-                  className="flex-1 py-3 bg-brand-blue text-white font-bold rounded-lg hover:bg-brand-blue/90"
+                  className="flex-1 py-3 bg-brand-charcoal text-white font-bold rounded-lg hover:bg-brand-charcoal/90"
                 >
                   Show Results
                 </button>

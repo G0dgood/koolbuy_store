@@ -232,15 +232,15 @@ export default function MarketingLoyaltyCardsPage() {
     if (n.includes("silver"))
       return "text-slate-600 bg-slate-50 border-slate-200";
     if (n.includes("platinum"))
-      return "text-indigo-600 bg-indigo-50 border-indigo-200";
-    return "text-cyan-600 bg-cyan-50 border-cyan-200";
+      return "text-brand-orange-text bg-brand-orange-soft border-brand-orange/30";
+    return "text-brand-orange-text bg-brand-orange-soft border-brand-orange/30";
   };
 
   return (
     <div className="flex flex-col gap-5 pb-12">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 right-8 z-50 bg-gray-900 text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-3">
+        <div className="fixed top-20 right-8 z-50 bg-gray-900 text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-md flex items-center gap-2 animate-in fade-in slide-in-from-top-3">
           <HiOutlineCheckBadge className="w-4 h-4 text-emerald-400" />
           <span>{toastMessage}</span>
         </div>
@@ -251,10 +251,10 @@ export default function MarketingLoyaltyCardsPage() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             {/* <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-brand-blue-light text-brand-blue flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center">
                 <HiOutlineCreditCard className="w-4 h-4" />
               </div>
-              <h1 className="text-xl font-black text-gray-900 tracking-tight">
+              <h1 className="text-xl font-bold text-gray-900 tracking-tight">
                 Loyalty Cards
               </h1>
             </div>
@@ -271,7 +271,7 @@ export default function MarketingLoyaltyCardsPage() {
               <span>Accounting Audit</span>
             </Link>
             <Button
-              className="h-9 px-4 text-xs font-bold bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white rounded-lg shadow-xs cursor-pointer"
+              className="h-9 px-4 text-xs font-bold bg-brand-orange hover:bg-brand-orange/90 text-white rounded-lg cursor-pointer"
               iconLeft={<HiOutlinePlus className="w-3.5 h-3.5" />}
               onClick={handleOpenAddModal}
             >
@@ -295,7 +295,7 @@ export default function MarketingLoyaltyCardsPage() {
                   );
                 }}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer focus:outline-none ${
-                  loyaltyEnabled ? "bg-[#00BCD4]" : "bg-gray-300"
+                  loyaltyEnabled ? "bg-brand-orange" : "bg-gray-300"
                 }`}
                 title={
                   loyaltyEnabled
@@ -327,7 +327,7 @@ export default function MarketingLoyaltyCardsPage() {
                   type="text"
                   value={redemptionValue}
                   onChange={(e) => setRedemptionValue(e.target.value)}
-                  className="w-16 font-mono font-bold text-xs text-brand-blue bg-transparent outline-none border-b border-transparent focus:border-[#00BCD4] text-center"
+                  className="w-16 font-mono font-bold text-xs text-brand-orange-text bg-transparent outline-none border-b border-transparent focus:border-brand-orange text-center"
                   placeholder="0.05"
                 />
                 <span className="text-[11px] text-gray-400 font-semibold">
@@ -446,7 +446,7 @@ export default function MarketingLoyaltyCardsPage() {
                           href={plan.linkUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-1.5 text-brand-blue hover:text-[#00BCD4] hover:underline font-bold text-xs group"
+                          className="inline-flex items-center gap-1.5 text-brand-orange-text hover:text-brand-orange-text hover:underline font-bold text-xs group"
                         >
                           <span>{plan.name}</span>
                           <HiOutlineArrowTopRightOnSquare className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
@@ -459,12 +459,12 @@ export default function MarketingLoyaltyCardsPage() {
                       </td>
 
                       {/* 5. Minimum Points */}
-                      <td className="py-3.5 px-4 font-black text-gray-900 font-mono text-xs whitespace-nowrap">
+                      <td className="py-3.5 px-4 font-bold text-gray-900 font-mono text-xs whitespace-nowrap">
                         {plan.minimumPoints}
                       </td>
 
                       {/* 6. Earnings Per Order */}
-                      <td className="py-3.5 px-4 font-black text-gray-900 font-mono text-xs whitespace-nowrap">
+                      <td className="py-3.5 px-4 font-bold text-gray-900 font-mono text-xs whitespace-nowrap">
                         {plan.earningsPerOrder}
                       </td>
 
@@ -495,7 +495,7 @@ export default function MarketingLoyaltyCardsPage() {
                           <button
                             type="button"
                             onClick={() => handleOpenEditModal(plan)}
-                            className="p-1.5 text-gray-400 hover:text-[#00BCD4] hover:bg-brand-blue-light/50 rounded-lg transition-colors cursor-pointer"
+                            className="p-1.5 text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft/50 rounded-lg transition-colors cursor-pointer"
                             title="Edit Loyalty Plan"
                           >
                             <HiOutlinePencilSquare className="w-4 h-4" />
@@ -579,7 +579,7 @@ export default function MarketingLoyaltyCardsPage() {
             <form onSubmit={handleSavePlan} className="space-y-4 pt-1">
               <div className="flex items-center justify-between border-b border-gray-100 pb-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 rounded-lg bg-brand-blue-light text-brand-blue flex items-center justify-center">
+                  <div className="w-9 h-9 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center">
                     <HiOutlineCreditCard className="w-4 h-4" />
                   </div>
                   <div>
@@ -760,7 +760,7 @@ export default function MarketingLoyaltyCardsPage() {
                 <Button
                   type="submit"
                   size="sm"
-                  className="bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white rounded-lg text-xs font-semibold"
+                  className="bg-brand-orange hover:bg-brand-orange/90 text-white rounded-lg text-xs font-semibold"
                 >
                   {planToEdit ? "Update Plan" : "Create Plan"}
                 </Button>

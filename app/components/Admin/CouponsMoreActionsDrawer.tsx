@@ -53,7 +53,7 @@ export function CouponsMoreActionsDrawer({ isOpen, onClose, onDeleteExpired }: C
   return (
     <Drawer isOpen={isOpen} onClose={onClose} title="More Actions">
       <div className="flex flex-col gap-2">
-        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest px-4 mb-4">
+        <p className="text-xs font-bold text-gray-400 uppercase tracking-wider px-4 mb-4">
           Bulk Management
         </p>
         <div className="flex flex-col gap-1">
@@ -68,13 +68,13 @@ export function CouponsMoreActionsDrawer({ isOpen, onClose, onDeleteExpired }: C
               <div className={`mt-1 w-10 h-10 rounded-lg flex items-center justify-center transition-all
                 ${action.variant === "danger" 
                   ? "bg-rose-50 text-rose-500 group-hover:bg-rose-100" 
-                  : "bg-brand-blue-light text-brand-blue group-hover:bg-brand-blue group-hover:text-white"}
+                  : "bg-brand-orange-soft text-brand-orange-text group-hover:bg-brand-charcoal group-hover:text-white"}
               `}>
                 <Icon name={action.icon} folder={action.folder} size="sm" />
               </div>
               <div className="flex flex-col gap-1 flex-1">
-                <span className={`text-[13px] font-black transition-colors
-                  ${action.variant === "danger" ? "text-rose-600" : "text-[#1D3557]"}
+                <span className={`text-[13px] font-bold transition-colors
+                  ${action.variant === "danger" ? "text-rose-600" : "text-brand-charcoal"}
                 `}>
                   {action.title}
                 </span>
@@ -96,8 +96,8 @@ export function CouponsMoreActionsDrawer({ isOpen, onClose, onDeleteExpired }: C
                <Icon name="star" folder="dashboardIcon" size="sm" />
             </div>
             <div className="flex flex-col">
-               <span className="text-[11px] font-black text-[#1D3557]">Pro Tip</span>
-               <span className="text-[9px] font-bold text-gray-400">You can also schedule coupons for future dates.</span>
+               <span className="text-[11px] font-bold text-brand-charcoal">Pro Tip</span>
+               <span className="text-[11px] font-bold text-gray-400">You can also schedule coupons for future dates.</span>
             </div>
          </div>
       </div>

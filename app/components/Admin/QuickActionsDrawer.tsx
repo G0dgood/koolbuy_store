@@ -29,7 +29,7 @@ export function QuickActionsDrawer({
   return (
     <Drawer isOpen={isOpen} onClose={onClose} title={title} width="max-w-md">
       <div className="flex flex-col gap-2 pb-8">
-        <p className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.2em] px-1 mb-2">Available Actions</p>
+        <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider px-1 mb-2">Available Actions</p>
         
         <div className="flex flex-col gap-1">
           {actions.map((action) => (
@@ -46,14 +46,14 @@ export function QuickActionsDrawer({
               <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
                 action.variant === "danger" 
                   ? "bg-rose-50 text-rose-500 group-hover:bg-rose-500 group-hover:text-white" 
-                  : "bg-blue-50 text-brand-blue group-hover:bg-brand-blue group-hover:text-white"
+                  : "bg-brand-orange-soft text-brand-orange-text group-hover:bg-brand-charcoal group-hover:text-white"
               }`}>
                 <Icon name={action.icon as any} size="sm" />
               </div>
               
               <div className="flex flex-col gap-0.5">
-                <span className={`text-[13px] font-black tracking-tight ${
-                  action.variant === "danger" ? "text-rose-600" : "text-[#1D3557]"
+                <span className={`text-[13px] font-bold tracking-tight ${
+                  action.variant === "danger" ? "text-rose-600" : "text-brand-charcoal"
                 }`}>
                   {action.label}
                 </span>
@@ -68,7 +68,7 @@ export function QuickActionsDrawer({
                 name="chevron_right" 
                 size="xs" 
                 className={`ml-auto opacity-0 group-hover:opacity-40 transition-all -translate-x-2 group-hover:translate-x-0 ${
-                  action.variant === "danger" ? "text-rose-400" : "text-brand-blue"
+                  action.variant === "danger" ? "text-rose-400" : "text-brand-orange-text"
                 }`} 
               />
             </button>

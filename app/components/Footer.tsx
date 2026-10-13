@@ -86,19 +86,19 @@ const Footer = () => {
               </p>
             </div>
             <div className="flex items-center gap-3 mt-6">
-              <div className="w-8 h-8 rounded-full bg-[#BDC1C7] flex items-center justify-center text-white cursor-pointer hover:bg-[#FF7A00] transition-colors">
+              <div className="w-8 h-8 rounded-full bg-faint flex items-center justify-center text-white cursor-pointer hover:bg-brand-orange transition-colors">
                 <Icon name="social/facebook" size="sm" />
               </div>
-              <div className="w-8 h-8 rounded-full bg-[#BDC1C7] flex items-center justify-center text-white cursor-pointer hover:bg-[#FF7A00] transition-colors">
+              <div className="w-8 h-8 rounded-full bg-faint flex items-center justify-center text-white cursor-pointer hover:bg-brand-orange transition-colors">
                 <Icon name="social/twitter" size="sm" />
               </div>
-              <div className="w-8 h-8 rounded-full bg-[#BDC1C7] flex items-center justify-center text-white cursor-pointer hover:bg-[#FF7A00] transition-colors">
+              <div className="w-8 h-8 rounded-full bg-faint flex items-center justify-center text-white cursor-pointer hover:bg-brand-orange transition-colors">
                 <Icon name="social/linkedin" size="sm" />
               </div>
-              <div className="w-8 h-8 rounded-full bg-[#BDC1C7] flex items-center justify-center text-white cursor-pointer hover:bg-[#FF7A00] transition-colors">
+              <div className="w-8 h-8 rounded-full bg-faint flex items-center justify-center text-white cursor-pointer hover:bg-brand-orange transition-colors">
                 <Icon name="social/instagram" size="sm" />
               </div>
-              <div className="w-8 h-8 rounded-full bg-[#BDC1C7] flex items-center justify-center text-white cursor-pointer hover:bg-[#FF7A00] transition-colors">
+              <div className="w-8 h-8 rounded-full bg-faint flex items-center justify-center text-white cursor-pointer hover:bg-brand-orange transition-colors">
                 <Icon name="social/youtube" size="sm" />
               </div>
             </div>
@@ -111,25 +111,25 @@ const Footer = () => {
             </h4>
             <div className="flex flex-col gap-3 text-sm text-gray-600 mt-1">
               <div className="flex items-start gap-2.5">
-                <FiMapPin className="text-[#FF7A00] text-base shrink-0 mt-0.5" />
+                <FiMapPin className="text-brand-orange-text text-base shrink-0 mt-0.5" />
                 <span className="leading-snug">
                   28A Adeola Raji Avenue, Gbagada, Lagos, Nigeria
                 </span>
               </div>
               <div className="flex items-center gap-2.5">
-                <FiPhone className="text-[#FF7A00] text-base shrink-0" />
+                <FiPhone className="text-brand-orange-text text-base shrink-0" />
                 <a
                   href="tel:+2349128413025"
-                  className="hover:text-[#FF7A00] transition-colors"
+                  className="hover:text-brand-orange-text transition-colors"
                 >
                   +2349128413025
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
-                <FiMail className="text-[#FF7A00] text-base shrink-0" />
+                <FiMail className="text-brand-orange-text text-base shrink-0" />
                 <a
                   href="mailto:info@koolbuystore.com"
-                  className="hover:text-[#FF7A00] transition-colors"
+                  className="hover:text-brand-orange-text transition-colors"
                 >
                   info@koolbuystore.com
                 </a>
@@ -145,19 +145,19 @@ const Footer = () => {
             <div className="flex flex-col gap-2.5 text-sm text-gray-600 mt-1">
               <Link
                 href="/register"
-                className="hover:text-[#FF7A00] transition-colors"
+                className="hover:text-brand-orange-text transition-colors"
               >
                 Vendor Registration
               </Link>
               <Link
                 href="/help"
-                className="hover:text-[#FF7A00] transition-colors"
+                className="hover:text-brand-orange-text transition-colors"
               >
                 Privacy Policy
               </Link>
               <Link
                 href="/help/payment"
-                className="hover:text-[#FF7A00] transition-colors"
+                className="hover:text-brand-orange-text transition-colors"
               >
                 Term & Conditons BNPL
               </Link>
@@ -178,23 +178,23 @@ const Footer = () => {
               <Image
                 src="/payment/Payment=payment, Pay-type=visa.png"
                 alt="Visa"
-                width={32}
+                width={31}
                 height={20}
-                className="h-5 w-auto object-contain"
+                className="object-contain"
               />
               <Image
                 src="/payment/Payment=payment, Pay-type=mastercard.png"
                 alt="Mastercard"
-                width={32}
+                width={31}
                 height={20}
-                className="h-5 w-auto object-contain"
+                className="object-contain"
               />
               <Image
                 src="/payment/Payment=payment, Pay-type=amex.png"
                 alt="Amex"
-                width={32}
+                width={31}
                 height={20}
-                className="h-5 w-auto object-contain"
+                className="object-contain"
               />
             </div>
           </div>

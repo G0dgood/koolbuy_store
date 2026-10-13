@@ -115,7 +115,7 @@ export const RecommendedVendors: React.FC = () => {
           className="inline-flex items-center gap-1.5 text-xs md:text-sm font-semibold text-gray-600 hover:text-brand-orange group transition-colors"
         >
           <span>See All</span>
-          <span className="w-5 h-5 rounded-full bg-[#FF7A00] text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+          <span className="w-5 h-5 rounded-full bg-brand-orange text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
             <FiChevronRight size={14} />
           </span>
         </Link>
@@ -127,7 +127,7 @@ export const RecommendedVendors: React.FC = () => {
         <button
           onClick={scrollPrev}
           aria-label="Previous vendors"
-          className="absolute -left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
+          className="absolute -left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
         >
           <FiChevronLeft size={18} />
         </button>
@@ -149,11 +149,11 @@ export const RecommendedVendors: React.FC = () => {
                   className="bg-white border border-[#1C1C1C1A] rounded-xl overflow-hidden flex flex-col h-full hover:shadow-md transition-all group cursor-pointer"
                 >
                   {/* Vendor Image Banner */}
-                  <div className="w-full aspect-square relative overflow-hidden bg-[#FF7A00]">
+                  <div className="w-full aspect-square relative overflow-hidden bg-brand-orange">
                     <Image
                       src={vendor.image}
                       alt={vendor.name}
-                      fill
+                      fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
@@ -163,7 +163,7 @@ export const RecommendedVendors: React.FC = () => {
                     <h4 className="text-xs sm:text-sm font-bold text-gray-900 line-clamp-1 group-hover:text-brand-orange transition-colors">
                       {vendor.name}
                     </h4>
-                    <span className="text-[11px] sm:text-xs font-extrabold text-[#E91E63] tracking-wider uppercase hover:underline inline-flex items-center gap-1">
+                    <span className="text-[11px] sm:text-xs font-bold text-[#E91E63] tracking-wider uppercase hover:underline inline-flex items-center gap-1">
                       SHOP NOW
                     </span>
                   </div>
@@ -177,7 +177,7 @@ export const RecommendedVendors: React.FC = () => {
         <button
           onClick={scrollNext}
           aria-label="Next vendors"
-          className="absolute -right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
+          className="absolute -right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
         >
           <FiChevronRight size={18} />
         </button>

@@ -78,7 +78,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
           minValRef.current = v;
           onChange([v, maxVal]);
         }}
-        className="thumb thumb--left pointer-events-none absolute h-0 w-full outline-none z-[3]"
+        className="thumb thumb--left appearance-none bg-transparent accent-brand-orange pointer-events-none absolute h-0 w-full outline-none z-[3]"
       />
       <input
         type="range"
@@ -92,21 +92,21 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
           maxValRef.current = v;
           onChange([minVal, v]);
         }}
-        className="thumb thumb--right pointer-events-none absolute h-0 w-full outline-none z-[4]"
+        className="thumb thumb--right appearance-none bg-transparent accent-brand-orange pointer-events-none absolute h-0 w-full outline-none z-[4]"
       />
 
       <div className="relative w-full">
-        <div className="absolute rounded-[3px] h-1 w-full bg-gray-200 z-[1]" />
+        <div className="absolute rounded-sm h-1 w-full bg-gray-200 z-[1]" />
         <div 
           ref={range} 
-          className="absolute rounded-[3px] h-1 bg-brand-blue z-[2]" 
+          className="absolute rounded-sm h-1 bg-brand-orange z-[2]" 
         />
       </div>
 
       <style jsx>{`
         .thumb::-webkit-slider-thumb {
           background-color: white;
-          border: 2px solid #3B82F6;
+          border: 2px solid #F57E16;
           border-radius: 50%;
           cursor: pointer;
           height: 14px;
@@ -117,7 +117,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
         }
         .thumb::-moz-range-thumb {
           background-color: white;
-          border: 2px solid #3B82F6;
+          border: 2px solid #F57E16;
           border-radius: 50%;
           cursor: pointer;
           height: 14px;

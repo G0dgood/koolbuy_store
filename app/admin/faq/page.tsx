@@ -97,7 +97,7 @@ export default function FAQManagementPage() {
       </div>
 
       {/* Table Section */}
-      <div className="bg-white overflow-hidden mb-8 border border-[#1C1C1C1A] rounded-[6px]">
+      <div className="bg-white overflow-hidden mb-8 border border-[#1C1C1C1A] rounded-lg">
         <div className="px-8 py-6 border-b border-gray-50 flex flex-col lg:flex-row lg:items-center justify-between gap-6 ">
           <div className="flex flex-col sm:flex-row items-center gap-6">
             <TabFilter
@@ -143,7 +143,7 @@ export default function FAQManagementPage() {
             </thead>
             <tbody className="divide-y divide-gray-50">
               {filteredFAQs.map((faq) => (
-                <tr key={faq.id} className="group hover:bg-blue-50/30 transition-colors">
+                <tr key={faq.id} className="group hover:bg-brand-orange-soft/30 transition-colors">
                   <td className="w-10 pl-8">
                     <Checkbox
                       checked={selectedIds.includes(faq.id)}
@@ -152,17 +152,17 @@ export default function FAQManagementPage() {
                   </td>
                   <td className="py-5">
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-brand-blue group-hover:bg-brand-blue/10 transition-colors">
+                      <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-brand-orange-text group-hover:bg-brand-charcoal/10 transition-colors">
                         <HiOutlineQuestionMarkCircle size={20} />
                       </div>
-                      <span className="text-xs font-bold text-[#1D3557] line-clamp-1 max-w-[300px]">{faq.question}</span>
+                      <span className="text-xs font-bold text-brand-charcoal line-clamp-1 max-w-[300px]">{faq.question}</span>
                     </div>
                   </td>
                   <td>
                     <span className="text-xs font-bold text-gray-500">{faq.category}</span>
                   </td>
                   <td className="text-center">
-                    <span className="px-3 py-1 bg-emerald-50 text-emerald-500 text-[10px] font-black rounded-full uppercase">
+                    <span className="px-3 py-1 bg-emerald-50 text-emerald-500 text-[11px] font-bold rounded-full uppercase">
                       {faq.status}
                     </span>
                   </td>
@@ -174,7 +174,7 @@ export default function FAQManagementPage() {
                       <Button
                         variant="outline"
                         shape="rounded-sm"
-                        className="!p-1.5 text-gray-400 hover:text-blue-500 hover:bg-brand-blue-light transition-all"
+                        className="!p-1.5 text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft transition-all"
                         onClick={() => {
                           setSelectedFAQ(faq);
                           setIsModalOpen(true);
@@ -204,7 +204,7 @@ export default function FAQManagementPage() {
               <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-gray-200 shadow-inner">
                 <HiMagnifyingGlass size={32} />
               </div>
-              <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">No FAQs found matching your criteria</p>
+              <p className="text-sm font-bold text-gray-400 uppercase tracking-wider">No FAQs found matching your criteria</p>
             </div>
           )}
         </div>

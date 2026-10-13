@@ -260,7 +260,7 @@ export default function MarketingCampaignsPage() {
   const getTypeBadge = (type: MarketingCampaign["type"]) => {
     switch (type) {
       case "Push Notification":
-        return "bg-cyan-50 text-[#00BCD4] border-cyan-200";
+        return "bg-brand-orange-soft text-brand-orange-text border-brand-orange/30";
       case "Email":
         return "bg-purple-50 text-purple-700 border-purple-200";
       case "SMS":
@@ -268,7 +268,7 @@ export default function MarketingCampaignsPage() {
       case "In-App Banner":
         return "bg-amber-50 text-amber-700 border-amber-200";
       default:
-        return "bg-blue-50 text-blue-700 border-blue-200";
+        return "bg-brand-orange-soft text-brand-orange-text border-brand-orange/30";
     }
   };
 
@@ -276,7 +276,7 @@ export default function MarketingCampaignsPage() {
     <div className="flex flex-col gap-5 pb-12">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 right-8 z-50 bg-gray-900 text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-3">
+        <div className="fixed top-20 right-8 z-50 bg-gray-900 text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-md flex items-center gap-2 animate-in fade-in slide-in-from-top-3">
           <HiOutlineCheckBadge className="w-4 h-4 text-emerald-400" />
           <span>{toastMessage}</span>
         </div>
@@ -286,10 +286,10 @@ export default function MarketingCampaignsPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           {/* <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-brand-blue-light text-brand-blue flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center">
               <HiOutlineMegaphone className="w-4 h-4" />
             </div>
-            <h1 className="text-xl font-black text-gray-900 tracking-tight">
+            <h1 className="text-xl font-bold text-gray-900 tracking-tight">
               Campaigns
             </h1>
           </div>
@@ -301,7 +301,7 @@ export default function MarketingCampaignsPage() {
 
         <div className="flex items-center gap-3 w-full sm:w-auto">
           <Button
-            className="h-9 px-4 text-xs font-bold bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white rounded-lg shadow-xs cursor-pointer"
+            className="h-9 px-4 text-xs font-bold bg-brand-orange hover:bg-brand-orange/90 text-white rounded-lg cursor-pointer"
             iconLeft={<HiOutlinePlus className="w-3.5 h-3.5" />}
             onClick={handleOpenAddModal}
           >
@@ -477,7 +477,7 @@ export default function MarketingCampaignsPage() {
                           <button
                             type="button"
                             onClick={() => handleOpenEditModal(c)}
-                            className="p-1.5 text-gray-400 hover:text-[#00BCD4] hover:bg-brand-blue-light/50 rounded-lg transition-colors cursor-pointer"
+                            className="p-1.5 text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft/50 rounded-lg transition-colors cursor-pointer"
                             title="Edit Campaign"
                           >
                             <HiOutlinePencilSquare className="w-4 h-4" />
@@ -561,7 +561,7 @@ export default function MarketingCampaignsPage() {
             <form onSubmit={handleSaveCampaign} className="space-y-4 pt-1">
               <div className="flex items-center justify-between border-b border-gray-100 pb-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 rounded-lg bg-brand-blue-light text-brand-blue flex items-center justify-center">
+                  <div className="w-9 h-9 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center">
                     <HiOutlineMegaphone className="w-4 h-4" />
                   </div>
                   <div>
@@ -776,7 +776,7 @@ export default function MarketingCampaignsPage() {
                 <Button
                   type="submit"
                   size="sm"
-                  className="bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white rounded-lg text-xs font-semibold"
+                  className="bg-brand-orange hover:bg-brand-orange/90 text-white rounded-lg text-xs font-semibold"
                 >
                   {campaignToEdit ? "Update Campaign" : "Schedule Campaign"}
                 </Button>

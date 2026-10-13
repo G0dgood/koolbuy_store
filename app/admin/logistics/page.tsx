@@ -665,7 +665,7 @@ export default function KoolLogisticsPage() {
             onClick={() => handleTabChange("dropping-orders")}
             className={`px-5 py-3 text-xs font-bold transition-all border-b-2 whitespace-nowrap flex items-center gap-2 ${
             activeTab === "dropping-orders"
-              ? "border-blue-600 text-blue-600 bg-white shadow-sm rounded-t-xl"
+              ? "border-brand-orange text-brand-orange-text bg-white rounded-t-xl"
               : "border-transparent text-gray-500 hover:text-gray-900 hover:bg-white/50"
           }`}
         >
@@ -682,7 +682,7 @@ export default function KoolLogisticsPage() {
             <line x1="12" y1="22.08" x2="12" y2="12" />
           </svg>
           <span>Dropping Orders Management</span>
-          <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-blue-50 text-blue-700">
+          <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-brand-orange-soft text-brand-orange-text">
             {droppingOrders.length}
           </span>
         </button>
@@ -691,7 +691,7 @@ export default function KoolLogisticsPage() {
           onClick={() => handleTabChange("vendor-addresses")}
           className={`px-5 py-3 text-xs font-bold transition-all border-b-2 whitespace-nowrap flex items-center gap-2 ${
             activeTab === "vendor-addresses"
-              ? "border-blue-600 text-blue-600 bg-white shadow-sm rounded-t-xl"
+              ? "border-brand-orange text-brand-orange-text bg-white rounded-t-xl"
               : "border-transparent text-gray-500 hover:text-gray-900 hover:bg-white/50"
           }`}
         >
@@ -707,7 +707,7 @@ export default function KoolLogisticsPage() {
             <circle cx="12" cy="10" r="3" />
           </svg>
           <span>Vendor addresses</span>
-          <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-gray-100 text-gray-600">
+          <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-gray-100 text-gray-600">
             {vendorAddresses.length}
           </span>
         </button>
@@ -716,7 +716,7 @@ export default function KoolLogisticsPage() {
           onClick={() => handleTabChange("delivery-prices")}
           className={`px-5 py-3 text-xs font-bold transition-all border-b-2 whitespace-nowrap flex items-center gap-2 ${
             activeTab === "delivery-prices"
-              ? "border-blue-600 text-blue-600 bg-white shadow-sm rounded-t-xl"
+              ? "border-brand-orange text-brand-orange-text bg-white rounded-t-xl"
               : "border-transparent text-gray-500 hover:text-gray-900 hover:bg-white/50"
           }`}
         >
@@ -732,7 +732,7 @@ export default function KoolLogisticsPage() {
             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
           </svg>
           <span>delivery prices per lga</span>
-          <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-gray-100 text-gray-600">
+          <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-gray-100 text-gray-600">
             {lgaPrices.length}
           </span>
         </button>
@@ -742,7 +742,7 @@ export default function KoolLogisticsPage() {
           {activeTab === "dropping-orders" && (
             <button
               onClick={() => setIsCreateDropModalOpen(true)}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white hover:bg-blue-700 transition-all flex items-center gap-1.5 shadow-sm shadow-blue-500/20"
+              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-orange text-white hover:bg-brand-orange-hover transition-all flex items-center gap-1.5 "
             >
               <Icon name="plus" className="w-3.5 h-3.5" />
               <span>New Dropping Order</span>
@@ -752,7 +752,7 @@ export default function KoolLogisticsPage() {
           {activeTab === "vendor-addresses" && (
             <button
               onClick={() => setIsAddVendorModalOpen(true)}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white hover:bg-blue-700 transition-all flex items-center gap-1.5 shadow-sm shadow-blue-500/20"
+              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-orange text-white hover:bg-brand-orange-hover transition-all flex items-center gap-1.5 "
             >
               <Icon name="plus" className="w-3.5 h-3.5" />
               <span>Add Vendor Address</span>
@@ -762,7 +762,7 @@ export default function KoolLogisticsPage() {
           {activeTab === "delivery-prices" && (
             <button
               onClick={openAddLgaModal}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white hover:bg-blue-700 transition-all flex items-center gap-1.5 shadow-sm shadow-blue-500/20"
+              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-orange text-white hover:bg-brand-orange-hover transition-all flex items-center gap-1.5 "
             >
               <Icon name="plus" className="w-3.5 h-3.5" />
               <span>Add LGA Price</span>
@@ -889,14 +889,14 @@ export default function KoolLogisticsPage() {
                     filteredDroppingOrders.map((order) => (
                       <tr
                         key={order.id}
-                        className="hover:bg-blue-50/20 transition-colors cursor-pointer"
+                        className="hover:bg-brand-orange-soft/20 transition-colors cursor-pointer"
                         onClick={() => setSelectedDropOrder(order)}
                       >
                         <td className="py-3.5 px-4">
                           <div className="font-mono font-bold text-gray-900">
                             {order.id}
                           </div>
-                          <div className="text-[11px] text-blue-600 font-medium">
+                          <div className="text-[11px] text-brand-orange-text font-medium">
                             {order.orderRef}
                           </div>
                         </td>
@@ -935,7 +935,7 @@ export default function KoolLogisticsPage() {
                           <div className="font-medium text-gray-900">
                             {order.itemsSummary}
                           </div>
-                          <span className="inline-block mt-0.5 text-[10px] font-semibold bg-gray-100 px-1.5 py-0.2 rounded text-gray-600">
+                          <span className="inline-block mt-0.5 text-[11px] font-semibold bg-gray-100 px-1.5 py-0.2 rounded text-gray-600">
                             {order.itemType}
                           </span>
                         </td>
@@ -951,27 +951,27 @@ export default function KoolLogisticsPage() {
 
                         <td className="py-3.5 px-4">
                           {order.dropStatus === "Ready for Drop" && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-100 text-amber-800 border border-amber-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800 border border-amber-200">
                               READY FOR DROP
                             </span>
                           )}
                           {order.dropStatus === "Dispatched" && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-blue-100 text-blue-800 border border-blue-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-brand-orange-soft text-brand-charcoal border border-brand-orange/30">
                               DISPATCHED
                             </span>
                           )}
                           {order.dropStatus === "In Transit" && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-purple-100 text-purple-800 border border-purple-200 animate-pulse">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-purple-100 text-purple-800 border border-purple-200 animate-pulse">
                               IN TRANSIT
                             </span>
                           )}
                           {order.dropStatus === "Dropped Off" && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-800 border border-emerald-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
                               DROPPED OFF
                             </span>
                           )}
                           {order.dropStatus === "Failed Handover" && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-100 text-rose-800 border border-rose-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-200">
                               FAILED
                             </span>
                           )}
@@ -984,7 +984,7 @@ export default function KoolLogisticsPage() {
                           >
                             <button
                               onClick={() => setSelectedDropOrder(order)}
-                              className="px-2.5 py-1 rounded-lg text-xs font-bold text-blue-600 hover:text-blue-800 hover:bg-blue-50 transition-colors"
+                              className="px-2.5 py-1 rounded-lg text-xs font-bold text-brand-orange-text hover:text-brand-charcoal hover:bg-brand-orange-soft transition-colors"
                             >
                               Details
                             </button>
@@ -1089,7 +1089,7 @@ export default function KoolLogisticsPage() {
                     filteredVendors.map((ven) => (
                       <tr
                         key={ven.id}
-                        className="hover:bg-blue-50/20 transition-colors"
+                        className="hover:bg-brand-orange-soft/20 transition-colors"
                       >
                         <td className="py-3.5 px-4">
                           <div className="font-bold text-gray-900">
@@ -1130,11 +1130,11 @@ export default function KoolLogisticsPage() {
 
                         <td className="py-3.5 px-4">
                           {ven.verificationStatus === "Verified" ? (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                               Verified
                             </span>
                           ) : (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
                               Pending Audit
                             </span>
                           )}
@@ -1147,7 +1147,7 @@ export default function KoolLogisticsPage() {
                                 `Address: ${ven.warehouseAddress}, ${ven.lga}, ${ven.state}\nContact: ${ven.contactPerson} (${ven.contactPhone})`,
                               )
                             }
-                            className="px-2.5 py-1 rounded-lg text-xs font-bold text-blue-600 hover:text-blue-800 hover:bg-blue-50 transition-colors"
+                            className="px-2.5 py-1 rounded-lg text-xs font-bold text-brand-orange-text hover:text-brand-charcoal hover:bg-brand-orange-soft transition-colors"
                           >
                             View Card
                           </button>
@@ -1272,7 +1272,7 @@ export default function KoolLogisticsPage() {
                     filteredLgaPrices.map((lga) => (
                       <tr
                         key={lga.id}
-                        className="hover:bg-blue-50/20 transition-colors"
+                        className="hover:bg-brand-orange-soft/20 transition-colors"
                       >
                         <td className="py-3.5 px-4">
                           <div className="font-bold text-gray-900 text-[13px]">
@@ -1287,7 +1287,7 @@ export default function KoolLogisticsPage() {
                           <div className="font-medium text-gray-900">
                             {lga.state}
                           </div>
-                          <span className="inline-block mt-0.5 text-[10px] font-semibold bg-slate-100 px-1.5 py-0.2 rounded text-slate-700">
+                          <span className="inline-block mt-0.5 text-[11px] font-semibold bg-slate-100 px-1.5 py-0.2 rounded text-slate-700">
                             {lga.zone}
                           </span>
                         </td>
@@ -1296,7 +1296,7 @@ export default function KoolLogisticsPage() {
                           ₦{lga.standardDeliveryFee.toLocaleString()}
                         </td>
 
-                        <td className="py-3.5 px-4 font-mono font-bold text-blue-600">
+                        <td className="py-3.5 px-4 font-mono font-bold text-brand-orange-text">
                           ₦{lga.heavyApplianceFee.toLocaleString()}
                         </td>
 
@@ -1310,11 +1310,11 @@ export default function KoolLogisticsPage() {
 
                         <td className="py-3.5 px-4">
                           {lga.status === "Active" ? (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                               Active
                             </span>
                           ) : (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
                               Restricted
                             </span>
                           )}
@@ -1323,7 +1323,7 @@ export default function KoolLogisticsPage() {
                         <td className="py-3.5 px-4 text-right">
                           <button
                             onClick={() => openEditLgaModal(lga)}
-                            className="px-2.5 py-1 rounded-lg text-xs font-bold text-blue-600 hover:text-blue-800 hover:bg-blue-50 transition-colors"
+                            className="px-2.5 py-1 rounded-lg text-xs font-bold text-brand-orange-text hover:text-brand-charcoal hover:bg-brand-orange-soft transition-colors"
                           >
                             Edit Rate
                           </button>
@@ -1351,10 +1351,10 @@ export default function KoolLogisticsPage() {
           <div className="space-y-6">
             <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-sm font-black text-gray-900">
+                <span className="font-mono text-sm font-bold text-gray-900">
                   {selectedDropOrder.id}
                 </span>
-                <span className="text-xs font-bold text-blue-600">
+                <span className="text-xs font-bold text-brand-orange-text">
                   Order Ref: {selectedDropOrder.orderRef}
                 </span>
               </div>
@@ -1382,7 +1382,7 @@ export default function KoolLogisticsPage() {
             </div>
 
             <div className="space-y-3">
-              <h4 className="text-xs font-black uppercase tracking-wider text-gray-400">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400">
                 Update Fulfillment Status
               </h4>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -1402,7 +1402,7 @@ export default function KoolLogisticsPage() {
                     }
                     className={`p-2.5 rounded-xl border text-xs font-bold transition-all text-center ${
                       selectedDropOrder.dropStatus === st
-                        ? "border-blue-600 bg-blue-50 text-blue-900 shadow-sm"
+                        ? "border-brand-orange bg-brand-orange-soft text-brand-charcoal "
                         : "border-gray-200 text-gray-600 hover:bg-gray-50"
                     }`}
                   >
@@ -1456,7 +1456,7 @@ export default function KoolLogisticsPage() {
                 onClick={() =>
                   alert(`Waybill slip generated for ${selectedDropOrder.id}`)
                 }
-                className="text-xs font-bold text-blue-600 hover:text-blue-800"
+                className="text-xs font-bold text-brand-orange-text hover:text-brand-charcoal"
               >
                 Print Waybill Slip
               </button>
@@ -1481,7 +1481,7 @@ export default function KoolLogisticsPage() {
       >
         <ModalBody>
           <div className="space-y-4 pt-2">
-            <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center mx-auto">
               <Icon name="plus" className="w-6 h-6" />
             </div>
             <div className="text-center">
@@ -1646,7 +1646,7 @@ export default function KoolLogisticsPage() {
       >
         <ModalBody>
           <div className="space-y-4 pt-2">
-            <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center mx-auto">
               <Icon name="plus" className="w-6 h-6" />
             </div>
             <div className="text-center">
@@ -1799,7 +1799,7 @@ export default function KoolLogisticsPage() {
       >
         <ModalBody>
           <div className="space-y-4 pt-2">
-            <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center mx-auto">
               <Icon name="settings" className="w-6 h-6" />
             </div>
             <div className="text-center">

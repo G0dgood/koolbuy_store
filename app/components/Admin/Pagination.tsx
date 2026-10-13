@@ -1,7 +1,11 @@
 "use client";
 
 import React from "react";
-import { Icon } from "../Icon";
+
+/* Pagination in the Koolboks Sales CRM style (components/ui/Pagination.tsx in
+   koolboks_sales_crm_web): text "Previous" / "Next", small grey page buttons,
+   the current page as a charcoal button. No border of its own (as in the
+   CRM): the page's footer draws the separator, so it is never doubled. */
 
 interface PaginationProps {
   currentPage: number;
@@ -10,62 +14,53 @@ interface PaginationProps {
   className?: string;
 }
 
-export const Pagination: React.FC<PaginationProps> = ({
-  currentPage,
-  totalPages,
-  onPageChange,
-  className = "",
-}) => {
-  // Generate page numbers to display
-  // For now, mirroring the [1, 2, 3, 4, 5, "...", total] pattern from the designs
-  const pages = [1, 2, 3, 4, 5, "...", totalPages];
+/** First, last and the pages around the current one, with "…" for the gaps. */
+const visiblePages = (current: number, total: number): (number | "...")[] => {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  if (current <= 4) return [1, 2, 3, 4, 5, "...", total];
+  if (current >= total - 3) return [1, "...", total - 4, total - 3, total - 2, total - 1, total];
+  return [1, "...", current - 1, current, current + 1, "...", total];
+};
+
+const step =
+  "px-3 py-2 text-[10px] md:text-[12px] font-medium text-gray-500 hover:text-gray-700 rounded-lg transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed";
+
+export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange, className = "" }) => {
+  const total = Math.max(1, totalPages);
 
   return (
-    <div className={`admin-pagination-footer !p-4 sm:!p-8 flex-col sm:flex-row gap-4 sm:gap-0 ${className}`}>
-      <button
-        onClick={() => onPageChange(Math.max(1, currentPage - 1))}
-        disabled={currentPage === 1}
-        className="admin-pagination-btn group disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto justify-center sm:justify-start py-2 sm:py-2.5"
-      >
-        <Icon
-          name="arrow_back"
-          folder="icon"
-          size="md"
-          className="transition-transform group-hover:-translate-x-0.5"
-        />
-        <span className="hidden sm:inline">Previous</span>
+    <nav aria-label="Pagination" className={`k-pagination flex items-center justify-between gap-3 px-4 sm:px-6 py-4 ${className}`}>
+      <button type="button" onClick={() => onPageChange(Math.max(1, currentPage - 1))} disabled={currentPage <= 1} className={step}>
+        Previous
       </button>
 
-      <div className="flex items-center gap-1 sm:gap-2 overflow-x-auto no-scrollbar py-1">
-        {pages.map((page, i) => (
-          <button
-            key={i}
-            onClick={() => typeof page === "number" && onPageChange(page)}
-            className={`cursor-pointer min-w-[32px] sm:min-w-[36px] w-8 h-8 sm:w-9 sm:h-9 rounded-[6px] flex items-center justify-center text-[12px] font-bold transition-all shrink-0 ${
-              page === currentPage
-                ? "bg-brand-blue text-white shadow-lg shadow-blue-100"
-                : "text-gray-400 hover:text-gray-900 hover:bg-gray-50 border border-transparent sm:border-gray-100"
-            } ${page === "..." ? "cursor-default border-none" : ""}`}
-            disabled={page === "..."}
-          >
-            {page}
-          </button>
-        ))}
+      <div className="flex items-center gap-1 overflow-x-auto no-scrollbar">
+        {visiblePages(currentPage, total).map((page, i) =>
+          page === "..." ? (
+            <span key={`gap-${i}`} className="px-2 text-gray-500" aria-hidden>
+              …
+            </span>
+          ) : (
+            <button
+              key={page}
+              type="button"
+              onClick={() => onPageChange(page)}
+              aria-current={page === currentPage ? "page" : undefined}
+              className={`px-3 py-1 min-w-8 leading-[150%] text-[10px] md:text-[12px] font-medium rounded-lg transition-colors cursor-pointer ${
+                page === currentPage
+                  ? "bg-brand-charcoal text-white "
+                  : "text-gray-500 hover:text-gray-700 hover:bg-gray-100"
+              }`}
+            >
+              {page}
+            </button>
+          ),
+        )}
       </div>
 
-      <button
-        onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
-        disabled={currentPage === totalPages}
-        className="admin-pagination-btn group disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto justify-center sm:justify-end py-2 sm:py-2.5"
-      >
-        <span className="hidden sm:inline">Next</span>
-        <Icon
-          name="arrow_forward"
-          folder="icon"
-          size="md"
-          className="transition-transform group-hover:translate-x-0.5"
-        />
+      <button type="button" onClick={() => onPageChange(Math.min(total, currentPage + 1))} disabled={currentPage >= total} className={step}>
+        Next
       </button>
-    </div>
+    </nav>
   );
 };

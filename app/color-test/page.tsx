@@ -132,7 +132,7 @@ export default function DesignSystemVerificationPage() {
                   <div className={`flex-1 rounded-xl ${color.class}`} />
                   {color.light && <div className={`w-12 rounded-xl border border-neutral-50 ${color.light}`} />}
                 </div>
-                <p className="text-sm font-black text-neutral-900 text-center tracking-widest uppercase">{color.name}</p>
+                <p className="text-sm font-bold text-neutral-900 text-center tracking-widest uppercase">{color.name}</p>
               </div>
             ))}
           </div>
@@ -152,7 +152,7 @@ export default function DesignSystemVerificationPage() {
               key={cursor.name}
               className={`flex flex-col items-center justify-center h-32 rounded-2xl border border-neutral-100 bg-neutral-50/50 hover:bg-white hover:border-brand-blue hover:shadow-lg transition-all group ${cursor.class}`}
             >
-              <p className="text-[10px] font-black text-neutral-400 uppercase tracking-widest group-hover:text-brand-blue mb-1">Cursor</p>
+              <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest group-hover:text-brand-blue mb-1">Cursor</p>
               <p className="text-sm font-bold text-neutral-900 group-hover:text-neutral-900">{cursor.name}</p>
               <div className="mt-4 w-6 h-6 rounded-full bg-neutral-200 group-hover:bg-brand-blue-light transition-colors" />
             </div>

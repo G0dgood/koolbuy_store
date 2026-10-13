@@ -47,13 +47,13 @@ export interface OrderListingViewProps {
 }
 
 const statusConfig: Record<string, { color: string; icon: any }> = {
-  Delivered: { color: "text-blue-500", icon: "Delivered" },
+  Delivered: { color: "text-success", icon: "Delivered" },
   Shipped: { color: "text-gray-500", icon: "Shipped" },
-  Pending: { color: "text-orange-400", icon: "Pending" },
+  Pending: { color: "text-brand-orange-text", icon: "Pending" },
   Cancelled: { color: "text-rose-500", icon: "Cancelled" },
   Active: { color: "text-emerald-500", icon: "Delivered" },
   Overdue: { color: "text-rose-600", icon: "Cancelled" },
-  Processing: { color: "text-blue-400", icon: "Shipped" },
+  Processing: { color: "text-brand-orange-text", icon: "Shipped" },
 };
 
 export function OrderListingView({
@@ -268,7 +268,7 @@ export function OrderListingView({
                 <Button
                   variant="outline"
                   shape="rounded-sm"
-                  className="p-2.5! text-gray-400 hover:text-brand-blue"
+                  className="p-2.5! text-gray-400 hover:text-brand-orange-text"
                   title="Sort"
                 >
                   <Icon name="sort" folder="dashboardIcon" size="sm" />
@@ -276,7 +276,7 @@ export function OrderListingView({
                 <Button
                   variant="outline"
                   shape="rounded-sm"
-                  className="p-2.5! text-gray-400 hover:text-brand-blue"
+                  className="p-2.5! text-gray-400 hover:text-brand-orange-text"
                   title="Filter"
                 >
                   <Icon
@@ -288,7 +288,7 @@ export function OrderListingView({
                 <Button
                   variant="outline"
                   shape="rounded-sm"
-                  className="p-2.5! text-gray-400 hover:text-brand-blue"
+                  className="p-2.5! text-gray-400 hover:text-brand-orange-text"
                   title="Options"
                 >
                   <Icon
@@ -369,7 +369,7 @@ export function OrderListingView({
                       </td>
                       <td>
                         <div className="flex items-center gap-3 min-w-50">
-                          <div className="w-10 h-10 rounded-[6px] overflow-hidden border border-gray-100 bg-gray-50 shrink-0">
+                          <div className="w-10 h-10 rounded-lg overflow-hidden border border-gray-100 bg-gray-50 shrink-0">
                             <img
                               src={order.image}
                               alt={order.product}
@@ -381,7 +381,7 @@ export function OrderListingView({
                               {order.product}
                             </span>
                             {order.plan && (
-                              <span className="text-[11px] font-bold text-brand-blue mt-0.5">
+                              <span className="text-[11px] font-bold text-brand-orange-text mt-0.5">
                                 {order.plan}
                               </span>
                             )}
@@ -397,7 +397,7 @@ export function OrderListingView({
                             ₦{order.price}
                           </span>
                           {order.deposit && (
-                            <span className="text-[10px] font-medium text-gray-400">
+                            <span className="text-[11px] font-medium text-gray-400">
                               Deposit: {order.deposit}
                             </span>
                           )}
@@ -408,7 +408,7 @@ export function OrderListingView({
                           <span
                             className={`w-1.5 h-1.5 rounded-full ${
                               isPaid
-                                ? "bg-blue-500"
+                                ? "bg-brand-orange"
                                 : isInstallmentActive
                                   ? "bg-amber-500"
                                   : "bg-rose-500"
@@ -439,7 +439,7 @@ export function OrderListingView({
                             <Button
                               variant="outline"
                               shape="rounded-sm"
-                              className="p-1.5! text-gray-400 hover:text-blue-500 hover:bg-brand-blue-light transition-all"
+                              className="p-1.5! text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft transition-all"
                               title="View Order Details"
                             >
                               <Icon

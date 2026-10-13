@@ -26,7 +26,7 @@ const brandsData = [
 ];
 
 const statusConfig = {
-  Active: "text-blue-500 bg-brand-blue-light",
+  Active: "text-success bg-success-soft",
   Inactive: "text-rose-500 bg-rose-50/50",
 };
 
@@ -83,7 +83,7 @@ export default function BrandsListing() {
         </div>
       </div>
 
-      <div className="bg-white overflow-hidden flex flex-col border border-[#1C1C1C1A] rounded-[6px]">
+      <div className="bg-white overflow-hidden flex flex-col border border-[#1C1C1C1A] rounded-lg">
         {/* Filter Controls Row */}
         <div className="p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between border-b border-gray-50">
           <TabFilter
@@ -161,10 +161,10 @@ export default function BrandsListing() {
                   <td className="text-sm font-medium text-gray-900">{index + 1}</td>
                   <td>
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-[6px] border border-gray-100 overflow-hidden bg-white p-1 ring-1 ring-gray-100 flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-lg border border-gray-100 overflow-hidden bg-white p-1 ring-1 ring-gray-100 flex items-center justify-center">
                         <img src={brand.logo} alt={brand.name} className="w-full h-full object-contain" />
                       </div>
-                      <span className="text-sm font-bold text-[#1D3557] group-hover:text-blue-600 transition-colors">
+                      <span className="text-sm font-bold text-brand-charcoal group-hover:text-brand-orange-text transition-colors">
                         {brand.name}
                       </span>
                     </div>
@@ -173,11 +173,11 @@ export default function BrandsListing() {
                   <td>
                     <div className="flex items-center gap-1.5">
                       <Icon name="star" folder="dashboardIcon" size="xs" className="text-amber-400" />
-                      <span className="text-xs font-bold text-[#1D3557]">{brand.rating}</span>
+                      <span className="text-xs font-bold text-brand-charcoal">{brand.rating}</span>
                     </div>
                   </td>
                   <td>
-                    <span className={`px-3 py-1.5 rounded-[6px] text-[10px] font-bold ${statusConfig[brand.status as keyof typeof statusConfig]}`}>
+                    <span className={`px-3 py-1.5 rounded-lg text-[11px] font-bold ${statusConfig[brand.status as keyof typeof statusConfig]}`}>
                       {brand.status}
                     </span>
                   </td>
@@ -186,7 +186,7 @@ export default function BrandsListing() {
                       <Button
                         variant="outline"
                         shape="rounded-sm"
-                        className="!p-1.5 text-gray-400 hover:text-blue-500 hover:bg-brand-blue-light transition-all"
+                        className="!p-1.5 text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft transition-all"
                         onClick={() => {
                           setBrandToEdit(brand);
                           setIsEditDrawerOpen(true);

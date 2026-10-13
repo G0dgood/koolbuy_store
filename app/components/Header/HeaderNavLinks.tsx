@@ -29,8 +29,8 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
           href="/"
           className={`transition-colors py-2 whitespace-nowrap ${
             isActive("/")
-              ? "text-[#FF7A00] font-bold"
-              : "text-gray-800 hover:text-[#FF7A00]"
+              ? "text-brand-orange-text font-bold"
+              : "text-gray-800 hover:text-brand-orange-text"
           }`}
         >
           Home
@@ -46,15 +46,15 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
             onClick={() => onToggleDropdown("categories")}
             className={`flex items-center gap-1.5 h-full py-2 transition-colors cursor-pointer outline-none whitespace-nowrap ${
               activeDropdown === "categories"
-                ? "text-[#FF7A00]"
-                : "text-gray-900 hover:text-[#FF7A00]"
+                ? "text-brand-orange-text"
+                : "text-gray-900 hover:text-brand-orange-text"
             }`}
           >
             <span>All categories</span>
             <FiChevronDown
               className={`text-xs transition-transform duration-200 ${
                 activeDropdown === "categories"
-                  ? "rotate-180 text-[#FF7A00]"
+                  ? "rotate-180 text-brand-orange-text"
                   : "text-gray-400"
               }`}
             />
@@ -63,14 +63,14 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
 
         {/* Marketplace */}
         <div className="relative flex items-center">
-          {/* <Button className="font-bold hover:shadow-sm text-xs xl:text-sm ">
+          {/* <Button className="font-bold text-xs xl:text-sm ">
             Marketplace
           </Button> */}
           <Button
             href="https://kool-konnect-frontend.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="h-10 bg-brand-blue text-white px-8 hover:bg-brand-blue/90 shadow-md active:scale-95 transition-all w-full md:w-fit font-bold"
+            className="h-10 bg-brand-charcoal text-white px-8 hover:bg-brand-charcoal/90 active:scale-95 transition-all w-full md:w-fit font-bold"
           >
             Marketplace
           </Button>
@@ -86,15 +86,15 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
             onClick={() => onToggleDropdown("quickLinks")}
             className={`flex items-center gap-1 transition-colors cursor-pointer py-2 outline-none whitespace-nowrap ${
               activeDropdown === "quickLinks"
-                ? "text-[#FF7A00] font-bold"
-                : "text-gray-800 hover:text-[#FF7A00]"
+                ? "text-brand-orange-text font-bold"
+                : "text-gray-800 hover:text-brand-orange-text"
             }`}
           >
             <span>Quick Links</span>
             <FiChevronDown
               className={`text-xs transition-transform duration-200 ${
                 activeDropdown === "quickLinks"
-                  ? "rotate-180 text-[#FF7A00]"
+                  ? "rotate-180 text-brand-orange-text"
                   : "text-gray-400"
               }`}
             />

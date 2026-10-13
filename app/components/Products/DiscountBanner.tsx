@@ -10,7 +10,7 @@ const DiscountBanner = () => {
        <Image 
          src="/web_images/twocolor_background.png" 
          alt="Discount Background" 
-         fill 
+         fill sizes="100vw" 
          className="object-cover" 
        />
        

@@ -13,7 +13,7 @@ const HeroUserCard = () => {
       {/* Profile Card */}
       <div className="bg-[#E3F0FF] p-5 rounded-lg flex md:flex-col gap-3 items-center md:items-start shadow-sm">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full overflow-hidden bg-white border border-blue-100 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-full overflow-hidden bg-white border border-brand-orange/15 flex items-center justify-center">
             <Image
               src="/avatars/avatar=pic1.jpg"
               alt="User"
@@ -30,7 +30,7 @@ const HeroUserCard = () => {
           <Button
             onClick={openRegister}
             size="sm"
-            className="w-full bg-brand-blue text-white hover:bg-brand-blue/90 border-none transition-colors cursor-pointer"
+            className="w-full bg-brand-charcoal text-white hover:bg-brand-charcoal/90 border-none transition-colors cursor-pointer"
           >
             Join now
           </Button>
@@ -38,7 +38,7 @@ const HeroUserCard = () => {
             onClick={openLogin}
             variant="ghost"
             size="sm"
-            className="w-full bg-white text-brand-blue border-none shadow-sm hover:bg-gray-50 transition-colors cursor-pointer"
+            className="w-full bg-white text-brand-orange-text border-none hover:bg-gray-50 transition-colors cursor-pointer"
           >
             Log in
           </Button>

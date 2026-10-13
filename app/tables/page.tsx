@@ -44,7 +44,7 @@ export default function TableDemo() {
   );
 
   return (
-    <div className="min-h-screen bg-[#F0F7FF] p-12 font-sans">
+    <div className="min-h-screen bg-off-white p-12 font-sans">
       <div className="max-w-7xl mx-auto bg-white rounded-xl  p-16 text-black">
         <h1 className="text-5xl font-bold mb-16">Table</h1>
 
@@ -133,11 +133,11 @@ export default function TableDemo() {
               <div className="w-40"><ActionIcons /></div>
               <div className="w-20"><Checkbox checked onChange={() => { }} /></div>
               <div className="w-40"><Badge variant="warning">Pending</Badge></div>
-              <div className="w-40 flex items-center gap-2 text-sm font-bold text-brand-blue">
+              <div className="w-40 flex items-center gap-2 text-sm font-bold text-brand-orange-text">
                 Text cell
                 <Icon name="expand_more" size="xs" />
               </div>
-              <div className="w-40 flex items-center gap-2 text-sm font-bold text-brand-blue">
+              <div className="w-40 flex items-center gap-2 text-sm font-bold text-brand-orange-text">
                 Text cell
                 <Icon name="expand_more" size="xs" className="rotate-180" />
               </div>

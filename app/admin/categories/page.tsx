@@ -14,12 +14,6 @@ import Checkbox from "@/app/components/Checkbox";
 import { EditCategoryDrawer } from "../../components/Admin/EditCategoryDrawer";
 import { BulkActionsDrawer } from "../../components/Admin/BulkActionsDrawer";
 import { RowsPerPage } from "@/app/components/rows-per-page";
-import {
-  HiOutlineSquares2X2,
-  HiOutlineAdjustmentsHorizontal,
-  HiOutlineBuildingStorefront,
-  HiOutlineCube,
-} from "react-icons/hi2";
 
 const categories = [
   { name: "Chest Freezers", image: "/images/koolboks/items/5.webp" },
@@ -194,7 +188,6 @@ export default function CategoriesPage() {
           trendValue="Active"
           trendIsUp={true}
           subtitle="Cooling classifications"
-          badgeIcon={<HiOutlineSquares2X2 className="w-4 h-4 text-[#00BCD4]" />}
         />
         <StatCard
           size="sm"
@@ -203,9 +196,6 @@ export default function CategoriesPage() {
           trendValue="+6 this month"
           trendIsUp={true}
           subtitle="Capacity, voltage & color"
-          badgeIcon={
-            <HiOutlineAdjustmentsHorizontal className="w-4 h-4 text-emerald-600" />
-          }
         />
         <StatCard
           size="sm"
@@ -214,9 +204,6 @@ export default function CategoriesPage() {
           trendValue="Verified"
           trendIsUp={true}
           subtitle="Manufacturers & partners"
-          badgeIcon={
-            <HiOutlineBuildingStorefront className="w-4 h-4 text-purple-600" />
-          }
         />
         <StatCard
           size="sm"
@@ -225,14 +212,13 @@ export default function CategoriesPage() {
           trendValue="Bundles"
           trendIsUp={true}
           subtitle="Solar panels & battery kits"
-          badgeIcon={<HiOutlineCube className="w-4 h-4 text-amber-500" />}
         />
       </div>
 
       {/* Categories Horizontal Scroll */}
       <div className="relative group">
         <button
-          className="absolute -left-5 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-gray-100 rounded-full flex items-center justify-center shadow-lg text-gray-400 hover:text-gray-900 z-10 opacity-0 group-hover:opacity-100 transition-opacity hover:border-brand-blue/30"
+          className="absolute -left-5 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-900 z-10 opacity-0 group-hover:opacity-100 transition-opacity hover:border-brand-charcoal/30"
           onClick={() => scroll("left")}
         >
           <Icon name="chevron_left" folder="icon" size="sm" />
@@ -245,16 +231,16 @@ export default function CategoriesPage() {
           {categories.map((cat, i) => (
             <div
               key={i}
-              className="shrink-0 w-55 bg-white p-3 rounded-lg flex items-center gap-3 hover:shadow-md transition-shadow cursor-pointer hover:border-brand-blue/30 group/item border border-[#1C1C1C1A]"
+              className="shrink-0 w-55 bg-white p-3 rounded-lg flex items-center gap-3 hover:shadow-md transition-shadow cursor-pointer hover:border-brand-charcoal/30 group/item border border-[#1C1C1C1A]"
             >
-              <div className="w-12 h-12 rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center p-1 group-hover/item:bg-brand-blue-light transition-colors">
+              <div className="w-12 h-12 rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center p-1 group-hover/item:bg-brand-orange-soft transition-colors">
                 <img
                   src={cat.image}
                   alt={cat.name}
                   className="w-full h-full object-contain"
                 />
               </div>
-              <span className="text-sm font-bold text-[#1D3557] group-hover/item:text-brand-blue transition-colors">
+              <span className="text-sm font-bold text-brand-charcoal group-hover/item:text-brand-orange-text transition-colors">
                 {cat.name}
               </span>
             </div>
@@ -262,7 +248,7 @@ export default function CategoriesPage() {
         </div>
 
         <button
-          className="absolute -right-5 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-gray-100 rounded-full flex items-center justify-center shadow-lg text-gray-400 hover:text-gray-900 z-10 opacity-0 group-hover:opacity-100 transition-opacity hover:border-brand-blue/30"
+          className="absolute -right-5 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-900 z-10 opacity-0 group-hover:opacity-100 transition-opacity hover:border-brand-charcoal/30"
           onClick={() => scroll("right")}
         >
           <Icon name="chevron_right" folder="icon" size="sm" />
@@ -303,21 +289,21 @@ export default function CategoriesPage() {
             <Button
               variant="outline"
               shape="rounded-sm"
-              className="p-2! text-gray-400 shadow-sm"
+              className="p-2! text-gray-400 "
             >
               <Icon name="sort" folder="dashboardIcon" size="sm" />
             </Button>
             <Button
               variant="outline"
               shape="rounded-sm"
-              className="p-2! text-gray-400 shadow-sm"
+              className="p-2! text-gray-400 "
             >
               <Icon name="circle-plus" folder="dashboardIcon" size="sm" />
             </Button>
             <Button
               variant="outline"
               shape="rounded-sm"
-              className="p-2! text-gray-400 shadow-sm"
+              className="p-2! text-gray-400 "
             >
               <Icon name="DotsHorizontal" folder="dashboardIcon" size="sm" />
             </Button>
@@ -380,7 +366,7 @@ export default function CategoriesPage() {
                       <Button
                         variant="outline"
                         shape="rounded-sm"
-                        className="p-1.5! text-gray-400 hover:text-blue-500 hover:bg-brand-blue-light transition-all"
+                        className="p-1.5! text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft transition-all"
                         onClick={() => {
                           setCategoryToEdit(p);
                           setIsEditDrawerOpen(true);

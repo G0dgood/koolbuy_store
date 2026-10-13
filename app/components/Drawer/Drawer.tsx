@@ -60,11 +60,11 @@ export default function Drawer({
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className={`relative bg-white h-full shadow-2xl z-50 flex flex-col ${width} w-full`}
+            className={`relative bg-white h-full shadow-md z-50 flex flex-col ${width} w-full`}
           >
             {/* Header */}
             <div className="flex items-center justify-between px-8 py-6 border-b border-gray-100 flex-shrink-0">
-              <h3 className="text-[18px] font-black text-[#1D3557]">{title}</h3>
+              <h3 className="text-[18px] font-bold text-brand-charcoal">{title}</h3>
               <div className="flex items-center gap-3">
                 {rightElement && rightElement}
                 <button

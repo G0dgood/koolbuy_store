@@ -21,7 +21,7 @@ const CartItemControl: React.FC<CartItemControlProps> = ({ id, price, quantity }
         <select 
           value={quantity}
           onChange={(e) => updateQuantity(id, parseInt(e.target.value))}
-          className="w-full h-10 px-3 border border-gray-300 rounded-lg bg-white text-sm text-gray-900 appearance-none outline-none focus:border-brand-blue cursor-pointer"
+          className="w-full h-10 px-3 border border-gray-300 rounded-lg bg-white text-sm text-gray-900 appearance-none outline-none focus:border-brand-orange cursor-pointer"
         >
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => (
             <option key={num} value={num}>Qty: {num}</option>

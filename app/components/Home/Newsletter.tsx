@@ -6,7 +6,7 @@ import { Button } from "@/app/components/Button";
 
 const Newsletter = () => {
   return (
-    <section className="w-full bg-[#EFF2F4] py-12 px-6 text-center flex flex-col items-center gap-6 relative overflow-hidden">
+    <section className="w-full bg-off-white py-12 px-6 text-center flex flex-col items-center gap-6 relative overflow-hidden">
       <div className="max-w-125 flex flex-col items-center text-center gap-2 z-10">
         <h3 className="text-xl md:text-2xl font-bold text-gray-900 truncate w-full">
           Subscribe to our newsletter
@@ -22,22 +22,22 @@ const Newsletter = () => {
           <Icon
             name="email"
             size="sm"
-            className="absolute left-3 text-gray-400 group-focus-within:text-brand-blue transition-colors"
+            className="absolute left-3 text-gray-400 group-focus-within:text-brand-orange-text transition-colors"
           />
           <input
             type="email"
             placeholder="Email"
-            className="w-full h-10 border border-gray-300 rounded-lg pl-10 pr-3 outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue/20 transition-all bg-white"
+            className="w-full h-10 border border-gray-300 rounded-lg pl-10 pr-3 outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/20 transition-all bg-white"
           />
         </div>
-        <Button className="h-10 bg-brand-blue text-white px-8 hover:bg-brand-blue/90 shadow-md active:scale-95 transition-all w-full md:w-fit font-bold">
+        <Button className="h-10 bg-brand-charcoal text-white px-8 hover:bg-brand-charcoal/90 active:scale-95 transition-all w-full md:w-fit font-bold">
           Subscribe
         </Button>
       </div>
 
       {/* Decorative background element */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-brand-blue/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-32 h-32 bg-brand-blue/5 rounded-full -ml-16 -mb-16 blur-3xl"></div>
+      <div className="absolute top-0 right-0 w-32 h-32 bg-brand-charcoal/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-32 h-32 bg-brand-charcoal/5 rounded-full -ml-16 -mb-16 blur-3xl"></div>
     </section>
   );
 };

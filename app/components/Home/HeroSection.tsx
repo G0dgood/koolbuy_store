@@ -89,7 +89,7 @@ const HeroSection = () => {
             <Image
               src={activeItem.image}
               alt={activeItem.title}
-              fill
+              fill sizes="100vw"
               className="object-cover object-center"
               priority
             />
@@ -108,7 +108,7 @@ const HeroSection = () => {
                   </span>
                 </div> */}
 
-                {/* <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight drop-shadow-md leading-tight">
+                {/* <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight drop-shadow-md leading-tight">
                   {activeItem.title}
                 </h1>
 
@@ -126,7 +126,7 @@ const HeroSection = () => {
         <button
           onClick={prevSlide}
           aria-label="Previous slide"
-          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition-all duration-200 z-20 cursor-pointer shadow-md active:scale-90"
+          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition-all duration-200 z-20 cursor-pointer active:scale-90"
         >
           <FiChevronLeft size={22} />
         </button>
@@ -134,7 +134,7 @@ const HeroSection = () => {
         <button
           onClick={nextSlide}
           aria-label="Next slide"
-          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition-all duration-200 z-20 cursor-pointer shadow-md active:scale-90"
+          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition-all duration-200 z-20 cursor-pointer active:scale-90"
         >
           <FiChevronRight size={22} />
         </button>
@@ -148,7 +148,7 @@ const HeroSection = () => {
               aria-label={`Go to slide ${idx + 1}`}
               className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
                 currentSlide === idx
-                  ? "w-7 bg-primary shadow-sm"
+                  ? "w-7 bg-primary "
                   : "w-2.5 bg-white/50 hover:bg-white/80"
               }`}
             />

@@ -20,7 +20,7 @@ interface HintProps extends React.HTMLAttributes<HTMLParagraphElement> {
 
 const Hint: React.FC<HintProps> = ({ children, variant = "default", className = "", ...props }) => {
   const variants = {
-    default: "text-orange-500", // Matching the design's orange hint text
+    default: "text-brand-orange-text", // Matching the design's orange hint text
     error: "text-red-500",
     warning: "text-amber-500",
   };

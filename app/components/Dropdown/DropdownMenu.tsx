@@ -43,7 +43,7 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
       className={`
         flex items-center gap-3 px-4 py-2.5 transition-all cursor-pointer w-full
         ${isDisabled ? "opacity-40 cursor-not-allowed" : "hover:bg-gray-50"}
-        ${isActive ? "bg-brand-blue-light text-brand-blue" : "text-gray-700"}
+        ${isActive ? "bg-brand-orange-soft text-brand-orange-text" : "text-gray-700"}
         ${className}
       `}
     >
@@ -63,10 +63,10 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
           <Icon
             name={icon}
             size="sm"
-            className={isActive ? "text-brand-blue" : "text-gray-400"}
+            className={isActive ? "text-brand-orange-text" : "text-gray-400"}
           />
         ) : (
-          <div className={`text-base flex items-center justify-center shrink-0 w-5 h-5 ${isActive ? "text-brand-blue" : "text-gray-400"}`}>
+          <div className={`text-base flex items-center justify-center shrink-0 w-5 h-5 ${isActive ? "text-brand-orange-text" : "text-gray-400"}`}>
             {icon}
           </div>
         )
@@ -148,7 +148,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
       animate="visible"
       exit="exit"
       variants={dropdownVariants}
-      className={`bg-white border border-gray-100 rounded-lg shadow-xl overflow-hidden py-1 ${className}`}
+      className={`bg-white border border-gray-100 rounded-lg shadow-md overflow-hidden py-1 ${className}`}
       style={{ width }}
     >
       {children}
@@ -180,7 +180,7 @@ const DropdownSearch: React.FC<DropdownSearchProps> = ({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
-          className="w-full bg-white border border-gray-100 rounded py-2 pl-9 pr-3 text-sm placeholder:text-gray-400 outline-none focus:border-brand-blue transition-colors"
+          className="w-full bg-white border border-gray-100 rounded py-2 pl-9 pr-3 text-sm placeholder:text-gray-400 outline-none focus:border-brand-orange transition-colors"
         />
         {value && onClear && (
           <button
@@ -211,7 +211,7 @@ const DropdownFooterAction: React.FC<DropdownFooterActionProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 w-full px-4 py-3 text-sm font-bold text-brand-blue bg-gray-50/50 border-t border-gray-100 hover:bg-gray-100 transition-all ${className}`}
+      className={`flex items-center gap-2 w-full px-4 py-3 text-sm font-bold text-brand-orange-text bg-gray-50/50 border-t border-gray-100 hover:bg-gray-100 transition-all ${className}`}
     >
       <Icon name={icon} size="xs" />
       {label}

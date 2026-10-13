@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 
 const ContactPage = () => {
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-off-white flex flex-col font-sans text-black">
       <Header />
 
       <main className="flex-1 w-full bg-white">
@@ -19,11 +19,11 @@ const ContactPage = () => {
           <Image
             src="/ContactUs/Banner.png"
             alt="Contact Us"
-            fill
+            fill sizes="100vw"
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1D3557]/80 to-transparent flex items-center">
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-charcoal/80 to-transparent flex items-center">
             <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 w-full">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -31,12 +31,12 @@ const ContactPage = () => {
                 transition={{ duration: 0.6 }}
                 className="flex flex-col gap-2"
               >
-                <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs md:text-sm">
+                <span className="text-brand-orange font-bold tracking-[0.2em] uppercase text-xs md:text-sm">
                   Koolbuy Store Support
                 </span>
-                <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight">
+                <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight">
                   How can we <br />
-                  <span className="text-[#8CB7F5]">help you?</span>
+                  <span className="text-white/60">help you?</span>
                 </h1>
                 <p className="text-white/80 text-sm md:text-base max-w-md mt-4 leading-relaxed">
                   Whether you have a question about features, pricing, or
@@ -57,7 +57,7 @@ const ContactPage = () => {
               className="flex flex-col gap-10"
             >
               <div className="flex flex-col gap-3">
-                <h2 className="text-3xl font-black text-[#1D3557] tracking-tight text-inter">
+                <h2 className="text-3xl font-bold text-brand-charcoal tracking-tight text-inter">
                   Send us a message
                 </h2>
                 <p className="text-gray-500 text-sm md:text-base">
@@ -77,7 +77,7 @@ const ContactPage = () => {
                   <Input
                     type="text"
                     placeholder="John Doe"
-                    className="h-12 border-gray-100 focus:border-brand-blue bg-gray-50/30"
+                    className="h-12 border-gray-100 focus:border-brand-orange bg-gray-50/30"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
@@ -87,7 +87,7 @@ const ContactPage = () => {
                   <Input
                     type="email"
                     placeholder="john@example.com"
-                    className="h-12 border-gray-100 focus:border-brand-blue bg-gray-50/30"
+                    className="h-12 border-gray-100 focus:border-brand-orange bg-gray-50/30"
                   />
                 </div>
                 <div className="flex flex-col gap-2 md:col-span-2">
@@ -97,7 +97,7 @@ const ContactPage = () => {
                   <Input
                     type="text"
                     placeholder="Inquiry about Koolbuy Store services"
-                    className="h-12 border-gray-100 focus:border-brand-blue bg-gray-50/30"
+                    className="h-12 border-gray-100 focus:border-brand-orange bg-gray-50/30"
                   />
                 </div>
                 <div className="flex flex-col gap-2 md:col-span-2">
@@ -105,14 +105,15 @@ const ContactPage = () => {
                     Message
                   </label>
                   <Textarea
-                    className="min-h-[160px] border-gray-100 focus:border-brand-blue bg-gray-50/30 shadow-none"
+                    className="min-h-[160px] border-gray-100 focus:border-brand-orange bg-gray-50/30 shadow-none"
                     placeholder="Write your message here..."
                   />
                 </div>
                 <div className="md:col-span-2 pt-4">
                   <Button
-                    variant="primary"
-                    className="w-full md:w-auto px-12 py-4 h-auto text-sm font-black uppercase tracking-widest shadow-xl shadow-blue-100"
+                    variant="accent"
+                    type="submit"
+                    className="w-full md:w-auto"
                   >
                     Submit Inquiry
                   </Button>
@@ -129,11 +130,11 @@ const ContactPage = () => {
             >
               <div className="flex flex-col gap-8">
                 <div className="flex items-start gap-5 group">
-                  <div className="w-14 h-14 rounded-2xl bg-brand-blue-light flex items-center justify-center text-brand-blue flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <div className="w-14 h-14 rounded-2xl bg-brand-orange-soft flex items-center justify-center text-brand-orange-text flex-shrink-0 group-hover:scale-110 transition-transform">
                     <HiMapPin size={24} />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h4 className="font-bold text-[#1D3557] text-lg">
+                    <h4 className="font-bold text-brand-charcoal text-lg">
                       Visit Us
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
@@ -145,11 +146,11 @@ const ContactPage = () => {
                 </div>
 
                 <div className="flex items-start gap-5 group">
-                  <div className="w-14 h-14 rounded-2xl bg-brand-blue-light flex items-center justify-center text-brand-blue flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <div className="w-14 h-14 rounded-2xl bg-brand-orange-soft flex items-center justify-center text-brand-orange-text flex-shrink-0 group-hover:scale-110 transition-transform">
                     <HiPhone size={24} />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h4 className="font-bold text-[#1D3557] text-lg">
+                    <h4 className="font-bold text-brand-charcoal text-lg">
                       Call Us
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
@@ -161,11 +162,11 @@ const ContactPage = () => {
                 </div>
 
                 <div className="flex items-start gap-5 group">
-                  <div className="w-14 h-14 rounded-2xl bg-brand-blue-light flex items-center justify-center text-brand-blue flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <div className="w-14 h-14 rounded-2xl bg-brand-orange-soft flex items-center justify-center text-brand-orange-text flex-shrink-0 group-hover:scale-110 transition-transform">
                     <HiEnvelope size={24} />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h4 className="font-bold text-[#1D3557] text-lg">
+                    <h4 className="font-bold text-brand-charcoal text-lg">
                       Email Us
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
@@ -191,7 +192,7 @@ const ContactPage = () => {
                   className="grayscale hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100"
                 ></iframe>
                 <div className="absolute top-4 left-4 pointer-events-none">
-                  <div className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-black uppercase tracking-tighter text-[#1D3557] shadow-sm border border-gray-100">
+                  <div className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold uppercase tracking-tighter text-brand-charcoal shadow-sm border border-gray-100">
                     Koolbuy Store HQ
                   </div>
                 </div>

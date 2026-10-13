@@ -96,9 +96,9 @@ const transactionsData = [
 ];
 
 const statusStyles = {
-  Complete: { color: "text-blue-500", bg: "bg-blue-500" },
+  Complete: { color: "text-success", bg: "bg-success" },
   Canceled: { color: "text-rose-500", bg: "bg-rose-500" },
-  Pending: { color: "text-orange-400", bg: "bg-orange-400" },
+  Pending: { color: "text-brand-orange-text", bg: "bg-brand-orange" },
 };
 
 export default function TransactionsPage() {
@@ -162,7 +162,7 @@ export default function TransactionsPage() {
         {/* Payment Method Card (Right 2 columns) */}
         <div className="xl:col-span-2 bg-white rounded-lg border border-[#1C1C1C1A] overflow-hidden flex flex-col p-6 gap-6">
           <div className="flex justify-between items-center">
-            <h3 className="text-sm font-bold text-[#1D3557]">Payment Method</h3>
+            <h3 className="text-sm font-bold text-brand-charcoal">Payment Method</h3>
             <Button
               variant="ghost"
               className="text-gray-300 hover:text-gray-600 p-1!"
@@ -173,14 +173,14 @@ export default function TransactionsPage() {
 
           <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
             {/* Visual Card */}
-            <div className="relative w-full max-w-[320px] h-45 rounded-3xl overflow-hidden shadow-xl shadow-blue-100 group">
-              <div className="absolute inset-0 bg-linear-to-br from-[#00BCD4] via-blue-400 to-[#1D3557]"></div>
+            <div className="relative w-full max-w-[320px] h-45 rounded-3xl overflow-hidden shadow-md shadow-brand-charcoal group">
+              <div className="absolute inset-0 bg-linear-to-br from-brand-charcoal via-brand-charcoal to-brand-orange-hover"></div>
               {/* Pattern overlay */}
               <div className="absolute inset-0 opacity-10 mix-blend-overlay bg-[url('/dashboardImage/image 270.png')] bg-cover"></div>
 
               <div className="relative h-full p-6 flex flex-col justify-between text-white">
                 <div className="flex justify-between items-start">
-                  <span className="text-xl font-black italic tracking-tighter">
+                  <span className="text-xl font-bold italic tracking-tighter">
                     Finaci
                   </span>
                   <div className="flex gap-1 items-center">
@@ -193,19 +193,19 @@ export default function TransactionsPage() {
                   <p className="text-xs font-medium opacity-70">
                     Card Holder name
                   </p>
-                  <p className="text-sm font-bold tracking-widest uppercase">
+                  <p className="text-sm font-bold tracking-wider uppercase">
                     Noman Manzoor
                   </p>
                 </div>
 
                 <div className="flex justify-between items-end">
                   <div className="flex flex-col gap-1">
-                    <p className="text-lg font-bold tracking-[0.2em]">
+                    <p className="text-lg font-bold tracking-wider">
                       **** **** **** 2345
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-[10px] opacity-70">Expiry Date</p>
+                    <p className="text-[11px] opacity-70">Expiry Date</p>
                     <p className="text-xs font-bold">02/30</p>
                   </div>
                 </div>
@@ -219,7 +219,7 @@ export default function TransactionsPage() {
                   <span className="text-xs font-bold text-gray-400">
                     Status:
                   </span>
-                  <span className="text-xs font-bold text-blue-500">
+                  <span className="text-xs font-bold text-brand-orange-text">
                     Active
                   </span>
                 </div>
@@ -227,7 +227,7 @@ export default function TransactionsPage() {
                   <span className="text-xs font-bold text-gray-400">
                     Transactions:
                   </span>
-                  <span className="text-xs font-bold text-[#1D3557]">
+                  <span className="text-xs font-bold text-brand-charcoal">
                     1,250
                   </span>
                 </div>
@@ -235,14 +235,14 @@ export default function TransactionsPage() {
                   <span className="text-xs font-bold text-gray-400">
                     Revenue:
                   </span>
-                  <span className="text-xs font-bold text-[#1D3557]">
+                  <span className="text-xs font-bold text-brand-charcoal">
                     ₦50,000
                   </span>
                 </div>
               </div>
               <Button
                 variant="ghost"
-                className="text-[11px] font-black text-brand-blue uppercase tracking-widest hover:underline px-0! justify-start!"
+                className="text-[11px] font-bold text-brand-orange-text uppercase tracking-wider hover:underline px-0! justify-start!"
               >
                 View Transactions
               </Button>
@@ -252,7 +252,7 @@ export default function TransactionsPage() {
           <div className="flex flex-col sm:flex-row gap-3 mt-auto pt-4 border-t border-gray-50">
             <Button
               variant="secondary"
-              className="flex-1 h-12 rounded-[6px] border-dashed border-gray-200 text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-all"
+              className="flex-1 h-12 rounded-lg border-dashed border-gray-200 text-gray-400 hover:text-brand-orange-text hover:border-brand-charcoal transition-all"
               iconLeft={
                 <Icon name="circle-plus" folder="dashboardIcon" size="sm" />
               }
@@ -398,7 +398,7 @@ export default function TransactionsPage() {
                       <Button
                         variant="outline"
                         shape="rounded-sm"
-                        className="p-1.5! text-gray-400 hover:text-blue-500 hover:bg-brand-blue-light transition-all"
+                        className="p-1.5! text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft transition-all"
                         onClick={() => {
                           setSelectedTransaction(tx);
                           setIsDetailDrawerOpen(true);

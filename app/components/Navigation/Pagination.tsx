@@ -32,7 +32,7 @@ const Pagination: React.FC<PaginationProps> = ({
           disabled={currentPage === 1}
           className="px-3 py-2 flex items-center justify-center border-r border-gray-200 hover:bg-gray-50 disabled:opacity-30 disabled:pointer-events-none"
         >
-          <Icon name="chevron_left" size="sm" className="text-brand-blue" />
+          <Icon name="chevron_left" size="sm" className="text-brand-orange-text" />
         </button>
 
         {pages.map((page) => {
@@ -43,7 +43,7 @@ const Pagination: React.FC<PaginationProps> = ({
               onClick={() => onPageChange(page)}
               className={`px-4 py-2 text-sm font-medium transition-colors border-r border-gray-200 last:border-r-0 ${
                 isActive
-                  ? "bg-brand-blue-light text-brand-blue"
+                  ? "bg-brand-orange-soft text-brand-orange-text"
                   : "text-gray-600 hover:bg-gray-50"
               }`}
             >
@@ -57,7 +57,7 @@ const Pagination: React.FC<PaginationProps> = ({
           disabled={currentPage === totalPages}
           className="px-3 py-2 flex items-center justify-center hover:bg-gray-50 disabled:opacity-30 disabled:pointer-events-none"
         >
-          <Icon name="chevron_right" size="sm" className="text-brand-blue" />
+          <Icon name="chevron_right" size="sm" className="text-brand-orange-text" />
         </button>
       </div>
 
@@ -66,7 +66,7 @@ const Pagination: React.FC<PaginationProps> = ({
           <select
             value={pageSize}
             onChange={(e) => onPageSizeChange?.(Number(e.target.value))}
-            className="appearance-none bg-white border border-gray-200 rounded-md pl-4 pr-10 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-blue/20"
+            className="appearance-none bg-white border border-gray-200 rounded-md pl-4 pr-10 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-orange/20"
           >
             {pageSizeOptions.map((option) => (
               <option key={option} value={option}>

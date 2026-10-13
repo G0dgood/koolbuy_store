@@ -199,11 +199,11 @@ export default function VendorsPage() {
           <title>${title}</title>
           <style>
             body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 32px; color: #111827; }
-            .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #00BCD4; padding-bottom: 16px; margin-bottom: 24px; }
-            h1 { font-size: 22px; font-weight: 800; color: #1D3557; margin: 0; }
+            .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #F57E16; padding-bottom: 16px; margin-bottom: 24px; }
+            h1 { font-size: 22px; font-weight: 800; color: #050711; margin: 0; }
             p { font-size: 12px; color: #6b7280; margin: 4px 0 0 0; }
             table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
-            th { background-color: #f8fafc; padding: 10px 14px; font-weight: 700; border-bottom: 2px solid #e2e8f0; color: #475569; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+            th { background-color: #F8F9FA; padding: 10px 14px; font-weight: 700; border-bottom: 2px solid #e2e8f0; color: #475569; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
             @media print {
               body { padding: 0; }
               @page { margin: 1.5cm; }
@@ -216,7 +216,7 @@ export default function VendorsPage() {
               <h1>${title}</h1>
               <p>Generated on ${new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })} • Total Records: ${filteredVendors.length}</p>
             </div>
-            <div style="font-weight: 900; font-size: 18px; color: #00BCD4;">KOOLBUY</div>
+            <div style="font-weight: 900; font-size: 18px; color: #F57E16;">KOOLBUY</div>
           </div>
           <table>
             <thead>
@@ -269,10 +269,10 @@ export default function VendorsPage() {
             iconLeft={
               <HiOutlineDocumentArrowDown
                 size={18}
-                className="text-brand-blue"
+                className="text-brand-orange-text"
               />
             }
-            className="border-gray-200 text-gray-800 shadow-2xs hover:bg-gray-50 px-4 py-2 text-xs sm:text-sm font-semibold"
+            className="border-gray-200 text-gray-800 hover:bg-gray-50 px-4 py-2 text-xs sm:text-sm font-semibold"
           >
             Export PDF
           </Button>
@@ -280,7 +280,7 @@ export default function VendorsPage() {
             variant="blue"
             size="md"
             // shape="pill"
-            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold shadow-sm shadow-brand-blue/20"
+            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold "
           >
             + Add New Vendor
           </Button>
@@ -293,7 +293,7 @@ export default function VendorsPage() {
           <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
             Total Vendors
           </span>
-          <span className="text-2xl font-black text-gray-900">
+          <span className="text-2xl font-bold text-gray-900">
             {vendorsData.length}
           </span>
           <span className="text-[11px] text-emerald-600 font-bold">
@@ -304,7 +304,7 @@ export default function VendorsPage() {
           <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
             Active Vendors
           </span>
-          <span className="text-2xl font-black text-gray-900">
+          <span className="text-2xl font-bold text-gray-900">
             {vendorsData.filter((v) => v.status === "Active").length}
           </span>
           <span className="text-[11px] text-emerald-600 font-bold">
@@ -315,7 +315,7 @@ export default function VendorsPage() {
           <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
             Awaiting Approval
           </span>
-          <span className="text-2xl font-black text-amber-600">
+          <span className="text-2xl font-bold text-amber-600">
             {vendorsData.filter((v) => v.status === "Awaiting Approval").length}
           </span>
           <span className="text-[11px] text-amber-600 font-bold">
@@ -342,7 +342,7 @@ export default function VendorsPage() {
               placeholder="Search vendor name, owner, or email..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full h-10 pl-9 pr-3 rounded-xl bg-gray-50 border border-gray-200 text-xs focus:outline-none focus:border-brand-blue focus:bg-white transition-all"
+              className="w-full h-10 pl-9 pr-3 rounded-xl bg-gray-50 border border-gray-200 text-xs focus:outline-none focus:border-brand-orange focus:bg-white transition-all"
             />
             <Icon
               name="search"
@@ -392,7 +392,7 @@ export default function VendorsPage() {
                   return (
                     <tr
                       key={vendor.id}
-                      className={isChecked ? "bg-blue-50/30" : ""}
+                      className={isChecked ? "bg-brand-orange-soft/30" : ""}
                     >
                       <td>
                         <Checkbox
@@ -402,7 +402,7 @@ export default function VendorsPage() {
                       </td>
                       <td className="font-bold text-gray-900">
                         <div className="text-xs">{vendor.name}</div>
-                        <div className="text-[10px] text-gray-400 font-normal">
+                        <div className="text-[11px] text-gray-400 font-normal">
                           {vendor.id}
                         </div>
                       </td>
@@ -411,7 +411,7 @@ export default function VendorsPage() {
                       </td>
                       <td className="text-xs text-gray-500">
                         <div>{vendor.email}</div>
-                        <div className="text-[10px] text-gray-400">
+                        <div className="text-[11px] text-gray-400">
                           {vendor.phone}
                         </div>
                       </td>
@@ -423,7 +423,7 @@ export default function VendorsPage() {
                       </td>
                       <td>
                         <span
-                          className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold ${
+                          className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold ${
                             vendor.status === "Active"
                               ? "bg-emerald-50 text-emerald-600"
                               : vendor.status === "Awaiting Approval"

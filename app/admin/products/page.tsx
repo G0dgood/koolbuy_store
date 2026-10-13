@@ -99,7 +99,7 @@ const productsData = [
 ];
 
 const statusStyles = {
-  Published: "text-blue-500 bg-brand-blue-light",
+  Published: "text-success bg-success-soft",
   Draft: "text-gray-400 bg-gray-50",
   "Out of Stock": "text-rose-500 bg-rose-50/50",
   "Low Stock": "text-amber-500 bg-amber-50/50",
@@ -171,7 +171,7 @@ export default function ProductListing() {
         </div>
       </div>
 
-      <div className="bg-white overflow-hidden flex flex-col border border-[#1C1C1C1A] rounded-[6px]">
+      <div className="bg-white overflow-hidden flex flex-col border border-[#1C1C1C1A] rounded-lg">
         {/* Filter Controls Bar */}
         <div className="p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between border-b border-gray-50">
           <TabFilter
@@ -209,10 +209,10 @@ export default function ProductListing() {
               <Button
                 variant="outline"
                 shape="rounded-sm"
-                className="text-gray-400 flex items-center gap-2 px-4 shadow-sm"
+                className="text-gray-400 flex items-center gap-2 px-4 "
               >
                 <Icon name="filter" folder="dashboardIcon" size="sm" />
-                <span className="text-xs font-bold text-[#1D3557]">
+                <span className="text-xs font-bold text-brand-charcoal">
                   Filters
                 </span>
               </Button>
@@ -253,7 +253,7 @@ export default function ProductListing() {
                   </td>
                   <td>
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-[6px] border border-gray-100 overflow-hidden bg-white p-1 shadow-sm ring-1 ring-gray-100">
+                      <div className="w-12 h-12 rounded-lg border border-gray-100 overflow-hidden bg-white p-1 shadow-sm ring-1 ring-gray-100">
                         <img
                           src={product.image}
                           alt={product.name}
@@ -261,10 +261,10 @@ export default function ProductListing() {
                         />
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-sm font-bold text-[#1D3557] leading-tight group-hover:text-blue-600 transition-colors">
+                        <span className="text-sm font-bold text-brand-charcoal leading-tight group-hover:text-brand-orange-text transition-colors">
                           {product.name}
                         </span>
-                        <span className="text-[10px] font-bold text-gray-400 mt-1 uppercase tracking-wider">
+                        <span className="text-[11px] font-bold text-gray-400 mt-1 uppercase tracking-wider">
                           SKU: {product.sku}
                         </span>
                       </div>
@@ -276,7 +276,7 @@ export default function ProductListing() {
                     </span>
                   </td>
                   <td>
-                    <span className="text-sm font-black text-[#00BCD4]">
+                    <span className="text-sm font-bold text-brand-orange-text">
                       {product.price}
                     </span>
                   </td>
@@ -291,7 +291,7 @@ export default function ProductListing() {
                   </td>
                   <td>
                     <span
-                      className={`px-3 py-1.5 rounded-[6px] text-[10px] font-bold ${statusStyles[product.status as keyof typeof statusStyles]}`}
+                      className={`px-3 py-1.5 rounded-lg text-[11px] font-bold ${statusStyles[product.status as keyof typeof statusStyles]}`}
                     >
                       {product.status}
                     </span>
@@ -301,7 +301,7 @@ export default function ProductListing() {
                       <Button
                         variant="outline"
                         shape="rounded-sm"
-                        className="p-1.5! text-gray-400 hover:text-blue-500 hover:bg-brand-blue-light transition-all"
+                        className="p-1.5! text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft transition-all"
                         onClick={() => {
                           setProductToEdit(product);
                           setIsEditDrawerOpen(true);

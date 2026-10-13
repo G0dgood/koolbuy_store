@@ -40,7 +40,7 @@ export const ProductGridItem: React.FC<{ product: ProductProps }> = ({ product }
          <Link href="/products/detail" className="flex flex-col flex-1">
             <div className="relative w-full aspect-square p-5 border-b border-gray-100 flex items-center justify-center">
                <div className="relative w-full h-full transition-transform duration-300 group-hover:scale-110">
-                  <Image src={product.image} alt={product.title} fill className="object-contain" />
+                  <Image src={product.image} alt={product.title} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw" className="object-contain" />
                </div>
                {/* Heart Icon (Overlay) */}
                <div className="absolute top-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -53,9 +53,9 @@ export const ProductGridItem: React.FC<{ product: ProductProps }> = ({ product }
                </div>
                <div className="flex items-center gap-2">
                   <Rating value={product.rating} />
-                  <span className="text-orange-500 text-sm font-medium">{product.rating}</span>
+                  <span className="text-brand-orange-text text-sm font-medium">{product.rating}</span>
                </div>
-               <span className="text-gray-600 text-sm leading-relaxed line-clamp-2 group-hover:text-brand-blue transition-colors font-medium">
+               <span className="text-gray-600 text-sm leading-relaxed line-clamp-2 group-hover:text-brand-orange-text transition-colors font-medium">
                   {product.title}
                </span>
             </div>
@@ -70,9 +70,9 @@ export const ProductGridItem: React.FC<{ product: ProductProps }> = ({ product }
             </Link>
             <Button 
                onClick={handleAddToCart}
-               variant="primary" 
+               variant="accent" 
                size="sm" 
-               className="flex-1 text-xs font-bold py-2 shadow-none"
+               className="flex-1 text-xs font-bold py-2 "
             >
                Add to cart
             </Button>
@@ -109,14 +109,14 @@ export const ProductListItem: React.FC<{
          {/* Product Image */}
          <Link href="/products/detail" className="w-24 h-24 md:w-48 md:h-48 flex-shrink-0 border border-gray-100 rounded flex items-center justify-center p-2 md:p-4 bg-white cursor-pointer overflow-hidden">
             <div className="relative w-full h-full transition-transform duration-300 hover:scale-110">
-               <Image src={product.image} alt={product.title} fill className="object-contain" />
+               <Image src={product.image} alt={product.title} fill sizes="(max-width: 768px) 96px, 192px" className="object-contain" />
             </div>
          </Link>
 
          {/* Product Content */}
          <div className="flex-1 flex flex-col gap-1 md:gap-3 pr-8 md:pr-0">
             <div className="flex items-start justify-between">
-               <Link href="/products/detail" className="text-sm md:text-md font-medium text-gray-900 leading-snug hover:text-brand-blue cursor-pointer transition-colors line-clamp-2 md:line-clamp-none">
+               <Link href="/products/detail" className="text-sm md:text-md font-medium text-gray-900 leading-snug hover:text-brand-orange-text cursor-pointer transition-colors line-clamp-2 md:line-clamp-none">
                   {product.title}
                </Link>
             </div>
@@ -133,15 +133,15 @@ export const ProductListItem: React.FC<{
                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] md:text-sm font-normal">
                   <div className="flex items-center gap-1">
                      <Rating value={product.rating} />
-                     <span className="text-orange-500 font-medium ml-0.5 md:ml-1">{product.rating}</span>
+                     <span className="text-brand-orange-text font-medium ml-0.5 md:ml-1">{product.rating}</span>
                   </div>
                   <div className="flex items-center gap-1.5 text-gray-400">
                      <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-gray-300" />
                      <span>{product.orders} orders</span>
                   </div>
                   {/* Shipping Info */}
-                  <div className="flex items-center gap-1.5 text-brand-blue">
-                     <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-brand-blue" />
+                  <div className="flex items-center gap-1.5 text-brand-orange-text">
+                     <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-brand-charcoal" />
                      <span className="font-medium">{product.shipping}</span>
                   </div>
                </div>
@@ -153,12 +153,12 @@ export const ProductListItem: React.FC<{
             </p>
 
             <div className="flex items-center gap-4 mt-auto pt-2">
-               <Link href="/products/detail" className="text-brand-blue font-bold text-sm hover:underline cursor-pointer flex items-center gap-1">
+               <Link href="/products/detail" className="text-brand-orange-text font-bold text-sm hover:underline cursor-pointer flex items-center gap-1">
                   View details
                </Link>
                <button 
                   onClick={handleAddToCart}
-                  className="md:hidden text-brand-blue font-bold text-sm hover:underline cursor-pointer"
+                  className="md:hidden text-brand-orange-text font-bold text-sm hover:underline cursor-pointer"
                >
                   Add to cart
                </button>
@@ -171,9 +171,9 @@ export const ProductListItem: React.FC<{
                {showFavorite && <FavoriteButton item={product as any} className="flex-shrink-0" />}
                <Button 
                   onClick={handleAddToCart}
-                  variant="primary" 
+                  variant="accent" 
                   size="sm" 
-                  className="w-full font-bold mt-2 shadow-none"
+                  className="w-full font-bold mt-2 "
                >
                   Add to cart
                </Button>

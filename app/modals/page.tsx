@@ -17,7 +17,7 @@ export default function ModalDemo() {
  const [openError, setOpenError] = useState(false);
 
  return (
-  <div className="min-h-screen bg-[#F0F7FF] p-12 font-sans">
+  <div className="min-h-screen bg-off-white p-12 font-sans">
    <div className="max-w-7xl mx-auto bg-white rounded-xl  p-16 text-black">
     <h1 className="text-5xl font-bold mb-16">Modal</h1>
 
@@ -97,7 +97,7 @@ export default function ModalDemo() {
      <Button onClick={() => setOpenNormal(true)}>Open Normal Modal</Button>
      <Button onClick={() => setOpenLarge(true)}>Open Large Modal</Button>
      <Button onClick={() => setOpenDelete(true)} className="bg-red-500">Open Delete Modal</Button>
-     <Button onClick={() => setOpenError(true)} className="bg-orange-500">Open Error Dialog</Button>
+     <Button onClick={() => setOpenError(true)} className="bg-brand-orange">Open Error Dialog</Button>
     </div>
 
     {/* Base Components Footer */}

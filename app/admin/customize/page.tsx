@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Checkbox from "@/app/components/Checkbox";
 import { Icon } from "@/app/components/Icon";
 import { Button } from "@/app/components/Button";
 import { Input, Textarea } from "@/app/components/Form/Inputs";
@@ -226,8 +227,8 @@ export default function CustomizePage() {
               onClick={() => setActiveTab(tab.id as CustomizeTab)}
               className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
                 isActive
-                  ? "bg-brand-blue text-white shadow-md shadow-brand-blue/20"
-                  : "bg-white text-gray-600 border border-gray-100 hover:bg-gray-50 hover:text-brand-blue"
+                  ? "bg-brand-charcoal text-white "
+                  : "bg-white text-gray-600 border border-gray-100 hover:bg-gray-50 hover:text-brand-orange-text"
               }`}
             >
               <IconComponent
@@ -467,7 +468,7 @@ export default function CustomizePage() {
                       <td className="font-mono text-gray-600 text-xs">
                         {vt.code}
                       </td>
-                      <td className="font-bold text-brand-blue text-xs">
+                      <td className="font-bold text-brand-orange-text text-xs">
                         {vt.commission}
                       </td>
                       <td className="text-xs text-gray-600 font-medium">
@@ -475,7 +476,7 @@ export default function CustomizePage() {
                       </td>
                       <td>
                         <span
-                          className={`px-2.5 py-1 rounded-md text-[10px] font-bold ${
+                          className={`px-2.5 py-1 rounded-md text-[11px] font-bold ${
                             vt.autoApproveProducts
                               ? "bg-emerald-50 text-emerald-600 border border-emerald-100"
                               : "bg-gray-100 text-gray-600"
@@ -487,7 +488,7 @@ export default function CustomizePage() {
                         </span>
                       </td>
                       <td>
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-brand-blue">
+                        <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-brand-orange-soft text-brand-orange-text">
                           {vt.status}
                         </span>
                       </td>
@@ -621,7 +622,7 @@ export default function CustomizePage() {
                         {lk.category}
                       </span>
                     </td>
-                    <td className="font-mono text-xs text-brand-blue max-w-sm truncate">
+                    <td className="font-mono text-xs text-brand-orange-text max-w-sm truncate">
                       <a
                         href={lk.url}
                         target="_blank"
@@ -884,16 +885,15 @@ export default function CustomizePage() {
                   installment contracts.
                 </span>
               </div>
-              <input
-                type="checkbox"
+              <Checkbox
+                size="medium"
                 checked={onboarding.requireBvnVerification}
-                onChange={(e) =>
+                onChange={(checked) =>
                   setOnboarding({
                     ...onboarding,
-                    requireBvnVerification: e.target.checked,
+                    requireBvnVerification: checked,
                   })
                 }
-                className="w-5 h-5 text-brand-blue accent-brand-blue rounded cursor-pointer"
               />
             </div>
 
@@ -908,16 +908,15 @@ export default function CustomizePage() {
                   via SMS.
                 </span>
               </div>
-              <input
-                type="checkbox"
+              <Checkbox
+                size="medium"
                 checked={onboarding.requirePhoneOtp}
-                onChange={(e) =>
+                onChange={(checked) =>
                   setOnboarding({
                     ...onboarding,
-                    requirePhoneOtp: e.target.checked,
+                    requirePhoneOtp: checked,
                   })
                 }
-                className="w-5 h-5 text-brand-blue accent-brand-blue rounded cursor-pointer"
               />
             </div>
 
@@ -932,16 +931,15 @@ export default function CustomizePage() {
                   creating a permanent account.
                 </span>
               </div>
-              <input
-                type="checkbox"
+              <Checkbox
+                size="medium"
                 checked={onboarding.allowGuestCheckout}
-                onChange={(e) =>
+                onChange={(checked) =>
                   setOnboarding({
                     ...onboarding,
-                    allowGuestCheckout: e.target.checked,
+                    allowGuestCheckout: checked,
                   })
                 }
-                className="w-5 h-5 text-brand-blue accent-brand-blue rounded cursor-pointer"
               />
             </div>
 
@@ -999,13 +997,12 @@ export default function CustomizePage() {
                   admin access live.
                 </span>
               </div>
-              <input
-                type="checkbox"
+              <Checkbox
+                size="medium"
                 checked={misc.maintenanceMode}
-                onChange={(e) =>
-                  setMisc({ ...misc, maintenanceMode: e.target.checked })
+                onChange={(checked) =>
+                  setMisc({ ...misc, maintenanceMode: checked })
                 }
-                className="w-5 h-5 text-brand-blue accent-brand-blue rounded cursor-pointer"
               />
             </div>
 
@@ -1020,16 +1017,15 @@ export default function CustomizePage() {
                     Display top promotional notification strip.
                   </span>
                 </div>
-                <input
-                  type="checkbox"
+                <Checkbox
+                  size="medium"
                   checked={misc.bannerAnnouncementActive}
-                  onChange={(e) =>
+                  onChange={(checked) =>
                     setMisc({
                       ...misc,
-                      bannerAnnouncementActive: e.target.checked,
+                      bannerAnnouncementActive: checked,
                     })
                   }
-                  className="w-5 h-5 text-brand-blue accent-brand-blue rounded cursor-pointer"
                 />
               </div>
               {misc.bannerAnnouncementActive && (

@@ -492,7 +492,7 @@ export default function CustomersListing() {
 
         <div className="flex-1 bg-white rounded-lg border border-[#1C1C1C1A] p-6 flex flex-col gap-5">
           <div className="flex justify-between items-center">
-            <h3 className="text-lg font-bold text-[#1D3557]">
+            <h3 className="text-lg font-bold text-brand-charcoal">
               Customer Overview
             </h3>
             <TabFilter
@@ -518,14 +518,14 @@ export default function CustomersListing() {
                       activeMetric.replace(/^\w/, (c) => c.toUpperCase()) +
                       (activeMetric === "conversion" ? "" : " Count"),
                     data: currentChartDataset,
-                    borderColor: "#00BCD4",
+                    borderColor: "#F57E16",
                     borderWidth: 3,
                     fill: true,
-                    backgroundColor: "rgba(33, 150, 243, 0.05)",
+                    backgroundColor: "rgba(245, 126, 22, 0.05)",
                     tension: 0.4,
                     pointRadius: (context: any) =>
                       context.dataIndex === 4 ? 6 : 0,
-                    pointBackgroundColor: "#00BCD4",
+                    pointBackgroundColor: "#F57E16",
                     pointBorderColor: "#fff",
                     pointBorderWidth: 2,
                   },
@@ -590,14 +590,14 @@ export default function CustomersListing() {
                     onClick={() => setIsDateDropdownOpen(!isDateDropdownOpen)}
                     className={`flex items-center gap-2 px-3 py-2 text-xs font-semibold rounded-lg border transition-all cursor-pointer ${
                       selectedDatePreset !== "all"
-                        ? "bg-[#00BCD4]/10 border-[#00BCD4] text-[#008ba3]"
+                        ? "bg-brand-orange/10 border-brand-orange text-[#008ba3]"
                         : "bg-white border-gray-200 text-gray-700 hover:bg-gray-50"
                     }`}
                   >
                     <HiOutlineCalendar
                       className={`w-4 h-4 ${
                         selectedDatePreset !== "all"
-                          ? "text-[#00BCD4]"
+                          ? "text-brand-orange-text"
                           : "text-gray-400"
                       }`}
                     />
@@ -627,7 +627,7 @@ export default function CustomersListing() {
 
                   {/* Dropdown Card */}
                   {isDateDropdownOpen && (
-                    <div className="absolute right-0 top-full mt-2 w-72 bg-white rounded-lg shadow-xl border border-gray-100 p-3 z-50 flex flex-col gap-2.5">
+                    <div className="absolute right-0 top-full mt-2 w-72 bg-white rounded-lg shadow-md border border-gray-100 p-3 z-50 flex flex-col gap-2.5">
                       <div className="flex items-center justify-between border-b border-gray-100 pb-2">
                         <span className="text-xs font-bold text-gray-700">
                           Filter by Signup Date
@@ -641,7 +641,7 @@ export default function CustomersListing() {
                               setCustomEndDate("");
                               setCurrentPage(1);
                             }}
-                            className="text-[11px] font-semibold text-[#00BCD4] hover:underline"
+                            className="text-[11px] font-semibold text-brand-orange-text hover:underline"
                           >
                             Reset
                           </button>
@@ -665,13 +665,13 @@ export default function CustomersListing() {
                               }}
                               className={`flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs transition-colors text-left cursor-pointer ${
                                 isSelected
-                                  ? "bg-[#00BCD4]/10 text-[#008ba3] font-bold"
+                                  ? "bg-brand-orange/10 text-[#008ba3] font-bold"
                                   : "text-gray-700 hover:bg-gray-50 font-medium"
                               }`}
                             >
                               <span>{preset.label}</span>
                               {isSelected && (
-                                <HiCheck className="w-4 h-4 text-[#00BCD4]" />
+                                <HiCheck className="w-4 h-4 text-brand-orange-text" />
                               )}
                             </button>
                           );
@@ -688,7 +688,7 @@ export default function CustomersListing() {
                           </span>
                           <div className="grid grid-cols-2 gap-2">
                             <div>
-                              <label className="block text-[10px] font-semibold text-gray-400 mb-1">
+                              <label className="block text-[11px] font-semibold text-gray-400 mb-1">
                                 From
                               </label>
                               <input
@@ -699,11 +699,11 @@ export default function CustomersListing() {
                                   setSelectedDatePreset("date_range");
                                   setCurrentPage(1);
                                 }}
-                                className="w-full text-xs px-2 py-1.5 border border-gray-200 rounded-md focus:outline-none focus:border-[#00BCD4]"
+                                className="w-full text-xs px-2 py-1.5 border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange"
                               />
                             </div>
                             <div>
-                              <label className="block text-[10px] font-semibold text-gray-400 mb-1">
+                              <label className="block text-[11px] font-semibold text-gray-400 mb-1">
                                 To
                               </label>
                               <input
@@ -714,7 +714,7 @@ export default function CustomersListing() {
                                   setSelectedDatePreset("date_range");
                                   setCurrentPage(1);
                                 }}
-                                className="w-full text-xs px-2 py-1.5 border border-gray-200 rounded-md focus:outline-none focus:border-[#00BCD4]"
+                                className="w-full text-xs px-2 py-1.5 border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange"
                               />
                             </div>
                           </div>
@@ -725,7 +725,7 @@ export default function CustomersListing() {
                                 setSelectedDatePreset("date_range");
                                 setIsDateDropdownOpen(false);
                               }}
-                              className="px-3 py-1 bg-[#00BCD4] text-white text-xs font-semibold rounded-md hover:bg-[#00acc1] transition-colors cursor-pointer"
+                              className="px-3 py-1 bg-brand-orange text-white text-xs font-semibold rounded-md hover:bg-brand-orange-hover transition-colors cursor-pointer"
                             >
                               Apply Range
                             </button>
@@ -855,7 +855,7 @@ export default function CustomersListing() {
                           <Button
                             variant="outline"
                             shape="rounded-sm"
-                            className="p-1.5! text-gray-400 hover:text-blue-500 hover:bg-brand-blue-light transition-all"
+                            className="p-1.5! text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft transition-all"
                             onClick={(e) => {
                               e.stopPropagation();
                               setCustomerToMessage(customer);
@@ -903,7 +903,7 @@ export default function CustomersListing() {
                             setCustomEndDate("");
                             setSearchQuery("");
                           }}
-                          className="text-xs font-semibold text-[#00BCD4] hover:underline cursor-pointer"
+                          className="text-xs font-semibold text-brand-orange-text hover:underline cursor-pointer"
                         >
                           Clear all filters
                         </button>

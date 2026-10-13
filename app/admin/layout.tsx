@@ -6,6 +6,7 @@ import { AdminSidebar } from "../components/Admin/AdminSidebar";
 import { AdminHeader } from "../components/Admin/AdminHeader";
 import { UserProvider } from "../context/UserContext";
 import { usePathname } from "next/navigation";
+import { applyAdminTheme, getAdminTheme } from "../components/Admin/adminTheme";
 
 export default function AdminLayout({
   children,
@@ -23,8 +24,11 @@ export default function AdminLayout({
 
   useEffect(() => {
     document.body.classList.add("admin-theme");
+    // Saved light/dark choice; the storefront is always light, so clear it on the way out.
+    applyAdminTheme(getAdminTheme());
     return () => {
       document.body.classList.remove("admin-theme");
+      document.documentElement.classList.remove("dark");
     };
   }, []);
 

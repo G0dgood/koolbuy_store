@@ -23,42 +23,42 @@ const CategoriesPage = () => {
       title: "Signature Fragrance",
       count: "320 items",
       image: "/brandImage/signature_oud.webp",
-      icon: <HiSparkles className="text-brand-blue" size={24} />,
+      icon: <HiSparkles className="text-brand-orange-text" size={24} />,
       link: "/products?category=fragrance",
     },
     {
       title: "Advanced Skincare",
       count: "150 items",
       image: "/brandImage/cat_skincare.png",
-      icon: <HiBeaker className="text-brand-blue" size={24} />,
+      icon: <HiBeaker className="text-brand-orange-text" size={24} />,
       link: "/products?category=skincare",
     },
     {
       title: "Artisanal Gift Sets",
       count: "85 items",
       image: "/brandImage/cat_gifts.png",
-      icon: <HiShoppingBag className="text-brand-blue" size={24} />,
+      icon: <HiShoppingBag className="text-brand-orange-text" size={24} />,
       link: "/products?category=gifts",
     },
     {
       title: "Body & Bath",
       count: "120 items",
       image: "/brandImage/cat_body.png",
-      icon: <HiHeart className="text-brand-blue" size={24} />,
+      icon: <HiHeart className="text-brand-orange-text" size={24} />,
       link: "/products?category=body",
     },
     {
       title: "Men's Grooming",
       count: "95 items",
       image: "/brandImage/cat_grooming.png",
-      icon: <HiStar className="text-brand-blue" size={24} />,
+      icon: <HiStar className="text-brand-orange-text" size={24} />,
       link: "/products?category=grooming",
     },
     {
       title: "Home Fragrance",
       count: "60 items",
       image: "/brandImage/cat_home_scent.png",
-      icon: <HiHome className="text-brand-blue" size={24} />,
+      icon: <HiHome className="text-brand-orange-text" size={24} />,
       link: "/products?category=home-scent",
     },
   ];
@@ -79,13 +79,13 @@ const CategoriesPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-off-white flex flex-col font-sans text-black">
       <Header />
 
       <main className="flex-1 w-full bg-white">
         {/* Step 86: Implement Minimalist Collections Hero section */}
         <section className="bg-gray-50 py-20 md:py-28 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue rounded-full filter blur-[120px] opacity-5 translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-charcoal rounded-full filter blur-[120px] opacity-5 translate-x-1/2 -translate-y-1/2" />
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -93,11 +93,11 @@ const CategoriesPage = () => {
               transition={{ duration: 0.6 }}
               className="flex flex-col gap-4"
             >
-              <span className="text-brand-blue font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs">
+              <span className="text-brand-orange-text font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs">
                 Koolbuy Store Catalogs
               </span>
-              <h1 className="text-4xl md:text-6xl font-black text-[#1D3557] tracking-tighter leading-none font-inter">
-                The <span className="text-brand-blue">Collections.</span>
+              <h1 className="text-4xl md:text-6xl font-bold text-brand-charcoal tracking-tighter leading-none font-inter">
+                The <span className="text-brand-orange-text">Collections.</span>
               </h1>
               <p className="text-gray-500 max-w-xl mx-auto text-sm md:text-lg mt-4 leading-relaxed font-medium">
                 Explore a universe of high-fidelity products curated across six
@@ -118,12 +118,12 @@ const CategoriesPage = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="relative aspect-[4/5] rounded-[40px] overflow-hidden cursor-pointer group shadow-sm hover:shadow-2xl transition-all duration-500"
+                className="relative aspect-[4/5] rounded-3xl overflow-hidden cursor-pointer group shadow-sm hover:shadow-md transition-all duration-500"
               >
                 <Image
                   src={col.image}
                   alt={col.title}
-                  fill
+                  fill sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-1000"
                 />
 
@@ -131,26 +131,26 @@ const CategoriesPage = () => {
                 <div className="absolute inset-0 bg-black/5 group-hover:bg-black/20 transition-colors duration-500" />
 
                 <div className="absolute bottom-6 left-6 right-6">
-                  <div className="bg-white/70 backdrop-blur-xl p-8 rounded-[32px] border border-white/40 flex flex-col gap-4 group-hover:-translate-y-2 transition-transform duration-500">
+                  <div className="bg-white/70 backdrop-blur-xl p-8 rounded-3xl border border-white/40 flex flex-col gap-4 group-hover:-translate-y-2 transition-transform duration-500">
                     <div className="flex items-center justify-between">
                       <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
                         {col.icon}
                       </div>
-                      <span className="text-[10px] font-black uppercase tracking-widest text-[#1D3557] opacity-60">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal opacity-60">
                         Verified Collection
                       </span>
                     </div>
                     <div className="flex flex-col gap-1">
-                      <h3 className="text-2xl font-black text-[#1D3557] tracking-tight">
+                      <h3 className="text-2xl font-bold text-brand-charcoal tracking-tight">
                         {col.title}
                       </h3>
-                      <span className="text-xs font-bold text-brand-blue uppercase tracking-widest">
+                      <span className="text-xs font-bold text-brand-orange-text uppercase tracking-widest">
                         {col.count}
                       </span>
                     </div>
                     <Link
                       href={col.link}
-                      className="flex items-center justify-between text-xs font-black uppercase tracking-widest text-[#1D3557] group-hover:text-brand-blue pt-2 transition-colors"
+                      className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-brand-charcoal group-hover:text-brand-orange-text pt-2 transition-colors"
                     >
                       Explore Catalog{" "}
                       <HiChevronRight
@@ -168,10 +168,10 @@ const CategoriesPage = () => {
           <section className="mt-24 md:mt-40">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
               <div className="flex flex-col gap-2">
-                <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs">
+                <span className="text-brand-orange-text font-bold tracking-[0.2em] uppercase text-xs">
                   Deeper Discovery
                 </span>
-                <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight">
+                <h2 className="text-3xl md:text-5xl font-bold text-brand-charcoal tracking-tight">
                   Popular Verticals.
                 </h2>
               </div>
@@ -189,7 +189,7 @@ const CategoriesPage = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
-                  className="px-8 py-4 bg-gray-50 border border-gray-100 rounded-2xl hover:border-brand-blue hover:bg-white hover:text-brand-blue hover:shadow-xl hover:shadow-blue-900/5 transition-all text-sm font-black uppercase tracking-widest text-[#1D3557] cursor-pointer"
+                  className="px-8 py-4 bg-gray-50 border border-gray-100 rounded-2xl hover:border-brand-charcoal hover:bg-white hover:text-brand-orange-text hover:shadow-md hover:shadow-brand-charcoal/5 transition-all text-sm font-bold uppercase tracking-widest text-brand-charcoal cursor-pointer"
                 >
                   {sub}
                 </motion.div>
@@ -199,19 +199,19 @@ const CategoriesPage = () => {
         </div>
 
         {/* Featured Promotion / Collections Trust */}
-        <section className="bg-[#1D3557] py-20 relative overflow-hidden">
+        <section className="bg-brand-charcoal py-20 relative overflow-hidden">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 flex flex-col items-center text-center gap-6 relative z-10">
-            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight font-inter">
-              Can't find your <span className="text-[#8CB7F5]">bloom?</span>
+            <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight font-inter">
+              Can't find your <span className="text-white/60">bloom?</span>
             </h2>
-            <p className="text-blue-100/40 text-sm md:text-base max-w-xl">
+            <p className="text-light-gray/40 text-sm md:text-base max-w-xl">
               Our concierge sourcing team is always adding new collections to
               the catalog. Connect with our curators if you're looking for
               something specific.
             </p>
             <Link
               href="/contact"
-              className="mt-4 px-12 py-5 bg-brand-blue text-white rounded-2xl font-black uppercase tracking-widest text-sm shadow-2xl shadow-blue-500/20 hover:scale-105 transition-all"
+              className="mt-4 px-12 py-5 bg-brand-orange text-white rounded-2xl font-bold uppercase tracking-widest text-sm shadow-md shadow-brand-orange/20 hover:scale-105 transition-all"
             >
               Request Curator Support
             </Link>

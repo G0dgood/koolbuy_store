@@ -76,15 +76,15 @@ export const HeaderNavMenu: React.FC = () => {
           }}
           className={`flex items-center gap-1 cursor-pointer transition-colors py-1.5 outline-none ${
             isLanguageOpen
-              ? "text-[#FF7A00] font-bold"
-              : "text-gray-700 hover:text-[#FF7A00]"
+              ? "text-brand-orange-text font-bold"
+              : "text-gray-700 hover:text-brand-orange-text"
           }`}
           aria-expanded={isLanguageOpen}
         >
           <span>Language</span>
           <FiChevronDown
             className={`text-xs text-gray-400 transition-transform duration-200 ${
-              isLanguageOpen ? "rotate-180 text-[#FF7A00]" : ""
+              isLanguageOpen ? "rotate-180 text-brand-orange-text" : ""
             }`}
           />
         </button>
@@ -94,7 +94,7 @@ export const HeaderNavMenu: React.FC = () => {
             <div className="absolute top-full right-0 pt-2 w-48 z-100">
               <DropdownMenu
                 width="100%"
-                className="shadow-2xl border border-gray-100 rounded-xl overflow-hidden py-1"
+                className="shadow-md border border-gray-100 rounded-xl overflow-hidden py-1"
               >
                 <div className="px-3 py-1.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100">
                   Select Language
@@ -128,15 +128,15 @@ export const HeaderNavMenu: React.FC = () => {
           }}
           className={`flex items-center gap-1 cursor-pointer transition-colors py-1.5 outline-none ${
             isHelpOpen
-              ? "text-[#FF7A00] font-bold"
-              : "text-gray-700 hover:text-[#FF7A00]"
+              ? "text-brand-orange-text font-bold"
+              : "text-gray-700 hover:text-brand-orange-text"
           }`}
           aria-expanded={isHelpOpen}
         >
           <span>Help</span>
           <FiChevronDown
             className={`text-xs text-gray-400 transition-transform duration-200 ${
-              isHelpOpen ? "rotate-180 text-[#FF7A00]" : ""
+              isHelpOpen ? "rotate-180 text-brand-orange-text" : ""
             }`}
           />
         </button>
@@ -146,7 +146,7 @@ export const HeaderNavMenu: React.FC = () => {
             <div className="absolute top-full right-0 pt-2 w-64 z-100">
               <DropdownMenu
                 width="100%"
-                className="shadow-2xl border border-gray-100 rounded-xl overflow-hidden"
+                className="shadow-md border border-gray-100 rounded-xl overflow-hidden"
               >
                 <div className="flex flex-col py-2">
                   {helpLinks.map((link) => (
@@ -155,7 +155,7 @@ export const HeaderNavMenu: React.FC = () => {
                       label={link.label}
                       href={link.href}
                       onSelect={() => setIsHelpOpen(false)}
-                      className="text-gray-700 hover:text-[#FF7A00] font-medium"
+                      className="text-gray-700 hover:text-brand-orange-text font-medium"
                     />
                   ))}
                 </div>
@@ -163,8 +163,8 @@ export const HeaderNavMenu: React.FC = () => {
                 {/* Contact Section */}
                 <div className="p-4 border-t border-gray-100 bg-gray-50/50 flex flex-col gap-2.5">
                   <Button
-                    className="w-full text-white h-10 shadow-sm active:scale-95 transition-all hover:opacity-90 text-xs"
-                    style={{ backgroundColor: "#2196F3" }}
+                    className="w-full text-white h-10 active:scale-95 transition-all hover:opacity-90 text-xs"
+                    style={{ backgroundColor: "#F57E16" }}
                     iconLeft={<Icon name="chat" size="sm" />}
                   >
                     Live Chat
@@ -195,15 +195,15 @@ export const HeaderNavMenu: React.FC = () => {
           }}
           className={`flex items-center gap-1 cursor-pointer transition-colors py-1.5 outline-none ${
             isCurrencyOpen
-              ? "text-[#FF7A00] font-bold"
-              : "text-gray-700 hover:text-[#FF7A00]"
+              ? "text-brand-orange-text font-bold"
+              : "text-gray-700 hover:text-brand-orange-text"
           }`}
           aria-expanded={isCurrencyOpen}
         >
           <span>Currency</span>
           <FiChevronDown
             className={`text-xs text-gray-400 transition-transform duration-200 ${
-              isCurrencyOpen ? "rotate-180 text-[#FF7A00]" : ""
+              isCurrencyOpen ? "rotate-180 text-brand-orange-text" : ""
             }`}
           />
         </button>
@@ -213,7 +213,7 @@ export const HeaderNavMenu: React.FC = () => {
             <div className="absolute top-full right-0 pt-2 w-52 z-100">
               <DropdownMenu
                 width="100%"
-                className="shadow-2xl border border-gray-100 rounded-xl overflow-hidden py-1"
+                className="shadow-md border border-gray-100 rounded-xl overflow-hidden py-1"
               >
                 <div className="px-3 py-1.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100">
                   Select Currency

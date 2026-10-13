@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Checkbox from "@/app/components/Checkbox";
 import { Icon } from "@/app/components/Icon";
 import { Button } from "@/app/components/Button";
 import { Input } from "@/app/components/Form/Inputs";
@@ -234,7 +235,7 @@ export default function AdminToolsPage() {
           onClick={() => setActiveTab("upload-files")}
           className={`px-4 py-3 text-xs font-bold transition-all border-b-2 whitespace-nowrap flex items-center gap-2 ${
             activeTab === "upload-files"
-              ? "border-blue-600 text-blue-600 bg-white shadow-sm rounded-t-xl"
+              ? "border-brand-orange text-brand-orange-text bg-white rounded-t-xl"
               : "border-transparent text-gray-500 hover:text-gray-900 hover:bg-white/50"
           }`}
         >
@@ -250,7 +251,7 @@ export default function AdminToolsPage() {
           onClick={() => setActiveTab("catalog-copy")}
           className={`px-4 py-3 text-xs font-bold transition-all border-b-2 whitespace-nowrap flex items-center gap-2 ${
             activeTab === "catalog-copy"
-              ? "border-blue-600 text-blue-600 bg-white shadow-sm rounded-t-xl"
+              ? "border-brand-orange text-brand-orange-text bg-white rounded-t-xl"
               : "border-transparent text-gray-500 hover:text-gray-900 hover:bg-white/50"
           }`}
         >
@@ -265,7 +266,7 @@ export default function AdminToolsPage() {
           onClick={() => setActiveTab("tax-copy")}
           className={`px-4 py-3 text-xs font-bold transition-all border-b-2 whitespace-nowrap flex items-center gap-2 ${
             activeTab === "tax-copy"
-              ? "border-blue-600 text-blue-600 bg-white shadow-sm rounded-t-xl"
+              ? "border-brand-orange text-brand-orange-text bg-white rounded-t-xl"
               : "border-transparent text-gray-500 hover:text-gray-900 hover:bg-white/50"
           }`}
         >
@@ -280,7 +281,7 @@ export default function AdminToolsPage() {
           onClick={() => setActiveTab("reset-defaults")}
           className={`px-4 py-3 text-xs font-bold transition-all border-b-2 whitespace-nowrap flex items-center gap-2 ${
             activeTab === "reset-defaults"
-              ? "border-blue-600 text-blue-600 bg-white shadow-sm rounded-t-xl"
+              ? "border-brand-orange text-brand-orange-text bg-white rounded-t-xl"
               : "border-transparent text-gray-500 hover:text-gray-900 hover:bg-white/50"
           }`}
         >
@@ -295,7 +296,7 @@ export default function AdminToolsPage() {
           onClick={() => setActiveTab("product-integrity")}
           className={`px-4 py-3 text-xs font-bold transition-all border-b-2 whitespace-nowrap flex items-center gap-2 ${
             activeTab === "product-integrity"
-              ? "border-blue-600 text-blue-600 bg-white shadow-sm rounded-t-xl"
+              ? "border-brand-orange text-brand-orange-text bg-white rounded-t-xl"
               : "border-transparent text-gray-500 hover:text-gray-900 hover:bg-white/50"
           }`}
         >
@@ -303,7 +304,7 @@ export default function AdminToolsPage() {
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
           </svg>
           <span>Product Integrity</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[10px] font-black bg-rose-50 text-rose-700">
+          <span className="px-1.5 py-0.2 rounded-full text-[11px] font-bold bg-rose-50 text-rose-700">
             {integrityIssues.filter((i) => i.status === "Open").length}
           </span>
         </button>
@@ -342,13 +343,13 @@ export default function AdminToolsPage() {
             {/* Drag & Drop Zone */}
             <div
               onClick={handleSimulateAddFiles}
-              className="border-2 border-dashed border-gray-300 hover:border-blue-500 rounded-lg p-8 sm:p-12 text-center cursor-pointer transition-all bg-gray-50/50 hover:bg-blue-50/20 group"
+              className="border-2 border-dashed border-gray-300 hover:border-brand-orange rounded-lg p-8 sm:p-12 text-center cursor-pointer transition-all bg-gray-50/50 hover:bg-brand-orange-soft/20 group"
             >
-              <div className="w-14 h-14 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
                 <Icon name="upload" className="w-7 h-7" />
               </div>
               <h3 className="text-sm font-bold text-gray-900">
-                Click or drag files here to upload to <span className="font-mono text-blue-600">/{targetFolder}</span>
+                Click or drag files here to upload to <span className="font-mono text-brand-orange-text">/{targetFolder}</span>
               </h3>
               <p className="text-xs text-gray-500 mt-1">
                 Supports PNG, JPG, WebP, SVG, PDF, CSV, XLSX up to 50MB per file.
@@ -386,7 +387,7 @@ export default function AdminToolsPage() {
                       className="p-3.5 bg-gray-50/80 rounded-xl border border-gray-200 flex items-center justify-between gap-4"
                     >
                       <div className="flex items-center gap-3 min-w-0">
-                        <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-mono text-xs font-black uppercase shrink-0">
+                        <div className="w-8 h-8 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center font-mono text-xs font-bold uppercase shrink-0">
                           {file.name.split(".").pop()}
                         </div>
                         <div className="min-w-0">
@@ -401,12 +402,12 @@ export default function AdminToolsPage() {
 
                       <div className="flex items-center gap-4 shrink-0">
                         {file.status === "completed" && (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800">
                             Uploaded
                           </span>
                         )}
                         {file.status === "uploading" && (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800 animate-pulse">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-brand-orange-soft text-brand-charcoal animate-pulse">
                             {file.progress}% Uploading
                           </span>
                         )}
@@ -443,7 +444,7 @@ export default function AdminToolsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Source Catalog */}
               <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-3">
-                <span className="text-xs font-black text-gray-700 uppercase tracking-wider block">
+                <span className="text-xs font-bold text-gray-700 uppercase tracking-wider block">
                   Source Catalog (Origin)
                 </span>
                 <Select
@@ -464,7 +465,7 @@ export default function AdminToolsPage() {
 
               {/* Destination Catalog */}
               <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-3">
-                <span className="text-xs font-black text-gray-700 uppercase tracking-wider block">
+                <span className="text-xs font-bold text-gray-700 uppercase tracking-wider block">
                   Destination Catalog (Target)
                 </span>
                 <Select
@@ -491,41 +492,37 @@ export default function AdminToolsPage() {
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                 <label className="flex items-center gap-2.5 text-xs font-medium text-gray-700 cursor-pointer">
-                  <input
-                    type="checkbox"
+                  <Checkbox
+                    size="small"
                     checked={includePricing}
-                    onChange={(e) => setIncludePricing(e.target.checked)}
-                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    onChange={(checked) => setIncludePricing(checked)}
                   />
                   <span>Copy base retail pricing and currency rates</span>
                 </label>
 
                 <label className="flex items-center gap-2.5 text-xs font-medium text-gray-700 cursor-pointer">
-                  <input
-                    type="checkbox"
+                  <Checkbox
+                    size="small"
                     checked={includeInventory}
-                    onChange={(e) => setIncludeInventory(e.target.checked)}
-                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    onChange={(checked) => setIncludeInventory(checked)}
                   />
                   <span>Copy warehouse inventory counts (Default: Reset to 0)</span>
                 </label>
 
                 <label className="flex items-center gap-2.5 text-xs font-medium text-gray-700 cursor-pointer">
-                  <input
-                    type="checkbox"
+                  <Checkbox
+                    size="small"
                     checked={includeMedia}
-                    onChange={(e) => setIncludeMedia(e.target.checked)}
-                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    onChange={(checked) => setIncludeMedia(checked)}
                   />
                   <span>Replicate product media thumbnails and gallery photos</span>
                 </label>
 
                 <label className="flex items-center gap-2.5 text-xs font-medium text-gray-700 cursor-pointer">
-                  <input
-                    type="checkbox"
+                  <Checkbox
+                    size="small"
                     checked={includeBnplRules}
-                    onChange={(e) => setIncludeBnplRules(e.target.checked)}
-                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    onChange={(checked) => setIncludeBnplRules(checked)}
                   />
                   <span>Copy BNPL installment terms (3, 6, 12-month payment options)</span>
                 </label>
@@ -560,7 +557,7 @@ export default function AdminToolsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-3">
-                <span className="text-xs font-black text-gray-700 uppercase tracking-wider block">
+                <span className="text-xs font-bold text-gray-700 uppercase tracking-wider block">
                   Source Tax Schedule
                 </span>
                 <Select
@@ -576,7 +573,7 @@ export default function AdminToolsPage() {
               </div>
 
               <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-3">
-                <span className="text-xs font-black text-gray-700 uppercase tracking-wider block">
+                <span className="text-xs font-bold text-gray-700 uppercase tracking-wider block">
                   Destination State / Region
                 </span>
                 <Select
@@ -614,11 +611,10 @@ export default function AdminToolsPage() {
 
                 <div className="flex items-center pt-5">
                   <label className="flex items-center gap-2 text-xs font-medium text-gray-700 cursor-pointer">
-                    <input
-                      type="checkbox"
+                    <Checkbox
+                      size="small"
                       checked={applyToAllCategories}
-                      onChange={(e) => setApplyToAllCategories(e.target.checked)}
-                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      onChange={(checked) => setApplyToAllCategories(checked)}
                     />
                     <span>Apply uniformly to all product categories</span>
                   </label>
@@ -649,7 +645,7 @@ export default function AdminToolsPage() {
             <div className="border-b border-gray-100 pb-4">
               <div className="flex items-center gap-2">
                 <h2 className="text-lg font-bold text-gray-900">Reset to Default Configuration Settings</h2>
-                <span className="px-2 py-0.5 rounded text-[10px] font-black bg-amber-50 text-amber-700 border border-amber-200 uppercase">
+                <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200 uppercase">
                   Admin Safe Reset
                 </span>
               </div>
@@ -677,11 +673,11 @@ export default function AdminToolsPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <label className="p-3.5 bg-gray-50 rounded-xl border border-gray-200 flex items-start gap-3 cursor-pointer hover:bg-gray-100/70 transition-colors">
-                  <input
-                    type="checkbox"
+                  <Checkbox
+                    size="small"
                     checked={resetLocalization}
-                    onChange={(e) => setResetLocalization(e.target.checked)}
-                    className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    onChange={(checked) => setResetLocalization(checked)}
+                    className="mt-0.5"
                   />
                   <div>
                     <span className="text-xs font-bold text-gray-900 block">Localization & Currency Tokens</span>
@@ -690,11 +686,11 @@ export default function AdminToolsPage() {
                 </label>
 
                 <label className="p-3.5 bg-gray-50 rounded-xl border border-gray-200 flex items-start gap-3 cursor-pointer hover:bg-gray-100/70 transition-colors">
-                  <input
-                    type="checkbox"
+                  <Checkbox
+                    size="small"
                     checked={resetNomenclature}
-                    onChange={(e) => setResetNomenclature(e.target.checked)}
-                    className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    onChange={(checked) => setResetNomenclature(checked)}
+                    className="mt-0.5"
                   />
                   <div>
                     <span className="text-xs font-bold text-gray-900 block">Platform Nomenclature</span>
@@ -703,11 +699,11 @@ export default function AdminToolsPage() {
                 </label>
 
                 <label className="p-3.5 bg-gray-50 rounded-xl border border-gray-200 flex items-start gap-3 cursor-pointer hover:bg-gray-100/70 transition-colors">
-                  <input
-                    type="checkbox"
+                  <Checkbox
+                    size="small"
                     checked={resetSecurityPolicy}
-                    onChange={(e) => setResetSecurityPolicy(e.target.checked)}
-                    className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    onChange={(checked) => setResetSecurityPolicy(checked)}
+                    className="mt-0.5"
                   />
                   <div>
                     <span className="text-xs font-bold text-gray-900 block">Security Policies & Rate Limits</span>
@@ -716,11 +712,11 @@ export default function AdminToolsPage() {
                 </label>
 
                 <label className="p-3.5 bg-gray-50 rounded-xl border border-gray-200 flex items-start gap-3 cursor-pointer hover:bg-gray-100/70 transition-colors">
-                  <input
-                    type="checkbox"
+                  <Checkbox
+                    size="small"
                     checked={resetStorefrontStyling}
-                    onChange={(e) => setResetStorefrontStyling(e.target.checked)}
-                    className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    onChange={(checked) => setResetStorefrontStyling(checked)}
+                    className="mt-0.5"
                   />
                   <div>
                     <span className="text-xs font-bold text-gray-900 block">Web & App Theme Styling</span>
@@ -771,17 +767,17 @@ export default function AdminToolsPage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
                 <span className="text-xs text-gray-500 font-semibold block uppercase">Total Scanned</span>
-                <span className="text-2xl font-black text-gray-900 mt-1 block">1,280 SKUs</span>
+                <span className="text-2xl font-bold text-gray-900 mt-1 block">1,280 SKUs</span>
               </div>
               <div className="bg-rose-50/70 p-4 rounded-xl border border-rose-100">
                 <span className="text-xs text-rose-700 font-semibold block uppercase">Open Anomalies</span>
-                <span className="text-2xl font-black text-rose-600 mt-1 block">
+                <span className="text-2xl font-bold text-rose-600 mt-1 block">
                   {integrityIssues.filter((i) => i.status === "Open").length} Issues
                 </span>
               </div>
               <div className="bg-emerald-50/70 p-4 rounded-xl border border-emerald-100">
                 <span className="text-xs text-emerald-700 font-semibold block uppercase">Catalog Health</span>
-                <span className="text-2xl font-black text-emerald-600 mt-1 block">99.7%</span>
+                <span className="text-2xl font-bold text-emerald-600 mt-1 block">99.7%</span>
               </div>
               <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
                 <span className="text-xs text-gray-500 font-semibold block uppercase">Last Integrity Run</span>
@@ -821,17 +817,17 @@ export default function AdminToolsPage() {
 
                         <td className="py-3 px-4">
                           {issue.severity === "High" && (
-                            <span className="px-2 py-0.5 rounded text-[10px] font-black bg-rose-100 text-rose-800">
+                            <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-800">
                               HIGH
                             </span>
                           )}
                           {issue.severity === "Medium" && (
-                            <span className="px-2 py-0.5 rounded text-[10px] font-black bg-amber-100 text-amber-800">
+                            <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-amber-100 text-amber-800">
                               MEDIUM
                             </span>
                           )}
                           {issue.severity === "Low" && (
-                            <span className="px-2 py-0.5 rounded text-[10px] font-black bg-slate-100 text-slate-800">
+                            <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-100 text-slate-800">
                               LOW
                             </span>
                           )}
@@ -853,7 +849,7 @@ export default function AdminToolsPage() {
                           {issue.status === "Open" ? (
                             <button
                               onClick={() => handleResolveIssue(issue.id)}
-                              className="px-2.5 py-1 rounded-lg text-xs font-bold text-blue-600 hover:text-blue-800 hover:bg-blue-50 transition-colors"
+                              className="px-2.5 py-1 rounded-lg text-xs font-bold text-brand-orange-text hover:text-brand-charcoal hover:bg-brand-orange-soft transition-colors"
                             >
                               Auto-Fix
                             </button>
@@ -877,7 +873,7 @@ export default function AdminToolsPage() {
       <Modal isOpen={isCatalogCopyModalOpen} onClose={() => setIsCatalogCopyModalOpen(false)}>
         <ModalBody>
           <div className="space-y-4 pt-2">
-            <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center mx-auto">
               <Icon name="copy" className="w-6 h-6" />
             </div>
             <div className="text-center">
@@ -887,7 +883,7 @@ export default function AdminToolsPage() {
               </p>
             </div>
 
-            <div className="p-3 bg-blue-50/70 border border-blue-200 rounded-xl text-xs text-blue-900 space-y-1">
+            <div className="p-3 bg-brand-orange-soft/70 border border-brand-orange/30 rounded-xl text-xs text-brand-charcoal space-y-1">
               <div>✓ Base retail prices included: {includePricing ? "Yes" : "No"}</div>
               <div>✓ Media and product assets included: {includeMedia ? "Yes" : "No"}</div>
               <div>✓ BNPL installment payment terms included: {includeBnplRules ? "Yes" : "No"}</div>

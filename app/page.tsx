@@ -108,7 +108,7 @@ const onSaleProducts = [
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-off-white flex flex-col font-sans text-black">
       <Header />
 
       {/* Full-width Hero Carousel */}
@@ -128,7 +128,7 @@ const Home = () => {
               <Image
                 src="/images/koolboks/banner-2.jpg"
                 alt="Koolbuy - Get a freezer for as low as ₦20,000 per month"
-                fill
+                fill sizes="100vw"
                 className="object-cover group-hover:scale-[1.01] transition-transform duration-500"
               />
             </div>

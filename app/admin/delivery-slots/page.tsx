@@ -277,8 +277,8 @@ export default function DeliverySlotsPage() {
     <div className="flex flex-col gap-6 mx-auto pb-16">
       {/* Toast */}
       {toastMessage && (
-        <div className="fixed top-20 right-8 z-50 bg-[#1D3557] text-white text-xs px-4 py-3 rounded-lg shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
-          <HiOutlineCheckCircle className="w-4 h-4 text-[#00BCD4]" />
+        <div className="fixed top-20 right-8 z-50 bg-brand-charcoal text-white text-xs px-4 py-3 rounded-lg shadow-md flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
+          <HiOutlineCheckCircle className="w-4 h-4 text-brand-orange" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -290,7 +290,7 @@ export default function DeliverySlotsPage() {
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
               Delivery Slots
             </h1>
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-[#00BCD4]/20">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-orange-soft text-brand-orange-text border border-brand-orange/20">
               Fulfillment Windows
             </span>
           </div>
@@ -305,7 +305,7 @@ export default function DeliverySlotsPage() {
           <Button
             variant="primary"
             shape="rounded-sm"
-            className="bg-[#00BCD4] hover:bg-[#00acc1] text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer shadow-xs"
+            className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer "
             onClick={handleOpenAddModal}
           >
             <HiOutlinePlus className="w-4 h-4" />
@@ -321,10 +321,10 @@ export default function DeliverySlotsPage() {
             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
               Total Slots
             </span>
-            <HiOutlineCalendarDays className="w-4 h-4 text-[#00BCD4]" />
+            <HiOutlineCalendarDays className="w-4 h-4 text-brand-orange-text" />
           </div>
-          <p className="text-xl font-black text-gray-900">{slots.length}</p>
-          <span className="text-[10px] text-gray-500 font-semibold">
+          <p className="text-xl font-bold text-gray-900">{slots.length}</p>
+          <span className="text-[11px] text-gray-500 font-semibold">
             Configured windows
           </span>
         </div>
@@ -336,10 +336,10 @@ export default function DeliverySlotsPage() {
             </span>
             <HiOutlineClock className="w-4 h-4 text-emerald-600" />
           </div>
-          <p className="text-xl font-black text-gray-900">
+          <p className="text-xl font-bold text-gray-900">
             {slots.filter((s) => s.status === "Active").length}
           </p>
-          <span className="text-[10px] text-emerald-600 font-semibold">
+          <span className="text-[11px] text-emerald-600 font-semibold">
             Bookable at checkout
           </span>
         </div>
@@ -349,12 +349,12 @@ export default function DeliverySlotsPage() {
             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
               Standard Free
             </span>
-            <HiOutlineTruck className="w-4 h-4 text-brand-blue" />
+            <HiOutlineTruck className="w-4 h-4 text-brand-orange-text" />
           </div>
-          <p className="text-xl font-black text-gray-900">
+          <p className="text-xl font-bold text-gray-900">
             {slots.filter((s) => s.price.toLowerCase() === "free").length}
           </p>
-          <span className="text-[10px] text-brand-blue font-semibold">
+          <span className="text-[11px] text-brand-orange-text font-semibold">
             Zero-cost windows
           </span>
         </div>
@@ -366,10 +366,10 @@ export default function DeliverySlotsPage() {
             </span>
             <HiOutlineCurrencyDollar className="w-4 h-4 text-amber-500" />
           </div>
-          <p className="text-xl font-black text-gray-900">
+          <p className="text-xl font-bold text-gray-900">
             {slots.filter((s) => s.price.toLowerCase() !== "free").length}
           </p>
-          <span className="text-[10px] text-amber-600 font-semibold">
+          <span className="text-[11px] text-amber-600 font-semibold">
             Express cold-chain fees
           </span>
         </div>
@@ -439,7 +439,7 @@ export default function DeliverySlotsPage() {
                     {/* 2. Title */}
                     <td className="py-3.5 px-4 font-bold text-gray-900">
                       <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-[#00BCD4] shrink-0" />
+                        <div className="w-2 h-2 rounded-full bg-brand-orange shrink-0" />
                         <span>{slot.title}</span>
                       </div>
                     </td>
@@ -487,7 +487,7 @@ export default function DeliverySlotsPage() {
                       <button
                         type="button"
                         onClick={() => toggleSlotStatus(slot.id)}
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all cursor-pointer ${
+                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold transition-all cursor-pointer ${
                           slot.status === "Active"
                             ? "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100"
                             : "bg-gray-100 text-gray-500 border border-gray-200 hover:bg-gray-200"
@@ -504,7 +504,7 @@ export default function DeliverySlotsPage() {
                         <button
                           type="button"
                           onClick={() => handleOpenEditModal(slot)}
-                          className="p-1.5 text-gray-400 hover:text-[#00BCD4] hover:bg-brand-blue-light/50 rounded-lg transition-colors cursor-pointer"
+                          className="p-1.5 text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft/50 rounded-lg transition-colors cursor-pointer"
                           title="Edit Delivery Slot"
                         >
                           <HiOutlinePencilSquare className="w-4 h-4" />
@@ -567,10 +567,10 @@ export default function DeliverySlotsPage() {
           ========================================================================= */}
       {isAddModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4 animate-in fade-in duration-150">
-          <div className="bg-white rounded-lg border border-gray-100 shadow-2xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]">
+          <div className="bg-white rounded-lg border border-gray-100 shadow-md w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]">
             <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-brand-blue-light border border-[#00BCD4]/20 text-[#00BCD4] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-brand-orange-soft border border-brand-orange/20 text-brand-orange-text flex items-center justify-center">
                   <HiOutlineClock className="w-4 h-4" />
                 </div>
                 <h3 className="text-sm font-bold text-gray-900">
@@ -603,7 +603,7 @@ export default function DeliverySlotsPage() {
                   onChange={(e) =>
                     setFormData((prev) => ({ ...prev, title: e.target.value }))
                   }
-                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                 />
               </div>
 
@@ -624,7 +624,7 @@ export default function DeliverySlotsPage() {
                         startTime: e.target.value,
                       }))
                     }
-                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                   />
                 </div>
 
@@ -643,7 +643,7 @@ export default function DeliverySlotsPage() {
                         endTime: e.target.value,
                       }))
                     }
-                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                   />
                 </div>
               </div>
@@ -665,7 +665,7 @@ export default function DeliverySlotsPage() {
                         price: e.target.value,
                       }))
                     }
-                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                   />
                 </div>
 
@@ -685,7 +685,7 @@ export default function DeliverySlotsPage() {
                         durationInMinute: parseInt(e.target.value, 10) || 0,
                       }))
                     }
-                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                   />
                 </div>
               </div>
@@ -706,7 +706,7 @@ export default function DeliverySlotsPage() {
                       cutOffTime: e.target.value,
                     }))
                   }
-                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                 />
               </div>
 
@@ -721,7 +721,7 @@ export default function DeliverySlotsPage() {
                       status: e.target.value as "Active" | "Inactive",
                     }))
                   }
-                  className="text-xs font-semibold px-2.5 py-1 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                  className="text-xs font-semibold px-2.5 py-1 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange text-gray-800"
                 >
                   <option value="Active">Active</option>
                   <option value="Inactive">Inactive</option>
@@ -743,7 +743,7 @@ export default function DeliverySlotsPage() {
                   type="submit"
                   variant="primary"
                   shape="rounded-sm"
-                  className="bg-[#00BCD4] hover:bg-[#00acc1] text-white text-xs font-semibold px-4 py-1.5 cursor-pointer shadow-xs"
+                  className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold px-4 py-1.5 cursor-pointer "
                 >
                   {slotToEdit ? "Update Slot" : "Create Delivery Slot"}
                 </Button>

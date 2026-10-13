@@ -75,25 +75,25 @@ export const ProductDetailsInfo: React.FC = () => {
     <div className="flex-1 flex flex-col gap-5 lg:w-1/2">
       {/* Title and Stock Row */}
       <div className="flex items-start justify-between gap-4">
-        <h1 className="text-xl sm:text-2xl font-extrabold text-gray-900 leading-snug tracking-tight uppercase">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 leading-snug tracking-tight uppercase">
           219L THERMOCOOL INVERTER SOLAR FREEZER (MAXI (24V 60AH BATTERY + 40V
           PWM + 2 X 600W PANELS))
         </h1>
-        <span className="shrink-0 bg-[#FFF4ED] text-[#FF7A00] font-bold text-xs px-3 py-1 rounded-md">
+        <span className="shrink-0 bg-[#FFF4ED] text-brand-orange-text font-bold text-xs px-3 py-1 rounded-md">
           In Stock
         </span>
       </div>
 
       {/* Sold By */}
       <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-700">
-        <div className="w-5 h-5 rounded bg-[#FF7A00] flex items-center justify-center text-white shrink-0 shadow-xs">
+        <div className="w-5 h-5 rounded bg-brand-orange flex items-center justify-center text-white shrink-0 shadow-xs">
           <FiShoppingCart size={11} />
         </div>
         <span>
           Sold by:{" "}
           <Link
             href="/products?vendor=gworld"
-            className="font-bold text-gray-900 hover:text-[#FF7A00] transition-colors"
+            className="font-bold text-gray-900 hover:text-brand-orange-text transition-colors"
           >
             Koolbuy- GWORLD ELECTRONICS
           </Link>
@@ -101,7 +101,7 @@ export const ProductDetailsInfo: React.FC = () => {
       </div>
 
       {/* Buy for as low as monthly BNPL Dropdown Card */}
-      <div className="w-full border border-[#FF7A00] rounded-2xl overflow-hidden bg-white shadow-xs">
+      <div className="w-full border border-brand-orange rounded-2xl overflow-hidden bg-white shadow-xs">
         {/* Dropdown Header Trigger */}
         <button
           type="button"
@@ -110,15 +110,15 @@ export const ProductDetailsInfo: React.FC = () => {
         >
           <span className="text-base sm:text-lg text-gray-800 font-bold">
             Buy for as low as{" "}
-            <strong className="text-[#FF7A00] font-black text-lg sm:text-xl">
+            <strong className="text-brand-orange-text font-bold text-lg sm:text-xl">
               ₦89,000
             </strong>{" "}
             monthly
           </span>
           {isBnplOpen ? (
-            <FiChevronUp className="text-[#FF7A00] text-xl shrink-0" />
+            <FiChevronUp className="text-brand-orange-text text-xl shrink-0" />
           ) : (
-            <FiChevronDown className="text-[#FF7A00] text-xl shrink-0" />
+            <FiChevronDown className="text-brand-orange-text text-xl shrink-0" />
           )}
         </button>
 
@@ -132,7 +132,7 @@ export const ProductDetailsInfo: React.FC = () => {
               transition={{ duration: 0.22, ease: "easeOut" }}
               className="overflow-hidden"
             >
-              <div className="p-5 pt-4 flex flex-col gap-4 bg-white border-t border-orange-100">
+              <div className="p-5 pt-4 flex flex-col gap-4 bg-white border-t border-brand-orange/15">
                 {/* Step 1: Select payment frequency */}
                 <div className="flex flex-col gap-2">
                   <span className="text-xs sm:text-sm font-semibold text-gray-800">
@@ -146,8 +146,8 @@ export const ProductDetailsInfo: React.FC = () => {
                         onClick={() => handleSelectFrequency(freq)}
                         className={`px-6 py-2 rounded-full font-bold text-xs sm:text-sm cursor-pointer transition-all outline-none ${
                           selectedFrequency === freq
-                            ? "bg-[#FF7A00] text-white shadow-xs"
-                            : "border border-[#FF7A00] text-[#FF7A00] bg-white hover:bg-orange-50"
+                            ? "bg-brand-orange text-white "
+                            : "border border-brand-orange text-brand-orange-text bg-white hover:bg-brand-orange-soft"
                         }`}
                       >
                         {freq}
@@ -169,8 +169,8 @@ export const ProductDetailsInfo: React.FC = () => {
                         onClick={() => handleSelectInstallment(num)}
                         className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full font-bold text-xs sm:text-sm flex items-center justify-center cursor-pointer transition-all outline-none ${
                           selectedInstallment === num
-                            ? "bg-[#FF7A00] text-white shadow-xs"
-                            : "border border-[#FF7A00] text-[#FF7A00] bg-white hover:bg-orange-50"
+                            ? "bg-brand-orange text-white "
+                            : "border border-brand-orange text-brand-orange-text bg-white hover:bg-brand-orange-soft"
                         }`}
                       >
                         {num}
@@ -180,18 +180,18 @@ export const ProductDetailsInfo: React.FC = () => {
                 </div>
 
                 {/* Step 3: Calculation Summary Box */}
-                <div className="bg-[#F8F9FA] rounded-xl py-3.5 px-4 text-center border border-gray-100 mt-1">
+                <div className="bg-off-white rounded-xl py-3.5 px-4 text-center border border-gray-100 mt-1">
                   <p className="text-xs sm:text-sm text-gray-800 font-semibold leading-relaxed">
                     You will be paying{" "}
-                    <strong className="text-[#FF7A00] font-extrabold">
+                    <strong className="text-brand-orange-text font-bold">
                       ₦{currentMonthlyAmount}
                     </strong>{" "}
                     Monthly for{" "}
-                    <strong className="text-[#FF7A00] font-extrabold">
+                    <strong className="text-brand-orange-text font-bold">
                       {selectedInstallment}
                     </strong>{" "}
                     consecutive{" "}
-                    <strong className="text-[#FF7A00] font-extrabold">
+                    <strong className="text-brand-orange-text font-bold">
                       Months
                     </strong>
                     .
@@ -204,7 +204,7 @@ export const ProductDetailsInfo: React.FC = () => {
       </div>
 
       {/* Price */}
-      <div className="text-2xl sm:text-3xl font-extrabold text-gray-900">
+      <div className="text-2xl sm:text-3xl font-bold text-gray-900">
         ₦2,155,000.00
       </div>
 
@@ -214,7 +214,7 @@ export const ProductDetailsInfo: React.FC = () => {
           <span className="font-semibold text-gray-900">Brand: </span>
           <Link
             href="/products?search=Koolbuy"
-            className="text-gray-700 hover:text-[#FF7A00] transition-colors"
+            className="text-gray-700 hover:text-brand-orange-text transition-colors"
           >
             Koolbuy- GWORLD ELECTRONICS
           </Link>
@@ -291,7 +291,7 @@ export const ProductDetailsInfo: React.FC = () => {
           <button
             type="button"
             onClick={handleAddToCart}
-            className="flex-1 h-11 sm:h-12 bg-[#FF7A00] hover:bg-[#E86D00] active:scale-[0.98] text-white font-bold text-xs sm:text-sm uppercase tracking-wider rounded-full shadow-md flex items-center justify-center gap-2.5 transition-all cursor-pointer"
+            className="flex-1 h-11 sm:h-12 bg-brand-orange hover:bg-brand-orange-hover active:scale-[0.98] text-white font-bold text-xs sm:text-sm uppercase tracking-wider rounded-full flex items-center justify-center gap-2.5 transition-all cursor-pointer"
           >
             <span>ADD TO CART</span>
             <FiShoppingCart size={16} />
@@ -304,7 +304,7 @@ export const ProductDetailsInfo: React.FC = () => {
         <span className="font-semibold text-gray-900">Category: </span>
         <Link
           href="/products?category=Single+Door+Chest+Freezers"
-          className="text-gray-700 hover:text-[#FF7A00] transition-colors"
+          className="text-gray-700 hover:text-brand-orange-text transition-colors"
         >
           Single Door Chest Freezers
         </Link>

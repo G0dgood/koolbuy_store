@@ -264,7 +264,7 @@ export default function AdvertManagement() {
     <div className="flex flex-col gap-8 mx-auto pb-20">
       <div className="flex justify-between items-center ">
         <div className="flex flex-col gap-1">
-          {/* <h1 className="text-xl font-black text-[#1D3557]">
+          {/* <h1 className="text-xl font-bold text-brand-charcoal">
             Advert Control Center
           </h1>
           <p className="text-sm text-gray-400 font-medium">
@@ -274,7 +274,7 @@ export default function AdvertManagement() {
 
         <div className="flex items-center gap-6">
           <div className="flex flex-col items-end gap-1.5 mr-4">
-            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none">
+            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider leading-none">
               Layout Architecture
             </span>
             <TabFilter
@@ -313,17 +313,17 @@ export default function AdvertManagement() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div className="lg:col-span-12 flex flex-col gap-8">
           {/* Section 1: Copywriting & Timing */}
-          <section className="bg-white p-8 rounded-[6px] border border-gray-100 shadow-sm flex flex-col gap-8">
+          <section className="bg-white p-8 rounded-lg border border-gray-100 shadow-sm flex flex-col gap-8">
             <div className="flex justify-between items-center">
-              <h3 className="text-lg font-black text-[#1D3557] flex items-center gap-2">
-                <span className="w-8 h-8 rounded-[6px] bg-blue-50 text-blue-500 flex items-center justify-center text-xs">
+              <h3 className="text-lg font-bold text-brand-charcoal flex items-center gap-2">
+                <span className="w-8 h-8 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center text-xs">
                   01
                 </span>
                 Feature Copy & Timing
               </h3>
               <div className="flex items-center gap-6">
                 <div className="flex flex-col items-end gap-1.5 ">
-                  <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest leading-none italic">
+                  <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider leading-none italic">
                     Targeting Atmosphere
                   </span>
                   <Dropdown
@@ -352,7 +352,7 @@ export default function AdvertManagement() {
                   <Button
                     variant="outline"
                     shape="rounded-sm"
-                    className="text-[10px] py-1 h-9 px-4"
+                    className="text-[11px] py-1 h-9 px-4"
                     onClick={() => {
                       const newBgs = [...config.backgroundImages];
                       newBgs[activeVisualIndex] = {
@@ -385,7 +385,7 @@ export default function AdvertManagement() {
                         size="md"
                       />
                       <Label
-                        className={`mb-0! text-[10px] font-black uppercase tracking-widest transition-opacity ${!config.showTitle ? "text-gray-300" : "text-brand-blue/60"}`}
+                        className={`mb-0! text-[11px] font-bold uppercase tracking-wider transition-opacity ${!config.showTitle ? "text-gray-300" : "text-brand-orange-text/60"}`}
                       >
                         Main Title
                       </Label>
@@ -430,7 +430,7 @@ export default function AdvertManagement() {
                         size="md"
                       />
                       <Label
-                        className={`mb-0! text-[10px] font-black uppercase tracking-widest transition-opacity ${!config.showHighlight ? "text-gray-300" : "text-brand-blue/60"}`}
+                        className={`mb-0! text-[11px] font-bold uppercase tracking-wider transition-opacity ${!config.showHighlight ? "text-gray-300" : "text-brand-orange-text/60"}`}
                       >
                         Highlighted Title
                       </Label>
@@ -479,7 +479,7 @@ export default function AdvertManagement() {
                       size="md"
                     />
                     <Label
-                      className={`mb-0! text-[10px] font-black uppercase tracking-widest transition-opacity ${!config.showDescription ? "text-gray-300" : "text-brand-blue/60"}`}
+                      className={`mb-0! text-[11px] font-bold uppercase tracking-wider transition-opacity ${!config.showDescription ? "text-gray-300" : "text-brand-orange-text/60"}`}
                     >
                       Description Text
                     </Label>
@@ -524,7 +524,7 @@ export default function AdvertManagement() {
                       size="md"
                     />
                     <Label
-                      className={`mb-0! text-[10px] font-black uppercase tracking-widest transition-opacity ${!config.showStats ? "text-gray-300" : "text-brand-blue/60"}`}
+                      className={`mb-0! text-[11px] font-bold uppercase tracking-wider transition-opacity ${!config.showStats ? "text-gray-300" : "text-brand-orange-text/60"}`}
                     >
                       Platform Stats
                     </Label>
@@ -561,14 +561,14 @@ export default function AdvertManagement() {
                 </div>
               </div>
 
-              <div className="bg-gray-50 p-6 rounded-[6px] border border-gray-100 flex flex-col gap-6 justify-center">
+              <div className="bg-gray-50 p-6 rounded-lg border border-gray-100 flex flex-col gap-6 justify-center">
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-black text-[#1D3557] uppercase tracking-widest">
+                  <label className="text-xs font-bold text-brand-charcoal uppercase tracking-wider">
                     {activeVisualIndex === null
                       ? "Global Cycle Duration"
                       : `Atmosphere ${activeVisualIndex + 1} Timing Override`}
                   </label>
-                  <p className="text-[10px] text-gray-400 font-medium">
+                  <p className="text-[11px] text-gray-400 font-medium">
                     {activeVisualIndex === null
                       ? "How many seconds should each background image stay before cycling?"
                       : `Override the global timing for this specific atmosphere.`}
@@ -598,9 +598,9 @@ export default function AdvertManagement() {
                         setConfig({ ...config, backgroundImages: newBgs });
                       }
                     }}
-                    className="flex-1 accent-brand-blue"
+                    className="flex-1 accent-brand-orange"
                   />
-                  <span className="w-16 h-12 bg-white rounded-[6px] border border-gray-200 flex items-center justify-center font-black text-brand-blue text-lg">
+                  <span className="w-16 h-12 bg-white rounded-lg border border-gray-200 flex items-center justify-center font-bold text-brand-orange-text text-lg">
                     {activeVisualIndex === null
                       ? config.cycleDuration
                       : config.backgroundImages[activeVisualIndex]?.duration ||
@@ -613,10 +613,10 @@ export default function AdvertManagement() {
           </section>
 
           {/* Section 2: Background Orchestration */}
-          <section className="bg-white p-8 rounded-[6px] border border-gray-100 shadow-sm flex flex-col gap-6">
+          <section className="bg-white p-8 rounded-lg border border-gray-100 shadow-sm flex flex-col gap-6">
             <div className="flex justify-between items-center">
-              <h3 className="text-lg font-black text-[#1D3557] flex items-center gap-2">
-                <span className="w-8 h-8 rounded-[6px] bg-indigo-50 text-indigo-500 flex items-center justify-center text-xs">
+              <h3 className="text-lg font-bold text-brand-charcoal flex items-center gap-2">
+                <span className="w-8 h-8 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center text-xs">
                   02
                 </span>
                 Atmospheric Visuals
@@ -655,7 +655,7 @@ export default function AdvertManagement() {
                       value={bg}
                       className="flex flex-col gap-3 min-w-60 cursor-grab active:cursor-grabbing"
                     >
-                      <div className="relative aspect-16/10 rounded-[6px] overflow-hidden border border-gray-100 shadow-sm group">
+                      <div className="relative aspect-16/10 rounded-lg overflow-hidden border border-gray-100 shadow-sm group">
                         <img
                           src={bg.url}
                           alt="Visual"
@@ -667,7 +667,7 @@ export default function AdvertManagement() {
 
                         {/* Drag Handle */}
                         <div className="absolute top-2 left-2 flex items-center gap-1.5 z-20">
-                          <div className="w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center text-[10px] font-black text-white shadow-lg">
+                          <div className="w-6 h-6 bg-brand-charcoal rounded-full flex items-center justify-center text-[11px] font-bold text-white shadow-lg">
                             {i + 1}
                           </div>
                           <div className="w-6 h-6 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-400 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
@@ -680,7 +680,7 @@ export default function AdvertManagement() {
                         </div>
 
                         {bg.linkedCategory && (
-                          <div className="absolute top-2 right-2 px-2 py-0.5 bg-emerald-500 rounded-lg text-[8px] font-black text-white shadow-lg uppercase tracking-widest z-10 animate-in fade-in zoom-in duration-300">
+                          <div className="absolute top-2 right-2 px-2 py-0.5 bg-emerald-500 rounded-lg text-[8px] font-bold text-white shadow-lg uppercase tracking-wider z-10 animate-in fade-in zoom-in duration-300">
                             {bg.linkedCategory}
                           </div>
                         )}
@@ -691,7 +691,7 @@ export default function AdvertManagement() {
                                 setRefiningAssetIndex(i);
                                 setIsRefineModalOpen(true);
                               }}
-                              className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-[#1D3557] hover:bg-brand-blue hover:text-white transition-all shadow-lg text-lg"
+                              className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-brand-charcoal hover:bg-brand-charcoal hover:text-white transition-all text-lg"
                               title="Edit Focal Point"
                             >
                               <LuPencilLine />
@@ -701,7 +701,7 @@ export default function AdvertManagement() {
                                 setReplacingAssetIndex(i);
                                 setIsBackgroundModalOpen(true);
                               }}
-                              className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-[#1D3557] hover:bg-brand-blue hover:text-white transition-all shadow-lg text-lg"
+                              className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-brand-charcoal hover:bg-brand-charcoal hover:text-white transition-all text-lg"
                               title="Replace Image"
                             >
                               <LuArrowLeftRight />
@@ -711,14 +711,14 @@ export default function AdvertManagement() {
                                 setRefiningAssetIndex(i);
                                 setIsRefineModalOpen(true);
                               }}
-                              className="px-4 py-1.5 bg-white rounded-lg text-[10px] font-black uppercase tracking-widest text-[#1D3557] hover:bg-brand-blue hover:text-white transition-all shadow-lg"
+                              className="px-4 py-1.5 bg-white rounded-lg text-[11px] font-bold uppercase tracking-wider text-brand-charcoal hover:bg-brand-charcoal hover:text-white transition-all "
                             >
                               Edit Visual
                             </button>
                           </div>
                           <button
                             onClick={() => toggleBackgroundSelection(bg.url)}
-                            className="text-[9px] font-bold text-white/70 hover:text-rose-400 transition-colors uppercase tracking-widest mt-1"
+                            className="text-[11px] font-bold text-white/70 hover:text-rose-400 transition-colors uppercase tracking-wider mt-1"
                           >
                             Remove
                           </button>
@@ -727,7 +727,7 @@ export default function AdvertManagement() {
 
                       {/* Category Link Selector */}
                       <div className="flex flex-col gap-1.5 pointer-events-auto">
-                        <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest px-1">
+                        <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider px-1">
                           Linked Category
                         </label>
                         <Dropdown
@@ -759,15 +759,15 @@ export default function AdvertManagement() {
               </Reorder.Group>
               <button
                 onClick={() => setIsBackgroundModalOpen(true)}
-                className="min-w-60 h-37.5 aspect-16/10 rounded-[6px] border-2 border-dashed border-gray-100 flex flex-col items-center justify-center gap-2 hover:border-indigo-200 transition-colors bg-indigo-50/10 group mt-0"
+                className="min-w-60 h-37.5 aspect-16/10 rounded-lg border-2 border-dashed border-gray-100 flex flex-col items-center justify-center gap-2 hover:border-brand-orange/30 transition-colors bg-brand-orange-soft/10 group mt-0"
               >
                 <Icon
                   name="circle-plus"
                   folder="dashboardIcon"
                   size="md"
-                  className="text-gray-300 group-hover:text-indigo-400 transition-colors"
+                  className="text-gray-300 group-hover:text-brand-orange-text transition-colors"
                 />
-                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest group-hover:text-indigo-500 transition-colors">
+                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider group-hover:text-brand-orange-text transition-colors">
                   Add Visual
                 </span>
               </button>
@@ -776,18 +776,18 @@ export default function AdvertManagement() {
 
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
             {/* Section 3: Featured Items Picker */}
-            <section className="bg-white p-8 rounded-[6px] border border-gray-100 shadow-sm flex flex-col gap-6 xl:col-span-2">
-              <h3 className="text-lg font-black text-[#1D3557] flex flex-col gap-6">
+            <section className="bg-white p-8 rounded-lg border border-gray-100 shadow-sm flex flex-col gap-6 xl:col-span-2">
+              <h3 className="text-lg font-bold text-brand-charcoal flex flex-col gap-6">
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center gap-2 text-emerald-500">
-                    <span className="w-8 h-8 rounded-[6px] bg-emerald-50 flex items-center justify-center text-xs">
+                    <span className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-xs">
                       03
                     </span>
                     Featured Inventory
                   </div>
                   <div className="flex items-center gap-6">
                     <div className="flex flex-col items-end gap-1.5 ">
-                      <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest leading-none italic">
+                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider leading-none italic">
                         Targeting Atmosphere
                       </span>
                       <Dropdown
@@ -815,7 +815,7 @@ export default function AdvertManagement() {
                         className="min-w-45"
                       />
                     </div>
-                    <span className="text-[10px] font-black text-emerald-500 uppercase tracking-widest leading-tight">
+                    <span className="text-[11px] font-bold text-emerald-500 uppercase tracking-wider leading-tight">
                       {activeFeaturedItems.length} Selected
                     </span>
                   </div>
@@ -823,7 +823,7 @@ export default function AdvertManagement() {
 
                 <div className="flex flex-col gap-2">
                   <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
                       {activeVisualIndex === null
                         ? "Global Display Preset"
                         : `Atmosphere ${activeVisualIndex + 1} Layout Override`}
@@ -831,7 +831,7 @@ export default function AdvertManagement() {
                     {activeVisualIndex !== null &&
                       config.backgroundImages[activeVisualIndex]
                         .inventoryLayout && (
-                        <span className="text-[9px] font-bold text-brand-blue-light uppercase tracking-widest bg-brand-blue/5 px-2 py-0.5 rounded-lg">
+                        <span className="text-[11px] font-bold text-light-gray uppercase tracking-wider bg-brand-charcoal/5 px-2 py-0.5 rounded-lg">
                           Active Override
                         </span>
                       )}
@@ -901,11 +901,11 @@ export default function AdvertManagement() {
                     <button
                       key={product.id}
                       onClick={() => toggleProductSelection(product)}
-                      className={`p-3 rounded-[6px] border transition-all flex flex-col gap-3 group relative
-                          ${isSelected ? "border-brand-blue bg-blue-50/20" : "border-gray-50 bg-white hover:border-blue-100"}
+                      className={`p-3 rounded-lg border transition-all flex flex-col gap-3 group relative
+                          ${isSelected ? "border-brand-charcoal bg-brand-orange-soft/20" : "border-gray-50 bg-white hover:border-brand-orange/15"}
                         `}
                     >
-                      <div className="relative aspect-square rounded-[6px] bg-white border border-gray-50 flex items-center justify-center overflow-hidden">
+                      <div className="relative aspect-square rounded-lg bg-white border border-gray-50 flex items-center justify-center overflow-hidden">
                         <img
                           src={product.image}
                           alt={product.name}
@@ -920,10 +920,10 @@ export default function AdvertManagement() {
                         </div>
                       </div>
                       <div className="flex flex-col text-left">
-                        <span className="text-[11px] font-bold text-[#1D3557] truncate">
+                        <span className="text-[11px] font-bold text-brand-charcoal truncate">
                           {product.name}
                         </span>
-                        <span className="text-[9px] font-black text-brand-blue uppercase">
+                        <span className="text-[11px] font-bold text-brand-orange-text uppercase">
                           {product.category}
                         </span>
                       </div>
@@ -934,9 +934,9 @@ export default function AdvertManagement() {
             </section>
 
             {/* Section 4: Item Arrangement */}
-            <section className="bg-white p-8 rounded-[6px] border border-gray-100 shadow-sm flex flex-col gap-6 xl:col-span-1">
-              <h3 className="text-lg font-black text-[#1D3557] flex items-center gap-2">
-                <span className="w-8 h-8 rounded-[6px] bg-orange-50 text-orange-500 flex items-center justify-center text-xs">
+            <section className="bg-white p-8 rounded-lg border border-gray-100 shadow-sm flex flex-col gap-6 xl:col-span-1">
+              <h3 className="text-lg font-bold text-brand-charcoal flex items-center gap-2">
+                <span className="w-8 h-8 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center text-xs">
                   04
                 </span>
                 Marketing Arrangement
@@ -945,10 +945,10 @@ export default function AdvertManagement() {
                 <div className="flex flex-col gap-3">
                   {config.showTitle && (
                     <div className="flex flex-col gap-1">
-                      <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none">
+                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider leading-none">
                         Main Header
                       </span>
-                      <div className="p-3 bg-gray-50 border border-gray-100 rounded-lg text-xs font-bold text-brand-blue">
+                      <div className="p-3 bg-gray-50 border border-gray-100 rounded-lg text-xs font-bold text-brand-orange-text">
                         {config.title}{" "}
                         <span className="text-emerald-500">
                           {config.titleHighlight}
@@ -959,17 +959,17 @@ export default function AdvertManagement() {
 
                   {config.showStats && (
                     <div className="flex flex-col gap-1">
-                      <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none">
+                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider leading-none">
                         Global Impact Stats
                       </span>
-                      <div className="flex bg-gray-50 border border-gray-100 p-4 rounded-[6px] items-center gap-4">
+                      <div className="flex bg-gray-50 border border-gray-100 p-4 rounded-lg items-center gap-4">
                         <Icon
                           name="verified"
                           folder="icon"
                           size="sm"
                           className="text-emerald-500"
                         />
-                        <span className="text-[10px] font-bold text-gray-500 leading-relaxed uppercase tracking-widest">
+                        <span className="text-[11px] font-bold text-gray-500 leading-relaxed uppercase tracking-wider">
                           {config.stats}
                         </span>
                       </div>
@@ -978,7 +978,7 @@ export default function AdvertManagement() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none">
+                  <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider leading-none">
                     {activeVisualIndex === null
                       ? "Global Inventory Sequence"
                       : `Atmosphere ${activeVisualIndex + 1} Selection`}
@@ -1004,10 +1004,10 @@ export default function AdvertManagement() {
                       <Reorder.Item
                         key={item.id}
                         value={item}
-                        className="p-4 bg-white rounded-[6px] border border-gray-100 shadow-sm cursor-grab active:cursor-grabbing flex items-center justify-between group hover:border-brand-blue transition-colors"
+                        className="p-4 bg-white rounded-lg border border-gray-100 shadow-sm cursor-grab active:cursor-grabbing flex items-center justify-between group hover:border-brand-charcoal transition-colors"
                       >
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-[6px] bg-gray-50 p-1">
+                          <div className="w-10 h-10 rounded-lg bg-gray-50 p-1">
                             <img
                               src={item.image}
                               alt={item.name}
@@ -1015,7 +1015,7 @@ export default function AdvertManagement() {
                             />
                           </div>
                           <div className="flex flex-col">
-                            <span className="text-sm font-bold text-[#1D3557]">
+                            <span className="text-sm font-bold text-brand-charcoal">
                               {item.name}
                             </span>
                           </div>
@@ -1024,7 +1024,7 @@ export default function AdvertManagement() {
                           name="Frame"
                           folder="dashboardIcon"
                           size="sm"
-                          className="text-gray-300 group-hover:text-brand-blue transition-colors"
+                          className="text-gray-300 group-hover:text-brand-orange-text transition-colors"
                         />
                       </Reorder.Item>
                     ))}
@@ -1098,8 +1098,8 @@ export default function AdvertManagement() {
                     <button
                       key={i}
                       onClick={() => handleSelectBackground(bg)}
-                      className={`group relative aspect-16/10 rounded-[6px] overflow-hidden border-4 transition-all
-                          ${isSelected ? "border-brand-blue ring-8 ring-blue-50 scale-[1.02]" : "border-transparent opacity-70 hover:opacity-100 shadow-sm"}
+                      className={`group relative aspect-16/10 rounded-lg overflow-hidden border-4 transition-all
+                          ${isSelected ? "border-brand-charcoal ring-8 ring-brand-orange/15 scale-[1.02]" : "border-transparent opacity-70 hover:opacity-100 "}
                         `}
                     >
                       <img
@@ -1108,14 +1108,14 @@ export default function AdvertManagement() {
                         className="w-full h-full object-cover"
                       />
                       {isSelected && (
-                        <div className="absolute top-3 right-3 p-1.5 bg-brand-blue rounded-[6px] text-white shadow-xl overflow-hidden flex items-center gap-2 px-3">
+                        <div className="absolute top-3 right-3 p-1.5 bg-brand-charcoal rounded-lg text-white shadow-md overflow-hidden flex items-center gap-2 px-3">
                           <Checkbox
                             checked={true}
                             onChange={() => {}}
                             size="md"
                             className="p-0!"
                           />
-                          <span className="text-[10px] font-black uppercase">
+                          <span className="text-[11px] font-bold uppercase">
                             {order}
                           </span>
                         </div>
@@ -1140,8 +1140,8 @@ export default function AdvertManagement() {
                     <button
                       key={product.id}
                       onClick={() => handleSelectBackground(product.image)}
-                      className={`group relative aspect-square rounded-[6px] overflow-hidden border-2 transition-all p-2 flex flex-col gap-2
-                          ${isSelected ? "border-brand-blue bg-blue-50/20 ring-4 ring-blue-50" : "border-gray-100 bg-white hover:border-blue-200 shadow-sm"}
+                      className={`group relative aspect-square rounded-lg overflow-hidden border-2 transition-all p-2 flex flex-col gap-2
+                          ${isSelected ? "border-brand-charcoal bg-brand-orange-soft/20 ring-4 ring-brand-orange/15" : "border-gray-100 bg-white hover:border-brand-orange/30 "}
                         `}
                     >
                       <div className="relative flex-1 bg-white rounded-lg overflow-hidden flex items-center justify-center p-2">
@@ -1151,24 +1151,24 @@ export default function AdvertManagement() {
                           className="w-full h-full object-contain group-hover:scale-110 transition-transform"
                         />
                         {isSelected && (
-                          <div className="absolute top-1 right-1 p-1 bg-brand-blue rounded-lg text-white shadow-lg overflow-hidden flex items-center gap-1.5 px-2">
+                          <div className="absolute top-1 right-1 p-1 bg-brand-charcoal rounded-lg text-white shadow-lg overflow-hidden flex items-center gap-1.5 px-2">
                             <Checkbox
                               checked={true}
                               onChange={() => {}}
                               size="md"
                               className="p-0!"
                             />
-                            <span className="text-[9px] font-black uppercase">
+                            <span className="text-[11px] font-bold uppercase">
                               {order}
                             </span>
                           </div>
                         )}
                       </div>
                       <div className="flex flex-col text-left px-1">
-                        <span className="text-[10px] font-bold text-[#1D3557] truncate">
+                        <span className="text-[11px] font-bold text-brand-charcoal truncate">
                           {product.name}
                         </span>
-                        <span className="text-[8px] font-black text-brand-blue uppercase">
+                        <span className="text-[8px] font-bold text-brand-orange-text uppercase">
                           {product.category}
                         </span>
                       </div>
@@ -1180,11 +1180,11 @@ export default function AdvertManagement() {
 
             {backgroundModalTab === "url" && (
               <div className="flex flex-col gap-8 items-center justify-center py-10 px-6">
-                <div className="w-20 h-20 bg-indigo-50 rounded-4xl flex items-center justify-center text-indigo-500 mb-2">
+                <div className="w-20 h-20 bg-brand-orange-soft rounded-4xl flex items-center justify-center text-brand-orange-text mb-2">
                   <Icon name="link-external" folder="dashboardIcon" size="lg" />
                 </div>
                 <div className="flex flex-col gap-2 text-center max-w-sm">
-                  <h4 className="text-base font-black text-[#1D3557]">
+                  <h4 className="text-base font-bold text-brand-charcoal">
                     Import Remote Visual
                   </h4>
                   <p className="text-xs text-gray-400 font-medium">
@@ -1217,7 +1217,7 @@ export default function AdvertManagement() {
 
                 {/* Preview of added URLs */}
                 <div className="w-full flex flex-col gap-4 mt-4">
-                  <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                  <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
                     Active URL Sources
                   </span>
                   <div className="grid grid-cols-2 gap-4">
@@ -1226,7 +1226,7 @@ export default function AdvertManagement() {
                       .map((asset, i) => (
                         <div
                           key={i}
-                          className="relative aspect-16/6 rounded-[6px] overflow-hidden border border-gray-100 shadow-sm group"
+                          className="relative aspect-16/6 rounded-lg overflow-hidden border border-gray-100 shadow-sm group"
                         >
                           <img
                             src={asset.url}
@@ -1270,8 +1270,8 @@ export default function AdvertManagement() {
                   className={`w-full border-2 border-dashed rounded-4xl p-12 flex flex-col items-center justify-center gap-4 transition-all cursor-pointer group
                     ${
                       isDragging
-                        ? "border-brand-blue bg-blue-50/50 scale-[1.02] shadow-xl"
-                        : "border-gray-200 bg-transparent hover:border-brand-blue hover:bg-blue-50/20 shadow-sm"
+                        ? "border-brand-charcoal bg-brand-orange-soft/50 scale-[1.02] shadow-md"
+                        : "border-gray-200 bg-transparent hover:border-brand-charcoal hover:bg-brand-orange-soft/20 shadow-sm"
                     }
                   `}
                 >
@@ -1283,14 +1283,14 @@ export default function AdvertManagement() {
                     multiple
                     onChange={handleFileUpload}
                   />
-                  <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-400 group-hover:text-brand-blue transition-all">
+                  <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-400 group-hover:text-brand-orange-text transition-all">
                     <Icon name="cloud_upload" folder="icon" size="md" />
                   </div>
                   <div className="flex flex-col items-center gap-1 text-center">
-                    <span className="text-sm font-black text-[#1D3557]">
+                    <span className="text-sm font-bold text-brand-charcoal">
                       Click or drag to upload from device
                     </span>
-                    <span className="text-[10px] font-bold text-gray-400 italic">
+                    <span className="text-[11px] font-bold text-gray-400 italic">
                       Max 5MB per image recommended
                     </span>
                   </div>
@@ -1299,7 +1299,7 @@ export default function AdvertManagement() {
                 {/* Preview of Uploaded Images */}
                 <div className="w-full flex flex-col gap-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
                       Recent Device Uploads
                     </span>
                     <button
@@ -1311,7 +1311,7 @@ export default function AdvertManagement() {
                           ),
                         })
                       }
-                      className="text-[9px] font-bold text-rose-500 hover:underline"
+                      className="text-[11px] font-bold text-rose-500 hover:underline"
                     >
                       Clear all uploads
                     </button>
@@ -1322,7 +1322,7 @@ export default function AdvertManagement() {
                       .map((asset, i) => (
                         <div
                           key={i}
-                          className="relative aspect-square rounded-[6px] overflow-hidden border border-gray-100 group"
+                          className="relative aspect-square rounded-lg overflow-hidden border border-gray-100 group"
                         >
                           <img
                             src={asset.url}
@@ -1362,7 +1362,7 @@ export default function AdvertManagement() {
                   ],
                 })
               }
-              className="text-[10px] font-black text-rose-500 uppercase tracking-widest hover:text-rose-600 transition-colors"
+              className="text-[11px] font-bold text-rose-500 uppercase tracking-wider hover:text-rose-600 transition-colors"
             >
               Reset to Default
             </button>
@@ -1397,7 +1397,7 @@ export default function AdvertManagement() {
         >
           <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-1">
-              <h4 className="text-sm font-black text-[#1D3557] uppercase tracking-widest">
+              <h4 className="text-sm font-bold text-brand-charcoal uppercase tracking-wider">
                 Master Your Framing
               </h4>
               <p className="text-xs text-gray-400 font-medium">
@@ -1406,7 +1406,7 @@ export default function AdvertManagement() {
               </p>
             </div>
 
-            <div className="relative aspect-video bg-gray-900 rounded-2xl overflow-hidden shadow-2xl group cursor-move">
+            <div className="relative aspect-video bg-gray-900 rounded-2xl overflow-hidden shadow-md group cursor-move">
               {/* Mock Browser UI Overlay */}
               <div className="absolute top-0 inset-x-0 h-8 bg-black/40 backdrop-blur-md z-20 flex items-center px-4 gap-2">
                 <div className="flex gap-1.5">
@@ -1464,14 +1464,14 @@ export default function AdvertManagement() {
 
                 {/* Focus Crosshair */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-8 h-8 rounded-full border-2 border-brand-blue shadow-[0_0_20px_rgba(0,119,255,0.5)] flex items-center justify-center">
-                    <div className="w-1 h-1 bg-brand-blue rounded-full" />
+                  <div className="w-8 h-8 rounded-full border-2 border-brand-charcoal shadow-[0_0_20px_rgba(0,119,255,0.5)] flex items-center justify-center">
+                    <div className="w-1 h-1 bg-brand-charcoal rounded-full" />
                   </div>
                 </div>
               </motion.div>
 
               <div className="absolute bottom-4 right-4 z-20 flex flex-col items-end gap-2">
-                <span className="px-3 py-1 bg-black/60 backdrop-blur-md rounded-lg text-[10px] font-black text-white uppercase tracking-widest border border-white/10">
+                <span className="px-3 py-1 bg-black/60 backdrop-blur-md rounded-lg text-[11px] font-bold text-white uppercase tracking-wider border border-white/10">
                   X:{" "}
                   {Math.round(
                     config.backgroundImages[refiningAssetIndex].positionX,

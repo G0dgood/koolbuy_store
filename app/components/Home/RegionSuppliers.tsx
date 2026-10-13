@@ -58,12 +58,12 @@ const RegionSuppliers = () => {
               <Image
                 src={region.flag}
                 alt={region.name}
-                fill
+                fill sizes="28px"
                 className="object-cover"
               />
             </div>
             <div className="flex flex-col min-w-0">
-              <span className="text-sm font-medium group-hover:text-brand-blue transition-colors truncate">
+              <span className="text-sm font-medium group-hover:text-brand-orange-text transition-colors truncate">
                 {region.name}
               </span>
               <span className="text-[10px] text-gray-400 truncate">

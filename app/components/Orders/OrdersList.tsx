@@ -154,7 +154,7 @@ export const OrdersList: React.FC = () => {
             placeholder="Search by Order ID..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full h-10 pl-10 pr-4 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:border-brand-blue focus:bg-white transition-colors text-gray-900"
+            className="w-full h-10 pl-10 pr-4 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:border-brand-orange focus:bg-white transition-colors text-gray-900"
           />
         </div>
       </div>
@@ -168,7 +168,7 @@ export const OrdersList: React.FC = () => {
               {/* Thumbnail */}
               <div className="w-20 h-20 md:w-24 md:h-24 bg-gray-100 rounded-lg border border-gray-200 overflow-hidden relative flex-shrink-0 p-2 flex items-center justify-center">
                 {order.image ? (
-                  <Image src={order.image} alt={`Order ${order.id}`} fill className="object-contain" />
+                  <Image src={order.image} alt={`Order ${order.id}`} fill sizes="96px" className="object-contain" />
                 ) : (
                   <Icon name="inventory_2" size="lg" className="text-gray-300 opacity-60" />
                 )}
@@ -185,7 +185,7 @@ export const OrdersList: React.FC = () => {
 
               {/* Price & Status */}
               <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-2 md:w-32 lg:w-48">
-                <span className="font-bold text-lg md:text-xl text-brand-blue">₦{order.total.toLocaleString()}</span>
+                <span className="font-bold text-lg md:text-xl text-brand-orange-text">₦{order.total.toLocaleString()}</span>
                 {getStatusBadge(order.status)}
               </div>
 
@@ -194,14 +194,14 @@ export const OrdersList: React.FC = () => {
                 <Button 
                   onClick={() => handleReorder(order)}
                   variant="primary" 
-                  className="flex-1 md:w-[130px] h-10 md:h-11 text-sm font-bold shadow-none rounded-lg active:scale-95 transition-all"
+                  className="flex-1 md:w-[130px] h-10 md:h-11 text-sm font-bold rounded-lg active:scale-95 transition-all"
                 >
                   Reorder
                 </Button>
                 <Button 
                   onClick={() => handleViewDetails(order.id)}
                   variant="secondary" 
-                  className="flex-1 md:w-[130px] h-10 md:h-11 text-sm font-bold border border-gray-200 text-gray-700 hover:text-brand-blue shadow-none rounded-lg focus:ring-0 transition-colors active:scale-95 transition-all"
+                  className="flex-1 md:w-[130px] h-10 md:h-11 text-sm font-bold border border-gray-200 text-gray-700 hover:text-brand-orange-text rounded-lg focus:ring-0 transition-colors active:scale-95 transition-all"
                 >
                   View Details
                 </Button>

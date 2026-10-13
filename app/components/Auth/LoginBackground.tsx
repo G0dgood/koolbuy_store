@@ -92,7 +92,7 @@ export const LoginBackground = () => {
             <Image
               src={images[currentIndex]?.url || "/images/login-hero.png"}
               alt="Premium Workspace"
-              fill
+              fill sizes="100vw"
               className="object-cover transition-all duration-1000"
               style={{ 
                 objectPosition: `${images[currentIndex]?.positionX || 50}% ${images[currentIndex]?.positionY || 50}%` 
@@ -113,7 +113,7 @@ export const LoginBackground = () => {
              whileHover={{ scale: 1.1, x: 5 }}
              whileTap={{ scale: 0.9 }}
              onClick={handlePrev}
-             className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white pointer-events-auto shadow-2xl hover:bg-white/20 transition-all opacity-40 hover:opacity-100"
+             className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white pointer-events-auto hover:bg-white/20 transition-all opacity-40 hover:opacity-100"
            >
              <HiChevronLeft size={24} />
            </motion.button>
@@ -122,7 +122,7 @@ export const LoginBackground = () => {
              whileHover={{ scale: 1.1, x: -5 }}
              whileTap={{ scale: 0.9 }}
              onClick={handleNext}
-             className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white pointer-events-auto shadow-2xl hover:bg-white/20 transition-all opacity-40 hover:opacity-100"
+             className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white pointer-events-auto hover:bg-white/20 transition-all opacity-40 hover:opacity-100"
            >
              <HiChevronRight size={24} />
            </motion.button>
@@ -138,7 +138,7 @@ export const LoginBackground = () => {
                onMouseEnter={() => setCurrentIndex(i)}
                onClick={() => setCurrentIndex(i)}
                className={`h-1.5 rounded-full transition-all pointer-events-auto
-                 ${currentIndex === i ? "w-8 bg-brand-blue-light shadow-[0_0_15px_rgba(33,150,243,0.5)]" : "w-3 bg-white/30 hover:bg-white/60"}
+                 ${currentIndex === i ? "w-8 bg-brand-orange-soft " : "w-3 bg-white/30 hover:bg-white/60"}
                `}
              />
            ))}

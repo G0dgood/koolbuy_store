@@ -1,5 +1,31 @@
 @import "tailwindcss";
 
+/* Self-hosted fonts (DESIGN.md §4). Never load fonts from Google. */
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url('/fonts/WorkSans-Variable-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url('/fonts/WorkSans-Variable-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('/fonts/Montserrat-Black-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -42,104 +68,162 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Custom Brand Colors */
-  --color-brand-blue: var(--brand-blue);
-  --color-brand-blue-light: var(--brand-blue-light);
+  /* Brand colors (DESIGN.md §1). brand-blue is kept as a legacy alias that
+     now resolves to charcoal, so existing bg-brand-blue / text-brand-blue
+     classes follow the Koolboks palette. */
   --color-brand-orange: var(--brand-orange);
-  --color-brand-orange-light: var(--brand-orange-light);
-  --color-brand-red: var(--brand-red);
+  --color-brand-orange-hover: var(--brand-orange-hover);
+  --color-brand-orange-soft: var(--brand-orange-soft);
+  --color-brand-orange-text: var(--brand-orange-text);
+  --color-brand-orange-light: var(--brand-orange-soft);
+  --color-brand-charcoal: var(--brand-charcoal);
+  --color-brand-blue: var(--brand-charcoal);
+  --color-brand-blue-light: var(--light-gray);
+  --color-brand-red: var(--status-error);
 
-  --font-inter: var(--font-inter);
-  --font-outfit: var(--font-outfit);
-  --font-lato: var(--font-lato);
-  --font-sans: var(--font-lato);
-  --font-heading: var(--font-lato);
+  /* Neutrals (DESIGN.md §2): bg-off-white, border-light-gray, text-subtle, text-faint */
+  --color-off-white: var(--off-white);
+  --color-light-gray: var(--light-gray);
+  --color-medium-gray: var(--medium-gray);
+  --color-subtle: var(--text-secondary);
+  --color-faint: var(--text-tertiary);
+
+  /* Status (DESIGN.md §3): text-success, bg-success-soft, bg-error-soft, ... */
+  --color-success: var(--status-success);
+  --color-success-soft: var(--status-success-soft);
+  --color-warning: var(--status-warning);
+  --color-error: var(--status-error);
+  --color-error-soft: var(--status-error-soft);
+
+  /* One typeface everywhere (DESIGN.md §4). Legacy hooks alias to Work Sans. */
+  --font-sans: var(--font-work-sans);
+  --font-heading: var(--font-work-sans);
+  /* font-mono (IDs, SKUs, amounts) stays in Work Sans; .font-mono below adds even-width figures. */
+  --font-mono: var(--font-work-sans);
+  --font-inter: var(--font-work-sans);
+  --font-outfit: var(--font-work-sans);
+  --font-lato: var(--font-work-sans);
+  --font-brand: var(--font-brand-face);
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(0.985 0.002 90);
-  --foreground: oklch(0.15 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0 0);
-  --primary: oklch(0.72 0.17 55);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.96 0 0);
-  --secondary-foreground: oklch(0.15 0 0);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.96 0 0);
-  --accent-foreground: oklch(0.15 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.92 0 0);
-  --input: oklch(0.92 0 0);
-  --ring: oklch(0.72 0.17 55);
-  --chart-1: oklch(0.72 0.17 55);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0.002 90);
-  --sidebar-foreground: oklch(0.2 0.02 260);
-  --sidebar-primary: oklch(0.72 0.17 55);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.96 0.01 90);
-  --sidebar-accent-foreground: oklch(0.2 0.02 260);
-  --sidebar-border: oklch(0.92 0.01 90);
-  --sidebar-ring: oklch(0.72 0.17 55);
+  --radius: 12px;
 
-  /* Brand Colors */
-  --brand-blue: #2196F3;
-  --brand-blue-light: #E1EFFE;
-  --brand-orange: #FF7A00;
-  --brand-orange-light: #FFF3E0;
-  --brand-red: #F44336;
+  --font-work-sans: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-brand-face: 'Montserrat', 'Work Sans', sans-serif;
+
+  /* Brand (DESIGN.md §1) */
+  --brand-orange: #F57E16;       /* sampled from the Koolboks logo */
+  --brand-orange-hover: #DC6C0B;
+  --brand-orange-soft: #FEF1E6;  /* tinted backgrounds, active states */
+  --brand-orange-text: #B85A0A;  /* orange for small text on white (4.7:1, AA) */
+  --brand-charcoal: #050711;     /* primary text, primary buttons */
+  --brand-on-orange: #FFFFFF;
+
+  /* Neutrals (DESIGN.md §2) */
+  --accent-white: #FFFFFF;
+  --off-white: #F8F9FA;
+  --light-gray: #E9ECEF;
+  --medium-gray: #DEE2E6;
+  --text-primary: #050711;
+  --text-secondary: #495057;
+  --text-tertiary: #6C757D;
+
+  /* Status (DESIGN.md §3) */
+  --status-success: #6C8B7D;
+  --status-success-soft: #EDF3EF;
+  --status-warning: #FD7E14;
+  --status-error: #DC3545;
+  --status-error-soft: #FDECEE;
+  --status-info: #6C757D;
+
+  /* Second chart series: neutral so orange leads (DESIGN.md §7) */
+  --chart-neutral: #ADB5BD;
+
+  --background: var(--off-white);
+  --foreground: var(--text-primary);
+  --card: var(--accent-white);
+  --card-foreground: var(--text-primary);
+  --popover: var(--accent-white);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--brand-orange);
+  --primary-foreground: var(--brand-on-orange);
+  --secondary: var(--off-white);
+  --secondary-foreground: var(--text-primary);
+  --muted: var(--off-white);
+  --muted-foreground: var(--text-tertiary);
+  --accent: var(--brand-orange-soft);
+  --accent-foreground: var(--text-primary);
+  --destructive: var(--status-error);
+  --destructive-foreground: #FFFFFF;
+  --border: var(--light-gray);
+  --input: var(--light-gray);
+  --ring: var(--brand-orange);
+  --chart-1: var(--brand-orange);
+  --chart-2: var(--text-secondary);
+  --chart-3: var(--text-tertiary);
+  --chart-4: var(--medium-gray);
+  --chart-5: var(--status-success);
+  --sidebar: var(--accent-white);
+  --sidebar-foreground: var(--text-primary);
+  --sidebar-primary: var(--brand-orange);
+  --sidebar-primary-foreground: var(--brand-on-orange);
+  --sidebar-accent: var(--brand-orange-soft);
+  --sidebar-accent-foreground: var(--text-primary);
+  --sidebar-border: var(--light-gray);
+  --sidebar-ring: var(--brand-orange);
 }
 
+/* Dark mode (admin only: the admin header toggle adds .dark to <html> while
+   you're in /admin). Core tokens change here; the shadcn-style tokens follow
+   them, and admin.css maps the hard-coded utility colours. */
 .dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  color-scheme: dark;
 
-  /* Brand Colors */
-  --brand-blue: #2196F3;
-  --brand-blue-light: #1e3a5f;
-  --brand-orange: #FF7A00;
-  --brand-orange-light: #4d2600;
-  --brand-red: #F44336;
+  /* Neutrals: slate page, lighter cards, slate borders, light text */
+  --off-white: #0F172A;
+  --accent-white: #1E293B;
+  --light-gray: #334155;
+  --medium-gray: #475569;
+  --text-primary: #F1F5F9;
+  --text-secondary: #CBD5E1;
+  --text-tertiary: #94A3B8;
+
+  /* Brand: "charcoal" is the ink colour, so it turns light; things filled with
+     it get dark text (admin.css), like the CRM's dark mode. */
+  --brand-charcoal: #F1F5F9;
+  --brand-orange-soft: rgba(245, 126, 22, 0.16);
+  --brand-orange-text: #F79A4A;
+
+  /* Status tints on a dark surface */
+  --status-success: #7FA898;
+  --status-success-soft: rgba(127, 168, 152, 0.16);
+  --status-error: #F06A78;
+  --status-error-soft: rgba(240, 106, 120, 0.16);
+  --chart-neutral: #64748B;
+
+  /* shadcn-style tokens */
+  --background: var(--off-white);
+  --foreground: var(--text-primary);
+  --card: var(--accent-white);
+  --card-foreground: var(--text-primary);
+  --popover: var(--accent-white);
+  --popover-foreground: var(--text-primary);
+  --secondary: #273449;
+  --secondary-foreground: var(--text-primary);
+  --muted: #273449;
+  --muted-foreground: var(--text-tertiary);
+  --accent: var(--brand-orange-soft);
+  --accent-foreground: var(--text-primary);
+  --border: var(--light-gray);
+  --input: var(--light-gray);
+  --sidebar: var(--accent-white);
+  --sidebar-foreground: var(--text-primary);
+  --sidebar-accent: var(--brand-orange-soft);
+  --sidebar-accent-foreground: var(--text-primary);
+  --sidebar-border: var(--light-gray);
 }
+
 
 @layer base {
   * {
@@ -154,7 +238,183 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-work-sans);
   }
+}
+
+/* Codes and figures in Work Sans line up like monospace (DESIGN.md §4). */
+.font-mono {
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+
+/* Checkbox, copied from the Koolboks Sales CRM (app/globals.css there, DESIGN.md §7):
+   a white box with a grey border and 4px corners; checked is charcoal (black) with a
+   white tick. The real <input> sits invisibly on top so it stays keyboard and
+   screen-reader friendly. Sizes: .checkbox-small (18px, tables, filters, lists)
+   and .checkbox-medium (22px, an option in a form). */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.checkbox-round {
+  position: relative;
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+.checkbox-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 28px;
+  height: 28px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.checkbox-label:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  opacity: 0;
+  transform: translate(-50%, -60%) rotate(45deg);
+  transition: opacity 0.2s ease;
+}
+.checkbox-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+.checkbox-input:hover + .checkbox-label {
+  border-color: var(--text-tertiary);
+}
+.checkbox-input:focus-visible + .checkbox-label {
+  outline: 2px solid var(--brand-orange);
+  outline-offset: 2px;
+}
+.checkbox-input:checked + .checkbox-label {
+  background-color: var(--brand-charcoal);
+  border-color: var(--brand-charcoal);
+}
+.checkbox-input:checked + .checkbox-label:after {
+  opacity: 1;
+}
+/* Some selected (e.g. a "select all" over a partly ticked list): a white dash. */
+.checkbox-input:indeterminate + .checkbox-label {
+  background-color: var(--brand-charcoal);
+  border-color: var(--brand-charcoal);
+}
+.checkbox-input:indeterminate + .checkbox-label:after {
+  opacity: 1;
+  width: 8px;
+  height: 0;
+  border-bottom-width: 2px;
+  border-right: none;
+  transform: translate(-50%, -50%);
+}
+.checkbox-input:disabled,
+.checkbox-input:disabled + .checkbox-label {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.checkbox-text-label {
+  font-size: 12px;
+  line-height: 1.4;
+  min-width: 0;
+  color: var(--text-primary);
+  cursor: pointer;
+  user-select: none;
+}
+.checkbox-input:disabled ~ .checkbox-text-label {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.checkbox-small .checkbox-round,
+.checkbox-small .checkbox-label {
+  width: 18px;
+  height: 18px;
+}
+.checkbox-small .checkbox-label:after {
+  width: 5px;
+  height: 9px;
+}
+.checkbox-small .checkbox-text-label {
+  display: flex;
+  align-items: center;
+  height: 18px;
+  font-size: 12px;
+}
+
+.checkbox-medium.checkbox-container {
+  gap: 10px;
+}
+.checkbox-medium .checkbox-round,
+.checkbox-medium .checkbox-label {
+  width: 22px;
+  height: 22px;
+}
+.checkbox-medium .checkbox-label:after {
+  width: 6px;
+  height: 10px;
+}
+.checkbox-medium .checkbox-text-label {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .checkbox-text-label,
+  .checkbox-small .checkbox-text-label {
+    font-size: 11px;
+  }
+  .checkbox-medium .checkbox-text-label {
+    font-size: 12px;
+  }
+}
+
+/* Brand helper classes (DESIGN.md §8) */
+.text-brand {
+  color: var(--brand-orange-text);
+}
+.bg-brand {
+  background-color: var(--brand-orange);
+  color: var(--brand-on-orange);
+}
+.bg-brand:hover {
+  background-color: var(--brand-orange-hover);
+}
+.brand-link {
+  color: var(--brand-orange-text);
+  font-weight: 500;
+  transition: opacity 150ms;
+}
+.brand-link:hover {
+  opacity: 0.8;
+}
+.brand-divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--light-gray);
 }
 
 /* Lead-capture floating widget: a soft, continuous orange glow. */

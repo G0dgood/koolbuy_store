@@ -60,20 +60,20 @@ const CookiePreferencesPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-off-white flex flex-col font-sans text-black">
       <Header />
 
       <main className="flex-1 w-full bg-white">
         {/* Privacy Hero */}
-        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-[#1D3557] overflow-hidden">
+        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-brand-charcoal overflow-hidden">
           <Image
             src="/brandImage/cat_body.png"
             alt="Privacy Framework"
-            fill
+            fill sizes="100vw"
             className="object-cover opacity-100 grayscale brightness-50"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1D3557] via-[#1D3557]/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-charcoal via-brand-charcoal/80 to-transparent" />
 
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 relative z-10">
             <motion.div
@@ -82,14 +82,14 @@ const CookiePreferencesPage = () => {
               transition={{ duration: 0.7 }}
               className="flex flex-col gap-6"
             >
-              <span className="text-[#8CB7F5] font-black tracking-[0.4em] uppercase text-xs">
+              <span className="text-brand-orange font-bold tracking-[0.4em] uppercase text-xs">
                 Privacy Orchestration
               </span>
-              <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none font-inter">
+              <h1 className="text-4xl md:text-7xl font-bold text-white tracking-tighter leading-none font-inter">
                 Cookie <br />
-                <span className="text-[#8CB7F5]">Preferences.</span>
+                <span className="text-white/60">Preferences.</span>
               </h1>
-              <p className="text-blue-100/60 max-w-2xl text-lg md:text-xl font-medium">
+              <p className="text-light-gray/60 max-w-2xl text-lg md:text-xl font-medium">
                 Your digital footprint is as unique as your sensory profile. At
                 Koolbuy Store, we prioritize your data sovereignty with
                 artisanal precision.
@@ -103,7 +103,7 @@ const CookiePreferencesPage = () => {
             {/* Policy Narrative */}
             <div className="lg:col-span-5 flex flex-col gap-10">
               <div className="flex flex-col gap-6">
-                <h2 className="text-3xl md:text-5xl font-black text-[#1D3557] tracking-tight">
+                <h2 className="text-3xl md:text-5xl font-bold text-brand-charcoal tracking-tight">
                   Our Integrity.
                 </h2>
                 <p className="text-gray-500 leading-relaxed text-lg">
@@ -114,10 +114,10 @@ const CookiePreferencesPage = () => {
                 </p>
               </div>
 
-              <div className="bg-blue-50/50 p-10 rounded-[40px] border border-blue-50 flex flex-col gap-6">
-                <div className="flex items-center gap-4 text-brand-blue">
+              <div className="bg-brand-orange-soft/50 p-10 rounded-3xl border border-brand-orange/15 flex flex-col gap-6">
+                <div className="flex items-center gap-4 text-brand-orange-text">
                   <HiShieldCheck size={32} />
-                  <h4 className="text-xl font-black text-[#1D3557]">
+                  <h4 className="text-xl font-bold text-brand-charcoal">
                     Data Sovereignty
                   </h4>
                 </div>
@@ -130,7 +130,7 @@ const CookiePreferencesPage = () => {
             </div>
 
             {/* Interactive Preference Control */}
-            <div className="lg:col-span-7 bg-white border border-gray-100 rounded-[48px] shadow-sm overflow-hidden">
+            <div className="lg:col-span-7 bg-white border border-gray-100 rounded-3xl shadow-sm overflow-hidden">
               <div className="p-8 md:p-12 flex flex-col gap-10">
                 {cookieTypes.map((cookie, i) => (
                   <div
@@ -138,11 +138,11 @@ const CookiePreferencesPage = () => {
                     className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-10 border-b border-gray-50 last:border-0 last:pb-0"
                   >
                     <div className="flex items-start gap-6 flex-1">
-                      <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-[#1D3557] shrink-0">
+                      <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-brand-charcoal shrink-0">
                         {cookie.icon}
                       </div>
                       <div className="flex flex-col gap-1">
-                        <h4 className="font-black text-[#1D3557] uppercase tracking-tighter">
+                        <h4 className="font-bold text-brand-charcoal uppercase tracking-tighter">
                           {cookie.title}
                         </h4>
                         <p className="text-xs text-gray-400 leading-relaxed max-w-md">
@@ -152,7 +152,7 @@ const CookiePreferencesPage = () => {
                     </div>
                     <div className="flex items-center gap-4">
                       {cookie.required ? (
-                        <span className="text-[10px] font-black uppercase tracking-widest text-brand-blue bg-brand-blue-light px-4 py-2 rounded-full">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-brand-orange-text bg-brand-orange-soft px-4 py-2 rounded-full">
                           Required
                         </span>
                       ) : (
@@ -162,7 +162,7 @@ const CookiePreferencesPage = () => {
                               cookie.id as keyof typeof preferences,
                             )
                           }
-                          className={`relative w-14 h-8 rounded-full transition-colors duration-300 ${preferences[cookie.id as keyof typeof preferences] ? "bg-brand-blue" : "bg-gray-200"}`}
+                          className={`relative w-14 h-8 rounded-full transition-colors duration-300 ${preferences[cookie.id as keyof typeof preferences] ? "bg-brand-charcoal" : "bg-gray-200"}`}
                         >
                           <motion.div
                             animate={{
@@ -188,13 +188,13 @@ const CookiePreferencesPage = () => {
                 <div className="flex gap-4 w-full md:w-auto">
                   <Button
                     variant="ghost"
-                    className="flex-1 md:flex-none border-gray-200 text-[#1D3557] px-10 h-14 font-black uppercase tracking-widest text-sm"
+                    className="flex-1 md:flex-none border-gray-200 text-brand-charcoal px-10 h-14 font-bold uppercase tracking-widest text-sm"
                   >
                     Reject All
                   </Button>
                   <Button
                     variant="primary"
-                    className="flex-1 md:flex-none bg-[#1D3557] text-white px-10 h-14 font-black uppercase tracking-widest text-sm"
+                    className="flex-1 md:flex-none bg-brand-charcoal text-white px-10 h-14 font-bold uppercase tracking-widest text-sm"
                   >
                     Accept All
                   </Button>

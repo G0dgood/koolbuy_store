@@ -22,7 +22,7 @@ export const ActionIcons: React.FC = () => {
       <button
         type="button"
         onClick={openLogin}
-        className="flex flex-col items-center cursor-pointer group text-gray-700 hover:text-[#FF7A00] transition-colors outline-none"
+        className="flex flex-col items-center cursor-pointer group text-gray-700 hover:text-brand-orange-text transition-colors outline-none"
       >
         <Icon name="profile" size="md" />
         <span className="text-[10px] font-medium mt-1 hidden md:block">
@@ -35,14 +35,14 @@ export const ActionIcons: React.FC = () => {
         href="/cart"
         className={`relative flex flex-col items-center group transition-colors ${
           isActive("/cart")
-            ? "text-[#FF7A00] font-bold"
-            : "text-gray-700 hover:text-[#FF7A00]"
+            ? "text-brand-orange-text font-bold"
+            : "text-gray-700 hover:text-brand-orange-text"
         }`}
       >
         <div className="relative">
           <Icon name="My_cart" size="md" />
           {cartCount > 0 && (
-            <span className="absolute -top-1.5 -right-1.5 bg-[#FF7A00] text-white text-[10px] font-bold min-w-4 h-4 flex items-center justify-center rounded-full px-1 border-2 border-white shadow-xs">
+            <span className="absolute -top-1.5 -right-1.5 bg-brand-orange text-white text-[10px] font-bold min-w-4 h-4 flex items-center justify-center rounded-full px-1 border-2 border-white shadow-xs">
               {cartCount}
             </span>
           )}

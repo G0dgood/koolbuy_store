@@ -483,7 +483,7 @@ export default function ReviewListing() {
                               <span className="text-[11px] font-medium text-gray-400">
                                 SKU: {product.sku}
                               </span>
-                              <span className="text-[11px] font-semibold text-brand-blue">
+                              <span className="text-[11px] font-semibold text-brand-orange-text">
                                 {product.price}
                               </span>
                             </div>
@@ -514,7 +514,7 @@ export default function ReviewListing() {
 
                       {/* Total Reviews */}
                       <td>
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-brand-blue">
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-brand-orange-soft text-brand-orange-text">
                           {product.totalReviews} Reviews
                         </span>
                       </td>
@@ -524,13 +524,13 @@ export default function ReviewListing() {
                         <Button
                           variant="outline"
                           shape="rounded-sm"
-                          className="px-3 py-1.5 text-xs font-semibold text-[#00BCD4] border-[#00BCD4]/30 hover:bg-[#00BCD4]/10 transition-all flex items-center gap-1.5 cursor-pointer"
+                          className="px-3 py-1.5 text-xs font-semibold text-brand-orange-text border-brand-orange/30 hover:bg-brand-orange/10 transition-all flex items-center gap-1.5 cursor-pointer"
                           onClick={() => {
                             setSelectedProductForReviews(product);
                             setIsReviewsDrawerOpen(true);
                           }}
                         >
-                          <HiOutlineEye className="w-4 h-4 text-[#00BCD4]" />
+                          <HiOutlineEye className="w-4 h-4 text-brand-orange-text" />
                           <span>View Reviews</span>
                         </Button>
                       </td>
@@ -541,7 +541,7 @@ export default function ReviewListing() {
                           <Button
                             variant="outline"
                             shape="rounded-sm"
-                            className="px-3 py-1.5 text-xs font-semibold text-gray-700 hover:text-brand-blue hover:bg-gray-50 border-gray-200 transition-all flex items-center gap-1.5 cursor-pointer"
+                            className="px-3 py-1.5 text-xs font-semibold text-gray-700 hover:text-brand-orange-text hover:bg-gray-50 border-gray-200 transition-all flex items-center gap-1.5 cursor-pointer"
                             onClick={() => {
                               setSelectedProductForEdit(product);
                               setIsEditDrawerOpen(true);
@@ -601,11 +601,11 @@ export default function ReviewListing() {
                 />
               </div>
               <div className="flex flex-col gap-1 min-w-0">
-                <h4 className="text-sm font-bold text-[#1D3557] truncate">
+                <h4 className="text-sm font-bold text-brand-charcoal truncate">
                   {selectedProductForReviews.name}
                 </h4>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-semibold text-brand-blue">
+                  <span className="text-xs font-semibold text-brand-orange-text">
                     {selectedProductForReviews.price}
                   </span>
                   <span className="text-[11px] text-gray-400 font-medium">
@@ -659,7 +659,7 @@ export default function ReviewListing() {
                           <span className="text-xs font-bold text-gray-800">
                             {rev.customer.name}
                           </span>
-                          <span className="text-[10px] text-gray-400 font-medium">
+                          <span className="text-[11px] text-gray-400 font-medium">
                             {rev.customer.email}
                           </span>
                         </div>
@@ -690,7 +690,7 @@ export default function ReviewListing() {
                       <Button
                         variant="outline"
                         shape="rounded-sm"
-                        className="px-2.5 py-1 text-[11px] font-semibold text-brand-blue hover:bg-blue-50 transition-all flex items-center gap-1 cursor-pointer"
+                        className="px-2.5 py-1 text-[11px] font-semibold text-brand-orange-text hover:bg-brand-orange-soft transition-all flex items-center gap-1 cursor-pointer"
                         onClick={() => {
                           setReviewToReply(rev);
                           setIsReplyDrawerOpen(true);

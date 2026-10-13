@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Checkbox from "@/app/components/Checkbox";
 import { Icon } from "@/app/components/Icon";
 import { Button } from "@/app/components/Button";
 import { Input, Textarea } from "@/app/components/Form/Inputs";
@@ -244,7 +245,7 @@ export default function AppStylingPage() {
                   onClick={() => setActiveSection(item.id as StylingSection)}
                   className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
                     isActive
-                      ? "bg-brand-blue text-white shadow-sm shadow-brand-blue/20"
+                      ? "bg-brand-blue text-white "
                       : "bg-white text-gray-600 border border-gray-100 hover:bg-gray-50 hover:text-brand-blue"
                   }`}
                 >
@@ -758,16 +759,15 @@ export default function AppStylingPage() {
                       Display "Home", "Categories", "BNPL", "Account".
                     </span>
                   </div>
-                  <input
-                    type="checkbox"
+                  <Checkbox
+                    size="medium"
                     checked={tabBarStyle.showLabels}
-                    onChange={(e) =>
+                    onChange={(checked) =>
                       setTabBarStyle({
                         ...tabBarStyle,
-                        showLabels: e.target.checked,
+                        showLabels: checked,
                       })
                     }
-                    className="w-5 h-5 text-brand-blue accent-brand-blue rounded cursor-pointer"
                   />
                 </div>
 
@@ -781,16 +781,15 @@ export default function AppStylingPage() {
                       scan.
                     </span>
                   </div>
-                  <input
-                    type="checkbox"
+                  <Checkbox
+                    size="medium"
                     checked={tabBarStyle.showCenterActionButton}
-                    onChange={(e) =>
+                    onChange={(checked) =>
                       setTabBarStyle({
                         ...tabBarStyle,
-                        showCenterActionButton: e.target.checked,
+                        showCenterActionButton: checked,
                       })
                     }
-                    className="w-5 h-5 text-brand-blue accent-brand-blue rounded cursor-pointer"
                   />
                 </div>
               </div>
@@ -850,19 +849,18 @@ export default function AppStylingPage() {
 
                     <div className="flex items-center gap-3 ml-auto">
                       <label className="flex items-center gap-2 text-xs font-semibold text-gray-600 cursor-pointer">
-                        <input
-                          type="checkbox"
+                        <Checkbox
+                          size="small"
                           checked={slide.active}
-                          onChange={(e) => {
+                          onChange={(checked) => {
                             setTutorialSlides((prev) =>
                               prev.map((s) =>
                                 s.id === slide.id
-                                  ? { ...s, active: e.target.checked }
+                                  ? { ...s, active: checked }
                                   : s,
                               ),
                             );
                           }}
-                          className="w-4 h-4 text-brand-blue accent-brand-blue rounded"
                         />
                         Active
                       </label>
@@ -1093,7 +1091,7 @@ export default function AppStylingPage() {
                         <h4 className="text-xs font-bold text-gray-900">
                           {sec.name}
                         </h4>
-                        <span className="text-[10px] text-gray-400 capitalize">
+                        <span className="text-[11px] text-gray-400 capitalize">
                           Layout: {sec.layout}
                         </span>
                       </div>
@@ -1117,20 +1115,18 @@ export default function AppStylingPage() {
                           { label: "Banner Carousel", value: "carousel" },
                         ]}
                       />
-                      <input
-                        type="checkbox"
+                      <Checkbox
+                        size="medium"
                         checked={sec.enabled}
-                        onChange={(e) => {
+                        onChange={(checked) => {
                           setHomeSections((prev) =>
                             prev.map((s) =>
                               s.id === sec.id
-                                ? { ...s, enabled: e.target.checked }
+                                ? { ...s, enabled: checked }
                                 : s,
                             ),
                           );
                         }}
-                        className="w-5 h-5 text-brand-blue accent-brand-blue rounded cursor-pointer"
-                        title="Toggle section visibility"
                       />
                     </div>
                   </div>
@@ -1148,7 +1144,7 @@ export default function AppStylingPage() {
                 <HiEye className="w-4 h-4 text-brand-blue" />
                 Live Mobile Theme Preview
               </span>
-              <span className="text-[10px] font-mono font-bold text-gray-400">
+              <span className="text-[11px] font-mono font-bold text-gray-400">
                 iOS / Android
               </span>
             </div>
@@ -1165,9 +1161,9 @@ export default function AppStylingPage() {
               <div className="absolute top-0 inset-x-0 h-5 bg-gray-900 rounded-b-xl w-32 mx-auto z-30" />
 
               {/* Status Bar */}
-              <div className="pt-2 px-6 flex justify-between items-center text-[10px] font-semibold text-gray-800 z-20">
+              <div className="pt-2 px-6 flex justify-between items-center text-[11px] font-semibold text-gray-800 z-20">
                 <span>9:41</span>
-                <div className="flex items-center gap-1 text-[10px]">
+                <div className="flex items-center gap-1 text-[11px]">
                   <span>5G</span>
                   <div className="w-4 h-2 rounded border border-gray-800 bg-gray-800" />
                 </div>
@@ -1205,7 +1201,7 @@ export default function AppStylingPage() {
                     borderRadius: homeStyle.cardCornerRadius,
                   }}
                 >
-                  <span className="text-[9px] font-extrabold uppercase tracking-wider bg-white/20 px-2 py-0.5 rounded w-fit">
+                  <span className="text-[11px] font-bold uppercase tracking-wider bg-white/20 px-2 py-0.5 rounded w-fit">
                     Zero Interest BNPL
                   </span>
                   <h4 className="text-xs font-bold leading-tight mt-1">
@@ -1218,7 +1214,7 @@ export default function AppStylingPage() {
                   {["Chest", "Solar", "Display", "Inverter"].map((cat, i) => (
                     <div
                       key={i}
-                      className="px-2.5 py-1 rounded-full text-[10px] font-bold shrink-0 border"
+                      className="px-2.5 py-1 rounded-full text-[11px] font-bold shrink-0 border"
                       style={{
                         backgroundColor:
                           i === 0 ? colors.primary : colors.surface,
@@ -1261,20 +1257,20 @@ export default function AppStylingPage() {
                         />
                       </div>
                       <span
-                        className="text-[10px] font-bold truncate"
+                        className="text-[11px] font-bold truncate"
                         style={{ color: colors.textPrimary }}
                       >
                         {p.name}
                       </span>
                       <span
-                        className="text-[10px] font-black"
+                        className="text-[11px] font-bold"
                         style={{ color: colors.primary }}
                       >
                         {p.price}
                       </span>
                       <button
                         type="button"
-                        className="w-full py-1 text-[9px] font-bold text-white rounded mt-1"
+                        className="w-full py-1 text-[11px] font-bold text-white rounded mt-1"
                         style={{ backgroundColor: colors.primary }}
                       >
                         Buy Now

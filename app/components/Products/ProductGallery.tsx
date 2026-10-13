@@ -39,7 +39,7 @@ export const ProductGallery: React.FC = () => {
           type="button"
           onClick={scrollUp}
           aria-label="Scroll thumbnails up"
-          className="hidden sm:flex w-7 h-7 rounded-full bg-white hover:bg-gray-100 border border-gray-200 items-center justify-center text-gray-500 hover:text-gray-900 transition-colors cursor-pointer shadow-xs"
+          className="hidden sm:flex w-7 h-7 rounded-full bg-white hover:bg-gray-100 border border-gray-200 items-center justify-center text-gray-500 hover:text-gray-900 transition-colors cursor-pointer "
         >
           <FiChevronUp size={16} />
         </button>
@@ -55,10 +55,10 @@ export const ProductGallery: React.FC = () => {
               type="button"
               onClick={() => setActiveImage(img)}
               className={`
-                relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-xl overflow-hidden bg-white p-1.5 transition-all cursor-pointer shadow-xs
+                relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-xl overflow-hidden bg-white p-1.5 transition-all cursor-pointer 
                 ${
                   activeImage === img
-                    ? "border-2 border-[#FF7A00] ring-2 ring-[#FF7A00]/20"
+                    ? "border-2 border-brand-orange ring-2 ring-brand-orange/20"
                     : "border border-gray-200 hover:border-gray-400 opacity-80 hover:opacity-100"
                 }
               `}
@@ -67,7 +67,7 @@ export const ProductGallery: React.FC = () => {
                 <Image
                   src={img}
                   alt={`Freezer view ${idx + 1}`}
-                  fill
+                  fill sizes="64px"
                   className="object-contain"
                 />
               </div>
@@ -80,7 +80,7 @@ export const ProductGallery: React.FC = () => {
           type="button"
           onClick={scrollDown}
           aria-label="Scroll thumbnails down"
-          className="hidden sm:flex w-7 h-7 rounded-full bg-white hover:bg-gray-100 border border-gray-200 items-center justify-center text-gray-500 hover:text-gray-900 transition-colors cursor-pointer shadow-xs"
+          className="hidden sm:flex w-7 h-7 rounded-full bg-white hover:bg-gray-100 border border-gray-200 items-center justify-center text-gray-500 hover:text-gray-900 transition-colors cursor-pointer "
         >
           <FiChevronDown size={16} />
         </button>
@@ -91,7 +91,7 @@ export const ProductGallery: React.FC = () => {
         <Image
           src={activeImage}
           alt="Koolbuy Solar Freezer Unit"
-          fill
+          fill sizes="(max-width: 768px) 100vw, 50vw"
           className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
           priority
         />

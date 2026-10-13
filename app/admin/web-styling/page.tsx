@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Checkbox from "@/app/components/Checkbox";
 import { Icon } from "@/app/components/Icon";
 import { Button } from "@/app/components/Button";
 import { Input, Textarea } from "@/app/components/Form/Inputs";
@@ -136,16 +137,16 @@ export default function WebStylingPage() {
       id: "status-2",
       status: "Processing",
       iconName: "Shipped",
-      color: "text-blue-500",
-      bg: "bg-blue-50",
+      color: "text-brand-orange-text",
+      bg: "bg-brand-orange-soft",
       description: "Warehouse picking and packaging in progress.",
     },
     {
       id: "status-3",
       status: "Shipped / In Transit",
       iconName: "Shipped",
-      color: "text-indigo-600",
-      bg: "bg-indigo-50",
+      color: "text-brand-orange-text",
+      bg: "bg-brand-orange-soft",
       description: "Dispatched with logistics carrier, on transit.",
     },
     {
@@ -197,7 +198,7 @@ export default function WebStylingPage() {
         <div>
           {/* <div className="flex items-center gap-2.5">
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Web Styling</h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-50 text-brand-blue border border-blue-100">
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-orange-soft text-brand-orange-text border border-brand-orange/15">
               Desktop & Web Storefront
             </span>
           </div>
@@ -232,8 +233,8 @@ export default function WebStylingPage() {
                   onClick={() => setActiveTab(item.id as WebStylingTab)}
                   className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
                     isActive
-                      ? "bg-brand-blue text-white shadow-sm shadow-brand-blue/20"
-                      : "bg-white text-gray-600 border border-gray-100 hover:bg-gray-50 hover:text-brand-blue"
+                      ? "bg-brand-charcoal text-white "
+                      : "bg-white text-gray-600 border border-gray-100 hover:bg-gray-50 hover:text-brand-orange-text"
                   }`}
                 >
                   <IconComponent
@@ -313,7 +314,7 @@ export default function WebStylingPage() {
                 <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
                   Live Browser Tab Appearance
                 </span>
-                <div className="bg-white rounded-t-xl px-4 py-2 border-b-2 border-brand-blue flex items-center gap-2 max-w-xs shadow-xs">
+                <div className="bg-white rounded-t-xl px-4 py-2 border-b-2 border-brand-charcoal flex items-center gap-2 max-w-xs shadow-xs">
                   <img
                     src={favicon.url}
                     alt="Favicon"
@@ -353,7 +354,7 @@ export default function WebStylingPage() {
               {/* Customer Sign In / Up */}
               <div className="flex flex-col gap-4 p-5 rounded-xl border border-gray-100 bg-gray-50/40">
                 <div className="flex items-center gap-2">
-                  <HiPhoto className="w-4 h-4 text-brand-blue" />
+                  <HiPhoto className="w-4 h-4 text-brand-orange-text" />
                   <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider">
                     Customer Sign In & Sign Up Split Image
                   </h4>
@@ -403,7 +404,7 @@ export default function WebStylingPage() {
               {/* Admin Portal Sign In Image */}
               <div className="flex flex-col gap-4 p-5 rounded-xl border border-gray-100 bg-gray-50/40">
                 <div className="flex items-center gap-2">
-                  <HiLockClosed className="w-4 h-4 text-brand-blue" />
+                  <HiLockClosed className="w-4 h-4 text-brand-orange-text" />
                   <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider">
                     Admin Portal Sign In Artwork
                   </h4>
@@ -441,7 +442,7 @@ export default function WebStylingPage() {
                       alt="Admin Auth"
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-blue-900/40 flex items-end p-3">
+                    <div className="absolute inset-0 bg-brand-charcoal/40 flex items-end p-3">
                       <p className="text-xs font-bold text-white leading-tight">
                         {authImages.adminHeadline}
                       </p>
@@ -745,19 +746,18 @@ export default function WebStylingPage() {
                       </span>
                     </div>
 
-                    <input
-                      type="checkbox"
+                    <Checkbox
+                      size="medium"
                       checked={pay.enabled}
-                      onChange={(e) => {
+                      onChange={(checked) => {
                         setPaymentIcons((prev) =>
                           prev.map((p) =>
                             p.id === pay.id
-                              ? { ...p, enabled: e.target.checked }
+                              ? { ...p, enabled: checked }
                               : p,
                           ),
                         );
                       }}
-                      className="w-5 h-5 text-brand-blue accent-brand-blue rounded cursor-pointer"
                     />
                   </div>
                 ))}
@@ -829,13 +829,13 @@ export default function WebStylingPage() {
 
         {/* Right Column: Live Desktop Browser Preview (4 cols) */}
         <div className="xl:col-span-4 sticky top-6">
-          <div className="bg-white rounded-3xl border border-gray-200 shadow-xl p-5 flex flex-col items-center">
+          <div className="bg-white rounded-3xl border border-gray-200 shadow-md p-5 flex flex-col items-center">
             <div className="w-full flex justify-between items-center mb-3">
               <span className="text-xs font-bold text-gray-800 flex items-center gap-1.5">
-                <HiEye className="w-4 h-4 text-brand-blue" />
+                <HiEye className="w-4 h-4 text-brand-orange-text" />
                 Live Web Storefront Preview
               </span>
-              <span className="text-[10px] font-mono font-bold text-gray-400">
+              <span className="text-[11px] font-mono font-bold text-gray-400">
                 Desktop Web
               </span>
             </div>
@@ -849,7 +849,7 @@ export default function WebStylingPage() {
                   <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
                   <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
                 </div>
-                <div className="flex-1 bg-white rounded-md px-2 py-0.5 text-[9px] font-semibold text-gray-700 flex items-center gap-1 truncate shadow-xs">
+                <div className="flex-1 bg-white rounded-md px-2 py-0.5 text-[11px] font-semibold text-gray-700 flex items-center gap-1 truncate shadow-xs">
                   <img
                     src={favicon.url}
                     alt="fav"
@@ -863,7 +863,7 @@ export default function WebStylingPage() {
               <div
                 className={`px-3 py-2 flex items-center justify-between border-b ${
                   homePageStyle.headerStyle === "brand-blue"
-                    ? "bg-[#2196F3] text-white"
+                    ? "bg-brand-orange text-white"
                     : "bg-white text-gray-800 border-gray-100"
                 }`}
               >
@@ -872,7 +872,7 @@ export default function WebStylingPage() {
                   alt="Koolbuy"
                   className="h-4 object-contain"
                 />
-                <div className="flex items-center gap-2 text-[9px] font-bold">
+                <div className="flex items-center gap-2 text-[11px] font-bold">
                   <span>Shop</span>
                   <span>BNPL</span>
                   <span>Contact</span>
@@ -882,15 +882,15 @@ export default function WebStylingPage() {
               {/* Web Storefront Body Preview */}
               <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-3 custom-scrollbar text-left">
                 {/* Hero Banner Sample */}
-                <div className="w-full h-28 rounded-xl bg-linear-to-r from-blue-600 to-sky-500 text-white p-3 flex flex-col justify-between shadow-xs">
-                  <span className="text-[8px] font-extrabold uppercase tracking-wider bg-white/20 px-2 py-0.5 rounded w-fit">
+                <div className="w-full h-28 rounded-xl bg-linear-to-r from-brand-charcoal to-brand-charcoal text-white p-3 flex flex-col justify-between shadow-xs">
+                  <span className="text-[8px] font-bold uppercase tracking-wider bg-white/20 px-2 py-0.5 rounded w-fit">
                     Koolbuy Web Store
                   </span>
                   <div>
                     <h4 className="text-xs font-bold leading-tight">
                       Solar Inverter Freezers
                     </h4>
-                    <p className="text-[9px] text-blue-100">
+                    <p className="text-[11px] text-light-gray">
                       Own from ₦15,000/month with zero deposit
                     </p>
                   </div>
@@ -904,10 +904,10 @@ export default function WebStylingPage() {
                       alt="P1"
                       className="h-14 object-contain mx-auto"
                     />
-                    <span className="text-[9px] font-bold text-gray-800 truncate">
+                    <span className="text-[11px] font-bold text-gray-800 truncate">
                       Scanfrost 600L
                     </span>
-                    <span className="text-[9px] font-bold text-brand-blue">
+                    <span className="text-[11px] font-bold text-brand-orange-text">
                       ₦1,406,000
                     </span>
                   </div>
@@ -917,10 +917,10 @@ export default function WebStylingPage() {
                       alt="P2"
                       className="h-14 object-contain mx-auto"
                     />
-                    <span className="text-[9px] font-bold text-gray-800 truncate">
+                    <span className="text-[11px] font-bold text-gray-800 truncate">
                       Bruhm 100ah Solar
                     </span>
-                    <span className="text-[9px] font-bold text-brand-blue">
+                    <span className="text-[11px] font-bold text-brand-orange-text">
                       ₦1,662,370
                     </span>
                   </div>

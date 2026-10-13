@@ -1,104 +1,77 @@
 "use client";
 
-import React from 'react';
-// import { CheckIcon } from '@radix-ui/react-icons';
-import { IoCheckmark } from 'react-icons/io5';
+import React, { useId } from "react";
+
+/* Checkbox, the same as the Koolboks Sales CRM's components/ui/Checkbox.tsx
+   (styles in app/globals.css: .checkbox-container …). A real <input> sits
+   invisibly over a drawn box, so clicks, the keyboard and screen readers all
+   work; checked is charcoal (black) with a white tick.
+   Sizes: "small" (18px) for table rows, filters, lists and checklists (the
+   default here, as most of this app's checkboxes are in tables), "medium"
+   (22px) for an option in a form. The older "sm" / "md" / "lg" names still work. */
 
 interface CheckboxProps {
-	id?: string;
-	checked: boolean;
-	onChange: (checked: boolean) => void;
-	label?: string;
-	disabled?: boolean;
-	size?: 'sm' | 'md' | 'lg';
-	variant?: 'default' | 'error';
-	className?: string;
-	children?: React.ReactNode;
+  id?: string;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  label?: string;
+  disabled?: boolean;
+  size?: "small" | "medium" | "default" | "sm" | "md" | "lg";
+  /** Kept for older callers; has no effect. */
+  variant?: "default" | "error";
+  className?: string;
+  /** Label content, when it's more than plain text. */
+  children?: React.ReactNode;
+  /** The accessible name when there's no visible label (e.g. a table's row checkbox). */
+  ariaLabel?: string;
 }
 
+const SIZE_CLASS: Record<NonNullable<CheckboxProps["size"]>, string> = {
+  small: "checkbox-small",
+  sm: "checkbox-small",
+  md: "checkbox-small",
+  medium: "checkbox-medium",
+  lg: "checkbox-medium",
+  default: "",
+};
+
 const Checkbox: React.FC<CheckboxProps> = ({
-	id,
-	checked,
-	onChange,
-	label,
-	disabled = false,
-	size = 'md',
-	// variant = 'default',
-	className = '',
-	children
+  id,
+  checked,
+  onChange,
+  label,
+  disabled = false,
+  size = "small",
+  className = "",
+  children,
+  ariaLabel,
 }) => {
-	const sizeClasses = {
-		sm: 'w-3 h-3',
-		md: 'w-4 h-4',
-		lg: 'w-5 h-5'
-	};
+  const generatedId = useId();
+  const checkboxId = id || generatedId;
+  const text = children ?? label;
 
-	const iconSizeClasses = {
-		sm: 'w-3 h-3',
-		md: 'w-4 h-4',
-		lg: 'w-5 h-5'
-	};
-
-	const baseClasses = `
-		inline-flex items-center justify-center
-		rounded
-		transition-all duration-200 ease-in-out
-		cursor-pointer
-		focus:outline-none
-		${sizeClasses[size]}
-	`;
-
-	const variantClasses = ``;
-
-	const checkedClasses = checked
-		? `bg-white text-brand-blue border border-brand-blue`
-		: `bg-neutral-50 border border-neutral-300`;
-
-	const disabledClasses = disabled
-		? `opacity-50 cursor-not-allowed`
-		: '';
-
-	const handleClick = () => {
-		if (!disabled) {
-			onChange(!checked);
-		}
-	};
-
-	const handleKeyDown = (e: React.KeyboardEvent) => {
-		if (e.key === ' ' || e.key === 'Enter') {
-			e.preventDefault();
-			handleClick();
-		}
-	};
-
-	return (
-		<div className={`flex items-center space-x-3  ${className}`}>
-			<div
-				id={id}
-				role="checkbox"
-				aria-checked={checked}
-				aria-disabled={disabled}
-				tabIndex={disabled ? -1 : 0}
-				className={`${baseClasses} ${variantClasses} ${checkedClasses} ${disabledClasses}`}
-				onClick={handleClick}
-				onKeyDown={handleKeyDown}
-			>
-				{checked && (
-					<IoCheckmark className={`${iconSizeClasses[size]} transition-opacity duration-200`} />
-				)}
-			</div>
-			{(label || children) && (
-				<label
-					htmlFor={id}
-					className={`font-sans font-normal text-[10px] md:text-[12px] leading-[23px] tracking-[-0.03em] text-[rgba(31,31,31,0.5)] cursor-pointer ${disabled ? 'opacity-50 cursor-not-allowed' : ''
-						}`}
-					onClick={handleClick}
-				>
-					{children || label}
-				</label>
-			)}
-		</div>
-	);
+  return (
+    <div className={`checkbox-container ${SIZE_CLASS[size]} ${className}`}>
+      <div className="checkbox-round">
+        <input
+          type="checkbox"
+          id={checkboxId}
+          checked={checked}
+          onChange={(e) => onChange(e.target.checked)}
+          disabled={disabled}
+          aria-label={text ? undefined : ariaLabel}
+          className="checkbox-input"
+        />
+        {/* The drawn box. A span, not a label, so the checkbox can sit inside a caller's <label>; the invisible input on top takes the clicks. */}
+        <span className="checkbox-label" aria-hidden />
+      </div>
+      {text && (
+        <label htmlFor={checkboxId} className="checkbox-text-label">
+          {text}
+        </label>
+      )}
+    </div>
+  );
 };
 
 export default Checkbox;

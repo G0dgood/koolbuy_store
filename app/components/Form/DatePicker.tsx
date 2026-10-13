@@ -83,7 +83,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
         onClick={() => handleDateSelect(d)}
         className={`
           w-8 h-8 text-xs font-semibold rounded-md flex items-center justify-center transition-colors
-          ${isSelected ? "bg-brand-blue text-white" : isToday ? "text-brand-blue font-bold" : "text-gray-700 hover:bg-gray-100"}
+          ${isSelected ? "bg-brand-charcoal text-white" : isToday ? "text-brand-orange-text font-bold" : "text-gray-700 hover:bg-gray-100"}
         `}
       >
         {d}
@@ -98,7 +98,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
         onClick={() => setIsOpen(!isOpen)}
         className={`
           flex items-center gap-2 w-full bg-white border rounded-md py-2.5 px-4 text-sm transition-all
-          ${isOpen ? "border-brand-blue ring-2 ring-brand-blue/20" : "border-gray-200 hover:border-gray-300"}
+          ${isOpen ? "border-brand-charcoal ring-2 ring-brand-orange/20" : "border-gray-200 hover:border-gray-300"}
         `}
       >
         <Icon name="calendar_today" size="sm" className="text-gray-400" />
@@ -108,7 +108,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
       </button>
 
       {isOpen && (
-        <div className="absolute z-20 w-[280px] mt-1.5 bg-white border border-gray-100 rounded-md shadow-xl p-4 animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="absolute z-20 w-[280px] mt-1.5 bg-white border border-gray-100 rounded-md shadow-md p-4 animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="flex items-center justify-between mb-4">
              <button onClick={handlePrevMonth} className="p-1 hover:bg-gray-100 rounded text-gray-400">
                 <Icon name="chevron_left" size="sm" />
@@ -132,8 +132,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
           </div>
 
           <div className="flex gap-2 mt-6 pt-4 border-t border-gray-100">
-            <Button variant="ghost" size="sm" className="flex-1 text-brand-blue border border-gray-200" onClick={handleClear}>Clear</Button>
-            <Button variant="ghost" size="sm" className="flex-1 text-brand-blue border border-gray-200" onClick={handleToday}>Today</Button>
+            <Button variant="ghost" size="sm" className="flex-1 text-brand-orange-text border border-gray-200" onClick={handleClear}>Clear</Button>
+            <Button variant="ghost" size="sm" className="flex-1 text-brand-orange-text border border-gray-200" onClick={handleToday}>Today</Button>
           </div>
         </div>
       )}

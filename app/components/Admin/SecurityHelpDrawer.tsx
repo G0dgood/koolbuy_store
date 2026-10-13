@@ -37,28 +37,28 @@ export function SecurityHelpDrawer({ isOpen, onClose }: SecurityHelpDrawerProps)
   return (
     <Drawer isOpen={isOpen} onClose={onClose} title="Security & Access Help">
       <div className="flex flex-col h-full gap-8">
-        <div className="flex items-center gap-4 p-5 bg-blue-50/50 border border-blue-100 rounded-2xl">
-           <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-brand-blue shadow-sm shrink-0">
+        <div className="flex items-center gap-4 p-5 bg-brand-orange-soft/50 border border-brand-orange/15 rounded-2xl">
+           <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-brand-orange-text shadow-sm shrink-0">
               <Icon name="live_help" folder="icon" size="sm" />
            </div>
            <div className="flex flex-col gap-0.5">
-              <span className="text-[13px] font-black text-[#1D3557]">Need immediate assistance?</span>
-              <span className="text-[11px] font-medium text-blue-600 leading-tight">Our security team is available 24/7 for account emergencies.</span>
+              <span className="text-[13px] font-bold text-brand-charcoal">Need immediate assistance?</span>
+              <span className="text-[11px] font-medium text-brand-orange-text leading-tight">Our security team is available 24/7 for account emergencies.</span>
            </div>
         </div>
 
         <div className="flex flex-col gap-2">
-           <p className="text-[10px] font-black text-gray-400 border-b border-gray-50 pb-2 uppercase tracking-[0.2em] px-2 mb-2">
+           <p className="text-[11px] font-bold text-gray-400 border-b border-gray-50 pb-2 uppercase tracking-wider px-2 mb-2">
               Security Guidelines
            </p>
            <div className="flex flex-col gap-3">
               {helpItems.map((item, i) => (
                 <div key={i} className="flex items-start gap-4 p-4 rounded-xl hover:bg-gray-50 transition-all group">
-                   <div className="mt-1 w-8 h-8 rounded-lg bg-white border border-gray-100 flex items-center justify-center text-gray-400 group-hover:text-brand-blue group-hover:border-brand-blue/20 transition-all shadow-sm shrink-0">
+                   <div className="mt-1 w-8 h-8 rounded-lg bg-white border border-gray-100 flex items-center justify-center text-gray-400 group-hover:text-brand-orange-text group-hover:border-brand-charcoal/20 transition-all shadow-sm shrink-0">
                       <Icon name={item.icon} folder="icon" size="xs" />
                    </div>
                    <div className="flex flex-col gap-1">
-                      <span className="text-[12px] font-black text-[#1D3557] group-hover:text-brand-blue transition-colors">{item.title}</span>
+                      <span className="text-[12px] font-bold text-brand-charcoal group-hover:text-brand-orange-text transition-colors">{item.title}</span>
                       <span className="text-[11px] font-medium text-gray-400 leading-relaxed">{item.description}</span>
                    </div>
                 </div>
@@ -69,7 +69,7 @@ export function SecurityHelpDrawer({ isOpen, onClose }: SecurityHelpDrawerProps)
         <div className="mt-auto flex flex-col gap-3 pb-8">
            <Button 
             variant="primary" 
-            className="w-full h-10 sm:h-12 text-[11px] font-black uppercase tracking-widest shadow-lg shadow-blue-100"
+            className="w-full h-10 sm:h-12 text-[11px] font-bold uppercase tracking-wider "
             onClick={() => {
               console.log("Escalating to support...");
               onClose();
@@ -77,7 +77,7 @@ export function SecurityHelpDrawer({ isOpen, onClose }: SecurityHelpDrawerProps)
            >
               Message Security Team
            </Button>
-           <p className="text-[10px] font-bold text-gray-400 text-center uppercase tracking-widest">
+           <p className="text-[11px] font-bold text-gray-400 text-center uppercase tracking-wider">
               Response time: ~5 minutes
            </p>
         </div>

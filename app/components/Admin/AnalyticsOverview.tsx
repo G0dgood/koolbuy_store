@@ -27,9 +27,9 @@ export const AnalyticsOverview: React.FC = () => {
   }, [isDropdownOpen]);
 
   return (
-    <div className="bg-white p-6 sm:p-8 rounded-[6px] border border-gray-100 shadow-sm flex flex-col gap-8">
+    <div className="bg-white p-6 sm:p-8 rounded-lg border border-gray-100 shadow-sm flex flex-col gap-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
-        <h3 className="text-[20px] font-black text-[#1D3557]">Report for this week</h3>
+        <h3 className="text-[20px] font-bold text-brand-charcoal">Report for this week</h3>
         <div className="flex items-center justify-between w-full sm:w-auto gap-4">
           <TabFilter
             tabs={["This week", "Last week"]}
@@ -38,7 +38,7 @@ export const AnalyticsOverview: React.FC = () => {
           />
           <div className="relative" ref={dropdownRef}>
             <button
-              className={`p-1 rounded-[6px] transition-all ${isDropdownOpen ? "bg-brand-blue-light text-brand-blue shadow-sm" : "text-gray-400 hover:bg-gray-50"}`}
+              className={`p-1 rounded-lg transition-all ${isDropdownOpen ? "bg-brand-orange-soft text-brand-orange-text " : "text-gray-400 hover:bg-gray-50"}`}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               <Icon name="DotsHorizontal" folder="dashboardIcon" size="sm" />
@@ -46,7 +46,7 @@ export const AnalyticsOverview: React.FC = () => {
 
             {isDropdownOpen && (
               <div className="absolute top-full right-0 mt-2 z-50">
-                <DropdownMenu width={240} className="shadow-2xl border-gray-100">
+                <DropdownMenu width={240} className="shadow-md border-gray-100">
                   <DropdownItem
                     label="Print Detailed Report"
                     subtext="Generate printer-friendly PDF"
@@ -81,8 +81,8 @@ export const AnalyticsOverview: React.FC = () => {
           { label: "Revenue", val: "250k" },
         ].map((stat) => (
           <div key={stat.label} className="flex flex-col gap-1 lg:border-gray-100 lg:border-l lg:pl-4 first:border-l-0 first:pl-0">
-            <span className="text-[22px] font-black text-[#1D3557] leading-none">{stat.val}</span>
-            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{stat.label}</span>
+            <span className="text-[22px] font-bold text-brand-charcoal leading-none">{stat.val}</span>
+            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{stat.label}</span>
           </div>
         ))}
       </div>
@@ -95,13 +95,13 @@ export const AnalyticsOverview: React.FC = () => {
             datasets: [{
               label: 'Revenue',
               data: [18, 18.5, 17, 16, 11, 12, 11],
-              borderColor: '#00BCD4',
+              borderColor: '#F57E16',
               borderWidth: 3,
               fill: true,
-              backgroundColor: 'rgba(33, 150, 243, 0.05)',
+              backgroundColor: 'rgba(245, 126, 22, 0.05)',
               tension: 0.4,
               pointRadius: (context: any) => context.dataIndex === 4 ? 6 : 0,
-              pointBackgroundColor: '#00BCD4',
+              pointBackgroundColor: '#F57E16',
               pointBorderColor: '#fff',
               pointBorderWidth: 2,
             }]

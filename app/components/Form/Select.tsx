@@ -70,8 +70,8 @@ export const Select = <T extends boolean = false>({
           }
         }}
         className={`
-          flex items-center justify-between w-full bg-white border rounded-[6px] py-2.5 px-4 text-sm transition-all cursor-pointer outline-none
-          ${isOpen ? "border-brand-blue ring-2 ring-brand-blue/20" : "border-gray-200 hover:border-gray-300"}
+          flex items-center justify-between w-full bg-white border rounded-lg py-2.5 px-4 text-sm transition-all cursor-pointer outline-none
+          ${isOpen ? "border-brand-charcoal ring-2 ring-brand-orange/20" : "border-gray-200 hover:border-gray-300"}
         `}
       >
         <div className="flex flex-wrap gap-1.5 flex-1 min-w-0">
@@ -101,7 +101,7 @@ export const Select = <T extends boolean = false>({
       </div>
 
       {isOpen && (
-        <div className="absolute z-50 w-full mt-1 bg-white border border-gray-100 rounded-[6px] shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="absolute z-50 w-full mt-1 bg-white border border-gray-100 rounded-lg shadow-md overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
           <ul className="max-h-60 overflow-y-auto">
             {options.map((option) => {
               const isSelected = isMulti
@@ -114,7 +114,7 @@ export const Select = <T extends boolean = false>({
                     onClick={() => handleSelect(option)}
                     className={`
                       w-full text-left px-4 py-3 text-sm transition-colors
-                      ${isSelected ? "bg-brand-blue-light text-brand-blue font-black" : "text-gray-700 hover:bg-gray-50"}
+                      ${isSelected ? "bg-brand-orange-soft text-brand-orange-text font-bold" : "text-gray-700 hover:bg-gray-50"}
                     `}
                   >
                     {option.label}

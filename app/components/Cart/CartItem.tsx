@@ -44,13 +44,13 @@ const CartItem: React.FC<CartItemProps> = ({ id, title, price, image, quantity, 
          {/* Item Image */}
          <div className="w-20 h-20 flex-shrink-0 border border-gray-100 rounded-md p-2 flex items-center justify-center bg-white">
             <div className="relative w-full h-full">
-               <Image src={image} alt={title} fill className="object-contain" />
+               <Image src={image} alt={title} fill sizes="80px" className="object-contain" />
             </div>
          </div>
 
          {/* Item Details */}
          <div className="flex-1 flex flex-col gap-1.5">
-            <h3 className="text-gray-900 font-medium text-sm leading-tight hover:text-brand-blue cursor-pointer transition-colors max-w-md">
+            <h3 className="text-gray-900 font-medium text-sm leading-tight hover:text-brand-orange-text cursor-pointer transition-colors max-w-md">
                {title}
             </h3>
             <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-400">
@@ -63,14 +63,14 @@ const CartItem: React.FC<CartItemProps> = ({ id, title, price, image, quantity, 
                <Button
                   onClick={() => removeFromCart(id)}
                   variant="ghost"
-                  className="!text-[#EB001B] text-xs font-bold px-3 py-1.5 border border-gray-200 hover:bg-red-50 shadow-none h-auto"
+                  className="!text-[#EB001B] text-xs font-bold px-3 py-1.5 border border-gray-200 hover:bg-red-50 h-auto"
                >
                   Remove
                </Button>
                <Button
                   onClick={handleSaveForLater}
                   variant="ghost"
-                  className="text-brand-blue text-xs font-bold px-3 py-1.5 border border-gray-200 hover:bg-brand-blue-light shadow-none h-auto"
+                  className="text-brand-orange-text text-xs font-bold px-3 py-1.5 border border-gray-200 hover:bg-brand-orange-soft h-auto"
                >
                   Save for later
                </Button>

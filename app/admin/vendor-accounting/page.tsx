@@ -10,9 +10,6 @@ import { Button } from "@/app/components/Button";
 import { Icon } from "@/app/components/Icon";
 import { Modal, ModalBody } from "@/app/components/Modal";
 import {
-  HiOutlineCurrencyDollar,
-  HiOutlineTruck,
-  HiOutlineReceiptPercent,
   HiOutlineDocumentArrowDown,
   HiOutlineBuildingStorefront,
 } from "react-icons/hi2";
@@ -277,7 +274,7 @@ export default function VendorAccountingPage() {
             variant="blue"
             size="md"
             iconLeft={<HiOutlineDocumentArrowDown size={18} />}
-            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold shadow-sm shadow-brand-blue/20 bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white"
+            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold bg-brand-orange hover:bg-brand-orange/90 text-white"
             onClick={() => setIsExportModalOpen(true)}
           >
             Export Settlements
@@ -295,7 +292,6 @@ export default function VendorAccountingPage() {
           trendValue="16.4%"
           trendIsUp={true}
           subtitle="Gross merchandise value"
-          badgeIcon={<HiOutlineCurrencyDollar className="w-4 h-4" />}
         />
 
         {/* 2. Total Delivery Fees */}
@@ -306,7 +302,6 @@ export default function VendorAccountingPage() {
           trendValue="8.2%"
           trendIsUp={true}
           subtitle="Logistics fulfillment value"
-          badgeIcon={<HiOutlineTruck className="w-4 h-4" />}
         />
 
         {/* 3. Total Admin Commissions */}
@@ -317,7 +312,6 @@ export default function VendorAccountingPage() {
           trendValue="14.5%"
           trendIsUp={true}
           subtitle="10% average platform cut"
-          badgeIcon={<HiOutlineReceiptPercent className="w-4 h-4" />}
         />
       </div>
 
@@ -397,14 +391,14 @@ export default function VendorAccountingPage() {
                     {/* Vendor Name */}
                     <td>
                       <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-md bg-blue-50 text-brand-blue flex items-center justify-center shrink-0">
+                        <div className="w-7 h-7 rounded-md bg-brand-orange-soft text-brand-orange-text flex items-center justify-center shrink-0">
                           <HiOutlineBuildingStorefront size={14} />
                         </div>
                         <div className="flex flex-col">
                           <span className="font-bold text-xs text-gray-900 whitespace-nowrap">
                             {row.vendorName}
                           </span>
-                          <span className="text-[10px] font-mono text-gray-400">
+                          <span className="text-[11px] font-mono text-gray-400">
                             {row.orderId}
                           </span>
                         </div>
@@ -422,7 +416,7 @@ export default function VendorAccountingPage() {
                     </td>
 
                     {/* Admin Commissions */}
-                    <td className="font-semibold text-xs text-brand-blue whitespace-nowrap">
+                    <td className="font-semibold text-xs text-brand-orange-text whitespace-nowrap">
                       {row.adminCommissions}
                     </td>
 
@@ -440,7 +434,7 @@ export default function VendorAccountingPage() {
                     {/* Promo [Admin] */}
                     <td className="text-xs whitespace-nowrap">
                       {row.promoAdmin !== "₦0" ? (
-                        <span className="font-semibold text-cyan-700 bg-cyan-50 px-2 py-0.5 rounded border border-cyan-100">
+                        <span className="font-semibold text-brand-orange-text bg-brand-orange-soft px-2 py-0.5 rounded border border-brand-orange/15">
                           {row.promoAdmin}
                         </span>
                       ) : (
@@ -471,7 +465,7 @@ export default function VendorAccountingPage() {
                     </td>
 
                     {/* Vendor Earning */}
-                    <td className="font-black text-xs text-emerald-600 whitespace-nowrap">
+                    <td className="font-bold text-xs text-emerald-600 whitespace-nowrap">
                       {row.vendorEarning}
                     </td>
                   </tr>
@@ -529,7 +523,7 @@ export default function VendorAccountingPage() {
             <div className="space-y-4 pt-2">
               <div className="flex items-center justify-between border-b border-gray-100 pb-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 rounded-lg bg-brand-blue-light text-brand-blue flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center">
                     <HiOutlineBuildingStorefront className="w-5 h-5" />
                   </div>
                   <div>
@@ -565,7 +559,7 @@ export default function VendorAccountingPage() {
                   <span className="text-gray-500">
                     Admin Commission (Platform cut)
                   </span>
-                  <span className="font-bold text-brand-blue">
+                  <span className="font-bold text-brand-orange-text">
                     -{selectedSettlement.adminCommissions}
                   </span>
                 </div>
@@ -599,7 +593,7 @@ export default function VendorAccountingPage() {
                   <span className="font-bold text-emerald-900 text-xs">
                     Net Vendor Earning
                   </span>
-                  <span className="font-black text-emerald-600 text-sm">
+                  <span className="font-bold text-emerald-600 text-sm">
                     {selectedSettlement.vendorEarning}
                   </span>
                 </div>
@@ -608,7 +602,7 @@ export default function VendorAccountingPage() {
               <div className="flex justify-end pt-2">
                 <Button
                   size="sm"
-                  className="bg-[#00BCD4] text-white"
+                  className="bg-brand-orange text-white"
                   onClick={() => setSelectedSettlement(null)}
                 >
                   Close
@@ -626,7 +620,7 @@ export default function VendorAccountingPage() {
       >
         <ModalBody>
           <div className="space-y-4 pt-2 text-center">
-            <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center mx-auto">
               <HiOutlineDocumentArrowDown className="w-6 h-6" />
             </div>
             <div>
@@ -648,7 +642,7 @@ export default function VendorAccountingPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-[#00BCD4] text-white"
+                className="bg-brand-orange text-white"
                 onClick={() => setIsExportModalOpen(false)}
               >
                 Download CSV

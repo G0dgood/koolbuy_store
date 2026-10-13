@@ -22,7 +22,7 @@ const modules = [
 ];
 
 const roles = [
- { id: "sa", name: "Super Admin", color: "bg-blue-500", users: 3 },
+ { id: "sa", name: "Super Admin", color: "bg-brand-orange", users: 3 },
  { id: "ed", name: "Editor", color: "bg-emerald-500", users: 8 },
  { id: "om", name: "Order Mgr", color: "bg-amber-500", users: 5 },
  { id: "st", name: "Support", color: "bg-rose-500", users: 12 },
@@ -94,8 +94,8 @@ export default function PermissionsAccordion() {
    {/* Action Bar */}
    <div className="flex justify-between items-end gap-6 mb-2">
     <div className="flex flex-col gap-1">
-     <h2 className="text-xl font-black text-[#1D3557]">Administrative Permissions</h2>
-     <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest leading-none">Role Based Governance</p>
+     <h2 className="text-xl font-bold text-brand-charcoal">Administrative Permissions</h2>
+     <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider leading-none">Role Based Governance</p>
     </div>
     <div className="flex gap-3">
      <Button
@@ -110,7 +110,7 @@ export default function PermissionsAccordion() {
    </div>
 
    {/* Global Filter Bar */}
-   <div className="bg-white rounded-[6px] border border-[#1C1C1C1A] p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between">
+   <div className="bg-white rounded-lg border border-[#1C1C1C1A] p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between">
     <div className="flex items-center gap-3 w-full lg:w-auto">
      <Dropdown
       options={[
@@ -128,7 +128,7 @@ export default function PermissionsAccordion() {
       size="md"
       variant="minimal"
      />
-     <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest whitespace-nowrap hidden xl:block">:Filter Sector</span>
+     <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider whitespace-nowrap hidden xl:block">:Filter Sector</span>
     </div>
 
     <div className="flex flex-wrap items-center gap-3 w-full xl:w-auto">
@@ -139,7 +139,7 @@ export default function PermissionsAccordion() {
        value={searchQuery}
        onChange={(e) => setSearchQuery(e.target.value)}
       />
-      <Icon name="search-01" folder="dashboardIcon" size="xs" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-300 group-focus-within:text-brand-blue transition-colors" />
+      <Icon name="search-01" folder="dashboardIcon" size="xs" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-300 group-focus-within:text-brand-orange-text transition-colors" />
      </div>
      <RowsPerPage value={rowsPerPage} onChange={setRowsPerPage} />
     </div>
@@ -151,7 +151,7 @@ export default function PermissionsAccordion() {
      const isExpanded = expandedRoleId === role.id;
 
      return (
-      <div key={role.id} className="bg-white rounded-[6px] border border-[#1C1C1C1A] overflow-hidden flex flex-col transition-all duration-300 hover:shadow-md">
+      <div key={role.id} className="bg-white rounded-lg border border-[#1C1C1C1A] overflow-hidden flex flex-col transition-all duration-300 hover:shadow-md">
        {/* Accordion Header */}
        <button
         onClick={() => setExpandedRoleId(isExpanded ? null : role.id)}
@@ -160,8 +160,8 @@ export default function PermissionsAccordion() {
         <div className="flex items-center gap-4">
          <div className={`w-3 h-3 rounded-full ${role.color} shadow-sm`} />
          <div className="flex flex-col gap-0.5">
-          <span className="text-base font-black text-[#1D3557]">{role.name}</span>
-          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{role.users} Active Users Assigned</span>
+          <span className="text-base font-bold text-brand-charcoal">{role.name}</span>
+          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{role.users} Active Users Assigned</span>
          </div>
         </div>
         <div className="flex items-center gap-4">
@@ -194,15 +194,15 @@ export default function PermissionsAccordion() {
             <thead>
              <tr className="bg-gray-50/20 border-b border-gray-100">
               <th className="py-4 pl-8 text-left">
-               <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">System Module</span>
+               <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">System Module</span>
               </th>
               {privileges.map(p => (
                <th key={p.id} className="py-4 text-center">
-                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{p.label}</span>
+                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{p.label}</span>
                </th>
               ))}
               <th className="py-4 pr-8 text-right w-24">
-               <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Toggle All</span>
+               <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Toggle All</span>
               </th>
              </tr>
             </thead>
@@ -217,8 +217,8 @@ export default function PermissionsAccordion() {
               >
                <td className="py-4 pl-8">
                 <div className="flex flex-col">
-                 <span className="text-[13px] font-black text-[#1D3557]">{module.label}</span>
-                 <span className="text-[9px] font-bold text-gray-300 uppercase tracking-widest">{module.category} Sector</span>
+                 <span className="text-[13px] font-bold text-brand-charcoal">{module.label}</span>
+                 <span className="text-[11px] font-bold text-gray-300 uppercase tracking-wider">{module.category} Sector</span>
                 </div>
                </td>
                {privileges.map(p => (
@@ -236,7 +236,7 @@ export default function PermissionsAccordion() {
                <td className="py-4 pr-8 text-right">
                 <button
                  onClick={() => toggleModuleRow(role.id, module.id)}
-                 className="w-7 h-7 rounded-lg bg-gray-50 flex items-center justify-center text-gray-300 hover:bg-brand-blue-light hover:text-brand-blue transition-all"
+                 className="w-7 h-7 rounded-lg bg-gray-50 flex items-center justify-center text-gray-300 hover:bg-brand-orange-soft hover:text-brand-orange-text transition-all"
                 >
                  <Icon name="verified" folder="icon" size="md" />
                 </button>
@@ -248,7 +248,7 @@ export default function PermissionsAccordion() {
 
            {filteredModules.length === 0 && (
             <div className="flex flex-col items-center justify-center py-20">
-             <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest italic opacity-60">No modules found for current filters</span>
+             <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider italic opacity-60">No modules found for current filters</span>
             </div>
            )}
           </div>

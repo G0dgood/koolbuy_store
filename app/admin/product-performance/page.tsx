@@ -9,9 +9,6 @@ import { TabFilter } from "../../components/Admin/TabFilter";
 import { Pagination } from "../../components/Admin/Pagination";
 import { RowsPerPage } from "@/app/components/rows-per-page";
 import {
-  HiOutlineArrowTrendingUp,
-  HiOutlineHeart,
-  HiOutlineArrowPath,
   HiOutlineDocumentArrowDown,
 } from "react-icons/hi2";
 
@@ -275,7 +272,7 @@ export default function ProductPerformancePage() {
           <Button
             variant="primary"
             shape="rounded-sm"
-            className="flex items-center gap-2 bg-[#00BCD4] hover:bg-[#00acc1] text-white text-xs font-semibold px-4 py-2 cursor-pointer shadow-sm"
+            className="flex items-center gap-2 bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold px-4 py-2 cursor-pointer "
             onClick={() => alert("Exporting Product Performance Report...")}
           >
             <HiOutlineDocumentArrowDown className="w-4 h-4" />
@@ -293,9 +290,6 @@ export default function ProductPerformancePage() {
           trendValue="18.4%"
           trendIsUp={true}
           subtitle="Best seller: Scanfrost 600L Inverter"
-          badgeIcon={
-            <HiOutlineArrowTrendingUp className="w-4 h-4 text-emerald-600" />
-          }
         />
         <StatCard
           size="sm"
@@ -304,7 +298,6 @@ export default function ProductPerformancePage() {
           trendValue="24.2%"
           trendIsUp={true}
           subtitle="Top wishlisted: Bruhm 100ah Solar"
-          badgeIcon={<HiOutlineHeart className="w-4 h-4 text-rose-500" />}
         />
         <StatCard
           size="sm"
@@ -313,7 +306,6 @@ export default function ProductPerformancePage() {
           trendValue="1.8%"
           trendIsUp={false}
           subtitle="Lowest return rate across catalog"
-          badgeIcon={<HiOutlineArrowPath className="w-4 h-4 text-amber-500" />}
         />
       </div>
 
@@ -450,12 +442,12 @@ export default function ProductPerformancePage() {
                       {activeTab === "Top Performing Products" && (
                         <>
                           <td className="text-center">
-                            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-brand-blue">
+                            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-brand-orange-soft text-brand-orange-text">
                               {item.unitsSold} units
                             </span>
                           </td>
                           <td>
-                            <span className="text-sm font-black text-gray-900">
+                            <span className="text-sm font-bold text-gray-900">
                               {item.totalRevenue}
                             </span>
                           </td>

@@ -86,8 +86,8 @@ const staffData = [
 ];
 
 const roleColors = {
-  "Super Admin": "text-[#1D3557] bg-gray-100",
-  Editor: "text-blue-500 bg-blue-50",
+  "Super Admin": "text-brand-charcoal bg-gray-100",
+  Editor: "text-brand-orange-text bg-brand-orange-soft",
   "Order Manager": "text-emerald-500 bg-emerald-50",
   Support: "text-amber-500 bg-amber-50",
 };
@@ -139,7 +139,7 @@ export default function UsersManagement() {
           iconLeft={
             <Icon name="circle-plus" folder="dashboardIcon" size="sm" />
           }
-          className="shadow-md shadow-blue-50 h-10 px-4 text-[10px] font-black uppercase tracking-widest whitespace-nowrap"
+          className=" h-10 px-4 text-[11px] font-bold uppercase tracking-wider whitespace-nowrap"
           onClick={() => setIsAddUserModalOpen(true)}
         >
           Add User
@@ -176,14 +176,14 @@ export default function UsersManagement() {
               <Button
                 variant="outline"
                 shape="rounded-sm"
-                className="p-2.5! text-gray-400 hover:text-brand-blue hover:bg-brand-blue-light border-gray-100 transition-all"
+                className="p-2.5! text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft border-gray-100 transition-all"
               >
                 <Icon name="filter" folder="dashboardIcon" size="sm" />
               </Button>
               <Button
                 variant="outline"
                 shape="rounded-sm"
-                className="p-2.5! text-gray-400 hover:text-brand-blue hover:bg-brand-blue-light border-gray-100 transition-all"
+                className="p-2.5! text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft border-gray-100 transition-all"
                 onClick={() => setIsMoreActionsOpen(true)}
               >
                 <Icon name="DotsHorizontal" folder="dashboardIcon" size="sm" />
@@ -233,10 +233,10 @@ export default function UsersManagement() {
                         />
                       </div>
                       <div className="flex flex-col min-w-0">
-                        <span className="text-sm font-black text-[#1D3557] group-hover:text-brand-blue transition-colors truncate">
+                        <span className="text-sm font-bold text-brand-charcoal group-hover:text-brand-orange-text transition-colors truncate">
                           {user.name}
                         </span>
-                        <span className="text-[10px] font-medium text-gray-400 truncate tracking-tight">
+                        <span className="text-[11px] font-medium text-gray-400 truncate tracking-tight">
                           {user.email}
                         </span>
                       </div>
@@ -244,7 +244,7 @@ export default function UsersManagement() {
                   </td>
                   <td>
                     <span
-                      className={`px-3 py-1.5 rounded-[6px] text-[10px] font-black uppercase tracking-widest ${roleColors[user.role as keyof typeof roleColors]}`}
+                      className={`px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-wider ${roleColors[user.role as keyof typeof roleColors]}`}
                     >
                       {user.role}
                     </span>
@@ -256,10 +256,10 @@ export default function UsersManagement() {
                   </td>
                   <td>
                     <div className="flex flex-col gap-0.5">
-                      <span className="text-xs font-black text-[#1D3557]">
+                      <span className="text-xs font-bold text-brand-charcoal">
                         {user.lastActive}
                       </span>
-                      <span className="text-[9px] font-bold text-gray-400 uppercase tracking-tighter opacity-70">
+                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-tighter opacity-70">
                         Synchronized
                       </span>
                     </div>
@@ -270,7 +270,7 @@ export default function UsersManagement() {
                         className={`w-1.5 h-1.5 rounded-full ${user.status === "Active" ? "bg-emerald-500 animate-pulse" : "bg-gray-300"}`}
                       />
                       <span
-                        className={`px-2.5 py-1 rounded-[6px] text-[10px] font-black ${statusStyles[user.status as keyof typeof statusStyles]}`}
+                        className={`px-2.5 py-1 rounded-lg text-[11px] font-bold ${statusStyles[user.status as keyof typeof statusStyles]}`}
                       >
                         {user.status}
                       </span>
@@ -281,7 +281,7 @@ export default function UsersManagement() {
                       <Button
                         variant="outline"
                         shape="rounded-sm"
-                        className="p-1.5! text-gray-400 hover:text-brand-blue hover:bg-brand-blue-light border-gray-100 transition-all"
+                        className="p-1.5! text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft border-gray-100 transition-all"
                         onClick={() => {
                           setSelectedStaff(user);
                           setIsStaffDetailOpen(true);
@@ -296,7 +296,7 @@ export default function UsersManagement() {
                       <Button
                         variant="outline"
                         shape="rounded-sm"
-                        className="p-1.5! text-gray-400 hover:text-brand-blue hover:bg-brand-blue-light border-gray-100 transition-all"
+                        className="p-1.5! text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft border-gray-100 transition-all"
                         onClick={() => {
                           setUserToEdit(user);
                           setIsEditModalOpen(true);

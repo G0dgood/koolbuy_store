@@ -109,7 +109,7 @@ export default function OrganisationProfilePage() {
           {/* Brand Summary Card */}
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col items-center text-center relative overflow-hidden">
             {/* Top Accent Pattern */}
-            <div className="absolute top-0 inset-x-0 h-24 bg-linear-to-r from-blue-600 via-brand-blue to-sky-500 opacity-90" />
+            <div className="absolute top-0 inset-x-0 h-24 bg-linear-to-r from-brand-charcoal via-brand-charcoal to-brand-orange-hover opacity-90" />
 
             {/* Logo Avatar */}
             <div className="relative mt-8 mb-4 w-28 h-28 rounded-2xl border-4 border-white overflow-hidden shadow-md bg-white p-2 flex items-center justify-center">
@@ -123,7 +123,7 @@ export default function OrganisationProfilePage() {
             <h2 className="text-lg font-bold text-gray-900">
               {orgData.legalName}
             </h2>
-            <span className="text-xs font-semibold text-brand-blue mt-0.5">
+            <span className="text-xs font-semibold text-brand-orange-text mt-0.5">
               Trading as: {orgData.tradingName}
             </span>
 
@@ -166,7 +166,7 @@ export default function OrganisationProfilePage() {
             {/* Change Logo Action */}
             <Button
               variant="outline"
-              className="mt-5 w-full text-xs font-semibold border-gray-200 text-gray-700 hover:text-brand-blue"
+              className="mt-5 w-full text-xs font-semibold border-gray-200 text-gray-700 hover:text-brand-orange-text"
               iconLeft={<HiPhoto className="w-4 h-4" />}
               onClick={() => setIsLogoModalOpen(true)}
             >
@@ -177,7 +177,7 @@ export default function OrganisationProfilePage() {
           {/* Corporate Channels Card */}
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col gap-4">
             <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
-              <HiGlobeAlt className="w-4 h-4 text-brand-blue" />
+              <HiGlobeAlt className="w-4 h-4 text-brand-orange-text" />
               Corporate Web Presence
             </h3>
 
@@ -186,11 +186,11 @@ export default function OrganisationProfilePage() {
                 href={orgData.website}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-between p-3 rounded-xl bg-gray-50/70 hover:bg-blue-50/50 hover:text-brand-blue transition-colors group"
+                className="flex items-center justify-between p-3 rounded-xl bg-gray-50/70 hover:bg-brand-orange-soft/50 hover:text-brand-orange-text transition-colors group"
               >
                 <div className="flex items-center gap-2">
-                  <HiGlobeAlt className="w-4 h-4 text-gray-400 group-hover:text-brand-blue" />
-                  <span className="font-semibold text-gray-800 group-hover:text-brand-blue">
+                  <HiGlobeAlt className="w-4 h-4 text-gray-400 group-hover:text-brand-orange-text" />
+                  <span className="font-semibold text-gray-800 group-hover:text-brand-orange-text">
                     Official Website
                   </span>
                 </div>
@@ -203,7 +203,7 @@ export default function OrganisationProfilePage() {
                 </span>
                 <a
                   href={`mailto:${orgData.supportEmail}`}
-                  className="font-semibold text-gray-800 hover:text-brand-blue"
+                  className="font-semibold text-gray-800 hover:text-brand-orange-text"
                 >
                   {orgData.supportEmail}
                 </a>
@@ -215,7 +215,7 @@ export default function OrganisationProfilePage() {
                 </span>
                 <a
                   href={`mailto:${orgData.primaryEmail}`}
-                  className="font-semibold text-gray-800 hover:text-brand-blue"
+                  className="font-semibold text-gray-800 hover:text-brand-orange-text"
                 >
                   {orgData.primaryEmail}
                 </a>
@@ -224,9 +224,9 @@ export default function OrganisationProfilePage() {
           </div>
 
           {/* Compliance & Regulatory Seal */}
-          <div className="bg-linear-to-br from-blue-50/80 via-white to-blue-50/40 rounded-2xl border border-blue-100 p-6 flex flex-col gap-3">
+          <div className="bg-linear-to-br from-brand-orange-soft/80 via-white to-brand-orange-soft/40 rounded-2xl border border-brand-orange/15 p-6 flex flex-col gap-3">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-brand-blue text-white flex items-center justify-center shrink-0 shadow-xs">
+              <div className="w-8 h-8 rounded-lg bg-brand-charcoal text-white flex items-center justify-center shrink-0 shadow-xs">
                 <HiShieldCheck className="w-5 h-5" />
               </div>
               <div>
@@ -251,7 +251,7 @@ export default function OrganisationProfilePage() {
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
             <div className="flex items-center justify-between border-b border-gray-50 pb-4">
               <div className="flex items-center gap-2">
-                <HiBuildingOffice2 className="w-5 h-5 text-brand-blue" />
+                <HiBuildingOffice2 className="w-5 h-5 text-brand-orange-text" />
                 <h3 className="text-base font-bold text-gray-900">
                   Legal Business Information
                 </h3>
@@ -363,7 +363,7 @@ export default function OrganisationProfilePage() {
           {/* Headquarters Location & Operating Coordinates */}
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
             <div className="flex items-center gap-2 border-b border-gray-50 pb-4">
-              <HiMapPin className="w-5 h-5 text-brand-blue" />
+              <HiMapPin className="w-5 h-5 text-brand-orange-text" />
               <h3 className="text-base font-bold text-gray-900">
                 Corporate Headquarters & Address
               </h3>
@@ -473,7 +473,7 @@ export default function OrganisationProfilePage() {
           {/* Official Communication & Banking Settlement */}
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
             <div className="flex items-center gap-2 border-b border-gray-50 pb-4">
-              <HiPhone className="w-5 h-5 text-brand-blue" />
+              <HiPhone className="w-5 h-5 text-brand-orange-text" />
               <h3 className="text-base font-bold text-gray-900">
                 Communication & Settlement Banking
               </h3>
@@ -588,7 +588,7 @@ export default function OrganisationProfilePage() {
               <span className="text-gray-500">Preset Default Logo:</span>
               <button
                 type="button"
-                className="text-brand-blue font-bold hover:underline"
+                className="text-brand-orange-text font-bold hover:underline"
                 onClick={() =>
                   setTempLogoUrl("/images/koolboks/koolbuy_logo.webp")
                 }

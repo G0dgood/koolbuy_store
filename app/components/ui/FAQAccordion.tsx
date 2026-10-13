@@ -13,16 +13,16 @@ interface FAQItemProps {
 
 export const FAQItem = ({ question, answer, isOpen, onToggle }: FAQItemProps) => {
   return (
-    <div className="border border-gray-100 rounded-2xl bg-white overflow-hidden transition-all hover:border-blue-100 hover:shadow-sm">
+    <div className="border border-gray-100 rounded-2xl bg-white overflow-hidden transition-all hover:border-brand-orange/15 hover:shadow-sm">
       <button
         onClick={onToggle}
         className="w-full flex items-center justify-between p-5 text-left transition-colors"
       >
-        <span className="text-sm md:text-base font-bold text-[#1D3557]">{question}</span>
+        <span className="text-sm md:text-base font-bold text-brand-charcoal">{question}</span>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
-          className={`flex-shrink-0 ml-4 ${isOpen ? "text-brand-blue" : "text-gray-400"}`}
+          className={`flex-shrink-0 ml-4 ${isOpen ? "text-brand-orange-text" : "text-gray-400"}`}
         >
           <HiChevronDown size={22} />
         </motion.div>

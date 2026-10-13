@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Inter, Outfit, Lato } from "next/font/google";
 import "./globals.css";
 import { MobileMenuProvider } from "./context/MobileMenuContext";
 import { AuthModalProvider } from "./context/AuthModalContext";
@@ -11,32 +10,7 @@ import { AuthModal } from "./components/Modal/AuthModal";
 import { Toaster } from "sonner";
 import { SocketProvider } from "@/app/context/SocketContext";
 import OfflineBanner from "@/app/components/ui/OfflineBanner";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-});
-
-const lato = Lato({
-  variable: "--font-lato",
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "700", "900"],
-});
+import { ADMIN_THEME_BOOT_SCRIPT } from "@/app/components/Admin/adminTheme";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -57,8 +31,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${outfit.variable} ${lato.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
+      // The admin theme script below may add `dark` to <html> before hydration.
+      suppressHydrationWarning
+      className="h-full antialiased"
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: ADMIN_THEME_BOOT_SCRIPT }} />
+      </head>
       <body className="min-h-full font-inter">
         <Toaster richColors closeButton position="bottom-right" />
         <SocketProvider>

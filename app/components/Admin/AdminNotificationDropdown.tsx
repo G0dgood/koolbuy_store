@@ -50,11 +50,14 @@ const notifications: NotificationEvent[] = [
 ];
 
 const typeStyles = {
-  order: { icon: "Cart", bg: "bg-blue-50 text-brand-blue", dot: "bg-brand-blue" },
+  order: { icon: "Cart", bg: "bg-brand-orange-soft text-brand-orange-text", dot: "bg-brand-charcoal" },
   stock: { icon: "inventory_2", bg: "bg-amber-50 text-amber-500", dot: "bg-amber-500" },
   customer: { icon: "people_alt", bg: "bg-emerald-50 text-emerald-500", dot: "bg-emerald-500" },
   alert: { icon: "error", bg: "bg-rose-50 text-rose-500", dot: "bg-rose-500" },
 };
+
+/** Unread notifications, for the header bell's badge. */
+export const unreadNotificationCount = notifications.filter((n) => !n.isRead).length;
 
 export const NotificationList: React.FC<{ onAction?: () => void }> = ({ onAction }) => {
   const router = useRouter();
@@ -63,11 +66,11 @@ export const NotificationList: React.FC<{ onAction?: () => void }> = ({ onAction
     <div className="flex flex-col">
       <div className="px-5 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/30">
         <div className="flex flex-col gap-0.5">
-          <span className="font-black text-[#1D3557] text-sm tracking-tight">System Notifications</span>
-          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Platform Events</span>
+          <span className="font-bold text-brand-charcoal text-sm tracking-tight">System Notifications</span>
+          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Platform Events</span>
         </div>
         <button 
-          className="text-[10px] font-black text-brand-blue uppercase hover:underline"
+          className="text-[11px] font-bold text-brand-orange-text uppercase hover:underline"
           onClick={onAction}
         >
           Mark all as read
@@ -80,7 +83,7 @@ export const NotificationList: React.FC<{ onAction?: () => void }> = ({ onAction
             key={item.id} 
             className={`
               px-5 py-4 hover:bg-gray-50/50 flex gap-4 cursor-pointer transition-all border-b border-gray-50/50 last:border-0 relative group
-              ${!item.isRead ? "bg-blue-50/10" : ""}
+              ${!item.isRead ? "bg-brand-orange-soft/10" : ""}
             `}
           >
             <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 border border-gray-100/50 ${typeStyles[item.type].bg}`}>
@@ -89,10 +92,10 @@ export const NotificationList: React.FC<{ onAction?: () => void }> = ({ onAction
             
             <div className="flex-1 flex flex-col min-w-0 pr-6">
               <div className="flex justify-between items-start gap-2">
-                <span className={`text-[13px] tracking-tight truncate ${!item.isRead ? "font-black text-[#1D3557]" : "font-bold text-gray-600"}`}>
+                <span className={`text-[13px] tracking-tight truncate ${!item.isRead ? "font-bold text-brand-charcoal" : "font-bold text-gray-600"}`}>
                   {item.title}
                 </span>
-                <span className="text-[10px] font-bold text-gray-400 whitespace-nowrap pt-0.5 uppercase tracking-tighter">{item.time}</span>
+                <span className="text-[11px] font-bold text-gray-400 whitespace-nowrap pt-0.5 uppercase tracking-tighter">{item.time}</span>
               </div>
               <p className={`text-[11px] leading-relaxed line-clamp-2 mt-1 ${!item.isRead ? "text-gray-900 font-bold" : "text-gray-400 font-medium"}`}>
                 {item.description}

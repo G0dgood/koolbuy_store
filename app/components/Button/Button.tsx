@@ -1,15 +1,30 @@
 import React from "react";
-import { Icon } from "../Icon";
-import { motion } from "framer-motion";
+import { ChevronDownIcon } from "@radix-ui/react-icons";
+
+/* Button in the Koolboks Sales CRM style (components/ui/Button.tsx in
+   koolboks_sales_crm_web, DESIGN.md §7):
+   - primary: charcoal fill, white text (the default button)
+   - accent: Koolboks orange, for the one key call-to-action on a screen
+   - outline: charcoal border and text; fills charcoal on hover
+   - secondary: light grey fill
+   - ghost: text only; light grey on hover
+   - danger: red fill
+   - link: orange text link
+   Sizes: md (16×8px padding, 12px text, ≈34px tall) is the standard; sm for
+   tight rows; lg only for hero banners. */
 
 type ButtonVariant =
   | "primary"
+  | "accent"
   | "secondary"
+  | "outline"
+  | "ghost"
+  | "danger"
+  | "link"
+  // Legacy names, kept so older screens keep working.
   | "blue"
   | "emerald"
-  | "rose"
-  | "outline"
-  | "ghost";
+  | "rose";
 type ButtonSize = "sm" | "md" | "lg";
 type ButtonShape = "rounded" | "rounded-sm" | "pill";
 
@@ -21,10 +36,39 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   iconRight?: React.ReactNode;
   showChevron?: boolean;
   isLoading?: boolean;
+  fullWidth?: boolean;
   href?: string;
   target?: string;
   rel?: string;
 }
+
+const base =
+  "inline-flex items-center justify-center gap-2 font-semibold whitespace-nowrap transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50 focus-visible:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed";
+
+const variants: Record<ButtonVariant, string> = {
+  primary: "bg-brand-charcoal text-white hover:bg-brand-charcoal/90 active:bg-brand-charcoal/80 border border-transparent",
+  accent: "bg-brand-orange text-white hover:bg-brand-orange-hover active:bg-brand-orange-hover border border-transparent",
+  secondary: "bg-gray-100 text-brand-charcoal hover:bg-gray-200 active:bg-gray-300 border border-transparent",
+  outline: "bg-transparent text-brand-charcoal border border-brand-charcoal hover:bg-brand-charcoal hover:text-white active:bg-brand-charcoal/90",
+  ghost: "bg-transparent text-brand-charcoal hover:bg-[#F1F3F5] active:bg-light-gray border border-transparent",
+  danger: "bg-red-600 text-white hover:bg-red-700 active:bg-red-800 border border-transparent",
+  link: "bg-transparent text-brand-orange-text hover:underline !p-0 !h-auto border-0",
+  blue: "bg-brand-charcoal text-white hover:bg-brand-charcoal/90 active:bg-brand-charcoal/80 border border-transparent",
+  emerald: "bg-brand-charcoal text-white hover:bg-brand-charcoal/90 active:bg-brand-charcoal/80 border border-transparent",
+  rose: "bg-error-soft text-error hover:bg-red-600 hover:text-white active:bg-red-700 border border-transparent",
+};
+
+const sizes: Record<ButtonSize, string> = {
+  sm: "px-3 py-2 text-[10px] md:text-[12px]",
+  md: "px-4 py-2 text-[10px] md:text-[12px]",
+  lg: "px-6 py-3 text-base",
+};
+
+const shapes: Record<ButtonShape, string> = {
+  rounded: "rounded-lg",
+  "rounded-sm": "rounded-lg",
+  pill: "rounded-full",
+};
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -37,6 +81,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       iconRight,
       showChevron,
       isLoading,
+      fullWidth,
       href,
       target,
       rel,
@@ -45,81 +90,44 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    // Base styles
-    const baseStyles =
-      "inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 cursor-pointer";
+    // A bg-/text- colour passed in className replaces the variant's, instead of
+    // racing it in the stylesheet.
+    const overrides = ["bg", "text"].filter((p) =>
+      new RegExp(`(^|\\s)${p}-(?!xs|sm|base|lg|xl|\\d|\\[\\d|left|center|right)`).test(className),
+    );
+    const variantClasses = (variants[variant] ?? variants.primary)
+      .split(/\s+/)
+      .filter((c) => !overrides.some((p) => new RegExp(`^([a-z-]+:)?${p}-`).test(c)))
+      .join(" ");
 
-    // Variant styles
-    const variants = {
-      primary:
-        "bg-primary text-white hover:bg-orange-300 active:bg-orange-700 focus:ring-brand-orange/50 border border-transparent ",
-      secondary:
-        "bg-white text-brand-blue border border-brand-blue hover:bg-brand-blue/5 active:bg-brand-blue/10 focus:ring-brand-blue/50 ",
-      blue:
-        "bg-brand-blue text-white hover:bg-brand-blue/90 active:bg-blue-700 focus:ring-brand-blue/50 border border-transparent shadow-sm shadow-brand-blue/20",
-      emerald:
-        "bg-brand-blue text-white hover:bg-blue-600 active:bg-blue-700 focus:ring-brand-blue/50 border border-transparent shadow-sm",
-      rose: "bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white active:bg-rose-600 focus:ring-rose-500/50 border border-transparent shadow-sm transition-all",
-      outline:
-        "bg-white text-[#1D3557] border border-gray-100 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-100/50 shadow-sm",
-      ghost:
-        "bg-transparent text-brand-blue hover:bg-brand-blue/10 active:bg-brand-blue/20 focus:ring-brand-blue/50",
-    };
-
-    // Size styles
-    const sizes = {
-      sm: "px-2.5 py-1 text-xs gap-1.5",
-      md: "px-3.5 py-1.5 text-sm gap-2 font-semibold",
-      lg: "px-5 py-2.5 text-base gap-3 font-bold",
-    };
-
-    // Shape styles
-    const shapes = {
-      rounded: "rounded-lg",
-      "rounded-sm": "rounded-[6px]",
-      pill: "rounded-full",
-    };
-
-    const combinedClassName = `
-      ${baseStyles}
-      ${variants[variant as keyof typeof variants] || variants.primary}
-      ${sizes[size as keyof typeof sizes] || sizes.md}
-      ${shapes[shape as keyof typeof shapes] || shapes.rounded}
-      ${isLoading ? "opacity-70 cursor-not-allowed" : ""}
-      ${className}
-    `
-      .trim()
-      .replace(/\s+/g, " ");
+    const combinedClassName = [
+      base,
+      variantClasses,
+      sizes[size] ?? sizes.md,
+      shapes[shape] ?? shapes.rounded,
+      fullWidth ? "w-full" : "",
+      isLoading ? "cursor-wait" : "",
+      // Buttons are flat, as in the CRM: shadow classes passed in are dropped.
+      className.replace(/(^|\s)(?:[a-z0-9-]+:)*!?shadow(?:-\S+)?(?=\s|$)/g, " "),
+    ]
+      .join(" ")
+      .replace(/\s+/g, " ")
+      .trim();
 
     const content = (
       <>
-        {isLoading && (
-          <motion.span
-            animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-            className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full mr-2"
-          />
+        {isLoading ? (
+          <span className="w-4 h-4 border-2 border-current/20 border-t-current rounded-full animate-spin shrink-0" aria-hidden />
+        ) : (
+          iconLeft && <span className="flex items-center justify-center shrink-0">{iconLeft}</span>
         )}
-        {!isLoading && iconLeft && (
-          <span className="flex justify-center items-center shrink-0">
-            {iconLeft}
-          </span>
-        )}
-        {children && (
-          <span className="flex items-center justify-center truncate">
-            {children}
-          </span>
-        )}
-        {!isLoading && iconRight && (
-          <span className="flex justify-center items-center shrink-0">
-            {iconRight}
-          </span>
-        )}
+        {/* gap: an icon passed inside the children keeps its distance from the text */}
+        {children && <span className="flex items-center justify-center gap-2 truncate">{children}</span>}
+        {!isLoading && iconRight && <span className="flex items-center justify-center shrink-0">{iconRight}</span>}
         {!isLoading && showChevron && (
-          <Icon
-            name="expand_more"
-            size={size === "sm" ? "xs" : "sm"}
-            className={`ml-1.5 shrink-0 transition-transform ${props["aria-expanded"] ? "rotate-180" : ""}`}
+          <ChevronDownIcon
+            className={`w-4 h-4 shrink-0 transition-transform ${props["aria-expanded"] ? "rotate-180" : ""}`}
+            aria-hidden
           />
         )}
       </>
@@ -132,7 +140,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           target={target}
           rel={target === "_blank" ? rel || "noopener noreferrer" : rel}
           className={combinedClassName}
-          {...(props as any)}
+          {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
         >
           {content}
         </a>
@@ -144,6 +152,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         className={combinedClassName}
         disabled={isLoading || props.disabled}
+        aria-busy={isLoading || undefined}
         {...props}
       >
         {content}

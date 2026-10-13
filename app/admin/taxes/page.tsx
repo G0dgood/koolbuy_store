@@ -10,7 +10,6 @@ import { Button } from "@/app/components/Button";
 import { Icon } from "@/app/components/Icon";
 import { Modal, ModalBody } from "@/app/components/Modal";
 import {
-  HiOutlineDocumentText,
   HiOutlineReceiptPercent,
   HiOutlineDocumentArrowDown,
   HiOutlineAdjustmentsHorizontal,
@@ -222,7 +221,7 @@ export default function TaxesReportPage() {
               variant="outline"
               size="md"
               iconLeft={<HiOutlineAdjustmentsHorizontal size={18} />}
-              className="border-gray-200 text-gray-800 shadow-2xs hover:bg-gray-50 px-4 py-2 text-xs sm:text-sm font-semibold"
+              className="border-gray-200 text-gray-800 hover:bg-gray-50 px-4 py-2 text-xs sm:text-sm font-semibold"
             >
               Configure Tax Rates
             </Button>
@@ -232,7 +231,7 @@ export default function TaxesReportPage() {
             variant="blue"
             size="md"
             iconLeft={<HiOutlineDocumentArrowDown size={18} />}
-            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold shadow-sm shadow-brand-blue/20 bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white"
+            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold bg-brand-orange hover:bg-brand-orange/90 text-white"
             onClick={() => setIsExportModalOpen(true)}
           >
             Export Tax Report
@@ -250,7 +249,6 @@ export default function TaxesReportPage() {
           trendValue="100% Active"
           trendIsUp={true}
           subtitle="Standard VAT & Withholding Tax"
-          badgeIcon={<HiOutlineReceiptPercent className="w-4 h-4" />}
         />
 
         {/* 2. Total Tax Collected */}
@@ -261,7 +259,6 @@ export default function TaxesReportPage() {
           trendValue="11.8%"
           trendIsUp={true}
           subtitle="+₦1.2M this month"
-          badgeIcon={<HiOutlineDocumentText className="w-4 h-4" />}
         />
       </div>
 
@@ -334,7 +331,7 @@ export default function TaxesReportPage() {
                     className="hover:bg-gray-50/60 transition-colors"
                   >
                     {/* Order ID */}
-                    <td className="font-mono font-bold text-xs text-brand-blue whitespace-nowrap">
+                    <td className="font-mono font-bold text-xs text-brand-orange-text whitespace-nowrap">
                       {record.orderId}
                     </td>
 
@@ -362,7 +359,7 @@ export default function TaxesReportPage() {
 
                     {/* Tax Amount */}
                     <td className="text-xs whitespace-nowrap">
-                      <span className="font-bold text-brand-blue bg-cyan-50 px-2.5 py-1 rounded-md border border-cyan-100">
+                      <span className="font-bold text-brand-orange-text bg-brand-orange-soft px-2.5 py-1 rounded-md border border-brand-orange/15">
                         {record.taxAmount}
                       </span>
                     </td>
@@ -427,7 +424,7 @@ export default function TaxesReportPage() {
             <div className="space-y-4 pt-2">
               <div className="flex items-center justify-between border-b border-gray-100 pb-3">
                 <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-lg bg-brand-blue-light text-brand-blue flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center">
                     <HiOutlineReceiptPercent className="w-5 h-5" />
                   </div>
                   <div>
@@ -439,7 +436,7 @@ export default function TaxesReportPage() {
                     </p>
                   </div>
                 </div>
-                <span className="font-bold text-xs bg-cyan-50 text-brand-blue px-2.5 py-1 rounded-md border border-cyan-100">
+                <span className="font-bold text-xs bg-brand-orange-soft text-brand-orange-text px-2.5 py-1 rounded-md border border-brand-orange/15">
                   {selectedRecord.taxType}
                 </span>
               </div>
@@ -465,14 +462,14 @@ export default function TaxesReportPage() {
                   </p>
                 </div>
 
-                <div className="p-3 bg-cyan-50/50 rounded-lg border border-cyan-100 col-span-2 flex items-center justify-between">
+                <div className="p-3 bg-brand-orange-soft/50 rounded-lg border border-brand-orange/15 col-span-2 flex items-center justify-between">
                   <div>
                     <span className="text-gray-500">Total Tax Levied</span>
                     <p className="text-[11px] text-gray-400">
                       Standard VAT calculation on taxable merchandise
                     </p>
                   </div>
-                  <span className="text-base font-black text-brand-blue">
+                  <span className="text-base font-bold text-brand-orange-text">
                     {selectedRecord.taxAmount}
                   </span>
                 </div>
@@ -481,7 +478,7 @@ export default function TaxesReportPage() {
               <div className="flex justify-end pt-2">
                 <Button
                   size="sm"
-                  className="bg-[#00BCD4] text-white"
+                  className="bg-brand-orange text-white"
                   onClick={() => setSelectedRecord(null)}
                 >
                   Close
@@ -499,7 +496,7 @@ export default function TaxesReportPage() {
       >
         <ModalBody>
           <div className="space-y-4 pt-2 text-center">
-            <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center mx-auto">
               <HiOutlineDocumentArrowDown className="w-6 h-6" />
             </div>
             <div>
@@ -521,7 +518,7 @@ export default function TaxesReportPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-[#00BCD4] text-white"
+                className="bg-brand-orange text-white"
                 onClick={() => setIsExportModalOpen(false)}
               >
                 Download CSV

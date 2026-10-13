@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Checkbox from "@/app/components/Checkbox";
 import { Button } from "@/app/components/Button";
 import { ConfirmationModal } from "@/app/components/Admin/ConfirmationModal";
 import {
@@ -631,8 +632,8 @@ export default function RolesManagementPage() {
     <div className="flex flex-col gap-6 mx-auto pb-16">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 right-8 z-50 bg-[#1D3557] text-white text-xs px-4 py-3 rounded-lg shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
-          <HiOutlineCheckCircle className="w-4 h-4 text-[#00BCD4]" />
+        <div className="fixed top-20 right-8 z-50 bg-brand-charcoal text-white text-xs px-4 py-3 rounded-lg shadow-md flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
+          <HiOutlineCheckCircle className="w-4 h-4 text-brand-orange" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -644,7 +645,7 @@ export default function RolesManagementPage() {
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
               Roles & Permissions
             </h1>
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-blue-light text-brand-blue border border-[#00BCD4]/20">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-orange-soft text-brand-orange-text border border-brand-orange/20">
               Access Governance
             </span>
           </div>
@@ -669,11 +670,11 @@ export default function RolesManagementPage() {
           <div className="p-4 border-b border-gray-100 flex flex-col gap-3 bg-gray-50/50">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-brand-blue-light border border-[#00BCD4]/20 text-[#00BCD4] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-brand-orange-soft border border-brand-orange/20 text-brand-orange-text flex items-center justify-center">
                   <HiOutlineShieldCheck className="w-4 h-4" />
                 </div>
                 <div>
-                  <h2 className="text-sm font-bold text-[#1D3557] uppercase tracking-wider">
+                  <h2 className="text-sm font-bold text-brand-charcoal uppercase tracking-wider">
                     Roles and Permission
                   </h2>
                   <span className="text-[11px] text-gray-400 font-medium">
@@ -686,7 +687,7 @@ export default function RolesManagementPage() {
               <Button
                 variant="primary"
                 shape="rounded-sm"
-                className="bg-[#00BCD4] hover:bg-[#00acc1] text-white flex items-center gap-1 text-xs font-semibold px-3 py-1.5 cursor-pointer shadow-xs"
+                className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1 text-xs font-semibold px-3 py-1.5 cursor-pointer "
                 onClick={handleOpenAddRole}
               >
                 <HiOutlinePlus className="w-3.5 h-3.5" />
@@ -701,7 +702,7 @@ export default function RolesManagementPage() {
                 placeholder="Search roles..."
                 value={roleSearch}
                 onChange={(e) => setRoleSearch(e.target.value)}
-                className="w-full text-xs pl-8 pr-3 py-1.5 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                className="w-full text-xs pl-8 pr-3 py-1.5 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange text-gray-800"
               />
               <HiOutlineMagnifyingGlass className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
             </div>
@@ -718,7 +719,7 @@ export default function RolesManagementPage() {
                   onClick={() => setSelectedRoleId(role.id)}
                   className={`p-3.5 transition-all cursor-pointer flex items-center justify-between gap-3 ${
                     isSelected
-                      ? "bg-brand-blue-light/70 border-l-4 border-l-[#00BCD4] text-brand-blue"
+                      ? "bg-brand-orange-soft/70 border-l-4 border-l-brand-orange text-brand-orange-text"
                       : "hover:bg-gray-50/70 text-gray-700"
                   }`}
                 >
@@ -726,13 +727,13 @@ export default function RolesManagementPage() {
                     <div className="flex items-center gap-2">
                       <span
                         className={`text-xs font-bold tracking-tight truncate ${
-                          isSelected ? "text-brand-blue" : "text-gray-900"
+                          isSelected ? "text-brand-orange-text" : "text-gray-900"
                         }`}
                       >
                         {role.name}
                       </span>
                       {role.id === "super-admin" && (
-                        <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-purple-50 text-purple-700 border border-purple-200 uppercase tracking-widest">
+                        <span className="text-[11px] font-bold px-1.5 py-0.2 rounded bg-purple-50 text-purple-700 border border-purple-200 uppercase tracking-wider">
                           Master
                         </span>
                       )}
@@ -743,7 +744,7 @@ export default function RolesManagementPage() {
                   </div>
 
                   <div className="flex items-center gap-2 shrink-0">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 border border-gray-200">
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 border border-gray-200">
                       {role.userCount} {role.userCount === 1 ? "user" : "users"}
                     </span>
 
@@ -751,7 +752,7 @@ export default function RolesManagementPage() {
                     <button
                       type="button"
                       onClick={(e) => handleOpenEditRole(role, e)}
-                      className="p-1 text-gray-400 hover:text-[#00BCD4] transition-colors cursor-pointer"
+                      className="p-1 text-gray-400 hover:text-brand-orange-text transition-colors cursor-pointer"
                       title="Edit role details"
                     >
                       <HiOutlinePencilSquare className="w-3.5 h-3.5" />
@@ -778,10 +779,10 @@ export default function RolesManagementPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <div className="flex items-center gap-2">
-                  <h2 className="text-base font-bold text-[#1D3557]">
+                  <h2 className="text-base font-bold text-brand-charcoal">
                     {selectedRole.name}
                   </h2>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                     {selectedRole.status}
                   </span>
                 </div>
@@ -794,7 +795,7 @@ export default function RolesManagementPage() {
                 <Button
                   variant="primary"
                   shape="rounded-sm"
-                  className="bg-[#00BCD4] hover:bg-[#00acc1] text-white text-xs font-semibold px-4 py-1.5 cursor-pointer shadow-xs shrink-0"
+                  className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold px-4 py-1.5 cursor-pointer shrink-0"
                   onClick={handleSaveAllPermissions}
                 >
                   Save Permissions
@@ -803,7 +804,7 @@ export default function RolesManagementPage() {
                 <Button
                   variant="primary"
                   shape="rounded-sm"
-                  className="bg-[#00BCD4] hover:bg-[#00acc1] text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-1.5 cursor-pointer shadow-xs shrink-0"
+                  className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-1.5 cursor-pointer shrink-0"
                   onClick={() => setIsAssignUserModalOpen(true)}
                 >
                   <HiOutlineUserPlus className="w-4 h-4" />
@@ -819,7 +820,7 @@ export default function RolesManagementPage() {
                 onClick={() => setActiveRightTab("Permissions")}
                 className={`pb-2 px-3 text-xs font-bold transition-all cursor-pointer relative ${
                   activeRightTab === "Permissions"
-                    ? "text-[#00BCD4] border-b-2 border-b-[#00BCD4]"
+                    ? "text-brand-orange-text border-b-2 border-b-brand-orange"
                     : "text-gray-500 hover:text-gray-800"
                 }`}
               >
@@ -834,7 +835,7 @@ export default function RolesManagementPage() {
                 onClick={() => setActiveRightTab("Assigned Users")}
                 className={`pb-2 px-3 text-xs font-bold transition-all cursor-pointer relative ${
                   activeRightTab === "Assigned Users"
-                    ? "text-[#00BCD4] border-b-2 border-b-[#00BCD4]"
+                    ? "text-brand-orange-text border-b-2 border-b-brand-orange"
                     : "text-gray-500 hover:text-gray-800"
                 }`}
               >
@@ -871,7 +872,7 @@ export default function RolesManagementPage() {
                         <h4 className="text-xs font-bold text-gray-900">
                           {perm.name}
                         </h4>
-                        <span className="text-[9px] px-1.5 py-0.2 rounded bg-gray-100 text-gray-600 font-medium">
+                        <span className="text-[11px] px-1.5 py-0.2 rounded bg-gray-100 text-gray-600 font-medium">
                           {perm.category}
                         </span>
                       </div>
@@ -886,20 +887,13 @@ export default function RolesManagementPage() {
                         (action) => {
                           const isChecked = perm[action];
                           return (
-                            <label
+                            <Checkbox
                               key={action}
-                              className="inline-flex items-center gap-1.5 cursor-pointer select-none text-[11px] font-semibold text-gray-600"
-                            >
-                              <input
-                                type="checkbox"
-                                checked={isChecked}
-                                onChange={() =>
-                                  handleTogglePermission(perm.id, action)
-                                }
-                                className="w-3.5 h-3.5 rounded text-[#00BCD4] focus:ring-[#00BCD4] accent-[#00BCD4] cursor-pointer"
-                              />
-                              <span className="capitalize">{action}</span>
-                            </label>
+                              size="small"
+                              checked={isChecked}
+                              onChange={() => handleTogglePermission(perm.id, action)}
+                              label={action[0].toUpperCase() + action.slice(1)}
+                            />
                           );
                         },
                       )}
@@ -923,7 +917,7 @@ export default function RolesManagementPage() {
                     placeholder="Search assigned members by name, email, or phone..."
                     value={userSearch}
                     onChange={(e) => setUserSearch(e.target.value)}
-                    className="w-full text-xs pl-8 pr-3 py-1.5 bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                    className="w-full text-xs pl-8 pr-3 py-1.5 bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange text-gray-800"
                   />
                   <HiOutlineMagnifyingGlass className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
                 </div>
@@ -972,7 +966,7 @@ export default function RolesManagementPage() {
                           {user.assignedDate}
                         </td>
                         <td className="py-3 px-4 text-center">
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
                             {user.status}
                           </span>
                         </td>
@@ -1019,7 +1013,7 @@ export default function RolesManagementPage() {
           ========================================================================= */}
       {isAddRoleModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4 animate-in fade-in duration-150">
-          <div className="bg-white rounded-lg border border-gray-100 shadow-2xl w-full max-w-md overflow-hidden flex flex-col">
+          <div className="bg-white rounded-lg border border-gray-100 shadow-md w-full max-w-md overflow-hidden flex flex-col">
             <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
               <h3 className="text-sm font-bold text-gray-900">
                 {roleToEdit ? "Edit Role" : "Create New Role"}
@@ -1046,7 +1040,7 @@ export default function RolesManagementPage() {
                   onChange={(e) =>
                     setRoleForm((prev) => ({ ...prev, name: e.target.value }))
                   }
-                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                 />
               </div>
 
@@ -1065,7 +1059,7 @@ export default function RolesManagementPage() {
                       department: e.target.value,
                     }))
                   }
-                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                 />
               </div>
 
@@ -1083,7 +1077,7 @@ export default function RolesManagementPage() {
                       description: e.target.value,
                     }))
                   }
-                  className="w-full text-xs p-3 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800 leading-relaxed"
+                  className="w-full text-xs p-3 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800 leading-relaxed"
                 />
               </div>
 
@@ -1097,7 +1091,7 @@ export default function RolesManagementPage() {
                       status: e.target.value as "Active" | "Inactive",
                     }))
                   }
-                  className="text-xs font-semibold px-2.5 py-1 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                  className="text-xs font-semibold px-2.5 py-1 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange text-gray-800"
                 >
                   <option value="Active">Active</option>
                   <option value="Inactive">Inactive</option>
@@ -1118,7 +1112,7 @@ export default function RolesManagementPage() {
                   type="submit"
                   variant="primary"
                   shape="rounded-sm"
-                  className="bg-[#00BCD4] hover:bg-[#00acc1] text-white text-xs font-semibold px-4 py-1.5 cursor-pointer shadow-xs"
+                  className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold px-4 py-1.5 cursor-pointer "
                 >
                   {roleToEdit ? "Update Role" : "Create Role"}
                 </Button>
@@ -1133,7 +1127,7 @@ export default function RolesManagementPage() {
           ========================================================================= */}
       {isAssignUserModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4 animate-in fade-in duration-150">
-          <div className="bg-white rounded-lg border border-gray-100 shadow-2xl w-full max-w-md overflow-hidden flex flex-col">
+          <div className="bg-white rounded-lg border border-gray-100 shadow-md w-full max-w-md overflow-hidden flex flex-col">
             <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
               <h3 className="text-sm font-bold text-gray-900">
                 Assign User to {selectedRole.name}
@@ -1166,7 +1160,7 @@ export default function RolesManagementPage() {
                       name: e.target.value,
                     }))
                   }
-                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                 />
               </div>
 
@@ -1185,7 +1179,7 @@ export default function RolesManagementPage() {
                       email: e.target.value,
                     }))
                   }
-                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                 />
               </div>
 
@@ -1203,7 +1197,7 @@ export default function RolesManagementPage() {
                       phone: e.target.value,
                     }))
                   }
-                  className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#00BCD4] text-gray-800"
+                  className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
                 />
               </div>
 
@@ -1221,7 +1215,7 @@ export default function RolesManagementPage() {
                   type="submit"
                   variant="primary"
                   shape="rounded-sm"
-                  className="bg-[#00BCD4] hover:bg-[#00acc1] text-white text-xs font-semibold px-4 py-1.5 cursor-pointer shadow-xs"
+                  className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold px-4 py-1.5 cursor-pointer "
                 >
                   Assign User
                 </Button>

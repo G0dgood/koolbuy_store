@@ -26,7 +26,7 @@ const SupplierCard = () => {
          <div className="bg-white border border-gray-200 rounded-lg p-5 flex flex-col gap-5 ">
             {/* Vendor Header */}
             <div className="flex gap-3 pb-4 border-b border-gray-100 items-center">
-               <div className="w-12 h-12 bg-[#DDF0FF] rounded flex items-center justify-center text-brand-blue font-bold text-xl">
+               <div className="w-12 h-12 bg-[#DDF0FF] rounded flex items-center justify-center text-brand-orange-text font-bold text-xl">
                   R
                </div>
                <div className="flex flex-col">
@@ -39,7 +39,7 @@ const SupplierCard = () => {
             <div className="flex flex-col gap-2">
                <div className="flex items-center gap-3">
                   {/* <div className="w-5 h-4 relative">
-                     <Image src="/country/Property 1=DE.png" alt="Germany" fill className="object-cover" />
+                     <Image src="/country/Property 1=DE.png" alt="Germany" fill sizes="20px" className="object-cover" />
                   </div> */}
                   {/* <span className="text-sm text-gray-400">Germany, Berlin</span> */}
                </div>
@@ -57,11 +57,11 @@ const SupplierCard = () => {
             <div className="flex flex-col gap-2">
                <Button
                   onClick={handleAddToCart}
-                  className="w-full bg-brand-blue text-white h-10 hover:bg-brand-blue/90 shadow-none cursor-pointer"
+                  className="w-full bg-brand-charcoal text-white h-10 hover:bg-brand-charcoal/90 cursor-pointer"
                >
                   Add to cart
                </Button>
-               {/* <Button variant="ghost" className="w-full bg-white text-brand-blue border border-gray-200 h-10 hover:bg-gray-50 shadow-none cursor-pointer">Seller's profile</Button> */}
+               {/* <Button variant="ghost" className="w-full bg-white text-brand-orange-text border border-gray-200 h-10 hover:bg-gray-50 cursor-pointer">Seller's profile</Button> */}
             </div>
          </div>
 
@@ -74,7 +74,7 @@ const SupplierCard = () => {
                image: "/images/shirt.jpg",
             }}
             variant="none"
-            className="flex items-center justify-center gap-2 py-4 text-brand-blue text-sm font-medium hover:underline cursor-pointer"
+            className="flex items-center justify-center gap-2 py-4 text-brand-orange-text text-sm font-medium hover:underline cursor-pointer"
          >
             Save for later
          </FavoriteButton>

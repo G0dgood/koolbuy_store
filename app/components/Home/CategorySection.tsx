@@ -67,13 +67,13 @@ const CategorySection: React.FC<CategorySectionProps> = ({
   };
 
   return (
-    <section className={`w-full bg-white border border-[#1C1C1C1A] rounded-[6px] flex flex-col md:flex-row overflow-hidden ${reverse ? "md:flex-row-reverse" : ""}`}>
+    <section className={`w-full bg-white border border-[#1C1C1C1A] rounded-lg flex flex-col md:flex-row overflow-hidden ${reverse ? "md:flex-row-reverse" : ""}`}>
       {/* Category Banner */}
       <div className="w-full md:w-72 relative min-h-[150px] md:min-h-0 group overflow-hidden">
         <Image
           src={bannerImage}
           alt={title}
-          fill
+          fill sizes="(max-width: 768px) 100vw, 288px"
           className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
         <div className="absolute inset-0 bg-black/5 group-hover:bg-black/10 transition-colors"></div>
@@ -84,7 +84,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
           <Link href="/products">
             <Button
               variant="ghost"
-              className="bg-white !text-gray-900 hover:bg-gray-100 font-bold w-fit py-1.5 px-3 md:py-2 md:px-5 h-auto text-xs md:text-sm border-none shadow-md transition-all active:scale-95"
+              className="bg-white !text-gray-900 hover:bg-gray-100 font-bold w-fit py-1.5 px-3 md:py-2 md:px-5 h-auto text-xs md:text-sm border-none transition-all active:scale-95"
             >
               Source now
             </Button>
@@ -108,7 +108,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
             >
               <motion.div variants={itemVariants} className="flex justify-between gap-3 h-full">
                 <div className="flex flex-col">
-                  <h4 className="text-xs md:text-sm font-medium text-gray-700 group-hover:text-brand-blue transition-colors leading-tight">
+                  <h4 className="text-xs md:text-sm font-medium text-gray-700 group-hover:text-brand-orange-text transition-colors leading-tight">
                     {item.name}
                   </h4>
                   <p className="text-[10px] md:text-xs text-gray-400 mt-1">
@@ -121,7 +121,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
                     <Image
                       src={item.image}
                       alt={item.name}
-                      fill
+                      fill sizes="80px"
                       className="object-contain group-hover:translate-y-[-2px] transition-transform duration-300"
                     />
                   )}
@@ -140,7 +140,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
                 onClick={(e) => handleAddToCart(e, item)}
                 variant="primary"
                 size="sm"
-                className="flex-1 text-[9px] h-7 font-bold shadow-none px-0"
+                className="flex-1 text-[9px] h-7 font-bold px-0"
               >
                 + Cart
               </Button>

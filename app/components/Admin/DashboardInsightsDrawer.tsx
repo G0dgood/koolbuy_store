@@ -1,211 +1,207 @@
 "use client";
 
+import React, { useState } from "react";
 import Drawer from "../Drawer/Drawer";
-import { Icon } from "../Icon";
-import { AdminChart } from "./AdminChart";
+import { Button } from "../Button";
+import { BRAND, ChartKind, ChartTypePicker, SERIES, SmartChart, naira } from "./DashboardUi";
+
+/* Insights drawer for the admin dashboard, in the CRM dashboard style: plain
+   sections with a 15px title, CRM charts (SmartChart) and Naira amounts.
+   The section the drawer was opened for comes first. Sample data until the
+   analytics API exists. */
+
+type Section = "revenue" | "funnel" | "traffic";
 
 interface DashboardInsightsDrawerProps {
-   isOpen: boolean;
-   onClose: () => void;
-   activeSection?: 'revenue' | 'funnel' | 'traffic' | null;
+  isOpen: boolean;
+  onClose: () => void;
+  activeSection?: Section | null;
 }
 
+const TITLES: Record<Section, string> = {
+  revenue: "Revenue Insights",
+  funnel: "Conversion Breakdown",
+  traffic: "Market Intelligence",
+};
+
+const MONTHS = ["May", "Jun", "Jul", "Aug", "Sep", "Oct"];
+const ACTUAL = [182_000_000, 214_000_000, 238_000_000, 251_000_000, 266_000_000, 284_800_000];
+const PROJECTED = [175_000_000, 205_000_000, 230_000_000, 258_000_000, 279_000_000, 301_000_000];
+
+const FUNNEL = [
+  { label: "Store visits", value: 64_800 },
+  { label: "Product views", value: 41_200 },
+  { label: "Added to cart", value: 9_640 },
+  { label: "Checkout started", value: 4_310 },
+  { label: "Orders placed", value: 2_160 },
+];
+
+const SOURCES = [
+  { label: "Direct", value: 38 },
+  { label: "Social", value: 27 },
+  { label: "Search", value: 21 },
+  { label: "WhatsApp", value: 9 },
+  { label: "Referral", value: 5 },
+];
+
+const REGIONS = [
+  { label: "Lagos", value: 168_400_000 },
+  { label: "Ogun", value: 46_900_000 },
+  { label: "Abuja (FCT)", value: 31_200_000 },
+  { label: "Rivers", value: 21_800_000 },
+  { label: "Oyo", value: 16_500_000 },
+];
+
+/** One block in the drawer: title, optional subtitle and controls, then content. */
+function Block({ title, subtitle, aside, children }: { title: string; subtitle?: string; aside?: React.ReactNode; children: React.ReactNode }) {
+  return (
+    <section aria-label={title} className="bg-white border border-light-gray rounded-lg p-4 md:p-5">
+      <header className="flex flex-wrap items-start justify-between gap-3 mb-4">
+        <div>
+          <h3 className="text-[15px] font-semibold text-brand-charcoal">{title}</h3>
+          {subtitle && <p className="text-[12px] text-faint">{subtitle}</p>}
+        </div>
+        {aside}
+      </header>
+      {children}
+    </section>
+  );
+}
+
+function Figure({ label, value, hint }: { label: string; value: string; hint?: string }) {
+  return (
+    <div className="p-3 rounded-lg bg-off-white">
+      <p className="text-[12px] text-faint">{label}</p>
+      <p className="mt-0.5 text-[18px] font-semibold text-brand-charcoal tabular-nums">{value}</p>
+      {hint && <p className="text-[11px] text-faint">{hint}</p>}
+    </div>
+  );
+}
+
+function RevenueSection() {
+  const [kind, setKind] = useState<ChartKind>("area");
+  const latest = ACTUAL[ACTUAL.length - 1];
+  const target = PROJECTED[PROJECTED.length - 1];
+  const vsTarget = Math.round((latest / target) * 1000) / 10;
+  const growth = Math.round(((latest - ACTUAL[0]) / ACTUAL[0]) * 1000) / 10;
+
+  return (
+    <Block
+      title="Revenue: actual vs. projected"
+      subtitle="The last six months"
+      aside={<ChartTypePicker kinds={["area", "line", "bar"]} value={kind} onChange={setKind} />}
+    >
+      <div className="grid grid-cols-3 gap-2 mb-4">
+        <Figure label="This month" value={naira(latest, true)} hint="Actual" />
+        <Figure label="Target" value={naira(target, true)} hint={`${vsTarget}% reached`} />
+        <Figure label="6-month growth" value={`${growth}%`} hint="Since May" />
+      </div>
+      <SmartChart
+        kind={kind}
+        height={240}
+        labels={MONTHS}
+        series={[
+          { label: "Actual", values: ACTUAL, color: BRAND },
+          { label: "Projected", values: PROJECTED, color: SERIES[0] },
+        ]}
+        format={(v) => naira(v, true)}
+      />
+    </Block>
+  );
+}
+
+function FunnelSection() {
+  const top = FUNNEL[0].value;
+  return (
+    <Block title="Conversion funnel" subtitle={`${((FUNNEL[FUNNEL.length - 1].value / top) * 100).toFixed(1)}% of visits became orders this month`}>
+      <ol className="space-y-2.5">
+        {FUNNEL.map((step, i) => {
+          const share = (step.value / top) * 100;
+          const fromPrev = i === 0 ? null : Math.round((step.value / FUNNEL[i - 1].value) * 100);
+          return (
+            <li key={step.label}>
+              <div className="flex items-center justify-between text-[13px] mb-1">
+                <span className="font-medium text-brand-charcoal">{step.label}</span>
+                <span className="tabular-nums text-subtle">
+                  {step.value.toLocaleString("en-NG")}
+                  {fromPrev !== null && <span className="text-faint"> · {fromPrev}% of previous</span>}
+                </span>
+              </div>
+              <div className="h-2 rounded-full bg-off-white overflow-hidden">
+                <div className="h-full rounded-full" style={{ width: `${Math.max(2, share)}%`, backgroundColor: SERIES[i % SERIES.length] }} />
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+    </Block>
+  );
+}
+
+function TrafficSection() {
+  const [regionKind, setRegionKind] = useState<ChartKind>("bar");
+  return (
+    <>
+      <Block title="Where shoppers come from" subtitle="Share of store visits this month">
+        <SmartChart
+          kind="donut"
+          height={200}
+          labels={SOURCES.map((s) => s.label)}
+          series={[{ label: "Visits", values: SOURCES.map((s) => s.value) }]}
+          format={(v) => `${v}%`}
+          centerLabel={{ value: `${SOURCES[0].value}%`, caption: "direct" }}
+        />
+      </Block>
+      <Block
+        title="Top regions"
+        subtitle="Revenue by state this month"
+        aside={<ChartTypePicker kinds={["bar", "donut"]} value={regionKind} onChange={setRegionKind} />}
+      >
+        <SmartChart
+          kind={regionKind}
+          height={220}
+          labels={REGIONS.map((r) => r.label)}
+          series={[{ label: "Revenue", values: REGIONS.map((r) => r.value) }]}
+          sliceColors={SERIES}
+          horizontal
+          format={(v) => naira(v, true)}
+          centerLabel={{ value: naira(REGIONS.reduce((a, r) => a + r.value, 0), true), caption: "top 5 states" }}
+        />
+      </Block>
+    </>
+  );
+}
+
+const SECTIONS: Record<Section, () => React.ReactElement> = {
+  revenue: RevenueSection,
+  funnel: FunnelSection,
+  traffic: TrafficSection,
+};
+
 export function DashboardInsightsDrawer({ isOpen, onClose, activeSection }: DashboardInsightsDrawerProps) {
-   const getTitle = () => {
-      switch (activeSection) {
-         case 'revenue': return "Revenue Insights";
-         case 'funnel': return "Conversion Breakdown";
-         case 'traffic': return "Market Intelligence";
-         default: return "Platform Insights";
-      }
-   };
+  const first: Section = activeSection ?? "revenue";
+  const order: Section[] = [first, ...(["revenue", "funnel", "traffic"] as Section[]).filter((s) => s !== first)];
 
-   return (
-      <Drawer isOpen={isOpen} onClose={onClose} title={getTitle()} width="max-w-xl">
-         <div className="flex flex-col gap-10 pb-8">
-            {/* Growth Forecast Section */}
-            <div className={`flex flex-col gap-6 p-2 rounded-2xl transition-all duration-500 ${activeSection === 'revenue' ? 'ring-2 ring-brand-blue/20 bg-brand-blue/[0.02]' : ''}`}>
-               <div className="flex justify-between items-end px-1">
-                  <div className="flex flex-col gap-1">
-                     <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em]">Revenue Distribution</h4>
-                     <p className="text-[13px] font-bold text-[#1D3557]">Projected vs. Actual Growth</p>
-                  </div>
-                  <div className="flex items-center gap-4">
-                     <div className="flex items-center gap-1.5">
-                        <div className="w-2.5 h-2.5 rounded-full bg-brand-blue"></div>
-                        <span className="text-[10px] font-bold text-gray-500">Actual</span>
-                     </div>
-                     <div className="flex items-center gap-1.5">
-                        <div className="w-2.5 h-2.5 rounded-full bg-blue-100"></div>
-                        <span className="text-[10px] font-bold text-gray-500">Projected</span>
-                     </div>
-                  </div>
-               </div>
+  return (
+    <Drawer isOpen={isOpen} onClose={onClose} title={activeSection ? TITLES[activeSection] : "Store insights"} width="max-w-xl">
+      <div className="flex flex-col gap-4 pb-8">
+        <span className="self-start px-2.5 py-1 rounded-full bg-off-white border border-light-gray text-[12px] text-faint">Sample data</span>
 
-               <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
-                  <div className="h-48 w-full">
-                     <AdminChart
-                        type="line"
-                        data={{
-                           labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-                           datasets: [
-                              {
-                                 label: 'Actual',
-                                 data: [20, 25, 40, 60, 80, 110],
-                                 borderColor: '#00BCD4',
-                                 borderWidth: 3,
-                                 fill: true,
-                                 backgroundColor: 'rgba(33, 150, 243, 0.1)',
-                                 tension: 0.4,
-                              },
-                              {
-                                 label: 'Projected',
-                                 data: [22, 30, 45, 75, 95, 130],
-                                 borderColor: '#BFDBFE',
-                                 borderWidth: 2,
-                                 borderDash: [5, 5],
-                                 fill: true,
-                                 backgroundColor: 'rgba(191, 219, 254, 0.05)',
-                                 tension: 0.4,
-                              }
-                           ]
-                        }}
-                        options={{
-                           scales: {
-                              y: {
-                                 ticks: {
-                                    callback: (value: string | number) => `$${value}k`
-                                 }
-                              }
-                           }
-                        }}
-                     />
-                  </div>
-               </div>
-            </div>
+        {order.map((s) => {
+          const Content = SECTIONS[s];
+          return <Content key={s} />;
+        })}
 
-            {/* Conversion Funnel */}
-            <div className={`flex flex-col gap-6 p-2 rounded-2xl transition-all duration-500 ${activeSection === 'funnel' ? 'ring-2 ring-brand-blue/20 bg-brand-blue/[0.02]' : ''}`}>
-               <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Conversion Funnel</h4>
-               <div className="flex flex-col gap-2">
-                  {[
-                     { label: "Website Visits", value: "240.5k", perc: 100, color: "bg-blue-600" },
-                     { label: "Product Views", value: "180.2k", perc: 75, color: "bg-blue-500" },
-                     { label: "Add to Cart", value: "45.8k", perc: 19, color: "bg-blue-400" },
-                     { label: "Successful Orders", value: "12.4k", perc: 5, color: "bg-blue-300" },
-                  ].map((step, i) => (
-                     <div key={i} className="group flex items-center gap-4">
-                        <div className="flex-1 h-12 bg-gray-50 rounded-xl border border-transparent group-hover:border-gray-100 transition-all flex items-center px-4 gap-4 relative overflow-hidden">
-                           <div className={`absolute left-0 top-0 bottom-0 ${step.color} transition-all duration-1000 origin-left`} style={{ width: `${step.perc}%`, opacity: 0.1 }}></div>
-                           <span className="text-[13px] font-black text-[#1D3557] z-10">{step.label}</span>
-                           <div className="ml-auto flex items-center gap-2 z-10">
-                              <span className="text-sm font-black text-[#1D3557]">{step.value}</span>
-                              <span className="text-[10px] font-bold text-gray-400">({step.perc}%)</span>
-                           </div>
-                        </div>
-                        {i < 3 && (
-                           <div className="w-4 flex flex-col items-center gap-0.5 opacity-20 group-hover:opacity-40 transition-opacity">
-                              <Icon name="arrow_downward" size="xs" />
-                           </div>
-                        )}
-                     </div>
-                  ))}
-               </div>
-            </div>
-
-            {/* Audience Intelligence */}
-            <div className={`grid grid-cols-2 gap-6 p-2 rounded-2xl transition-all duration-500 ${activeSection === 'traffic' ? 'ring-2 ring-brand-blue/20 bg-brand-blue/[0.02]' : ''}`}>
-               <div className="flex flex-col gap-4">
-                  <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Traffic Sources</h4>
-                  <div className="bg-white border border-gray-100 rounded-2xl p-6 flex flex-col gap-6 shadow-sm">
-                     <div className="relative w-32 h-32 mx-auto">
-                        <AdminChart
-                           type="doughnut"
-                           data={{
-                              labels: ['Direct', 'Social', 'Other'],
-                              datasets: [{
-                                 data: [60, 30, 10],
-                                 backgroundColor: ['#00BCD4', '#60A5FA', '#93C5FD'],
-                                 borderWidth: 0,
-                                 cutout: '75%',
-                              }]
-                           }}
-                           options={{
-                              plugins: {
-                                 tooltip: { enabled: true }
-                              }
-                           }}
-                        />
-                        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                           <span className="text-lg font-black text-[#1D3557]">85%</span>
-                           <span className="text-[8px] font-bold text-gray-400 uppercase">Retention</span>
-                        </div>
-                     </div>
-                     <div className="flex flex-col gap-3">
-                        <div className="flex justify-between items-center px-1">
-                           <div className="flex items-center gap-2">
-                              <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                              <span className="text-[10px] font-bold text-gray-500">Direct</span>
-                           </div>
-                           <span className="text-[10px] font-black text-[#1D3557]">60%</span>
-                        </div>
-                        <div className="flex justify-between items-center px-1">
-                           <div className="flex items-center gap-2">
-                              <div className="w-2 h-2 rounded-full bg-blue-300"></div>
-                              <span className="text-[10px] font-bold text-gray-500">Social</span>
-                           </div>
-                           <span className="text-[10px] font-black text-[#1D3557]">30%</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-
-               <div className="flex flex-col gap-4">
-                  <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Top Regions</h4>
-                  <div className="bg-white border border-gray-100 rounded-2xl p-6 flex flex-col gap-4 shadow-sm h-[230px]">
-                     <AdminChart
-                        type="bar"
-                        data={{
-                           labels: ["North America", "Europe", "Africa", "Asia"],
-                           datasets: [{
-                              label: 'Revenue',
-                              data: [120, 85, 45, 15],
-                              backgroundColor: '#00BCD4',
-                              borderRadius: 4,
-                              indexAxis: 'y',
-                           }]
-                        }}
-                        options={{
-                           scales: {
-                              x: {
-                                 display: false,
-                              },
-                              y: {
-                                 grid: { display: false },
-                                 ticks: {
-                                    color: '#1D3557',
-                                    font: { size: 11, weight: 'bold' }
-                                 }
-                              }
-                           }
-                        }}
-                     />
-                  </div>
-               </div>
-            </div>
-
-            {/* Global Action */}
-            <div className="mt-4 p-6 rounded-2xl bg-[#1D3557] relative overflow-hidden group cursor-pointer">
-               <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-16 translate-x-16 group-hover:scale-125 transition-transform duration-500"></div>
-               <div className="flex flex-col gap-1 relative z-10">
-                  <h5 className="text-white text-sm font-black tracking-tight">Generate Advanced Audit Report</h5>
-                  <p className="text-white/60 text-[10px] font-medium max-w-[280px]">Deep-dive into every transaction, user behavior, and operational bottleneck.</p>
-               </div>
-               <button className="mt-5 w-fit bg-brand-blue text-white px-5 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest relative z-10 shadow-lg shadow-black/20 group-hover:bg-white group-hover:text-brand-blue transition-colors">
-                  Run Audit Now
-               </button>
-            </div>
-         </div>
-      </Drawer>
-   );
+        <section className="border border-light-gray rounded-lg p-4 md:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div>
+            <h3 className="text-[15px] font-semibold text-brand-charcoal">Full audit report</h3>
+            <p className="text-[12px] text-faint">Every transaction, customer and fulfilment step in one export.</p>
+          </div>
+          <Button variant="outline" disabled title="Available once the reporting API is connected">
+            Generate report
+          </Button>
+        </section>
+      </div>
+    </Drawer>
+  );
 }

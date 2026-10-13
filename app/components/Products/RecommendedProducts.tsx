@@ -48,13 +48,13 @@ export const RecommendedProducts: React.FC<RecommendedProductsProps> = ({ produc
                 <Image 
                   src={product.image} 
                   alt={product.title} 
-                  fill 
+                  fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw" 
                   className="object-contain p-2 group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
               <div className="flex flex-col gap-1 mb-2">
                 <span className="text-sm font-bold text-gray-900">{product.price}</span>
-                <p className="text-[11px] text-gray-500 line-clamp-2 leading-relaxed group-hover:text-brand-blue transition-colors">
+                <p className="text-[11px] text-gray-500 line-clamp-2 leading-relaxed group-hover:text-brand-orange-text transition-colors">
                   {product.title}
                 </p>
               </div>
@@ -70,7 +70,7 @@ export const RecommendedProducts: React.FC<RecommendedProductsProps> = ({ produc
                 onClick={(e) => handleAddToCart(e, product)}
                 variant="primary" 
                 size="sm" 
-                className="w-full text-[10px] h-8 font-bold shadow-none"
+                className="w-full text-[10px] h-8 font-bold "
                >
                  + Cart
                </Button>

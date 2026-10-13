@@ -12,9 +12,7 @@ import { Modal, ModalBody } from "@/app/components/Modal";
 import Link from "next/link";
 import {
   HiOutlineCreditCard,
-  HiOutlineSparkles,
   HiOutlineGift,
-  HiOutlineShoppingCart,
   HiOutlineArrowDownTray,
   HiOutlineCheckBadge,
   HiOutlineArrowRight,
@@ -224,7 +222,7 @@ export default function AccountingLoyaltyCardsPage() {
       case "Silver Preferred":
         return "bg-slate-100 text-slate-700 border-slate-200";
       case "Bronze Member":
-        return "bg-orange-50 text-orange-700 border-orange-200";
+        return "bg-brand-orange-soft text-brand-orange-text border-brand-orange/30";
       default:
         return "bg-gray-50 text-gray-700 border-gray-200";
     }
@@ -251,7 +249,7 @@ export default function AccountingLoyaltyCardsPage() {
         <div className="flex items-center gap-3 w-full sm:w-auto">
           <Link
             href="/admin/loyalty-cards"
-            className="inline-flex items-center gap-1.5 h-10 px-4 text-xs font-bold rounded-lg border border-brand-blue/30 text-brand-blue bg-brand-blue-light/50 hover:bg-brand-blue-light transition-colors"
+            className="inline-flex items-center gap-1.5 h-10 px-4 text-xs font-bold rounded-lg border border-brand-charcoal/30 text-brand-orange-text bg-brand-orange-soft/50 hover:bg-brand-orange-soft transition-colors"
           >
             <span>Marketing Loyalty Plans</span>
             <HiOutlineArrowRight className="w-3.5 h-3.5" />
@@ -265,7 +263,7 @@ export default function AccountingLoyaltyCardsPage() {
             Export Logs
           </Button>
           <Button
-            className="flex-1 sm:flex-initial h-10 px-4 text-xs font-bold bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white shadow-xs"
+            className="flex-1 sm:flex-initial h-10 px-4 text-xs font-bold bg-brand-orange hover:bg-brand-orange/90 text-white "
             iconLeft={<HiOutlineGift className="w-4 h-4" />}
             onClick={() => setIsIssueModalOpen(true)}
           >
@@ -283,7 +281,6 @@ export default function AccountingLoyaltyCardsPage() {
           trendValue="100% Active"
           trendIsUp={true}
           subtitle="Gold, Silver & Bronze Tiers"
-          badgeIcon={<HiOutlineCreditCard className="w-4 h-4" />}
         />
         <StatCard
           size="sm"
@@ -292,7 +289,6 @@ export default function AccountingLoyaltyCardsPage() {
           trendValue="18.5%"
           trendIsUp={true}
           subtitle="+340 this month"
-          badgeIcon={<HiOutlineSparkles className="w-4 h-4" />}
         />
         <StatCard
           size="sm"
@@ -301,7 +297,6 @@ export default function AccountingLoyaltyCardsPage() {
           trendValue="12.2%"
           trendIsUp={true}
           subtitle="₦8.1M redeemed value"
-          badgeIcon={<HiOutlineGift className="w-4 h-4" />}
         />
         <StatCard
           size="sm"
@@ -310,7 +305,6 @@ export default function AccountingLoyaltyCardsPage() {
           trendValue="8.7%"
           trendIsUp={true}
           subtitle="Orders with loyalty cards"
-          badgeIcon={<HiOutlineShoppingCart className="w-4 h-4" />}
         />
       </div>
 
@@ -383,7 +377,7 @@ export default function AccountingLoyaltyCardsPage() {
                     onClick={() => setSelectedRecord(record)}
                     className="hover:bg-gray-50/60 transition-colors"
                   >
-                    <td className="font-mono font-bold text-xs text-brand-blue">
+                    <td className="font-mono font-bold text-xs text-brand-orange-text">
                       {record.orderId}
                     </td>
                     <td className="text-xs text-gray-500 whitespace-nowrap">
@@ -485,7 +479,7 @@ export default function AccountingLoyaltyCardsPage() {
             <div className="space-y-4 pt-2">
               <div className="flex items-center justify-between border-b border-gray-100 pb-3">
                 <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-lg bg-brand-blue-light text-brand-blue flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center">
                     <HiOutlineCreditCard className="w-5 h-5" />
                   </div>
                   <div>
@@ -545,7 +539,7 @@ export default function AccountingLoyaltyCardsPage() {
               <div className="flex justify-end pt-2">
                 <Button
                   size="sm"
-                  className="bg-[#00BCD4] text-white"
+                  className="bg-brand-orange text-white"
                   onClick={() => setSelectedRecord(null)}
                 >
                   Close
@@ -563,7 +557,7 @@ export default function AccountingLoyaltyCardsPage() {
       >
         <ModalBody>
           <div className="space-y-4 pt-2 text-center">
-            <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center mx-auto">
               <HiOutlineArrowDownTray className="w-6 h-6" />
             </div>
             <div>
@@ -585,7 +579,7 @@ export default function AccountingLoyaltyCardsPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-[#00BCD4] text-white"
+                className="bg-brand-orange text-white"
                 onClick={() => setIsExportModalOpen(false)}
               >
                 Download CSV
@@ -603,7 +597,7 @@ export default function AccountingLoyaltyCardsPage() {
         <ModalBody>
           <div className="space-y-4 pt-2">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-cyan-50 text-[#00BCD4] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center">
                 <HiOutlineGift className="w-5 h-5" />
               </div>
               <div>
@@ -659,7 +653,7 @@ export default function AccountingLoyaltyCardsPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-[#00BCD4] text-white"
+                className="bg-brand-orange text-white"
                 onClick={() => setIsIssueModalOpen(false)}
               >
                 Confirm & Issue

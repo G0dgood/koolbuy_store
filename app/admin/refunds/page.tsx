@@ -10,10 +10,7 @@ import { Button } from "@/app/components/Button";
 import { Icon } from "@/app/components/Icon";
 import { Modal, ModalBody } from "@/app/components/Modal";
 import {
-  HiOutlineCurrencyDollar,
   HiOutlineBanknotes,
-  HiOutlineClock,
-  HiOutlineCheckCircle,
   HiOutlineBuildingStorefront,
   HiOutlineDocumentArrowDown,
   HiOutlineCheck,
@@ -311,7 +308,7 @@ export default function PayoutRequestsPage() {
             variant="blue"
             size="md"
             iconLeft={<HiOutlineDocumentArrowDown size={18} />}
-            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold shadow-sm shadow-brand-blue/20 bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white"
+            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold bg-brand-orange hover:bg-brand-orange/90 text-white"
             onClick={() => setIsExportModalOpen(true)}
           >
             Export Payouts
@@ -329,7 +326,6 @@ export default function PayoutRequestsPage() {
           trendValue="14.2%"
           trendIsUp={true}
           subtitle="Across all orders"
-          badgeIcon={<HiOutlineCurrencyDollar className="w-4 h-4" />}
         />
 
         {/* 2. Total Available Funds */}
@@ -340,7 +336,6 @@ export default function PayoutRequestsPage() {
           trendValue="11.5%"
           trendIsUp={true}
           subtitle="Ready for disbursement"
-          badgeIcon={<HiOutlineBanknotes className="w-4 h-4" />}
         />
 
         {/* 3. Pending Payout Value */}
@@ -351,7 +346,6 @@ export default function PayoutRequestsPage() {
           trendValue="4 Pending"
           trendIsUp={false}
           subtitle="Awaiting admin approval"
-          badgeIcon={<HiOutlineClock className="w-4 h-4 text-amber-500" />}
         />
 
         {/* 4. Completed Payout Value */}
@@ -362,9 +356,6 @@ export default function PayoutRequestsPage() {
           trendValue="18.0%"
           trendIsUp={true}
           subtitle="Disbursed to date"
-          badgeIcon={
-            <HiOutlineCheckCircle className="w-4 h-4 text-emerald-500" />
-          }
         />
       </div>
 
@@ -373,7 +364,7 @@ export default function PayoutRequestsPage() {
         {/* Controls Row */}
         <div className="p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between border-b border-gray-50">
           {/* Toggle for pending and completed */}
-          <div className="flex items-center gap-1 p-1 bg-gray-100 rounded-lg w-full sm:w-auto">
+          <div role="tablist" className="flex sm:inline-flex rounded-lg border border-light-gray overflow-hidden bg-white w-full sm:w-auto">
             {toggleOptions.map((opt) => {
               const count = requests.filter((r) => r.status === opt).length;
               const isActive = activeToggle === opt;
@@ -384,20 +375,18 @@ export default function PayoutRequestsPage() {
                     setActiveToggle(opt as "Pending" | "Completed");
                     setCurrentPage(1);
                   }}
-                  className={`flex-1 sm:flex-initial px-5 py-2 rounded-md text-xs font-bold transition-all flex items-center gap-2 ${
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`flex-1 sm:flex-initial h-9 px-3.5 text-[13px] font-medium transition-colors flex items-center justify-center gap-2 border-r border-light-gray last:border-r-0 cursor-pointer ${
                     isActive
-                      ? "bg-white text-gray-900 shadow-xs"
-                      : "text-gray-500 hover:text-gray-800"
+                      ? "bg-brand-orange-soft text-brand-charcoal shadow-[inset_0_-3px_0_var(--brand-orange)]"
+                      : "bg-white text-subtle hover:text-brand-charcoal"
                   }`}
                 >
                   <span>{opt}</span>
                   <span
-                    className={`px-2 py-0.5 rounded-full text-[10px] ${
-                      isActive
-                        ? opt === "Pending"
-                          ? "bg-amber-50 text-amber-600 font-extrabold"
-                          : "bg-emerald-50 text-emerald-600 font-extrabold"
-                        : "bg-gray-200/60 text-gray-600"
+                    className={`px-1.5 py-0.5 rounded-full text-[11px] font-semibold tabular-nums ${
+                      isActive ? "bg-white text-brand-charcoal" : "bg-off-white text-subtle"
                     }`}
                   >
                     {count}
@@ -469,14 +458,14 @@ export default function PayoutRequestsPage() {
                     {/* Vendor */}
                     <td>
                       <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-md bg-blue-50 text-brand-blue flex items-center justify-center shrink-0">
+                        <div className="w-7 h-7 rounded-md bg-brand-orange-soft text-brand-orange-text flex items-center justify-center shrink-0">
                           <HiOutlineBuildingStorefront size={14} />
                         </div>
                         <div className="flex flex-col">
                           <span className="font-bold text-xs text-gray-900 whitespace-nowrap">
                             {req.vendor}
                           </span>
-                          <span className="text-[10px] text-gray-400">
+                          <span className="text-[11px] text-gray-400">
                             {req.accountDetails.bankName} ••••{" "}
                             {req.accountDetails.accountNumber.slice(-4)}
                           </span>
@@ -497,7 +486,7 @@ export default function PayoutRequestsPage() {
                     </td>
 
                     {/* Amount */}
-                    <td className="font-black text-xs text-gray-900 whitespace-nowrap">
+                    <td className="font-bold text-xs text-gray-900 whitespace-nowrap">
                       {req.amount}
                     </td>
 
@@ -523,7 +512,7 @@ export default function PayoutRequestsPage() {
                                   action: "approve",
                                 })
                               }
-                              className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white rounded-md text-xs font-bold shadow-xs transition-colors"
+                              className="inline-flex items-center gap-1 px-3 py-1.5 bg-brand-orange hover:bg-brand-orange/90 text-white rounded-md text-xs font-bold transition-colors"
                               title="Approve and disburse payout"
                             >
                               <HiOutlineCheck size={14} />
@@ -608,7 +597,7 @@ export default function PayoutRequestsPage() {
             <div className="space-y-4 pt-2">
               <div className="flex items-center justify-between border-b border-gray-100 pb-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 rounded-lg bg-brand-blue-light text-brand-blue flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center">
                     <HiOutlineBanknotes className="w-5 h-5" />
                   </div>
                   <div>
@@ -660,7 +649,7 @@ export default function PayoutRequestsPage() {
                     <span className="font-bold text-gray-900">
                       {selectedRequest.accountDetails.accountName}
                     </span>
-                    <span className="font-mono font-bold text-brand-blue">
+                    <span className="font-mono font-bold text-brand-orange-text">
                       {selectedRequest.accountDetails.accountNumber}
                     </span>
                   </div>
@@ -670,7 +659,7 @@ export default function PayoutRequestsPage() {
                   </p>
                 </div>
 
-                <div className="p-3 bg-blue-50/50 rounded-lg border border-blue-100 col-span-2 flex justify-between items-center">
+                <div className="p-3 bg-brand-orange-soft/50 rounded-lg border border-brand-orange/15 col-span-2 flex justify-between items-center">
                   <div>
                     <span className="text-xs text-gray-500">
                       Requested Amount
@@ -679,7 +668,7 @@ export default function PayoutRequestsPage() {
                       Via {selectedRequest.payoutType}
                     </p>
                   </div>
-                  <span className="text-lg font-black text-gray-900">
+                  <span className="text-lg font-bold text-gray-900">
                     {selectedRequest.amount}
                   </span>
                 </div>
@@ -696,7 +685,7 @@ export default function PayoutRequestsPage() {
                 {selectedRequest.status === "Pending" && (
                   <Button
                     size="sm"
-                    className="bg-[#00BCD4] text-white"
+                    className="bg-brand-orange text-white"
                     onClick={() => {
                       setActionConfirmRequest({
                         request: selectedRequest,
@@ -725,7 +714,7 @@ export default function PayoutRequestsPage() {
               <div
                 className={`w-12 h-12 rounded-lg flex items-center justify-center mx-auto ${
                   actionConfirmRequest.action === "approve"
-                    ? "bg-cyan-50 text-[#00BCD4]"
+                    ? "bg-brand-orange-soft text-brand-orange-text"
                     : "bg-rose-50 text-rose-600"
                 }`}
               >
@@ -761,7 +750,7 @@ export default function PayoutRequestsPage() {
                   size="sm"
                   className={`${
                     actionConfirmRequest.action === "approve"
-                      ? "bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white"
+                      ? "bg-brand-orange hover:bg-brand-orange/90 text-white"
                       : "bg-rose-600 hover:bg-rose-700 text-white"
                   }`}
                   onClick={handleConfirmAction}
@@ -783,7 +772,7 @@ export default function PayoutRequestsPage() {
       >
         <ModalBody>
           <div className="space-y-4 pt-2 text-center">
-            <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center mx-auto">
               <HiOutlineDocumentArrowDown className="w-6 h-6" />
             </div>
             <div>
@@ -805,7 +794,7 @@ export default function PayoutRequestsPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-[#00BCD4] text-white"
+                className="bg-brand-orange text-white"
                 onClick={() => setIsExportModalOpen(false)}
               >
                 Download CSV

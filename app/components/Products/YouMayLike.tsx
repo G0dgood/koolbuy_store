@@ -36,22 +36,22 @@ const YouMayLike = () => {
       <div className="flex flex-col gap-6">
          {items.map((item, idx) => (
             <div key={idx} className="flex items-center gap-3 group relative cursor-pointer active:scale-95 transition-all">
-              <Link href="/products/detail" className="w-14 h-14 relative flex-shrink-0 border border-gray-100 rounded p-1 group-hover:border-brand-blue transition-colors overflow-hidden bg-gray-50/50">
-                 <Image src={item.image} alt={item.name} fill className="object-contain transition-transform group-hover:scale-110" />
+              <Link href="/products/detail" className="w-14 h-14 relative flex-shrink-0 border border-gray-100 rounded p-1 group-hover:border-brand-charcoal transition-colors overflow-hidden bg-gray-50/50">
+                 <Image src={item.image} alt={item.name} fill sizes="56px" className="object-contain transition-transform group-hover:scale-110" />
               </Link>
               <div className="flex-1 flex flex-col gap-1 overflow-hidden">
-                 <Link href="/products/detail" className="text-sm font-medium text-gray-900 line-clamp-2 leading-tight hover:text-brand-blue transition-colors">
+                 <Link href="/products/detail" className="text-sm font-medium text-gray-900 line-clamp-2 leading-tight hover:text-brand-orange-text transition-colors">
                     {item.name}
                  </Link>
                  <div className="flex items-center justify-between">
                     <span className="text-xs text-gray-400 font-normal">{item.price}</span>
                     <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                       <Link href="/products/detail" title="View details" className="text-brand-blue hover:scale-110 transition-transform">
+                       <Link href="/products/detail" title="View details" className="text-brand-orange-text hover:scale-110 transition-transform">
                           <Icon name="visibility" size="xs" />
                        </Link>
                        <button 
                          onClick={(e) => handleAddToCart(e, item)}
-                         className="text-brand-blue hover:scale-110 transition-transform p-1 hover:bg-brand-blue/5 rounded-full"
+                         className="text-brand-orange-text hover:scale-110 transition-transform p-1 hover:bg-brand-charcoal/5 rounded-full"
                          title="Add to cart"
                        >
                           <Icon name="shopping_cart" size="xs" />

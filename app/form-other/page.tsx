@@ -18,7 +18,7 @@ export default function FormOtherDemo() {
   const [radioValue, setRadioValue] = useState("second");
 
   return (
-    <div className="min-h-screen bg-[#F0F7FF] p-12 font-sans">
+    <div className="min-h-screen bg-off-white p-12 font-sans">
       <div className="max-w-4xl mx-auto bg-white rounded-xl  p-16 text-black">
         <h1 className="text-5xl font-bold mb-16">Form - Other</h1>
 
@@ -101,8 +101,8 @@ export default function FormOtherDemo() {
                   defaultValue="Text"
                   suffixElement={
                     <div className="flex gap-1.5 mr-1">
-                      <div className="w-5 h-5 rounded bg-brand-blue" />
-                      <div className="w-5 h-5 rounded bg-brand-blue" />
+                      <div className="w-5 h-5 rounded bg-brand-charcoal" />
+                      <div className="w-5 h-5 rounded bg-brand-charcoal" />
                     </div>
                   }
                 />

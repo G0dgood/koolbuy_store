@@ -87,11 +87,11 @@ export function TransactionTable() {
         transaction={selectedTransaction}
       />
       <div className="flex justify-between items-center">
-        <h3 className="text-[18px] font-black text-[#1D3557]">Transaction</h3>
+        <h3 className="text-[18px] font-bold text-brand-charcoal">Transaction</h3>
         <Button
           variant="blue"
           iconRight={<Icon name="sort" folder="dashboardIcon" size="sm" />}
-          className="text-[11px] font-black px-6 h-9 rounded-[6px]"
+          className="text-[11px] font-bold px-6 h-9 rounded-lg"
         >
           Filter
         </Button>
@@ -112,10 +112,10 @@ export function TransactionTable() {
           <tbody>
             {transactionData.map((tx, i) => (
               <tr key={i} className="group">
-                <td className="text-[13px] font-black text-[#1D3557]">
+                <td className="text-[13px] font-bold text-brand-charcoal">
                   {i + 1}.
                 </td>
-                <td className="text-[13px] font-black text-[#1D3557]">
+                <td className="text-[13px] font-bold text-brand-charcoal">
                   #{tx.id}
                 </td>
                 <td className="text-[11px] font-bold text-gray-600">
@@ -124,17 +124,17 @@ export function TransactionTable() {
                 <td className="pl-4">
                   <div className="flex items-center gap-2">
                     <span className={`w-2 h-2 rounded-full ${tx.color}`}></span>
-                    <span className="text-[12px] font-bold text-[#1D3557]">
+                    <span className="text-[12px] font-bold text-brand-charcoal">
                       {tx.status}
                     </span>
                   </div>
                 </td>
-                <td className="text-[13px] font-black text-[#1D3557] text-right">
+                <td className="text-[13px] font-bold text-brand-charcoal text-right">
                   {tx.amount}
                 </td>
                 <td className="text-right">
                   <button
-                    className="p-1 px-3 py-1 text-[10px] font-black bg-brand-blue text-white hover:bg-brand-blue/90 rounded-md transition-all shadow-xs"
+                    className="p-1 px-3 py-1 text-[11px] font-bold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 rounded-md transition-all "
                     onClick={() => {
                       setSelectedTransaction(tx);
                       setIsDetailDrawerOpen(true);
@@ -152,7 +152,7 @@ export function TransactionTable() {
       <div className="flex justify-end pt-2">
         <Button
           variant="blue"
-          className="text-[10px] font-black uppercase tracking-widest px-8 h-10 rounded-[6px]"
+          className="text-[11px] font-bold uppercase tracking-wider px-8 h-10 rounded-lg"
           onClick={() => router.push("/admin/transactions")}
         >
           Details

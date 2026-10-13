@@ -26,7 +26,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between mb-4 group"
       >
-        <h4 className="font-bold text-gray-900 text-sm group-hover:text-brand-blue transition-colors">
+        <h4 className="font-bold text-gray-900 text-sm group-hover:text-brand-orange-text transition-colors">
           {title}
         </h4>
         <Icon
@@ -146,12 +146,12 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
             <li
               key={cat}
               onClick={() => handleCategoryClick(cat)}
-              className={`cursor-pointer transition-colors ${filters.category === cat ? "text-brand-blue font-bold" : "text-gray-600 hover:text-brand-blue"}`}
+              className={`cursor-pointer transition-colors ${filters.category === cat ? "text-brand-orange-text font-bold" : "text-gray-600 hover:text-brand-orange-text"}`}
             >
               {cat}
             </li>
           ))}
-          <li className="text-brand-blue font-medium mt-2 cursor-pointer">
+          <li className="text-brand-orange-text font-medium mt-2 cursor-pointer">
             View all boutique
           </li>
         </ul>
@@ -168,7 +168,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
             size="lg"
           />
         ))}
-        <span className="text-brand-blue text-sm font-medium mt-1 cursor-pointer">
+        <span className="text-brand-orange-text text-sm font-medium mt-1 cursor-pointer">
           View all houses
         </span>
       </FilterSection>
@@ -191,7 +191,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
               type="number"
               value={filters.priceRange[0]}
               onChange={handleMinPriceChange}
-              className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm outline-none focus:border-brand-blue"
+              className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm outline-none focus:border-brand-orange"
             />
           </div>
           <div className="flex flex-col gap-1 flex-1">
@@ -200,7 +200,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
               type="number"
               value={filters.priceRange[1]}
               onChange={handleMaxPriceChange}
-              className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm outline-none focus:border-brand-blue"
+              className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm outline-none focus:border-brand-orange"
             />
           </div>
         </div>

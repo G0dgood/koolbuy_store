@@ -10,9 +10,6 @@ import { Button } from "@/app/components/Button";
 import { Icon } from "@/app/components/Icon";
 import { Modal, ModalBody } from "@/app/components/Modal";
 import {
-  HiOutlineReceiptPercent,
-  HiOutlineBuildingStorefront,
-  HiOutlineShieldCheck,
   HiOutlineDocumentArrowDown,
   HiOutlineShoppingBag,
 } from "react-icons/hi2";
@@ -269,7 +266,7 @@ export default function SubscriptionDiscountsPage() {
             variant="blue"
             size="md"
             iconLeft={<HiOutlineDocumentArrowDown size={18} />}
-            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold shadow-sm shadow-brand-blue/20 bg-[#00BCD4] hover:bg-[#00BCD4]/90 text-white"
+            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold bg-brand-orange hover:bg-brand-orange/90 text-white"
             onClick={() => setIsExportModalOpen(true)}
           >
             Export Report
@@ -287,7 +284,6 @@ export default function SubscriptionDiscountsPage() {
           trendValue="100% Covered"
           trendIsUp={true}
           subtitle="Cumulative subscription discounts"
-          badgeIcon={<HiOutlineReceiptPercent className="w-4 h-4" />}
         />
 
         {/* 2. Subscription Discount On Admin's Account */}
@@ -298,7 +294,6 @@ export default function SubscriptionDiscountsPage() {
           trendValue="Platform absorbed"
           trendIsUp={true}
           subtitle="Funded from admin operational revenue"
-          badgeIcon={<HiOutlineShieldCheck className="w-4 h-4 text-cyan-600" />}
         />
 
         {/* 3. Subscription Discount On Vendors's Account */}
@@ -309,9 +304,6 @@ export default function SubscriptionDiscountsPage() {
           trendValue="Merchant absorbed"
           trendIsUp={true}
           subtitle="Funded from merchant partner margins"
-          badgeIcon={
-            <HiOutlineBuildingStorefront className="w-4 h-4 text-purple-600" />
-          }
         />
       </div>
 
@@ -384,7 +376,7 @@ export default function SubscriptionDiscountsPage() {
                     className="hover:bg-gray-50/60 transition-colors"
                   >
                     {/* Order Number */}
-                    <td className="font-mono font-bold text-xs text-brand-blue whitespace-nowrap">
+                    <td className="font-mono font-bold text-xs text-brand-orange-text whitespace-nowrap">
                       {order.orderNumber}
                     </td>
 
@@ -408,7 +400,7 @@ export default function SubscriptionDiscountsPage() {
                     {/* Discount On Admin's Account */}
                     <td className="text-xs whitespace-nowrap">
                       {order.discountOnAdminAccount !== "₦0" ? (
-                        <span className="font-bold text-cyan-700 bg-cyan-50 px-2.5 py-1 rounded-md border border-cyan-100">
+                        <span className="font-bold text-brand-orange-text bg-brand-orange-soft px-2.5 py-1 rounded-md border border-brand-orange/15">
                           {order.discountOnAdminAccount}
                         </span>
                       ) : (
@@ -430,7 +422,7 @@ export default function SubscriptionDiscountsPage() {
                     {/* Total Subscription Discount */}
                     <td className="text-xs whitespace-nowrap">
                       {order.totalSubscriptionDiscount !== "₦0" ? (
-                        <span className="font-black text-gray-900 bg-gray-100 px-3 py-1 rounded-md border border-gray-200">
+                        <span className="font-bold text-gray-900 bg-gray-100 px-3 py-1 rounded-md border border-gray-200">
                           {order.totalSubscriptionDiscount}
                         </span>
                       ) : (
@@ -489,7 +481,7 @@ export default function SubscriptionDiscountsPage() {
             <div className="space-y-4 pt-2">
               <div className="flex items-center justify-between border-b border-gray-100 pb-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 rounded-lg bg-brand-blue-light text-brand-blue flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center">
                     <HiOutlineShoppingBag className="w-5 h-5" />
                   </div>
                   <div>
@@ -527,14 +519,14 @@ export default function SubscriptionDiscountsPage() {
                   </p>
                 </div>
 
-                <div className="p-3 bg-cyan-50/50 rounded-lg border border-cyan-100">
+                <div className="p-3 bg-brand-orange-soft/50 rounded-lg border border-brand-orange/15">
                   <span className="text-gray-500">
                     Discount On Admin's Account
                   </span>
-                  <p className="font-bold text-brand-blue mt-0.5 text-sm">
+                  <p className="font-bold text-brand-orange-text mt-0.5 text-sm">
                     {selectedOrder.discountOnAdminAccount}
                   </p>
-                  <p className="text-[10px] text-gray-400 mt-0.5">
+                  <p className="text-[11px] text-gray-400 mt-0.5">
                     Platform funded absorption
                   </p>
                 </div>
@@ -546,7 +538,7 @@ export default function SubscriptionDiscountsPage() {
                   <p className="font-bold text-purple-700 mt-0.5 text-sm">
                     {selectedOrder.discountOnVendorAccount}
                   </p>
-                  <p className="text-[10px] text-gray-400 mt-0.5">
+                  <p className="text-[11px] text-gray-400 mt-0.5">
                     Merchant funded absorption
                   </p>
                 </div>
@@ -556,11 +548,11 @@ export default function SubscriptionDiscountsPage() {
                     <span className="font-bold text-gray-700">
                       Total Subscription Discount
                     </span>
-                    <p className="text-[10px] text-gray-500">
+                    <p className="text-[11px] text-gray-500">
                       Combined customer savings on order
                     </p>
                   </div>
-                  <span className="text-base font-black text-gray-900">
+                  <span className="text-base font-bold text-gray-900">
                     {selectedOrder.totalSubscriptionDiscount}
                   </span>
                 </div>
@@ -569,7 +561,7 @@ export default function SubscriptionDiscountsPage() {
               <div className="flex justify-end pt-2">
                 <Button
                   size="sm"
-                  className="bg-[#00BCD4] text-white"
+                  className="bg-brand-orange text-white"
                   onClick={() => setSelectedOrder(null)}
                 >
                   Close
@@ -587,7 +579,7 @@ export default function SubscriptionDiscountsPage() {
       >
         <ModalBody>
           <div className="space-y-4 pt-2 text-center">
-            <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center mx-auto">
               <HiOutlineDocumentArrowDown className="w-6 h-6" />
             </div>
             <div>
@@ -609,7 +601,7 @@ export default function SubscriptionDiscountsPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-[#00BCD4] text-white"
+                className="bg-brand-orange text-white"
                 onClick={() => setIsExportModalOpen(false)}
               >
                 Download CSV

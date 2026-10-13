@@ -41,7 +41,7 @@ const Avatar: React.FC<AvatarProps> = ({
       ) : initials ? (
         <span className="text-gray-500 font-bold text-sm">{initials}</span>
       ) : (
-        <div className="w-full h-full bg-[#BFDBFE] flex items-center justify-center text-white">
+        <div className="w-full h-full bg-brand-orange-soft flex items-center justify-center text-white">
           <Icon name="person" size={size === "lg" ? "lg" : "md"} />
         </div>
       )}

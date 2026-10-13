@@ -19,7 +19,7 @@ export default function CartPage() {
   const [isClearModalOpen, setIsClearModalOpen] = React.useState(false);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F7FAFC]">
+    <div className="flex flex-col min-h-screen bg-off-white">
       <Header />
 
       <div className="flex-1 max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-4 md:py-6 flex flex-col gap-6 md:gap-8 w-full">
@@ -47,7 +47,7 @@ export default function CartPage() {
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8">
               <Link href="/products" className="w-full md:w-auto">
                 <Button
-                  className="w-full md:w-fit bg-brand-blue text-white px-8 h-10"
+                  className="w-full md:w-fit bg-brand-charcoal text-white px-8 h-10"
                   iconLeft={<Icon name="arrow_back white" size="xs" />}
                 >
                   Back to shop
@@ -57,7 +57,7 @@ export default function CartPage() {
                 <Button
                   onClick={() => setIsClearModalOpen(true)}
                   variant="ghost"
-                  className="w-full md:w-auto text-brand-blue bg-white border border-gray-200 px-6 h-10 hover:bg-gray-50 transition-colors"
+                  className="w-full md:w-auto text-brand-orange-text bg-white border border-gray-200 px-6 h-10 hover:bg-gray-50 transition-colors"
                 >
                   Remove all
                 </Button>

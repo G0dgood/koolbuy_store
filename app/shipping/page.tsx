@@ -48,21 +48,21 @@ const ShippingPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-off-white flex flex-col font-sans text-black">
       <Header />
 
       <main className="flex-1 w-full bg-white">
         {/* Step 74: Global Logistics Hero section */}
-        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-[#1D3557] overflow-hidden">
+        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-brand-charcoal overflow-hidden">
           <Image
             src="/brandImage/shipping_banner.png"
             alt="Shipping Banner"
-            fill
+            fill sizes="100vw"
             className="object-cover opacity-100"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1D3557] via-[#1D3557]/80 to-transparent" />
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue rounded-full filter blur-[140px] opacity-10 translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-charcoal via-brand-charcoal/80 to-transparent" />
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-orange rounded-full filter blur-[140px] opacity-10 translate-x-1/2 -translate-y-1/2" />
 
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 relative z-10">
             <motion.div
@@ -72,16 +72,16 @@ const ShippingPage = () => {
               className="flex flex-col gap-6"
             >
               <div className="flex items-center gap-3">
-                <span className="w-10 h-1 bg-brand-blue rounded-full" />
-                <span className="text-brand-blue font-bold tracking-[0.3em] uppercase text-xs">
+                <span className="w-10 h-1 bg-brand-orange rounded-full" />
+                <span className="text-brand-orange font-bold tracking-[0.3em] uppercase text-xs">
                   Global Logistics
                 </span>
               </div>
-              <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter font-inter leading-none">
+              <h1 className="text-4xl md:text-7xl font-bold text-white tracking-tighter font-inter leading-none">
                 Delivering Excellence <br />
-                to Your <span className="text-[#8CB7F5]">Doorstep.</span>
+                to Your <span className="text-white/60">Doorstep.</span>
               </h1>
-              <p className="text-blue-100/60 max-w-2xl text-base md:text-xl leading-relaxed font-medium">
+              <p className="text-light-gray/60 max-w-2xl text-base md:text-xl leading-relaxed font-medium">
                 Koolbuy Store partners with top-tier global carriers to ensure
                 your products arrive in pristine condition, no matter where you
                 are in the world.
@@ -100,16 +100,16 @@ const ShippingPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white p-10 rounded-[40px] border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all group flex flex-col h-full"
+                className="bg-white p-10 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-2 transition-all group flex flex-col h-full"
               >
-                <div className="w-16 h-16 bg-brand-blue-light rounded-3xl flex items-center justify-center text-brand-blue mb-8 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-500">
+                <div className="w-16 h-16 bg-brand-orange-soft rounded-3xl flex items-center justify-center text-brand-orange-text mb-8 group-hover:bg-brand-charcoal group-hover:text-white transition-colors duration-500">
                   {method.icon}
                 </div>
-                <h3 className="text-2xl font-black text-[#1D3557] mb-4">
+                <h3 className="text-2xl font-bold text-brand-charcoal mb-4">
                   {method.title}
                 </h3>
                 <div className="flex flex-col gap-1 mb-6">
-                  <div className="flex items-center gap-2 text-brand-blue">
+                  <div className="flex items-center gap-2 text-brand-orange-text">
                     <HiClock />
                     <span className="text-sm font-bold uppercase tracking-widest">
                       {method.time}
@@ -138,9 +138,9 @@ const ShippingPage = () => {
             ))}
           </div>
 
-          <div className="mt-20 flex flex-col lg:flex-row gap-12 items-center bg-gray-50 rounded-[40px] p-10 md:p-16 border border-gray-100">
+          <div className="mt-20 flex flex-col lg:flex-row gap-12 items-center bg-gray-50 rounded-3xl p-10 md:p-16 border border-gray-100">
             <div className="flex-1 flex flex-col gap-6">
-              <h2 className="text-3xl font-black text-[#1D3557] tracking-tight">
+              <h2 className="text-3xl font-bold text-brand-charcoal tracking-tight">
                 Regional Estimates
               </h2>
               <p className="text-gray-500 leading-relaxed">
@@ -154,18 +154,18 @@ const ShippingPage = () => {
                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
                       {region.region}
                     </span>
-                    <span className="font-black text-[#1D3557] text-xl">
+                    <span className="font-bold text-brand-charcoal text-xl">
                       {region.days}
                     </span>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="w-full lg:w-[400px] aspect-square relative rounded-3xl overflow-hidden shadow-xl">
+            <div className="w-full lg:w-[400px] aspect-square relative rounded-3xl overflow-hidden shadow-md">
               <Image
                 src="/brandImage/regional_visual.png"
                 alt="Distribution Center"
-                fill
+                fill sizes="(max-width: 1024px) 100vw, 400px"
                 className="object-cover"
               />
             </div>
@@ -173,14 +173,14 @@ const ShippingPage = () => {
         </section>
 
         {/* Step 76: Implement Tracking Journey and Packaging commitments */}
-        <section className="bg-[#1D3557] py-24 md:py-32 relative overflow-hidden">
+        <section className="bg-brand-charcoal py-24 md:py-32 relative overflow-hidden">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center relative z-10">
             <div className="flex flex-col gap-10">
               <div className="flex flex-col gap-4">
-                <span className="text-brand-blue font-bold tracking-[0.2em] uppercase text-xs">
+                <span className="text-brand-orange font-bold tracking-[0.2em] uppercase text-xs">
                   Stay Connected
                 </span>
-                <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">
+                <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-tight">
                   Follow Your Bloom <br />
                   Every Step of the Way.
                 </h2>
@@ -188,28 +188,28 @@ const ShippingPage = () => {
 
               <div className="flex flex-col gap-8">
                 <div className="flex items-start gap-6">
-                  <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-brand-blue shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-brand-orange shrink-0">
                     <HiMapPin size={24} />
                   </div>
                   <div className="flex flex-col gap-1">
                     <h4 className="font-bold text-white text-lg">
                       Intelligent Notifications
                     </h4>
-                    <p className="text-blue-100/40 text-sm leading-relaxed">
+                    <p className="text-light-gray/40 text-sm leading-relaxed">
                       Receive SMS and Email updates the moment your package
                       reaches a new milestone.
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-6">
-                  <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-brand-blue shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-brand-orange shrink-0">
                     <HiCube size={24} />
                   </div>
                   <div className="flex flex-col gap-1">
                     <h4 className="font-bold text-white text-lg">
                       Secure Packaging
                     </h4>
-                    <p className="text-blue-100/40 text-sm leading-relaxed">
+                    <p className="text-light-gray/40 text-sm leading-relaxed">
                       All products are shipped in eco-friendly, reinforced
                       Koolbuy Store packaging for maximum protection.
                     </p>
@@ -218,24 +218,24 @@ const ShippingPage = () => {
               </div>
 
               <div className="pt-4">
-                <button className="bg-brand-blue text-white px-12 py-5 rounded-2xl font-black uppercase tracking-widest text-sm shadow-2xl shadow-blue-500/20 hover:scale-105 transition-all">
+                <button className="bg-brand-orange text-white px-12 py-5 rounded-2xl font-bold uppercase tracking-widest text-sm hover:scale-105 transition-all">
                   Track My Order
                 </button>
               </div>
             </div>
 
             <div className="relative group">
-              <div className="absolute -inset-4 bg-brand-blue/20 rounded-[50px] blur-2xl group-hover:bg-brand-blue/30 transition-all" />
-              <div className="relative rounded-[40px] overflow-hidden border border-white/10 aspect-video shadow-2xl">
+              <div className="absolute -inset-4 bg-brand-charcoal/20 rounded-3xl blur-2xl group-hover:bg-brand-charcoal/30 transition-all" />
+              <div className="relative rounded-3xl overflow-hidden border border-white/10 aspect-video shadow-md">
                 <Image
                   src="/web_images/Mask group copy 3.png"
                   alt="Tracking Visual"
-                  fill
+                  fill sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1D3557]/80 to-transparent flex items-end p-8">
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal/80 to-transparent flex items-end p-8">
                   <div className="flex flex-col gap-1">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-brand-blue">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-brand-orange">
                       Real-time Dashboard
                     </span>
                     <p className="text-white text-sm font-medium">
@@ -251,7 +251,7 @@ const ShippingPage = () => {
         {/* FAQ Anchor CTA */}
         <section className="py-24 md:py-32 bg-white">
           <div className="max-w-[1440px] mx-auto px-6 text-center">
-            <h2 className="text-3xl font-black text-[#1D3557] mb-6 tracking-tight">
+            <h2 className="text-3xl font-bold text-brand-charcoal mb-6 tracking-tight">
               Still have shipping questions?
             </h2>
             <p className="text-gray-500 mb-10 max-w-xl mx-auto italic">
@@ -260,7 +260,7 @@ const ShippingPage = () => {
             </p>
             <button
               onClick={() => (window.location.href = "/faq")}
-              className="px-10 py-4 bg-gray-50 border border-gray-100 rounded-xl text-[#1D3557] font-black uppercase tracking-widest text-xs hover:bg-white hover:border-brand-blue hover:text-brand-blue transition-all"
+              className="px-10 py-4 bg-gray-50 border border-gray-100 rounded-xl text-brand-charcoal font-bold uppercase tracking-widest text-xs hover:bg-white hover:border-brand-charcoal hover:text-brand-orange-text transition-all"
             >
               Visit Help Center
             </button>

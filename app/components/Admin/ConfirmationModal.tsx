@@ -36,24 +36,24 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     },
     warning: {
       icon: "warning_amber",
-      iconBg: "bg-orange-50",
+      iconBg: "bg-brand-orange-soft",
       iconColor: "text-brand-orange",
-      buttonBg: "bg-brand-orange hover:bg-orange-600",
-      shadow: "shadow-orange-100",
+      buttonBg: "bg-brand-orange hover:bg-brand-orange",
+      shadow: "shadow-brand-charcoal",
     },
     success: {
       icon: "verified",
-      iconBg: "bg-brand-blue-light",
-      iconColor: "text-brand-blue",
-      buttonBg: "bg-brand-blue hover:bg-blue-600",
-      shadow: "shadow-blue-100",
+      iconBg: "bg-brand-orange-soft",
+      iconColor: "text-brand-orange-text",
+      buttonBg: "bg-brand-charcoal hover:bg-brand-orange",
+      shadow: "shadow-brand-charcoal",
     },
     info: {
       icon: "help_outline",
-      iconBg: "bg-brand-blue-light",
-      iconColor: "text-brand-blue",
-      buttonBg: "bg-brand-blue hover:bg-blue-600",
-      shadow: "shadow-blue-100",
+      iconBg: "bg-brand-orange-soft",
+      iconColor: "text-brand-orange-text",
+      buttonBg: "bg-brand-charcoal hover:bg-brand-orange",
+      shadow: "shadow-brand-charcoal",
     },
   };
 
@@ -67,13 +67,13 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
       title={title}
     >
       <div className="flex flex-col items-center text-center gap-6 py-4">
-        <div className={`w-16 h-16 ${config.iconBg} rounded-[20px] flex items-center justify-center ${config.iconColor} shadow-sm border border-current flex-shrink-0 mb-2 relative overflow-hidden`}>
+        <div className={`w-16 h-16 ${config.iconBg} rounded-2xl flex items-center justify-center ${config.iconColor} shadow-sm border border-current flex-shrink-0 mb-2 relative overflow-hidden`}>
           <div className="absolute inset-0 bg-current opacity-10"></div>
           <Icon name={config.icon} size="lg" className="relative z-10" />
         </div>
 
         <div className="flex flex-col gap-2 mt-2">
-          <h3 className="text-lg sm:text-xl font-black text-gray-900 leading-tight">{title}</h3>
+          <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-tight">{title}</h3>
           <p className="text-[13px] sm:text-sm text-gray-500 font-medium leading-relaxed px-4">
             {message}
           </p>
@@ -88,7 +88,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
             {cancelText}
           </Button>
           <Button
-            className={`flex-1 h-10 sm:h-12 font-black text-white border-transparent shadow-lg ${config.shadow} transition-all active:scale-95 ${config.buttonBg}`}
+            className={`flex-1 h-10 sm:h-12 font-bold text-white border-transparent transition-all active:scale-95 ${config.buttonBg}`}
             onClick={() => {
               onConfirm();
               onClose();

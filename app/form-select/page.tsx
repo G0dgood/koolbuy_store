@@ -29,7 +29,7 @@ export default function FormSelectDemo() {
  ];
 
  return (
-  <div className="min-h-screen bg-[#F0F7FF] p-12 font-sans">
+  <div className="min-h-screen bg-off-white p-12 font-sans">
    <div className="max-w-4xl mx-auto bg-white rounded-xl  p-16">
     <h1 className="text-5xl font-bold mb-16 text-black">Form - select</h1>
 
@@ -50,7 +50,7 @@ export default function FormSelectDemo() {
         options={[options[1]]}
         value={select2}
         onChange={(v) => setSelect2(v as string)}
-        className="border-brand-blue"
+        className="border-brand-charcoal"
        />
 
        <Select
@@ -87,7 +87,7 @@ export default function FormSelectDemo() {
         />
 
         {/* Visual Calendar Mockup to match Design */}
-        <div className="w-[280px] bg-white border border-gray-100 rounded-md shadow-xl p-4">
+        <div className="w-[280px] bg-white border border-gray-100 rounded-md shadow-md p-4">
          <div className="flex items-center justify-between mb-4">
           <button className="p-1 text-gray-400">
            <Icon name="chevron_left" size="sm" />
@@ -104,14 +104,14 @@ export default function FormSelectDemo() {
          </div>
          <div className="grid grid-cols-7 gap-1">
           {Array.from({ length: 31 }, (_, i) => i + 1).map(d => (
-           <div key={d} className={`w-8 h-8 text-xs font-semibold rounded-md flex items-center justify-center ${d === 16 ? "bg-brand-blue text-white" : "text-gray-700 hover:bg-gray-50 pointer-events-none"}`}>
+           <div key={d} className={`w-8 h-8 text-xs font-semibold rounded-md flex items-center justify-center ${d === 16 ? "bg-brand-charcoal text-white" : "text-gray-700 hover:bg-gray-50 pointer-events-none"}`}>
             {d}
            </div>
           ))}
          </div>
          <div className="flex gap-2 mt-6 pt-4 border-t border-gray-100">
-          <button className="flex-1 py-2 text-xs font-bold text-brand-blue border border-gray-100 rounded-md">Clear</button>
-          <button className="flex-1 py-2 text-xs font-bold text-brand-blue border border-gray-100 rounded-md">Today</button>
+          <button className="flex-1 py-2 text-xs font-bold text-brand-orange-text border border-gray-100 rounded-md">Clear</button>
+          <button className="flex-1 py-2 text-xs font-bold text-brand-orange-text border border-gray-100 rounded-md">Today</button>
          </div>
         </div>
        </div>

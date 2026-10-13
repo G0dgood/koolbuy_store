@@ -29,7 +29,7 @@ const itemVariants: Variants = {
 
 export default function ProfilePage() {
   return (
-    <div className="min-h-screen bg-[#F7FAFC] flex flex-col font-inter">
+    <div className="min-h-screen bg-off-white flex flex-col font-inter">
       <Header />
 
       <div className="flex-1 max-w-[1440px] w-full mx-auto px-6 md:px-10 lg:px-16 py-6 md:py-8">
@@ -60,7 +60,7 @@ export default function ProfilePage() {
                  <Button variant="outline" className="border-gray-200 text-gray-600 font-bold hover:bg-gray-50 h-10 px-5">
                    Activity Log
                  </Button>
-                 <Button className="bg-brand-blue text-white shadow-md shadow-brand-blue/20 hover:bg-brand-blue/90 font-bold h-10 px-6">
+                 <Button className="bg-brand-charcoal text-white hover:bg-brand-charcoal/90 font-bold h-10 px-6">
                     Settings
                  </Button>
               </div>
@@ -98,9 +98,9 @@ export default function ProfilePage() {
                   </div>
                   <div className="flex flex-col gap-2">
                     <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Country / Region</label>
-                    <div className="flex items-center justify-between px-4 border border-gray-200 rounded-lg bg-gray-50/50 h-12 w-full cursor-pointer hover:border-brand-blue transition-all group">
+                    <div className="flex items-center justify-between px-4 border border-gray-200 rounded-lg bg-gray-50/50 h-12 w-full cursor-pointer hover:border-brand-charcoal transition-all group">
                       <span className="text-sm text-gray-900 font-medium">United States</span>
-                      <Icon name="expand_more" size="xs" className="text-gray-400 group-hover:text-brand-blue transition-colors" />
+                      <Icon name="expand_more" size="xs" className="text-gray-400 group-hover:text-brand-orange-text transition-colors" />
                     </div>
                   </div>
                 </div>
@@ -114,7 +114,7 @@ export default function ProfilePage() {
                     <Button variant="ghost" className="h-11 px-6 font-bold text-gray-500 hover:text-gray-900">
                       Discard
                     </Button>
-                    <Button className="h-11 px-8 bg-brand-blue text-white shadow-lg shadow-brand-blue/20 hover:bg-brand-blue/90 font-bold">
+                    <Button className="h-11 px-8 bg-brand-charcoal text-white hover:bg-brand-charcoal/90 font-bold">
                       Save Profile
                     </Button>
                   </div>
@@ -123,7 +123,7 @@ export default function ProfilePage() {
             </motion.div>
 
             {/* Newsletter Section - Subtle */}
-            <motion.div variants={itemVariants} className="bg-gradient-to-r from-brand-blue to-blue-700 p-8 rounded-2xl shadow-lg flex flex-col md:flex-row items-center justify-between gap-6 text-white overflow-hidden relative">
+            <motion.div variants={itemVariants} className="bg-gradient-to-r from-brand-charcoal to-brand-orange-hover p-8 rounded-2xl shadow-lg flex flex-col md:flex-row items-center justify-between gap-6 text-white overflow-hidden relative">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
               <div className="z-10 text-center md:text-left">
                 <h3 className="text-xl font-bold mb-1">Stay updated on new deals!</h3>
@@ -134,7 +134,7 @@ export default function ProfilePage() {
                   placeholder="Email address"
                   className="bg-white/20 border border-white/30 rounded-xl px-4 py-3 text-sm placeholder:text-white/60 outline-none focus:bg-white/30 transition-all flex-1 md:w-64"
                 />
-                <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md active:scale-95">
+                <button className="bg-brand-orange hover:bg-brand-orange text-white font-bold px-6 py-3 rounded-xl transition-all active:scale-95">
                   Join
                 </button>
               </div>

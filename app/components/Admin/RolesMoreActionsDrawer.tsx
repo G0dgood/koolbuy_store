@@ -54,7 +54,7 @@ export function RolesMoreActionsDrawer({ isOpen, onClose, onSyncPermissions }: R
     <Drawer isOpen={isOpen} onClose={onClose} title="Roles: More Actions">
       <div className="flex flex-col h-full gap-8">
         <div className="flex flex-col gap-2">
-          <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] px-4 mb-2">
+          <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider px-4 mb-2">
             Governance Tools
           </p>
           <div className="flex flex-col gap-1">
@@ -69,13 +69,13 @@ export function RolesMoreActionsDrawer({ isOpen, onClose, onSyncPermissions }: R
                 <div className={`mt-1 w-10 h-10 rounded-lg flex items-center justify-center transition-all
                   ${action.variant === "danger" 
                     ? "bg-rose-50 text-rose-500 group-hover:bg-rose-100" 
-                    : "bg-brand-blue-light text-brand-blue group-hover:bg-brand-blue group-hover:text-white"}
+                    : "bg-brand-orange-soft text-brand-orange-text group-hover:bg-brand-charcoal group-hover:text-white"}
                 `}>
                   <Icon name={action.icon} folder={action.folder} size="sm" />
                 </div>
                 <div className="flex flex-col gap-1 flex-1">
-                  <span className={`text-[13px] font-black transition-colors
-                    ${action.variant === "danger" ? "text-rose-600" : "text-[#1D3557]"}
+                  <span className={`text-[13px] font-bold transition-colors
+                    ${action.variant === "danger" ? "text-rose-600" : "text-brand-charcoal"}
                   `}>
                     {action.title}
                   </span>
@@ -91,17 +91,17 @@ export function RolesMoreActionsDrawer({ isOpen, onClose, onSyncPermissions }: R
           </div>
         </div>
 
-        <div className="mt-auto p-5 bg-[#1D3557] rounded-2xl border border-blue-900 shadow-xl overflow-hidden relative">
+        <div className="mt-auto p-5 bg-brand-charcoal rounded-2xl border border-brand-charcoal shadow-md overflow-hidden relative">
           <div className="absolute top-0 right-0 p-4 opacity-10 rotate-12">
              <Icon name="verified" folder="icon" size="lg" className="text-white w-20 h-20" />
           </div>
           <div className="relative z-10 flex flex-col gap-3">
-             <div className="w-10 h-10 rounded-xl bg-blue-500/20 border border-blue-400/20 flex items-center justify-center text-blue-400">
+             <div className="w-10 h-10 rounded-xl bg-brand-orange/20 border border-brand-orange/20 flex items-center justify-center text-brand-orange">
                 <Icon name="verified" folder="icon" size="sm" />
              </div>
              <div className="flex flex-col gap-1">
-                <span className="text-[14px] font-black text-white">Administrative Governance</span>
-                <span className="text-[11px] font-medium text-blue-200/60 leading-relaxed">
+                <span className="text-[14px] font-bold text-white">Administrative Governance</span>
+                <span className="text-[11px] font-medium text-light-gray/60 leading-relaxed">
                    Enforce strict access control. Reviewing audit logs regularly ensures system integrity and compliance.
                 </span>
              </div>

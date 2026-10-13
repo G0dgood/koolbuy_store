@@ -62,7 +62,7 @@ const RecommendedItems = () => {
           className="inline-flex items-center gap-1.5 text-xs md:text-sm font-semibold text-gray-600 hover:text-brand-orange group transition-colors"
         >
           <span>See All</span>
-          <span className="w-5 h-5 rounded-full bg-[#FF7A00] text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+          <span className="w-5 h-5 rounded-full bg-brand-orange text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
             <FiChevronRight size={14} />
           </span>
         </Link>
@@ -72,19 +72,19 @@ const RecommendedItems = () => {
           <Link
             key={idx}
             href="/products/detail"
-            className="bg-white border border-[#1C1C1C1A] rounded-[6px] p-4 flex flex-col gap-3 hover:shadow-md transition-shadow cursor-pointer group"
+            className="bg-white border border-[#1C1C1C1A] rounded-lg p-4 flex flex-col gap-3 hover:shadow-md transition-shadow cursor-pointer group"
           >
             <div className="w-full aspect-square relative mb-2">
               <Image
                 src={item.image}
                 alt={item.title}
-                fill
+                fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                 className="object-contain group-hover:scale-105 transition-transform"
               />
             </div>
             <div className="flex flex-col gap-1">
               <span className="font-bold text-gray-900">{item.price}</span>
-              <p className="text-sm text-gray-500 line-clamp-2 leading-tight group-hover:text-brand-blue transition-colors">
+              <p className="text-sm text-gray-500 line-clamp-2 leading-tight group-hover:text-brand-orange-text transition-colors">
                 {item.title}
               </p>
             </div>

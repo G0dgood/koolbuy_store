@@ -92,7 +92,7 @@ export function UploadMediaModal({ isOpen, onClose, onUploadSuccess }: UploadMed
           onDrop={handleDrop}
           className={`
             border-2 border-dashed rounded-2xl p-12 flex flex-col items-center justify-center gap-4 transition-all cursor-pointer group
-            ${isDragging ? "border-brand-blue bg-blue-50/30" : "border-gray-200 bg-gray-50/50 hover:bg-white hover:border-brand-blue/30 hover:shadow-xl hover:shadow-blue-50/50"}
+            ${isDragging ? "border-brand-charcoal bg-brand-orange-soft/30" : "border-gray-200 bg-gray-50/50 hover:bg-white hover:border-brand-charcoal/30 hover:shadow-md hover:shadow-brand-charcoal/50"}
           `}
         >
           <input
@@ -103,11 +103,11 @@ export function UploadMediaModal({ isOpen, onClose, onUploadSuccess }: UploadMed
             accept=".jpg,.jpeg,.png,.mp4"
             onChange={handleFileSelect}
           />
-          <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-gray-400 group-hover:text-brand-blue group-hover:scale-110 transition-all shadow-sm">
+          <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-gray-400 group-hover:text-brand-orange-text group-hover:scale-110 transition-all shadow-sm">
             <Icon name="cloud_upload" folder="icon" size="md" />
           </div>
           <div className="flex flex-col items-center gap-1 text-center">
-            <span className="text-sm font-black text-[#1D3557]">Click or drag to upload media</span>
+            <span className="text-sm font-bold text-brand-charcoal">Click or drag to upload media</span>
             <span className="text-[11px] font-bold text-gray-400">Support for JPG, PNG, and MP4 up to 50MB</span>
           </div>
         </div>
@@ -116,8 +116,8 @@ export function UploadMediaModal({ isOpen, onClose, onUploadSuccess }: UploadMed
         {stagedFiles.length > 0 && (
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-black text-[#1D3557] uppercase tracking-wider">Staged Files ({stagedFiles.length})</span>
-              <button onClick={() => setStagedFiles([])} className="text-[10px] font-bold text-red-500 hover:underline">Clear all</button>
+              <span className="text-xs font-bold text-brand-charcoal uppercase tracking-wider">Staged Files ({stagedFiles.length})</span>
+              <button onClick={() => setStagedFiles([])} className="text-[11px] font-bold text-red-500 hover:underline">Clear all</button>
             </div>
             <div className="grid grid-cols-1 gap-2 max-h-[160px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-200">
               {stagedFiles.map((file, idx) => (
@@ -128,7 +128,7 @@ export function UploadMediaModal({ isOpen, onClose, onUploadSuccess }: UploadMed
                     </div>
                     <div className="flex flex-col">
                       <span className="text-[11px] font-bold text-gray-900 truncate max-w-[200px]">{file.name}</span>
-                      <span className="text-[10px] font-medium text-gray-400">{(file.size / (1024 * 1024)).toFixed(2)} MB</span>
+                      <span className="text-[11px] font-medium text-gray-400">{(file.size / (1024 * 1024)).toFixed(2)} MB</span>
                     </div>
                   </div>
                   <button
@@ -150,10 +150,10 @@ export function UploadMediaModal({ isOpen, onClose, onUploadSuccess }: UploadMed
             { icon: "verified", label: "Color Space", text: "Use sRGB for consistent color across all browsers." }
           ].map((req, i) => (
             <div key={i} className="flex items-start gap-3 p-4 bg-white border border-gray-50 rounded-xl">
-              <Icon name={req.icon} folder="icon" size="xs" className="text-brand-blue mt-0.5" />
+              <Icon name={req.icon} folder="icon" size="xs" className="text-brand-orange-text mt-0.5" />
               <div className="flex flex-col gap-0.5">
-                <span className="text-[11px] font-black text-[#1D3557]">{req.label}</span>
-                <span className="text-[10px] font-bold text-gray-400 leading-tight">{req.text}</span>
+                <span className="text-[11px] font-bold text-brand-charcoal">{req.label}</span>
+                <span className="text-[11px] font-bold text-gray-400 leading-tight">{req.text}</span>
               </div>
             </div>
           ))}

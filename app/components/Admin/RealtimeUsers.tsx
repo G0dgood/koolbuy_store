@@ -39,37 +39,37 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
     <motion.div
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="bg-white p-8 border border-[#1C1C1C1A] rounded-[6px] relative overflow-hidden group"
+      className="bg-white p-8 border border-[#1C1C1C1A] rounded-lg relative overflow-hidden group"
     >
       {/* Instrumentation Backdrop Grid */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(#1D3557 1px, transparent 1px)`,
+          backgroundImage: `radial-gradient(#050711 1px, transparent 1px)`,
           backgroundSize: "20px 20px",
         }}
       />
 
       {/* Subtle Glow Overlays */}
-      <div className="absolute -top-24 -right-24 w-64 h-64 bg-brand-blue/5 rounded-full blur-[80px] pointer-events-none" />
-      <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-400/5 rounded-full blur-[80px] pointer-events-none" />
+      <div className="absolute -top-24 -right-24 w-64 h-64 bg-brand-charcoal/5 rounded-full blur-[80px] pointer-events-none" />
+      <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-brand-orange/5 rounded-full blur-[80px] pointer-events-none" />
 
       <div className="flex justify-between items-start relative z-10">
         <div className="flex flex-col gap-1.5">
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-brand-blue/5 border border-brand-blue/10 w-fit">
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-brand-charcoal/5 border border-brand-charcoal/10 w-fit">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500 shadow-[0_0_8px_rgba(33,150,243,0.8)]"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-orange shadow-[0_0_8px_rgba(245,126,22,0.8)]"></span>
             </span>
-            <span className="text-[10px] font-black text-brand-blue uppercase tracking-widest">
+            <span className="text-[11px] font-bold text-brand-orange-text uppercase tracking-wider">
               Realtime Monitor
             </span>
           </div>
 
-          <h3 className="text-5xl font-black text-[#1D3557] tracking-[-0.04em] mt-3 tabular-nums drop-shadow-sm">
+          <h3 className="text-5xl font-bold text-brand-charcoal tracking-[-0.04em] mt-3 tabular-nums drop-shadow-sm">
             21,540
           </h3>
-          <p className="text-[11px] font-bold text-gray-400 mt-2 flex items-center gap-2 uppercase tracking-widest opacity-80">
+          <p className="text-[11px] font-bold text-gray-400 mt-2 flex items-center gap-2 uppercase tracking-wider opacity-80">
             <span className="w-4 h-px bg-gray-200"></span>
             Active Users Now
             <span className="w-4 h-px bg-gray-200"></span>
@@ -78,7 +78,7 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
 
         <div className="relative" ref={dropdownRef}>
           <button
-            className={`p-2 rounded-xl transition-all duration-300 ${isDropdownOpen ? "bg-[#1D3557] text-white shadow-lg" : "text-gray-400 hover:bg-gray-50 border border-transparent hover:border-gray-100"}`}
+            className={`p-2 rounded-xl transition-all duration-300 ${isDropdownOpen ? "bg-brand-charcoal text-white " : "text-gray-400 hover:bg-gray-50 border border-transparent hover:border-gray-100"}`}
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
             <Icon name="DotsHorizontal" folder="dashboardIcon" size="sm" />
@@ -94,7 +94,7 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
               >
                 <DropdownMenu
                   width={220}
-                  className="shadow-2xl border border-gray-100 rounded-2xl overflow-hidden backdrop-blur-xl bg-white/90"
+                  className="shadow-md border border-gray-100 rounded-2xl overflow-hidden backdrop-blur-xl bg-white/90"
                 >
                   <DropdownItem
                     label="Force Refresh"
@@ -148,19 +148,19 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
                   backgroundColor: (context: any) => {
                     const chart = context.chart;
                     const { ctx, chartArea } = chart;
-                    if (!chartArea) return "#00BCD4";
+                    if (!chartArea) return "#F57E16";
                     const gradient = ctx.createLinearGradient(
                       0,
                       chartArea.bottom,
                       0,
                       chartArea.top,
                     );
-                    gradient.addColorStop(0, "#00BCD4");
-                    gradient.addColorStop(1, "#60A5FA");
+                    gradient.addColorStop(0, "#F57E16");
+                    gradient.addColorStop(1, "#F9A55C");
                     return gradient;
                   },
                   borderRadius: 3,
-                  hoverBackgroundColor: "#1D3557",
+                  hoverBackgroundColor: "#050711",
                   barThickness: 4,
                   gap: 2,
                 },
@@ -177,10 +177,10 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
 
       <div className="flex flex-col gap-6 pt-6 mt-2 relative z-10">
         <div className="flex justify-between items-center bg-gray-50/50 p-2 rounded-lg border border-gray-100/50">
-          <h4 className="text-[12px] font-black text-[#1D3557] uppercase tracking-widest pl-1">
+          <h4 className="text-[12px] font-bold text-brand-charcoal uppercase tracking-wider pl-1">
             Global Distribution
           </h4>
-          <span className="text-[10px] font-black text-brand-blue bg-white px-2 py-0.5 rounded border border-gray-100 shadow-sm">
+          <span className="text-[11px] font-bold text-brand-orange-text bg-white px-2 py-0.5 rounded border border-gray-100 shadow-sm">
             ACTIVE
           </span>
         </div>
@@ -218,16 +218,16 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
                   {c.flag}
                 </div>
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-[11px] font-black text-[#1D3557] tracking-tight">
+                  <span className="text-[11px] font-bold text-brand-charcoal tracking-tight">
                     {c.val}
                   </span>
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter opacity-70">
+                  <span className="text-[11px] font-bold text-gray-400 uppercase tracking-tighter opacity-70">
                     {c.country}
                   </span>
                 </div>
               </div>
               <div
-                className={`flex items-center gap-1 text-[10px] font-black px-2.5 py-1 rounded-lg border shadow-sm transition-all duration-300 ${c.isUp ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-rose-50 text-rose-500 border-rose-100"}`}
+                className={`flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-lg border shadow-sm transition-all duration-300 ${c.isUp ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-rose-50 text-rose-500 border-rose-100"}`}
               >
                 <Icon
                   name={c.isUp ? "arrow_upward" : "arrow_downward"}
@@ -247,7 +247,7 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: isActive ? 1 : 0.1 }}
                     transition={{ delay: 0.5 + idx * 0.02 + i * 0.1 }}
-                    className={`h-full flex-1 rounded-[1px] ${isActive ? "bg-linear-to-b from-blue-400 to-brand-blue shadow-[0_0_5px_rgba(33,150,243,0.3)]" : "bg-gray-200"}`}
+                    className={`h-full flex-1 rounded-sm ${isActive ? "bg-linear-to-b from-brand-orange to-brand-charcoal shadow-[0_0_5px_rgba(245,126,22,0.3)]" : "bg-gray-200"}`}
                   />
                 );
               })}
@@ -258,13 +258,13 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
 
       <button
         onClick={onViewInsight}
-        className="group relative w-full h-13 mt-6 flex items-center justify-center transition-all duration-300 overflow-hidden rounded-[6px]"
+        className="group relative w-full h-13 mt-6 flex items-center justify-center transition-all duration-300 overflow-hidden rounded-lg"
       >
         {/* Glass Background */}
-        <div className="absolute inset-0 bg-[#1D3557] group-hover:bg-[#1D3557]/90 transition-colors" />
+        <div className="absolute inset-0 bg-brand-charcoal group-hover:bg-brand-charcoal/90 transition-colors" />
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-linear-to-r from-transparent via-white/10 to-transparent skew-x-12 translate-x-full group-hover:translate-x-[-200%] duration-1000" />
 
-        <span className="relative z-10 text-[11px] font-black text-white uppercase tracking-[0.2em] flex items-center gap-3">
+        <span className="relative z-10 text-[11px] font-bold text-white uppercase tracking-wider flex items-center gap-3">
           Deep Analysis
           <Icon
             name="arrow_forward"
@@ -274,11 +274,11 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
         </span>
 
         {/* Outer Glow on hover */}
-        <div className="absolute inset-x-4 inset-y-0 bg-brand-blue/30 blur-2xl group-hover:opacity-100 opacity-0 transition-opacity pointer-events-none" />
+        <div className="absolute inset-x-4 inset-y-0 bg-brand-charcoal/30 blur-2xl group-hover:opacity-100 opacity-0 transition-opacity pointer-events-none" />
       </button>
 
       {/* Subtle border bottom glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-linear-to-r from-transparent via-brand-blue/40 to-transparent" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-linear-to-r from-transparent via-brand-charcoal/40 to-transparent" />
     </motion.div>
   );
 };

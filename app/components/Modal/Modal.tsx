@@ -76,7 +76,7 @@ export default function Modal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className={`relative bg-white rounded-2xl text-left overflow-hidden shadow-2xl ${sizeClasses[size]} w-[100%] md:w-full z-50 max-h-[85vh] flex flex-col`}
+            className={`relative bg-white rounded-2xl text-left overflow-hidden shadow-md ${sizeClasses[size]} w-[100%] md:w-full z-50 max-h-[85vh] flex flex-col`}
           >
             {header ? (
               header

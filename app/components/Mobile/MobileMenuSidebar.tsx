@@ -43,12 +43,12 @@ const MobileMenuSidebar = () => {
   return (
     <aside 
       className={`
-        fixed inset-y-0 left-0 w-[280px] bg-white z-[100] shadow-2xl flex flex-col transition-transform duration-300 ease-in-out
+        fixed inset-y-0 left-0 w-[280px] bg-white z-[100] shadow-md flex flex-col transition-transform duration-300 ease-in-out
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
       `}
     >
       {/* Header / Profile */}
-      <div className="bg-[#EFF2F4] p-6 flex flex-col gap-4 relative">
+      <div className="bg-off-white p-6 flex flex-col gap-4 relative">
          <button 
            onClick={closeMenu}
            className="absolute top-4 right-4 text-gray-500 hover:text-black"
@@ -75,13 +75,13 @@ const MobileMenuSidebar = () => {
                   key={iIdx} 
                   href={item.href} 
                   onClick={closeMenu}
-                  className="flex items-center gap-4 px-6 py-3 text-sm text-gray-600 hover:bg-gray-50 hover:text-brand-blue transition-colors group"
+                  className="flex items-center gap-4 px-6 py-3 text-sm text-gray-600 hover:bg-gray-50 hover:text-brand-orange-text transition-colors group"
                 >
                    {item.icon && (
                      <Icon 
                        name={item.icon} 
                        size="sm" 
-                       className="text-gray-400 group-hover:text-brand-blue" 
+                       className="text-gray-400 group-hover:text-brand-orange-text" 
                      />
                    )}
                    <span className={!item.icon ? "ml-9" : ""}>{item.label}</span>

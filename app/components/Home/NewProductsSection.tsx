@@ -90,7 +90,7 @@ export const NewProductsSection: React.FC = () => {
           className="inline-flex items-center gap-1.5 text-xs md:text-sm font-semibold text-gray-600 hover:text-brand-orange group transition-colors"
         >
           <span>See All</span>
-          <span className="w-5 h-5 rounded-full bg-[#FF7A00] text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+          <span className="w-5 h-5 rounded-full bg-brand-orange text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
             <FiChevronRight size={14} />
           </span>
         </Link>
@@ -118,14 +118,14 @@ export const NewProductsSection: React.FC = () => {
                 <Image
                   src={prod.image}
                   alt={prod.name}
-                  fill
+                  fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                   className="object-contain group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
 
               {/* Product Info */}
               <div className="flex flex-col gap-1 text-left w-full">
-                <h4 className="text-xs sm:text-sm font-semibold text-gray-900 group-hover:text-brand-blue transition-colors truncate">
+                <h4 className="text-xs sm:text-sm font-semibold text-gray-900 group-hover:text-brand-orange-text transition-colors truncate">
                   {prod.name}
                 </h4>
                 <p className="text-[11px] text-gray-400 font-medium truncate">

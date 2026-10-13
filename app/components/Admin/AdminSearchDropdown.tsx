@@ -79,19 +79,19 @@ export const AdminSearchDropdown: React.FC<AdminSearchDropdownProps> = ({
     <div className="absolute top-full left-0 pt-4 z-50 cursor-default">
       <DropdownMenu
         width={480}
-        className="shadow-2xl border-gray-100 p-0 overflow-hidden max-h-150 flex flex-col"
+        className="shadow-md border-gray-100 p-0 overflow-hidden max-h-150 flex flex-col"
       >
         <div className="px-5 py-4 border-b border-gray-50 flex justify-between items-center bg-gray-50/50">
           <div className="flex flex-col gap-0.5">
-            <span className="font-black text-[#1D3557] text-sm tracking-tight">
+            <span className="font-bold text-brand-charcoal text-sm tracking-tight">
               {query ? `Search results for "${query}"` : "Recent Searches"}
             </span>
-            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">
+            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider leading-none">
               {filteredResults.length} matches found
             </span>
           </div>
           {!query && (
-            <button className="text-[10px] font-black text-brand-blue uppercase hover:underline">
+            <button className="text-[11px] font-bold text-brand-orange-text uppercase hover:underline">
               Clear History
             </button>
           )}
@@ -101,7 +101,7 @@ export const AdminSearchDropdown: React.FC<AdminSearchDropdownProps> = ({
           {categories.length > 0 ? (
             categories.map((cat) => (
               <div key={cat} className="mb-4 last:mb-0">
-                <h4 className="px-3 py-2 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                <h4 className="px-3 py-2 text-[11px] font-bold text-gray-400 uppercase tracking-wider">
                   {cat}s
                 </h4>
                 <div className="flex flex-col gap-0.5">
@@ -110,7 +110,7 @@ export const AdminSearchDropdown: React.FC<AdminSearchDropdownProps> = ({
                     .map((item) => (
                       <button
                         key={item.id}
-                        className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-brand-blue-light group transition-all text-left"
+                        className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-brand-orange-soft group transition-all text-left"
                       >
                         <div
                           className={`w-10 h-10 rounded-lg shrink-0 flex items-center justify-center border border-gray-100 shadow-sm overflow-hidden
@@ -137,7 +137,7 @@ export const AdminSearchDropdown: React.FC<AdminSearchDropdownProps> = ({
                           )}
                         </div>
                         <div className="flex flex-col flex-1 min-w-0">
-                          <span className="text-[13px] font-black text-[#1D3557] group-hover:text-brand-blue truncate">
+                          <span className="text-[13px] font-bold text-brand-charcoal group-hover:text-brand-orange-text truncate">
                             {item.title}
                           </span>
                           <span className="text-[11px] font-bold text-gray-400 truncate">
@@ -146,13 +146,13 @@ export const AdminSearchDropdown: React.FC<AdminSearchDropdownProps> = ({
                         </div>
                         {item.meta && (
                           <span
-                            className={`text-[11px] font-black px-2 py-0.5 rounded-md
+                            className={`text-[11px] font-bold px-2 py-0.5 rounded-md
                                ${
                                  item.meta === "Complete"
                                    ? "bg-emerald-50 text-emerald-500"
                                    : item.meta === "Pending"
                                      ? "bg-amber-50 text-amber-500"
-                                     : "text-brand-blue"
+                                     : "text-brand-orange-text"
                                }
                             `}
                           >
@@ -170,7 +170,7 @@ export const AdminSearchDropdown: React.FC<AdminSearchDropdownProps> = ({
                 <Icon name="search-01" folder="dashboardIcon" size="lg" />
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-black text-[#1D3557]">
+                <span className="text-sm font-bold text-brand-charcoal">
                   No matches found
                 </span>
                 <span className="text-xs font-bold text-gray-400 max-w-50">
@@ -182,14 +182,14 @@ export const AdminSearchDropdown: React.FC<AdminSearchDropdownProps> = ({
         </div>
 
         <button className="h-14 border-t border-gray-50 flex items-center justify-center gap-2 group hover:bg-gray-50 transition-all">
-          <span className="text-[11px] font-black text-[#1D3557] group-hover:text-brand-blue uppercase tracking-widest">
+          <span className="text-[11px] font-bold text-brand-charcoal group-hover:text-brand-orange-text uppercase tracking-wider">
             View All Search Results
           </span>
           <Icon
             name="arrow_forward"
             folder="icon"
             size="xs"
-            className="text-gray-300 group-hover:text-brand-blue transition-all translate-x-0 group-hover:translate-x-1"
+            className="text-gray-300 group-hover:text-brand-orange-text transition-all translate-x-0 group-hover:translate-x-1"
           />
         </button>
       </DropdownMenu>

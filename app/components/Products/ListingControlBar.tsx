@@ -86,13 +86,13 @@ const ListingControlBar: React.FC<ListingControlBarProps> = ({
               onClick={() => onViewModeChange("grid")}
               className={`w-9 h-9 flex items-center justify-center transition-colors cursor-pointer ${viewMode === "grid" ? "bg-gray-100" : "bg-white hover:bg-gray-50"}`}
             >
-              <Icon name="grid_view" size="sm" className={viewMode === "grid" ? "text-brand-blue" : "text-gray-900"} />
+              <Icon name="grid_view" size="sm" className={viewMode === "grid" ? "text-brand-orange-text" : "text-gray-900"} />
             </button>
             <button
               onClick={() => onViewModeChange("list")}
               className={`w-9 h-9 flex items-center justify-center border-l border-gray-200 transition-colors cursor-pointer ${viewMode === "list" ? "bg-gray-100" : "bg-white hover:bg-gray-50"}`}
             >
-              <Icon name="list" size="sm" className={viewMode === "list" ? "text-brand-blue" : "text-gray-900"} />
+              <Icon name="list" size="sm" className={viewMode === "list" ? "text-brand-orange-text" : "text-gray-900"} />
             </button>
           </div>
         </div>
@@ -102,7 +102,7 @@ const ListingControlBar: React.FC<ListingControlBarProps> = ({
       <div className="flex md:hidden items-center justify-between gap-2 px-1">
         <div className="flex items-center gap-2 flex-1">
           {/* Sort Button */}
-          <button className="flex-1 flex items-center justify-between px-3 py-2 bg-white border border-gray-200 rounded-[6px] text-sm font-medium">
+          <button className="flex-1 flex items-center justify-between px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium">
             <span>Sort: Newest</span>
             <Icon name="sort" size="xs" className="text-gray-400 ml-2" />
           </button>
@@ -110,12 +110,12 @@ const ListingControlBar: React.FC<ListingControlBarProps> = ({
           {/* Filter Button */}
           <button
             onClick={onFilterClick}
-            className="flex-1 flex items-center justify-between px-3 py-2 bg-white border border-gray-200 rounded-[6px] text-sm font-medium"
+            className="flex-1 flex items-center justify-between px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium"
           >
             <div className="flex items-center gap-2">
               <span>Filter</span>
               {activeFilterTags.length > 0 && (
-                <span className="bg-brand-blue text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
+                <span className="bg-brand-charcoal text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
                   {activeFilterTags.length}
                 </span>
               )}
@@ -125,7 +125,7 @@ const ListingControlBar: React.FC<ListingControlBarProps> = ({
         </div>
 
         {/* Mobile View Toggles */}
-        <div className="flex items-center bg-white border border-gray-200 rounded-[6px] overflow-hidden">
+        <div className="flex items-center bg-white border border-gray-200 rounded-lg overflow-hidden">
           <button
             onClick={() => onViewModeChange("grid")}
             className={`w-10 h-10 flex items-center justify-center transition-colors ${viewMode === "grid" ? "bg-gray-100" : "bg-white"}`}
@@ -148,15 +148,15 @@ const ListingControlBar: React.FC<ListingControlBarProps> = ({
             <div
               key={tag.id}
               onClick={() => handleRemoveTag(tag)}
-              className="flex items-center gap-2 px-3 py-1.5 border border-brand-blue rounded h-8 bg-white cursor-pointer hover:bg-brand-blue-light transition-colors group"
+              className="flex items-center gap-2 px-3 py-1.5 border border-brand-charcoal rounded h-8 bg-white cursor-pointer hover:bg-brand-orange-soft transition-colors group"
             >
               <span className="text-sm text-gray-700">{tag.label}</span>
-              <Icon name="clear" size="xs" className="text-gray-400 group-hover:text-brand-blue transition-colors" />
+              <Icon name="clear" size="xs" className="text-gray-400 group-hover:text-brand-orange-text transition-colors" />
             </div>
           ))}
           <button
             onClick={handleClearAll}
-            className="text-brand-blue text-sm font-medium ml-2 hover:underline cursor-pointer"
+            className="text-brand-orange-text text-sm font-medium ml-2 hover:underline cursor-pointer"
           >
             Clear all filters
           </button>

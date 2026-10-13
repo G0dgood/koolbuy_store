@@ -63,7 +63,7 @@ const TableRow: React.FC<TableRowProps> = ({
   <tr 
     className={`
       border-b border-gray-100 transition-colors
-      ${isSelected ? "bg-brand-blue-light/50" : "hover:bg-gray-50/50"}
+      ${isSelected ? "bg-brand-orange-soft/50" : "hover:bg-gray-50/50"}
       ${className}
     `}
     {...props}

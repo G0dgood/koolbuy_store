@@ -95,7 +95,7 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
         {/* Left: Categories */}
         <div className="w-64 border-r border-gray-100 flex flex-col pt-2 bg-gray-50/30">
           <div className="px-5 py-4 flex flex-col gap-1">
-            <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest px-1">Filter Categories</h4>
+            <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-wider px-1">Filter Categories</h4>
           </div>
           <div className="flex flex-col gap-1 px-3">
             {categories.map((cat) => (
@@ -104,12 +104,12 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
                 onClick={() => setSelectedCategory(cat.name)}
                 className={`flex items-center justify-between px-4 py-3 rounded-xl transition-all text-xs font-bold
                   ${selectedCategory === cat.name
-                    ? "bg-brand-blue text-white shadow-lg shadow-blue-100"
-                    : "text-gray-500 hover:bg-white hover:text-brand-blue"}
+                    ? "bg-brand-charcoal text-white "
+                    : "text-gray-500 hover:bg-white hover:text-brand-orange-text"}
                 `}
               >
                 <span>{cat.name}</span>
-                <span className={`text-[10px] ${selectedCategory === cat.name ? "text-blue-100" : "text-gray-400"}`}>
+                <span className={`text-[11px] ${selectedCategory === cat.name ? "text-light-gray" : "text-gray-400"}`}>
                   {cat.count}
                 </span>
               </button>
@@ -121,10 +121,10 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
         <div className="flex-1 flex flex-col bg-white">
           <div className="p-6 border-b border-gray-50 flex items-center justify-between">
             <div className="flex flex-col">
-              <h3 className="text-sm font-black text-[#1D3557]">Selection Area</h3>
-              <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Picking products from {selectedCategory}</span>
+              <h3 className="text-sm font-bold text-brand-charcoal">Selection Area</h3>
+              <span className="text-[11px] text-gray-400 font-bold uppercase tracking-wider">Picking products from {selectedCategory}</span>
             </div>
-            <span className="text-[11px] font-black text-brand-blue bg-brand-blue-light px-3 py-1 rounded-full uppercase">
+            <span className="text-[11px] font-bold text-brand-orange-text bg-brand-orange-soft px-3 py-1 rounded-full uppercase">
               {filteredProducts.length} Products Found
             </span>
           </div>
@@ -136,16 +136,16 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
                 onClick={() => toggleProduct(product.id)}
                 className={`relative flex flex-col gap-3 p-4 rounded-2xl border-2 transition-all cursor-pointer group
                   ${selections[product.id] !== undefined
-                    ? "border-brand-blue bg-blue-50/30"
-                    : "border-gray-100 hover:border-brand-blue/30 bg-white"}
+                    ? "border-brand-charcoal bg-brand-orange-soft/30"
+                    : "border-gray-100 hover:border-brand-charcoal/30 bg-white"}
                 `}
               >
                 <div className="w-full aspect-square bg-white rounded-xl border border-gray-50 p-2 flex items-center justify-center overflow-hidden">
                   <img src={product.image} alt={product.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <h4 className="text-xs font-bold text-[#1D3557] line-clamp-1">{product.name}</h4>
-                  <span className="text-[10px] font-black text-brand-blue">₦{product.price.toLocaleString()}</span>
+                  <h4 className="text-xs font-bold text-brand-charcoal line-clamp-1">{product.name}</h4>
+                  <span className="text-[11px] font-bold text-brand-orange-text">₦{product.price.toLocaleString()}</span>
                 </div>
 
                 <div className="absolute top-4 right-4 z-10">
@@ -163,15 +163,15 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
         {/* Right: Summary & Discounts */}
         <div className="w-80 border-l border-gray-100 flex flex-col bg-gray-50/30">
           <div className="p-6 border-b border-gray-50">
-            <h3 className="text-sm font-black text-[#1D3557] uppercase tracking-wider">Summary List</h3>
-            <p className="text-[10px] text-gray-400 font-bold mt-1 uppercase leading-tight">Apply specific discounts for selected items</p>
+            <h3 className="text-sm font-bold text-brand-charcoal uppercase tracking-wider">Summary List</h3>
+            <p className="text-[11px] text-gray-400 font-bold mt-1 uppercase leading-tight">Apply specific discounts for selected items</p>
           </div>
 
           <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 custom-scrollbar">
             {selectedProductList.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-center p-6 gap-4 opacity-40">
                 <HiOutlineTag size={40} className="text-gray-300" />
-                <p className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">No products selected for this offer feed</p>
+                <p className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">No products selected for this offer feed</p>
               </div>
             ) : (
               selectedProductList.map(p => (
@@ -181,8 +181,8 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
                       <img src={p.image} alt="" className="w-full h-full object-contain" />
                     </div>
                     <div className="flex flex-col min-w-0 flex-1">
-                      <span className="text-[10px] font-black text-[#1D3557] truncate">{p.name}</span>
-                      <span className="text-[9px] font-bold text-gray-400">Orig. ₦{p.price.toLocaleString()}</span>
+                      <span className="text-[11px] font-bold text-brand-charcoal truncate">{p.name}</span>
+                      <span className="text-[11px] font-bold text-gray-400">Orig. ₦{p.price.toLocaleString()}</span>
                     </div>
                     <button
                       onClick={() => toggleProduct(p.id)}
@@ -192,16 +192,16 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
                     </button>
                   </div>
                   <div className="flex items-center gap-3 bg-gray-50 p-2 rounded-xl">
-                    <RiPercentLine className="text-brand-blue" />
+                    <RiPercentLine className="text-brand-orange-text" />
                     <input
                       type="number"
                       value={selections[p.id]}
                       onChange={(e) => updateDiscount(p.id, parseInt(e.target.value) || 0)}
-                      className="w-full bg-transparent border-none text-xs font-black text-[#1D3557] focus:ring-0 p-0"
+                      className="w-full bg-transparent border-none text-xs font-bold text-brand-charcoal focus:ring-0 p-0"
                       min="1"
                       max="99"
                     />
-                    <span className="text-[10px] font-black text-gray-400 uppercase">Discount</span>
+                    <span className="text-[11px] font-bold text-gray-400 uppercase">Discount</span>
                   </div>
                 </div>
               ))
@@ -211,7 +211,7 @@ export function CreateOfferModal({ isOpen, onClose, onSave, initialSelections }:
           <div className="p-6 border-t border-gray-100 bg-white flex flex-col gap-4">
             <div className="flex justify-between items-center text-xs font-bold text-gray-500">
               <span>Selected Items:</span>
-              <span className="text-brand-blue">{selectedProductList.length}</span>
+              <span className="text-brand-orange-text">{selectedProductList.length}</span>
             </div>
             <Button
               variant="primary"

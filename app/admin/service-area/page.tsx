@@ -167,7 +167,7 @@ export default function AdminServiceAreaPage() {
                         <Button
                           variant="outline"
                           shape="rounded-sm"
-                          className="p-1.5! text-gray-400 hover:text-brand-blue hover:bg-brand-blue-light transition-all cursor-pointer"
+                          className="p-1.5! text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft transition-all cursor-pointer"
                           onClick={() => setAreaToEdit(area)}
                           title="Edit area"
                         >

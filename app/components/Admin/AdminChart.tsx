@@ -31,6 +31,8 @@ ChartJS.register(
   Legend,
   Filler
 );
+// Every chart (axes, legends, tooltips) uses the app font, as in the CRM.
+ChartJS.defaults.font.family = "'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
 
 interface AdminChartProps {
   type: "line" | "bar" | "doughnut";
@@ -55,9 +57,9 @@ export const AdminChart: React.FC<AdminChartProps> = ({
         display: false,
       },
       tooltip: {
-        backgroundColor: '#1D3557',
-        titleFont: { size: 12, weight: 'bold', family: 'Inter' },
-        bodyFont: { size: 11, family: 'Inter' },
+        backgroundColor: '#050711',
+        titleFont: { size: 12, weight: 'bold', family: 'Work Sans' },
+        bodyFont: { size: 11, family: 'Work Sans' },
         padding: 12,
         cornerRadius: 8,
         displayColors: false,
@@ -67,16 +69,16 @@ export const AdminChart: React.FC<AdminChartProps> = ({
       x: {
         grid: { display: false },
         ticks: { 
-            color: '#94a3b8', 
-            font: { size: 10, weight: 'bold', family: 'Inter' } 
+            color: '#6C757D', 
+            font: { size: 10, weight: 'bold', family: 'Work Sans' } 
         },
         border: { display: false }
       },
       y: {
-        grid: { color: '#F1F5F9' },
+        grid: { color: '#F8F9FA' },
         ticks: { 
-            color: '#94a3b8', 
-            font: { size: 10, weight: 'bold', family: 'Inter' },
+            color: '#6C757D', 
+            font: { size: 10, weight: 'bold', family: 'Work Sans' },
             callback: (value: any) => value >= 1000 ? `${value / 1000}k` : value
         },
         border: { display: false }

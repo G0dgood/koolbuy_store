@@ -156,7 +156,7 @@ export const PartnersCarousel: React.FC = () => {
           className="inline-flex items-center gap-1.5 text-xs md:text-sm font-semibold text-gray-600 hover:text-brand-orange group transition-colors"
         >
           <span>See All</span>
-          <span className="w-5 h-5 rounded-full bg-[#FF7A00] text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+          <span className="w-5 h-5 rounded-full bg-brand-orange text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
             <FiChevronRight size={14} />
           </span>
         </Link>
@@ -168,7 +168,7 @@ export const PartnersCarousel: React.FC = () => {
         <button
           onClick={scrollPrev}
           aria-label="Previous partners"
-          className="absolute -left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
+          className="absolute -left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
         >
           <FiChevronLeft size={18} />
         </button>
@@ -188,7 +188,7 @@ export const PartnersCarousel: React.FC = () => {
                 <Image
                   src={partner.image}
                   alt={partner.name}
-                  fill
+                  fill sizes="224px"
                   className="object-contain filter grayscale-0 group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
@@ -200,7 +200,7 @@ export const PartnersCarousel: React.FC = () => {
         <button
           onClick={scrollNext}
           aria-label="Next partners"
-          className="absolute -right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
+          className="absolute -right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
         >
           <FiChevronRight size={18} />
         </button>

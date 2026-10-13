@@ -48,21 +48,21 @@ const SavedForLater = () => {
               <Image
                 src={item.image}
                 alt={item.title}
-                fill
+                fill sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-contain scale-75 group-hover:scale-80 transition-transform duration-300"
               />
             </div>
             <div className="flex flex-col gap-3">
               <div className="flex flex-col gap-1">
                 <span className="font-bold text-gray-900">{item.price}</span>
-                <p className="text-gray-500 text-sm leading-tight line-clamp-2 group-hover:text-brand-blue">{item.title}</p>
+                <p className="text-gray-500 text-sm leading-tight line-clamp-2 group-hover:text-brand-orange-text">{item.title}</p>
               </div>
               <div className="flex flex-row gap-2">
                 <Button 
                   onClick={() => handleMoveToCart(item)}
                   variant="secondary" 
                   size="sm" 
-                  className="flex-1 font-bold hover:bg-brand-blue hover:text-white shadow-none justify-center" 
+                  className="flex-1 font-bold hover:bg-brand-charcoal hover:text-white justify-center" 
                   iconLeft={<Icon name="shopping_cart" size="xs" />}
                 >
                   Move to cart
@@ -71,7 +71,7 @@ const SavedForLater = () => {
                   onClick={() => removeFromWishlist(item.id)}
                   variant="ghost" 
                   size="sm" 
-                  className="flex-1 !text-[#EB001B] font-medium border border-brand-blue-light hover:bg-red-50 shadow-none justify-center"
+                  className="flex-1 !text-[#EB001B] font-medium border border-brand-orange/15 hover:bg-red-50 justify-center"
                 >
                   Remove
                 </Button>

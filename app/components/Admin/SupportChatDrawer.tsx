@@ -40,10 +40,10 @@ export function SupportChatDrawer({ isOpen, onClose, ticket }: SupportChatDrawer
         <Button
           variant="outline"
           shape="rounded-sm"
-          className="!py-1.5 !px-3 text-[10px] font-black uppercase tracking-wider border-gray-100 text-[#1D3557] gap-2 hover:bg-gray-50 transition-colors"
+          className="!py-1.5 !px-3 text-[11px] font-bold uppercase tracking-wider border-gray-100 text-brand-charcoal gap-2 hover:bg-gray-50 transition-colors"
           onClick={() => setIsStatusModalOpen(true)}
         >
-          <BiSliderAlt size={14} className="text-brand-blue" />
+          <BiSliderAlt size={14} className="text-brand-orange-text" />
           Status
         </Button>
       }
@@ -58,14 +58,14 @@ export function SupportChatDrawer({ isOpen, onClose, ticket }: SupportChatDrawer
               <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></div>
            </div>
            <div className="flex flex-col">
-              <span className="text-sm font-black text-[#1D3557]">{ticket.customer}</span>
+              <span className="text-sm font-bold text-brand-charcoal">{ticket.customer}</span>
               <div className="flex items-center gap-1.5">
                  <div className="flex items-center gap-1 text-emerald-500">
                     <HiCheckBadge size={14} />
-                    <span className="text-[10px] font-bold">Verified User</span>
+                    <span className="text-[11px] font-bold">Verified User</span>
                  </div>
-                 <span className="text-[10px] text-gray-300">•</span>
-                 <span className="text-[10px] font-bold text-gray-400">{ticket.ticketId}</span>
+                 <span className="text-[11px] text-gray-300">•</span>
+                 <span className="text-[11px] font-bold text-gray-400">{ticket.ticketId}</span>
               </div>
            </div>
         </div>
@@ -77,18 +77,18 @@ export function SupportChatDrawer({ isOpen, onClose, ticket }: SupportChatDrawer
                  <div className={`max-w-[80%] flex flex-col gap-1.5 ${msg.sender === "agent" ? "items-end" : "items-start"}`}>
                     <div className={`p-4 rounded-2xl text-xs font-bold leading-relaxed shadow-sm
                        ${msg.sender === "agent" 
-                          ? "bg-brand-blue text-white rounded-tr-none" 
-                          : "bg-gray-100 text-[#1D3557] rounded-tl-none"}
+                          ? "bg-brand-charcoal text-white rounded-tr-none" 
+                          : "bg-gray-100 text-brand-charcoal rounded-tl-none"}
                     `}>
                        {msg.text}
                     </div>
-                    <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">{msg.time}</span>
+                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{msg.time}</span>
                  </div>
               </div>
            ))}
            
            <div className="flex justify-center">
-              <span className="px-3 py-1 bg-gray-50 rounded-full text-[9px] font-black text-gray-400 uppercase tracking-widest border border-gray-100">
+              <span className="px-3 py-1 bg-gray-50 rounded-full text-[11px] font-bold text-gray-400 uppercase tracking-wider border border-gray-100">
                  Today
               </span>
            </div>
@@ -96,8 +96,8 @@ export function SupportChatDrawer({ isOpen, onClose, ticket }: SupportChatDrawer
 
         {/* Input Area */}
         <div className="pt-6 border-t border-gray-100 mt-auto">
-           <div className="flex items-center gap-3 bg-gray-50 p-2 rounded-2xl border border-gray-100 focus-within:border-brand-blue/30 focus-within:bg-white transition-all">
-              <button className="p-2 text-gray-400 hover:text-brand-blue transition-colors">
+           <div className="flex items-center gap-3 bg-gray-50 p-2 rounded-2xl border border-gray-100 focus-within:border-brand-orange/30 focus-within:bg-white transition-all">
+              <button className="p-2 text-gray-400 hover:text-brand-orange-text transition-colors">
                  <PiPaperclipBold size={20} />
               </button>
               <input 
@@ -105,13 +105,13 @@ export function SupportChatDrawer({ isOpen, onClose, ticket }: SupportChatDrawer
                  value={message}
                  onChange={(e) => setMessage(e.target.value)}
                  placeholder="Type your message..."
-                 className="flex-1 bg-transparent border-none outline-none text-xs font-bold text-[#1D3557] placeholder:text-gray-400 py-2"
+                 className="flex-1 bg-transparent border-none outline-none text-xs font-bold text-brand-charcoal placeholder:text-gray-400 py-2"
               />
-              <button className="w-10 h-10 rounded-xl bg-brand-blue text-white flex items-center justify-center shadow-lg shadow-blue-100 hover:scale-105 active:scale-95 transition-all">
+              <button className="w-10 h-10 rounded-xl bg-brand-charcoal text-white flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
                  <IoSend size={18} />
               </button>
            </div>
-           <p className="text-[10px] text-center text-gray-400 mt-3 font-medium italic">
+           <p className="text-[11px] text-center text-gray-400 mt-3 font-medium italic">
               Press Enter to send message
            </p>
         </div>
