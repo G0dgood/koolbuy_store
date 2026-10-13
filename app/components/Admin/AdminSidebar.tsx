@@ -168,7 +168,7 @@ const navSections: NavItemConfig[][] = [
     { name: "Errors & Health", href: "/admin/health", icon: ActivityLogIcon },
     { name: "Tools", href: "/admin/tools", icon: HobbyKnifeIcon },
     { name: "Kool Logistics", href: "/admin/logistics", icon: GlobeIcon },
-    { name: "DB Audit Logs", href: "/admin/audit-logs", icon: ClockIcon },
+    { name: "Audit Logs", href: "/admin/audit-logs", icon: ClockIcon },
   ],
 ];
 
@@ -296,7 +296,7 @@ export const AdminSidebar: React.FC<SidenavProps> = ({ isOpen, onClose }) => {
       >
         {/* 70px logo bar, level with the header */}
         <div className={`h-[70px] px-4 shrink-0 flex items-center border-b border-light-gray ${collapsed ? "justify-center" : "justify-between gap-2"}`}>
-          <Link href="/admin" className="flex items-center focus:outline-none" aria-label="KoolBuy admin home">
+          <Link href="/" className="flex items-center focus:outline-none" aria-label="Go to the KoolBuy store" title="Go to the store">
             <img src="/images/koolboks/koolbuy_logo.webp" alt="KoolBuy" className={`${collapsed ? "h-8" : "h-9"} w-auto object-contain`} />
           </Link>
           <button

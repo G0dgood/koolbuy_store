@@ -725,7 +725,7 @@ export default function CustomersListing() {
                                 setSelectedDatePreset("date_range");
                                 setIsDateDropdownOpen(false);
                               }}
-                              className="px-3 py-1 bg-brand-orange text-white text-xs font-semibold rounded-md hover:bg-brand-orange-hover transition-colors cursor-pointer"
+                              className="px-3 py-1 bg-brand-charcoal text-white text-xs font-semibold rounded-md hover:bg-brand-charcoal/90 transition-colors cursor-pointer"
                             >
                               Apply Range
                             </button>

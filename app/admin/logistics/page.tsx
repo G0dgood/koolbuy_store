@@ -742,7 +742,7 @@ export default function KoolLogisticsPage() {
           {activeTab === "dropping-orders" && (
             <button
               onClick={() => setIsCreateDropModalOpen(true)}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-orange text-white hover:bg-brand-orange-hover transition-all flex items-center gap-1.5 "
+              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 transition-all flex items-center gap-1.5 "
             >
               <Icon name="plus" className="w-3.5 h-3.5" />
               <span>New Dropping Order</span>
@@ -752,7 +752,7 @@ export default function KoolLogisticsPage() {
           {activeTab === "vendor-addresses" && (
             <button
               onClick={() => setIsAddVendorModalOpen(true)}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-orange text-white hover:bg-brand-orange-hover transition-all flex items-center gap-1.5 "
+              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 transition-all flex items-center gap-1.5 "
             >
               <Icon name="plus" className="w-3.5 h-3.5" />
               <span>Add Vendor Address</span>
@@ -762,7 +762,7 @@ export default function KoolLogisticsPage() {
           {activeTab === "delivery-prices" && (
             <button
               onClick={openAddLgaModal}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-orange text-white hover:bg-brand-orange-hover transition-all flex items-center gap-1.5 "
+              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 transition-all flex items-center gap-1.5 "
             >
               <Icon name="plus" className="w-3.5 h-3.5" />
               <span>Add LGA Price</span>

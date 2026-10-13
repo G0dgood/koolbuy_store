@@ -266,7 +266,7 @@ export default function SubscriptionDiscountsPage() {
             variant="blue"
             size="md"
             iconLeft={<HiOutlineDocumentArrowDown size={18} />}
-            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold bg-brand-orange hover:bg-brand-orange/90 text-white"
+            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold bg-brand-charcoal hover:bg-brand-charcoal/90 text-white"
             onClick={() => setIsExportModalOpen(true)}
           >
             Export Report
@@ -561,7 +561,7 @@ export default function SubscriptionDiscountsPage() {
               <div className="flex justify-end pt-2">
                 <Button
                   size="sm"
-                  className="bg-brand-orange text-white"
+                  className="bg-brand-charcoal text-white"
                   onClick={() => setSelectedOrder(null)}
                 >
                   Close
@@ -601,7 +601,7 @@ export default function SubscriptionDiscountsPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-brand-orange text-white"
+                className="bg-brand-charcoal text-white"
                 onClick={() => setIsExportModalOpen(false)}
               >
                 Download CSV

@@ -485,7 +485,7 @@ html.dark :is([class^="bg-brand-charcoal/"], [class*=" bg-brand-charcoal/"]) {
 }
 
 /* The KoolBuy logo has dark lettering, so on dark it sits on a white plate. */
-html.dark #sidenav a[aria-label="KoolBuy admin home"] img {
+html.dark #sidenav a[aria-label="Go to the KoolBuy store"] img {
   background-color: #fff;
   border-radius: 8px;
   padding: 3px 6px;

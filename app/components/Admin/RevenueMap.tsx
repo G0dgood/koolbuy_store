@@ -57,12 +57,17 @@ export default function RevenueMap({
   useEffect(() => {
     let cancelled = false;
     let m: MbMap | null = null;
+    // Each map draws into its own inner element, so a map that is still being
+    // torn down (see cleanup) never overlaps the next one.
+    const el = document.createElement("div");
+    el.style.cssText = "position:absolute;inset:0";
+    box.current?.appendChild(el);
     (async () => {
       const mapboxgl = (await import("mapbox-gl")).default;
       if (cancelled || !box.current) return;
       mapboxgl.accessToken = MAPBOX_TOKEN;
       m = new mapboxgl.Map({
-        container: box.current,
+        container: el,
         style: document.documentElement.classList.contains("dark")
           ? "mapbox://styles/mapbox/dark-v11"
           : "mapbox://styles/mapbox/light-v11",
@@ -147,8 +152,17 @@ export default function RevenueMap({
 
     return () => {
       cancelled = true;
-      m?.remove();
       map.current = null;
+      // Hide now, remove a little later. Mapbox sends a "map loaded" usage event
+      // when a map starts and clears that event's error callback in remove();
+      // removing straight away (React mounts twice in development) made a failed
+      // or blocked event call the cleared callback: "this.errorCb is not a function".
+      el.style.display = "none";
+      const dead = m;
+      window.setTimeout(() => {
+        dead?.remove();
+        el.remove();
+      }, 5000);
     };
     // The map is created once for the given points.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -159,7 +173,7 @@ export default function RevenueMap({
       ref={box}
       role="region"
       aria-label="Revenue map"
-      className="w-full rounded-lg overflow-hidden border border-light-gray"
+      className="relative w-full rounded-lg overflow-hidden border border-light-gray"
       style={{ height }}
     />
   );

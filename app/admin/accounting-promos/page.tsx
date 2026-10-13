@@ -332,7 +332,7 @@ export default function AccountingPromoCodesPage() {
           <Button
             variant="blue"
             size="md"
-            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold bg-brand-orange hover:bg-brand-orange/90 text-white"
+            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold bg-brand-charcoal hover:bg-brand-charcoal/90 text-white"
             iconLeft={<HiOutlinePlus size={16} />}
             onClick={() => setIsAddReportModalOpen(true)}
           >
@@ -611,7 +611,7 @@ export default function AccountingPromoCodesPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-brand-orange text-white"
+                className="bg-brand-charcoal text-white"
                 onClick={() => setIsExportModalOpen(false)}
               >
                 Download CSV

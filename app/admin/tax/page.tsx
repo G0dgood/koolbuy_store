@@ -501,7 +501,7 @@ export default function TaxPage() {
             <Button
               variant="primary"
               shape="rounded-sm"
-              className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1 text-xs font-semibold px-3 py-1.5 cursor-pointer "
+              className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white flex items-center gap-1 text-xs font-semibold px-3 py-1.5 cursor-pointer "
               onClick={handleOpenAddCategory}
             >
               <HiOutlinePlus className="w-3.5 h-3.5" />
@@ -618,7 +618,7 @@ export default function TaxPage() {
             <Button
               variant="primary"
               shape="rounded-sm"
-              className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1 text-xs font-semibold px-3 py-1.5 cursor-pointer "
+              className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white flex items-center gap-1 text-xs font-semibold px-3 py-1.5 cursor-pointer "
               onClick={handleOpenAddRate}
             >
               <HiOutlinePlus className="w-3.5 h-3.5" />
@@ -827,7 +827,7 @@ export default function TaxPage() {
                   type="submit"
                   variant="primary"
                   shape="rounded-sm"
-                  className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold px-4 py-1.5 cursor-pointer "
+                  className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white text-xs font-semibold px-4 py-1.5 cursor-pointer "
                 >
                   {categoryToEdit ? "Update Category" : "Create Category"}
                 </Button>
@@ -988,7 +988,7 @@ export default function TaxPage() {
                   type="submit"
                   variant="primary"
                   shape="rounded-sm"
-                  className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold px-4 py-1.5 cursor-pointer "
+                  className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white text-xs font-semibold px-4 py-1.5 cursor-pointer "
                 >
                   {rateToEdit ? "Update Tax Rate" : "Create Tax Rate"}
                 </Button>

@@ -363,7 +363,7 @@ export default function MarketingPromocodePage() {
           <Button
             variant="primary"
             shape="rounded-sm"
-            className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer "
+            className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer "
             onClick={handleOpenAddModal}
           >
             <HiOutlinePlus className="w-4 h-4" />
@@ -867,7 +867,7 @@ export default function MarketingPromocodePage() {
                   type="submit"
                   variant="primary"
                   shape="rounded-sm"
-                  className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold px-4 py-1.5 cursor-pointer "
+                  className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white text-xs font-semibold px-4 py-1.5 cursor-pointer "
                 >
                   {promoToEdit ? "Update Promo" : "Create Promo"}
                 </Button>

@@ -263,7 +263,7 @@ export default function AccountingLoyaltyCardsPage() {
             Export Logs
           </Button>
           <Button
-            className="flex-1 sm:flex-initial h-10 px-4 text-xs font-bold bg-brand-orange hover:bg-brand-orange/90 text-white "
+            className="flex-1 sm:flex-initial h-10 px-4 text-xs font-bold bg-brand-charcoal hover:bg-brand-charcoal/90 text-white "
             iconLeft={<HiOutlineGift className="w-4 h-4" />}
             onClick={() => setIsIssueModalOpen(true)}
           >
@@ -539,7 +539,7 @@ export default function AccountingLoyaltyCardsPage() {
               <div className="flex justify-end pt-2">
                 <Button
                   size="sm"
-                  className="bg-brand-orange text-white"
+                  className="bg-brand-charcoal text-white"
                   onClick={() => setSelectedRecord(null)}
                 >
                   Close
@@ -579,7 +579,7 @@ export default function AccountingLoyaltyCardsPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-brand-orange text-white"
+                className="bg-brand-charcoal text-white"
                 onClick={() => setIsExportModalOpen(false)}
               >
                 Download CSV
@@ -653,7 +653,7 @@ export default function AccountingLoyaltyCardsPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-brand-orange text-white"
+                className="bg-brand-charcoal text-white"
                 onClick={() => setIsIssueModalOpen(false)}
               >
                 Confirm & Issue

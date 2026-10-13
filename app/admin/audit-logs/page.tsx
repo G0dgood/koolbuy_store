@@ -845,7 +845,7 @@ export default function DBAuditLogsPage() {
                   onClick={() => setDrawerTab("diff")}
                   className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${
                     drawerTab === "diff"
-                      ? "bg-brand-orange text-white "
+                      ? "bg-brand-charcoal text-white "
                       : "text-gray-600 hover:bg-gray-100"
                   }`}
                 >
@@ -855,7 +855,7 @@ export default function DBAuditLogsPage() {
                   onClick={() => setDrawerTab("raw")}
                   className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${
                     drawerTab === "raw"
-                      ? "bg-brand-orange text-white "
+                      ? "bg-brand-charcoal text-white "
                       : "text-gray-600 hover:bg-gray-100"
                   }`}
                 >

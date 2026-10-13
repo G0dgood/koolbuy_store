@@ -308,7 +308,7 @@ export default function PayoutRequestsPage() {
             variant="blue"
             size="md"
             iconLeft={<HiOutlineDocumentArrowDown size={18} />}
-            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold bg-brand-orange hover:bg-brand-orange/90 text-white"
+            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold bg-brand-charcoal hover:bg-brand-charcoal/90 text-white"
             onClick={() => setIsExportModalOpen(true)}
           >
             Export Payouts
@@ -512,7 +512,7 @@ export default function PayoutRequestsPage() {
                                   action: "approve",
                                 })
                               }
-                              className="inline-flex items-center gap-1 px-3 py-1.5 bg-brand-orange hover:bg-brand-orange/90 text-white rounded-md text-xs font-bold transition-colors"
+                              className="inline-flex items-center gap-1 px-3 py-1.5 bg-brand-charcoal hover:bg-brand-charcoal/90 text-white rounded-md text-xs font-bold transition-colors"
                               title="Approve and disburse payout"
                             >
                               <HiOutlineCheck size={14} />
@@ -685,7 +685,7 @@ export default function PayoutRequestsPage() {
                 {selectedRequest.status === "Pending" && (
                   <Button
                     size="sm"
-                    className="bg-brand-orange text-white"
+                    className="bg-brand-charcoal text-white"
                     onClick={() => {
                       setActionConfirmRequest({
                         request: selectedRequest,
@@ -750,7 +750,7 @@ export default function PayoutRequestsPage() {
                   size="sm"
                   className={`${
                     actionConfirmRequest.action === "approve"
-                      ? "bg-brand-orange hover:bg-brand-orange/90 text-white"
+                      ? "bg-brand-charcoal hover:bg-brand-charcoal/90 text-white"
                       : "bg-rose-600 hover:bg-rose-700 text-white"
                   }`}
                   onClick={handleConfirmAction}
@@ -794,7 +794,7 @@ export default function PayoutRequestsPage() {
               </Button>
               <Button
                 size="sm"
-                className="bg-brand-orange text-white"
+                className="bg-brand-charcoal text-white"
                 onClick={() => setIsExportModalOpen(false)}
               >
                 Download CSV

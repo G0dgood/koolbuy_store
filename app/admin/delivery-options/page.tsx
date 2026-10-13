@@ -338,7 +338,7 @@ export default function DeliveryOptionsPage() {
               onClick={() => setActiveFilter(tab.id as any)}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
                 activeFilter === tab.id
-                  ? "bg-brand-orange text-white "
+                  ? "bg-brand-charcoal text-white "
                   : "text-gray-600 hover:bg-gray-50"
               }`}
             >

@@ -307,7 +307,7 @@ export default function BNPLFormsPage() {
           <Button
             variant="primary"
             shape="rounded-sm"
-            className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer "
+            className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer "
             onClick={() => setIsAddModalOpen(true)}
           >
             <HiOutlinePlus className="w-4 h-4" />
@@ -715,7 +715,7 @@ function CreateOrEditFormModalContent({
         <Button
           variant="primary"
           type="submit"
-          className="bg-brand-orange hover:bg-brand-orange-hover text-white"
+          className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white"
         >
           {initialData ? "Save Changes" : "Create Form"}
         </Button>

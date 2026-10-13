@@ -687,7 +687,7 @@ export default function RolesManagementPage() {
               <Button
                 variant="primary"
                 shape="rounded-sm"
-                className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1 text-xs font-semibold px-3 py-1.5 cursor-pointer "
+                className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white flex items-center gap-1 text-xs font-semibold px-3 py-1.5 cursor-pointer "
                 onClick={handleOpenAddRole}
               >
                 <HiOutlinePlus className="w-3.5 h-3.5" />
@@ -795,7 +795,7 @@ export default function RolesManagementPage() {
                 <Button
                   variant="primary"
                   shape="rounded-sm"
-                  className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold px-4 py-1.5 cursor-pointer shrink-0"
+                  className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white text-xs font-semibold px-4 py-1.5 cursor-pointer shrink-0"
                   onClick={handleSaveAllPermissions}
                 >
                   Save Permissions
@@ -804,7 +804,7 @@ export default function RolesManagementPage() {
                 <Button
                   variant="primary"
                   shape="rounded-sm"
-                  className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-1.5 cursor-pointer shrink-0"
+                  className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-1.5 cursor-pointer shrink-0"
                   onClick={() => setIsAssignUserModalOpen(true)}
                 >
                   <HiOutlineUserPlus className="w-4 h-4" />
@@ -1112,7 +1112,7 @@ export default function RolesManagementPage() {
                   type="submit"
                   variant="primary"
                   shape="rounded-sm"
-                  className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold px-4 py-1.5 cursor-pointer "
+                  className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white text-xs font-semibold px-4 py-1.5 cursor-pointer "
                 >
                   {roleToEdit ? "Update Role" : "Create Role"}
                 </Button>
@@ -1215,7 +1215,7 @@ export default function RolesManagementPage() {
                   type="submit"
                   variant="primary"
                   shape="rounded-sm"
-                  className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold px-4 py-1.5 cursor-pointer "
+                  className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white text-xs font-semibold px-4 py-1.5 cursor-pointer "
                 >
                   Assign User
                 </Button>

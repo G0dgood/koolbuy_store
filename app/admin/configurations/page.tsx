@@ -1075,7 +1075,7 @@ export default function ConfigurationsPage() {
             onClick={() => setActiveTab("cards")}
             className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
               activeTab === "cards"
-                ? "bg-brand-orange text-white "
+                ? "bg-brand-charcoal text-white "
                 : "text-gray-600 hover:bg-gray-50"
             }`}
           >
@@ -1097,7 +1097,7 @@ export default function ConfigurationsPage() {
             onClick={() => setActiveTab("mods")}
             className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
               activeTab === "mods"
-                ? "bg-brand-orange text-white "
+                ? "bg-brand-charcoal text-white "
                 : "text-gray-600 hover:bg-gray-50"
             }`}
           >
@@ -1444,7 +1444,7 @@ export default function ConfigurationsPage() {
               <Button
                 variant="primary"
                 shape="rounded-sm"
-                className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold px-5 py-2 cursor-pointer "
+                className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white text-xs font-semibold px-5 py-2 cursor-pointer "
                 onClick={handleSaveCardSettings}
               >
                 Save Changes

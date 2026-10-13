@@ -310,7 +310,7 @@ export default function EmailTemplatesPage() {
           <Button
             variant="primary"
             shape="rounded-sm"
-            className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer "
+            className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer "
             onClick={handleSave}
           >
             <HiOutlineCheck className="w-4 h-4" />
@@ -538,7 +538,7 @@ export default function EmailTemplatesPage() {
               <Button
                 variant="primary"
                 shape="rounded-sm"
-                className="bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer "
+                className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer "
                 onClick={handleSave}
               >
                 <HiOutlineCheck className="w-4 h-4" />

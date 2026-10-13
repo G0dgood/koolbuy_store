@@ -301,7 +301,7 @@ export default function MarketingCampaignsPage() {
 
         <div className="flex items-center gap-3 w-full sm:w-auto">
           <Button
-            className="h-9 px-4 text-xs font-bold bg-brand-orange hover:bg-brand-orange/90 text-white rounded-lg cursor-pointer"
+            className="h-9 px-4 text-xs font-bold bg-brand-charcoal hover:bg-brand-charcoal/90 text-white rounded-lg cursor-pointer"
             iconLeft={<HiOutlinePlus className="w-3.5 h-3.5" />}
             onClick={handleOpenAddModal}
           >
@@ -776,7 +776,7 @@ export default function MarketingCampaignsPage() {
                 <Button
                   type="submit"
                   size="sm"
-                  className="bg-brand-orange hover:bg-brand-orange/90 text-white rounded-lg text-xs font-semibold"
+                  className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white rounded-lg text-xs font-semibold"
                 >
                   {campaignToEdit ? "Update Campaign" : "Schedule Campaign"}
                 </Button>
