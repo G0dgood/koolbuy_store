@@ -1,16 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
 
-interface CategoryTab {
+export interface CategoryTab {
   id: string;
   name: string;
   link: string;
 }
 
-const categories: CategoryTab[] = [
+export const categories: CategoryTab[] = [
   { id: "all", name: "All", link: "/products" },
   {
     id: "single-door",
@@ -78,63 +76,36 @@ export const IntroducingProducts: React.FC<IntroducingProductsProps> = ({
   };
 
   return (
-    <section className="w-full flex flex-col items-center gap-6 pt-2">
-      {/* Section Title */}
-      <h2 className="text-2xl sm:text-3xl font-bold text-brand-charcoal text-center tracking-tight">
-        Introducing Our Products
-      </h2>
+    <section className="w-full flex flex-col items-center gap-6 pt-6 md:pt-10">
+      {/* Large, tight headline with a short line under it */}
+      <div className="text-center max-w-2xl px-4">
+        <h2 className="text-[32px] sm:text-[44px] md:text-[52px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+          Introducing our products.
+        </h2>
+        <p className="mt-3 text-[17px] md:text-[19px] text-subtle leading-snug">
+          Solar freezers, inverters and batteries, built for Nigerian businesses.
+        </p>
+      </div>
 
-      {/* Categories Tabs Bar */}
+      {/* Category chips */}
       <div className="w-full max-w-full overflow-x-auto scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden py-1">
-        <div className="flex items-center justify-start md:justify-center min-w-max mx-auto px-4 gap-1 sm:gap-2">
-          {categories.map((cat, idx) => {
+        <div className="flex items-center justify-start md:justify-center min-w-max mx-auto px-4 gap-2">
+          {categories.map((cat) => {
             const isActive = activeTab === cat.id;
-
             return (
-              <React.Fragment key={cat.id}>
-                <Link
-                  href={cat.link}
-                  onClick={() => handleSelectTab(cat.id)}
-                  className="group relative"
-                >
-                  <motion.div
-                    whileHover={{ y: -2, scale: 1.04 }}
-                    whileTap={{ scale: 0.97 }}
-                    transition={{ type: "spring", stiffness: 350, damping: 22 }}
-                    className={`relative px-3.5 sm:px-4 py-2.5 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-200 outline-none ${
-                      isActive ? "bg-brand-orange-soft/7" : "hover:bg-brand-orange-soft/50"
-                    }`}
-                  >
-                    <span
-                      className={`text-xs sm:text-sm whitespace-pre-line leading-tight transition-colors duration-200 ${
-                        isActive
-                          ? "text-brand-orange-text font-bold"
-                          : "text-gray-600 font-medium group-hover:text-brand-orange-text"
-                      }`}
-                    >
-                      {cat.name}
-                    </span>
-
-                    {/* Active Orange Underline */}
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeTabUnderline"
-                        className="absolute -bottom-0.5 w-8 sm:w-10 h-0.75 bg-brand-orange rounded-full"
-                        transition={{
-                          type: "spring",
-                          stiffness: 350,
-                          damping: 30,
-                        }}
-                      />
-                    )}
-                  </motion.div>
-                </Link>
-
-                {/* Vertical Divider between items */}
-                {idx < categories.length - 1 && (
-                  <div className="h-6 w-px bg-gray-200 mx-0.5 shrink-0 self-center opacity-60" />
-                )}
-              </React.Fragment>
+              <button
+                key={cat.id}
+                type="button"
+                onClick={() => handleSelectTab(cat.id)}
+                aria-pressed={isActive}
+                className={`px-4 py-2 rounded-full text-[13px] font-medium whitespace-nowrap transition-colors duration-200 ${
+                  isActive
+                    ? "bg-brand-charcoal text-white"
+                    : "bg-black/[0.04] text-gray-700 hover:bg-black/[0.08] hover:text-brand-charcoal"
+                }`}
+              >
+                {cat.name.replace(/\n/g, " ")}
+              </button>
             );
           })}
         </div>

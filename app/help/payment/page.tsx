@@ -19,80 +19,80 @@ import { Button } from "@/app/components/Button";
 const PaymentOptionsPage = () => {
   const paymentMethods = [
     {
-      title: "Traditional Orchestration",
+      title: "Traditional orchestration",
       desc: "We accept all major high-fidelity cards including Visa, MasterCard, and American Express, processed with 256-bit encryption.",
-      icon: <HiCreditCard size={28} />,
+      icon: <HiCreditCard size={22} />,
     },
     {
-      title: "Digital Currencies",
+      title: "Digital currencies",
       desc: "For the modern collector, we support direct artisanal transfers via Bitcoin and Ethereum, materializing instant transaction finality.",
-      icon: <HiGlobeAlt size={28} />,
+      icon: <HiGlobeAlt size={22} />,
     },
     {
-      title: "Concierge Billing",
+      title: "Concierge billing",
       desc: "Patrons with custom procurement accounts may opt for wire orchestration or monthly boutique billing for high-volume acquisitions.",
-      icon: <HiBanknotes size={28} />,
+      icon: <HiBanknotes size={22} />,
     },
   ];
 
   return (
-    <div className="min-h-screen bg-off-white flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-off-white flex flex-col font-sans text-brand-charcoal">
       <Header />
 
-      <main className="flex-1 w-full bg-white">
+      <main className="flex-1 w-full bg-off-white">
         {/* Secure Orchestration Hero */}
-        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-brand-charcoal overflow-hidden">
-          <Image
-            src="/brandImage/shipping_banner.png"
-            alt="Secure Payments"
-            fill sizes="100vw"
-            className="object-cover opacity-100 grayscale brightness-[0.4]"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-charcoal via-brand-charcoal/80 to-transparent" />
+        <section className="max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 pt-14 md:pt-24">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-3xl mx-auto flex flex-col items-center text-center gap-3"
+          >
+            <span className="text-[13px] font-semibold text-brand-orange-text">
+              Security framework
+            </span>
+            <h1 className="text-[34px] md:text-[52px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+              Secure orchestration.
+            </h1>
+            <p className="text-subtle max-w-2xl text-[17px] md:text-[19px] leading-snug">
+              Your transactional integrity is our highest priority. We employ
+              high-fidelity encryption and artisanal fraud prevention to
+              ensure every acquisition is flawless and protected.
+            </p>
+          </motion.div>
 
-          <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              className="flex flex-col gap-6"
-            >
-              <span className="text-brand-orange font-bold tracking-[0.4em] uppercase text-xs">
-                Security Framework
-              </span>
-              <h1 className="text-4xl md:text-7xl font-bold text-white tracking-tighter leading-none font-inter">
-                Secure <br />
-                <span className="text-white/60">Orchestration.</span>
-              </h1>
-              <p className="text-light-gray/60 max-w-2xl text-lg md:text-xl font-medium">
-                Your transactional integrity is our highest priority. We employ
-                high-fidelity encryption and artisanal fraud prevention to
-                ensure every acquisition is flawless and protected.
-              </p>
-            </motion.div>
+          <div className="relative mt-12 md:mt-16 w-full aspect-[16/9] md:aspect-[12/5] rounded-tile md:rounded-hero overflow-hidden">
+            <Image
+              src="/brandImage/shipping_banner.png"
+              alt="Secure Payments"
+              fill
+              sizes="(max-width: 1440px) 100vw, 1312px"
+              // The photo has another site's carousel arrows baked into its edges; zoom past them.
+              className="object-cover scale-[1.13]"
+              priority
+            />
           </div>
         </section>
 
-        <section className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-24 md:py-32">
+        <section className="max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-12 md:py-20">
           {/* Payment Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-4">
             {paymentMethods.map((method, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-white p-10 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-all group"
+                transition={{ delay: i * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-white p-7 md:p-8 rounded-tile hover:shadow-lift transition-shadow duration-300 ease-apple"
               >
-                <div className="w-16 h-16 bg-brand-orange-soft rounded-3xl flex items-center justify-center text-brand-orange-text mb-8 group-hover:bg-brand-charcoal group-hover:text-white transition-colors duration-500">
+                <div className="w-11 h-11 bg-brand-orange-soft rounded-stage flex items-center justify-center text-brand-orange-text mb-5">
                   {method.icon}
                 </div>
-                <h3 className="text-2xl font-bold text-brand-charcoal mb-4">
+                <h3 className="text-[19px] font-semibold text-brand-charcoal tracking-[-0.01em] mb-2">
                   {method.title}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">
+                <p className="text-subtle text-[15px] leading-relaxed">
                   {method.desc}
                 </p>
               </motion.div>
@@ -100,66 +100,65 @@ const PaymentOptionsPage = () => {
           </div>
 
           {/* Encryption Details Area */}
-          <div className="mt-24 md:mt-40 bg-gray-50 rounded-3xl p-10 md:p-24 overflow-hidden relative">
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-charcoal/5 rounded-full filter blur-[100px] translate-x-1/2 -translate-y-1/2" />
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
-              <div className="flex flex-col gap-8">
-                <div className="flex flex-col gap-4">
-                  <span className="text-brand-orange-text font-bold tracking-[0.2em] uppercase text-xs">
-                    Technical Integrity
+          <div className="mt-16 md:mt-28 bg-white rounded-tile md:rounded-hero p-7 md:p-14 lg:p-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+              <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-2">
+                  <span className="text-[13px] font-semibold text-brand-orange-text">
+                    Technical integrity
                   </span>
-                  <h2 className="text-3xl md:text-5xl font-bold text-brand-charcoal tracking-tight leading-tight">
-                    Artisanal Encryption <br />
-                    Standards.
+                  <h2 className="text-[28px] md:text-[40px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-[1.1]">
+                    Artisanal encryption <br />
+                    standards.
                   </h2>
                 </div>
-                <p className="text-gray-500 text-lg leading-relaxed">
+                <p className="text-subtle text-[17px] leading-relaxed">
                   Every transaction within the Koolbuy Store ecosystem is
                   materialized through a 256-bit SSL encrypted tunnel. We do not
                   store raw payment credentials, utilizing high-fidelity
                   tokenization to ensure the absolute sanctity of your financial
                   data.
                 </p>
-                <div className="flex flex-wrap gap-6 pt-4">
-                  <div className="flex items-center gap-3 text-brand-charcoal">
-                    <HiLockClosed className="text-brand-orange-text" size={24} />
-                    <span className="text-xs font-bold uppercase tracking-widest">
-                      SSL Secure
+                <div className="flex flex-wrap gap-2 pt-2">
+                  <div className="inline-flex items-center gap-2 h-9 px-4 rounded-full bg-black/[0.04] text-brand-charcoal">
+                    <HiLockClosed className="text-brand-orange-text" size={16} />
+                    <span className="text-[14px] font-medium">
+                      SSL secure
                     </span>
                   </div>
-                  <div className="flex items-center gap-3 text-brand-charcoal">
-                    <HiCheckBadge className="text-brand-orange-text" size={24} />
-                    <span className="text-xs font-bold uppercase tracking-widest">
-                      PCI Compliant
+                  <div className="inline-flex items-center gap-2 h-9 px-4 rounded-full bg-black/[0.04] text-brand-charcoal">
+                    <HiCheckBadge className="text-brand-orange-text" size={16} />
+                    <span className="text-[14px] font-medium">
+                      PCI compliant
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex flex-col gap-8 bg-brand-charcoal p-10 md:p-12 rounded-3xl shadow-md relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-charcoal/10 rounded-full filter blur-[60px] group-hover:scale-110 transition-transform duration-700" />
-                <div className="flex items-center gap-4 text-brand-orange relative z-10">
-                  <HiShieldCheck size={32} />
-                  <h4 className="text-xl font-bold text-white">
-                    Patron Assurance
+              <div className="flex flex-col gap-5 bg-brand-charcoal p-7 md:p-10 rounded-tile">
+                <div className="flex items-center gap-3">
+                  <div className="w-11 h-11 rounded-stage bg-white/10 text-brand-orange flex items-center justify-center shrink-0">
+                    <HiShieldCheck size={22} />
+                  </div>
+                  <h4 className="text-[19px] font-semibold text-white">
+                    Patron assurance
                   </h4>
                 </div>
-                <p className="text-sm text-light-gray/60 leading-relaxed italic relative z-10">
-                  "We understand that luxury discovery requires absolute peace
+                <p className="text-[16px] text-white/60 leading-relaxed">
+                  &ldquo;We understand that luxury discovery requires absolute peace
                   of mind. Our billing curators work tirelessly behind the
                   scenes to monitor transaction integrity, ensuring that your
                   journey from curation to acquisition is as secure as it is
-                  seamless."
+                  seamless.&rdquo;
                 </p>
-                <div className="flex items-center gap-3 relative z-10">
-                  <div className="w-10 h-10 rounded-full bg-white/20" />
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-white/10" />
                   <div className="flex flex-col">
-                    <span className="text-[10px] font-bold uppercase text-brand-orange tracking-widest">
-                      Chief Security Officer
+                    <span className="text-[14px] font-semibold text-white">
+                      Chief security officer
                     </span>
-                    <span className="text-[10px] text-white/40 font-medium">
-                      Boutique Compliance Suite
+                    <span className="text-[13px] text-white/60">
+                      Boutique compliance suite
                     </span>
                   </div>
                 </div>

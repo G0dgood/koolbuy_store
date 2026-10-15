@@ -21,21 +21,21 @@ const FilterSection: React.FC<FilterSectionProps> = ({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="border-t border-gray-200 py-4 first:border-t-0">
+    <div className="border-t border-black/[0.06] py-4 first:border-t-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between mb-4 group"
+        className="w-full flex items-center justify-between group cursor-pointer"
       >
-        <h4 className="font-bold text-gray-900 text-sm group-hover:text-brand-orange-text transition-colors">
+        <h4 className="text-[13px] font-semibold text-brand-charcoal">
           {title}
         </h4>
         <Icon
           name="expand_more"
           size="xs"
-          className={`text-gray-400 transform transition-transform ${isOpen ? "rotate-180" : ""}`}
+          className={`text-faint group-hover:text-brand-charcoal transform transition-all duration-300 ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
-      {isOpen && <div className="flex flex-col gap-2">{children}</div>}
+      {isOpen && <div className="flex flex-col gap-2.5 mt-3 text-[14px]">{children}</div>}
     </div>
   );
 };
@@ -132,10 +132,10 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
   );
 
   return (
-    <aside className="w-64 flex-shrink-0 flex flex-col gap-4">
+    <aside className="w-full lg:w-64 flex-shrink-0 flex flex-col bg-white rounded-[22px] px-5 py-1">
       {/* Categories */}
       <FilterSection title="Category">
-        <ul className="flex flex-col gap-2 text-sm">
+        <ul className="flex flex-col gap-2.5 text-[14px]">
           {[
             "Signature Fragrance",
             "Luxury Skincare",
@@ -146,19 +146,19 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
             <li
               key={cat}
               onClick={() => handleCategoryClick(cat)}
-              className={`cursor-pointer transition-colors ${filters.category === cat ? "text-brand-orange-text font-bold" : "text-gray-600 hover:text-brand-orange-text"}`}
+              className={`cursor-pointer transition-colors ${filters.category === cat ? "text-brand-orange-text font-semibold" : "text-subtle hover:text-brand-charcoal"}`}
             >
               {cat}
             </li>
           ))}
-          <li className="text-brand-orange-text font-medium mt-2 cursor-pointer">
+          <li className="text-[13px] text-brand-orange-text font-medium mt-1 cursor-pointer hover:underline">
             View all boutique
           </li>
         </ul>
       </FilterSection>
 
       {/* Brands */}
-      <FilterSection title="Artisanal Houses">
+      <FilterSection title="Artisanal houses">
         {["Koolbuy Store", "Prada", "Versace", "Gucci", "Dior"].map((brand) => (
           <Checkbox
             key={brand}
@@ -168,7 +168,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
             size="lg"
           />
         ))}
-        <span className="text-brand-orange-text text-sm font-medium mt-1 cursor-pointer">
+        <span className="text-brand-orange-text text-[13px] font-medium mt-1 cursor-pointer hover:underline">
           View all houses
         </span>
       </FilterSection>
@@ -186,28 +186,28 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
         </div>
         <div className="flex gap-2">
           <div className="flex flex-col gap-1 flex-1">
-            <span className="text-xs text-gray-400">Min</span>
+            <span className="text-[12px] text-faint">Min</span>
             <input
               type="number"
               value={filters.priceRange[0]}
               onChange={handleMinPriceChange}
-              className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm outline-none focus:border-brand-orange"
+              className="w-full h-9 bg-black/[0.04] border border-transparent rounded-xl px-3 text-[14px] text-brand-charcoal tabular-nums outline-none transition-colors focus:bg-white focus:border-light-gray"
             />
           </div>
           <div className="flex flex-col gap-1 flex-1">
-            <span className="text-xs text-gray-400">Max</span>
+            <span className="text-[12px] text-faint">Max</span>
             <input
               type="number"
               value={filters.priceRange[1]}
               onChange={handleMaxPriceChange}
-              className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm outline-none focus:border-brand-orange"
+              className="w-full h-9 bg-black/[0.04] border border-transparent rounded-xl px-3 text-[14px] text-brand-charcoal tabular-nums outline-none transition-colors focus:bg-white focus:border-light-gray"
             />
           </div>
         </div>
       </FilterSection>
 
       {/* Collection */}
-      <FilterSection title="Collection Type">
+      <FilterSection title="Collection type">
         {["Any", "Intense", "Discovery", "Essential", "Seasonal"].map(
           (cond) => (
             <Radio

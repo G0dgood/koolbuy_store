@@ -10,62 +10,67 @@ const sectionVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
 };
 
+/* Apple-store style form pieces (DESIGN.md §13). The ! keeps these ahead of the
+   shared Input's own border/background/radius classes. */
+const SECTION = "bg-white rounded-[22px] overflow-hidden";
+const SECTION_TITLE = "text-[19px] md:text-[20px] font-semibold text-brand-charcoal tracking-[-0.01em] leading-tight";
+const SECTION_SUB = "text-[13px] text-subtle mt-0.5";
+const STEP = "w-8 h-8 rounded-full bg-brand-orange-soft text-brand-orange-text text-[14px] font-semibold flex items-center justify-center shrink-0";
+const LABEL = "text-[13px] font-medium text-brand-charcoal";
+const FIELD =
+  "h-11! rounded-xl! bg-black/[0.04]! border! border-transparent! px-4! py-0! text-[15px]! text-brand-charcoal placeholder:text-faint! outline-none shadow-none transition-colors focus:bg-white! focus:border-brand-orange! focus:ring-4! focus:ring-brand-orange/15!";
+
 export const CheckoutForm: React.FC = () => {
   const [paymentMethod, setPaymentMethod] = useState<"card" | "paypal">("card");
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-8">
+    <div className="flex-1 w-full flex flex-col gap-4 md:gap-6">
       {/* Step 1: Shipping Address */}
       <motion.section
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
+        className={SECTION}
       >
-        <div className="p-6 md:p-8 bg-gray-50/50 border-b border-gray-100 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-full bg-brand-charcoal text-white flex items-center justify-center font-bold shadow-lg shadow-brand-charcoal/20">
-              1
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-gray-900 tracking-tight">Shipping Details</h2>
-              <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mt-0.5">Where should we deliver?</p>
-            </div>
+        <div className="px-6 pt-6 md:px-8 md:pt-8 flex items-center gap-3">
+          <div className={STEP}>1</div>
+          <div>
+            <h2 className={SECTION_TITLE}>Shipping details</h2>
+            <p className={SECTION_SUB}>Where should we deliver?</p>
           </div>
-          <Icon name="local_shipping" size="md" className="text-brand-orange-text opacity-10" />
         </div>
 
         <div className="p-6 md:p-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">First Name</label>
-              <Input placeholder="John" className="h-[52px] bg-gray-50/50 border-gray-100 focus:border-brand-orange focus:bg-white transition-all shadow-none rounded-xl" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-5">
+            <div className="flex flex-col gap-1.5">
+              <label className={LABEL}>First name</label>
+              <Input placeholder="John" className={FIELD} />
             </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Last Name</label>
-              <Input placeholder="Doe" className="h-[52px] bg-gray-50/50 border-gray-100 focus:border-brand-orange focus:bg-white transition-all shadow-none rounded-xl" />
+            <div className="flex flex-col gap-1.5">
+              <label className={LABEL}>Last name</label>
+              <Input placeholder="Doe" className={FIELD} />
             </div>
-            <div className="flex flex-col gap-2 md:col-span-2">
-              <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Email Address</label>
-              <Input placeholder="john.doe@example.com" type="email" className="h-[52px] bg-gray-50/50 border-gray-100 focus:border-brand-orange focus:bg-white transition-all shadow-none rounded-xl" />
+            <div className="flex flex-col gap-1.5 md:col-span-2">
+              <label className={LABEL}>Email address</label>
+              <Input placeholder="john.doe@example.com" type="email" className={FIELD} />
             </div>
-            <div className="flex flex-col gap-2 md:col-span-2">
-              <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Street Address</label>
+            <div className="flex flex-col gap-1.5 md:col-span-2">
+              <label className={LABEL}>Street address</label>
               <div className="relative flex items-center">
-                <Input placeholder="123 Shopping Avenue, Suite 456" className="h-[52px] bg-gray-50/50 border-gray-100 focus:border-brand-orange focus:bg-white transition-all shadow-none rounded-xl w-full" />
-                <Icon name="location_on" size="xs" className="absolute right-4 text-gray-300" />
+                <Input placeholder="123 Shopping Avenue, Suite 456" className={`${FIELD} pr-11! w-full`} />
+                <Icon name="location_on" size="sm" className="absolute right-4 text-faint" />
               </div>
             </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">City</label>
-              <Input placeholder="San Francisco" className="h-[52px] bg-gray-50/50 border-gray-100 focus:border-brand-orange focus:bg-white transition-all shadow-none rounded-xl" />
+            <div className="flex flex-col gap-1.5">
+              <label className={LABEL}>City</label>
+              <Input placeholder="San Francisco" className={FIELD} />
             </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Country</label>
-              <div className="flex items-center justify-between px-4 border border-gray-100 rounded-xl bg-gray-50/50 h-[52px] w-full cursor-pointer hover:border-brand-charcoal hover:bg-white transition-all group">
-                <span className="text-sm text-gray-900 font-semibold">United States</span>
-                <Icon name="expand_more" size="xs" className="text-gray-400 group-hover:text-brand-orange-text transition-colors" />
+            <div className="flex flex-col gap-1.5">
+              <label className={LABEL}>Country</label>
+              <div className="flex items-center justify-between h-11 px-4 rounded-xl bg-black/[0.04] border border-transparent w-full cursor-pointer transition-colors hover:bg-black/[0.06] group">
+                <span className="text-[15px] text-brand-charcoal">United States</span>
+                <Icon name="expand_more" size="xs" className="text-faint group-hover:text-brand-charcoal transition-colors" />
               </div>
             </div>
           </div>
@@ -78,64 +83,60 @@ export const CheckoutForm: React.FC = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
+        className={SECTION}
       >
-        <div className="p-6 md:p-8 bg-gray-50/50 border-b border-gray-100 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-full bg-brand-charcoal text-white flex items-center justify-center font-bold shadow-lg shadow-brand-charcoal/20">
-              2
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-gray-900 tracking-tight">Payment Selection</h2>
-              <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mt-0.5">Secure Transaction</p>
-            </div>
+        <div className="px-6 pt-6 md:px-8 md:pt-8 flex items-center gap-3">
+          <div className={STEP}>2</div>
+          <div>
+            <h2 className={SECTION_TITLE}>Payment selection</h2>
+            <p className={SECTION_SUB}>Secure transaction</p>
           </div>
-          <Icon name="security" size="md" className="text-brand-orange-text opacity-10" />
         </div>
 
         <div className="p-6 md:p-8">
-          <div className="flex flex-col md:flex-row gap-4 mb-8">
+          <div className="flex flex-col md:flex-row gap-3 mb-6">
             <button
               onClick={() => setPaymentMethod("card")}
-              className={`flex-1 flex flex-col items-start p-5 rounded-2xl border-2 transition-all gap-4 text-left relative overflow-hidden
+              className={`flex-1 flex flex-col items-start p-5 rounded-[16px] bg-white transition-shadow gap-4 text-left relative overflow-hidden
                 ${paymentMethod === "card"
-                  ? "border-brand-charcoal bg-brand-orange-soft/30 "
-                  : "border-gray-50 bg-gray-50/30 hover:border-brand-charcoal/30 hover:bg-white"}`}
+                  ? "ring-2 ring-brand-orange"
+                  : "ring-1 ring-black/[0.08] hover:ring-black/[0.16]"}`}
             >
               <Radio
                 name="paymentMethod"
                 checked={paymentMethod === "card"}
                 onChange={() => setPaymentMethod("card")}
+                activeColor="var(--brand-orange)"
                 rightElement={
                   <div className="flex gap-2">
-                    <Image src="/payment/Payment=payment, Pay-type=visa.png" alt="Visa" width={32} height={20} className="object-contain" />
-                    <Image src="/payment/Payment=payment, Pay-type=mastercard.png" alt="Mastercard" width={32} height={20} className="object-contain" />
+                    <Image src="/payment/visa.png" alt="Visa" width={32} height={20} className="object-contain" />
+                    <Image src="/payment/mastercard.png" alt="Mastercard" width={32} height={20} className="object-contain" />
                   </div>
                 }
               />
               <div className="relative z-10 pointer-events-none">
-                <span className={`font-bold text-[13px] block ${paymentMethod === "card" ? "text-gray-900" : "text-gray-500"}`}>Credit / Debit Card</span>
-                <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">Instant confirmation</span>
+                <span className="text-[15px] font-semibold text-brand-charcoal block">Credit / Debit card</span>
+                <span className="text-[13px] text-subtle mt-0.5 block">Instant confirmation</span>
               </div>
             </button>
 
             <button
               onClick={() => setPaymentMethod("paypal")}
-              className={`flex-1 flex flex-col items-start p-5 rounded-2xl border-2 transition-all gap-4 text-left relative overflow-hidden
+              className={`flex-1 flex flex-col items-start p-5 rounded-[16px] bg-white transition-shadow gap-4 text-left relative overflow-hidden
                 ${paymentMethod === "paypal"
-                  ? "border-[#0070BA] bg-brand-orange-soft/30 "
-                  : "border-gray-50 bg-gray-50/30 hover:border-[#0070BA]/30 hover:bg-white"}`}
+                  ? "ring-2 ring-brand-orange"
+                  : "ring-1 ring-black/[0.08] hover:ring-black/[0.16]"}`}
             >
               <Radio
                 name="paymentMethod"
                 checked={paymentMethod === "paypal"}
                 onChange={() => setPaymentMethod("paypal")}
                 icon="paypal"
-                activeColor="#0070BA"
+                activeColor="var(--brand-orange)"
               />
               <div className="relative z-10 pointer-events-none">
-                <span className={`font-bold text-[13px] block ${paymentMethod === "paypal" ? "text-gray-900" : "text-gray-500"}`}>PayPal Express</span>
-                <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">Redirect to PayPal</span>
+                <span className="text-[15px] font-semibold text-brand-charcoal block">PayPal Express</span>
+                <span className="text-[13px] text-subtle mt-0.5 block">Redirect to PayPal</span>
               </div>
             </button>
           </div>
@@ -144,31 +145,31 @@ export const CheckoutForm: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 md:p-8 bg-gray-50/80 rounded-2xl border border-gray-100"
+              className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-5"
             >
-              <div className="flex flex-col gap-2 md:col-span-2">
-                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Card Number</label>
+              <div className="flex flex-col gap-1.5 md:col-span-2">
+                <label className={LABEL}>Card number</label>
                 <div className="relative flex items-center">
-                  <Input placeholder="0000 0000 0000 0000" className="h-[52px] pl-12 shadow-none border-gray-200 focus:border-brand-orange focus:bg-white rounded-xl" />
-                  <Icon name="security" size="xs" className="absolute left-4 text-gray-400" />
+                  <Input placeholder="0000 0000 0000 0000" className={`${FIELD} pl-11! tabular-nums`} />
+                  <Icon name="security" size="sm" className="absolute left-4 text-faint" />
                 </div>
               </div>
-              <div className="flex flex-col gap-2 md:col-span-2">
-                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Cardholder Name</label>
-                <Input placeholder="FULL NAME AS ON CARD" className="h-[52px] shadow-none border-gray-200 focus:border-brand-orange focus:bg-white rounded-xl uppercase placeholder:normal-case font-semibold text-sm" />
+              <div className="flex flex-col gap-1.5 md:col-span-2">
+                <label className={LABEL}>Cardholder name</label>
+                <Input placeholder="Full name as on card" className={FIELD} />
               </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Expiry Date</label>
+              <div className="flex flex-col gap-1.5">
+                <label className={LABEL}>Expiry date</label>
                 <div className="relative flex items-center">
-                  <Input placeholder="MM / YY" className="h-[52px] shadow-none border-gray-200 focus:border-brand-orange focus:bg-white rounded-xl text-center font-bold" />
-                  <Icon name="calendar_today" size="xs" className="absolute left-4 text-gray-200 hidden md:block" />
+                  <Input placeholder="MM / YY" className={`${FIELD} pl-11! tabular-nums`} />
+                  <Icon name="calendar_today" size="sm" className="absolute left-4 text-faint" />
                 </div>
               </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Security Code</label>
+              <div className="flex flex-col gap-1.5">
+                <label className={LABEL}>Security code</label>
                 <div className="relative flex items-center">
-                  <Input placeholder="CVV" type="password" className="h-[52px] shadow-none border-gray-200 focus:border-brand-orange focus:bg-white rounded-xl text-center font-bold tracking-widest" />
-                  <Icon name="help" size="xs" className="absolute right-4 text-gray-300" />
+                  <Input placeholder="CVV" type="password" className={`${FIELD} pr-11!`} />
+                  <Icon name="help" size="sm" className="absolute right-4 text-faint" />
                 </div>
               </div>
             </motion.div>
@@ -176,16 +177,16 @@ export const CheckoutForm: React.FC = () => {
 
           {paymentMethod === "paypal" && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="p-8 bg-[#0070BA]/5 rounded-2xl border border-[#0070BA]/10 flex flex-col items-center text-center gap-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="p-8 bg-off-white rounded-[16px] flex flex-col items-center text-center gap-3"
             >
-              <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg">
-                <Icon name="paypal" size="lg" className="text-[#0070BA]" />
+              <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center">
+                <Icon name="paypal" size="lg" className="text-brand-charcoal" />
               </div>
               <div>
-                <h3 className="font-bold text-gray-900">PayPal Express</h3>
-                <p className="text-sm text-gray-500 max-w-[240px] mt-1">You will be redirected to PayPal to complete your purchase securely.</p>
+                <h3 className="text-[17px] font-semibold text-brand-charcoal">PayPal Express</h3>
+                <p className="text-[14px] text-subtle max-w-[260px] mt-1">You will be redirected to PayPal to complete your purchase securely.</p>
               </div>
             </motion.div>
           )}

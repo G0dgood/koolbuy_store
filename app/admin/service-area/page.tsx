@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import { Icon } from "@/app/components/Icon";
 import { Button } from "@/app/components/Button";
 import { Input } from "@/app/components/Form/Inputs";
+import { Search } from "@/app/components/Form";
 import { Pagination } from "@/app/components/Admin/Pagination";
 import { RowsPerPage } from "@/app/components/rows-per-page";
 import { ConfirmationModal } from "@/app/components/Admin/ConfirmationModal";
@@ -101,23 +102,16 @@ export default function AdminServiceAreaPage() {
         {/* Search and Table Controls */}
         <div className="p-4 sm:p-5 flex flex-col sm:flex-row gap-4 items-center justify-between border-b border-gray-100">
           <div className="w-full sm:w-80">
-            <Input
-              type="text"
+            <Search
               placeholder="Search service area name..."
               value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
+              onChange={(val) => {
+                setSearchQuery(val);
                 setCurrentPage(1);
               }}
-              className="bg-white border-gray-200 placeholder:text-gray-400 text-xs font-medium"
-              suffixElement={
-                <Icon
-                  name="search-01"
-                  folder="dashboardIcon"
-                  size="sm"
-                  className="text-gray-400"
-                />
-              }
+              maxWidth="100%"
+              className="w-full"
+              showClearButton
             />
           </div>
 

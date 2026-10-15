@@ -185,20 +185,20 @@ const ProductsPage = () => {
         />
 
         {/* Breadcrumbs */}
-        <div className="hidden md:flex items-center gap-2 text-sm text-gray-400 overflow-x-auto whitespace-nowrap scrollbar-none pb-2 px-4 md:px-0">
-          <Link href="/" className="hover:text-brand-orange-text">
+        <div className="hidden md:flex items-center gap-1.5 text-[12px] text-faint overflow-x-auto whitespace-nowrap scrollbar-none px-4 md:px-0">
+          <Link href="/" className="hover:text-brand-charcoal transition-colors">
             Home
           </Link>
-          <Icon name="chevron_right" size="xs" />
-          <Link href="#" className="hover:text-brand-orange-text">
+          <span aria-hidden="true" className="text-gray-300">›</span>
+          <Link href="#" className="hover:text-brand-charcoal transition-colors">
             Clothings
           </Link>
-          <Icon name="chevron_right" size="xs" />
-          <Link href="#" className="hover:text-brand-orange-text">
+          <span aria-hidden="true" className="text-gray-300">›</span>
+          <Link href="#" className="hover:text-brand-charcoal transition-colors">
             Men's wear
           </Link>
-          <Icon name="chevron_right" size="xs" />
-          <span className="text-gray-600 font-medium">Summer clothing</span>
+          <span aria-hidden="true" className="text-gray-300">›</span>
+          <span className="text-subtle">Summer clothing</span>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-6 items-start px-4 md:px-0 mt-3 md:mt-0">
@@ -222,7 +222,7 @@ const ProductsPage = () => {
               className={`
                 ${
                   viewMode === "grid"
-                    ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 md:gap-5"
+                    ? "grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5"
                     : "flex flex-col gap-3 md:gap-4"
                 }
               `}
@@ -289,33 +289,33 @@ const ProductsPage = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsFilterDrawerOpen(false)}
-              className="fixed inset-0 bg-black/50 z-[100] lg:hidden"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] lg:hidden"
             />
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-y-0 right-0 w-[85%] max-w-sm bg-white z-[110] lg:hidden flex flex-col shadow-md"
+              className="fixed inset-y-0 right-0 w-[85%] max-w-sm bg-off-white z-[110] lg:hidden flex flex-col rounded-l-[22px] overflow-hidden"
             >
-              <div className="flex items-center justify-between p-4 border-b border-gray-100">
-                <h2 className="text-lg font-bold">Filters</h2>
+              <div className="flex items-center justify-between px-5 py-4 bg-white border-b border-black/[0.06]">
+                <h2 className="text-[20px] font-semibold text-brand-charcoal tracking-[-0.02em]">Filters</h2>
                 <button
                   onClick={() => setIsFilterDrawerOpen(false)}
-                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  className="w-9 h-9 flex items-center justify-center bg-black/[0.04] hover:bg-black/[0.08] text-brand-charcoal rounded-full transition-colors"
                 >
                   <Icon name="close" size="md" />
                 </button>
               </div>
-              <div className="flex-1 overflow-y-auto p-4">
+              <div className="flex-1 overflow-y-auto p-3">
                 <FilterSidebar filters={filters} setFilters={setFilters} />
               </div>
-              <div className="p-4 border-t border-gray-100 flex gap-3">
+              <div className="p-4 bg-white border-t border-black/[0.06] flex gap-3">
                 <button
                   onClick={() => setIsFilterDrawerOpen(false)}
-                  className="flex-1 py-3 bg-brand-charcoal text-white font-bold rounded-lg hover:bg-brand-charcoal/90"
+                  className="flex-1 py-3 bg-brand-charcoal text-white text-[15px] font-medium rounded-full hover:bg-brand-charcoal/90 transition-colors"
                 >
-                  Show Results
+                  Show results
                 </button>
               </div>
             </motion.div>

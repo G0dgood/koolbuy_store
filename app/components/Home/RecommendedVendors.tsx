@@ -1,5 +1,6 @@
 "use client";
 
+import { StoreSectionHeader } from "./StoreUi";
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -104,22 +105,7 @@ export const RecommendedVendors: React.FC = () => {
       onTouchStart={() => setIsPaused(true)}
       onTouchEnd={() => setIsPaused(false)}
     >
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg md:text-xl font-bold tracking-wider text-gray-900">
-          Recommended Vendors
-        </h3>
-
-        <Link
-          href="/products"
-          className="inline-flex items-center gap-1.5 text-xs md:text-sm font-semibold text-gray-600 hover:text-brand-orange group transition-colors"
-        >
-          <span>See All</span>
-          <span className="w-5 h-5 rounded-full bg-brand-orange text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-            <FiChevronRight size={14} />
-          </span>
-        </Link>
-      </div>
+      <StoreSectionHeader title="Recommended vendors" subtitle="Verified sellers with great service." href="/products" />
 
       {/* Relative container with arrows */}
       <div className="relative group/carousel">
@@ -127,7 +113,7 @@ export const RecommendedVendors: React.FC = () => {
         <button
           onClick={scrollPrev}
           aria-label="Previous vendors"
-          className="absolute -left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
+          className="absolute -left-2 md:-left-4 top-[40%] -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/85 backdrop-blur-xl shadow-[0_4px_16px_rgba(0,0,0,0.12)] flex items-center justify-center text-brand-charcoal hover:bg-white transition-all cursor-pointer opacity-0 group-hover/carousel:opacity-100 focus-visible:opacity-100"
         >
           <FiChevronLeft size={18} />
         </button>
@@ -135,36 +121,34 @@ export const RecommendedVendors: React.FC = () => {
         {/* Carousel Container */}
         <div
           ref={scrollRef}
-          className="flex items-stretch gap-4 md:gap-5 overflow-x-auto scrollbar-none scroll-smooth py-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          className="flex items-stretch gap-3 md:gap-4 overflow-x-auto scrollbar-none scroll-smooth py-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           {vendors.map((vendor) => (
             <div
               key={vendor.id}
-              className="w-60 sm:w-65 md:w-[calc(25%-15px)] shrink-0 flex flex-col"
+              className="w-60 sm:w-65 md:w-[calc(25%-12px)] shrink-0 flex flex-col"
             >
               <Link href={vendor.link} className="flex-1 flex flex-col">
                 <motion.div
-                  whileHover={{ y: -4 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="bg-white border border-[#1C1C1C1A] rounded-xl overflow-hidden flex flex-col h-full hover:shadow-md transition-all group cursor-pointer"
+                  className="bg-white rounded-[22px] overflow-hidden flex flex-col h-full transition-shadow duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] group cursor-pointer"
                 >
                   {/* Vendor Image Banner */}
-                  <div className="w-full aspect-square relative overflow-hidden bg-brand-orange">
+                  <div className="w-full aspect-square relative overflow-hidden bg-off-white">
                     <Image
                       src={vendor.image}
                       alt={vendor.name}
                       fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     />
                   </div>
 
                   {/* Bottom Info */}
-                  <div className="p-4 flex flex-col items-center text-center gap-1.5 bg-white border-t border-gray-100">
-                    <h4 className="text-xs sm:text-sm font-bold text-gray-900 line-clamp-1 group-hover:text-brand-orange transition-colors">
+                  <div className="px-4 pt-3 pb-4 flex flex-col gap-0.5">
+                    <h4 className="text-[14px] font-semibold text-brand-charcoal line-clamp-1">
                       {vendor.name}
                     </h4>
-                    <span className="text-[11px] sm:text-xs font-bold text-[#E91E63] tracking-wider uppercase hover:underline inline-flex items-center gap-1">
-                      SHOP NOW
+                    <span className="text-[13px] font-medium text-brand-orange-text group-hover:underline">
+                      Shop now ›
                     </span>
                   </div>
                 </motion.div>
@@ -177,7 +161,7 @@ export const RecommendedVendors: React.FC = () => {
         <button
           onClick={scrollNext}
           aria-label="Next vendors"
-          className="absolute -right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
+          className="absolute -right-2 md:-right-4 top-[40%] -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/85 backdrop-blur-xl shadow-[0_4px_16px_rgba(0,0,0,0.12)] flex items-center justify-center text-brand-charcoal hover:bg-white transition-all cursor-pointer opacity-0 group-hover/carousel:opacity-100 focus-visible:opacity-100"
         >
           <FiChevronRight size={18} />
         </button>

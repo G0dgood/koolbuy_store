@@ -32,38 +32,24 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Load from localStorage on mount
   useEffect(() => {
-    const savedCart = localStorage.getItem("cart_items");
-
-    if (savedCart) {
-      setCartItems(JSON.parse(savedCart));
-    } else {
-      // Seed with initial hardcoded data if empty
-      setCartItems([
-        {
-          id: "c1",
-          title: "T-shirts with multiple colors, for men and boy",
-          price: "₦78.99",
-          image: "/images/shirt.jpg",
-          quantity: 1,
-          meta: { size: "Medium", color: "Blue", material: "Cotton", seller: "Artel Market" }
-        },
-        {
-          id: "c2",
-          title: "Leather bag for travel and for men",
-          price: "₦39.00",
-          image: "/images/bag.jpg",
-          quantity: 1,
-          meta: { size: "Large", color: "Black", material: "Leather", seller: "Best Buy" }
-        },
-        {
-          id: "c3",
-          title: "Canon camera black, 100x zoom",
-          price: "₦170.00",
-          image: "/images/camera.jpg",
-          quantity: 1,
-          meta: { size: "Small", color: "Black", material: "Plastic", seller: "Photo Max" }
+    try {
+      const savedCart = localStorage.getItem("cart_items");
+      if (savedCart) {
+        const parsed = JSON.parse(savedCart);
+        if (Array.isArray(parsed)) {
+          // Filter out any legacy dummy/static items
+          const cleaned = parsed.filter(
+            (item: any) => !["c1", "c2", "c3"].includes(item.id)
+          );
+          setCartItems(cleaned);
+        } else {
+          setCartItems([]);
         }
-      ]);
+      } else {
+        setCartItems([]);
+      }
+    } catch {
+      setCartItems([]);
     }
     
     setIsInitialized(true);

@@ -23,15 +23,15 @@ const SupplierCard = () => {
 
    return (
       <div className="w-72 flex-shrink-0 flex flex-col gap-3">
-         <div className="bg-white border border-gray-200 rounded-lg p-5 flex flex-col gap-5 ">
+         <div className="bg-white rounded-[22px] p-6 flex flex-col gap-5">
             {/* Vendor Header */}
-            <div className="flex gap-3 pb-4 border-b border-gray-100 items-center">
-               <div className="w-12 h-12 bg-[#DDF0FF] rounded flex items-center justify-center text-brand-orange-text font-bold text-xl">
+            <div className="flex gap-3 pb-5 border-b border-black/[0.06] items-center">
+               <div className="w-12 h-12 bg-brand-orange-soft rounded-full flex items-center justify-center text-brand-orange-text font-semibold text-[18px]">
                   R
                </div>
                <div className="flex flex-col">
-                  <span className="text-sm font-medium text-gray-900">Supplier</span>
-                  <span className="text-xs text-gray-400">Guanjoi Trading Co., Ltd.</span>
+                  <span className="text-[14px] font-semibold text-brand-charcoal">Supplier</span>
+                  <span className="text-[13px] text-subtle">Guanjoi Trading Co., Ltd.</span>
                </div>
             </div>
 
@@ -44,8 +44,8 @@ const SupplierCard = () => {
                   {/* <span className="text-sm text-gray-400">Germany, Berlin</span> */}
                </div>
                <div className="flex items-center gap-3">
-                  <Icon name="verified_user" size="sm" className="text-gray-400" />
-                  <span className="text-sm text-gray-400">Verified Seller</span>
+                  <Icon name="verified_user" size="sm" className="text-success" />
+                  <span className="text-[14px] text-subtle">Verified Seller</span>
                </div>
                {/* <div className="flex items-center gap-3">
                   <Icon name="public" size="sm" className="text-gray-400" />
@@ -57,7 +57,10 @@ const SupplierCard = () => {
             <div className="flex flex-col gap-2">
                <Button
                   onClick={handleAddToCart}
-                  className="w-full bg-brand-charcoal text-white h-10 hover:bg-brand-charcoal/90 cursor-pointer"
+                  variant="accent"
+                  shape="pill"
+                  size="lg"
+                  className="w-full h-11 text-[15px] cursor-pointer"
                >
                   Add to cart
                </Button>
@@ -74,7 +77,7 @@ const SupplierCard = () => {
                image: "/images/shirt.jpg",
             }}
             variant="none"
-            className="flex items-center justify-center gap-2 py-4 text-brand-orange-text text-sm font-medium hover:underline cursor-pointer"
+            className="flex items-center justify-center gap-2 py-3 text-brand-orange-text text-[14px] font-medium hover:underline cursor-pointer"
          >
             Save for later
          </FavoriteButton>

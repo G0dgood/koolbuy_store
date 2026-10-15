@@ -14,60 +14,117 @@ import { ClearCartModal } from "@/app/components/Modal";
 
 import { useCart } from "@/app/context/CartContext";
 
+import { EmptyCartIllustration } from "@/app/components/Cart/EmptyCartIllustration";
+
 export default function CartPage() {
   const { cartItems, clearCart } = useCart();
   const [isClearModalOpen, setIsClearModalOpen] = React.useState(false);
+
+  const hasItems = cartItems.length > 0;
 
   return (
     <div className="flex flex-col min-h-screen bg-off-white">
       <Header />
 
-      <div className="flex-1 max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-4 md:py-6 flex flex-col gap-6 md:gap-8 w-full">
-        <h2 className="text-xl md:text-2xl font-bold text-gray-900"> My cart ({cartItems.length})</h2>
+      <div className="flex-1 max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-8 md:py-12 flex flex-col gap-8 md:gap-10 w-full">
+        <div className="flex items-center justify-between">
+          <h1 className="text-[24px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
+            My cart <span className="text-faint tabular-nums font-normal">({cartItems.length})</span>
+          </h1>
+          {hasItems && (
+            <Link href="/products" className="text-sm font-medium text-brand-orange-text hover:underline hidden sm:block">
+              Continue shopping →
+            </Link>
+          )}
+        </div>
 
-        <div className="flex flex-col lg:flex-row gap-6 md:gap-8 items-start">
-          {/* Cart List Container */}
-          <div className="flex-1 bg-white border border-gray-200 md:rounded-lg p-4 md:p-6 flex flex-col w-full">
-            {cartItems.length > 0 ? (
-              cartItems.map((item) => (
+        {hasItems ? (
+          <div className="flex flex-col lg:flex-row gap-6 md:gap-8 items-start">
+            {/* Cart List Container */}
+            <div className="flex-1 bg-white rounded-[22px] px-5 py-2 md:px-8 md:py-4 flex flex-col w-full shadow-xs">
+              {cartItems.map((item) => (
                 <CartItem key={item.id} {...item} />
-              ))
-            ) : (
-              <div className="py-12 flex flex-col items-center gap-4 text-center">
-                <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center text-gray-400">
-                  <Icon name="shopping_cart" size="md" />
-                </div>
-                <div className="flex flex-col gap-1">
-                  <p className="text-gray-900 font-bold">Your cart is empty</p>
-                  <p className="text-gray-500 text-sm">Looks like you haven't added anything to your cart yet.</p>
-                </div>
-              </div>
-            )}
+              ))}
 
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8">
-              <Link href="/products" className="w-full md:w-auto">
-                <Button
-                  className="w-full md:w-fit bg-brand-charcoal text-white px-8 h-10"
-                  iconLeft={<Icon name="arrow_back white" size="xs" />}
-                >
-                  Back to shop
-                </Button>
-              </Link>
-              {cartItems.length > 0 && (
+              <div className="flex flex-col md:flex-row justify-between items-center gap-3 pt-6 pb-4 border-t border-black/[0.04] mt-2">
+                <Link href="/products" className="w-full md:w-auto">
+                  <Button
+                    variant="primary"
+                    shape="pill"
+                    className="w-full md:w-fit px-6 h-10 text-[14px]!"
+                    iconLeft={<Icon name="arrow_back white" size="xs" />}
+                  >
+                    Back to shop
+                  </Button>
+                </Link>
                 <Button
                   onClick={() => setIsClearModalOpen(true)}
                   variant="ghost"
-                  className="w-full md:w-auto text-brand-orange-text bg-white border border-gray-200 px-6 h-10 hover:bg-gray-50 transition-colors"
+                  shape="pill"
+                  className="w-full md:w-auto px-5 h-10 text-[14px]! font-medium! text-brand-orange-text hover:bg-brand-orange-soft"
                 >
                   Remove all
                 </Button>
-              )}
+              </div>
             </div>
-          </div>
 
-          {/* Summary Sidebar */}
-          <CartSummary />
-        </div>
+            {/* Summary Sidebar */}
+            <CartSummary />
+          </div>
+        ) : (
+          /* Empty State with Custom SVG */
+          <div className="bg-white rounded-[24px] px-6 py-12 md:py-16 flex flex-col items-center justify-center text-center gap-6 shadow-xs border border-black/[0.04]">
+            <EmptyCartIllustration className="w-64 h-52 sm:w-80 sm:h-64" />
+
+            <div className="flex flex-col items-center gap-2 max-w-md">
+              <h2 className="text-[22px] md:text-[26px] font-bold text-brand-charcoal tracking-[-0.02em]">
+                Your cart is empty
+              </h2>
+              <p className="text-[15px] text-subtle leading-relaxed">
+                Looks like you haven&apos;t added anything to your cart yet. Discover energy-efficient solar freezers, appliances, and marketplace essentials.
+              </p>
+            </div>
+
+            {/* Quick Category Suggestions */}
+            <div className="flex flex-wrap items-center justify-center gap-2 max-w-lg">
+              <Link
+                href="/products?category=freezers"
+                className="px-3.5 py-1.5 rounded-full bg-off-white hover:bg-brand-orange-soft text-[13px] font-medium text-brand-charcoal hover:text-brand-orange-text transition-colors border border-black/[0.04]"
+              >
+                Solar Freezers
+              </Link>
+              <Link
+                href="/products?category=coolers"
+                className="px-3.5 py-1.5 rounded-full bg-off-white hover:bg-brand-orange-soft text-[13px] font-medium text-brand-charcoal hover:text-brand-orange-text transition-colors border border-black/[0.04]"
+              >
+                AC/DC Hybrid Coolers
+              </Link>
+              <Link
+                href="/products?category=ice-makers"
+                className="px-3.5 py-1.5 rounded-full bg-off-white hover:bg-brand-orange-soft text-[13px] font-medium text-brand-charcoal hover:text-brand-orange-text transition-colors border border-black/[0.04]"
+              >
+                Ice Makers
+              </Link>
+              <Link
+                href="/products"
+                className="px-3.5 py-1.5 rounded-full bg-off-white hover:bg-brand-orange-soft text-[13px] font-medium text-brand-charcoal hover:text-brand-orange-text transition-colors border border-black/[0.04]"
+              >
+                Solar Kits & Batteries
+              </Link>
+            </div>
+
+            <Link href="/products" className="mt-2">
+              <Button
+                variant="accent"
+                shape="pill"
+                size="lg"
+                className="px-8 h-12 text-[15px]! font-semibold!"
+              >
+                Start shopping
+              </Button>
+            </Link>
+          </div>
+        )}
 
         {/* Footer info and Saved for Later */}
         <div className="flex flex-col gap-8">

@@ -71,19 +71,22 @@ const HeroSection = () => {
 
   return (
     <section
-      className="w-full bg-white overflow-hidden"
+      aria-roledescription="carousel"
+      aria-label="Featured products"
+      className="w-full relative"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <div className="relative w-full h-95 sm:h-115 md:h-145 lg:h-165 xl:h-180 2xl:h-200 overflow-hidden">
+      {/* Full-width hero banner at 12:5 aspect ratio without outer padding */}
+      <div className="group/hero relative w-full aspect-[12/5] min-h-[200px] sm:min-h-[280px] md:min-h-[400px] overflow-hidden bg-off-white">
         <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
             key={currentSlide}
             custom={direction}
-            initial={{ opacity: 0, x: direction > 0 ? 50 : -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: direction > 0 ? -50 : 50 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, scale: 1.015 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-0 w-full h-full"
           >
             <Image
@@ -102,21 +105,6 @@ const HeroSection = () => {
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="max-w-xl flex flex-col gap-2 md:gap-3 text-white bg-linear-to-r to-transparent p-5 sm:p-7"
               >
-                {/* <div className="inline-flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary text-white uppercase tracking-wider shadow-sm">
-                    {activeItem.subtitle}
-                  </span>
-                </div> */}
-
-                {/* <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight drop-shadow-md leading-tight">
-                  {activeItem.title}
-                </h1>
-
-                <div className="flex items-center gap-4">
-                  <p className="text-sm sm:text-base text-gray-200 font-medium drop-shadow-sm line-clamp-2">
-                    {activeItem.highlight}
-                  </p>
-                </div> */}
               </motion.div>
             </div>
           </motion.div>
@@ -126,7 +114,7 @@ const HeroSection = () => {
         <button
           onClick={prevSlide}
           aria-label="Previous slide"
-          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition-all duration-200 z-20 cursor-pointer active:scale-90"
+          className="absolute left-3 sm:left-6 md:left-10 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 rounded-full bg-white/70 hover:bg-white text-brand-charcoal backdrop-blur-xl flex items-center justify-center transition-all duration-300 z-20 cursor-pointer opacity-0 group-hover/hero:opacity-100 focus-visible:opacity-100"
         >
           <FiChevronLeft size={22} />
         </button>
@@ -134,22 +122,23 @@ const HeroSection = () => {
         <button
           onClick={nextSlide}
           aria-label="Next slide"
-          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition-all duration-200 z-20 cursor-pointer active:scale-90"
+          className="absolute right-3 sm:right-6 md:right-10 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 rounded-full bg-white/70 hover:bg-white text-brand-charcoal backdrop-blur-xl flex items-center justify-center transition-all duration-300 z-20 cursor-pointer opacity-0 group-hover/hero:opacity-100 focus-visible:opacity-100"
         >
           <FiChevronRight size={22} />
         </button>
 
-        {/* Bottom Pagination Dots */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20 bg-black/30 backdrop-blur-md px-3 py-1.5 rounded-full">
+        {/* Slim dots overlaid on the banner */}
+        <div className="absolute bottom-3 sm:bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 bg-black/25 backdrop-blur-md px-3 py-1.5 rounded-full">
           {carouselSlides.map((slide, idx) => (
             <button
               key={slide.id}
               onClick={() => goToSlide(idx)}
               aria-label={`Go to slide ${idx + 1}`}
-              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+              aria-current={currentSlide === idx ? "true" : undefined}
+              className={`h-2 rounded-full transition-all duration-500 cursor-pointer ${
                 currentSlide === idx
-                  ? "w-7 bg-primary "
-                  : "w-2.5 bg-white/50 hover:bg-white/80"
+                  ? "w-6 bg-white"
+                  : "w-2 bg-white/50 hover:bg-white/80"
               }`}
             />
           ))}

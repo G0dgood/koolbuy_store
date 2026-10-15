@@ -35,42 +35,43 @@ export const RecommendedProducts: React.FC<RecommendedProductsProps> = ({ produc
 
   return (
     <div className="flex flex-col gap-4 mt-8 px-4 md:px-0 md:hidden">
-      <h2 className="text-lg font-bold text-gray-900">You may also like</h2>
+      <h2 className="text-[22px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">You may also like</h2>
       
       <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-none -mx-4 px-4 md:mx-0 md:px-0">
         {products.map((product) => (
           <div 
             key={product.id}
-            className="flex-shrink-0 w-[160px] bg-white border border-gray-200 rounded-lg p-3 flex flex-col gap-2 hover:shadow-md transition-all relative group cursor-pointer active:scale-[0.98]"
+            className="flex-shrink-0 w-[160px] bg-white rounded-[22px] overflow-hidden flex flex-col gap-2 transition-shadow duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] relative group cursor-pointer active:scale-[0.98]"
           >
             <Link href={`/products/detail`} className="flex flex-col flex-1">
-              <div className="w-full aspect-square relative mb-1">
+              <div className="w-full aspect-square relative bg-off-white overflow-hidden">
                 <Image 
                   src={product.image} 
                   alt={product.title} 
                   fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw" 
-                  className="object-contain p-2 group-hover:scale-110 transition-transform duration-300"
+                  className="object-contain mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                 />
               </div>
-              <div className="flex flex-col gap-1 mb-2">
-                <span className="text-sm font-bold text-gray-900">{product.price}</span>
-                <p className="text-[11px] text-gray-500 line-clamp-2 leading-relaxed group-hover:text-brand-orange-text transition-colors">
+              <div className="flex flex-col gap-0.5 px-3 pt-2.5 mb-2">
+                <p className="text-[13px] font-semibold text-brand-charcoal line-clamp-2 leading-snug">
                   {product.title}
                 </p>
+                <span className="mt-0.5 text-[13px] text-brand-charcoal tabular-nums">{product.price}</span>
               </div>
             </Link>
             
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1.5">
                <Link href="/products/detail" className="w-full">
-                  <Button variant="ghost" size="sm" className="w-full text-[10px] h-8 font-bold border border-gray-100 bg-gray-50/50 hover:bg-gray-100">
-                    View Details
+                  <Button variant="ghost" size="sm" shape="pill" className="w-full h-8 font-medium bg-black/[0.04] hover:bg-black/[0.08]">
+                    View details
                   </Button>
                </Link>
                <Button 
                 onClick={(e) => handleAddToCart(e, product)}
                 variant="primary" 
                 size="sm" 
-                className="w-full text-[10px] h-8 font-bold "
+                shape="pill"
+                className="w-full h-8 font-medium"
                >
                  + Cart
                </Button>

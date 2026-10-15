@@ -55,18 +55,18 @@ const ProductReviews = () => {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="flex flex-col gap-10"
+      className="flex flex-col gap-8"
     >
-      {/* Rating Summary Section */}
-      <div className="flex flex-col md:flex-row gap-8 md:items-center bg-gray-50/50 rounded-2xl p-6 md:p-8 border border-gray-100">
-        <div className="flex flex-col items-center text-center md:border-r border-gray-200 md:pr-12">
-          <span className="text-5xl font-bold text-gray-900 leading-none">4.8</span>
+      {/* Rating summary */}
+      <div className="flex flex-col md:flex-row gap-8 md:items-center bg-off-white rounded-[22px] p-6 md:p-8">
+        <div className="flex flex-col items-center text-center md:border-r border-black/[0.06] md:pr-12">
+          <span className="text-[48px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-none tabular-nums">4.8</span>
           <div className="flex gap-1 my-3">
             {[1, 2, 3, 4, 5].map((star) => (
-              <Icon key={star} name="star" size="sm" className={star <= 4 ? "text-brand-orange-text" : "text-gray-300"} />
+              <Icon key={star} name="star" size="sm" className={star <= 4 ? "text-brand-orange" : "text-gray-300"} />
             ))}
           </div>
-          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Based on 124 reviews</p>
+          <p className="text-[13px] text-subtle">Based on 124 reviews</p>
         </div>
 
         <div className="flex-1 flex flex-col gap-3">
@@ -75,31 +75,31 @@ const ProductReviews = () => {
              const pct = percentages[stars as keyof typeof percentages];
              return (
                <div key={stars} className="flex items-center gap-4">
-                  <span className="text-xs font-bold text-gray-500 w-12">{stars} Stars</span>
-                  <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <span className="text-[13px] text-subtle w-14">{stars} Stars</span>
+                  <div className="flex-1 h-1.5 bg-black/[0.06] rounded-full overflow-hidden">
                     <motion.div 
                       initial={{ width: 0 }}
                       animate={{ width: `${pct}%` }}
                       transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-                      className="h-full bg-brand-charcoal"
+                      className="h-full rounded-full bg-brand-orange"
                     />
                   </div>
-                  <span className="text-xs font-bold text-gray-400 w-10 text-right">{pct}%</span>
+                  <span className="text-[13px] text-faint w-10 text-right tabular-nums">{pct}%</span>
                </div>
              );
           })}
         </div>
       </div>
 
-      {/* Review List */}
-      <div className="flex flex-col gap-8">
-        <div className="flex items-center justify-between">
-          <h3 className="text-xl font-bold text-gray-900 tracking-tight">User Reviews</h3>
+      {/* Review list */}
+      <div className="flex flex-col gap-6">
+        <div className="flex items-center justify-between gap-4">
+          <h3 className="text-[22px] md:text-[26px] font-semibold text-brand-charcoal tracking-[-0.02em]">User reviews</h3>
           <button 
             onClick={() => setIsReviewModalOpen(true)}
-            className="text-sm font-bold text-brand-orange-text hover:underline cursor-pointer"
+            className="text-[14px] md:text-[15px] font-medium text-brand-orange-text hover:underline cursor-pointer whitespace-nowrap"
           >
-            Write a Review
+            Write a review ›
           </button>
         </div>
 
@@ -109,36 +109,36 @@ const ProductReviews = () => {
           productName="Canon EOS R5 Mirrorless Camera"
         />
 
-        <div className="flex flex-col gap-8 divide-y divide-gray-100">
+        <div className="flex flex-col gap-3">
           {mockReviews.map((review) => (
-            <div key={review.id} className="pt-8 first:pt-0">
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-4">
-                  <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm ring-1 ring-gray-100">
-                    <Image src={review.avatar} alt={review.user} fill sizes="48px" className="object-cover" />
+            <div key={review.id} className="bg-off-white rounded-[18px] p-5 md:p-6">
+              <div className="flex items-start justify-between gap-3 mb-3">
+                <div className="flex items-center gap-3">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden bg-light-gray shrink-0">
+                    <Image src={review.avatar} alt={review.user} fill sizes="40px" className="object-cover" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900">{review.user}</h4>
+                    <h4 className="text-[14px] font-semibold text-brand-charcoal">{review.user}</h4>
                     <div className="flex items-center gap-2 mt-0.5">
                        <div className="flex gap-0.5">
                           {[1, 2, 3, 4, 5].map((star) => (
-                            <Icon key={star} name="star" size="xs" className={star <= review.rating ? "text-brand-orange-text" : "text-gray-200"} />
+                            <Icon key={star} name="star" size="xs" className={star <= review.rating ? "text-brand-orange" : "text-gray-300"} />
                           ))}
                        </div>
-                       <span className="text-[10px] text-gray-400 font-medium">• {review.date}</span>
+                       <span className="text-[12px] text-faint">• {review.date}</span>
                     </div>
                   </div>
                 </div>
 
                 {review.verified && (
-                  <div className="flex items-center gap-1.5 px-3 py-1 bg-brand-orange-soft text-[10px] font-bold text-brand-orange-text uppercase tracking-wider rounded-full border border-brand-orange/15">
+                  <div className="flex items-center gap-1 px-2.5 py-1 bg-success-soft text-[12px] font-medium text-success rounded-full shrink-0">
                     <Icon name="check" size="xs" />
                     Verified
                   </div>
                 )}
               </div>
 
-              <p className="text-gray-600 text-sm leading-relaxed max-w-[900px]">
+              <p className="text-subtle text-[14px] leading-relaxed max-w-[900px]">
                 {review.comment}
               </p>
             </div>

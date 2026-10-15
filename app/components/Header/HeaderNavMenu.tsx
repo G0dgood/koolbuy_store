@@ -7,7 +7,15 @@ import { DropdownMenu, DropdownItem } from "../Dropdown/DropdownMenu";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon";
 
-export const HeaderNavMenu: React.FC = () => {
+interface HeaderNavMenuProps {
+  onOpenDropdown?: () => void;
+  isMegaMenuOpen?: boolean;
+}
+
+export const HeaderNavMenu: React.FC<HeaderNavMenuProps> = ({
+  onOpenDropdown,
+  isMegaMenuOpen,
+}) => {
   const [isCurrencyOpen, setIsCurrencyOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
@@ -18,6 +26,14 @@ export const HeaderNavMenu: React.FC = () => {
   const currencyRef = useRef<HTMLDivElement>(null);
   const languageRef = useRef<HTMLDivElement>(null);
   const helpRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isMegaMenuOpen) {
+      setIsCurrencyOpen(false);
+      setIsLanguageOpen(false);
+      setIsHelpOpen(false);
+    }
+  }, [isMegaMenuOpen]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -70,7 +86,11 @@ export const HeaderNavMenu: React.FC = () => {
         <button
           type="button"
           onClick={() => {
-            setIsLanguageOpen((prev) => !prev);
+            setIsLanguageOpen((prev) => {
+              const next = !prev;
+              if (next) onOpenDropdown?.();
+              return next;
+            });
             setIsCurrencyOpen(false);
             setIsHelpOpen(false);
           }}
@@ -91,7 +111,7 @@ export const HeaderNavMenu: React.FC = () => {
 
         <AnimatePresence>
           {isLanguageOpen && (
-            <div className="absolute top-full right-0 pt-2 w-48 z-100">
+            <div className="absolute top-full right-0 pt-2 w-48 z-120">
               <DropdownMenu
                 width="100%"
                 className="shadow-md border border-gray-100 rounded-xl overflow-hidden py-1"
@@ -122,7 +142,11 @@ export const HeaderNavMenu: React.FC = () => {
         <button
           type="button"
           onClick={() => {
-            setIsHelpOpen((prev) => !prev);
+            setIsHelpOpen((prev) => {
+              const next = !prev;
+              if (next) onOpenDropdown?.();
+              return next;
+            });
             setIsCurrencyOpen(false);
             setIsLanguageOpen(false);
           }}
@@ -143,7 +167,7 @@ export const HeaderNavMenu: React.FC = () => {
 
         <AnimatePresence>
           {isHelpOpen && (
-            <div className="absolute top-full right-0 pt-2 w-64 z-100">
+            <div className="absolute top-full right-0 pt-2 w-64 z-120">
               <DropdownMenu
                 width="100%"
                 className="shadow-md border border-gray-100 rounded-xl overflow-hidden"
@@ -189,7 +213,11 @@ export const HeaderNavMenu: React.FC = () => {
         <button
           type="button"
           onClick={() => {
-            setIsCurrencyOpen((prev) => !prev);
+            setIsCurrencyOpen((prev) => {
+              const next = !prev;
+              if (next) onOpenDropdown?.();
+              return next;
+            });
             setIsLanguageOpen(false);
             setIsHelpOpen(false);
           }}
@@ -210,7 +238,7 @@ export const HeaderNavMenu: React.FC = () => {
 
         <AnimatePresence>
           {isCurrencyOpen && (
-            <div className="absolute top-full right-0 pt-2 w-52 z-100">
+            <div className="absolute top-full right-0 pt-2 w-52 z-120">
               <DropdownMenu
                 width="100%"
                 className="shadow-md border border-gray-100 rounded-xl overflow-hidden py-1"

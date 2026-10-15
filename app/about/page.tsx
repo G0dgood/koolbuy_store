@@ -44,59 +44,61 @@ const AboutPage = () => {
 
   const values = [
     {
-      title: "Uncompromising Quality",
+      title: "Uncompromising quality",
       desc: "We believe that excellence is found in the details. Every product undergoes a rigorous curation process.",
-      icon: <HiStar className="text-brand-orange-text" size={24} />,
+      icon: <HiStar className="text-brand-orange-text" size={22} />,
     },
     {
-      title: "Sustainable Innovation",
+      title: "Sustainable innovation",
       desc: "Blooming without harming. We prioritize ethical sourcing and eco-friendly practices in everything we do.",
-      icon: <HiLightBulb className="text-brand-orange-text" size={24} />,
+      icon: <HiLightBulb className="text-brand-orange-text" size={22} />,
     },
     {
-      title: "Community Growth",
+      title: "Community growth",
       desc: "We don't just sell products; we cultivate a community of individuals who appreciate fine artistry.",
-      icon: <HiUserGroup className="text-brand-orange-text" size={24} />,
+      icon: <HiUserGroup className="text-brand-orange-text" size={22} />,
     },
   ];
 
+  const ease = [0.16, 1, 0.3, 1] as const;
+
   return (
-    <div className="min-h-screen bg-off-white flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-off-white flex flex-col font-sans text-brand-charcoal">
       <Header />
 
-      <main className="flex-1 w-full bg-white">
-        {/* Step 62: Hero section with parallax-style background */}
-        <section className="relative w-full h-[400px] md:h-[520px] overflow-hidden flex items-center justify-center text-center">
+      <main className="flex-1 w-full max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 pt-4 md:pt-8 pb-16 md:pb-24 flex flex-col gap-16 md:gap-28">
+        {/* Hero: a large photo tile with a dark overlay (dark band rules) */}
+        <section className="relative w-full h-105 md:h-130 rounded-tile md:rounded-hero overflow-hidden flex items-center justify-center text-center">
           <motion.div
-            initial={{ scale: 1.1 }}
+            initial={{ scale: 1.06 }}
             animate={{ scale: 1 }}
-            transition={{ duration: 1.5 }}
+            transition={{ duration: 1.5, ease }}
             className="absolute inset-0"
           >
             <Image
               src="/brandImage/brand_banner.png"
               alt="Koolbuy Store Background"
-              fill sizes="100vw"
+              fill sizes="(max-width: 1440px) 100vw, 1440px"
               className="object-cover"
               priority
             />
           </motion.div>
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
-          <div className="relative z-10 max-w-[1440px] px-6">
+          <div className="absolute inset-0 bg-brand-charcoal/60" />
+          <div className="relative z-10 max-w-3xl px-6">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="flex flex-col items-center gap-4"
+              transition={{ duration: 0.7, ease }}
+              className="flex flex-col items-center gap-3"
             >
-              <span className="px-4 py-1.5 bg-brand-charcoal rounded-full text-[10px] font-bold uppercase tracking-[0.3em] text-white">
+              <span className="text-[13px] font-semibold text-brand-orange">
                 Established 2015
               </span>
-              <h1 className="text-4xl md:text-7xl font-bold text-white tracking-tighter font-inter leading-none">
-                Cultivating <span className="text-white/60">Pure</span>{" "}
-                Excellence
+              <h1 className="text-[36px] sm:text-[44px] md:text-[56px] font-semibold text-white tracking-[-0.03em] leading-[1.05]">
+                Cultivating <span className="text-white/60">pure</span>{" "}
+                excellence.
               </h1>
-              <p className="text-white/70 max-w-xl text-sm md:text-lg mt-2 leading-relaxed">
+              <p className="text-white/70 max-w-xl text-[17px] md:text-[19px] mt-1 leading-snug">
                 Koolbuy Store was founded on a simple philosophy: beauty should
                 be accessible, sustainable, and high-fidelity.
               </p>
@@ -104,36 +106,38 @@ const AboutPage = () => {
           </div>
         </section>
 
-        {/* Step 63: Alternating Brand Narrative section */}
-        <section className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-24 md:py-32 flex flex-col gap-24 md:gap-40">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-center">
+        {/* Brand narrative: alternating text and photo */}
+        <section className="flex flex-col gap-16 md:gap-28">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex flex-col gap-6"
+              transition={{ duration: 0.5, ease }}
+              className="flex flex-col gap-5"
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-brand-charcoal tracking-tight leading-tight">
+              <h2 className="text-[30px] md:text-[44px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
                 The intersection <br />
                 of scent and skin.
               </h2>
-              <div className="w-20 h-1.5 bg-brand-charcoal rounded-full" />
-              <p className="text-gray-500 text-base md:text-xl leading-relaxed">
+              <div className="w-10 h-1 bg-brand-orange rounded-full" />
+              <p className="text-subtle text-[17px] md:text-[19px] leading-normal">
                 In a world of mass-produced beauty, we chose the path of the
                 artisan. Our journey began with a single botanical extract and a
                 vision to merge the alchemy of scent with the science of skin
                 wellness.
               </p>
-              <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+              <p className="text-faint text-[15px] leading-normal">
                 Every Koolbuy Store creation is a sensory experience designed to
                 nourish the skin while elevating the spirit.
               </p>
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative aspect-square rounded-3xl overflow-hidden shadow-md"
+              transition={{ duration: 0.5, ease }}
+              className="relative aspect-square rounded-tile md:rounded-hero overflow-hidden bg-off-white"
             >
               <Image
                 src="/brandImage/serene_story.png"
@@ -144,12 +148,13 @@ const AboutPage = () => {
             </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative aspect-square rounded-3xl overflow-hidden shadow-md order-2 lg:order-1"
+              transition={{ duration: 0.5, ease }}
+              className="relative aspect-square rounded-tile md:rounded-hero overflow-hidden bg-off-white order-2 lg:order-1"
             >
               <Image
                 src="/brandImage/product_2.png"
@@ -159,37 +164,38 @@ const AboutPage = () => {
               />
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex flex-col gap-6 order-1 lg:order-2"
+              transition={{ duration: 0.5, ease }}
+              className="flex flex-col gap-5 order-1 lg:order-2"
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-brand-charcoal tracking-tight leading-tight">
+              <h2 className="text-[30px] md:text-[44px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
                 Sourced with soul, <br />
                 crafted for life.
               </h2>
-              <div className="w-20 h-1.5 bg-brand-orange rounded-full" />
-              <p className="text-gray-500 text-base md:text-xl leading-relaxed">
+              <div className="w-10 h-1 bg-brand-orange rounded-full" />
+              <p className="text-subtle text-[17px] md:text-[19px] leading-normal">
                 We travel the globe, not just for materials, but for stories.
                 Our sourcing team partners with local communities to ensure that
                 every raw material is harvested with respect for the earth.
               </p>
-              <div className="flex items-center gap-6 mt-4">
-                <div className="flex flex-col">
-                  <span className="text-2xl font-bold text-brand-charcoal">
+              <div className="flex items-center gap-6 mt-2">
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[28px] font-semibold text-brand-charcoal tracking-[-0.02em] tabular-nums">
                     50+
                   </span>
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                    Global Partners
+                  <span className="text-[13px] text-faint">
+                    Global partners
                   </span>
                 </div>
-                <div className="h-10 w-px bg-gray-200" />
-                <div className="flex flex-col">
-                  <span className="text-2xl font-bold text-brand-charcoal">
+                <div className="h-10 w-px bg-light-gray" />
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[28px] font-semibold text-brand-charcoal tracking-[-0.02em] tabular-nums">
                     100%
                   </span>
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                    Ethical Choice
+                  <span className="text-[13px] text-faint">
+                    Ethical choice
                   </span>
                 </div>
               </div>
@@ -197,135 +203,128 @@ const AboutPage = () => {
           </div>
         </section>
 
-        {/* Step 64: Core Values Grid */}
-        <section className="bg-gray-50 py-24 md:py-32">
-          <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 text-center">
-            <div className="flex flex-col items-center gap-4 mb-20 text-center">
-              <span className="text-brand-orange-text font-bold tracking-[0.2em] uppercase text-xs">
-                Our Foundations
-              </span>
-              <h2 className="text-3xl md:text-5xl font-bold text-brand-charcoal tracking-tight">
-                The Mist & Bloom Values
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {values.map((v, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="bg-white p-10 rounded-3xl shadow-sm hover:shadow-md hover:-translate-y-2 transition-all text-left flex flex-col gap-6 group"
-                >
-                  <div className="w-14 h-14 bg-brand-orange-soft rounded-2xl flex items-center justify-center group-hover:bg-brand-charcoal group-hover:text-white transition-colors">
-                    {v.icon}
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <h4 className="text-xl font-bold text-brand-charcoal">
-                      {v.title}
-                    </h4>
-                    <p className="text-gray-500 text-sm leading-relaxed">
-                      {v.desc}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+        {/* Core values */}
+        <section className="flex flex-col gap-8 md:gap-10">
+          <div className="flex flex-col items-center gap-2 text-center max-w-2xl mx-auto">
+            <span className="text-[13px] font-semibold text-brand-orange-text">
+              Our foundations
+            </span>
+            <h2 className="text-[30px] md:text-[44px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
+              The Mist &amp; Bloom values.
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+            {values.map((v, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08, ease }}
+                className="bg-white p-8 md:p-10 rounded-tile text-left flex flex-col gap-5"
+              >
+                <div className="w-12 h-12 bg-brand-orange-soft rounded-stage flex items-center justify-center">
+                  {v.icon}
+                </div>
+                <div className="flex flex-col gap-2">
+                  <h4 className="text-[20px] font-semibold text-brand-charcoal tracking-[-0.01em]">
+                    {v.title}
+                  </h4>
+                  <p className="text-subtle text-[15px] leading-normal">
+                    {v.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </section>
 
-        {/* Step 64: Meet the Team */}
-        <section className="py-24 md:py-32">
-          <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16">
-            <div className="flex flex-col items-start gap-4 mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold text-brand-charcoal tracking-tight">
-                Meet the Architects
-              </h2>
-              <p className="text-gray-500 max-w-xl">
-                The passionate individuals behind the scenes who make Bloom &
-                Mist happen every single day.
-              </p>
-            </div>
+        {/* Meet the team */}
+        <section className="flex flex-col gap-8 md:gap-10">
+          <div className="flex flex-col items-start gap-2">
+            <h2 className="text-[30px] md:text-[44px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
+              Meet the architects.
+            </h2>
+            <p className="text-subtle text-[17px] md:text-[19px] max-w-xl leading-snug">
+              The passionate individuals behind the scenes who make Bloom &amp;
+              Mist happen every single day.
+            </p>
+          </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8">
-              {team.map((member, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="flex flex-col gap-4 group"
-                >
-                  <div className="relative aspect-[3/4] rounded-3xl overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500 shadow-lg">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill sizes="(max-width: 768px) 50vw, 25vw"
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                      <div className="flex gap-3 text-white">
-                        <button className="hover:scale-120 transition-transform">
-                          <HiStar size={18} />
-                        </button>
-                        <button className="hover:scale-120 transition-transform">
-                          <HiHeart size={18} />
-                        </button>
-                      </div>
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4">
+            {team.map((member, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.06, ease }}
+                className="bg-white rounded-tile overflow-hidden flex flex-col group transition-shadow duration-300 hover:shadow-lift"
+              >
+                <div className="relative aspect-3/4 bg-off-white overflow-hidden">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill sizes="(max-width: 768px) 50vw, 20vw"
+                    className="object-cover transition-transform duration-500 ease-apple group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-brand-charcoal/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                    <div className="flex gap-2 text-brand-charcoal">
+                      <button className="w-9 h-9 rounded-full material-frosted flex items-center justify-center hover:bg-white transition-colors">
+                        <HiStar size={16} />
+                      </button>
+                      <button className="w-9 h-9 rounded-full material-frosted flex items-center justify-center hover:bg-white transition-colors">
+                        <HiHeart size={16} />
+                      </button>
                     </div>
                   </div>
-                  <div className="flex flex-col">
-                    <h5 className="font-bold text-brand-charcoal text-lg">
-                      {member.name}
-                    </h5>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-brand-orange-text">
-                      {member.role}
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                </div>
+                <div className="flex flex-col gap-0.5 px-4 pt-3 pb-4">
+                  <h5 className="text-[15px] font-semibold text-brand-charcoal leading-snug">
+                    {member.name}
+                  </h5>
+                  <span className="text-[13px] text-faint">
+                    {member.role}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </section>
 
-        {/* Step 64: Trust/Stats Section */}
-        <section className="bg-brand-charcoal py-20 overflow-hidden relative">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-orange rounded-full filter blur-[120px] opacity-20 translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-orange rounded-full filter blur-[120px] opacity-10 -translate-x-1/2 translate-y-1/2" />
-
-          <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 grid grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
-            <div className="flex flex-col items-center lg:items-start gap-2">
-              <span className="text-4xl md:text-6xl font-bold text-white tracking-tighter">
+        {/* Trust / stats: a charcoal band tile (dark band rules) */}
+        <section className="bg-brand-charcoal rounded-tile md:rounded-hero px-6 sm:px-10 md:px-16 py-12 md:py-16">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12">
+            <div className="flex flex-col items-center lg:items-start gap-1">
+              <span className="text-[40px] md:text-[56px] font-semibold text-white tracking-[-0.03em] leading-none tabular-nums">
                 10<span className="text-brand-orange">+</span>
               </span>
-              <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">
-                Years of Pursuit
+              <span className="text-[15px] text-white/60">
+                Years of pursuit
               </span>
             </div>
-            <div className="flex flex-col items-center lg:items-start gap-2">
-              <span className="text-4xl md:text-6xl font-bold text-white tracking-tighter">
+            <div className="flex flex-col items-center lg:items-start gap-1">
+              <span className="text-[40px] md:text-[56px] font-semibold text-white tracking-[-0.03em] leading-none tabular-nums">
                 5M<span className="text-brand-orange">+</span>
               </span>
-              <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">
-                Global Shipments
+              <span className="text-[15px] text-white/60">
+                Global shipments
               </span>
             </div>
-            <div className="flex flex-col items-center lg:items-start gap-2">
-              <span className="text-4xl md:text-6xl font-bold text-white tracking-tighter">
+            <div className="flex flex-col items-center lg:items-start gap-1">
+              <span className="text-[40px] md:text-[56px] font-semibold text-white tracking-[-0.03em] leading-none tabular-nums">
                 24<span className="text-brand-orange">/</span>7
               </span>
-              <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">
-                Expert Support
+              <span className="text-[15px] text-white/60">
+                Expert support
               </span>
             </div>
-            <div className="flex flex-col items-center lg:items-start gap-2">
-              <span className="text-4xl md:text-6xl font-bold text-white tracking-tighter">
+            <div className="flex flex-col items-center lg:items-start gap-1">
+              <span className="text-[40px] md:text-[56px] font-semibold text-white tracking-[-0.03em] leading-none tabular-nums">
                 98<span className="text-brand-orange">%</span>
               </span>
-              <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">
-                Customer Trust
+              <span className="text-[15px] text-white/60">
+                Customer trust
               </span>
             </div>
           </div>

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
 
 /* Self-hosted fonts (DESIGN.md §4). Never load fonts from Google. */
 @font-face {
@@ -34,6 +35,15 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+  /* Storefront radii (DESIGN.md §5): rounded-stage, rounded-tile, rounded-hero */
+  --radius-stage: 16px;
+  --radius-tile: 22px;
+  --radius-hero: 32px;
+  /* Motion (DESIGN.md §6): ease-apple, Apple-style ease-out */
+  --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Elevation (DESIGN.md §5): shadow-lift for hover, shadow-float for floating panels */
+  --shadow-lift: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-float: 0 12px 40px rgba(0, 0, 0, 0.12);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -125,9 +135,13 @@
   --off-white: #F8F9FA;
   --light-gray: #E9ECEF;
   --medium-gray: #DEE2E6;
+  --bg-primary: var(--off-white);
+  --bg-secondary: var(--light-gray);
   --text-primary: #050711;
   --text-secondary: #495057;
   --text-tertiary: #6C757D;
+  --input-focus-border: var(--brand-orange);
+  --shadow-light: rgba(245, 126, 22, 0.15);
 
   /* Status (DESIGN.md §3) */
   --status-success: #6C8B7D;
@@ -185,6 +199,8 @@
   --accent-white: #1E293B;
   --light-gray: #334155;
   --medium-gray: #475569;
+  --bg-primary: var(--off-white);
+  --bg-secondary: var(--light-gray);
   --text-primary: #F1F5F9;
   --text-secondary: #CBD5E1;
   --text-tertiary: #94A3B8;
@@ -392,7 +408,37 @@
   }
 }
 
-/* Brand helper classes (DESIGN.md §8) */
+/* Storefront primary colour is Koolboks orange (DESIGN.md §13): outside the
+   admin (no #page-wrapper on the page), any button or link filled charcoal,
+   e.g. Button "primary", active chips, the search pill, becomes orange. The
+   admin keeps charcoal. Charcoal sections and text are not affected. */
+html:not(:has(#page-wrapper)) :is(button, a).bg-brand-charcoal {
+  background-color: var(--brand-orange);
+  color: var(--brand-on-orange);
+}
+html:not(:has(#page-wrapper)) :is(button, a).bg-brand-charcoal:hover:not(:disabled) {
+  background-color: var(--brand-orange-hover);
+}
+html:not(:has(#page-wrapper)) :is(button, a).bg-brand-charcoal :is(svg, .k-icon) {
+  color: var(--brand-on-orange);
+}
+
+/* Storefront cards have the CRM card edge (DESIGN.md §5): every white rounded
+   card outside the admin gets a 1px light-grey border. Pills (rounded-full),
+   floating panels (fixed/absolute) and the header are left alone. The admin
+   has the same rule in admin.css. */
+html:not(:has(#page-wrapper)) body :is(div, section, article, aside, form, li, a).bg-white[class*="rounded"]:not([class*="rounded-full"]):not(.fixed, .absolute):not(header *) {
+  border: 1px solid var(--light-gray);
+}
+
+/* Brand helper classes (DESIGN.md §10) */
+/* Frosted material for sticky bars and floating panels (DESIGN.md §5). */
+.material-frosted {
+  background-color: rgb(255 255 255 / 0.8);
+  -webkit-backdrop-filter: saturate(1.5) blur(24px);
+  backdrop-filter: saturate(1.5) blur(24px);
+}
+
 .text-brand {
   color: var(--brand-orange-text);
 }
@@ -501,6 +547,7 @@
   html {
     scroll-behavior: auto;
   }
+  .advert-marquee,
   .lead-glow,
   .lead-ring,
   .lead-breathe,
@@ -582,4 +629,323 @@
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: rgba(107, 114, 128, 0.6);
+}
+
+/* CRM Form & Input Styles (ported from koolboks_sales_crm_web) */
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.input-label {
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.required-asterisk {
+  color: var(--status-error);
+  margin-left: 2px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--light-gray);
+  border-radius: 14px;
+  background-color: var(--accent-white);
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.5;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+/* Hide native date/time picker indicators when using custom pickers */
+.input-field[type="date"]::-webkit-calendar-picker-indicator,
+.input-field[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--brand-orange);
+  box-shadow: 0 0 0 3px var(--brand-orange-soft);
+}
+
+.input-field:disabled {
+  background-color: var(--bg-secondary);
+  color: var(--text-tertiary);
+  cursor: not-allowed;
+}
+
+.input-field.error {
+  border-color: var(--status-error);
+}
+
+.input-field.error:focus {
+  border-color: var(--status-error);
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+}
+
+.input-error {
+  color: var(--status-error);
+  font-size: 12px;
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+/* CRM Search Component Styles (ported from koolboks_sales_crm_web) */
+.search-container {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.search-container.active,
+.search-container:focus-within {
+  border-color: var(--input-focus-border, var(--brand-orange)) !important;
+  box-shadow: 0 0 0 3px var(--shadow-light, rgba(245, 126, 22, 0.15)) !important;
+}
+
+.dark .search-container.active,
+.dark .search-container:focus-within {
+  border-color: var(--brand-orange) !important;
+  box-shadow: 0 0 0 3px rgba(245, 126, 22, 0.25) !important;
+}
+
+.search-input::placeholder {
+  color: var(--text-tertiary);
+  font-family: var(--font-work-sans);
+  font-size: 13px;
+}
+
+.dark .search-input::placeholder {
+  color: #94A3B8;
+}
+
+/* Custom Dropdown Component Styles (ported from koolboks_sales_crm_web) */
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.dropdown-label {
+  font-family: var(--font-work-sans), sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary, #475569);
+  line-height: 1.4;
+}
+
+.dropdown-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.dropdown-trigger {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--light-gray, #E2E8F0);
+  background-color: #ffffff;
+  color: var(--text-primary, #0F172A);
+  font-family: var(--font-work-sans), sans-serif;
+  font-size: 12px;
+  line-height: 150%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-align: left;
+}
+
+.dark .dropdown-trigger {
+  background-color: var(--accent-white, #1E293B);
+  border-color: var(--light-gray, #334155);
+  color: #F8FAFC;
+}
+
+.dropdown-trigger:hover:not(:disabled) {
+  border-color: #94A3B8;
+  background-color: #ffffff;
+}
+
+.dark .dropdown-trigger:hover:not(:disabled) {
+  border-color: var(--text-tertiary, #64748B);
+  background-color: #1E293B;
+  color: #F8FAFC;
+}
+
+.dropdown-trigger:focus,
+.dropdown-wrapper.open .dropdown-trigger {
+  outline: none;
+  border-color: var(--brand-orange, #F57E16);
+  box-shadow: 0 0 0 3px rgba(245, 126, 22, 0.15);
+}
+
+.dark .dropdown-trigger:focus,
+.dark .dropdown-wrapper.open .dropdown-trigger {
+  border-color: var(--brand-orange, #F57E16);
+  box-shadow: 0 0 0 3px rgba(245, 126, 22, 0.25);
+}
+
+.dropdown-trigger:disabled {
+  background-color: var(--bg-secondary, #F1F5F9);
+  color: var(--text-tertiary, #94A3B8);
+  cursor: not-allowed;
+}
+
+.dark .dropdown-trigger:disabled {
+  background-color: var(--bg-secondary, #0F172A);
+  color: var(--text-tertiary, #64748B);
+}
+
+.dropdown-trigger.error {
+  border-color: var(--status-error, #EF4444);
+}
+
+.dropdown-text {
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-text.placeholder {
+  color: #9CA1AD;
+}
+
+.dark .dropdown-text.placeholder {
+  color: #6B7280;
+}
+
+.dropdown-chevron {
+  color: #64748B;
+  transition: transform 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.dark .dropdown-chevron {
+  color: var(--text-tertiary, #94A3B8);
+}
+
+.dropdown-chevron.open {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  margin-top: 4px;
+  background-color: #ffffff;
+  border: 1px solid var(--light-gray, #E2E8F0);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.dropdown-menu.dropdown-menu-up {
+  top: auto;
+  bottom: 100%;
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.dark .dropdown-menu {
+  background-color: var(--accent-white, #1E293B);
+  border-color: var(--light-gray, #334155);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-options {
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.dropdown-option {
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  background-color: transparent;
+  color: var(--text-primary, #0F172A);
+  font-family: var(--font-work-sans), sans-serif;
+  font-size: 12px;
+  line-height: 150%;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdown-option:hover {
+  background-color: var(--bg-hover, #F8FAFC);
+  color: var(--text-primary, #0F172A);
+}
+
+.dark .dropdown-option:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #F8FAFC;
+}
+
+.dropdown-option.selected {
+  background-color: var(--brand-orange-soft, #FEF1E6);
+  color: var(--brand-orange-text, #B85A0A);
+  font-weight: 600;
+}
+
+.dark .dropdown-option.selected {
+  background-color: rgba(245, 126, 22, 0.2);
+  color: #F79A4A;
+}
+
+.dropdown-option:focus {
+  outline: none;
+  background-color: var(--brand-orange-soft, #FEF1E6);
+}
+
+.dropdown-error {
+  color: var(--status-error, #EF4444);
+  font-size: 12px;
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.dropdown-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 16px;
+  text-align: center;
+  color: var(--text-tertiary, #94A3B8);
+}
+
+.dropdown-empty-icon {
+  margin-bottom: 8px;
+  opacity: 0.6;
+}
+
+.dropdown-empty-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dropdown-empty-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary, #64748B);
+  margin: 0;
 }

@@ -1,17 +1,19 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Icon } from "@/app/components/Icon";
 import { Button } from "@/app/components/Button";
 import { Input } from "@/app/components/Form/Inputs";
-import { Select } from "@/app/components/Form/Select";
+import { Search, Dropdown } from "@/app/components/Form";
+import { Tabs } from "@/app/components/ui/Tabs";
 import { Pagination } from "@/app/components/Admin/Pagination";
 import { RowsPerPage } from "@/app/components/rows-per-page";
 import Modal from "@/app/components/Modal/Modal";
 import ModalBody from "@/app/components/Modal/ModalBody";
 import ModalFooter from "@/app/components/Modal/ModalFooter";
 import Drawer from "@/app/components/Drawer/Drawer";
+import { normalizeApiBase } from "@/lib/api";
 
 // ----------------------------------------------------
 // Interfaces
@@ -31,11 +33,11 @@ export interface DroppingOrder {
   itemsSummary: string;
   itemType: "Heavy Freezer" | "Solar Kit" | "Ice Chest" | "Spare Parts";
   dropStatus:
-    | "Ready for Drop"
-    | "Dispatched"
-    | "In Transit"
-    | "Dropped Off"
-    | "Failed Handover";
+  | "Ready for Drop"
+  | "Dispatched"
+  | "In Transit"
+  | "Dropped Off"
+  | "Failed Handover";
   dropDate: string;
   estimatedDelivery: string;
   notes?: string;
@@ -69,325 +71,63 @@ export interface LgaDeliveryPrice {
   status: "Active" | "Restricted" | "Suspended";
 }
 
-// ----------------------------------------------------
-// Mock Data
-// ----------------------------------------------------
-const initialDroppingOrders: DroppingOrder[] = [
-  {
-    id: "DRP-9842",
-    orderRef: "ORD-2026-8942",
-    customerName: "Babatunde Adeleke",
-    customerPhone: "+234 803 123 4567",
-    destinationAddress: "Plot 14 Admiralty Way, Lekki Phase 1",
-    lga: "Eti-Osa",
-    state: "Lagos",
-    dispatchHub: "Lagos Island Hub (Lekki)",
-    carrier: "Kool Logistics Van #02",
-    driverName: "Sunday Musa",
-    driverPhone: "+234 812 900 3341",
-    itemsSummary: "Solar Freezer 210L (1x)",
-    itemType: "Heavy Freezer",
-    dropStatus: "In Transit",
-    dropDate: "2026-09-20",
-    estimatedDelivery: "2026-09-20 17:30",
-    notes: "Requires 2 persons for gate offload",
-  },
-  {
-    id: "DRP-9841",
-    orderRef: "ORD-2026-8930",
-    customerName: "Folake Balogun",
-    customerPhone: "+234 802 884 9012",
-    destinationAddress: "22 Allen Avenue, Ikeja",
-    lga: "Ikeja",
-    state: "Lagos",
-    dispatchHub: "Lagos Mainland Depot (Ikeja)",
-    carrier: "GIG Logistics Express",
-    driverName: "Emeka Obi",
-    driverPhone: "+234 814 220 9811",
-    itemsSummary: "Koolboks Portable Ice Chest 50L (2x)",
-    itemType: "Ice Chest",
-    dropStatus: "Dropped Off",
-    dropDate: "2026-09-20",
-    estimatedDelivery: "2026-09-20 13:00",
-    notes: "Customer signed electronic POD",
-  },
-  {
-    id: "DRP-9840",
-    orderRef: "ORD-2026-8915",
-    customerName: "Aliyu Mohammed",
-    customerPhone: "+234 809 332 1009",
-    destinationAddress: "House 12, 4th Avenue, Gwarinpa Estate",
-    lga: "Abuja Municipal (AMAC)",
-    state: "FCT Abuja",
-    dispatchHub: "Abuja Regional Center",
-    carrier: "Kool Logistics Truck #01",
-    driverName: "Haruna Garba",
-    driverPhone: "+234 805 771 9043",
-    itemsSummary: "Commercial Deep Freezer 500L (1x)",
-    itemType: "Heavy Freezer",
-    dropStatus: "Dispatched",
-    dropDate: "2026-09-20",
-    estimatedDelivery: "2026-09-21 11:00",
-    notes: "Call client before arriving at estate security gate",
-  },
-  {
-    id: "DRP-9839",
-    orderRef: "ORD-2026-8899",
-    customerName: "Chinedu Eze",
-    customerPhone: "+234 806 550 4432",
-    destinationAddress: "7 Trans-Amadi Industrial Layout",
-    lga: "Port Harcourt",
-    state: "Rivers",
-    dispatchHub: "Port Harcourt Hub",
-    carrier: "Red Star Express",
-    driverName: "Godswill Briggs",
-    driverPhone: "+234 803 664 1209",
-    itemsSummary: "Solar Battery & Inverter Upgrade Kit",
-    itemType: "Solar Kit",
-    dropStatus: "Ready for Drop",
-    dropDate: "2026-09-21",
-    estimatedDelivery: "2026-09-21 16:00",
-    notes: "Staged at Bay 2 awaiting courier pickup",
-  },
-  {
-    id: "DRP-9838",
-    orderRef: "ORD-2026-8874",
-    customerName: "Rashidat Olaniyan",
-    customerPhone: "+234 701 992 3450",
-    destinationAddress: "Plot 8, Ring Road, Challenge",
-    lga: "Ibadan South-West",
-    state: "Oyo",
-    dispatchHub: "Ibadan Central Depot",
-    carrier: "Kool Fleet Van #05",
-    driverName: "Kayode Ajayi",
-    driverPhone: "+234 808 112 5590",
-    itemsSummary: "Solar Freezer 150L (1x)",
-    itemType: "Heavy Freezer",
-    dropStatus: "Failed Handover",
-    dropDate: "2026-09-19",
-    estimatedDelivery: "2026-09-19 16:00",
-    notes: "Recipient unreachable via phone. Rescheduling drop.",
-  },
-];
-
-const initialVendorAddresses: VendorAddress[] = [
-  {
-    id: "VADDR-01",
-    vendorName: "SolarTech Distribution Ltd",
-    vendorCode: "VEN-104",
-    contactPerson: "Alhaji Ibrahim Danjuma",
-    contactPhone: "+234 802 334 1122",
-    contactEmail: "logistics@solartech.ng",
-    warehouseAddress: "Block B, Industrial Estate, Ilupeju",
-    lga: "Oshodi-Isolo",
-    state: "Lagos",
-    operatingHours: "Mon - Fri: 8:00 AM - 5:30 PM",
-    dockAccess: "Loading Bay 3, Forklift Available, 40ft Trailer Access",
-    pickupNotes: "Call warehouse supervisor 30 mins before arrival",
-    verificationStatus: "Verified",
-  },
-  {
-    id: "VADDR-02",
-    vendorName: "EcoCool Manufacturing Hub",
-    vendorCode: "VEN-088",
-    contactPerson: "Ngozi Chimamanda",
-    contactPhone: "+234 803 778 9901",
-    contactEmail: "fulfillment@ecocool.com.ng",
-    warehouseAddress: "Km 14 Ikorodu Road, Ojota Depot",
-    lga: "Kosofe",
-    state: "Lagos",
-    operatingHours: "Mon - Sat: 7:30 AM - 6:00 PM",
-    dockAccess: "Ground Level Loading, Hydraulic Ramp",
-    pickupNotes: "Driver must wear safety boots & hi-vis jacket",
-    verificationStatus: "Verified",
-  },
-  {
-    id: "VADDR-03",
-    vendorName: "Northern Sun Power Systems",
-    vendorCode: "VEN-210",
-    contactPerson: "Sani Bello",
-    contactPhone: "+234 809 112 4433",
-    contactEmail: "dispatch@northernsun.ng",
-    warehouseAddress: "Plot 42 Sharada Industrial Area Phase 2",
-    lga: "Kano Municipal",
-    state: "Kano",
-    operatingHours: "Mon - Thu: 8:30 AM - 4:30 PM",
-    dockAccess: "Open Yard, Crane & Forklift Service",
-    pickupNotes: "Advance gate pass code generated via merchant portal",
-    verificationStatus: "Verified",
-  },
-  {
-    id: "VADDR-04",
-    vendorName: "Delta Cold Chain Ventures",
-    vendorCode: "VEN-312",
-    contactPerson: "Efe Akpokona",
-    contactPhone: "+234 805 667 8890",
-    contactEmail: "efecold@deltaventure.com",
-    warehouseAddress: "18 Effurun-Sapele Road, Enerhen",
-    lga: "Uvwie",
-    state: "Delta",
-    operatingHours: "Mon - Fri: 9:00 AM - 5:00 PM",
-    dockAccess: "Medium Van Dock, Manual Offloading Crew",
-    pickupNotes: "Weekend dispatch requires 24h advance request",
-    verificationStatus: "Pending Audit",
-  },
-  {
-    id: "VADDR-05",
-    vendorName: "GreenGrid Energy Supplies",
-    vendorCode: "VEN-156",
-    contactPerson: "Tariq Adele",
-    contactPhone: "+234 813 440 2211",
-    contactEmail: "warehouse@greengrid.ng",
-    warehouseAddress: "Central Business District, Idu Yard",
-    lga: "Abuja Municipal (AMAC)",
-    state: "FCT Abuja",
-    operatingHours: "Mon - Fri: 8:00 AM - 5:00 PM",
-    dockAccess: "Full Container Bay, 5-Ton Forklift",
-    pickupNotes: "Heavy trucks allowed between 10am and 3pm only",
-    verificationStatus: "Verified",
-  },
-];
-
-const initialLgaDeliveryPrices: LgaDeliveryPrice[] = [
-  {
-    id: "LGA-01",
-    lgaName: "Ikeja",
-    state: "Lagos",
-    zone: "Zone 1 (Core Metro)",
-    standardDeliveryFee: 4500,
-    heavyApplianceFee: 11500,
-    estimatedTransitTime: "Same Day - 24 Hours",
-    hubAssigned: "Lagos Mainland Depot (Ikeja)",
-    status: "Active",
-  },
-  {
-    id: "LGA-02",
-    lgaName: "Eti-Osa",
-    state: "Lagos",
-    zone: "Zone 1 (Core Metro)",
-    standardDeliveryFee: 5000,
-    heavyApplianceFee: 12500,
-    estimatedTransitTime: "24 Hours",
-    hubAssigned: "Lagos Island Hub (Lekki)",
-    status: "Active",
-  },
-  {
-    id: "LGA-03",
-    lgaName: "Alimosho",
-    state: "Lagos",
-    zone: "Zone 2 (Suburban)",
-    standardDeliveryFee: 6500,
-    heavyApplianceFee: 14000,
-    estimatedTransitTime: "24 - 48 Hours",
-    hubAssigned: "Lagos Mainland Depot (Ikeja)",
-    status: "Active",
-  },
-  {
-    id: "LGA-04",
-    lgaName: "Ikorodu",
-    state: "Lagos",
-    zone: "Zone 3 (Outskirts)",
-    standardDeliveryFee: 8500,
-    heavyApplianceFee: 18000,
-    estimatedTransitTime: "2 - 3 Days",
-    hubAssigned: "Ikorodu Satellite Hub",
-    status: "Active",
-  },
-  {
-    id: "LGA-05",
-    lgaName: "Abuja Municipal (AMAC)",
-    state: "FCT Abuja",
-    zone: "Zone 1 (Core Metro)",
-    standardDeliveryFee: 6000,
-    heavyApplianceFee: 15000,
-    estimatedTransitTime: "24 Hours",
-    hubAssigned: "Abuja Regional Center",
-    status: "Active",
-  },
-  {
-    id: "LGA-06",
-    lgaName: "Gwagwalada",
-    state: "FCT Abuja",
-    zone: "Zone 3 (Outskirts)",
-    standardDeliveryFee: 9500,
-    heavyApplianceFee: 20000,
-    estimatedTransitTime: "2 - 3 Days",
-    hubAssigned: "Abuja Regional Center",
-    status: "Restricted",
-  },
-  {
-    id: "LGA-07",
-    lgaName: "Port Harcourt",
-    state: "Rivers",
-    zone: "Zone 1 (Core Metro)",
-    standardDeliveryFee: 5500,
-    heavyApplianceFee: 13500,
-    estimatedTransitTime: "24 - 48 Hours",
-    hubAssigned: "Port Harcourt Central Hub",
-    status: "Active",
-  },
-  {
-    id: "LGA-08",
-    lgaName: "Obio/Akpor",
-    state: "Rivers",
-    zone: "Zone 2 (Suburban)",
-    standardDeliveryFee: 6500,
-    heavyApplianceFee: 15000,
-    estimatedTransitTime: "24 - 48 Hours",
-    hubAssigned: "Port Harcourt Central Hub",
-    status: "Active",
-  },
-  {
-    id: "LGA-09",
-    lgaName: "Ibadan North",
-    state: "Oyo",
-    zone: "Zone 1 (Core Metro)",
-    standardDeliveryFee: 4500,
-    heavyApplianceFee: 11000,
-    estimatedTransitTime: "24 Hours",
-    hubAssigned: "Ibadan Central Depot",
-    status: "Active",
-  },
-  {
-    id: "LGA-10",
-    lgaName: "Kano Municipal",
-    state: "Kano",
-    zone: "Zone 1 (Core Metro)",
-    standardDeliveryFee: 6000,
-    heavyApplianceFee: 14500,
-    estimatedTransitTime: "24 - 48 Hours",
-    hubAssigned: "Kano Regional Depot",
-    status: "Active",
-  },
-];
+const API_BASE = normalizeApiBase();
 
 type ActiveTabType = "dropping-orders" | "vendor-addresses" | "delivery-prices";
 
 export default function KoolLogisticsPage() {
   const [activeTab, setActiveTab] = useState<ActiveTabType>("dropping-orders");
 
-  // State: Dropping Orders
-  const [droppingOrders, setDroppingOrders] = useState<DroppingOrder[]>(
-    initialDroppingOrders,
-  );
+  // State: Dropping Orders (Dynamic from backend API)
+  const [droppingOrders, setDroppingOrders] = useState<DroppingOrder[]>([]);
   const [dropSearch, setDropSearch] = useState("");
   const [dropStatusFilter, setDropStatusFilter] = useState("all");
   const [dropHubFilter, setDropHubFilter] = useState("all");
 
-  // State: Vendor Addresses
-  const [vendorAddresses, setVendorAddresses] = useState<VendorAddress[]>(
-    initialVendorAddresses,
-  );
+  // State: Vendor Addresses (Dynamic from backend API)
+  const [vendorAddresses, setVendorAddresses] = useState<VendorAddress[]>([]);
   const [vendorSearch, setVendorSearch] = useState("");
   const [vendorStateFilter, setVendorStateFilter] = useState("all");
 
-  // State: Delivery Prices
-  const [lgaPrices, setLgaPrices] = useState<LgaDeliveryPrice[]>(
-    initialLgaDeliveryPrices,
-  );
+  // State: Delivery Prices (Dynamic from backend API)
+  const [lgaPrices, setLgaPrices] = useState<LgaDeliveryPrice[]>([]);
   const [lgaSearch, setLgaSearch] = useState("");
   const [lgaStateFilter, setLgaStateFilter] = useState("all");
   const [lgaZoneFilter, setLgaZoneFilter] = useState("all");
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const fetchData = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const [dropsRes, vendorsRes, pricesRes] = await Promise.all([
+        fetch(`${API_BASE}/logistics/admin/dropping-orders/`),
+        fetch(`${API_BASE}/logistics/admin/vendor-addresses/`),
+        fetch(`${API_BASE}/logistics/admin/delivery-prices/`),
+      ]);
+      if (dropsRes.ok) {
+        const data = await dropsRes.json();
+        if (Array.isArray(data.items)) setDroppingOrders(data.items);
+      }
+      if (vendorsRes.ok) {
+        const data = await vendorsRes.json();
+        if (Array.isArray(data.items)) setVendorAddresses(data.items);
+      }
+      if (pricesRes.ok) {
+        const data = await pricesRes.json();
+        if (Array.isArray(data.items)) setLgaPrices(data.items);
+      }
+    } catch (err) {
+      console.error("Failed to load logistics data:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -521,98 +261,183 @@ export default function KoolLogisticsPage() {
   };
 
   // Create Dropping Order
-  const handleCreateDropOrder = () => {
+  // Create Dropping Order
+  const handleCreateDropOrder = async () => {
     if (!newOrderRef.trim() || !newCustName.trim()) {
       alert("Please enter Order Reference and Customer Name.");
       return;
     }
-    const newOrder: DroppingOrder = {
-      id: `DRP-${Math.floor(1000 + Math.random() * 9000)}`,
-      orderRef: newOrderRef.trim(),
-      customerName: newCustName.trim(),
-      customerPhone: newCustPhone || "+234 800 000 0000",
-      destinationAddress: newAddress || "Pending delivery address confirmation",
-      lga: newLga,
-      state: newState,
-      dispatchHub: `${newState} Central Depot`,
-      carrier: newCarrier,
-      driverName: "Pending Assignment",
-      driverPhone: "-",
-      itemsSummary: newItems || "Standard Appliance Item",
-      itemType: newItemType,
-      dropStatus: "Ready for Drop",
-      dropDate: new Date().toISOString().split("T")[0],
-      estimatedDelivery: "24 Hours from handover",
-    };
-    setDroppingOrders([newOrder, ...droppingOrders]);
-    setIsCreateDropModalOpen(false);
+    setIsSubmitting(true);
+    try {
+      const res = await fetch(`${API_BASE}/logistics/admin/dropping-orders/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          orderRef: newOrderRef.trim(),
+          customerName: newCustName.trim(),
+          customerPhone: newCustPhone || "+234 800 000 0000",
+          destinationAddress: newAddress || "Pending delivery address confirmation",
+          lga: newLga,
+          state: newState,
+          dispatchHub: `${newState} Central Depot`,
+          carrier: newCarrier,
+          itemsSummary: newItems || "Standard Appliance Item",
+          itemType: newItemType,
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.item) {
+          setDroppingOrders((prev) => [data.item, ...prev]);
+        } else {
+          fetchData();
+        }
+        setIsCreateDropModalOpen(false);
+        setNewOrderRef("");
+        setNewCustName("");
+        setNewCustPhone("");
+        setNewAddress("");
+        setNewItems("");
+      } else {
+        const err = await res.json().catch(() => ({}));
+        alert(err.error || "Failed to create dropping order");
+      }
+    } catch (e) {
+      console.error(e);
+      alert("Error creating dropping order. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Add Vendor Address
-  const handleAddVendor = () => {
+  const handleAddVendor = async () => {
     if (!newVenName.trim()) {
       alert("Please provide Vendor Name.");
       return;
     }
-    const newVen: VendorAddress = {
-      id: `VADDR-${Math.floor(10 + Math.random() * 90)}`,
-      vendorName: newVenName.trim(),
-      vendorCode: newVenCode || `VEN-${Math.floor(100 + Math.random() * 900)}`,
-      contactPerson: newVenContact || "Logistics Manager",
-      contactPhone: newVenPhone || "+234 800 000 0000",
-      contactEmail: newVenEmail || "logistics@vendor.ng",
-      warehouseAddress: newVenAddress || "Main Distribution Hub",
-      lga: newVenLga,
-      state: newVenState,
-      operatingHours: newVenHours,
-      dockAccess: newVenDock,
-      pickupNotes: "Standard pickup dispatch protocol",
-      verificationStatus: "Verified",
-    };
-    setVendorAddresses([newVen, ...vendorAddresses]);
-    setIsAddVendorModalOpen(false);
+    setIsSubmitting(true);
+    try {
+      const res = await fetch(`${API_BASE}/logistics/admin/vendor-addresses/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          vendorName: newVenName.trim(),
+          vendorCode: newVenCode || undefined,
+          contactPerson: newVenContact || "Logistics Manager",
+          phone: newVenPhone || "+234 800 000 0000",
+          contactPhone: newVenPhone || "+234 800 000 0000",
+          email: newVenEmail || "logistics@vendor.ng",
+          pickupAddress: newVenAddress || "Main Distribution Hub",
+          warehouseAddress: newVenAddress || "Main Distribution Hub",
+          lga: newVenLga,
+          state: newVenState,
+          operatingHours: newVenHours,
+          dockAccess: newVenDock,
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.item) {
+          setVendorAddresses((prev) => [data.item, ...prev]);
+        } else {
+          fetchData();
+        }
+        setIsAddVendorModalOpen(false);
+        setNewVenName("");
+        setNewVenCode("");
+        setNewVenContact("");
+        setNewVenPhone("");
+        setNewVenEmail("");
+        setNewVenAddress("");
+      } else {
+        const err = await res.json().catch(() => ({}));
+        alert(err.error || "Failed to add vendor address");
+      }
+    } catch (e) {
+      console.error(e);
+      alert("Error adding vendor address.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Save / Update LGA Price
-  const handleSaveLgaPrice = () => {
+  const handleSaveLgaPrice = async () => {
     if (!lgaNameInput.trim()) {
       alert("Please enter LGA Name.");
       return;
     }
-    if (editingLga) {
-      setLgaPrices((prev) =>
-        prev.map((l) => {
-          if (l.id === editingLga.id) {
-            return {
-              ...l,
-              lgaName: lgaNameInput,
-              state: lgaStateInput,
-              zone: lgaZoneInput,
-              standardDeliveryFee: Number(stdFeeInput) || 5000,
-              heavyApplianceFee: Number(heavyFeeInput) || 12000,
-              estimatedTransitTime: transitTimeInput,
-              hubAssigned: hubInput,
-            };
+    setIsSubmitting(true);
+    try {
+      if (editingLga) {
+        const res = await fetch(`${API_BASE}/logistics/admin/delivery-prices/${editingLga.id}/`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            lgaName: lgaNameInput.trim(),
+            state: lgaStateInput,
+            zone: lgaZoneInput,
+            standardPrice: Number(stdFeeInput) || 5000,
+            standardDeliveryFee: Number(stdFeeInput) || 5000,
+            heavyAppliancePrice: Number(heavyFeeInput) || 12000,
+            heavyApplianceFee: Number(heavyFeeInput) || 12000,
+            dispatchHub: hubInput,
+            hubAssigned: hubInput,
+            estimatedDays: transitTimeInput,
+            estimatedTransitTime: transitTimeInput,
+          }),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.item) {
+            setLgaPrices((prev) => prev.map((l) => (l.id === editingLga.id ? { ...l, ...data.item } : l)));
+          } else {
+            fetchData();
           }
-          return l;
-        }),
-      );
-      setEditingLga(null);
-    } else {
-      const newLgaItem: LgaDeliveryPrice = {
-        id: `LGA-${Math.floor(100 + Math.random() * 900)}`,
-        lgaName: lgaNameInput.trim(),
-        state: lgaStateInput,
-        zone: lgaZoneInput,
-        standardDeliveryFee: Number(stdFeeInput) || 5000,
-        heavyApplianceFee: Number(heavyFeeInput) || 12000,
-        estimatedTransitTime: transitTimeInput,
-        hubAssigned: hubInput,
-        status: "Active",
-      };
-      setLgaPrices([newLgaItem, ...lgaPrices]);
+          setEditingLga(null);
+          setIsAddLgaModalOpen(false);
+        } else {
+          const err = await res.json().catch(() => ({}));
+          alert(err.error || "Failed to update LGA delivery tariff");
+        }
+      } else {
+        const res = await fetch(`${API_BASE}/logistics/admin/delivery-prices/`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            lgaName: lgaNameInput.trim(),
+            state: lgaStateInput,
+            zone: lgaZoneInput,
+            standardPrice: Number(stdFeeInput) || 5000,
+            standardDeliveryFee: Number(stdFeeInput) || 5000,
+            heavyAppliancePrice: Number(heavyFeeInput) || 12000,
+            heavyApplianceFee: Number(heavyFeeInput) || 12000,
+            dispatchHub: hubInput,
+            hubAssigned: hubInput,
+            estimatedDays: transitTimeInput,
+            estimatedTransitTime: transitTimeInput,
+          }),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.item) {
+            setLgaPrices((prev) => [data.item, ...prev]);
+          } else {
+            fetchData();
+          }
+          setIsAddLgaModalOpen(false);
+        } else {
+          const err = await res.json().catch(() => ({}));
+          alert(err.error || "Failed to add LGA delivery tariff");
+        }
+      }
+    } catch (e) {
+      console.error(e);
+      alert("Error saving LGA delivery price.");
+    } finally {
+      setIsSubmitting(false);
     }
-    setIsAddLgaModalOpen(false);
   };
 
   // Open Edit LGA
@@ -642,7 +467,7 @@ export default function KoolLogisticsPage() {
   };
 
   // Toggle Drop Order Status
-  const handleUpdateDropStatus = (
+  const handleUpdateDropStatus = async (
     id: string,
     nextStatus: DroppingOrder["dropStatus"],
   ) => {
@@ -654,95 +479,96 @@ export default function KoolLogisticsPage() {
         prev ? { ...prev, dropStatus: nextStatus } : null,
       );
     }
+    try {
+      await fetch(`${API_BASE}/logistics/admin/dropping-orders/${id}/status/`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: nextStatus }),
+      });
+    } catch (err) {
+      console.error("Failed to update status on server:", err);
+    }
   };
 
   return (
     <div className="space-y-6">
       {/* Tabs Switcher: Dropping Orders Management, Vendor addresses, delivery prices per lga */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-200 pb-0.5">
-        <div className="flex items-center gap-2 overflow-x-auto">
-          <button
-            onClick={() => handleTabChange("dropping-orders")}
-            className={`px-5 py-3 text-xs font-bold transition-all border-b-2 whitespace-nowrap flex items-center gap-2 ${
-            activeTab === "dropping-orders"
-              ? "border-brand-orange text-brand-orange-text bg-white rounded-t-xl"
-              : "border-transparent text-gray-500 hover:text-gray-900 hover:bg-white/50"
-          }`}
-        >
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-            <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-            <line x1="12" y1="22.08" x2="12" y2="12" />
-          </svg>
-          <span>Dropping Orders Management</span>
-          <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-brand-orange-soft text-brand-orange-text">
-            {droppingOrders.length}
-          </span>
-        </button>
-
-        <button
-          onClick={() => handleTabChange("vendor-addresses")}
-          className={`px-5 py-3 text-xs font-bold transition-all border-b-2 whitespace-nowrap flex items-center gap-2 ${
-            activeTab === "vendor-addresses"
-              ? "border-brand-orange text-brand-orange-text bg-white rounded-t-xl"
-              : "border-transparent text-gray-500 hover:text-gray-900 hover:bg-white/50"
-          }`}
-        >
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-            <circle cx="12" cy="10" r="3" />
-          </svg>
-          <span>Vendor addresses</span>
-          <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-gray-100 text-gray-600">
-            {vendorAddresses.length}
-          </span>
-        </button>
-
-        <button
-          onClick={() => handleTabChange("delivery-prices")}
-          className={`px-5 py-3 text-xs font-bold transition-all border-b-2 whitespace-nowrap flex items-center gap-2 ${
-            activeTab === "delivery-prices"
-              ? "border-brand-orange text-brand-orange-text bg-white rounded-t-xl"
-              : "border-transparent text-gray-500 hover:text-gray-900 hover:bg-white/50"
-          }`}
-        >
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <line x1="12" y1="1" x2="12" y2="23" />
-            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-          </svg>
-          <span>delivery prices per lga</span>
-          <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-gray-100 text-gray-600">
-            {lgaPrices.length}
-          </span>
-        </button>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex-1 min-w-0">
+          <Tabs
+            variant="segmented"
+            tabs={[
+              {
+                id: "dropping-orders",
+                label: "Dropping Orders Management",
+                count: droppingOrders.length,
+                icon: (
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    aria-hidden="true"
+                  >
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                    <line x1="12" y1="22.08" x2="12" y2="12" />
+                  </svg>
+                ),
+              },
+              {
+                id: "vendor-addresses",
+                label: "Vendor addresses",
+                count: vendorAddresses.length,
+                icon: (
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    aria-hidden="true"
+                  >
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                ),
+              },
+              {
+                id: "delivery-prices",
+                label: "delivery prices per lga",
+                count: lgaPrices.length,
+                icon: (
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    aria-hidden="true"
+                  >
+                    <line x1="12" y1="1" x2="12" y2="23" />
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                  </svg>
+                ),
+              },
+            ]}
+            activeTab={activeTab}
+            onTabChange={(id) => handleTabChange(id as "dropping-orders" | "vendor-addresses" | "delivery-prices")}
+            layoutId="logisticsTabsUnderline"
+            className="border-b-0"
+          />
         </div>
 
-        <div className="flex items-center gap-2 pb-1 shrink-0">
+        <div className="flex items-center gap-2 pb-2 sm:pb-0 shrink-0">
           {activeTab === "dropping-orders" && (
             <button
               onClick={() => setIsCreateDropModalOpen(true)}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 transition-all flex items-center gap-1.5 "
+              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <Icon name="plus" className="w-3.5 h-3.5" />
               <span>New Dropping Order</span>
@@ -752,7 +578,7 @@ export default function KoolLogisticsPage() {
           {activeTab === "vendor-addresses" && (
             <button
               onClick={() => setIsAddVendorModalOpen(true)}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 transition-all flex items-center gap-1.5 "
+              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <Icon name="plus" className="w-3.5 h-3.5" />
               <span>Add Vendor Address</span>
@@ -762,7 +588,7 @@ export default function KoolLogisticsPage() {
           {activeTab === "delivery-prices" && (
             <button
               onClick={openAddLgaModal}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 transition-all flex items-center gap-1.5 "
+              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <Icon name="plus" className="w-3.5 h-3.5" />
               <span>Add LGA Price</span>
@@ -780,17 +606,18 @@ export default function KoolLogisticsPage() {
           <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="lg:col-span-2">
-                <Input
-                  type="text"
+                <Search
                   placeholder="Search Drop ID, Order Ref, Customer, Driver, LGA..."
                   value={dropSearch}
-                  onChange={(e) => setDropSearch(e.target.value)}
-                  className="w-full text-xs"
+                  onChange={setDropSearch}
+                  maxWidth="100%"
+                  className="w-full"
+                  showClearButton
                 />
               </div>
 
               <div>
-                <Select
+                <Dropdown
                   options={[
                     { label: "All Drop Statuses", value: "all" },
                     { label: "Ready for Drop", value: "Ready for Drop" },
@@ -800,13 +627,15 @@ export default function KoolLogisticsPage() {
                     { label: "Failed Handover", value: "Failed Handover" },
                   ]}
                   value={dropStatusFilter}
-                  onChange={(val) => setDropStatusFilter(val)}
-                  className="text-xs"
+                  onChange={(val) => setDropStatusFilter(val as string)}
+                  searchable={true}
+                  searchPlaceholder="Search drop status..."
+                  placeholder="All Drop Statuses"
                 />
               </div>
 
               <div>
-                <Select
+                <Dropdown
                   options={[
                     { label: "All Logistics Hubs", value: "all" },
                     {
@@ -828,8 +657,10 @@ export default function KoolLogisticsPage() {
                     },
                   ]}
                   value={dropHubFilter}
-                  onChange={(val) => setDropHubFilter(val)}
-                  className="text-xs"
+                  onChange={(val) => setDropHubFilter(val as string)}
+                  searchable={true}
+                  searchPlaceholder="Search logistics hub..."
+                  placeholder="All Logistics Hubs"
                 />
               </div>
             </div>
@@ -866,7 +697,7 @@ export default function KoolLogisticsPage() {
                     <th className="py-3.5 px-4">Carrier & Driver</th>
                     <th className="py-3.5 px-4">Items / Payload</th>
                     <th className="py-3.5 px-4">Scheduled Drop</th>
-                    <th className="py-3.5 px-4">Drop Status</th>
+                    <th className="py-3.5 px-4 whitespace-nowrap">Drop Status</th>
                     <th className="py-3.5 px-4 text-right">Actions</th>
                   </tr>
                 </thead>
@@ -949,7 +780,7 @@ export default function KoolLogisticsPage() {
                           </div>
                         </td>
 
-                        <td className="py-3.5 px-4">
+                        <td className="py-3.5 px-4 whitespace-nowrap">
                           {order.dropStatus === "Ready for Drop" && (
                             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800 border border-amber-200">
                               READY FOR DROP
@@ -1009,17 +840,18 @@ export default function KoolLogisticsPage() {
           <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="lg:col-span-3">
-                <Input
-                  type="text"
+                <Search
                   placeholder="Search vendor name, contact person, address, LGA..."
                   value={vendorSearch}
-                  onChange={(e) => setVendorSearch(e.target.value)}
-                  className="w-full text-xs"
+                  onChange={setVendorSearch}
+                  maxWidth="100%"
+                  className="w-full"
+                  showClearButton
                 />
               </div>
 
               <div>
-                <Select
+                <Dropdown
                   options={[
                     { label: "All States", value: "all" },
                     { label: "Lagos", value: "Lagos" },
@@ -1029,8 +861,10 @@ export default function KoolLogisticsPage() {
                     { label: "Delta", value: "Delta" },
                   ]}
                   value={vendorStateFilter}
-                  onChange={(val) => setVendorStateFilter(val)}
-                  className="text-xs"
+                  onChange={(val) => setVendorStateFilter(val as string)}
+                  searchable={true}
+                  searchPlaceholder="Search state..."
+                  placeholder="All States"
                 />
               </div>
             </div>
@@ -1171,17 +1005,18 @@ export default function KoolLogisticsPage() {
           <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="lg:col-span-2">
-                <Input
-                  type="text"
+                <Search
                   placeholder="Search LGA name, State, Hub..."
                   value={lgaSearch}
-                  onChange={(e) => setLgaSearch(e.target.value)}
-                  className="w-full text-xs"
+                  onChange={setLgaSearch}
+                  maxWidth="100%"
+                  className="w-full"
+                  showClearButton
                 />
               </div>
 
               <div>
-                <Select
+                <Dropdown
                   options={[
                     { label: "All States", value: "all" },
                     { label: "Lagos", value: "Lagos" },
@@ -1191,13 +1026,15 @@ export default function KoolLogisticsPage() {
                     { label: "Kano", value: "Kano" },
                   ]}
                   value={lgaStateFilter}
-                  onChange={(val) => setLgaStateFilter(val)}
-                  className="text-xs"
+                  onChange={(val) => setLgaStateFilter(val as string)}
+                  searchable={true}
+                  searchPlaceholder="Search state..."
+                  placeholder="All States"
                 />
               </div>
 
               <div>
-                <Select
+                <Dropdown
                   options={[
                     { label: "All Zones", value: "all" },
                     {
@@ -1211,8 +1048,10 @@ export default function KoolLogisticsPage() {
                     },
                   ]}
                   value={lgaZoneFilter}
-                  onChange={(val) => setLgaZoneFilter(val)}
-                  className="text-xs"
+                  onChange={(val) => setLgaZoneFilter(val as string)}
+                  searchable={true}
+                  searchPlaceholder="Search zone..."
+                  placeholder="All Zones"
                 />
               </div>
             </div>
@@ -1400,11 +1239,10 @@ export default function KoolLogisticsPage() {
                     onClick={() =>
                       handleUpdateDropStatus(selectedDropOrder.id, st)
                     }
-                    className={`p-2.5 rounded-xl border text-xs font-bold transition-all text-center ${
-                      selectedDropOrder.dropStatus === st
+                    className={`p-2.5 rounded-xl border text-xs font-bold transition-all text-center ${selectedDropOrder.dropStatus === st
                         ? "border-brand-orange bg-brand-orange-soft text-brand-charcoal "
                         : "border-gray-200 text-gray-600 hover:bg-gray-50"
-                    }`}
+                      }`}
                   >
                     {st}
                   </button>
@@ -1553,7 +1391,7 @@ export default function KoolLogisticsPage() {
                   <label className="text-xs font-bold text-gray-700 block mb-1">
                     State
                   </label>
-                  <Select
+                  <Dropdown
                     options={[
                       { label: "Lagos", value: "Lagos" },
                       { label: "FCT Abuja", value: "FCT Abuja" },
@@ -1562,8 +1400,10 @@ export default function KoolLogisticsPage() {
                       { label: "Kano", value: "Kano" },
                     ]}
                     value={newState}
-                    onChange={(val) => setNewState(val)}
-                    className="text-xs"
+                    onChange={(val) => setNewState(val as string)}
+                    searchable={true}
+                    searchPlaceholder="Search state..."
+                    placeholder="Select state"
                   />
                 </div>
                 <div>
@@ -1597,7 +1437,7 @@ export default function KoolLogisticsPage() {
                 <label className="text-xs font-bold text-gray-700 block mb-1">
                   Carrier Fleet
                 </label>
-                <Select
+                <Dropdown
                   options={[
                     {
                       label: "Kool Logistics Van #01",
@@ -1614,8 +1454,10 @@ export default function KoolLogisticsPage() {
                     { label: "Red Star Express", value: "Red Star Express" },
                   ]}
                   value={newCarrier}
-                  onChange={(val) => setNewCarrier(val)}
-                  className="text-xs"
+                  onChange={(val) => setNewCarrier(val as string)}
+                  searchable={true}
+                  searchPlaceholder="Search carrier..."
+                  placeholder="Select carrier fleet"
                 />
               </div>
             </div>
@@ -1732,7 +1574,7 @@ export default function KoolLogisticsPage() {
                   <label className="text-xs font-bold text-gray-700 block mb-1">
                     State
                   </label>
-                  <Select
+                  <Dropdown
                     options={[
                       { label: "Lagos", value: "Lagos" },
                       { label: "FCT Abuja", value: "FCT Abuja" },
@@ -1741,8 +1583,10 @@ export default function KoolLogisticsPage() {
                       { label: "Kano", value: "Kano" },
                     ]}
                     value={newVenState}
-                    onChange={(val) => setNewVenState(val)}
-                    className="text-xs"
+                    onChange={(val) => setNewVenState(val as string)}
+                    searchable={true}
+                    searchPlaceholder="Search state..."
+                    placeholder="Select state"
                   />
                 </div>
                 <div>
@@ -1832,7 +1676,7 @@ export default function KoolLogisticsPage() {
                   <label className="text-xs font-bold text-gray-700 block mb-1">
                     State
                   </label>
-                  <Select
+                  <Dropdown
                     options={[
                       { label: "Lagos", value: "Lagos" },
                       { label: "FCT Abuja", value: "FCT Abuja" },
@@ -1841,8 +1685,10 @@ export default function KoolLogisticsPage() {
                       { label: "Kano", value: "Kano" },
                     ]}
                     value={lgaStateInput}
-                    onChange={(val) => setLgaStateInput(val)}
-                    className="text-xs"
+                    onChange={(val) => setLgaStateInput(val as string)}
+                    searchable={true}
+                    searchPlaceholder="Search state..."
+                    placeholder="Select state"
                   />
                 </div>
               </div>
@@ -1851,7 +1697,7 @@ export default function KoolLogisticsPage() {
                 <label className="text-xs font-bold text-gray-700 block mb-1">
                   Logistics Zone
                 </label>
-                <Select
+                <Dropdown
                   options={[
                     {
                       label: "Zone 1 (Core Metro)",
@@ -1865,7 +1711,9 @@ export default function KoolLogisticsPage() {
                   ]}
                   value={lgaZoneInput}
                   onChange={(val) => setLgaZoneInput(val as any)}
-                  className="text-xs"
+                  searchable={true}
+                  searchPlaceholder="Search zone..."
+                  placeholder="Select zone"
                 />
               </div>
 

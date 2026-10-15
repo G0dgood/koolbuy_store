@@ -2,7 +2,10 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { HiChevronDown } from "react-icons/hi2";
+import { PlusIcon } from "@radix-ui/react-icons";
+
+/* Apple-style FAQ list (DESIGN.md §8): rows separated by hairlines, a 17px
+   question, a plus that turns into a cross when open, and calm grey answers. */
 
 interface FAQItemProps {
   question: string;
@@ -13,19 +16,24 @@ interface FAQItemProps {
 
 export const FAQItem = ({ question, answer, isOpen, onToggle }: FAQItemProps) => {
   return (
-    <div className="border border-gray-100 rounded-2xl bg-white overflow-hidden transition-all hover:border-brand-orange/15 hover:shadow-sm">
+    <div className="border-b border-black/[0.06]">
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between p-5 text-left transition-colors"
+        aria-expanded={isOpen ? true : false}
+        className="group w-full flex items-center justify-between gap-6 py-5 md:py-6 text-left cursor-pointer"
       >
-        <span className="text-sm md:text-base font-bold text-brand-charcoal">{question}</span>
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          className={`flex-shrink-0 ml-4 ${isOpen ? "text-brand-orange-text" : "text-gray-400"}`}
+        <span className="text-[16px] md:text-[17px] font-semibold text-brand-charcoal leading-snug tracking-[-0.01em] group-hover:text-brand-orange-text transition-colors duration-200">
+          {question}
+        </span>
+        <motion.span
+          animate={{ rotate: isOpen ? 45 : 0 }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${
+            isOpen ? "bg-brand-orange-soft text-brand-orange-text" : "bg-black/[0.04] text-subtle"
+          }`}
         >
-          <HiChevronDown size={22} />
-        </motion.div>
+          <PlusIcon className="w-4 h-4" aria-hidden />
+        </motion.span>
       </button>
       <AnimatePresence>
         {isOpen && (
@@ -33,9 +41,10 @@ export const FAQItem = ({ question, answer, isOpen, onToggle }: FAQItemProps) =>
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden"
           >
-            <div className="px-5 pb-5 text-sm md:text-[15px] leading-relaxed text-gray-500 font-medium">
+            <div className="pb-6 pr-14 text-[15px] md:text-[16px] leading-relaxed text-subtle">
               {answer}
             </div>
           </motion.div>
@@ -57,7 +66,7 @@ export const FAQAccordion = ({ items }: FAQAccordionProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col border-t border-black/[0.06]">
       {items.map((item) => (
         <FAQItem
           key={item.id}

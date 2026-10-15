@@ -13,131 +13,128 @@ import {
 } from "react-icons/hi2";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { Button } from "@/app/components/Button";
 
 const RefundPage = () => {
   const steps = [
     {
-      title: "Initiate Request",
+      title: "Initiate request",
       desc: "Contact support or use the 'Initiate Return' button in your account dashboard.",
-      icon: <HiReceiptRefund size={24} />,
+      icon: <HiReceiptRefund size={22} />,
     },
     {
-      title: "Quality Check",
+      title: "Quality check",
       desc: "Ship the item back to our facility for a professional quality and condition inspection.",
-      icon: <HiShieldCheck size={24} />,
+      icon: <HiShieldCheck size={22} />,
     },
     {
       title: "Processing",
       desc: "Once approved, we initiate the refund process through your original payment method.",
-      icon: <HiArrowPath size={24} />,
+      icon: <HiArrowPath size={22} />,
     },
     {
-      title: "Refund Received",
+      title: "Refund received",
       desc: "Funds typically appear in your account within 5-10 business days.",
-      icon: <HiCheckCircle size={24} />,
+      icon: <HiCheckCircle size={22} />,
     },
   ];
 
   const eligibility = [
     {
-      title: "30-Day Window",
+      title: "30-day window",
       desc: "Refund requests must be submitted within 30 days of the delivery date.",
-      icon: <HiClock size={24} />,
+      icon: <HiClock size={22} />,
     },
     {
-      title: "Original Condition",
+      title: "Original condition",
       desc: "Items must be unused, unwashed, and in their original packaging with all tags.",
-      icon: <HiShieldCheck size={24} />,
+      icon: <HiShieldCheck size={22} />,
     },
     {
-      title: "Proof of Purchase",
+      title: "Proof of purchase",
       desc: "A valid order number or digital receipt is required to process any refund.",
-      icon: <HiReceiptRefund size={24} />,
+      icon: <HiReceiptRefund size={22} />,
     },
   ];
 
   return (
-    <div className="min-h-screen bg-off-white flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-off-white flex flex-col font-sans text-brand-charcoal">
       <Header />
 
-      <main className="flex-1 w-full bg-white">
-        {/* Step 68: Trust Hero with policy branding */}
-        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-brand-charcoal overflow-hidden">
-          <Image
-            src="/brandImage/regional_visual.png"
-            alt="Refund Banner"
-            fill sizes="100vw"
-            className="object-cover opacity-100"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-charcoal via-brand-charcoal/80 to-transparent" />
-          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-orange rounded-full filter blur-[120px] opacity-20 translate-x-1/4 -translate-y-1/4" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-orange rounded-full filter blur-[100px] opacity-10 -translate-x-1/4 translate-y-1/4" />
+      <main className="flex-1 w-full bg-off-white">
+        {/* Trust Hero with policy branding */}
+        <section className="max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 pt-14 md:pt-24">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-3xl mx-auto flex flex-col items-center text-center gap-3"
+          >
+            <div className="w-14 h-14 rounded-stage bg-brand-orange-soft flex items-center justify-center text-brand-orange-text mb-2">
+              <HiShieldCheck size={28} />
+            </div>
+            <h1 className="text-[34px] md:text-[52px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+              Transparent refunds.
+            </h1>
+            <p className="text-subtle max-w-2xl text-[17px] md:text-[19px] leading-snug">
+              At Koolbuy Store, we believe in blooming relationships built
+              on trust. Our 30-day money-back guarantee is designed to give
+              you peace of mind with every purchase.
+            </p>
+          </motion.div>
 
-          <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 relative z-10 text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              className="flex flex-col items-center gap-6"
-            >
-              <div className="w-20 h-20 rounded-3xl bg-white/10 backdrop-blur-md flex items-center justify-center text-brand-orange shadow-md border border-white/10">
-                <HiShieldCheck size={40} />
-              </div>
-              <div className="flex flex-col gap-3">
-                <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tighter font-inter">
-                  Transparent <span className="text-white/60">Refunds</span>
-                </h1>
-                <p className="text-light-gray/70 max-w-2xl text-base md:text-lg leading-relaxed font-medium mx-auto">
-                  At Koolbuy Store, we believe in blooming relationships built
-                  on trust. Our 30-day money-back guarantee is designed to give
-                  you peace of mind with every purchase.
-                </p>
-              </div>
-            </motion.div>
+          <div className="relative mt-12 md:mt-16 w-full aspect-[16/9] md:aspect-[1280/544] rounded-tile md:rounded-hero overflow-hidden">
+            <Image
+              src="/brandImage/regional_visual.png"
+              alt="Refund Banner"
+              fill
+              sizes="(max-width: 1440px) 100vw, 1312px"
+              className="object-cover"
+              priority
+            />
           </div>
         </section>
 
-        {/* Step 69: Eligibility Grid and Rules section */}
-        <section className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-24 md:py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-1 flex flex-col gap-6">
-              <span className="text-brand-orange-text font-bold tracking-[0.2em] uppercase text-xs">
-                Policy Foundations
+        {/* Eligibility Grid and Rules section */}
+        <section className="max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-16 md:py-28">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+            <div className="lg:col-span-1 flex flex-col gap-3">
+              <span className="text-[13px] font-semibold text-brand-orange-text">
+                Policy foundations
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-charcoal tracking-tight leading-tight">
-                Eligibility <br />
-                Criteria
+              <h2 className="text-[28px] md:text-[34px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-[1.1]">
+                Eligibility <br className="hidden lg:block" />
+                criteria.
               </h2>
-              <p className="text-gray-500 text-sm md:text-base leading-relaxed">
+              <p className="text-subtle text-[16px] md:text-[17px] leading-relaxed">
                 To ensure a fair process for all customers, we maintain
                 standardized criteria for all refund requests. Please verify
                 your item meets these conditions before initiating.
               </p>
             </div>
-            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
               {eligibility.map((item, i) => (
                 <div
                   key={i}
-                  className="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:border-brand-charcoal/30 transition-all group"
+                  className="bg-white p-7 rounded-tile"
                 >
-                  <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-brand-orange-text shadow-sm mb-6 group-hover:scale-110 transition-transform">
+                  <div className="w-11 h-11 bg-brand-orange-soft rounded-stage flex items-center justify-center text-brand-orange-text mb-5">
                     {item.icon}
                   </div>
-                  <h4 className="text-lg font-bold text-brand-charcoal mb-2">
+                  <h4 className="text-[17px] md:text-[19px] font-semibold text-brand-charcoal tracking-[-0.01em] mb-1.5">
                     {item.title}
                   </h4>
-                  <p className="text-gray-500 text-sm leading-relaxed">
+                  <p className="text-subtle text-[15px] leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
               ))}
-              <div className="bg-brand-orange-soft p-8 rounded-3xl flex items-center gap-5 border border-brand-charcoal/10">
+              <div className="bg-brand-orange-soft p-7 rounded-tile flex items-center gap-4">
                 <HiExclamationCircle
                   className="text-brand-orange-text shrink-0"
-                  size={32}
+                  size={28}
                 />
-                <p className="text-brand-orange-text text-sm font-bold leading-relaxed">
+                <p className="text-brand-charcoal text-[15px] font-medium leading-relaxed">
                   Non-refundable items include clearance products, open personal
                   care items, and gift cards.
                 </p>
@@ -146,43 +143,43 @@ const RefundPage = () => {
           </div>
         </section>
 
-        {/* Step 70: Implement Visual Refund Process Timeline */}
-        <section className="bg-gray-50 py-24 md:py-32">
-          <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16">
-            <div className="text-center mb-20 flex flex-col items-center gap-4">
-              <h2 className="text-3xl md:text-5xl font-bold text-brand-charcoal tracking-tight">
-                How the process works
+        {/* Visual Refund Process Timeline */}
+        <section className="max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+          <div className="bg-white rounded-tile md:rounded-hero px-6 py-12 md:px-12 md:py-20">
+            <div className="text-center mb-12 md:mb-16 flex flex-col items-center gap-2">
+              <h2 className="text-[28px] md:text-[40px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-[1.1]">
+                How the process works.
               </h2>
-              <p className="text-gray-500 max-w-xl">
+              <p className="text-subtle text-[17px] md:text-[19px] leading-snug max-w-xl">
                 A transparent, four-step journey from your request to the funds
                 appearing in your account.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 relative">
               {/* Connector Line (Desktop) */}
-              <div className="hidden lg:block absolute top-[52px] left-0 right-0 h-0.5 bg-gray-200 z-0" />
+              <div className="hidden lg:block absolute top-7 left-0 right-0 h-px bg-black/[0.06] z-0" />
 
               {steps.map((step, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="relative z-10 flex flex-col items-center lg:items-start text-center lg:text-left gap-6 group"
+                  transition={{ delay: i * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative z-10 flex flex-col items-center lg:items-start text-center lg:text-left gap-5"
                 >
-                  <div className="w-24 h-24 rounded-full bg-white border-4 border-gray-50 shadow-md flex items-center justify-center text-brand-orange-text group-hover:bg-brand-charcoal group-hover:text-white transition-all duration-500">
+                  <div className="w-14 h-14 rounded-full bg-brand-orange-soft ring-8 ring-white flex items-center justify-center text-brand-orange-text">
                     {step.icon}
                   </div>
-                  <div className="flex flex-col gap-2">
-                    <span className="text-brand-orange-text font-bold text-xs uppercase tracking-[0.2em]">
+                  <div className="flex flex-col gap-1.5">
+                    <span className="text-brand-orange-text font-semibold text-[13px]">
                       Step 0{i + 1}
                     </span>
-                    <h4 className="text-xl font-bold text-brand-charcoal">
+                    <h4 className="text-[19px] font-semibold text-brand-charcoal tracking-[-0.01em]">
                       {step.title}
                     </h4>
-                    <p className="text-gray-500 text-sm leading-relaxed px-4 lg:px-0">
+                    <p className="text-subtle text-[15px] leading-relaxed px-4 lg:px-0">
                       {step.desc}
                     </p>
                   </div>
@@ -193,25 +190,34 @@ const RefundPage = () => {
         </section>
 
         {/* Contact CTA */}
-        <section className="py-24 md:py-32">
-          <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16">
-            <div className="w-full bg-brand-orange-soft rounded-3xl p-12 md:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/40 rounded-full filter blur-[80px] -translate-x-1/2 -translate-y-1/2" />
-              <div className="flex flex-col gap-4 relative z-10 text-center lg:text-left">
-                <h2 className="text-3xl md:text-4xl font-bold text-brand-charcoal tracking-tight">
+        <section className="py-16 md:py-28">
+          <div className="max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+            <div className="w-full bg-white rounded-tile md:rounded-hero p-8 md:p-16 flex flex-col lg:flex-row items-center justify-between gap-8">
+              <div className="flex flex-col gap-2 text-center lg:text-left">
+                <h2 className="text-[28px] md:text-[34px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
                   Need to start a refund?
                 </h2>
-                <p className="text-brand-orange-text/80 font-medium">
+                <p className="text-subtle text-[17px]">
                   Our support team is ready to guide you through the process.
                 </p>
               </div>
-              <div className="flex items-center gap-4 relative z-10">
-                <button className="bg-brand-charcoal text-white px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:scale-105 transition-transform">
-                  Initiate Now
-                </button>
-                <button className="bg-white text-brand-charcoal px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-xs border border-brand-orange/15 hover:bg-gray-50 transition-colors">
-                  View Orders
-                </button>
+              <div className="flex flex-col sm:flex-row items-center gap-3">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  shape="pill"
+                  className="h-11 px-6 text-[15px]!"
+                >
+                  Initiate now
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  shape="pill"
+                  className="h-11 px-6 text-[15px]! bg-black/[0.04] hover:bg-black/[0.08] text-brand-charcoal"
+                >
+                  View orders
+                </Button>
               </div>
             </div>
           </div>

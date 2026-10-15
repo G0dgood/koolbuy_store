@@ -31,82 +31,83 @@ const CookiePreferencesPage = () => {
   const cookieTypes = [
     {
       id: "essential",
-      title: "Strictly Essential",
+      title: "Strictly essential",
       desc: "These cookies are vital for the core orchestration of the Koolbuy Store experience, including secure authentication and cart persistence.",
-      icon: <HiLockClosed size={24} />,
+      icon: <HiLockClosed size={22} />,
       required: true,
     },
     {
       id: "functional",
-      title: "Functional Preference",
+      title: "Functional preference",
       desc: "Enables specialized features like sensory discovery history and regional language synchronization for a tailored boutique experience.",
-      icon: <HiAdjustmentsHorizontal size={24} />,
+      icon: <HiAdjustmentsHorizontal size={22} />,
       required: false,
     },
     {
       id: "analytics",
-      title: "Performance Discovery",
+      title: "Performance discovery",
       desc: "Anonymous tracking that allows our curation team to understand platform trajectories and optimize high-fidelity visual performance.",
-      icon: <HiChartBar size={24} />,
+      icon: <HiChartBar size={22} />,
       required: false,
     },
     {
       id: "marketing",
-      title: "Bespoke Targeting",
+      title: "Bespoke targeting",
       desc: "Allows us to present you with artisanal collections and designer offers that align with your unique sensory profile.",
-      icon: <HiFingerPrint size={24} />,
+      icon: <HiFingerPrint size={22} />,
       required: false,
     },
   ];
 
   return (
-    <div className="min-h-screen bg-off-white flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-off-white flex flex-col font-sans text-brand-charcoal">
       <Header />
 
-      <main className="flex-1 w-full bg-white">
+      <main className="flex-1 w-full bg-off-white">
         {/* Privacy Hero */}
-        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-brand-charcoal overflow-hidden">
-          <Image
-            src="/brandImage/cat_body.png"
-            alt="Privacy Framework"
-            fill sizes="100vw"
-            className="object-cover opacity-100 grayscale brightness-50"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-charcoal via-brand-charcoal/80 to-transparent" />
-
-          <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 relative z-10">
+        <section className="max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 pt-14 md:pt-24">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 md:gap-16 items-center">
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              className="flex flex-col gap-6"
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col items-center text-center md:items-start md:text-left gap-3"
             >
-              <span className="text-brand-orange font-bold tracking-[0.4em] uppercase text-xs">
-                Privacy Orchestration
+              <span className="text-[13px] font-semibold text-brand-orange-text">
+                Privacy orchestration
               </span>
-              <h1 className="text-4xl md:text-7xl font-bold text-white tracking-tighter leading-none font-inter">
-                Cookie <br />
-                <span className="text-white/60">Preferences.</span>
+              <h1 className="text-[34px] md:text-[52px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+                Cookie preferences.
               </h1>
-              <p className="text-light-gray/60 max-w-2xl text-lg md:text-xl font-medium">
+              <p className="text-subtle max-w-2xl text-[17px] md:text-[19px] leading-snug">
                 Your digital footprint is as unique as your sensory profile. At
                 Koolbuy Store, we prioritize your data sovereignty with
                 artisanal precision.
               </p>
             </motion.div>
+
+            <div className="relative mx-auto w-full max-w-55 md:max-w-60 aspect-[285/435] rounded-tile overflow-hidden">
+              <Image
+                src="/brandImage/cat_body.png"
+                alt="Privacy Framework"
+                fill
+                sizes="240px"
+                className="object-cover"
+                priority
+              />
+            </div>
           </div>
         </section>
 
-        <section className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-24 md:py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
+        <section className="max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-12 md:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-4 lg:gap-6 items-start">
             {/* Policy Narrative */}
-            <div className="lg:col-span-5 flex flex-col gap-10">
-              <div className="flex flex-col gap-6">
-                <h2 className="text-3xl md:text-5xl font-bold text-brand-charcoal tracking-tight">
-                  Our Integrity.
+            <div className="lg:col-span-5 flex flex-col gap-3 md:gap-4">
+              <div className="flex flex-col gap-3 p-2 md:p-4">
+                <h2 className="text-[26px] md:text-[34px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
+                  Our integrity.
                 </h2>
-                <p className="text-gray-500 leading-relaxed text-lg">
+                <p className="text-subtle leading-relaxed text-[17px]">
                   We use cookies to ensure that your journey through the Koolbuy
                   Store ecosystem is seamless, secure, and personalized. You
                   have absolute control over which non-essential technologies
@@ -114,14 +115,16 @@ const CookiePreferencesPage = () => {
                 </p>
               </div>
 
-              <div className="bg-brand-orange-soft/50 p-10 rounded-3xl border border-brand-orange/15 flex flex-col gap-6">
-                <div className="flex items-center gap-4 text-brand-orange-text">
-                  <HiShieldCheck size={32} />
-                  <h4 className="text-xl font-bold text-brand-charcoal">
-                    Data Sovereignty
+              <div className="bg-white p-7 md:p-8 rounded-tile flex flex-col gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-11 h-11 rounded-stage bg-brand-orange-soft text-brand-orange-text flex items-center justify-center shrink-0">
+                    <HiShieldCheck size={22} />
+                  </div>
+                  <h4 className="text-[19px] font-semibold text-brand-charcoal">
+                    Data sovereignty
                   </h4>
                 </div>
-                <p className="text-sm text-gray-500 leading-relaxed">
+                <p className="text-[15px] text-subtle leading-relaxed">
                   All personal data is encrypted and handled in strict
                   accordance with global privacy frameworks, including GDPR and
                   CCPA.
@@ -130,29 +133,29 @@ const CookiePreferencesPage = () => {
             </div>
 
             {/* Interactive Preference Control */}
-            <div className="lg:col-span-7 bg-white border border-gray-100 rounded-3xl shadow-sm overflow-hidden">
-              <div className="p-8 md:p-12 flex flex-col gap-10">
+            <div className="lg:col-span-7 bg-white rounded-tile md:rounded-hero overflow-hidden">
+              <div className="px-6 md:px-10 py-2 md:py-4 flex flex-col">
                 {cookieTypes.map((cookie, i) => (
                   <div
                     key={cookie.id}
-                    className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-10 border-b border-gray-50 last:border-0 last:pb-0"
+                    className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 py-6 border-b border-black/[0.06] last:border-0"
                   >
-                    <div className="flex items-start gap-6 flex-1">
-                      <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-brand-charcoal shrink-0">
+                    <div className="flex items-start gap-4 flex-1">
+                      <div className="w-11 h-11 bg-brand-orange-soft rounded-stage flex items-center justify-center text-brand-orange-text shrink-0">
                         {cookie.icon}
                       </div>
                       <div className="flex flex-col gap-1">
-                        <h4 className="font-bold text-brand-charcoal uppercase tracking-tighter">
+                        <h4 className="text-[17px] font-semibold text-brand-charcoal">
                           {cookie.title}
                         </h4>
-                        <p className="text-xs text-gray-400 leading-relaxed max-w-md">
+                        <p className="text-[14px] text-subtle leading-relaxed max-w-md">
                           {cookie.desc}
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4 pl-15 md:pl-0">
                       {cookie.required ? (
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-brand-orange-text bg-brand-orange-soft px-4 py-2 rounded-full">
+                        <span className="text-[12px] font-medium text-brand-orange-text bg-brand-orange-soft px-3 py-1 rounded-full">
                           Required
                         </span>
                       ) : (
@@ -162,7 +165,7 @@ const CookiePreferencesPage = () => {
                               cookie.id as keyof typeof preferences,
                             )
                           }
-                          className={`relative w-14 h-8 rounded-full transition-colors duration-300 ${preferences[cookie.id as keyof typeof preferences] ? "bg-brand-charcoal" : "bg-gray-200"}`}
+                          className={`relative w-14 h-8 rounded-full transition-colors duration-300 ease-apple cursor-pointer ${preferences[cookie.id as keyof typeof preferences] ? "bg-brand-orange" : "bg-gray-200"}`}
                         >
                           <motion.div
                             animate={{
@@ -181,22 +184,26 @@ const CookiePreferencesPage = () => {
                 ))}
               </div>
 
-              <div className="bg-gray-100/50 p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-gray-100">
-                <p className="text-xs text-gray-400 font-medium">
+              <div className="bg-off-white px-6 md:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-black/[0.06]">
+                <p className="text-[13px] text-faint">
                   Your preferences are synchronized in real-time.
                 </p>
-                <div className="flex gap-4 w-full md:w-auto">
+                <div className="flex gap-2 w-full md:w-auto">
                   <Button
                     variant="ghost"
-                    className="flex-1 md:flex-none border-gray-200 text-brand-charcoal px-10 h-14 font-bold uppercase tracking-widest text-sm"
+                    size="lg"
+                    shape="pill"
+                    className="flex-1 md:flex-none h-11 px-6 text-[15px]! bg-black/[0.04] hover:bg-black/[0.08] text-brand-charcoal"
                   >
-                    Reject All
+                    Reject all
                   </Button>
                   <Button
                     variant="primary"
-                    className="flex-1 md:flex-none bg-brand-charcoal text-white px-10 h-14 font-bold uppercase tracking-widest text-sm"
+                    size="lg"
+                    shape="pill"
+                    className="flex-1 md:flex-none h-11 px-6 text-[15px]!"
                   >
-                    Accept All
+                    Accept all
                   </Button>
                 </div>
               </div>

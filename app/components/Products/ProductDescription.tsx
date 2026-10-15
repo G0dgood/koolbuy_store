@@ -7,11 +7,11 @@ const ProductDescription = () => {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-5 max-w-[800px]">
-        <p className="text-gray-600 text-sm leading-relaxed">
+        <p className="text-subtle text-[15px] md:text-[16px] leading-relaxed">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
         </p>
 
-        <table className="w-full border-collapse border border-gray-100 text-sm">
+        <table className="w-full border-collapse text-[14px] md:text-[15px]">
           <tbody>
             {[
               { label: "Model", value: "#8786867" },
@@ -20,9 +20,9 @@ const ProductDescription = () => {
               { label: "Size", value: "34mm x 450mm x 19mm" },
               { label: "Memory", value: "36GB RAM" },
             ].map((row, idx) => (
-              <tr key={idx} className="border-b border-gray-100 last:border-0">
-                <td className="bg-gray-50 text-gray-400 p-3 w-48 font-medium">{row.label}</td>
-                <td className="text-gray-600 p-3">{row.value}</td>
+              <tr key={idx} className="border-b border-black/[0.06] last:border-0">
+                <td className="text-subtle py-3.5 pr-4 w-40 md:w-56 align-top">{row.label}</td>
+                <td className="text-brand-charcoal py-3.5">{row.value}</td>
               </tr>
             ))}
           </tbody>
@@ -37,8 +37,8 @@ const ProductDescription = () => {
           "Duis aute irure dolor in reprehenderit",
           "Some our feature goes here",
         ].map((feature, idx) => (
-          <div key={idx} className="flex items-center gap-3 text-sm text-gray-600">
-            <Icon name="check" size="xs" className="text-gray-400" />
+          <div key={idx} className="flex items-center gap-3 text-[14px] md:text-[15px] text-brand-charcoal">
+            <span className="w-5 h-5 rounded-full bg-success-soft text-success flex items-center justify-center shrink-0"><Icon name="check" size="xs" /></span>
             <span>{feature}</span>
           </div>
         ))}

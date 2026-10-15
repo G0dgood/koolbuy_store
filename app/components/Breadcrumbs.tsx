@@ -14,19 +14,26 @@ interface BreadcrumbsProps {
 
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = "" }) => {
   return (
-    <nav className={`flex items-center gap-2 text-sm ${className}`}>
-      <Link href="/" className="text-gray-400 hover:text-brand-orange-text transition-colors flex items-center">
-        <Icon name="home" size="xs" />
+    <nav
+      aria-label="Breadcrumb"
+      className={`flex items-center gap-1.5 text-[12px] md:text-[13px] text-faint whitespace-nowrap overflow-x-auto scrollbar-none ${className}`}
+    >
+      <Link
+        href="/"
+        aria-label="Home"
+        className="flex items-center text-faint hover:text-brand-charcoal transition-colors duration-200"
+      >
+        <Icon name="home" size="sm" />
       </Link>
       {items.map((item, idx) => (
         <React.Fragment key={idx}>
-          <Icon name="chevron_right" size="xs" className="text-gray-300" />
+          <span aria-hidden="true" className="text-gray-300">›</span>
           {item.href ? (
-            <Link href={item.href} className="text-gray-400 hover:text-brand-orange-text transition-colors">
+            <Link href={item.href} className="text-faint hover:text-brand-charcoal transition-colors duration-200">
               {item.label}
             </Link>
           ) : (
-            <span className="text-gray-900 font-bold">{item.label}</span>
+            <span aria-current="page" className="text-subtle">{item.label}</span>
           )}
         </React.Fragment>
       ))}

@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 const cards = [
   {
     id: "serve-it-cold",
-    eyebrow: "SERVE IT COLD",
+    eyebrow: "serve it cold",
     title: "Koolboks cooling for ice-cold refreshment",
     image: "/images/koolboks/cold/yellow-cold-bg.png",
     textColor: "text-gray-900",
@@ -19,7 +19,7 @@ const cards = [
   },
   {
     id: "freeze-more",
-    eyebrow: "FREEZE MORE",
+    eyebrow: "freeze more",
     title: "Sell More Ice With Ice Maker Machine",
     image: "/images/koolboks/cold/black-cold-bg.png",
     textColor: "text-white",
@@ -29,7 +29,7 @@ const cards = [
   },
   {
     id: "keep-it-fresh",
-    eyebrow: "KEEP IT FRESH",
+    eyebrow: "keep it fresh",
     title: "100% Meat Preservation with Koolbuy Product",
     image: "/images/koolboks/cold/blue-cold-bg.png",
     textColor: "text-white",
@@ -44,16 +44,16 @@ export const ColdFeaturesSection: React.FC = () => {
     <section className="w-full flex flex-col gap-6 md:gap-8">
       {/* Centered Heading */}
       <div className="text-center max-w-2xl mx-auto px-4">
-        <span className="text-brand-charcoal font-bold text-[16px] md:text-[18px] tracking-wider block">
-          Start With Koolboks Now!
-        </span>
-        <p className="text-gray-800 text-sm md:text-base font-semibold mt-1.5">
-          Own A Refrigerator And Grow Your Business
+        <h2 className="text-[30px] md:text-[44px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
+          Start with Koolboks.
+        </h2>
+        <p className="mt-2 text-[17px] md:text-[19px] text-subtle">
+          Own a refrigerator and grow your business.
         </p>
       </div>
 
       {/* Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
         {cards.map((card, idx) => (
           <motion.div
             key={card.id}
@@ -61,36 +61,36 @@ export const ColdFeaturesSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: idx * 0.15 }}
-            className="group relative rounded-2xl md:rounded-3xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 min-h-105 sm:min-h-115 flex flex-col justify-between"
+            className="group relative rounded-[22px] md:rounded-[32px] overflow-hidden min-h-115 sm:min-h-125 flex flex-col justify-between"
           >
             {/* Background Image */}
             <Image
               src={card.image}
               alt={card.title}
               fill
-              className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+              className="object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
               sizes="(max-width: 768px) 100vw, 33vw"
               priority={false}
             />
 
             {/* Top Text Content Overlay */}
-            <div className="relative z-10 pt-8 sm:pt-10 px-6 sm:px-8 text-center flex flex-col items-center">
+            <div className="relative z-10 pt-10 sm:pt-12 px-6 sm:px-8 text-center flex flex-col items-center">
               <span
-                className={`text-[11px] sm:text-xs font-bold tracking-widest uppercase mb-2 ${card.eyebrowColor}`}
+                className={`block text-[13px] font-semibold mb-1.5 first-letter:uppercase ${card.eyebrowColor}`}
               >
                 {card.eyebrow}
               </span>
               <h3
-                className={`text-base sm:text-lg font-bold leading-snug max-w-65 mb-5 sm:mb-6 ${card.textColor}`}
+                className={`text-[24px] sm:text-[28px] font-semibold tracking-[-0.02em] leading-[1.1] max-w-72 mb-5 sm:mb-6 ${card.textColor}`}
               >
                 {card.title}
               </h3>
 
               <Link
                 href={card.href}
-                className="inline-flex items-center gap-2 bg-white px-6 py-2 rounded-full shadow-md hover:shadow-lg hover:bg-gray-50 active:scale-95 transition-all text-xs font-bold uppercase tracking-wider group-hover:gap-3"
+                className="inline-flex items-center gap-1.5 bg-white/90 backdrop-blur px-5 py-2 rounded-full hover:bg-white transition-colors text-[13px] font-medium"
               >
-                <span className={card.buttonTextColor}>SHOP NOW</span>
+                <span className={card.buttonTextColor}>Shop now</span>
                 <FiArrowRight
                   className={`${card.buttonTextColor} text-xs transition-transform duration-200`}
                 />

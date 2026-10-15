@@ -34,45 +34,24 @@ export const WishlistProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   // Load from localStorage on mount
   useEffect(() => {
-    const savedWishlist = localStorage.getItem("wishlist_items");
-    if (savedWishlist) {
-      setWishlistItems(JSON.parse(savedWishlist));
-    } else {
-      // Seed with initial hardcoded data from the WishlistPage
-      setWishlistItems([
-        {
-          id: "1",
-          title: "Canon EOS R5 Mirrorless Camera with 24-105mm Lens Black, ultra high resolution",
-          price: "₦998.00",
-          originalPrice: "₦1,128.00",
-          rating: 4.8,
-          orders: 154,
-          shipping: "Free Shipping",
-          description: "Experience the ultimate in photography with the Canon EOS R5. featuring a 45MP full-frame CMOS sensor and 8K video recording capabilities. This bundle includes the versatile 24-105mm lens for all your professional needs.",
-          image: "/images/camera.jpg",
-        },
-        {
-          id: "2",
-          title: "Apple iPhone 14 Pro Max 128GB Deep Purple, unlocked and optimized for global speed",
-          price: "₦1,099.00",
-          rating: 4.9,
-          orders: 2310,
-          shipping: "Fast Shipping",
-          description: "The latest flagship from Apple featuring the Dynamic Island, 48MP main camera, and the lightning-fast A16 Bionic chip. Experience the best in mobile technology and premium design.",
-          image: "/images/iphone.jpg",
-        },
-        {
-          id: "3",
-          title: "Sony WH-1000XM5 Noise Canceling Headphones with Auto NC Optimizer",
-          price: "₦348.00",
-          originalPrice: "₦399.00",
-          rating: 4.7,
-          orders: 890,
-          shipping: "Free Shipping",
-          description: "Industry-leading noise cancellation with two processors and eight microphones. Experience crystal clear sound and ultimate comfort with the newest Sony flagship headphones.",
-          image: "/images/headphone.jpg",
-        },
-      ]);
+    try {
+      const savedWishlist = localStorage.getItem("wishlist_items");
+      if (savedWishlist) {
+        const parsed = JSON.parse(savedWishlist);
+        if (Array.isArray(parsed)) {
+          // Filter out legacy dummy/static items
+          const cleaned = parsed.filter(
+            (item: any) => !["1", "2", "3"].includes(item.id)
+          );
+          setWishlistItems(cleaned);
+        } else {
+          setWishlistItems([]);
+        }
+      } else {
+        setWishlistItems([]);
+      }
+    } catch {
+      setWishlistItems([]);
     }
     setIsInitialized(true);
   }, []);

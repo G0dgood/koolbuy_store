@@ -13,6 +13,7 @@ import { FaFacebookF, FaTwitter, FaWhatsapp } from "react-icons/fa";
 import { useCart } from "@/app/context/CartContext";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/app/components/Button";
 
 const installmentMap: Record<number, string> = {
   2: "1,180,000.00",
@@ -72,57 +73,63 @@ export const ProductDetailsInfo: React.FC = () => {
     installmentMap[selectedInstallment] || "89,000.00";
 
   return (
-    <div className="flex-1 flex flex-col gap-5 lg:w-1/2">
-      {/* Title and Stock Row */}
-      <div className="flex items-start justify-between gap-4">
-        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 leading-snug tracking-tight uppercase">
-          219L THERMOCOOL INVERTER SOLAR FREEZER (MAXI (24V 60AH BATTERY + 40V
-          PWM + 2 X 600W PANELS))
+    <div className="flex-1 flex flex-col gap-6 lg:w-1/2 lg:py-2">
+      {/* Title and stock */}
+      <div className="flex flex-col gap-3">
+        <span className="self-start inline-flex items-center gap-1.5 bg-success-soft text-success font-medium text-[12px] px-2.5 py-1 rounded-full">
+          <span className="w-1.5 h-1.5 rounded-full bg-success" aria-hidden />
+          In stock
+        </span>
+        <h1 className="text-[28px] md:text-[36px] font-semibold text-brand-charcoal leading-tight tracking-[-0.025em]">
+          219L Thermocool Inverter Solar Freezer (Maxi (24V 60Ah battery + 40V
+          PWM + 2 x 600W panels))
         </h1>
-        <span className="shrink-0 bg-[#FFF4ED] text-brand-orange-text font-bold text-xs px-3 py-1 rounded-md">
-          In Stock
-        </span>
-      </div>
 
-      {/* Sold By */}
-      <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-700">
-        <div className="w-5 h-5 rounded bg-brand-orange flex items-center justify-center text-white shrink-0 shadow-xs">
-          <FiShoppingCart size={11} />
+        {/* Sold by */}
+        <div className="flex items-center gap-2 text-[13px] text-subtle">
+          <div className="w-5 h-5 rounded-full bg-brand-orange-soft flex items-center justify-center text-brand-orange-text shrink-0">
+            <FiShoppingCart size={10} />
+          </div>
+          <span>
+            Sold by:{" "}
+            <Link
+              href="/products?vendor=gworld"
+              className="font-medium text-brand-charcoal hover:text-brand-orange-text transition-colors"
+            >
+              Koolbuy- GWORLD ELECTRONICS
+            </Link>
+          </span>
         </div>
-        <span>
-          Sold by:{" "}
-          <Link
-            href="/products?vendor=gworld"
-            className="font-bold text-gray-900 hover:text-brand-orange-text transition-colors"
-          >
-            Koolbuy- GWORLD ELECTRONICS
-          </Link>
-        </span>
       </div>
 
-      {/* Buy for as low as monthly BNPL Dropdown Card */}
-      <div className="w-full border border-brand-orange rounded-2xl overflow-hidden bg-white shadow-xs">
-        {/* Dropdown Header Trigger */}
+      {/* Price */}
+      <div className="flex flex-col gap-1">
+        <div className="text-[24px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.02em] tabular-nums">
+          ₦2,155,000.00
+        </div>
+      </div>
+
+      {/* Buy for as low as monthly (BNPL) */}
+      <div className="w-full rounded-[18px] overflow-hidden bg-off-white">
         <button
           type="button"
           onClick={() => setIsBnplOpen((prev) => !prev)}
-          className="w-full px-5 py-4 flex items-center justify-between cursor-pointer outline-none bg-[#FFFBF7] hover:bg-[#FFF6ED] transition-colors text-left"
+          className="w-full px-5 py-4 flex items-center justify-between gap-3 cursor-pointer outline-none hover:bg-black/[0.02] transition-colors text-left"
         >
-          <span className="text-base sm:text-lg text-gray-800 font-bold">
+          <span className="text-[15px] md:text-[16px] text-brand-charcoal">
             Buy for as low as{" "}
-            <strong className="text-brand-orange-text font-bold text-lg sm:text-xl">
+            <strong className="text-brand-orange-text font-semibold">
               ₦89,000
             </strong>{" "}
             monthly
           </span>
           {isBnplOpen ? (
-            <FiChevronUp className="text-brand-orange-text text-xl shrink-0" />
+            <FiChevronUp className="text-subtle text-lg shrink-0" />
           ) : (
-            <FiChevronDown className="text-brand-orange-text text-xl shrink-0" />
+            <FiChevronDown className="text-subtle text-lg shrink-0" />
           )}
         </button>
 
-        {/* Dropdown Content */}
         <AnimatePresence>
           {isBnplOpen && (
             <motion.div
@@ -132,22 +139,22 @@ export const ProductDetailsInfo: React.FC = () => {
               transition={{ duration: 0.22, ease: "easeOut" }}
               className="overflow-hidden"
             >
-              <div className="p-5 pt-4 flex flex-col gap-4 bg-white border-t border-brand-orange/15">
-                {/* Step 1: Select payment frequency */}
-                <div className="flex flex-col gap-2">
-                  <span className="text-xs sm:text-sm font-semibold text-gray-800">
+              <div className="px-5 pb-5 pt-1 flex flex-col gap-5">
+                {/* Step 1: payment frequency */}
+                <div className="flex flex-col gap-2.5">
+                  <span className="text-[13px] font-medium text-subtle">
                     Select payment frequency to pay small small.
                   </span>
-                  <div className="flex items-center gap-3 flex-wrap">
+                  <div className="flex items-center gap-2 flex-wrap">
                     {["Easy 35", "Easy 25", "Easy 20"].map((freq) => (
                       <button
                         key={freq}
                         type="button"
                         onClick={() => handleSelectFrequency(freq)}
-                        className={`px-6 py-2 rounded-full font-bold text-xs sm:text-sm cursor-pointer transition-all outline-none ${
+                        className={`px-5 py-2 rounded-full font-medium text-[13px] cursor-pointer transition-colors outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50 ${
                           selectedFrequency === freq
-                            ? "bg-brand-orange text-white "
-                            : "border border-brand-orange text-brand-orange-text bg-white hover:bg-brand-orange-soft"
+                            ? "bg-brand-charcoal text-white"
+                            : "bg-white text-brand-charcoal ring-1 ring-black/[0.08] hover:ring-black/20"
                         }`}
                       >
                         {freq}
@@ -156,21 +163,21 @@ export const ProductDetailsInfo: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Step 2: Select number of installments */}
-                <div className="flex flex-col gap-2">
-                  <span className="text-xs sm:text-sm font-semibold text-gray-800">
+                {/* Step 2: number of installments */}
+                <div className="flex flex-col gap-2.5">
+                  <span className="text-[13px] font-medium text-subtle">
                     Select the number of installments
                   </span>
-                  <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
+                  <div className="flex items-center gap-2 flex-wrap">
                     {[2, 5, 11, 17, 23, 29, 35].map((num) => (
                       <button
                         key={num}
                         type="button"
                         onClick={() => handleSelectInstallment(num)}
-                        className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full font-bold text-xs sm:text-sm flex items-center justify-center cursor-pointer transition-all outline-none ${
+                        className={`w-10 h-10 rounded-full font-medium text-[13px] tabular-nums flex items-center justify-center cursor-pointer transition-colors outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50 ${
                           selectedInstallment === num
-                            ? "bg-brand-orange text-white "
-                            : "border border-brand-orange text-brand-orange-text bg-white hover:bg-brand-orange-soft"
+                            ? "bg-brand-charcoal text-white"
+                            : "bg-white text-brand-charcoal ring-1 ring-black/[0.08] hover:ring-black/20"
                         }`}
                       >
                         {num}
@@ -179,20 +186,20 @@ export const ProductDetailsInfo: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Step 3: Calculation Summary Box */}
-                <div className="bg-off-white rounded-xl py-3.5 px-4 text-center border border-gray-100 mt-1">
-                  <p className="text-xs sm:text-sm text-gray-800 font-semibold leading-relaxed">
+                {/* Step 3: summary */}
+                <div className="bg-white rounded-[14px] py-3.5 px-4 text-center">
+                  <p className="text-[14px] text-brand-charcoal leading-relaxed">
                     You will be paying{" "}
-                    <strong className="text-brand-orange-text font-bold">
+                    <strong className="text-brand-orange-text font-semibold">
                       ₦{currentMonthlyAmount}
                     </strong>{" "}
-                    Monthly for{" "}
-                    <strong className="text-brand-orange-text font-bold">
+                    monthly for{" "}
+                    <strong className="text-brand-orange-text font-semibold">
                       {selectedInstallment}
                     </strong>{" "}
                     consecutive{" "}
-                    <strong className="text-brand-orange-text font-bold">
-                      Months
+                    <strong className="text-brand-orange-text font-semibold">
+                      months
                     </strong>
                     .
                   </p>
@@ -203,55 +210,8 @@ export const ProductDetailsInfo: React.FC = () => {
         </AnimatePresence>
       </div>
 
-      {/* Price */}
-      <div className="text-2xl sm:text-3xl font-bold text-gray-900">
-        ₦2,155,000.00
-      </div>
-
-      {/* Brand & Social Share Row */}
-      <div className="flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm text-gray-600 pt-1 border-t border-gray-100">
-        <div>
-          <span className="font-semibold text-gray-900">Brand: </span>
-          <Link
-            href="/products?search=Koolbuy"
-            className="text-gray-700 hover:text-brand-orange-text transition-colors"
-          >
-            Koolbuy- GWORLD ELECTRONICS
-          </Link>
-        </div>
-
-        {/* Social Share */}
-        <div className="flex items-center gap-2.5">
-          <span className="font-medium text-gray-500">Share:</span>
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-500 hover:text-[#1877F2] transition-colors"
-          >
-            <FaFacebookF size={13} />
-          </a>
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-500 hover:text-[#1DA1F2] transition-colors"
-          >
-            <FaTwitter size={13} />
-          </a>
-          <a
-            href="https://whatsapp.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-500 hover:text-[#25D366] transition-colors"
-          >
-            <FaWhatsapp size={14} />
-          </a>
-        </div>
-      </div>
-
-      {/* Description Text */}
-      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+      {/* Description */}
+      <p className="text-[15px] md:text-[16px] text-subtle leading-relaxed">
         Thermocool 219L Inverter Solar Freezer with Maxi Solar Kit (24V 60Ah
         battery + 40V PWM + 2 &times; 600W Solar Panels) Smart Solar Freezing
         &ndash; Built for Off-Grid Performance. The Thermocool 219L Inverter
@@ -259,55 +219,97 @@ export const ProductDetailsInfo: React.FC = () => {
         reliable freezing experience for off-grid and unstable power situations.
       </p>
 
-      {/* Quantity & Add to Cart Row */}
-      <div className="flex flex-col gap-2 pt-2">
-        <span className="text-xs sm:text-sm font-semibold text-gray-800">
-          Quantity:
+      {/* Quantity and add to cart */}
+      <div className="flex flex-col gap-2.5">
+        <span className="text-[13px] font-medium text-subtle">
+          Quantity
         </span>
-        <div className="flex items-center gap-4">
-          {/* Quantity Selector */}
-          <div className="h-11 sm:h-12 border border-gray-300 rounded-full px-4 flex items-center gap-4 bg-white shadow-xs">
+        <div className="flex items-center gap-3">
+          {/* Quantity stepper */}
+          <div className="h-12 rounded-full px-2 flex items-center gap-1 bg-black/[0.04]">
             <button
               type="button"
               onClick={handleDecrease}
               disabled={quantity <= 1}
-              className="text-gray-500 hover:text-gray-900 disabled:opacity-30 cursor-pointer outline-none"
+              className="w-8 h-8 rounded-full flex items-center justify-center text-brand-charcoal hover:bg-white disabled:opacity-30 disabled:hover:bg-transparent transition-colors cursor-pointer outline-none"
             >
               <FiMinus size={14} />
             </button>
-            <span className="text-sm font-bold text-gray-900 min-w-4 text-center">
+            <span className="text-[15px] font-medium text-brand-charcoal min-w-6 text-center tabular-nums">
               {quantity}
             </span>
             <button
               type="button"
               onClick={handleIncrease}
-              className="text-gray-500 hover:text-gray-900 cursor-pointer outline-none"
+              className="w-8 h-8 rounded-full flex items-center justify-center text-brand-charcoal hover:bg-white transition-colors cursor-pointer outline-none"
             >
               <FiPlus size={14} />
             </button>
           </div>
 
-          {/* Add to Cart Button */}
-          <button
+          {/* Add to cart */}
+          <Button
             type="button"
+            variant="accent"
+            shape="pill"
+            size="lg"
             onClick={handleAddToCart}
-            className="flex-1 h-11 sm:h-12 bg-brand-orange hover:bg-brand-orange-hover active:scale-[0.98] text-white font-bold text-xs sm:text-sm uppercase tracking-wider rounded-full flex items-center justify-center gap-2.5 transition-all cursor-pointer"
+            iconRight={<FiShoppingCart size={16} />}
+            className="flex-1 h-12 text-[15px]"
           >
-            <span>ADD TO CART</span>
-            <FiShoppingCart size={16} />
-          </button>
+            Add to cart
+          </Button>
         </div>
       </div>
 
-      {/* Category Row */}
-      <div className="text-xs sm:text-sm text-gray-600 pt-2 border-t border-gray-100">
-        <span className="font-semibold text-gray-900">Category: </span>
-        <Link
-          href="/products?category=Single+Door+Chest+Freezers"
-          className="text-gray-700 hover:text-brand-orange-text transition-colors"
-        >
-          Single Door Chest Freezers
-        </Link>
+      {/* Brand, category and share */}
+      <div className="flex flex-col gap-2 pt-5 border-t border-black/[0.06] text-[13px] text-subtle">
+        <div>
+          <span>Brand: </span>
+          <Link
+            href="/products?search=Koolbuy"
+            className="text-brand-charcoal hover:text-brand-orange-text transition-colors"
+          >
+            Koolbuy- GWORLD ELECTRONICS
+          </Link>
+        </div>
+        <div>
+          <span>Category: </span>
+          <Link
+            href="/products?category=Single+Door+Chest+Freezers"
+            className="text-brand-charcoal hover:text-brand-orange-text transition-colors"
+          >
+            Single Door Chest Freezers
+          </Link>
+        </div>
+
+        <div className="flex items-center gap-1 pt-1">
+          <span className="mr-1">Share:</span>
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-subtle hover:text-brand-charcoal hover:bg-black/[0.04] transition-colors"
+          >
+            <FaFacebookF size={13} />
+          </a>
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-subtle hover:text-brand-charcoal hover:bg-black/[0.04] transition-colors"
+          >
+            <FaTwitter size={13} />
+          </a>
+          <a
+            href="https://whatsapp.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-subtle hover:text-brand-charcoal hover:bg-black/[0.04] transition-colors"
+          >
+            <FaWhatsapp size={14} />
+          </a>
+        </div>
       </div>
     </div>
   );

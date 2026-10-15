@@ -19,33 +19,29 @@ import { HiSearch } from "react-icons/hi";
 const HelpCenterPage = () => {
   const categories = [
     {
-      title: "Getting Started",
-      icon: <HiQuestionMarkCircle size={28} />,
+      title: "Getting started",
+      icon: <HiQuestionMarkCircle size={22} />,
       links: ["Set up your account", "First-time shopping", "Member benefits"],
-      color: "bg-brand-orange-soft text-brand-orange-text",
     },
     {
-      title: "Shipping & Delivery",
-      icon: <HiTruck size={28} />,
+      title: "Shipping & delivery",
+      icon: <HiTruck size={22} />,
       links: [
         "Delivery timelines",
         "Free shipping policy",
         "International rates",
       ],
-      color: "bg-emerald-50 text-emerald-600",
       href: "/shipping",
     },
     {
-      title: "Payments & Pricing",
-      icon: <HiCreditCard size={28} />,
+      title: "Payments & pricing",
+      icon: <HiCreditCard size={22} />,
       links: ["Accepted methods", "Currency options", "Voucher codes"],
-      color: "bg-purple-50 text-purple-600",
     },
     {
-      title: "Returns & Refunds",
-      icon: <HiArrowPath size={28} />,
+      title: "Returns & refunds",
+      icon: <HiArrowPath size={22} />,
       links: ["Return policy", "Refund timelines", "Exchanges"],
-      color: "bg-rose-50 text-rose-600",
       href: "/refund",
     },
   ];
@@ -58,80 +54,75 @@ const HelpCenterPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-off-white flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-off-white flex flex-col font-sans text-brand-charcoal">
       <Header />
 
-      <main className="flex-1 w-full bg-white">
+      <main className="flex-1 w-full bg-off-white">
         {/* Help Center Hero */}
-        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-brand-charcoal overflow-hidden">
-          <Image
-            src="/brandImage/brand_banner.png"
-            alt="Support Banner"
-            fill sizes="100vw"
-            className="object-cover opacity-100"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-charcoal via-brand-charcoal/80 to-transparent" />
+        <section className="max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 pt-14 md:pt-24">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col items-center text-center gap-3"
+          >
+            <span className="text-[13px] font-semibold text-brand-orange-text">
+              Support concierge
+            </span>
+            <h1 className="text-[34px] md:text-[52px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+              How can we help you?
+            </h1>
 
-          <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              className="flex flex-col gap-8 items-center text-center md:items-start md:text-left"
-            >
-              <div className="flex flex-col gap-4">
-                <span className="text-brand-orange font-bold tracking-[0.4em] uppercase text-xs">
-                  Support Concierge
-                </span>
-                <h1 className="text-4xl md:text-7xl font-bold text-white tracking-tighter leading-none font-inter">
-                  How can we <br />
-                  <span className="text-white/60">help you?</span>
-                </h1>
-              </div>
+            {/* Search Bar Component */}
+            <div className="mt-6 w-full max-w-2xl relative group">
+              <HiSearch
+                className="absolute left-5 top-1/2 -translate-y-1/2 text-faint group-focus-within:text-brand-orange-text transition-colors"
+                size={20}
+              />
+              <input
+                type="text"
+                placeholder="Search for articles, tracking, or policies..."
+                className="w-full h-12 md:h-14 rounded-full bg-white border border-light-gray pl-13 pr-6 text-[16px] text-brand-charcoal placeholder:text-faint outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/15 transition-all"
+              />
+            </div>
+          </motion.div>
 
-              {/* Search Bar Component */}
-              <div className="w-full max-w-2xl relative group">
-                <HiSearch
-                  className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-brand-orange transition-colors"
-                  size={24}
-                />
-                <input
-                  type="text"
-                  placeholder="Search for articles, tracking, or policies..."
-                  className="w-full bg-white/95 backdrop-blur-md border border-white/20 py-6 pl-16 pr-8 rounded-2xl shadow-md outline-none focus:ring-4 focus:ring-brand-orange/20 transition-all text-gray-900 font-medium"
-                />
-              </div>
-            </motion.div>
+          <div className="relative mt-12 md:mt-16 w-full aspect-[16/9] md:aspect-[1440/644] rounded-tile md:rounded-hero overflow-hidden">
+            <Image
+              src="/brandImage/brand_banner.png"
+              alt="Support Banner"
+              fill
+              sizes="(max-width: 1440px) 100vw, 1312px"
+              className="object-cover object-right"
+              priority
+            />
           </div>
         </section>
 
         {/* Category Grid */}
-        <section className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-24 md:py-32">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <section className="max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-12 md:py-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
             {categories.map((cat, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-2 transition-all group lg:aspect-square flex flex-col justify-between"
+                transition={{ delay: i * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-white p-6 md:p-7 rounded-tile hover:shadow-lift transition-shadow duration-300 ease-apple group flex flex-col justify-between"
               >
                 <div>
-                  <div
-                    className={`w-14 h-14 ${cat.color} rounded-2xl flex items-center justify-center mb-6`}
-                  >
+                  <div className="w-11 h-11 bg-brand-orange-soft text-brand-orange-text rounded-stage flex items-center justify-center mb-5">
                     {cat.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-brand-charcoal mb-4">
+                  <h3 className="text-[19px] font-semibold text-brand-charcoal tracking-[-0.01em] mb-3">
                     {cat.title}
                   </h3>
                   <div className="flex flex-col gap-2">
                     {cat.links.map((link, j) => (
                       <span
                         key={j}
-                        className="text-sm text-gray-400 font-medium hover:text-brand-orange-text cursor-pointer transition-colors"
+                        className="text-[15px] text-subtle hover:text-brand-charcoal cursor-pointer transition-colors"
                       >
                         {link}
                       </span>
@@ -140,59 +131,58 @@ const HelpCenterPage = () => {
                 </div>
                 <Link
                   href={cat.href || "#"}
-                  className="mt-8 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-brand-orange-text opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="mt-6 inline-flex items-center gap-0.5 text-[14px] font-medium text-brand-orange-text hover:underline"
                 >
-                  View More <HiChevronRight size={16} />
+                  View more <HiChevronRight size={14} />
                 </Link>
               </motion.div>
             ))}
           </div>
 
           {/* Popular FAQs Section */}
-          <div className="mt-40 grid grid-cols-1 lg:grid-cols-2 gap-20">
-            <div className="flex flex-col gap-10">
-              <div className="flex flex-col gap-4">
-                <span className="text-brand-orange-text font-bold tracking-[0.2em] uppercase text-xs">
+          <div className="mt-16 md:mt-28 grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4 items-stretch">
+            <div className="bg-white rounded-tile md:rounded-hero p-6 md:p-10 flex flex-col gap-6">
+              <div className="flex flex-col gap-2">
+                <span className="text-[13px] font-semibold text-brand-orange-text">
                   Discovery
                 </span>
-                <h2 className="text-4xl font-bold text-brand-charcoal tracking-tight">
-                  Trending Questions.
+                <h2 className="text-[26px] md:text-[34px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
+                  Trending questions.
                 </h2>
               </div>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col border-t border-black/[0.06]">
                 {popularFaqs.map((faq, i) => (
                   <div
                     key={i}
-                    className="p-6 bg-gray-50 border border-transparent hover:border-brand-charcoal hover:bg-white rounded-2xl cursor-pointer transition-all flex items-center justify-between group"
+                    className="py-4 border-b border-black/[0.06] cursor-pointer flex items-center justify-between gap-4 group"
                   >
-                    <span className="text-gray-600 font-medium group-hover:text-brand-charcoal">
+                    <span className="text-[16px] text-brand-charcoal group-hover:text-brand-orange-text transition-colors">
                       {faq}
                     </span>
-                    <HiChevronRight className="text-gray-300 group-hover:text-brand-orange-text group-hover:translate-x-1 transition-all" />
+                    <HiChevronRight className="shrink-0 text-faint group-hover:text-brand-orange-text group-hover:translate-x-0.5 transition-all" />
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-brand-charcoal rounded-3xl p-10 md:p-16 flex flex-col justify-center gap-8 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-brand-orange rounded-full filter blur-[100px] opacity-10 translate-x-1/2 -translate-y-1/2" />
-              <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-brand-orange">
-                <HiShieldCheck size={32} />
+            <div className="bg-brand-charcoal rounded-tile md:rounded-hero p-8 md:p-12 flex flex-col justify-center gap-5">
+              <div className="w-11 h-11 bg-white/10 rounded-stage flex items-center justify-center text-brand-orange">
+                <HiShieldCheck size={22} />
               </div>
-              <h3 className="text-3xl font-bold text-white leading-tight">
-                Can't find the <br />
+              <h3 className="text-[28px] md:text-[34px] font-semibold text-white tracking-[-0.025em] leading-[1.1]">
+                Can&apos;t find the <br />
                 <span className="text-white/60">answer?</span>
               </h3>
-              <p className="text-light-gray/40 text-lg">
+              <p className="text-white/60 text-[17px] leading-relaxed max-w-md">
                 Our artisanal support curators are available from 9am to 6pm for
                 a personalized consultation.
               </p>
-              <div className="pt-4">
+              <div className="pt-2">
                 <Link
                   href="/contact"
-                  className="px-12 py-5 bg-brand-orange text-white rounded-2xl font-bold uppercase tracking-widest text-sm shadow-md shadow-brand-orange/20 hover:scale-105 transition-all inline-block"
+                  className="inline-flex items-center justify-center h-11 px-6 rounded-full bg-brand-orange hover:bg-brand-orange-hover text-white text-[15px] font-semibold transition-colors duration-200"
                 >
-                  Talk to a Human
+                  Talk to a human
                 </Link>
               </div>
             </div>

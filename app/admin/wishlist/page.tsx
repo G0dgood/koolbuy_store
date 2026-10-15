@@ -9,6 +9,7 @@ import { Pagination } from "../../components/Admin/Pagination";
 import { RowsPerPage } from "@/app/components/rows-per-page";
 import Checkbox from "@/app/components/Checkbox";
 import { ConfirmationModal } from "@/app/components/Admin/ConfirmationModal";
+import { Search } from "@/app/components/Form";
 
 interface WishlistEntry {
   id: number;
@@ -231,23 +232,17 @@ export default function AdminWishlistPage() {
             activeTab={activeTab}
             onChange={setActiveTab}
           />
-          <div className="relative w-full sm:w-80">
-            <input
-              type="text"
-              placeholder="Search product, customer, email, phone..."
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="w-full h-10 pl-9 pr-3 rounded-xl bg-gray-50 border border-gray-200 text-xs focus:outline-none focus:border-brand-orange focus:bg-white transition-all"
-            />
-            <Icon
-              name="search"
-              size="xs"
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
-            />
-          </div>
+          <Search
+            placeholder="Search product, customer, email, phone..."
+            value={searchQuery}
+            onChange={(val) => {
+              setSearchQuery(val);
+              setCurrentPage(1);
+            }}
+            maxWidth="100%"
+            className="w-full sm:w-80"
+            showClearButton
+          />
         </div>
 
         {/* Table */}

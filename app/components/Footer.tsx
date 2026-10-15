@@ -61,170 +61,90 @@ import { Newsletter } from "./Home/Newsletter";
 //   </div>
 // );
 
+const SOCIALS = ["facebook", "twitter", "linkedin", "instagram", "youtube"];
+
+/* Footer in an Apple-store style: light grey, small 12px text, sentence-case
+   column titles, hairline separators and a quiet bottom row. */
 const Footer = () => {
   return (
     <>
       <Newsletter />
-      <footer className="w-full bg-white border-t border-gray-200 pt-16">
-        <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 mb-16">
-          {/* Brand Column */}
-          <div className="lg:col-span-3 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center mb-4">
-                <div className="h-10 overflow-hidden flex items-center">
-                  <img
-                    src="/images/koolboks/koolbuy_logo.webp"
-                    alt="Koolbuy Store"
-                    className="h-full w-auto object-contain"
-                  />
-                </div>
-              </div>
-              <p className="text-gray-500 text-sm leading-relaxed max-w-70">
-                Nigeria&apos;s leading solar refrigeration and clean-tech
-                marketplace. 24/7 power, verified warranties, and flexible
-                payment plans.
+      <footer className="w-full bg-off-white text-[12px] text-subtle">
+        <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-16 pt-10 pb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-8 border-b border-black/[0.08]">
+            {/* Brand */}
+            <div className="lg:col-span-4 flex flex-col gap-4">
+              <img src="/images/koolboks/koolbuy_logo.webp" alt="KoolBuy" className="h-9 w-auto object-contain self-start" />
+              <p className="leading-relaxed max-w-80">
+                Nigeria&apos;s solar refrigeration and clean-tech marketplace: power around the clock, verified
+                warranties and flexible payment plans.
               </p>
-            </div>
-            <div className="flex items-center gap-3 mt-6">
-              <div className="w-8 h-8 rounded-full bg-faint flex items-center justify-center text-white cursor-pointer hover:bg-brand-orange transition-colors">
-                <Icon name="social/facebook" size="sm" />
-              </div>
-              <div className="w-8 h-8 rounded-full bg-faint flex items-center justify-center text-white cursor-pointer hover:bg-brand-orange transition-colors">
-                <Icon name="social/twitter" size="sm" />
-              </div>
-              <div className="w-8 h-8 rounded-full bg-faint flex items-center justify-center text-white cursor-pointer hover:bg-brand-orange transition-colors">
-                <Icon name="social/linkedin" size="sm" />
-              </div>
-              <div className="w-8 h-8 rounded-full bg-faint flex items-center justify-center text-white cursor-pointer hover:bg-brand-orange transition-colors">
-                <Icon name="social/instagram" size="sm" />
-              </div>
-              <div className="w-8 h-8 rounded-full bg-faint flex items-center justify-center text-white cursor-pointer hover:bg-brand-orange transition-colors">
-                <Icon name="social/youtube" size="sm" />
+              <div className="flex items-center gap-2">
+                {SOCIALS.map((name) => (
+                  <span
+                    key={name}
+                    aria-label={name}
+                    className="w-8 h-8 rounded-full bg-black/[0.05] flex items-center justify-center text-gray-600 hover:bg-brand-charcoal hover:text-white transition-colors cursor-pointer"
+                  >
+                    <Icon name={`social/${name}`} size="sm" />
+                  </span>
+                ))}
               </div>
             </div>
-          </div>
 
-          {/* Contact Us Column */}
-          <div className="lg:col-span-3 flex flex-col gap-3">
-            <h4 className="font-bold text-gray-900 text-sm tracking-wider uppercase">
-              CONTACT US
-            </h4>
-            <div className="flex flex-col gap-3 text-sm text-gray-600 mt-1">
-              <div className="flex items-start gap-2.5">
-                <FiMapPin className="text-brand-orange-text text-base shrink-0 mt-0.5" />
-                <span className="leading-snug">
-                  28A Adeola Raji Avenue, Gbagada, Lagos, Nigeria
-                </span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <FiPhone className="text-brand-orange-text text-base shrink-0" />
-                <a
-                  href="tel:+2349128413025"
-                  className="hover:text-brand-orange-text transition-colors"
-                >
-                  +2349128413025
-                </a>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <FiMail className="text-brand-orange-text text-base shrink-0" />
-                <a
-                  href="mailto:info@koolbuystore.com"
-                  className="hover:text-brand-orange-text transition-colors"
-                >
-                  info@koolbuystore.com
-                </a>
-              </div>
+            {/* Contact */}
+            <div className="lg:col-span-3 flex flex-col gap-2.5">
+              <h4 className="text-[12px] font-semibold text-brand-charcoal">Contact us</h4>
+              <p className="flex items-start gap-2 leading-snug">
+                <FiMapPin className="shrink-0 mt-0.5" />
+                28A Adeola Raji Avenue, Gbagada, Lagos, Nigeria
+              </p>
+              <a href="tel:+2349128413025" className="flex items-center gap-2 hover:text-brand-charcoal hover:underline">
+                <FiPhone className="shrink-0" />
+                +234 912 841 3025
+              </a>
+              <a href="mailto:info@koolbuystore.com" className="flex items-center gap-2 hover:text-brand-charcoal hover:underline">
+                <FiMail className="shrink-0" />
+                info@koolbuystore.com
+              </a>
             </div>
-          </div>
 
-          {/* Quick Links Column */}
-          <div className="lg:col-span-2 flex flex-col gap-3">
-            <h4 className="font-bold text-gray-900 text-sm tracking-wider uppercase">
-              QUICK LINKS
-            </h4>
-            <div className="flex flex-col gap-2.5 text-sm text-gray-600 mt-1">
-              <Link
-                href="/register"
-                className="hover:text-brand-orange-text transition-colors"
-              >
-                Vendor Registration
-              </Link>
-              <Link
-                href="/help"
-                className="hover:text-brand-orange-text transition-colors"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                href="/help/payment"
-                className="hover:text-brand-orange-text transition-colors"
-              >
-                Term & Conditons BNPL
-              </Link>
+            {/* Links */}
+            <div className="lg:col-span-2 flex flex-col gap-2.5">
+              <h4 className="text-[12px] font-semibold text-brand-charcoal">Quick links</h4>
+              <Link href="/register" className="hover:text-brand-charcoal hover:underline">Vendor registration</Link>
+              <Link href="/help" className="hover:text-brand-charcoal hover:underline">Privacy policy</Link>
+              <Link href="/help/payment" className="hover:text-brand-charcoal hover:underline">BNPL terms &amp; conditions</Link>
             </div>
-          </div>
 
-          {/* Payment Methods Column */}
-          <div className="lg:col-span-2 flex flex-col gap-3">
-            <h4 className="font-bold text-gray-900 text-sm tracking-wider uppercase">
-              PAYMENT METHODS
-            </h4>
-            <div className="flex flex-col gap-2 text-xs font-semibold text-gray-700 mt-1 uppercase tracking-wide">
-              <span>VISA DISCOVER</span>
-              <span>AMERICAN EXPRESS</span>
-              <span>MASTER CARD</span>
-            </div>
-            <div className="flex items-center gap-2 mt-2 flex-wrap">
-              <Image
-                src="/payment/Payment=payment, Pay-type=visa.png"
-                alt="Visa"
-                width={31}
-                height={20}
-                className="object-contain"
-              />
-              <Image
-                src="/payment/Payment=payment, Pay-type=mastercard.png"
-                alt="Mastercard"
-                width={31}
-                height={20}
-                className="object-contain"
-              />
-              <Image
-                src="/payment/Payment=payment, Pay-type=amex.png"
-                alt="Amex"
-                width={31}
-                height={20}
-                className="object-contain"
-              />
-            </div>
-          </div>
-
-          {/* Find Our App On Mobile Column */}
-          <div className="lg:col-span-2 flex flex-col gap-3">
-            <h4 className="font-bold text-gray-900 text-sm tracking-wider uppercase">
-              FIND OUR APP ON MOBILE
-            </h4>
-            {/* <div className="flex items-center gap-3 mt-1">
-              <QrCodeBox label="iOS App" />
-              <QrCodeBox label="Android" />
-            </div> */}
-            <div className="mt-2">
+            {/* Payments + app */}
+            <div className="lg:col-span-3 flex flex-col gap-2.5">
+              <h4 className="text-[12px] font-semibold text-brand-charcoal">We accept</h4>
+              <div className="flex items-center gap-2">
+                {[
+                  ["visa", "Visa"],
+                  ["mastercard", "Mastercard"],
+                  ["amex", "American Express"],
+                ].map(([key, label]) => (
+                  <Image
+                    key={key}
+                    src={`/payment/${key}.png`}
+                    alt={label}
+                    width={31}
+                    height={20}
+                    className="object-contain"
+                  />
+                ))}
+              </div>
+              <h4 className="mt-3 text-[12px] font-semibold text-brand-charcoal">Get the app</h4>
               <StoreButtons orientation="vertical" />
             </div>
           </div>
-        </div>
 
-        {/* Footer Bottom */}
-        <div className="w-full bg-gray-100 py-6 border-t border-gray-200">
-          <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-16 flex items-center justify-between text-sm text-gray-500">
-            <p>
-              © {new Date().getFullYear()} Koolbuy Store. All rights reserved.
-            </p>
-            <div className="flex items-center gap-2 cursor-pointer">
-              <div className="w-5 h-4 bg-gray-200 rounded-sm"></div>
-              <span>English</span>
-              <Icon name="expand_less" size="xs" />
-            </div>
+          {/* Bottom row */}
+          <div className="pt-5 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+            <p>Copyright © {new Date().getFullYear()} KoolBuy Store. All rights reserved.</p>
+            <p>Nigeria · English</p>
           </div>
         </div>
       </footer>

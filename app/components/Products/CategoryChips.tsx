@@ -16,7 +16,7 @@ export const CategoryChips: React.FC<CategoryChipsProps> = ({
   className = "",
 }) => {
   return (
-    <div className={`w-full overflow-x-auto scrollbar-none flex items-center gap-2 px-4 py-2 bg-white ${className}`}>
+    <div className={`w-full overflow-x-auto scrollbar-none flex items-center gap-2 px-4 py-3 bg-white ${className}`}>
       {categories.map((cat) => {
         const isSelected = selectedCategory === cat;
         return (
@@ -24,10 +24,10 @@ export const CategoryChips: React.FC<CategoryChipsProps> = ({
             key={cat}
             onClick={() => onSelect(cat)}
             className={`
-              px-4 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors
+              px-4 py-2 rounded-full text-[13px] font-medium whitespace-nowrap transition-colors
               ${isSelected 
-                ? "bg-[#E5F1FF] text-[#0D6EFD]" 
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"}
+                ? "bg-brand-charcoal text-white"
+                : "bg-black/[0.04] text-gray-700 hover:bg-black/[0.08]"}
             `}
           >
             {cat}

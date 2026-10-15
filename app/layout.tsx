@@ -11,6 +11,7 @@ import { Toaster } from "sonner";
 import { SocketProvider } from "@/app/context/SocketContext";
 import OfflineBanner from "@/app/components/ui/OfflineBanner";
 import { ADMIN_THEME_BOOT_SCRIPT } from "@/app/components/Admin/adminTheme";
+import { StoreProvider } from "@/app/components/providers/StoreProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -41,22 +42,24 @@ export default function RootLayout({
       </head>
       <body className="min-h-full font-inter">
         <Toaster richColors closeButton position="bottom-right" />
-        <SocketProvider>
-          <OfflineBanner />
-          <AuthModalProvider>
-            <CartProvider>
-              <WishlistProvider>
-                <MobileMenuProvider>
-                  <MobileMenuSidebar />
-                  <PageWrapper>
-                    {children}
-                  </PageWrapper>
-                </MobileMenuProvider>
-              </WishlistProvider>
-            </CartProvider>
-            <AuthModal />
-          </AuthModalProvider>
-        </SocketProvider>
+        <StoreProvider>
+          <SocketProvider>
+            <OfflineBanner />
+            <AuthModalProvider>
+              <CartProvider>
+                <WishlistProvider>
+                  <MobileMenuProvider>
+                    <MobileMenuSidebar />
+                    <PageWrapper>
+                      {children}
+                    </PageWrapper>
+                  </MobileMenuProvider>
+                </WishlistProvider>
+              </CartProvider>
+              <AuthModal />
+            </AuthModalProvider>
+          </SocketProvider>
+        </StoreProvider>
       </body>
     </html>
   );

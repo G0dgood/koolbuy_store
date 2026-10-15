@@ -25,14 +25,16 @@ const Pagination: React.FC<PaginationProps> = ({
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <div className={`flex items-center gap-4 ${className}`}>
-      <div className="flex border border-gray-200 rounded-md overflow-hidden bg-white">
+    <nav aria-label="Pagination" className={`flex items-center gap-4 ${className}`}>
+      {/* Storefront style (DESIGN.md §8): round page buttons, current page orange. */}
+      <div className="flex items-center gap-1">
         <button
           onClick={() => onPageChange(Math.max(1, currentPage - 1))}
           disabled={currentPage === 1}
-          className="px-3 py-2 flex items-center justify-center border-r border-gray-200 hover:bg-gray-50 disabled:opacity-30 disabled:pointer-events-none"
+          aria-label="Previous page"
+          className="w-9 h-9 rounded-full flex items-center justify-center text-gray-600 hover:bg-black/[0.05] transition-colors disabled:opacity-30 disabled:pointer-events-none"
         >
-          <Icon name="chevron_left" size="sm" className="text-brand-orange-text" />
+          <Icon name="chevron_left" size="sm" />
         </button>
 
         {pages.map((page) => {
@@ -41,10 +43,11 @@ const Pagination: React.FC<PaginationProps> = ({
             <button
               key={page}
               onClick={() => onPageChange(page)}
-              className={`px-4 py-2 text-sm font-medium transition-colors border-r border-gray-200 last:border-r-0 ${
+              aria-current={isActive ? "page" : undefined}
+              className={`min-w-9 h-9 px-2 rounded-full text-[14px] font-medium tabular-nums transition-colors ${
                 isActive
-                  ? "bg-brand-orange-soft text-brand-orange-text"
-                  : "text-gray-600 hover:bg-gray-50"
+                  ? "bg-brand-orange text-white"
+                  : "text-gray-600 hover:bg-black/[0.05] hover:text-brand-charcoal"
               }`}
             >
               {page}
@@ -55,9 +58,10 @@ const Pagination: React.FC<PaginationProps> = ({
         <button
           onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
           disabled={currentPage === totalPages}
-          className="px-3 py-2 flex items-center justify-center hover:bg-gray-50 disabled:opacity-30 disabled:pointer-events-none"
+          aria-label="Next page"
+          className="w-9 h-9 rounded-full flex items-center justify-center text-gray-600 hover:bg-black/[0.05] transition-colors disabled:opacity-30 disabled:pointer-events-none"
         >
-          <Icon name="chevron_right" size="sm" className="text-brand-orange-text" />
+          <Icon name="chevron_right" size="sm" />
         </button>
       </div>
 
@@ -66,7 +70,7 @@ const Pagination: React.FC<PaginationProps> = ({
           <select
             value={pageSize}
             onChange={(e) => onPageSizeChange?.(Number(e.target.value))}
-            className="appearance-none bg-white border border-gray-200 rounded-md pl-4 pr-10 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-orange/20"
+            className="appearance-none h-9 bg-black/[0.04] border border-transparent rounded-full pl-4 pr-10 text-[14px] font-medium text-gray-700 hover:bg-black/[0.06] focus:outline-none focus:bg-white focus:border-light-gray focus:ring-4 focus:ring-brand-orange/15"
           >
             {pageSizeOptions.map((option) => (
               <option key={option} value={option}>
@@ -79,7 +83,7 @@ const Pagination: React.FC<PaginationProps> = ({
           </div>
         </div>
       )}
-    </div>
+    </nav>
   );
 };
 

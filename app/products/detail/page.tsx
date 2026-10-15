@@ -51,50 +51,52 @@ export default function ProductDetailPage() {
     <div className="flex flex-col min-h-screen bg-off-white">
       <Header />
 
-      <div className="flex-1 max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-4 md:py-6 flex flex-col gap-6 md:gap-8 w-full">
+      <div className="flex-1 max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-4 md:py-6 flex flex-col gap-10 md:gap-16 w-full">
+        <div className="flex flex-col gap-3 md:gap-4">
         {/* Breadcrumbs */}
-        <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-400 overflow-x-auto whitespace-nowrap scrollbar-none pb-1">
-          <Link href="/" className="hover:text-brand-orange-text transition-colors">
+        <div className="flex items-center gap-1.5 text-[13px] text-faint overflow-x-auto whitespace-nowrap scrollbar-none pb-1">
+          <Link href="/" className="hover:text-brand-charcoal transition-colors">
             Home
           </Link>
           <Icon name="chevron_right" size="xs" />
           <Link
             href="/products"
-            className="hover:text-brand-orange-text transition-colors"
+            className="hover:text-brand-charcoal transition-colors"
           >
             Products
           </Link>
           <Icon name="chevron_right" size="xs" />
           <Link
             href="/products?category=Single+Door+Chest+Freezers"
-            className="hover:text-brand-orange-text transition-colors"
+            className="hover:text-brand-charcoal transition-colors"
           >
             Single Door Chest Freezers
           </Link>
           <Icon name="chevron_right" size="xs" />
-          <span className="text-gray-600 font-medium truncate max-w-60 sm:max-w-md">
+          <span className="text-brand-charcoal truncate max-w-60 sm:max-w-md">
             219L Thermocool Inverter Solar Freezer
           </span>
         </div>
 
-        {/* Top Product Section (2-column layout matching reference) */}
-        <div className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 md:p-8 flex flex-col lg:flex-row gap-8 lg:gap-12 shadow-xs">
+        {/* Top product section: gallery and buy box */}
+        <div className="bg-white rounded-[22px] md:rounded-[32px] p-4 sm:p-6 md:p-10 flex flex-col lg:flex-row gap-8 lg:gap-14">
           <ProductGallery />
           <ProductDetailsInfo />
         </div>
+        </div>
 
-        {/* Second Card: 5 Medium-Sized Feature Views */}
+        {/* Feature views */}
         <ProductFeatureGallery />
 
-        {/* Mid Section: Tabs + You May Like */}
-        <div className="flex flex-col lg:flex-row gap-8 items-start">
+        {/* Tabs + You may like */}
+        <div className="flex flex-col lg:flex-row gap-4 md:gap-6 items-start">
           <ProductTabs />
           <YouMayLike />
         </div>
 
         <RelatedProducts products={relatedProducts} />
 
-        {/* Bottom Banner */}
+        {/* Bottom banner */}
         <DiscountBanner />
       </div>
 

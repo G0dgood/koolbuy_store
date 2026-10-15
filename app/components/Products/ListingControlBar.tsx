@@ -65,78 +65,78 @@ const ListingControlBar: React.FC<ListingControlBarProps> = ({
   return (
     <div className="w-full flex flex-col gap-4">
       {/* Top Bar Desktop */}
-      <div className="hidden md:flex w-full bg-white border border-gray-200 rounded-lg h-16 items-center justify-between px-5">
+      <div className="hidden md:flex w-full bg-white rounded-[22px] h-16 items-center justify-between pl-6 pr-3">
         <div className="flex items-center gap-4">
-          <span className="text-sm text-gray-700">
-            <span className="font-bold">{count.toLocaleString()}</span> products found
-            {filters.category && <span> in <span className="font-bold">{filters.category}</span></span>}
+          <span className="text-[14px] text-subtle">
+            <span className="font-semibold text-brand-charcoal tabular-nums">{count.toLocaleString()}</span> products found
+            {filters.category && <span> in <span className="font-semibold text-brand-charcoal">{filters.category}</span></span>}
           </span>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           {/* Sort Dropdown */}
-          <div className="flex items-center border border-gray-200 rounded px-3 py-1.5 bg-white cursor-pointer hover:bg-gray-50 transition-colors">
-            <span className="text-sm text-gray-700 font-medium">Featured</span>
-            <Icon name="expand_more" size="xs" className="text-gray-400 ml-6" />
+          <div className="flex items-center h-10 rounded-full pl-4 pr-3 bg-black/[0.04] cursor-pointer hover:bg-black/[0.08] transition-colors">
+            <span className="text-[13px] text-brand-charcoal font-medium">Featured</span>
+            <Icon name="expand_more" size="xs" className="text-faint ml-6" />
           </div>
 
           {/* View Switcher */}
-          <div className="flex items-center border border-gray-200 rounded overflow-hidden">
+          <div className="flex items-center gap-0.5 p-1 rounded-full bg-black/[0.04]">
             <button
               onClick={() => onViewModeChange("grid")}
-              className={`w-9 h-9 flex items-center justify-center transition-colors cursor-pointer ${viewMode === "grid" ? "bg-gray-100" : "bg-white hover:bg-gray-50"}`}
+              className={`w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer ${viewMode === "grid" ? "bg-white text-brand-orange-text shadow-[0_1px_3px_rgba(0,0,0,0.1)]" : "text-faint hover:text-brand-charcoal"}`}
             >
-              <Icon name="grid_view" size="sm" className={viewMode === "grid" ? "text-brand-orange-text" : "text-gray-900"} />
+              <Icon name="grid_view" size="sm" />
             </button>
             <button
               onClick={() => onViewModeChange("list")}
-              className={`w-9 h-9 flex items-center justify-center border-l border-gray-200 transition-colors cursor-pointer ${viewMode === "list" ? "bg-gray-100" : "bg-white hover:bg-gray-50"}`}
+              className={`w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer ${viewMode === "list" ? "bg-white text-brand-orange-text shadow-[0_1px_3px_rgba(0,0,0,0.1)]" : "text-faint hover:text-brand-charcoal"}`}
             >
-              <Icon name="list" size="sm" className={viewMode === "list" ? "text-brand-orange-text" : "text-gray-900"} />
+              <Icon name="list" size="sm" />
             </button>
           </div>
         </div>
       </div>
 
       {/* Top Bar Mobile (as per design image) */}
-      <div className="flex md:hidden items-center justify-between gap-2 px-1">
+      <div className="flex md:hidden items-center justify-between gap-2">
         <div className="flex items-center gap-2 flex-1">
           {/* Sort Button */}
-          <button className="flex-1 flex items-center justify-between px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium">
+          <button className="flex-1 flex items-center justify-between h-10 px-4 bg-white rounded-full text-[13px] font-medium text-brand-charcoal">
             <span>Sort: Newest</span>
-            <Icon name="sort" size="xs" className="text-gray-400 ml-2" />
+            <Icon name="sort" size="xs" className="text-faint ml-2" />
           </button>
 
           {/* Filter Button */}
           <button
             onClick={onFilterClick}
-            className="flex-1 flex items-center justify-between px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium"
+            className="flex-1 flex items-center justify-between h-10 px-4 bg-white rounded-full text-[13px] font-medium text-brand-charcoal"
           >
             <div className="flex items-center gap-2">
               <span>Filter</span>
               {activeFilterTags.length > 0 && (
-                <span className="bg-brand-charcoal text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
+                <span className="bg-brand-charcoal text-white text-[11px] min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center tabular-nums">
                   {activeFilterTags.length}
                 </span>
               )}
             </div>
-            <Icon name="filter_alt" size="xs" className="text-gray-400" />
+            <Icon name="filter_alt" size="xs" className="text-faint" />
           </button>
         </div>
 
         {/* Mobile View Toggles */}
-        <div className="flex items-center bg-white border border-gray-200 rounded-lg overflow-hidden">
+        <div className="flex items-center gap-0.5 p-1 bg-white rounded-full">
           <button
             onClick={() => onViewModeChange("grid")}
-            className={`w-10 h-10 flex items-center justify-center transition-colors ${viewMode === "grid" ? "bg-gray-100" : "bg-white"}`}
+            className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${viewMode === "grid" ? "bg-brand-charcoal text-white" : "text-faint"}`}
           >
-            <Icon name="grid_view" size="sm" className={viewMode === "grid" ? "text-gray-900" : "text-gray-400"} />
+            <Icon name="grid_view" size="sm" />
           </button>
           <button
             onClick={() => onViewModeChange("list")}
-            className={`w-10 h-10 flex items-center justify-center border-l border-gray-200 transition-colors ${viewMode === "list" ? "bg-gray-100" : "bg-white"}`}
+            className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${viewMode === "list" ? "bg-brand-charcoal text-white" : "text-faint"}`}
           >
-            <Icon name="list" size="sm" className={viewMode === "list" ? "text-gray-900" : "text-gray-400"} />
+            <Icon name="list" size="sm" />
           </button>
         </div>
       </div>
@@ -148,15 +148,15 @@ const ListingControlBar: React.FC<ListingControlBarProps> = ({
             <div
               key={tag.id}
               onClick={() => handleRemoveTag(tag)}
-              className="flex items-center gap-2 px-3 py-1.5 border border-brand-charcoal rounded h-8 bg-white cursor-pointer hover:bg-brand-orange-soft transition-colors group"
+              className="flex items-center gap-1.5 pl-3.5 pr-2.5 h-8 rounded-full bg-white cursor-pointer hover:bg-black/[0.04] transition-colors group"
             >
-              <span className="text-sm text-gray-700">{tag.label}</span>
-              <Icon name="clear" size="xs" className="text-gray-400 group-hover:text-brand-orange-text transition-colors" />
+              <span className="text-[13px] text-brand-charcoal">{tag.label}</span>
+              <Icon name="clear" size="xs" className="text-faint group-hover:text-brand-charcoal transition-colors" />
             </div>
           ))}
           <button
             onClick={handleClearAll}
-            className="text-brand-orange-text text-sm font-medium ml-2 hover:underline cursor-pointer"
+            className="text-brand-orange-text text-[13px] font-medium ml-2 hover:underline cursor-pointer"
           >
             Clear all filters
           </button>

@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { Icon } from "../Icon";
 import { getAdvertConfig, BackgroundAsset } from "../../utils/advertState";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
@@ -79,21 +78,21 @@ export const LoginBackground = () => {
   return (
     <>
       {/* Immersive Background Advert with Cross-Fade */}
-      <div className="fixed inset-0 z-0">
+      <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={images[currentIndex]?.url}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.2 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-0"
           >
             <Image
               src={images[currentIndex]?.url || "/images/login-hero.png"}
               alt="Premium Workspace"
-              fill sizes="100vw"
-              className="object-cover transition-all duration-1000"
+              fill sizes="(max-width: 1024px) 100vw, 60vw"
+              className="object-cover"
               style={{ 
                 objectPosition: `${images[currentIndex]?.positionX || 50}% ${images[currentIndex]?.positionY || 50}%` 
               }}
@@ -102,53 +101,47 @@ export const LoginBackground = () => {
           </motion.div>
         </AnimatePresence>
         
-        {/* Ambient Overlay */}
-        <div className="absolute inset-0 bg-black/20 backdrop-brightness-[0.9]" />
+        {/* Ambient Overlay: keeps the white advert copy legible */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-black/5" />
       </div>
 
       {/* Navigation Arrows */}
       {images.length > 1 && (
-        <div className="fixed inset-x-0 top-1/2 -translate-y-1/2 z-20 flex justify-between px-6 lg:px-12 pointer-events-none">
-           <motion.button
-             whileHover={{ scale: 1.1, x: 5 }}
-             whileTap={{ scale: 0.9 }}
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-20 flex justify-between px-4 lg:px-6 pointer-events-none">
+           <button
              onClick={handlePrev}
-             className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white pointer-events-auto hover:bg-white/20 transition-all opacity-40 hover:opacity-100"
+             aria-label="Previous slide"
+             className="w-10 h-10 rounded-full material-frosted shadow-float flex items-center justify-center text-brand-charcoal pointer-events-auto cursor-pointer opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity duration-300 ease-apple"
            >
-             <HiChevronLeft size={24} />
-           </motion.button>
+             <HiChevronLeft size={20} />
+           </button>
            
-           <motion.button
-             whileHover={{ scale: 1.1, x: -5 }}
-             whileTap={{ scale: 0.9 }}
+           <button
              onClick={handleNext}
-             className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white pointer-events-auto hover:bg-white/20 transition-all opacity-40 hover:opacity-100"
+             aria-label="Next slide"
+             className="w-10 h-10 rounded-full material-frosted shadow-float flex items-center justify-center text-brand-charcoal pointer-events-auto cursor-pointer opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity duration-300 ease-apple"
            >
-             <HiChevronRight size={24} />
-           </motion.button>
+             <HiChevronRight size={20} />
+           </button>
         </div>
       )}
 
       {/* Bottom Indicators (Dashes) */}
       {images.length > 1 && (
-        <div className="fixed bottom-10 inset-x-0 z-20 flex justify-center gap-2 pointer-events-none">
+        <div className="absolute bottom-4 lg:bottom-6 inset-x-0 z-20 flex justify-center gap-1.5 pointer-events-none">
            {images.map((_, i) => (
              <button
                key={i}
                onMouseEnter={() => setCurrentIndex(i)}
                onClick={() => setCurrentIndex(i)}
-               className={`h-1.5 rounded-full transition-all pointer-events-auto
-                 ${currentIndex === i ? "w-8 bg-brand-orange-soft " : "w-3 bg-white/30 hover:bg-white/60"}
+               aria-label={`Slide ${i + 1}`}
+               className={`h-1.5 rounded-full transition-all duration-300 ease-apple pointer-events-auto cursor-pointer
+                 ${currentIndex === i ? "w-6 bg-brand-orange" : "w-1.5 bg-white/50 hover:bg-white/80"}
                `}
              />
            ))}
         </div>
       )}
-
-      {/* Decorative Background Icon */}
-      <div className="fixed bottom-24 right-24 z-0 hidden lg:block opacity-[0.05] pointer-events-none">
-        <Icon name="verified" folder="icon" size="lg" className="text-white scale-[15]" />
-      </div>
     </>
   );
 };

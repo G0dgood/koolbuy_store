@@ -107,6 +107,8 @@ const onSaleProducts = [
 ];
 
 const Home = () => {
+  const [activeCategory, setActiveCategory] = React.useState("all");
+
   return (
     <div className="min-h-screen bg-off-white flex flex-col font-sans text-black">
       <Header />
@@ -114,22 +116,22 @@ const Home = () => {
       {/* Full-width Hero Carousel */}
       <HeroSection />
 
-      <main className="flex-1 w-full max-w-360 mx-auto px-6 md:px-10 lg:px-16 py-8 md:py-12 flex flex-col gap-8 md:gap-24">
+      <main className="flex-1 w-full max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 pt-8 md:pt-14 pb-16 md:pb-24 flex flex-col gap-16 md:gap-28">
         {/* Introducing Our Products & Category Tabs */}
-        <div className="flex flex-col gap-8">
-          <IntroducingProducts />
-          <NewProductsSection />
+        <div className="flex flex-col gap-12 md:gap-16">
+          <IntroducingProducts activeTab={activeCategory} onTabChange={setActiveCategory} />
+          <NewProductsSection category={activeCategory} />
         </div>
 
         {/* Promotional Banner */}
-        <div className="w-full relative rounded-lg overflow-hidden border border-[#1C1C1C1A] shadow-xs group bg-white">
+        <div className="w-full relative rounded-md md:rounded-lg overflow-hidden group bg-off-white">
           <Link href="/products" className="block w-full">
             <div className="relative w-full aspect-[3.3/1] min-h-35 sm:min-h-45 md:min-h-55">
               <Image
                 src="/images/koolboks/banner-2.jpg"
                 alt="Koolbuy - Get a freezer for as low as ₦20,000 per month"
                 fill sizes="100vw"
-                className="object-cover group-hover:scale-[1.01] transition-transform duration-500"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.015]"
               />
             </div>
           </Link>

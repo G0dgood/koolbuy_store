@@ -26,15 +26,15 @@ const ServiceBadges = () => {
   ];
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-10">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8">
       {badges.map((badge, idx) => (
-        <div key={idx} className="flex items-start gap-4 max-w-[250px]">
-           <div className={`w-12 h-12 ${badge.color} rounded-full flex-shrink-0 flex items-center justify-center text-gray-400`}>
-              <Icon name={badge.icon} size="md" />
+        <div key={idx} className="flex items-center gap-3">
+           <div className={`w-10 h-10 bg-white rounded-full flex-shrink-0 flex items-center justify-center text-subtle`}>
+              <Icon name={badge.icon} size="sm" />
            </div>
            <div className="flex flex-col">
-              <span className="text-gray-900 font-medium text-sm">{badge.title}</span>
-              <p className="text-gray-400 text-xs leading-relaxed">{badge.desc}</p>
+              <span className="text-[13px] font-semibold text-brand-charcoal">{badge.title}</span>
+              <p className="text-[13px] text-subtle leading-snug">{badge.desc}</p>
            </div>
         </div>
       ))}

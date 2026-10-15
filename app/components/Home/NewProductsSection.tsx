@@ -1,144 +1,52 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { FiChevronRight } from "react-icons/fi";
-import { motion, Variants } from "framer-motion";
+import { StoreProductGrid, StoreSectionHeader, type StoreProduct } from "./StoreUi";
+import { categories } from "./IntroducingProducts";
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15,
-    },
-  },
-};
-
-const newProductsList = [
-  {
-    id: "np1",
-    name: "Kool - Scanfrost 600L Inverter...",
-    vendor: "Koolbuy - SOLA BEST ELECTRONICS",
-    price: "₦1,406,000.00",
-    image: "/images/koolboks/items/5.webp",
-  },
-  {
-    id: "np2",
-    name: "Kool Scanfrost 60ah Pedestal...",
-    vendor: "Koolbuy - DESTINY ELECTRONICS",
-    price: "₦1,287,600.00",
-    image: "/images/koolboks/items/1.webp",
-  },
-  {
-    id: "np3",
-    name: "Kool Bruhm 60ah Pedestal ...",
-    vendor: "Koolbuy - MKK Electronics",
-    price: "₦1,287,600.00",
-    image: "/images/koolboks/items/4.webp",
-  },
-  {
-    id: "np4",
-    name: "200L AC Inverter Freezers (...",
-    vendor: "Koolbuy - Cash / Carry V.I",
-    price: "₦2,420,000.00",
-    image: "/images/koolboks/items/3.webp",
-  },
-  {
-    id: "np5",
-    name: "Koolboks 600L AC Inverter ...",
-    vendor: "Koolbuy - Wugobest",
-    price: "₦1,468,000.00",
-    image: "/images/koolboks/items/6.webp",
-  },
-  {
-    id: "np6",
-    name: "Koolboks 538L Refurbished",
-    vendor: "Koolbuy - MATT C VENTURES",
-    price: "₦1,538,000.00",
-    image: "/images/koolboks/items/2.webp",
-  },
+// Sample catalogue until the storefront is wired to real product data.
+// `category` matches the chip ids in IntroducingProducts.
+const newProductsList: (StoreProduct & { category: string })[] = [
+  { id: "np1", category: "single-door", name: "Kool - Scanfrost 600L Inverter...", vendor: "Koolbuy - SOLA BEST ELECTRONICS", price: "₦1,406,000.00", image: "/images/koolboks/items/5.webp" },
+  { id: "np2", category: "pedestal", name: "Kool Scanfrost 60ah Pedestal...", vendor: "Koolbuy - DESTINY ELECTRONICS", price: "₦1,287,600.00", image: "/images/koolboks/items/1.webp" },
+  { id: "np3", category: "pedestal", name: "Kool Bruhm 60ah Pedestal ...", vendor: "Koolbuy - MKK Electronics", price: "₦1,287,600.00", image: "/images/koolboks/items/4.webp" },
+  { id: "np4", category: "single-door", name: "200L AC Inverter Freezers (...", vendor: "Koolbuy - Cash / Carry V.I", price: "₦2,420,000.00", image: "/images/koolboks/items/3.webp" },
+  { id: "np5", category: "double-door", name: "Koolboks 600L AC Inverter ...", vendor: "Koolbuy - Wugobest", price: "₦1,468,000.00", image: "/images/koolboks/items/6.webp" },
+  { id: "np6", category: "double-door", name: "Koolboks 538L Refurbished", vendor: "Koolbuy - MATT C VENTURES", price: "₦1,538,000.00", image: "/images/koolboks/items/2.webp" },
+  { id: "np7", category: "single-door", name: "Koolboks 208L DC Freezer", vendor: "Koolbuy - SOLA BEST ELECTRONICS", price: "₦1,950,000.00", image: "/images/koolboks/items/3.webp" },
+  { id: "np8", category: "pedestal", name: "Koolboks 100Ah AC Battery", vendor: "Koolbuy - DESTINY ELECTRONICS", price: "₦1,662,370.00", image: "/images/koolboks/items/1.webp" },
+  { id: "np9", category: "chiller", name: "Koolboks 300L Display Chiller", vendor: "Koolbuy - Wugobest", price: "₦1,120,000.00", image: "/images/koolboks/items/6.webp" },
+  { id: "np10", category: "chiller", name: "Koolboks 450L Glass Door Chiller", vendor: "Koolbuy - MKK Electronics", price: "₦1,385,000.00", image: "/images/koolboks/items/2.webp" },
+  { id: "np11", category: "upright", name: "Koolboks 250L Upright Freezer", vendor: "Koolbuy - Cash / Carry V.I", price: "₦1,245,000.00", image: "/images/koolboks/items/4.webp" },
+  { id: "np12", category: "upright", name: "Koolboks 400L Upright Freezer", vendor: "Koolbuy - MATT C VENTURES", price: "₦1,690,000.00", image: "/images/koolboks/items/5.webp" },
+  { id: "np13", category: "cold-room", name: "Koolboks Solar Cold Room 10ft", vendor: "Koolbuy - SOLA BEST ELECTRONICS", price: "₦8,950,000.00", image: "/images/koolboks/items/6.webp" },
+  { id: "np14", category: "cold-room", name: "Koolboks Solar Cold Room 20ft", vendor: "Koolbuy - Wugobest", price: "₦14,500,000.00", image: "/images/koolboks/items/2.webp" },
+  { id: "np15", category: "power-station", name: "Koolboks 2kWh Power Station", vendor: "Koolbuy - DESTINY ELECTRONICS", price: "₦980,000.00", image: "/images/koolboks/items/1.webp" },
+  { id: "np16", category: "power-station", name: "Koolboks 5kWh Power Station", vendor: "Koolbuy - MKK Electronics", price: "₦2,150,000.00", image: "/images/koolboks/items/4.webp" },
+  { id: "np17", category: "ac", name: "Koolboks 1.5HP Solar Air Conditioner", vendor: "Koolbuy - Cash / Carry V.I", price: "₦1,050,000.00", image: "/images/koolboks/items/3.webp" },
+  { id: "np18", category: "ac", name: "Koolboks 2HP Inverter Air Conditioner", vendor: "Koolbuy - MATT C VENTURES", price: "₦1,320,000.00", image: "/images/koolboks/items/5.webp" },
+  { id: "np19", category: "ice-makers", name: "Koolboks 195L DC Ice Maker", vendor: "Koolbuy - SOLA BEST ELECTRONICS", price: "₦3,235,000.00", image: "/images/koolboks/items/6.webp" },
+  { id: "np20", category: "ice-makers", name: "Koolboks 300L DC Ice Maker", vendor: "Koolbuy - Wugobest", price: "₦3,890,000.00", image: "/images/koolboks/items/2.webp" },
 ];
 
-export const NewProductsSection: React.FC = () => {
+export const NewProductsSection: React.FC<{ category?: string }> = ({ category = "all" }) => {
+  const active = categories.find((c) => c.id === category) ?? categories[0];
+  const isAll = active.id === "all";
+  const products = isAll ? newProductsList : newProductsList.filter((p) => p.category === active.id);
+
   return (
-    <section className="w-full flex flex-col gap-5">
-      {/* Section Header */}
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg md:text-xl font-bold tracking-wider text-gray-900">
-          New Products
-        </h3>
-
-        <Link
-          href="/products"
-          className="inline-flex items-center gap-1.5 text-xs md:text-sm font-semibold text-gray-600 hover:text-brand-orange group transition-colors"
-        >
-          <span>See All</span>
-          <span className="w-5 h-5 rounded-full bg-brand-orange text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-            <FiChevronRight size={14} />
-          </span>
-        </Link>
-      </div>
-
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-5"
-      >
-        {newProductsList.map((prod, idx) => (
-          <Link key={idx} href="/products/detail" className="flex flex-col">
-            <motion.div
-              variants={itemVariants}
-              whileHover={{
-                y: -4,
-                transition: { type: "spring", stiffness: 300, damping: 15 },
-              }}
-              className="bg-white border border-[#1C1C1C1A] rounded-xl p-4 flex flex-col justify-between h-full hover:shadow-md transition-shadow group cursor-pointer"
-            >
-              {/* Product Image Area */}
-              <div className="w-full aspect-square relative mb-3 flex items-center justify-center">
-                <Image
-                  src={prod.image}
-                  alt={prod.name}
-                  fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                  className="object-contain group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-
-              {/* Product Info */}
-              <div className="flex flex-col gap-1 text-left w-full">
-                <h4 className="text-xs sm:text-sm font-semibold text-gray-900 group-hover:text-brand-orange-text transition-colors truncate">
-                  {prod.name}
-                </h4>
-                <p className="text-[11px] text-gray-400 font-medium truncate">
-                  {prod.vendor}
-                </p>
-                <span className="text-xs sm:text-sm font-bold text-gray-900 mt-0.5">
-                  {prod.price}
-                </span>
-              </div>
-            </motion.div>
-          </Link>
-        ))}
-      </motion.div>
+    <section className="w-full flex flex-col gap-6">
+      <StoreSectionHeader
+        title={isAll ? "New products" : active.name.replace(/\n/g, " ")}
+        subtitle={isAll ? "Just arrived on KoolBuy." : "Fresh picks in this category."}
+        href={active.link}
+      />
+      {products.length > 0 ? (
+        // key restarts the ease-in each time the category changes
+        <StoreProductGrid key={active.id} products={products} twoRows />
+      ) : (
+        <p className="py-12 text-center text-[15px] text-subtle">No products in this category yet.</p>
+      )}
     </section>
   );
 };

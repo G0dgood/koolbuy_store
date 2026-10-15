@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useCart } from "@/app/context/CartContext";
 import { toast } from "sonner";
 import { Icon } from "../Icon";
+import { StoreSectionHeader } from "../Home/StoreUi";
 
 const YouMayLike = () => {
   const { addToCart } = useCart();
@@ -31,27 +32,27 @@ const YouMayLike = () => {
   };
 
   return (
-    <div className="w-full lg:w-72 flex-shrink-0 bg-white border border-gray-200 rounded-lg p-5 flex flex-col gap-5">
-      <h3 className="font-bold text-gray-900">You may like</h3>
-      <div className="flex flex-col gap-6">
+    <div className="w-full lg:w-80 flex-shrink-0 bg-white rounded-[22px] md:rounded-[32px] p-6 flex flex-col gap-5">
+      <StoreSectionHeader title="You may like" />
+      <div className="flex flex-col gap-2">
          {items.map((item, idx) => (
-            <div key={idx} className="flex items-center gap-3 group relative cursor-pointer active:scale-95 transition-all">
-              <Link href="/products/detail" className="w-14 h-14 relative flex-shrink-0 border border-gray-100 rounded p-1 group-hover:border-brand-charcoal transition-colors overflow-hidden bg-gray-50/50">
-                 <Image src={item.image} alt={item.name} fill sizes="56px" className="object-contain transition-transform group-hover:scale-110" />
+            <div key={idx} className="flex items-center gap-3 group relative cursor-pointer rounded-[16px] p-2 -mx-2 hover:bg-off-white transition-colors">
+              <Link href="/products/detail" className="w-16 h-16 relative flex-shrink-0 rounded-[12px] p-1.5 overflow-hidden bg-off-white">
+                 <Image src={item.image} alt={item.name} fill sizes="64px" className="object-contain p-1.5 mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-[1.04]" />
               </Link>
               <div className="flex-1 flex flex-col gap-1 overflow-hidden">
-                 <Link href="/products/detail" className="text-sm font-medium text-gray-900 line-clamp-2 leading-tight hover:text-brand-orange-text transition-colors">
+                 <Link href="/products/detail" className="text-[14px] font-semibold text-brand-charcoal line-clamp-2 leading-snug">
                     {item.name}
                  </Link>
                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-400 font-normal">{item.price}</span>
-                    <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                       <Link href="/products/detail" title="View details" className="text-brand-orange-text hover:scale-110 transition-transform">
+                    <span className="text-[13px] text-brand-charcoal tabular-nums">{item.price}</span>
+                    <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                       <Link href="/products/detail" title="View details" className="w-7 h-7 rounded-full flex items-center justify-center text-subtle hover:text-brand-charcoal hover:bg-white transition-colors">
                           <Icon name="visibility" size="xs" />
                        </Link>
                        <button 
                          onClick={(e) => handleAddToCart(e, item)}
-                         className="text-brand-orange-text hover:scale-110 transition-transform p-1 hover:bg-brand-charcoal/5 rounded-full"
+                         className="w-7 h-7 rounded-full flex items-center justify-center text-brand-orange-text hover:bg-white transition-colors cursor-pointer"
                          title="Add to cart"
                        >
                           <Icon name="shopping_cart" size="xs" />

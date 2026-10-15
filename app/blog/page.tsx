@@ -11,6 +11,7 @@ import {
   HiArrowLongRight,
 } from "react-icons/hi2";
 import { motion } from "framer-motion";
+import { Button } from "@/app/components/Button";
 
 const BlogPage = () => {
   const posts = [
@@ -70,154 +71,156 @@ const BlogPage = () => {
     },
   ];
 
+  const ease = [0.16, 1, 0.3, 1] as const;
+
   return (
-    <div className="min-h-screen bg-off-white flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-off-white flex flex-col font-sans text-brand-charcoal">
       <Header />
 
-      <main className="flex-1 w-full bg-white">
-        {/* Step 80: Implement Editorial Hero section */}
-        <section className="bg-gray-50 py-20 md:py-32 border-b border-gray-100 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-brand-charcoal rounded-full filter blur-[120px] opacity-5 -translate-x-1/2 -translate-y-1/2" />
-          <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-16 relative z-10 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="flex flex-col items-center gap-4"
-            >
-              <span className="text-brand-orange-text font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs">
-                Koolbuy Store Journal
-              </span>
-              <h1 className="text-4xl md:text-7xl font-bold text-brand-charcoal tracking-tighter leading-none">
-                Insights <span className="text-brand-orange-text">&</span> Inspiration.
-              </h1>
-              <p className="text-gray-500 max-w-2xl text-sm md:text-lg mt-4 leading-relaxed font-medium">
-                Exploring the intersection of high-fidelity craftsmanship,
-                sustainable innovation, and modern lifestyle orchestration.
-              </p>
-            </motion.div>
-          </div>
+      <main className="flex-1 w-full max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 pt-10 md:pt-16 pb-16 md:pb-24 flex flex-col gap-12 md:gap-20">
+        {/* Editorial headline */}
+        <section className="text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease }}
+            className="flex flex-col items-center gap-3 max-w-3xl mx-auto"
+          >
+            <span className="text-[13px] font-semibold text-brand-orange-text">
+              Koolbuy Store journal
+            </span>
+            <h1 className="text-[36px] sm:text-[44px] md:text-[56px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+              Insights <span className="text-faint">&amp;</span> inspiration.
+            </h1>
+            <p className="text-subtle max-w-2xl text-[17px] md:text-[19px] mt-1 leading-snug">
+              Exploring the intersection of high-fidelity craftsmanship,
+              sustainable innovation, and modern lifestyle orchestration.
+            </p>
+          </motion.div>
         </section>
 
-        <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-16 py-16 md:py-24">
-          {/* Step 81: Build Featured Story immersive card */}
-          <motion.section
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="w-full mb-24 cursor-pointer group"
-          >
-            <div className="w-full aspect-video md:aspect-21/9 rounded-3xl bg-gray-100 overflow-hidden relative shadow-md">
-              <Image
-                src="/books/7.png"
-                alt="Featured Story"
-                fill sizes="100vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-1000"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-brand-charcoal via-brand-charcoal/20 to-transparent flex items-end">
-                <div className="p-8 md:p-16 max-w-4xl flex flex-col gap-4">
-                  <span className="px-4 py-1.5 bg-brand-charcoal rounded-full text-[10px] font-bold uppercase tracking-[0.2em] text-white w-fit">
-                    Featured Story
-                  </span>
-                  <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-tight">
-                    Beyond the Interface: The Humanity of High-Fidelity Design
-                  </h2>
-                  <p className="text-light-gray/60 text-sm md:text-lg max-w-2xl leading-relaxed">
-                    How we orchestrated a digital language that feels as tactile
-                    as our physical products. An interview with our lead
-                    architects.
-                  </p>
-                  <div className="flex items-center gap-4 pt-4">
-                    <button className="bg-white text-brand-charcoal px-8 py-3.5 rounded-xl font-bold uppercase tracking-widest text-xs flex items-center gap-2 group-hover:bg-brand-charcoal group-hover:text-white transition-all">
-                      Read Feature <HiArrowLongRight size={18} />
-                    </button>
-                    <div className="flex items-center gap-4 text-white/40 text-xs font-bold uppercase tracking-widest">
-                      <span className="flex items-center gap-1">
-                        <HiCalendar /> Oct 20, 2023
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <HiClock /> 12 min read
-                      </span>
-                    </div>
+        {/* Featured story: a large photo tile (dark band rules) */}
+        <motion.section
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease }}
+          className="w-full cursor-pointer group"
+        >
+          <div className="w-full aspect-4/5 sm:aspect-video md:aspect-21/9 rounded-tile md:rounded-hero bg-off-white overflow-hidden relative">
+            <Image
+              src="/books/7.png"
+              alt="Featured Story"
+              fill sizes="(max-width: 1440px) 100vw, 1440px"
+              className="object-cover transition-transform duration-700 ease-apple group-hover:scale-[1.03]"
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-brand-charcoal/90 via-brand-charcoal/30 to-transparent flex items-end">
+              <div className="p-6 sm:p-10 md:p-14 max-w-4xl flex flex-col gap-3">
+                <span className="text-[13px] font-semibold text-brand-orange">
+                  Featured story
+                </span>
+                <h2 className="text-[28px] md:text-[44px] font-semibold text-white tracking-[-0.03em] leading-[1.08]">
+                  Beyond the interface: <span className="text-white/60">the humanity of high-fidelity design.</span>
+                </h2>
+                <p className="text-white/70 text-[15px] md:text-[17px] max-w-2xl leading-normal">
+                  How we orchestrated a digital language that feels as tactile
+                  as our physical products. An interview with our lead
+                  architects.
+                </p>
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-3">
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    shape="pill"
+                    className="px-6"
+                    iconRight={<HiArrowLongRight size={18} />}
+                  >
+                    Read feature
+                  </Button>
+                  <div className="flex items-center gap-4 text-white/60 text-[13px]">
+                    <span className="flex items-center gap-1.5">
+                      <HiCalendar /> Oct 20, 2023
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <HiClock /> 12 min read
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
-          </motion.section>
+          </div>
+        </motion.section>
 
-          {/* Step 82: Implement Responsive Journal Feed (Article Grid) */}
-          <section className="flex flex-col gap-12">
-            <div className="flex items-center justify-between">
-              <h3 className="text-2xl font-bold text-brand-charcoal tracking-tight">
-                Recent Journal Entries
-              </h3>
-              <div className="flex items-center gap-3 text-brand-orange-text font-bold text-sm cursor-pointer group">
-                <span className="group-hover:mr-2 transition-all">
-                  View All Categories
-                </span>
-                <HiChevronRight />
-              </div>
+        {/* Journal feed */}
+        <section className="flex flex-col gap-6 md:gap-8">
+          <div className="flex items-end justify-between gap-4">
+            <h3 className="text-[26px] md:text-[34px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
+              Recent journal entries
+            </h3>
+            <div className="shrink-0 flex items-center gap-0.5 text-brand-orange-text font-medium text-[14px] md:text-[15px] cursor-pointer hover:underline">
+              <span>View all categories</span>
+              <HiChevronRight />
             </div>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {posts.map((post, i) => (
-                <motion.article
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="flex flex-col gap-6 cursor-pointer group"
-                >
-                  <div className="relative aspect-4/3 rounded-3xl overflow-hidden shadow-sm">
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-lg text-[10px] font-bold uppercase tracking-widest text-brand-orange-text shadow-sm">
-                        {post.category}
-                      </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+            {posts.map((post, i) => (
+              <motion.article
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.06, ease }}
+                className="bg-white rounded-tile overflow-hidden flex flex-col cursor-pointer group transition-shadow duration-300 hover:shadow-lift"
+              >
+                <div className="relative aspect-4/3 bg-off-white overflow-hidden">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-500 ease-apple group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute top-3 left-3">
+                    <span className="px-3 py-1 material-frosted rounded-full text-[12px] font-medium text-brand-charcoal">
+                      {post.category}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-2 px-5 pt-4 pb-5 flex-1">
+                  <div className="flex items-center gap-4 text-[12px] text-faint">
+                    <span className="flex items-center gap-1">
+                      <HiCalendar /> {post.date}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <HiClock /> {post.readTime}
+                    </span>
+                  </div>
+                  <h4 className="text-[18px] font-semibold text-brand-charcoal tracking-[-0.01em] leading-snug line-clamp-2">
+                    {post.title}
+                  </h4>
+                  <p className="text-subtle text-[15px] leading-normal line-clamp-2">
+                    {post.excerpt}
+                  </p>
+                  <div className="mt-auto pt-2">
+                    <div className="flex items-center gap-0.5 text-[14px] font-medium text-brand-orange-text group-hover:underline">
+                      Read story{" "}
+                      <HiChevronRight
+                        size={14}
+                        className="transition-transform duration-200 group-hover:translate-x-0.5"
+                      />
                     </div>
                   </div>
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center gap-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                      <span className="flex items-center gap-1">
-                        <HiCalendar className="text-brand-orange-text" /> {post.date}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <HiClock className="text-brand-orange-text" /> {post.readTime}
-                      </span>
-                    </div>
-                    <h4 className="text-xl font-bold text-brand-charcoal leading-tight group-hover:text-brand-orange-text transition-colors duration-300 line-clamp-2">
-                      {post.title}
-                    </h4>
-                    <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">
-                      {post.excerpt}
-                    </p>
-                    <div className="pt-2">
-                      <div className="flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-brand-charcoal group-hover:text-brand-orange-text transition-colors">
-                        Read Story{" "}
-                        <HiChevronRight
-                          size={14}
-                          className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </motion.article>
-              ))}
-            </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
 
-            <div className="mt-16 flex justify-center">
-              <button className="px-12 py-4 border-2 border-gray-100 rounded-2xl text-brand-charcoal font-bold uppercase tracking-widest text-xs hover:border-brand-charcoal hover:text-brand-orange-text transition-all">
-                Load Older Stories
-              </button>
-            </div>
-          </section>
-        </div>
+          <div className="mt-6 md:mt-10 flex justify-center">
+            <Button variant="secondary" size="lg" shape="pill" className="px-8">
+              Load older stories
+            </Button>
+          </div>
+        </section>
       </main>
 
       <Footer />

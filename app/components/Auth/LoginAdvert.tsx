@@ -62,14 +62,13 @@ export const LoginAdvert = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 30 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.3, duration: 0.8 }}
-      className="relative z-10 hidden lg:flex flex-col gap-8 max-w-[600px] text-right items-end"
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.3, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      className="relative z-10 hidden lg:flex flex-col gap-8 max-w-[600px] text-right items-end pb-6"
     >
       {(config.showTitle || config.showHighlight || config.showDescription) && (
-        <div className="flex flex-col gap-4">
-          <div className="w-16 h-1 bg-white rounded-full ml-auto" />
+        <div className="flex flex-col gap-3">
           <AnimatePresence mode="wait">
             {(config.showTitle || config.showHighlight) && (
               <motion.div
@@ -77,11 +76,11 @@ export const LoginAdvert = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
-                <h1 className="text-6xl xl:text-7xl font-bold text-white leading-[1.1] drop-shadow-md">
+                <h1 className="text-[44px] xl:text-[52px] font-semibold text-white tracking-[-0.03em] leading-[1.05]">
                   {config.showTitle && <span>{displayCopy.title} <br /></span>}
-                  {config.showHighlight && <span className="text-light-gray">{displayCopy.titleHighlight}</span>}
+                  {config.showHighlight && <span className="text-white/60">{displayCopy.titleHighlight}</span>}
                 </h1>
               </motion.div>
             )}
@@ -95,7 +94,7 @@ export const LoginAdvert = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-white/80 text-xl font-medium max-w-lg mt-2 drop-shadow-lg leading-relaxed"
+                className="text-white/80 text-[17px] xl:text-[19px] max-w-lg ml-auto leading-relaxed"
               >
                 {displayCopy.description}
               </motion.p>
@@ -105,34 +104,33 @@ export const LoginAdvert = () => {
       )}
 
       {/* Dynamic Feature List (Featured Products) */}
-      <div className="mt-4 w-full ml-auto">
+      <div className="w-full ml-auto">
         {activeLayout === "list" && (
-          <div className="flex flex-col gap-6 max-w-md ml-auto">
+          <div className="flex flex-col gap-4 max-w-md ml-auto">
             <AnimatePresence mode="popLayout">
               {filteredItems.map((item, i) => (
                 <motion.div
                   key={item.id}
-                  initial={{ opacity: 0, scale: 0.9, x: 20 }}
-                  animate={{ opacity: 1, scale: 1, x: 0 }}
-                  exit={{ opacity: 0, scale: 0.8, x: -20 }}
-                  transition={{ delay: i * 0.05 }}
-                  whileHover={{ x: -10 }}
-                  className="flex items-center gap-6 justify-end group cursor-pointer"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ delay: i * 0.05, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex items-center gap-4 justify-end group/item cursor-pointer"
                 >
                   <div className="flex flex-col items-end text-right">
-                    <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/50 group-hover:text-light-gray transition-colors">
+                    <span className="text-[13px] font-medium text-white/60">
                       {item.category}
                     </span>
-                    <span className="text-lg font-bold text-white group-hover:text-light-gray transition-colors">
+                    <span className="text-[17px] font-semibold text-white leading-snug">
                       {item.name}
                     </span>
-                    <span className="text-[10px] font-bold text-white/40 group-hover:text-white/80 transition-opacity">
-                      FEATURED SELECTION • {item.price}
+                    <span className="text-[13px] text-white/60 tabular-nums group-hover/item:text-white/80 transition-colors">
+                      Featured selection • {item.price}
                     </span>
                   </div>
 
-                  <div className="w-16 h-16 rounded-lg bg-white/10 backdrop-blur-xl flex items-center justify-center border border-white/20 group-hover:bg-white/20 group-hover:scale-110 transition-all overflow-hidden p-2 shadow-md">
-                    <img src={item.image} alt={item.name} className="w-full h-full object-contain drop-shadow-lg" />
+                  <div className="w-16 h-16 rounded-stage bg-white/10 backdrop-blur-xl flex items-center justify-center group-hover/item:bg-white/20 transition-colors overflow-hidden p-2">
+                    <img src={item.image} alt={item.name} className="w-full h-full object-contain transition-transform duration-500 ease-apple group-hover/item:scale-[1.04]" />
                   </div>
                 </motion.div>
               ))}
@@ -146,20 +144,19 @@ export const LoginAdvert = () => {
               {filteredItems.slice(0, 8).map((item, i) => (
                 <motion.div
                   key={item.id}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ delay: i * 0.05 }}
-                  whileHover={{ y: -5, scale: 1.05 }}
-                  className="p-3 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 flex flex-col gap-2 group cursor-pointer"
+                  exit={{ opacity: 0 }}
+                  transition={{ delay: i * 0.05, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="p-3 rounded-stage bg-white/10 backdrop-blur-md hover:bg-white/15 transition-colors flex flex-col gap-2 group/item cursor-pointer"
                 >
-                  <div className="aspect-[4/3] bg-white/10 rounded-sm p-2 flex items-center justify-center overflow-hidden">
-                    <img src={item.image} alt={item.name} className="w-full h-full object-contain group-hover:scale-125 transition-transform duration-500" />
+                  <div className="aspect-[4/3] bg-white/10 rounded-xl p-2 flex items-center justify-center overflow-hidden">
+                    <img src={item.image} alt={item.name} className="w-full h-full object-contain group-hover/item:scale-[1.04] transition-transform duration-500 ease-apple" />
                   </div>
                   <div className="flex flex-col text-right">
-                    <span className="text-[8px] font-bold text-light-gray uppercase tracking-widest">{item.category}</span>
-                    <span className="text-[11px] font-bold text-white truncate">{item.name}</span>
-                    <span className="text-[10px] font-bold text-white/60">{item.price}</span>
+                    <span className="text-[11px] font-medium text-white/60 truncate">{item.category}</span>
+                    <span className="text-[13px] font-semibold text-white truncate">{item.name}</span>
+                    <span className="text-[12px] text-white/70 tabular-nums">{item.price}</span>
                   </div>
                 </motion.div>
               ))}
@@ -168,24 +165,24 @@ export const LoginAdvert = () => {
         )}
 
         {activeLayout === "strip" && (
-          <div className="fixed bottom-24 inset-x-0 px-12 z-30 flex justify-center">
-            <div className="flex items-center gap-4 bg-white/5 backdrop-blur-lg border border-white/10 p-2 rounded-full overflow-hidden">
+          <div className="flex justify-end">
+            <div className="flex items-center gap-1 bg-white/10 backdrop-blur-lg p-1.5 rounded-full overflow-hidden max-w-full">
               <AnimatePresence mode="popLayout">
                 {filteredItems.map((item, i) => (
                   <motion.div
                     key={item.id}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ delay: i * 0.1 }}
-                    className="flex items-center gap-3 px-4 py-2 hover:bg-white/10 rounded-full transition-colors cursor-pointer group"
+                    exit={{ opacity: 0 }}
+                    transition={{ delay: i * 0.1, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    className="flex items-center gap-2.5 pl-1.5 pr-4 py-1.5 hover:bg-white/10 rounded-full transition-colors cursor-pointer shrink-0"
                   >
                     <div className="w-8 h-8 rounded-full bg-white/20 p-1 flex items-center justify-center overflow-hidden text-center">
                       <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
                     </div>
-                    <div className="flex flex-col">
-                      <span className="text-[10px] font-bold text-white group-hover:text-light-gray transition-colors">{item.name}</span>
-                      <span className="text-[8px] font-bold text-white/40 uppercase">{item.price}</span>
+                    <div className="flex flex-col text-left">
+                      <span className="text-[13px] font-medium text-white whitespace-nowrap">{item.name}</span>
+                      <span className="text-[12px] text-white/60 tabular-nums">{item.price}</span>
                     </div>
                   </motion.div>
                 ))}
@@ -195,7 +192,7 @@ export const LoginAdvert = () => {
         )}
 
         {filteredItems.length === 0 && (
-          <p className="text-white/30 text-xs font-bold uppercase tracking-widest italic pt-10 text-right">
+          <p className="text-white/60 text-[13px] pt-6 text-right">
             No items in {activeCategory} category
           </p>
         )}
@@ -209,9 +206,9 @@ export const LoginAdvert = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-12 p-6 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm text-right max-w-sm"
+            className="px-5 py-4 rounded-stage bg-white/10 backdrop-blur-md text-right max-w-sm"
           >
-            <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest leading-loose">
+            <p className="text-[13px] text-white/75 leading-relaxed">
               {displayCopy.stats}
             </p>
           </motion.div>

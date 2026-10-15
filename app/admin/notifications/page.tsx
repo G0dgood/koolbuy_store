@@ -5,6 +5,7 @@ import Checkbox from "@/app/components/Checkbox";
 import { Icon } from "../../components/Icon";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Form/Inputs";
+import { Search } from "@/app/components/Form";
 import {
   HiOutlineBell,
   HiOutlineCheck,
@@ -310,15 +311,15 @@ export default function NotificationsManagementPage() {
             </span>
 
             {/* Search Box */}
-            <div className="relative w-full">
-              <input
-                type="text"
+            <div className="w-full">
+              <Search
                 placeholder="Search notification name..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full text-xs pl-8 pr-3 py-1.5 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange"
+                onChange={setSearchQuery}
+                maxWidth="100%"
+                className="w-full"
+                showClearButton
               />
-              <HiOutlineMagnifyingGlass className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
             </div>
           </div>
 

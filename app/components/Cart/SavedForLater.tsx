@@ -8,6 +8,8 @@ import { Button } from "../Button";
 import { useCart } from "@/app/context/CartContext";
 import { useWishlist } from "@/app/context/WishlistContext";
 
+import { EmptySavedIllustration } from "./EmptySavedIllustration";
+
 const SavedForLater = () => {
   const { addToCart } = useCart();
   const { wishlistItems, removeFromWishlist } = useWishlist();
@@ -24,45 +26,55 @@ const SavedForLater = () => {
 
   if (wishlistItems.length === 0) {
     return (
-      <section className="bg-white border border-gray-200 rounded-lg overflow-hidden ">
-        <div className="p-6 border-b border-gray-100">
-          <h3 className="text-xl font-bold text-gray-900">Saved for later</h3>
-        </div>
-        <div className="p-12 flex flex-col items-center text-center gap-2">
-           <p className="text-gray-900 font-bold">No saved items</p>
-           <p className="text-gray-500 text-sm">Items you save for later will appear here.</p>
+      <section className="bg-white rounded-[24px] overflow-hidden p-6 md:p-8 flex flex-col gap-6 shadow-xs border border-black/[0.04]">
+        <h3 className="text-[20px] md:text-[24px] font-semibold text-brand-charcoal tracking-[-0.02em]">
+          Saved for later
+        </h3>
+        <div className="py-6 md:py-10 flex flex-col items-center text-center gap-4">
+          <EmptySavedIllustration className="w-48 h-40 md:w-56 md:h-44" />
+          <div className="flex flex-col items-center gap-1.5 max-w-sm">
+            <h4 className="text-[18px] md:text-[20px] font-bold text-brand-charcoal tracking-[-0.01em]">
+              No saved items
+            </h4>
+            <p className="text-[14px] md:text-[15px] text-subtle leading-relaxed">
+              Items you save for later will appear here so you can easily move them to your cart anytime.
+            </p>
+          </div>
         </div>
       </section>
     );
   }
 
   return (
-    <section className="bg-white border border-gray-200 rounded-lg overflow-hidden ">
-      <div className="p-6 border-b border-gray-100">
-        <h3 className="text-xl font-bold text-gray-900">Saved for later ({wishlistItems.length})</h3>
+    <section className="bg-white rounded-[22px] overflow-hidden">
+      <div className="px-6 pt-6 md:px-8 md:pt-8">
+        <h3 className="text-[20px] md:text-[24px] font-semibold text-brand-charcoal tracking-[-0.02em]">
+          Saved for later <span className="text-faint tabular-nums">({wishlistItems.length})</span>
+        </h3>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-x divide-gray-100">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 p-4 md:p-6">
         {wishlistItems.map((item) => (
-          <div key={item.id} className="p-6 flex flex-col gap-4 hover:bg-gray-50 transition-colors group cursor-pointer">
-            <div className="w-full aspect-square relative rounded bg-white border border-gray-200 flex items-center justify-center p-14 md:p-10 overflow-hidden">
+          <div key={item.id} className="flex flex-col gap-3 group cursor-pointer rounded-[22px] overflow-hidden border border-light-gray">
+            <div className="w-full aspect-square relative bg-off-white overflow-hidden">
               <Image
                 src={item.image}
                 alt={item.title}
                 fill sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-contain scale-75 group-hover:scale-80 transition-transform duration-300"
+                className="object-contain mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-[1.04]"
               />
             </div>
-            <div className="flex flex-col gap-3">
-              <div className="flex flex-col gap-1">
-                <span className="font-bold text-gray-900">{item.price}</span>
-                <p className="text-gray-500 text-sm leading-tight line-clamp-2 group-hover:text-brand-orange-text">{item.title}</p>
+            <div className="flex flex-col gap-3 px-4 pb-4">
+              <div className="flex flex-col gap-0.5">
+                <p className="text-[14px] font-semibold text-brand-charcoal leading-snug line-clamp-2">{item.title}</p>
+                <span className="text-[14px] text-brand-charcoal tabular-nums">{item.price}</span>
               </div>
-              <div className="flex flex-row gap-2">
+              <div className="flex flex-row items-center gap-2">
                 <Button 
                   onClick={() => handleMoveToCart(item)}
-                  variant="secondary" 
+                  variant="primary" 
+                  shape="pill"
                   size="sm" 
-                  className="flex-1 font-bold hover:bg-brand-charcoal hover:text-white justify-center" 
+                  className="flex-1 h-9 text-[13px]! justify-center" 
                   iconLeft={<Icon name="shopping_cart" size="xs" />}
                 >
                   Move to cart
@@ -70,8 +82,9 @@ const SavedForLater = () => {
                 <Button 
                   onClick={() => removeFromWishlist(item.id)}
                   variant="ghost" 
+                  shape="pill"
                   size="sm" 
-                  className="flex-1 !text-[#EB001B] font-medium border border-brand-orange/15 hover:bg-red-50 justify-center"
+                  className="h-9 px-4 text-[13px]! font-normal! text-brand-orange-text justify-center"
                 >
                   Remove
                 </Button>

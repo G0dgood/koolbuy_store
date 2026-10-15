@@ -26,14 +26,11 @@ export const OrderSummary: React.FC = () => {
   const total = subtotal + estimatedTax;
 
   return (
-    <div className="w-full lg:w-[400px] xl:w-[450px] shrink-0 sticky top-28">
-      <section className="bg-white border border-[#1C1C1C1A] rounded-lg overflow-hidden transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
-        <div className="p-6 md:p-8 bg-gray-50/50 border-b border-gray-100 flex items-center justify-between">
-          <div>
-            <h2 className="text-xl font-bold text-gray-900 tracking-tight">Order Summary</h2>
-            <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mt-0.5">Review items</p>
-          </div>
-          <Icon name="shopping_cart" size="md" className="text-brand-orange-text opacity-10" />
+    <div className="w-full lg:w-[400px] xl:w-[420px] shrink-0 sticky top-28">
+      <section className="bg-white rounded-[22px] overflow-hidden">
+        <div className="px-6 pt-6 md:px-8 md:pt-8">
+          <h2 className="text-[19px] md:text-[20px] font-semibold text-brand-charcoal tracking-[-0.01em] leading-tight">Order summary</h2>
+          <p className="text-[13px] text-subtle mt-0.5">Review items</p>
         </div>
 
         <div className="p-6 md:p-8">
@@ -41,82 +38,81 @@ export const OrderSummary: React.FC = () => {
             initial="hidden"
             animate="visible"
             transition={{ staggerChildren: 0.1 }}
-            className="flex flex-col gap-6 mb-8 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar"
+            className="flex flex-col mb-6 max-h-[400px] overflow-y-auto pr-1 custom-scrollbar"
           >
             {cartItems.length > 0 ? (
               cartItems.map((item) => (
-                <motion.div key={item.id} variants={itemVariants} className="flex gap-4 group">
-                  <div className="w-20 h-20 bg-white rounded-2xl border border-gray-100 flex-shrink-0 relative overflow-hidden shadow-sm group-hover:shadow-md transition-all duration-300">
-                    <Image src={item.image} alt={item.title} fill sizes="80px" className="object-contain p-2 group-hover:scale-110 transition-transform duration-500" />
+                <motion.div key={item.id} variants={itemVariants} className="flex gap-4 py-4 first:pt-0 border-b border-black/[0.06] last:border-0 group">
+                  <div className="w-16 h-16 bg-off-white rounded-[16px] flex-shrink-0 relative overflow-hidden">
+                    <Image src={item.image} alt={item.title} fill sizes="64px" className="object-contain p-2 mix-blend-multiply" />
                   </div>
-                  <div className="flex-1 flex flex-col justify-between py-1">
-                    <div>
+                  <div className="flex-1 min-w-0 flex items-start justify-between gap-3">
+                    <div className="min-w-0">
                       <Link href="/products/detail">
-                        <h4 className="font-bold text-gray-900 text-[13px] line-clamp-2 leading-tight group-hover:text-brand-orange-text cursor-pointer transition-colors">
+                        <h4 className="text-[15px] font-semibold text-brand-charcoal line-clamp-2 leading-snug hover:text-brand-orange-text cursor-pointer transition-colors">
                           {item.title}
                         </h4>
                       </Link>
-                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mt-1.5 block">Qty: {item.quantity}</span>
+                      <span className="text-[13px] text-subtle mt-0.5 block">Qty: {item.quantity}</span>
                     </div>
-                    <span className="font-bold text-brand-orange-text text-sm tracking-tight">₦{(parsePrice(item.price) * item.quantity).toFixed(2)}</span>
+                    <span className="text-[15px] font-semibold text-brand-charcoal tabular-nums whitespace-nowrap">₦{(parsePrice(item.price) * item.quantity).toFixed(2)}</span>
                   </div>
                 </motion.div>
               ))
             ) : (
-              <div className="py-8 text-center bg-gray-50/50 rounded-2xl border border-dashed border-gray-200">
-                <Icon name="shopping_bag" size="lg" className="text-gray-300 mx-auto mb-2" />
-                <p className="text-sm text-gray-500 font-bold">Your cart is empty</p>
+              <div className="py-8 text-center bg-off-white rounded-[16px]">
+                <Icon name="shopping_bag" size="lg" className="text-faint mx-auto mb-2" />
+                <p className="text-[14px] text-subtle">Your cart is empty</p>
               </div>
             )}
           </motion.div>
 
-          <div className="space-y-4 mb-8 bg-gray-50/50 p-6 rounded-2xl border border-gray-100/50">
-            <div className="flex justify-between text-[13px]">
-              <span className="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Subtotal</span>
-              <span className="text-gray-900 font-bold">₦{subtotal.toFixed(2)}</span>
+          <div className="flex flex-col gap-2.5 mb-6 pt-5 border-t border-black/[0.06] text-[14px]">
+            <div className="flex justify-between">
+              <span className="text-subtle">Subtotal</span>
+              <span className="text-brand-charcoal tabular-nums">₦{subtotal.toFixed(2)}</span>
             </div>
-            <div className="flex justify-between text-[13px]">
-              <span className="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Shipping</span>
-              <span className="text-brand-orange-text font-bold uppercase tracking-widest text-[11px]">{subtotal > 0 ? "Free" : "₦0.00"}</span>
+            <div className="flex justify-between">
+              <span className="text-subtle">Shipping</span>
+              <span className="text-brand-charcoal">{subtotal > 0 ? "Free" : "₦0.00"}</span>
             </div>
-            <div className="flex justify-between text-[13px]">
-              <span className="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Estimated Tax</span>
-              <span className="text-gray-900 font-bold">₦{estimatedTax.toFixed(2)}</span>
+            <div className="flex justify-between">
+              <span className="text-subtle">Estimated tax</span>
+              <span className="text-brand-charcoal tabular-nums">₦{estimatedTax.toFixed(2)}</span>
             </div>
 
-            <div className="h-px bg-gray-200/50 my-2"></div>
-
-            <div className="flex justify-between items-center pt-2">
+            <div className="flex justify-between items-baseline pt-4 mt-2 border-t border-black/[0.06]">
               <div className="flex flex-col">
-                <span className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">Total</span>
-                <span className="text-[9px] text-gray-400 font-bold uppercase tracking-widest">Incl. VAT</span>
+                <span className="text-[17px] font-semibold text-brand-charcoal">Total</span>
+                <span className="text-[12px] text-faint">Incl. VAT</span>
               </div>
-              <span className="text-3xl font-bold text-brand-orange-text leading-none tracking-tighter">₦{total.toFixed(2)}</span>
+              <span className="text-[22px] font-semibold text-brand-charcoal tabular-nums tracking-[-0.01em] leading-none">₦{total.toFixed(2)}</span>
             </div>
           </div>
 
           <Button
             variant="accent"
             size="lg"
+            shape="pill"
             fullWidth
-            className={cartItems.length > 0 ? "" : "!bg-gray-400"}
+            className="text-[16px]!"
             disabled={cartItems.length === 0}
           >
-            <span>Complete Order</span>
-            <Icon name="arrow_forward" size="xs" className="opacity-60" />
+            <span>Complete order</span>
+            <Icon name="arrow_forward" size="xs" className="opacity-70" />
           </Button>
 
-          <div className="mt-8 flex flex-col gap-4">
-            <div className="flex items-center justify-center gap-2.5 px-4 py-2.5 bg-brand-orange-soft rounded-full w-fit mx-auto border border-brand-orange/15 shadow-sm shadow-brand-charcoal/50">
-              <Icon name="verified_user" size="xs" className="text-brand-orange-text" />
-              <span className="text-[10px] font-bold text-brand-orange-text uppercase tracking-widest">Secure 256-bit SSL encryption</span>
+          <div className="mt-6 flex flex-col items-center gap-3">
+            <div className="flex items-center justify-center gap-1.5">
+              <Icon name="verified_user" size="sm" className="text-faint" />
+              <span className="text-[12px] text-subtle">Secure 256-bit SSL encryption</span>
             </div>
 
             <div className="flex items-center justify-center gap-4 opacity-50 hover:opacity-100 transition-opacity">
-              <Image src="/payment/Payment=payment, Pay-type=visa.png" alt="Visa" width={32} height={20} className="object-contain grayscale hover:grayscale-0 transition-all cursor-crosshair" />
-              <Image src="/payment/Payment=payment, Pay-type=mastercard.png" alt="Mastercard" width={32} height={20} className="object-contain grayscale hover:grayscale-0 transition-all cursor-crosshair" />
-              <div className="w-[1px] h-3 bg-gray-300 mx-1" />
-              <Icon name="security" size="sm" className="text-gray-400" />
+              <Image src="/payment/visa.png" alt="Visa" width={32} height={20} className="object-contain grayscale hover:grayscale-0 transition-all" />
+              <Image src="/payment/mastercard.png" alt="Mastercard" width={32} height={20} className="object-contain grayscale hover:grayscale-0 transition-all" />
+              <div className="w-px h-3 bg-light-gray mx-1" />
+              <Icon name="security" size="sm" className="text-faint" />
             </div>
           </div>
         </div>

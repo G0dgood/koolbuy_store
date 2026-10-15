@@ -7,8 +7,11 @@ export * from "./Switch";
 export * from "./Tag";
 export * from "./Select";
 export * from "./DatePicker";
+export * from "./DateRange";
 export * from "./Uploader";
 export * from "./RangeSlider";
 export * from "./Layouts";
 export * from "./FloatingInputs";
-
+export * from "./Search";
+export * from "./Dropdown";
+export * from "./Segmented";

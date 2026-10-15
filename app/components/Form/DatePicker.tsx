@@ -1,144 +1,429 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import { Icon } from "../Icon";
-import { Button } from "../Button";
+import React, {
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { createPortal } from "react-dom";
+import {
+  CalendarIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  Cross2Icon,
+} from "@radix-ui/react-icons";
 
-interface DatePickerProps {
-  value?: Date;
-  onChange?: (date: Date) => void;
-  placeholder?: string;
-  className?: string;
+/** 'YYYY-MM-DD' in local time (no UTC shift). */
+export const toIso = (d: Date) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
+    d.getDate()
+  ).padStart(2, "0")}`;
+
+export const fromIso = (s: string) => {
+  const [y, m, d] = s.split("-").map(Number);
+  return new Date(y, m - 1, d);
+};
+
+export const addDays = (iso: string, n: number) => {
+  const d = fromIso(iso);
+  d.setDate(d.getDate() + n);
+  return toIso(d);
+};
+export const addDaysIso = addDays;
+
+const WEEKDAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
+
+export const longDate = (iso: string) =>
+  fromIso(iso).toLocaleDateString("en-GB", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+
+export const formatDisplayDate = (iso: string) => {
+  if (!iso) return "";
+  const d = fromIso(iso);
+  const day = String(d.getDate()).padStart(2, "0");
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const year = d.getFullYear();
+  return `${day}/${month}/${year}`;
+};
+
+function cn(...classes: (string | undefined | null | false)[]) {
+  return classes.filter(Boolean).join(" ");
 }
 
-const DatePicker: React.FC<DatePickerProps> = ({
+export interface DatePickerProps {
+  label?: string;
+  value?: string | Date;
+  onChange: (v: any) => void;
+  min?: string;
+  max?: string;
+  error?: string;
+  /** Hint under the field. */
+  description?: string;
+  placeholder?: string;
+  required?: boolean;
+  /** Shortcut buttons, as [label, days from `min` or today]. */
+  quickPicks?: [string, number][];
+  /** Show the clear (X) button. Defaults to `!required`. */
+  clearable?: boolean;
+  /** Which edge of the field the calendar lines up with. */
+  align?: "left" | "right";
+  /** Keep the label for screen readers only (e.g. a date in a card header). */
+  hideLabel?: boolean;
+  className?: string;
+  displayFormat?: "long" | "dd/mm/yyyy";
+}
+
+/**
+ * A date field with the app's own calendar instead of the browser's: a button
+ * styled like the other inputs opens a month grid with quick picks. Ported
+ * directly from koolboks_sales_crm_web (components/ui/DatePicker.tsx).
+ */
+export function DatePicker({
+  label = "Date",
   value,
   onChange,
-  placeholder = "Choose date",
-  className = "",
-}) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [viewDate, setViewDate] = useState(value || new Date());
-  const containerRef = useRef<HTMLDivElement>(null);
+  min,
+  max,
+  error,
+  description,
+  placeholder = "Pick a date",
+  required,
+  quickPicks,
+  clearable,
+  align = "right",
+  hideLabel = false,
+  className,
+  displayFormat,
+}: DatePickerProps) {
+  const id = useId();
+  const [open, setOpen] = useState(false);
+  const today = toIso(new Date());
+
+  const isoValue = useMemo(() => {
+    if (!value) return "";
+    if (value instanceof Date) return toIso(value);
+    return value;
+  }, [value]);
+
+  const [month, setMonth] = useState(() => fromIso(isoValue || min || today));
+  const box = useRef<HTMLDivElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const [pos, setPos] = useState<React.CSSProperties | null>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
+    if (open) setMonth(fromIso(isoValue || min || today));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const away = (e: MouseEvent | TouchEvent) => {
+      const t = e.target as Node;
+      if (!box.current?.contains(t) && !panel.current?.contains(t))
+        setOpen(false);
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    const esc = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    document.addEventListener("mousedown", away);
+    document.addEventListener("touchstart", away);
+    document.addEventListener("keydown", esc);
+    return () => {
+      document.removeEventListener("mousedown", away);
+      document.removeEventListener("touchstart", away);
+      document.removeEventListener("keydown", esc);
+    };
+  }, [open]);
 
-  const daysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
-  const firstDayOfMonth = (year: number, month: number) => new Date(year, month, 1).getDay();
+  // The calendar is drawn on <body> (so a scrolling modal or card can't clip
+  // it), under the field, or above it when there isn't room below.
+  useLayoutEffect(() => {
+    if (!open) {
+      setPos(null);
+      return;
+    }
+    const place = () => {
+      const r = trigger.current?.getBoundingClientRect();
+      if (!r) return;
+      const width = Math.min(300, window.innerWidth - 32);
+      const left = Math.max(
+        16,
+        Math.min(
+          align === "left" ? r.left : r.right - width,
+          window.innerWidth - width - 16
+        )
+      );
+      const below = window.innerHeight - r.bottom;
+      const height = panel.current?.offsetHeight ?? 380;
+      setPos(
+        below >= height + 16 || below >= r.top
+          ? { top: r.bottom + 8, left, width }
+          : { bottom: window.innerHeight - r.top + 8, left, width }
+      );
+    };
+    place();
+    window.addEventListener("resize", place);
+    window.addEventListener("scroll", place, true);
+    return () => {
+      window.removeEventListener("resize", place);
+      window.removeEventListener("scroll", place, true);
+    };
+  }, [open, align]);
 
-  const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
+  const allowed = (iso: string) =>
+    (!min || iso >= min) && (!max || iso <= max);
 
-  const year = viewDate.getFullYear();
-  const month = viewDate.getMonth();
+  // Monday-first grid for the shown month, padded with blanks.
+  const cells = useMemo(() => {
+    const first = new Date(month.getFullYear(), month.getMonth(), 1);
+    const lead = (first.getDay() + 6) % 7;
+    const days = new Date(
+      month.getFullYear(),
+      month.getMonth() + 1,
+      0
+    ).getDate();
+    return [
+      ...Array(lead).fill(null),
+      ...Array.from({ length: days }, (_, i) =>
+        toIso(new Date(month.getFullYear(), month.getMonth(), i + 1))
+      ),
+    ];
+  }, [month]);
 
-  const handlePrevMonth = () => setViewDate(new Date(year, month - 1, 1));
-  const handleNextMonth = () => setViewDate(new Date(year, month + 1, 1));
+  const shift = (n: number) =>
+    setMonth((m) => new Date(m.getFullYear(), m.getMonth() + n, 1));
 
-  const handleDateSelect = (day: number) => {
-    const newDate = new Date(year, month, day);
-    onChange?.(newDate);
-    setIsOpen(false);
-  };
-
-  const handleToday = () => {
-    const today = new Date();
-    onChange?.(today);
-    setViewDate(today);
-    setIsOpen(false);
+  const pick = (iso: string) => {
+    if (value instanceof Date) {
+      onChange(iso ? fromIso(iso) : undefined);
+    } else {
+      onChange(iso);
+    }
+    setOpen(false);
   };
 
   const handleClear = () => {
-    // Note: This simplified version just resets the internal state
-    setIsOpen(false);
+    if (value instanceof Date) {
+      onChange(undefined);
+    } else {
+      onChange("");
+    }
+    setOpen(false);
   };
 
-  const days = [];
-  const startDay = firstDayOfMonth(year, month);
-  const totalDays = daysInMonth(year, month);
+  const base = min && min > today ? min : today;
 
-  // Fill in empty spaces before the first day
-  for (let i = 0; i < startDay; i++) {
-    days.push(<div key={`empty-${i}`} className="w-8 h-8" />);
-  }
-
-  // Fill in the actual days
-  for (let d = 1; d <= totalDays; d++) {
-    const isSelected = value?.getDate() === d && value?.getMonth() === month && value?.getFullYear() === year;
-    const isToday = new Date().getDate() === d && new Date().getMonth() === month && new Date().getFullYear() === year;
-
-    days.push(
-      <button
-        key={d}
-        onClick={() => handleDateSelect(d)}
-        className={`
-          w-8 h-8 text-xs font-semibold rounded-md flex items-center justify-center transition-colors
-          ${isSelected ? "bg-brand-charcoal text-white" : isToday ? "text-brand-orange-text font-bold" : "text-gray-700 hover:bg-gray-100"}
-        `}
-      >
-        {d}
-      </button>
-    );
-  }
+  const displayString = useMemo(() => {
+    if (!isoValue) return "";
+    if (displayFormat === "dd/mm/yyyy" || placeholder === "dd/mm/yyyy") {
+      return formatDisplayDate(isoValue);
+    }
+    return longDate(isoValue);
+  }, [isoValue, displayFormat, placeholder]);
 
   return (
-    <div className={`relative w-48 ${className}`} ref={containerRef}>
-      <button
-        type="button"
-        onClick={() => setIsOpen(!isOpen)}
-        className={`
-          flex items-center gap-2 w-full bg-white border rounded-md py-2.5 px-4 text-sm transition-all
-          ${isOpen ? "border-brand-charcoal ring-2 ring-brand-orange/20" : "border-gray-200 hover:border-gray-300"}
-        `}
-      >
-        <Icon name="calendar_today" size="sm" className="text-gray-400" />
-        <span className={value ? "text-gray-900" : "text-gray-400"}>
-          {value ? value.toLocaleDateString("en-GB") : placeholder}
-        </span>
-      </button>
+    <div className={cn("input-container relative", className)} ref={box}>
+      <label className={hideLabel ? "sr-only" : "input-label"} htmlFor={id}>
+        {label}
+        {required && <span className="required-asterisk">*</span>}
+      </label>
+      <div className="relative">
+        <button
+          ref={trigger}
+          id={id}
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-haspopup="dialog"
+          aria-expanded={open}
+          className={cn(
+            "input-field w-full flex items-center gap-3 text-left cursor-pointer",
+            error ? "error" : ""
+          )}
+        >
+          <CalendarIcon
+            className="w-4.5 h-4.5 shrink-0"
+            style={{ color: "var(--brand-orange)" }}
+            aria-hidden
+          />
+          <span
+            className="flex-1 truncate"
+            style={{
+              color: isoValue ? "var(--text-primary)" : "var(--text-tertiary)",
+              fontWeight: 400,
+            }}
+          >
+            {isoValue ? displayString : placeholder}
+          </span>
+        </button>
+        {isoValue && (clearable ?? !required) && (
+          <button
+            type="button"
+            onClick={handleClear}
+            aria-label={`Clear ${label}`}
+            className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full cursor-pointer hover:bg-gray-100 transition-colors"
+            style={{ color: "var(--text-tertiary)" }}
+          >
+            <Cross2Icon className="w-4 h-4" aria-hidden />
+          </button>
+        )}
+      </div>
 
-      {isOpen && (
-        <div className="absolute z-20 w-[280px] mt-1.5 bg-white border border-gray-100 rounded-md shadow-md p-4 animate-in fade-in slide-in-from-top-2 duration-200">
-          <div className="flex items-center justify-between mb-4">
-             <button onClick={handlePrevMonth} className="p-1 hover:bg-gray-100 rounded text-gray-400">
-                <Icon name="chevron_left" size="sm" />
-             </button>
-             <span className="text-sm font-bold text-gray-900">
-                {monthNames[month]} {year}
-             </span>
-             <button onClick={handleNextMonth} className="p-1 hover:bg-gray-100 rounded text-gray-400">
-                <Icon name="chevron_right" size="sm" />
-             </button>
-          </div>
+      {open &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            ref={panel}
+            role="dialog"
+            aria-label={label}
+            className="fixed z-[1000] p-3 rounded-[var(--radius)] border shadow-xl animate-in fade-in zoom-in-95 duration-100"
+            style={{
+              ...(pos ?? { top: -9999, left: -9999, width: 300 }),
+              backgroundColor: "var(--accent-white)",
+              borderColor: "var(--light-gray)",
+            }}
+          >
+            {quickPicks && quickPicks.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-3">
+                {quickPicks.map(([text, days]) => {
+                  const iso = addDays(base, days);
+                  const on = isoValue === iso;
+                  return (
+                    <button
+                      key={text}
+                      type="button"
+                      disabled={!allowed(iso)}
+                      onClick={() => pick(iso)}
+                      className="px-3 h-8 rounded-full border text-[12px] font-medium disabled:opacity-40 cursor-pointer transition-colors"
+                      style={{
+                        borderColor: on
+                          ? "var(--brand-orange)"
+                          : "var(--light-gray)",
+                        backgroundColor: on
+                          ? "var(--brand-orange-soft)"
+                          : "transparent",
+                        color: on
+                          ? "var(--brand-orange-text)"
+                          : "var(--text-primary)",
+                      }}
+                    >
+                      {text}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+            <div className="flex items-center justify-between mb-2">
+              <button
+                type="button"
+                onClick={() => shift(-1)}
+                aria-label="Previous month"
+                className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-[var(--bg-primary)] cursor-pointer text-gray-700 transition-colors"
+              >
+                <ChevronLeftIcon className="w-4 h-4" aria-hidden />
+              </button>
+              <span
+                className="text-[14px] font-semibold"
+                style={{ color: "var(--text-primary)" }}
+              >
+                {month.toLocaleDateString("en-GB", {
+                  month: "long",
+                  year: "numeric",
+                })}
+              </span>
+              <button
+                type="button"
+                onClick={() => shift(1)}
+                aria-label="Next month"
+                className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-[var(--bg-primary)] cursor-pointer text-gray-700 transition-colors"
+              >
+                <ChevronRightIcon className="w-4 h-4" aria-hidden />
+              </button>
+            </div>
+            <div className="grid grid-cols-7 gap-1 text-center">
+              {WEEKDAYS.map((d) => (
+                <span
+                  key={d}
+                  className="text-[11px] font-medium py-1"
+                  style={{ color: "var(--text-tertiary)" }}
+                >
+                  {d}
+                </span>
+              ))}
+              {cells.map((iso, i) =>
+                iso ? (
+                  <button
+                    key={iso}
+                    type="button"
+                    disabled={!allowed(iso)}
+                    onClick={() => pick(iso)}
+                    aria-label={longDate(iso)}
+                    aria-pressed={iso === isoValue}
+                    className="h-9 rounded-full text-[13px] disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer transition-all flex items-center justify-center"
+                    style={{
+                      backgroundColor:
+                        iso === isoValue
+                          ? "var(--brand-orange)"
+                          : "transparent",
+                      color: iso === isoValue ? "#fff" : "var(--text-primary)",
+                      fontWeight:
+                        iso === today || iso === isoValue ? 700 : 400,
+                      boxShadow:
+                        iso === today && iso !== isoValue
+                          ? "inset 0 0 0 1px var(--brand-orange)"
+                          : undefined,
+                    }}
+                  >
+                    {Number(iso.slice(8))}
+                  </button>
+                ) : (
+                  <span key={`blank-${i}`} />
+                )
+              )}
+            </div>
 
-          <div className="grid grid-cols-7 gap-1 text-center mb-2">
-            {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((d) => (
-              <div key={d} className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{d}</div>
-            ))}
-          </div>
+            <div className="flex gap-2 mt-3 pt-2.5 border-t border-[var(--light-gray)]">
+              <button
+                type="button"
+                onClick={handleClear}
+                className="flex-1 py-1.5 text-xs font-semibold rounded-md border border-[var(--light-gray)] hover:bg-[var(--bg-primary)] transition-colors cursor-pointer"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Clear
+              </button>
+              <button
+                type="button"
+                onClick={() => pick(today)}
+                className="flex-1 py-1.5 text-xs font-bold rounded-md border transition-colors cursor-pointer"
+                style={{
+                  borderColor: "var(--brand-orange)",
+                  backgroundColor: "var(--brand-orange-soft)",
+                  color: "var(--brand-orange-text)",
+                }}
+              >
+                Today
+              </button>
+            </div>
+          </div>,
+          document.body
+        )}
 
-          <div className="grid grid-cols-7 gap-1">
-            {days}
-          </div>
-
-          <div className="flex gap-2 mt-6 pt-4 border-t border-gray-100">
-            <Button variant="ghost" size="sm" className="flex-1 text-brand-orange-text border border-gray-200" onClick={handleClear}>Clear</Button>
-            <Button variant="ghost" size="sm" className="flex-1 text-brand-orange-text border border-gray-200" onClick={handleToday}>Today</Button>
-          </div>
-        </div>
+      {description && (
+        <p
+          className="-mt-1 text-[12px] leading-snug"
+          style={{ color: "var(--text-tertiary)" }}
+        >
+          {description}
+        </p>
       )}
+      {error && <span className="input-error">{error}</span>}
     </div>
   );
-};
+}
 
-export { DatePicker };
+export default DatePicker;

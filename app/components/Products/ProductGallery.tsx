@@ -32,14 +32,14 @@ export const ProductGallery: React.FC = () => {
 
   return (
     <div className="flex flex-col-reverse sm:flex-row items-start gap-4 w-full lg:w-1/2">
-      {/* Vertical Mini Picture View (Thumbnails on the Left) */}
-      <div className="flex sm:flex-col items-center gap-2 shrink-0 w-full sm:w-18">
+      {/* Thumbnails (left on desktop, below on mobile) */}
+      <div className="flex sm:flex-col items-center gap-2 shrink-0 w-full sm:w-20">
         {/* Scroll Up Button */}
         <button
           type="button"
           onClick={scrollUp}
           aria-label="Scroll thumbnails up"
-          className="hidden sm:flex w-7 h-7 rounded-full bg-white hover:bg-gray-100 border border-gray-200 items-center justify-center text-gray-500 hover:text-gray-900 transition-colors cursor-pointer "
+          className="hidden sm:flex w-8 h-8 rounded-full bg-white/80 backdrop-blur-xl ring-1 ring-black/[0.06] items-center justify-center text-subtle hover:text-brand-charcoal hover:bg-white transition-colors cursor-pointer"
         >
           <FiChevronUp size={16} />
         </button>
@@ -47,7 +47,7 @@ export const ProductGallery: React.FC = () => {
         {/* Thumbnails Container */}
         <div
           ref={scrollRef}
-          className="flex sm:flex-col gap-2.5 overflow-x-auto sm:overflow-y-auto max-h-[420px] w-full py-1 px-0.5 scrollbar-none scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          className="flex sm:flex-col gap-2.5 overflow-x-auto sm:overflow-y-auto max-h-[440px] w-full p-1 scrollbar-none scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           {images.map((img, idx) => (
             <button
@@ -55,11 +55,11 @@ export const ProductGallery: React.FC = () => {
               type="button"
               onClick={() => setActiveImage(img)}
               className={`
-                relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-xl overflow-hidden bg-white p-1.5 transition-all cursor-pointer 
+                relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-[14px] overflow-hidden bg-off-white p-1.5 transition-all duration-200 cursor-pointer
                 ${
                   activeImage === img
-                    ? "border-2 border-brand-orange ring-2 ring-brand-orange/20"
-                    : "border border-gray-200 hover:border-gray-400 opacity-80 hover:opacity-100"
+                    ? "ring-2 ring-brand-orange"
+                    : "ring-1 ring-black/[0.06] opacity-70 hover:opacity-100"
                 }
               `}
             >
@@ -68,7 +68,7 @@ export const ProductGallery: React.FC = () => {
                   src={img}
                   alt={`Freezer view ${idx + 1}`}
                   fill sizes="64px"
-                  className="object-contain"
+                  className="object-contain mix-blend-multiply"
                 />
               </div>
             </button>
@@ -80,19 +80,19 @@ export const ProductGallery: React.FC = () => {
           type="button"
           onClick={scrollDown}
           aria-label="Scroll thumbnails down"
-          className="hidden sm:flex w-7 h-7 rounded-full bg-white hover:bg-gray-100 border border-gray-200 items-center justify-center text-gray-500 hover:text-gray-900 transition-colors cursor-pointer "
+          className="hidden sm:flex w-8 h-8 rounded-full bg-white/80 backdrop-blur-xl ring-1 ring-black/[0.06] items-center justify-center text-subtle hover:text-brand-charcoal hover:bg-white transition-colors cursor-pointer"
         >
           <FiChevronDown size={16} />
         </button>
       </div>
 
-      {/* Main Big Product View */}
-      <div className="relative w-full aspect-square bg-white border border-gray-200 rounded-2xl overflow-hidden flex items-center justify-center p-6 shadow-xs group">
+      {/* Main image stage */}
+      <div className="relative w-full aspect-square bg-off-white rounded-[22px] overflow-hidden flex items-center justify-center p-6 group">
         <Image
           src={activeImage}
           alt="Koolbuy Solar Freezer Unit"
           fill sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+          className="object-contain p-8 md:p-12 mix-blend-multiply group-hover:scale-[1.03] transition-transform duration-500 ease-out"
           priority
         />
       </div>

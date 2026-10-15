@@ -88,7 +88,7 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({ children, config
 	const messageQueueRef = useRef<any[]>([]);
 
 	const {
-		url = process.env.NEXT_PUBLIC_SOCKET_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',
+		url = process.env.NEXT_PUBLIC_SOCKET_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001',
 		autoConnect = true,
 		enableOfflineMode: configEnableOfflineMode = true,
 		maxQueueSize = 100,

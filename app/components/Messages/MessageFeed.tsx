@@ -86,38 +86,40 @@ export const MessageFeed: React.FC = () => {
   exit: { opacity: 0, y: -10, transition: { duration: 0.2 } }
  };
 
+ const TAB = "h-8 px-4 text-[14px] font-medium rounded-full transition-colors duration-200 cursor-pointer";
+
  return (
-  <div className="w-full bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden flex flex-col">
+  <div className="w-full bg-white rounded-[22px] overflow-hidden flex flex-col">
    {/* Feed Toolbar */}
-   <div className="p-4 border-b border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-4">
-    <div className="flex gap-2 p-1 bg-gray-100 rounded-lg">
+   <div className="px-5 py-4 md:px-6 border-b border-black/[0.06] flex flex-col sm:flex-row justify-between items-center gap-4">
+    <div className="flex gap-1 p-1 bg-black/[0.04] rounded-full">
      <button
       onClick={() => setActiveTab("all")}
-      className={`px-4 py-1.5 text-sm font-medium rounded-md transition-colors ${activeTab === 'all' ? 'bg-white text-brand-orange-text' : 'text-gray-600 hover:text-gray-900'}`}
+      className={`${TAB} ${activeTab === 'all' ? 'bg-brand-orange text-white' : 'text-brand-charcoal hover:bg-black/[0.04]'}`}
      >
-      All Messages
+      All messages
      </button>
      <button
       onClick={() => setActiveTab("unread")}
-      className={`px-4 py-1.5 text-sm font-medium rounded-md transition-colors ${activeTab === 'unread' ? 'bg-white text-brand-orange-text' : 'text-gray-600 hover:text-gray-900'}`}
+      className={`${TAB} ${activeTab === 'unread' ? 'bg-brand-orange text-white' : 'text-brand-charcoal hover:bg-black/[0.04]'}`}
      >
       Unread
      </button>
     </div>
 
     <div className="relative w-full sm:w-64">
-     <Icon name="search" size="sm" className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+     <Icon name="search" size="sm" className="absolute left-4 top-1/2 -translate-y-1/2 text-faint" />
      <input
       type="text"
       placeholder="Search messages..."
-      className="w-full h-10 pl-10 pr-4 bg-white border border-gray-300 rounded-lg text-sm outline-none focus:border-brand-orange transition-colors text-gray-900"
+      className="w-full h-10 pl-11 pr-4 rounded-full bg-black/[0.04] border border-transparent outline-none transition-colors text-[14px] text-brand-charcoal placeholder:text-faint focus:bg-white focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/15"
      />
     </div>
    </div>
 
    {/* Feed List Area */}
    <motion.div
-    className="flex-1 w-full flex flex-col divide-y divide-gray-100 min-h-[400px]"
+    className="flex-1 w-full flex flex-col divide-y divide-black/[0.06] min-h-[400px]"
     variants={containerVariants}
     initial="hidden"
     animate="show"
@@ -132,43 +134,43 @@ export const MessageFeed: React.FC = () => {
         animate="show"
         exit="exit"
         layout
-        className={`p-4 sm:p-5 flex gap-4 hover:bg-gray-50 transition-colors cursor-pointer group relative ${message.isUnread ? 'bg-brand-orange-soft/20' : 'bg-white'}`}
+        className="pl-7 pr-5 py-4 sm:pl-8 sm:pr-6 sm:py-5 flex gap-4 bg-white hover:bg-black/[0.02] transition-colors duration-200 cursor-pointer group relative"
        >
         {message.isUnread && (
-         <div className="absolute left-0 top-0 bottom-0 w-1 bg-brand-charcoal rounded-r"></div>
+         <div className="absolute left-3 sm:left-3.5 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-brand-orange" aria-label="Unread"></div>
         )}
 
-        <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border border-gray-100 bg-white">
+        <div className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0 bg-off-white">
          {message.avatar.startsWith("icon:") ? (
-          <div className="w-full h-full bg-brand-orange-soft flex items-center justify-center text-brand-orange">
-           <Icon name={message.avatar.replace("icon:", "")} size="md" />
+          <div className="w-full h-full bg-brand-orange-soft flex items-center justify-center text-brand-orange-text">
+           <Icon name={message.avatar.replace("icon:", "")} size="sm" />
           </div>
          ) : (
           <Image src={message.avatar} alt={message.sender} width={48} height={48} className="w-full h-full object-cover" />
          )}
         </div>
 
-        <div className="flex-1 flex flex-col min-w-0">
-         <div className="flex justify-between items-start mb-1 gap-4">
-          <span className={`text-sm sm:text-base truncate ${message.isUnread ? 'font-bold text-gray-900' : 'font-semibold text-gray-700'}`}>
+        <div className="flex-1 flex flex-col min-w-0 gap-0.5">
+         <div className="flex justify-between items-baseline gap-4">
+          <span className={`text-[15px] truncate text-brand-charcoal ${message.isUnread ? 'font-semibold' : 'font-medium'}`}>
            {message.sender}
           </span>
-          <span className={`text-xs sm:text-sm whitespace-nowrap pt-0.5 ${message.isUnread ? 'font-bold text-brand-orange-text' : 'text-gray-400 font-medium'}`}>
+          <span className={`text-[12px] whitespace-nowrap ${message.isUnread ? 'font-medium text-brand-orange-text' : 'text-faint'}`}>
            {message.time}
           </span>
          </div>
 
-         <span className={`text-sm truncate mb-1 ${message.isUnread ? 'font-semibold text-gray-900' : 'font-medium text-gray-700'}`}>
+         <span className={`text-[14px] truncate ${message.isUnread ? 'font-medium text-brand-charcoal' : 'text-brand-charcoal'}`}>
           {message.subject}
          </span>
 
-         <p className="text-sm text-gray-500 line-clamp-1 sm:line-clamp-2 leading-relaxed">
+         <p className="text-[13px] text-subtle line-clamp-1 sm:line-clamp-2 leading-relaxed">
           {message.preview}
          </p>
         </div>
 
-        <div className="hidden sm:flex flex-col justify-center items-end opacity-0 group-hover:opacity-100 transition-opacity">
-         <button className="w-8 h-8 rounded-full bg-white border border-gray-200 text-gray-500 hover:text-brand-orange-text hover:border-brand-charcoal flex items-center justify-center ">
+        <div className="hidden sm:flex flex-col justify-center items-end opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+         <button className="w-8 h-8 rounded-full text-faint hover:text-error hover:bg-error-soft transition-colors flex items-center justify-center cursor-pointer">
           <Icon name="delete" size="sm" />
          </button>
         </div>
@@ -180,10 +182,12 @@ export const MessageFeed: React.FC = () => {
        initial={{ opacity: 0 }}
        animate={{ opacity: 1 }}
        exit={{ opacity: 0 }}
-       className="p-12 flex flex-col items-center justify-center text-gray-500 w-full col-span-full h-40"
+       className="py-16 flex flex-col items-center justify-center gap-4 text-center w-full col-span-full"
       >
-       <Icon name="message_header" size="lg" className="mb-4 opacity-50" />
-       <p className="font-medium">No messages found.</p>
+       <div className="w-16 h-16 bg-off-white rounded-full flex items-center justify-center text-faint">
+        <Icon name="message_header" size="md" />
+       </div>
+       <p className="text-[17px] font-semibold text-brand-charcoal">No messages found.</p>
       </motion.div>
      )}
     </AnimatePresence>

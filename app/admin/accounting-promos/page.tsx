@@ -6,6 +6,7 @@ import { TabFilter } from "@/app/components/Admin/TabFilter";
 import { Pagination } from "@/app/components/Admin/Pagination";
 import { RowsPerPage } from "@/app/components/rows-per-page";
 import { Input } from "@/app/components/Form/Inputs";
+import { Search } from "@/app/components/Form";
 import { Button } from "@/app/components/Button";
 import { Icon } from "@/app/components/Icon";
 import { Modal, ModalBody } from "@/app/components/Modal";
@@ -395,24 +396,16 @@ export default function AccountingPromoCodesPage() {
           />
 
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
-            <Input
-              type="text"
+            <Search
               placeholder="Search order ID, customer, vendor, code..."
               value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
+              onChange={(val) => {
+                setSearchQuery(val);
                 setCurrentPage(1);
               }}
-              containerClassName="w-full lg:w-80"
-              className="bg-white border-gray-200 text-xs font-medium rounded-lg"
-              suffixElement={
-                <Icon
-                  name="search-01"
-                  folder="dashboardIcon"
-                  size="sm"
-                  className="text-gray-400"
-                />
-              }
+              maxWidth="100%"
+              className="w-full lg:w-80"
+              showClearButton
             />
 
             <RowsPerPage

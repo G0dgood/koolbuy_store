@@ -36,43 +36,53 @@ export const ProductGridItem: React.FC<{ product: ProductProps }> = ({ product }
    };
 
    return (
-      <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow group flex flex-col h-full relative">
+      <div className="bg-white rounded-[20px] overflow-hidden transition-all duration-300 hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] group flex flex-col h-full relative">
          <Link href="/products/detail" className="flex flex-col flex-1">
-            <div className="relative w-full aspect-square p-5 border-b border-gray-100 flex items-center justify-center">
-               <div className="relative w-full h-full transition-transform duration-300 group-hover:scale-110">
-                  <Image src={product.image} alt={product.title} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw" className="object-contain" />
-               </div>
+            <div className="relative w-full aspect-[4/3] bg-off-white overflow-hidden">
+               <Image
+                  src={product.image}
+                  alt={product.title}
+                  fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 30vw"
+                  className="object-contain mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+               />
                {/* Heart Icon (Overlay) */}
                <div className="absolute top-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <FavoriteButton item={product as any} variant="outline" size="sm" />
+                  <FavoriteButton item={product as any} variant="outline" size="sm" className="rounded-full! border-transparent! bg-white/90! backdrop-blur shadow-xs" />
                </div>
             </div>
-            <div className="p-5 flex flex-col gap-2 pb-16"> {/* Add padding for buttons */}
-               <div className="flex items-center justify-between">
-                  <span className="font-bold text-lg text-gray-900">{product.price}</span>
+            <div className="p-4 flex flex-col gap-1.5 flex-1 justify-between">
+               <div className="flex flex-col gap-1">
+                  <span className="text-[15px] font-semibold text-brand-charcoal leading-snug line-clamp-2">
+                     {product.title}
+                  </span>
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                     <Rating value={product.rating} />
+                     <span className="text-faint text-[13px] tabular-nums">{product.rating}</span>
+                  </div>
                </div>
-               <div className="flex items-center gap-2">
-                  <Rating value={product.rating} />
-                  <span className="text-brand-orange-text text-sm font-medium">{product.rating}</span>
+               <div className="mt-1 flex items-baseline gap-2">
+                  <span className="text-[16px] font-semibold text-brand-charcoal tabular-nums">{product.price}</span>
+                  {product.originalPrice && (
+                     <span className="text-faint line-through text-[13px] tabular-nums">{product.originalPrice}</span>
+                  )}
                </div>
-               <span className="text-gray-600 text-sm leading-relaxed line-clamp-2 group-hover:text-brand-orange-text transition-colors font-medium">
-                  {product.title}
-               </span>
             </div>
          </Link>
 
-         {/* Actions Footer */}
-         <div className="absolute bottom-0 left-0 right-0 p-3 bg-white border-t border-gray-50 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-200">
+         {/* Actions Footer (Hover Overlay) */}
+         <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-white via-white/95 to-transparent pt-8 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-200 translate-y-1 group-hover:translate-y-0">
             <Link href="/products/detail" className="flex-1">
-               <Button variant="secondary" size="sm" className="w-full text-xs font-bold py-2 border-gray-200">
-                  View details
+               <Button variant="outline" size="sm" shape="pill" className="w-full text-[13px]! font-medium h-9!">
+                  Details
                </Button>
             </Link>
             <Button 
                onClick={handleAddToCart}
                variant="accent" 
                size="sm" 
-               className="flex-1 text-xs font-bold py-2 "
+               shape="pill"
+               className="flex-1 text-[13px]! font-medium h-9!"
             >
                Add to cart
             </Button>
@@ -105,60 +115,64 @@ export const ProductListItem: React.FC<{
    };
 
    return (
-      <div className="bg-white border border-gray-200 rounded-lg p-3 md:p-5 flex gap-3 md:gap-6 hover:shadow-md transition-shadow relative group">
+      <div className="bg-white rounded-[20px] overflow-hidden flex gap-3 md:gap-6 transition-shadow duration-300 hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] relative group">
          {/* Product Image */}
-         <Link href="/products/detail" className="w-24 h-24 md:w-48 md:h-48 flex-shrink-0 border border-gray-100 rounded flex items-center justify-center p-2 md:p-4 bg-white cursor-pointer overflow-hidden">
-            <div className="relative w-full h-full transition-transform duration-300 hover:scale-110">
-               <Image src={product.image} alt={product.title} fill sizes="(max-width: 768px) 96px, 192px" className="object-contain" />
-            </div>
+         <Link href="/products/detail" className="relative w-32 md:w-48 self-stretch min-h-32 md:min-h-48 flex-shrink-0 bg-off-white cursor-pointer overflow-hidden">
+            <Image
+               src={product.image}
+               alt={product.title}
+               fill
+               sizes="(max-width: 768px) 128px, 192px"
+               className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+            />
          </Link>
 
          {/* Product Content */}
-         <div className="flex-1 flex flex-col gap-1 md:gap-3 pr-8 md:pr-0">
+         <div className="flex-1 min-w-0 flex flex-col gap-1.5 py-4 pr-4 md:pr-0">
             <div className="flex items-start justify-between">
-               <Link href="/products/detail" className="text-sm md:text-md font-medium text-gray-900 leading-snug hover:text-brand-orange-text cursor-pointer transition-colors line-clamp-2 md:line-clamp-none">
+               <Link href="/products/detail" className="text-[15px] md:text-[17px] font-semibold text-brand-charcoal leading-snug tracking-[-0.01em] hover:underline cursor-pointer line-clamp-2 md:line-clamp-none">
                   {product.title}
                </Link>
             </div>
 
-            <div className="flex flex-col gap-0.5 md:gap-1">
-               <div className="flex items-center gap-2 md:gap-3">
-                  <span className="font-bold text-md md:text-xl text-gray-900">{product.price}</span>
+            <div className="flex flex-col gap-1">
+               <div className="flex items-baseline gap-2">
+                  <span className="text-[15px] md:text-[17px] font-semibold text-brand-charcoal tabular-nums">{product.price}</span>
                   {product.originalPrice && (
-                     <span className="text-gray-400 line-through text-xs md:text-sm font-medium">{product.originalPrice}</span>
+                     <span className="text-faint line-through text-[12px] md:text-[13px] tabular-nums">{product.originalPrice}</span>
                   )}
                </div>
 
                {/* Rating & Orders */}
-               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] md:text-sm font-normal">
+               <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] md:text-[13px]">
                   <div className="flex items-center gap-1">
                      <Rating value={product.rating} />
-                     <span className="text-brand-orange-text font-medium ml-0.5 md:ml-1">{product.rating}</span>
+                     <span className="text-faint ml-0.5 tabular-nums">{product.rating}</span>
                   </div>
-                  <div className="flex items-center gap-1.5 text-gray-400">
-                     <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-gray-300" />
-                     <span>{product.orders} orders</span>
+                  <div className="flex items-center gap-2 text-faint">
+                     <span aria-hidden="true" className="w-[3px] h-[3px] rounded-full bg-gray-300" />
+                     <span className="tabular-nums">{product.orders} orders</span>
                   </div>
                   {/* Shipping Info */}
-                  <div className="flex items-center gap-1.5 text-brand-orange-text">
-                     <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-brand-charcoal" />
+                  <div className="flex items-center gap-2 text-success">
+                     <span aria-hidden="true" className="w-[3px] h-[3px] rounded-full bg-gray-300" />
                      <span className="font-medium">{product.shipping}</span>
                   </div>
                </div>
             </div>
 
             {/* Desktop-only description */}
-            <p className="hidden md:block text-gray-500 text-sm leading-relaxed line-clamp-2 mt-1">
+            <p className="hidden md:block text-subtle text-[14px] leading-relaxed line-clamp-2">
                {product.description}
             </p>
 
-            <div className="flex items-center gap-4 mt-auto pt-2">
-               <Link href="/products/detail" className="text-brand-orange-text font-bold text-sm hover:underline cursor-pointer flex items-center gap-1">
-                  View details
+            <div className="flex items-center gap-4 mt-auto pt-1">
+               <Link href="/products/detail" className="text-brand-orange-text font-medium text-[13px] md:text-[14px] hover:underline cursor-pointer flex items-center gap-1">
+                  View details ›
                </Link>
                <button 
                   onClick={handleAddToCart}
-                  className="md:hidden text-brand-orange-text font-bold text-sm hover:underline cursor-pointer"
+                  className="md:hidden text-brand-orange-text font-medium text-[13px] hover:underline cursor-pointer"
                >
                   Add to cart
                </button>
@@ -166,14 +180,15 @@ export const ProductListItem: React.FC<{
          </div>
 
          {/* Actions Section (Right Side) */}
-         <div className="hidden md:flex flex-col items-end justify-between py-1 min-w-[140px]">
+         <div className="hidden md:flex flex-col items-end justify-between py-4 pr-5 min-w-[150px]">
             <div className="flex flex-col gap-2 items-end w-full">
-               {showFavorite && <FavoriteButton item={product as any} className="flex-shrink-0" />}
+               {showFavorite && <FavoriteButton item={product as any} className="flex-shrink-0 rounded-full! border-transparent!" />}
                <Button 
                   onClick={handleAddToCart}
                   variant="accent" 
                   size="sm" 
-                  className="w-full font-bold mt-2 "
+                  shape="pill"
+                  className="w-full font-medium mt-1 text-[14px]!"
                >
                   Add to cart
                </Button>
@@ -185,7 +200,7 @@ export const ProductListItem: React.FC<{
                      e.stopPropagation();
                      onRemove();
                   }}
-                  className="text-red-500 font-bold text-xs md:text-sm hover:underline cursor-pointer transition-all mt-auto"
+                  className="text-error font-medium text-[13px] hover:underline cursor-pointer transition-all mt-auto"
                >
                   Remove
                </button>

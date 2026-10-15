@@ -15,63 +15,60 @@ export const ProfileSidebar: React.FC = () => {
   const pathname = usePathname();
 
   const navItems: NavItem[] = [
-    { label: "Personal Info", href: "/profile", icon: "profile" },
-    // { label: "My Orders", href: "/orders", icon: "favorite" },
+    { label: "Personal info", href: "/profile", icon: "profile" },
+    // { label: "My orders", href: "/orders", icon: "favorite" },
     // { label: "Messages", href: "/messages", icon: "message_header", badge: 2 },
-    { label: "My Wishlist", href: "/wishlist", icon: "favorite" },
+    { label: "My wishlist", href: "/wishlist", icon: "favorite" },
     { label: "Settings", href: "/settings", icon: "Settings" },
   ];
 
   return (
-    <aside className="w-full lg:w-72 shrink-0 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden sticky top-24">
+    <aside className="w-full lg:w-72 shrink-0 bg-white rounded-[22px] overflow-hidden lg:sticky lg:top-24">
       {/* User Header */}
-      <div className="p-8 pb-6 border-b border-gray-50 flex flex-col items-center text-center">
-        <div className="relative group cursor-pointer">
-          <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg ring-1 ring-gray-100 mb-4 group-hover:ring-brand-orange/30 transition-all">
+      <div className="px-6 pt-8 pb-6 flex flex-col items-center text-center">
+        <div className="relative group cursor-pointer mb-4">
+          <div className="w-20 h-20 rounded-full overflow-hidden bg-off-white">
             <Image
               src="/avatars/avatar=pic1.jpg"
               alt="User Avatar"
               width={96}
               height={96}
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              className="w-full h-full object-cover transition-transform duration-500 ease-apple group-hover:scale-[1.04]"
             />
           </div>
-          <div className="absolute bottom-4 right-1 bg-brand-charcoal text-white p-1.5 rounded-full shadow-md border-2 border-white translate-y-1/2">
+          <div className="absolute -bottom-0.5 -right-0.5 w-7 h-7 rounded-full bg-white ring-1 ring-black/[0.08] text-brand-charcoal flex items-center justify-center transition-colors group-hover:text-brand-orange-text">
             <Icon name="edit" size="xs" />
           </div>
         </div>
-        <h3 className="text-xl font-bold text-gray-900 mb-0.5">Alex John</h3>
-        <p className="text-sm font-medium text-gray-400 mb-3 uppercase tracking-tighter">Premium Member</p>
-        <div className="px-3 py-1 bg-brand-orange-soft text-brand-orange-text text-[10px] font-bold rounded-full uppercase tracking-wider">
-          Verified Buyer
-        </div>
+        <h3 className="text-[19px] font-semibold text-brand-charcoal tracking-[-0.01em] leading-tight">Alex John</h3>
+        <p className="mt-0.5 text-[13px] text-subtle">Premium member</p>
+        <span className="mt-3 px-2.5 py-0.5 bg-brand-orange-soft text-brand-charcoal text-[12px] font-medium rounded-full">
+          Verified buyer
+        </span>
       </div>
 
       {/* Navigation */}
-      <nav className="flex flex-col py-4 px-3">
+      <nav className="flex flex-col gap-0.5 p-3 border-t border-black/[0.06]">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           return (
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-4 px-5 py-3.5 rounded-xl font-bold text-sm transition-all group relative overflow-hidden
+              className={`flex items-center gap-3 px-4 h-11 rounded-xl text-[15px] transition-colors duration-200 group
                 ${isActive
-                  ? "text-brand-orange-text bg-brand-orange-soft"
-                  : "text-gray-500 hover:text-brand-orange-text hover:bg-gray-50"}`}
+                  ? "bg-brand-orange-soft text-brand-charcoal font-medium"
+                  : "text-brand-charcoal hover:bg-black/[0.04]"}`}
             >
-              {isActive && (
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-6 bg-brand-charcoal rounded-r-full" />
-              )}
               <Icon
                 name={item.icon}
                 size="sm"
-                className={`transition-colors ${isActive ? "text-brand-orange-text" : "text-gray-400 group-hover:text-brand-orange-text"}`}
+                className={`transition-colors ${isActive ? "text-brand-orange-text" : "text-faint"}`}
               />
               <span className="flex-1">{item.label}</span>
               {item.badge && (
-                <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold transition-colors
-                  ${isActive ? "bg-brand-charcoal text-white" : "bg-gray-200 text-gray-600 group-hover:bg-brand-charcoal group-hover:text-white"}`}>
+                <span className={`min-w-5 h-5 px-1.5 rounded-full flex items-center justify-center text-[11px] font-semibold tabular-nums
+                  ${isActive ? "bg-brand-orange text-white" : "bg-black/[0.06] text-subtle"}`}>
                   {item.badge}
                 </span>
               )}
@@ -81,10 +78,10 @@ export const ProfileSidebar: React.FC = () => {
       </nav>
 
       {/* Footer Action */}
-      <div className="p-6 pt-2 border-t border-gray-50 bg-gray-50/30">
-        <button className="flex items-center gap-3 px-4 py-3 text-red-500 transition-all w-full rounded-xl font-bold text-sm hover:bg-red-50 hover:text-red-700">
+      <div className="p-3 border-t border-black/[0.06]">
+        <button className="flex items-center gap-3 px-4 h-11 text-error transition-colors w-full rounded-xl text-[15px] hover:bg-error-soft cursor-pointer">
           <Icon name="logout" size="sm" />
-          Log Out
+          Log out
         </button>
       </div>
     </aside>

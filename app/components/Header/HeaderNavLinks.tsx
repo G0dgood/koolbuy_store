@@ -23,14 +23,14 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
   return (
     <div className="hidden lg:flex items-center h-full">
       {/* Navigation Buttons Row */}
-      <div className="flex items-center gap-4 xl:gap-6 text-xs xl:text-sm font-semibold text-gray-800 h-full">
+      <div className="flex items-center gap-5 xl:gap-7 text-[13px] font-medium text-gray-800 h-full">
         {/* Home */}
         <Link
           href="/"
           className={`transition-colors py-2 whitespace-nowrap ${
             isActive("/")
-              ? "text-brand-orange-text font-bold"
-              : "text-gray-800 hover:text-brand-orange-text"
+              ? "text-brand-orange-text font-semibold"
+              : "text-gray-600 hover:text-brand-charcoal"
           }`}
         >
           Home
@@ -47,7 +47,7 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
             className={`flex items-center gap-1.5 h-full py-2 transition-colors cursor-pointer outline-none whitespace-nowrap ${
               activeDropdown === "categories"
                 ? "text-brand-orange-text"
-                : "text-gray-900 hover:text-brand-orange-text"
+                : "text-gray-600 hover:text-brand-charcoal"
             }`}
           >
             <span>All categories</span>
@@ -70,7 +70,8 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
             href="https://kool-konnect-frontend.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="h-10 bg-brand-charcoal text-white px-8 hover:bg-brand-charcoal/90 active:scale-95 transition-all w-full md:w-fit font-bold"
+            shape="pill"
+            className="bg-brand-charcoal text-white hover:bg-brand-charcoal/85 w-full md:w-fit"
           >
             Marketplace
           </Button>
@@ -86,8 +87,8 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
             onClick={() => onToggleDropdown("quickLinks")}
             className={`flex items-center gap-1 transition-colors cursor-pointer py-2 outline-none whitespace-nowrap ${
               activeDropdown === "quickLinks"
-                ? "text-brand-orange-text font-bold"
-                : "text-gray-800 hover:text-brand-orange-text"
+                ? "text-brand-orange-text"
+                : "text-gray-600 hover:text-brand-charcoal"
             }`}
           >
             <span>Quick Links</span>

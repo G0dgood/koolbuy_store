@@ -22,7 +22,7 @@ const BrandsPage = () => {
       description:
         "Our flagship house, masterfully balancing midnight bloom with rare oud for an unforgettable sensory trajectory.",
       image: "/brandImage/signature_oud.webp",
-      icon: <HiSparkles className="text-brand-orange-text" size={24} />,
+      icon: <HiSparkles className="text-brand-orange-text" size={22} />,
       link: "/products?brand=Bloom+%26+Mist",
     },
     {
@@ -30,7 +30,7 @@ const BrandsPage = () => {
       description:
         "Reinventing classic elegance through avant-garde scented sensations and timeless ambery signatures.",
       image: "/brandImage/product_2.png",
-      icon: <HiStar className="text-brand-orange-text" size={24} />,
+      icon: <HiStar className="text-brand-orange-text" size={22} />,
       link: "/products?brand=Prada",
     },
     {
@@ -38,7 +38,7 @@ const BrandsPage = () => {
       description:
         "Powerful, passionate compositions that blend noble ingredients into vibrant, high-fidelity fragrances.",
       image: "/brandImage/product_4.png",
-      icon: <HiShieldCheck className="text-brand-orange-text" size={24} />,
+      icon: <HiShieldCheck className="text-brand-orange-text" size={22} />,
       link: "/products?brand=Versace",
     },
     {
@@ -46,7 +46,7 @@ const BrandsPage = () => {
       description:
         "Eclectic and contemporary structures that remain unchanged from the first application to the skin.",
       image: "/brandImage/gucci_guilty.png",
-      icon: <HiBeaker className="text-brand-orange-text" size={24} />,
+      icon: <HiBeaker className="text-brand-orange-text" size={22} />,
       link: "/products?brand=Gucci",
     },
     {
@@ -54,7 +54,7 @@ const BrandsPage = () => {
       description:
         "Absolute luxury distilled into intense floral and woody orchestrations for the modern connoisseur.",
       image: "/brandImage/product_6.png",
-      icon: <HiShoppingBag className="text-brand-orange-text" size={24} />,
+      icon: <HiShoppingBag className="text-brand-orange-text" size={22} />,
       link: "/products?brand=Dior",
     },
     {
@@ -62,122 +62,116 @@ const BrandsPage = () => {
       description:
         "Sophisticated beauty rituals designed to materialize absolute radiance and timeless femininity.",
       image: "/brandImage/product_13.png",
-      icon: <HiSparkles className="text-brand-orange-text" size={24} />,
+      icon: <HiSparkles className="text-brand-orange-text" size={22} />,
       link: "/products?brand=Lancôme",
     },
   ];
 
+  const ease = [0.16, 1, 0.3, 1] as const;
+
   return (
-    <div className="min-h-screen bg-off-white flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-off-white flex flex-col font-sans text-brand-charcoal">
       <Header />
 
-      <main className="flex-1 w-full bg-white">
-        {/* Brands Hero section */}
-        <section className="bg-gray-50 py-20 md:py-32 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-charcoal rounded-full filter blur-[120px] opacity-5 translate-x-1/2 -translate-y-1/2" />
-          <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-16 text-center relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="flex flex-col gap-4"
-            >
-              <span className="text-brand-orange-text font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs">
-                Artisanal Houses
-              </span>
-              <h1 className="text-4xl md:text-7xl font-bold text-brand-charcoal tracking-tighter leading-none font-inter">
-                The <span className="text-brand-orange-text">Brands.</span>
-              </h1>
-              <p className="text-gray-500 max-w-xl mx-auto text-sm md:text-lg mt-6 leading-relaxed font-medium">
-                Explore our curated selection of luxury perfume houses and
-                skincare curators, each bringing a unique signature to the
-                Koolbuy Store ecosystem.
-              </p>
-            </motion.div>
-          </div>
+      <main className="flex-1 w-full max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 pt-10 md:pt-16 pb-16 md:pb-24 flex flex-col gap-12 md:gap-20">
+        {/* Brands headline */}
+        <section className="text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease }}
+            className="flex flex-col items-center gap-3 max-w-3xl mx-auto"
+          >
+            <span className="text-[13px] font-semibold text-brand-orange-text">
+              Artisanal houses
+            </span>
+            <h1 className="text-[36px] sm:text-[44px] md:text-[56px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+              The <span className="text-faint">brands.</span>
+            </h1>
+            <p className="text-subtle max-w-xl mx-auto text-[17px] md:text-[19px] mt-1 leading-snug">
+              Explore our curated selection of luxury perfume houses and
+              skincare curators, each bringing a unique signature to the
+              Koolbuy Store ecosystem.
+            </p>
+          </motion.div>
         </section>
 
-        <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-16 py-16 md:py-32">
-          {/* Visual Brands Grid */}
-          <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12">
-            {brands.map((brand, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: i * 0.1 }}
-                className="relative aspect-16/10 rounded-3xl overflow-hidden cursor-pointer group shadow-sm hover:shadow-md transition-all duration-700"
-              >
+        {/* Brands grid: photo edge to edge, text below */}
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4">
+          {brands.map((brand, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: (i % 2) * 0.08, ease }}
+              className="bg-white rounded-tile md:rounded-hero overflow-hidden flex flex-col cursor-pointer group transition-shadow duration-300 hover:shadow-lift"
+            >
+              <div className="relative aspect-16/10 bg-off-white overflow-hidden">
                 <Image
                   src={brand.image}
                   alt={brand.title}
-                  fill sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000"
+                  fill sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 ease-apple group-hover:scale-[1.03]"
                 />
+              </div>
 
-                {/* Glassmorphism Overlay */}
-                <div className="absolute inset-0 bg-linear-to-t from-gray-900/60 via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
-
-                <div className="absolute bottom-8 left-8 right-8">
-                  <div className="bg-white/70 backdrop-blur-2xl p-8 md:p-10 rounded-3xl border border-white/40 flex flex-col gap-6 group-hover:-translate-y-4 transition-transform duration-500">
-                    <div className="flex items-center justify-between">
-                      <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-lg">
-                        {brand.icon}
-                      </div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal opacity-60">
-                        Signature House
-                      </span>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <h3 className="text-3xl font-bold text-brand-charcoal tracking-tight">
-                        {brand.title}
-                      </h3>
-                      <p className="text-sm text-gray-500 leading-relaxed font-medium max-w-sm">
-                        {brand.description}
-                      </p>
-                    </div>
-                    <Link
-                      href={brand.link}
-                      className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-brand-orange-text pt-2 group-hover:translate-x-2 transition-transform"
-                    >
-                      Discover Collection <HiChevronRight size={18} />
-                    </Link>
+              <div className="flex flex-col gap-4 px-6 pt-5 pb-6 md:px-8 md:pt-6 md:pb-8 flex-1">
+                <div className="flex items-center justify-between">
+                  <div className="w-11 h-11 bg-brand-orange-soft rounded-stage flex items-center justify-center">
+                    {brand.icon}
                   </div>
+                  <span className="text-[13px] text-faint">
+                    Signature house
+                  </span>
                 </div>
-              </motion.div>
-            ))}
-          </section>
-        </div>
+                <div className="flex flex-col gap-1.5">
+                  <h3 className="text-[24px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.02em] leading-[1.1]">
+                    {brand.title}
+                  </h3>
+                  <p className="text-[15px] text-subtle leading-normal max-w-md">
+                    {brand.description}
+                  </p>
+                </div>
+                <Link
+                  href={brand.link}
+                  className="mt-auto inline-flex items-center gap-0.5 w-fit text-[15px] font-medium text-brand-orange-text hover:underline"
+                >
+                  Discover collection <HiChevronRight size={16} />
+                </Link>
+              </div>
+            </motion.div>
+          ))}
+        </section>
 
-        {/* Brands Concierge section */}
-        <section className="bg-brand-charcoal py-24 relative overflow-hidden">
+        {/* Brands concierge: a charcoal band tile (dark band rules) */}
+        <section className="bg-brand-charcoal rounded-tile md:rounded-hero py-16 md:py-24 relative overflow-hidden">
           <Image
             src="/brandImage/brand_banner.png"
             alt="Background"
-            fill sizes="100vw"
+            fill sizes="(max-width: 1440px) 100vw, 1440px"
             className="object-cover opacity-10 grayscale"
           />
-          <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-16 flex flex-col items-center text-center gap-8 relative z-10">
-            <div className="flex flex-col gap-2">
-              <span className="text-brand-orange font-bold tracking-[0.4em] uppercase text-xs">
-                Custom Procurement
+          <div className="px-6 md:px-10 flex flex-col items-center text-center gap-5 relative z-10">
+            <div className="flex flex-col gap-3">
+              <span className="text-[13px] font-semibold text-brand-orange">
+                Custom procurement
               </span>
-              <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tighter leading-none font-inter">
+              <h2 className="text-[30px] md:text-[48px] font-semibold text-white tracking-[-0.03em] leading-[1.05]">
                 Looking for a specific{" "}
-                <span className="text-white/60">Creator?</span>
+                <span className="text-white/60">creator?</span>
               </h2>
             </div>
-            <p className="text-light-gray/40 text-sm md:text-lg max-w-2xl font-medium">
+            <p className="text-white/60 text-[17px] md:text-[19px] max-w-2xl leading-snug">
               Our artisans maintain connections with luxury houses globally. If
-              you need a specific brand or collector's edition not shown here,
+              you need a specific brand or collector&apos;s edition not shown here,
               our concierge sourcing team is at your disposal.
             </p>
             <Link
               href="/contact"
-              className="mt-4 px-16 py-6 bg-brand-orange text-white rounded-3xl font-bold uppercase tracking-widest text-sm shadow-md shadow-brand-orange/20 hover:scale-105 active:scale-95 transition-all"
+              className="mt-3 inline-flex items-center justify-center px-7 py-3 bg-brand-orange hover:bg-brand-orange-hover text-white rounded-full font-semibold text-[15px] transition-colors duration-200"
             >
-              Consult a Brand Curator
+              Consult a brand curator
             </Link>
           </div>
         </section>

@@ -16,6 +16,12 @@ import Image from "next/image";
 import { Input } from "@/app/components/Form/Inputs";
 import { Button } from "@/app/components/Button";
 
+/* Soft grey inputs as in the checkout form (DESIGN.md §8). The ! keeps these
+   ahead of the shared Input's own border/background/radius classes. */
+const LABEL = "text-[13px] font-medium text-brand-charcoal";
+const FIELD =
+  "h-11! rounded-xl! bg-black/[0.04]! border! border-transparent! px-4! py-0! text-[15px]! text-brand-charcoal placeholder:text-faint! outline-none shadow-none transition-colors focus:bg-white! focus:border-brand-orange! focus:ring-4! focus:ring-brand-orange/15!";
+
 const TrackingPage = () => {
   const [orderId, setOrderId] = useState("");
   const [email, setEmail] = useState("");
@@ -28,7 +34,7 @@ const TrackingPage = () => {
 
   const trackingSteps = [
     {
-      status: "Order Placed",
+      status: "Order placed",
       time: "Oct 24, 10:30 AM",
       active: true,
       done: true,
@@ -40,9 +46,9 @@ const TrackingPage = () => {
       done: true,
     },
     { status: "Shipped", time: "Oct 25, 09:00 AM", active: true, done: false },
-    { status: "In Transit", time: "Est. Oct 27", active: false, done: false },
+    { status: "In transit", time: "Est. Oct 27", active: false, done: false },
     {
-      status: "Out for Delivery",
+      status: "Out for delivery",
       time: "Est. Oct 28",
       active: false,
       done: false,
@@ -50,72 +56,71 @@ const TrackingPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-off-white flex flex-col font-sans text-black">
+    <div className="min-h-screen bg-off-white flex flex-col font-sans text-brand-charcoal">
       <Header />
 
-      <main className="flex-1 w-full bg-white">
+      <main className="flex-1 w-full bg-off-white">
         {/* Tracking Hero Section */}
-        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-brand-charcoal overflow-hidden text-center md:text-left">
-          <Image
-            src="/brandImage/regional_visual.png"
-            alt="Logistics Network"
-            fill sizes="100vw"
-            className="object-cover opacity-60 grayscale"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-charcoal via-brand-charcoal/90 to-transparent" />
+        <section className="max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 pt-14 md:pt-24">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-3xl mx-auto flex flex-col items-center text-center gap-3"
+          >
+            <span className="text-[13px] font-semibold text-brand-orange-text">
+              Real-time logistics
+            </span>
+            <h1 className="text-[34px] md:text-[52px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+              Follow your journey.
+            </h1>
+            <p className="text-subtle max-w-xl text-[17px] md:text-[19px] leading-snug">
+              Enter your order credentials to visualize the trajectory of your
+              Koolbuy Store essentials from our curators to your door.
+            </p>
+          </motion.div>
 
-          <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              className="flex flex-col gap-6"
-            >
-              <span className="text-brand-orange font-bold tracking-[0.4em] uppercase text-xs">
-                Real-time Logistics
-              </span>
-              <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tighter leading-none font-inter">
-                Follow Your <br />
-                <span className="text-white/60">Journey.</span>
-              </h1>
-              <p className="text-light-gray/60 max-w-xl text-lg font-medium">
-                Enter your order credentials to visualize the trajectory of your
-                Koolbuy Store essentials from our curators to your door.
-              </p>
-            </motion.div>
+          <div className="relative mt-12 md:mt-16 w-full aspect-[16/9] md:aspect-[1280/544] rounded-tile md:rounded-hero overflow-hidden">
+            <Image
+              src="/brandImage/regional_visual.png"
+              alt="Logistics Network"
+              fill
+              sizes="(max-width: 1440px) 100vw, 1312px"
+              className="object-cover"
+              priority
+            />
           </div>
         </section>
 
-        <section className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-20 md:py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 xl:gap-24 items-start">
+        <section className="max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-12 md:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-4 lg:gap-6 items-start">
             {/* Tracking Input Form */}
-            <div className="lg:col-span-4 flex flex-col gap-10">
+            <div className="lg:col-span-4 flex flex-col gap-3 md:gap-4">
               <form
                 onSubmit={handleTrack}
-                className="flex flex-col gap-8 bg-gray-50 border border-gray-100 p-8 rounded-lg shadow-sm"
+                className="flex flex-col gap-5 bg-white p-6 md:p-8 rounded-tile"
               >
-                <div className="flex flex-col gap-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal opacity-60">
+                <div className="flex flex-col gap-1.5">
+                  <label className={LABEL}>
                     Order ID
                   </label>
                   <Input
                     type="text"
                     placeholder="e.g. #BM-123456"
-                    className="h-14 bg-white border-gray-100"
+                    className={FIELD}
                     value={orderId}
                     onChange={(e) => setOrderId(e.target.value)}
                     required
                   />
                 </div>
-                <div className="flex flex-col gap-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal opacity-60">
-                    Account Email
+                <div className="flex flex-col gap-1.5">
+                  <label className={LABEL}>
+                    Account email
                   </label>
                   <Input
                     type="email"
                     placeholder="john@example.com"
-                    className="h-14 bg-white border-gray-100"
+                    className={FIELD}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -124,9 +129,11 @@ const TrackingPage = () => {
                 <Button
                   type="submit"
                   variant="primary"
-                  className="w-full h-14 bg-brand-charcoal text-white font-bold uppercase tracking-widest text-sm "
+                  size="lg"
+                  shape="pill"
+                  className="w-full h-12 text-[15px]! mt-1"
                 >
-                  Visualize Journey
+                  Visualize journey
                 </Button>
 
                 <button
@@ -136,18 +143,20 @@ const TrackingPage = () => {
                     setEmail("guest@bloomandmist.com");
                     setIsTracking(true);
                   }}
-                  className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-orange-text/60 hover:text-brand-orange-text transition-colors text-center w-full"
+                  className="text-[14px] font-medium text-brand-orange-text hover:underline transition-colors text-center w-full"
                 >
-                  Try with Demo ID
+                  Try with demo ID
                 </button>
               </form>
 
-              <div className="flex flex-col gap-6 text-sm text-gray-500 bg-brand-orange-soft/30 p-8 rounded-3xl border border-brand-orange/15">
-                <div className="flex items-center gap-3 font-bold text-brand-charcoal">
-                  <HiCubeTransparent size={20} className="text-brand-orange-text" />
-                  <span>Packaging Note</span>
+              <div className="flex flex-col gap-3 bg-white p-6 md:p-8 rounded-tile">
+                <div className="flex items-center gap-3">
+                  <div className="w-11 h-11 rounded-stage bg-brand-orange-soft text-brand-orange-text flex items-center justify-center shrink-0">
+                    <HiCubeTransparent size={22} />
+                  </div>
+                  <span className="text-[17px] font-semibold text-brand-charcoal">Packaging note</span>
                 </div>
-                <p className="leading-relaxed">
+                <p className="text-[15px] text-subtle leading-relaxed">
                   All Koolbuy Store orders are fortified in eco-friendly,
                   artisan-textured packaging to ensure sensory preservation
                   during transit.
@@ -163,77 +172,81 @@ const TrackingPage = () => {
                     key="tracking-results"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="flex flex-col gap-12"
+                    className="flex flex-col gap-3 md:gap-4"
                   >
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-gray-100 pb-10">
-                      <div className="flex flex-col gap-1">
-                        <h3 className="text-3xl font-bold text-brand-charcoal tracking-tight">
-                          Status: Shipped
-                        </h3>
-                        <p className="text-gray-400 font-medium">
-                          Estimated arrival:{" "}
-                          <span className="text-brand-orange-text">
-                            October 28, 2026
-                          </span>
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <div className="w-14 h-14 rounded-2xl bg-brand-charcoal flex items-center justify-center text-white shadow-lg">
-                          <HiTruck size={28} />
+                    <div className="bg-white rounded-tile md:rounded-hero p-6 md:p-10 flex flex-col gap-10">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-black/[0.06] pb-8">
+                        <div className="flex flex-col gap-1">
+                          <h3 className="text-[26px] md:text-[32px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
+                            Status: Shipped
+                          </h3>
+                          <p className="text-[15px] text-subtle">
+                            Estimated arrival:{" "}
+                            <span className="text-brand-orange-text font-medium">
+                              October 28, 2026
+                            </span>
+                          </p>
                         </div>
-                        <div className="flex flex-col">
-                          <span className="text-[10px] font-bold uppercase text-gray-400 tracking-widest">
-                            Courier
-                          </span>
-                          <span className="font-bold text-brand-charcoal">
-                            Global Express
-                          </span>
+                        <div className="flex items-center gap-3">
+                          <div className="w-11 h-11 rounded-stage bg-brand-orange-soft flex items-center justify-center text-brand-orange-text">
+                            <HiTruck size={22} />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="text-[12px] text-faint">
+                              Courier
+                            </span>
+                            <span className="text-[15px] font-semibold text-brand-charcoal">
+                              Global Express
+                            </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-5 gap-8 relative pb-20">
-                      {/* Progress Line */}
-                      <div className="absolute top-6 left-6 right-6 h-1 bg-gray-100 hidden md:block" />
-                      <div className="absolute top-6 left-6 w-[40%] h-1 bg-brand-charcoal hidden md:block" />
+                      <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-4 relative">
+                        {/* Progress Line */}
+                        <div className="absolute top-5 left-[10%] right-[10%] h-0.5 rounded-full bg-black/[0.06] hidden md:block" />
+                        <div className="absolute top-5 left-[10%] w-[40%] h-0.5 rounded-full bg-brand-orange hidden md:block" />
 
-                      {trackingSteps.map((step, i) => (
-                        <div
-                          key={i}
-                          className={`flex md:flex-col items-center gap-4 md:gap-6 relative z-10 ${!step.active ? "opacity-30" : ""}`}
-                        >
+                        {trackingSteps.map((step, i) => (
                           <div
-                            className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg transition-colors overflow-hidden ${step.done ? "bg-brand-charcoal text-white" : "bg-white text-gray-300 border border-gray-100"}`}
+                            key={i}
+                            className={`flex md:flex-col items-center gap-4 md:gap-3 relative z-10 ${!step.active ? "opacity-50" : ""}`}
                           >
-                            {step.done ? <HiCheckCircle size={24} /> : i + 1}
+                            <div
+                              className={`w-10 h-10 rounded-full flex items-center justify-center text-[14px] font-semibold ring-4 ring-white transition-colors overflow-hidden ${step.done ? "bg-success-soft text-success" : step.active ? "bg-brand-orange-soft text-brand-orange-text" : "bg-off-white text-faint"}`}
+                            >
+                              {step.done ? <HiCheckCircle size={22} /> : i + 1}
+                            </div>
+                            <div className="flex flex-col md:items-center md:text-center gap-0.5">
+                              <span className="text-[14px] font-semibold text-brand-charcoal">
+                                {step.status}
+                              </span>
+                              <span className="text-[12px] text-faint">
+                                {step.time}
+                              </span>
+                            </div>
                           </div>
-                          <div className="flex flex-col md:items-center md:text-center gap-1">
-                            <span className="font-bold text-xs text-brand-charcoal uppercase tracking-tighter">
-                              {step.status}
-                            </span>
-                            <span className="text-[10px] text-gray-400 font-medium">
-                              {step.time}
-                            </span>
-                          </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
 
-                    <div className="bg-brand-charcoal rounded-3xl p-10 flex flex-col md:flex-row items-center justify-between gap-8">
-                      <div className="flex flex-col gap-2 text-center md:text-left">
-                        <h4 className="text-2xl font-bold text-white">
+                    <div className="bg-brand-charcoal rounded-tile md:rounded-hero p-7 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                      <div className="flex flex-col gap-1 text-center md:text-left">
+                        <h4 className="text-[22px] md:text-[26px] font-semibold text-white tracking-[-0.02em]">
                           Need a custom update?
                         </h4>
-                        <p className="text-light-gray/40 font-medium">
+                        <p className="text-[16px] text-white/60">
                           Connect with our logistics concierge for precise
                           orchestration.
                         </p>
                       </div>
                       <Button
-                        variant="ghost"
-                        className="text-white border-white/20 px-10 rounded-2xl h-14 font-bold uppercase tracking-widest text-sm"
+                        variant="primary"
+                        size="lg"
+                        shape="pill"
+                        className="h-11 px-6 text-[15px]! shrink-0"
                       >
-                        Request Detail
+                        Request detail
                       </Button>
                     </div>
                   </motion.div>
@@ -242,16 +255,16 @@ const TrackingPage = () => {
                     key="tracking-empty"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="h-[500px] border-2 border-dashed border-gray-100 rounded-3xl flex flex-col items-center justify-center text-center p-12 gap-6"
+                    className="min-h-100 md:h-125 bg-white rounded-tile md:rounded-hero flex flex-col items-center justify-center text-center p-10 md:p-12 gap-5"
                   >
-                    <div className="w-24 h-24 rounded-full bg-gray-50 flex items-center justify-center text-gray-300">
-                      <HiMagnifyingGlass size={48} />
+                    <div className="w-16 h-16 rounded-full bg-black/[0.04] flex items-center justify-center text-faint">
+                      <HiMagnifyingGlass size={28} />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <h3 className="text-2xl font-bold text-gray-400">
-                        Visualization Awaiting
+                      <h3 className="text-[22px] md:text-[26px] font-semibold text-brand-charcoal tracking-[-0.02em]">
+                        Visualization awaiting
                       </h3>
-                      <p className="text-gray-300 max-w-sm font-medium">
+                      <p className="text-[16px] text-subtle max-w-sm leading-relaxed">
                         Enter your order ID and email to materialize the
                         trajectory of your artisanal shipment.
                       </p>

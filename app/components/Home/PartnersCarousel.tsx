@@ -1,5 +1,6 @@
 "use client";
 
+import { StoreSectionHeader } from "./StoreUi";
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -146,21 +147,7 @@ export const PartnersCarousel: React.FC = () => {
       onTouchEnd={() => setIsPaused(false)}
     >
       {/* Section Header */}
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg md:text-xl font-bold tracking-wider text-gray-900">
-          Meet Our Partners
-        </h3>
-
-        <Link
-          href="/brands"
-          className="inline-flex items-center gap-1.5 text-xs md:text-sm font-semibold text-gray-600 hover:text-brand-orange group transition-colors"
-        >
-          <span>See All</span>
-          <span className="w-5 h-5 rounded-full bg-brand-orange text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-            <FiChevronRight size={14} />
-          </span>
-        </Link>
-      </div>
+      <StoreSectionHeader title="Our partners" subtitle="Brands we stock and stand behind." href="/brands" />
 
       {/* Relative container with arrows */}
       <div className="relative group/carousel">
@@ -168,7 +155,7 @@ export const PartnersCarousel: React.FC = () => {
         <button
           onClick={scrollPrev}
           aria-label="Previous partners"
-          className="absolute -left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
+          className="absolute -left-2 md:-left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/85 backdrop-blur-xl shadow-[0_4px_16px_rgba(0,0,0,0.12)] flex items-center justify-center text-brand-charcoal hover:bg-white transition-all cursor-pointer opacity-0 group-hover/carousel:opacity-100 focus-visible:opacity-100"
         >
           <FiChevronLeft size={18} />
         </button>
@@ -176,20 +163,20 @@ export const PartnersCarousel: React.FC = () => {
         {/* Carousel Container */}
         <div
           ref={scrollRef}
-          className="flex items-center gap-4 md:gap-6 overflow-x-auto scrollbar-none scroll-smooth py-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          className="flex items-center gap-3 md:gap-4 overflow-x-auto scrollbar-none scroll-smooth py-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           {partners.map((partner) => (
             <Link
               key={partner.id}
               href={partner.link}
-              className="shrink-0 w-40 sm:w-48 md:w-56 h-20 sm:h-24 flex items-center justify-cente hover:border-gray-300 transition-all group"
+              className="shrink-0 w-40 sm:w-48 md:w-56 h-24 sm:h-28 rounded-[18px] bg-white px-6 flex items-center justify-center transition-shadow duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] group"
             >
-              <div className="relative w-full h-full flex items-center justify-center">
+              <div className="relative w-full h-14 flex items-center justify-center">
                 <Image
                   src={partner.image}
                   alt={partner.name}
                   fill sizes="224px"
-                  className="object-contain filter grayscale-0 group-hover:scale-105 transition-transform duration-300"
+                  className="object-contain transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
             </Link>
@@ -200,7 +187,7 @@ export const PartnersCarousel: React.FC = () => {
         <button
           onClick={scrollNext}
           aria-label="Next partners"
-          className="absolute -right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
+          className="absolute -right-2 md:-right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/85 backdrop-blur-xl shadow-[0_4px_16px_rgba(0,0,0,0.12)] flex items-center justify-center text-brand-charcoal hover:bg-white transition-all cursor-pointer opacity-0 group-hover/carousel:opacity-100 focus-visible:opacity-100"
         >
           <FiChevronRight size={18} />
         </button>

@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Badge } from "../Badge";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon";
 import { Pagination } from "../Navigation/Pagination";
@@ -126,100 +125,107 @@ export const OrdersList: React.FC = () => {
     toast.info(`Viewing details for ${orderId}`);
   };
 
-  const getStatusBadge = (status: OrderData["status"]) => {
-    switch (status) {
-      case "Delivered":
-        return <Badge variant="success">{status}</Badge>;
-      case "Shipped":
-        return <Badge variant="info">{status}</Badge>;
-      case "Processing":
-        return <Badge variant="warning">{status}</Badge>;
-      case "Cancelled":
-        return <Badge variant="error">{status}</Badge>;
-      default:
-        return <Badge variant="neutral">{status}</Badge>;
-    }
+  const STATUS_PILL: Record<OrderData["status"], string> = {
+    Delivered: "bg-success-soft text-success",
+    Shipped: "bg-brand-orange-soft text-brand-orange-text",
+    Processing: "bg-brand-orange-soft text-brand-orange-text",
+    Cancelled: "bg-error-soft text-error",
   };
+
+  const getStatusBadge = (status: OrderData["status"]) => (
+    <span className={`inline-flex items-center h-6 px-2.5 rounded-full text-[12px] font-medium whitespace-nowrap ${STATUS_PILL[status] ?? "bg-black/[0.04] text-subtle"}`}>
+      {status}
+    </span>
+  );
 
   return (
     <div className="flex flex-col gap-6">
-      {/* List Toolbar */}
-      <div className="bg-white p-4 border border-gray-200 rounded-lg flex flex-col sm:flex-row justify-between items-center gap-4">
-        <h2 className="text-lg font-bold text-gray-900 leading-none">All Orders</h2>
+      <div className="bg-white rounded-[22px] flex flex-col">
+        {/* List Toolbar */}
+        <div className="px-5 pt-5 pb-4 md:px-8 md:pt-6 flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-black/[0.06]">
+          <h2 className="text-[19px] md:text-[20px] font-semibold text-brand-charcoal tracking-[-0.01em] leading-tight">All orders</h2>
 
-        <div className="w-full sm:w-80 relative">
-          <Icon name="search" size="sm" className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Search by Order ID..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full h-10 pl-10 pr-4 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:border-brand-orange focus:bg-white transition-colors text-gray-900"
-          />
-        </div>
-      </div>
-
-      {/* Orders Map */}
-      <div className="flex flex-col gap-4">
-        {paginatedOrders.length > 0 ? (
-          paginatedOrders.map((order) => (
-            <div key={order.id} className="bg-white border border-gray-200 rounded-xl hover:shadow-md transition-shadow p-5 flex flex-col md:flex-row md:items-center justify-between gap-5 md:gap-6">
-              
-              {/* Thumbnail */}
-              <div className="w-20 h-20 md:w-24 md:h-24 bg-gray-100 rounded-lg border border-gray-200 overflow-hidden relative flex-shrink-0 p-2 flex items-center justify-center">
-                {order.image ? (
-                  <Image src={order.image} alt={`Order ${order.id}`} fill sizes="96px" className="object-contain" />
-                ) : (
-                  <Icon name="inventory_2" size="lg" className="text-gray-300 opacity-60" />
-                )}
-              </div>
-
-              {/* Info */}
-              <div className="flex flex-col flex-1 gap-1">
-                <span className="font-bold text-base md:text-lg text-gray-900 tracking-tight">{order.id}</span>
-                <span className="text-xs md:text-sm text-gray-500 font-medium">Placed on {order.date}</span>
-                <span className="text-xs md:text-sm text-gray-500 font-medium mt-1">
-                  Contains {order.items} {order.items === 1 ? 'item' : 'items'}
-                </span>
-              </div>
-
-              {/* Price & Status */}
-              <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-2 md:w-32 lg:w-48">
-                <span className="font-bold text-lg md:text-xl text-brand-orange-text">₦{order.total.toLocaleString()}</span>
-                {getStatusBadge(order.status)}
-              </div>
-
-              {/* Actions */}
-              <div className="flex gap-3 md:flex-col mt-4 md:mt-0 pt-4 md:pt-0 border-t border-gray-50 md:border-t-0 md:border-l border-gray-100 md:pl-6 w-full md:w-auto flex-shrink-0">
-                <Button 
-                  onClick={() => handleReorder(order)}
-                  variant="primary" 
-                  className="flex-1 md:w-[130px] h-10 md:h-11 text-sm font-bold rounded-lg active:scale-95 transition-all"
-                >
-                  Reorder
-                </Button>
-                <Button 
-                  onClick={() => handleViewDetails(order.id)}
-                  variant="secondary" 
-                  className="flex-1 md:w-[130px] h-10 md:h-11 text-sm font-bold border border-gray-200 text-gray-700 hover:text-brand-orange-text rounded-lg focus:ring-0 transition-colors active:scale-95 transition-all"
-                >
-                  View Details
-                </Button>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="py-12 flex flex-col items-center justify-center text-gray-400 bg-white border border-gray-200 rounded-xl">
-            <Icon name="inventory_2" size="lg" className="mb-2 opacity-50" />
-            <p className="font-medium text-gray-500">No orders found.</p>
+          <div className="w-full sm:w-80 relative">
+            <Icon name="search" size="sm" className="absolute left-4 top-1/2 -translate-y-1/2 text-faint" />
+            <input
+              type="text"
+              placeholder="Search by order ID..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full h-10 pl-11 pr-4 rounded-full bg-black/[0.04] border border-transparent outline-none transition-colors text-[14px] text-brand-charcoal placeholder:text-faint focus:bg-white focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/15"
+            />
           </div>
-        )}
+        </div>
+
+        {/* Orders Map */}
+        <div className="flex flex-col px-5 md:px-8">
+          {paginatedOrders.length > 0 ? (
+            paginatedOrders.map((order) => (
+              <div key={order.id} className="py-6 flex flex-col md:flex-row md:items-center gap-4 md:gap-6 border-b border-black/[0.06] last:border-0">
+                <div className="flex items-center gap-4 md:gap-6 flex-1 min-w-0">
+                  {/* Thumbnail */}
+                  <div className="w-20 h-20 md:w-24 md:h-24 flex-shrink-0 rounded-[16px] bg-off-white p-3 flex items-center justify-center">
+                    {order.image ? (
+                      <div className="relative w-full h-full">
+                        <Image src={order.image} alt={`Order ${order.id}`} fill sizes="96px" className="object-contain mix-blend-multiply" />
+                      </div>
+                    ) : (
+                      <Icon name="inventory_2" size="lg" className="text-faint" />
+                    )}
+                  </div>
+
+                  {/* Info */}
+                  <div className="flex flex-col flex-1 min-w-0 gap-0.5">
+                    <span className="text-[15px] font-semibold text-brand-charcoal leading-snug tabular-nums">{order.id}</span>
+                    <span className="text-[13px] text-subtle">Placed on {order.date}</span>
+                    <span className="text-[13px] text-subtle">
+                      Contains {order.items} {order.items === 1 ? 'item' : 'items'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Price & Status */}
+                <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-2 md:w-36 lg:w-44">
+                  <span className="text-[17px] font-semibold text-brand-charcoal tabular-nums tracking-[-0.01em]">₦{order.total.toLocaleString()}</span>
+                  {getStatusBadge(order.status)}
+                </div>
+
+                {/* Actions */}
+                <div className="flex items-center gap-2 md:flex-col md:items-stretch w-full md:w-auto flex-shrink-0">
+                  <Button
+                    onClick={() => handleReorder(order)}
+                    variant="secondary"
+                    shape="pill"
+                    className="flex-1 md:flex-none md:w-[130px] h-10 text-[14px]! bg-black/[0.04] hover:bg-black/[0.08] text-brand-charcoal"
+                  >
+                    Reorder
+                  </Button>
+                  <Button
+                    onClick={() => handleViewDetails(order.id)}
+                    variant="ghost"
+                    shape="pill"
+                    className="flex-1 md:flex-none md:w-[130px] h-10 text-[14px]! font-medium! text-brand-orange-text hover:bg-brand-orange-soft!"
+                  >
+                    View details
+                  </Button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="py-16 flex flex-col items-center gap-4 text-center">
+              <div className="w-16 h-16 bg-off-white rounded-full flex items-center justify-center text-faint">
+                <Icon name="inventory_2" size="md" />
+              </div>
+              <p className="text-[17px] font-semibold text-brand-charcoal">No orders found.</p>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Pagination component replaces manual buttons */}
       {totalPages > 1 && (
-        <div className="flex justify-end mt-2">
-          <Pagination 
+        <div className="flex justify-end">
+          <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
             onPageChange={(page) => setCurrentPage(page)}
