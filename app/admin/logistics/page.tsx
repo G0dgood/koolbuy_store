@@ -14,6 +14,11 @@ import ModalBody from "@/app/components/Modal/ModalBody";
 import ModalFooter from "@/app/components/Modal/ModalFooter";
 import Drawer from "@/app/components/Drawer/Drawer";
 import { normalizeApiBase } from "@/lib/api";
+import {
+  EmptyDroppingOrdersIllustration,
+  EmptyVendorWarehouseIllustration,
+  EmptyDeliveryRatesIllustration,
+} from "@/app/components/Admin/EmptyLogisticsIllustrations";
 
 // ----------------------------------------------------
 // Interfaces
@@ -502,59 +507,16 @@ export default function KoolLogisticsPage() {
                 id: "dropping-orders",
                 label: "Dropping Orders Management",
                 count: droppingOrders.length,
-                icon: (
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    aria-hidden="true"
-                  >
-                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                    <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                    <line x1="12" y1="22.08" x2="12" y2="12" />
-                  </svg>
-                ),
               },
               {
                 id: "vendor-addresses",
                 label: "Vendor addresses",
                 count: vendorAddresses.length,
-                icon: (
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    aria-hidden="true"
-                  >
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                    <circle cx="12" cy="10" r="3" />
-                  </svg>
-                ),
               },
               {
                 id: "delivery-prices",
                 label: "delivery prices per lga",
                 count: lgaPrices.length,
-                icon: (
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    aria-hidden="true"
-                  >
-                    <line x1="12" y1="1" x2="12" y2="23" />
-                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                  </svg>
-                ),
               },
             ]}
             activeTab={activeTab}
@@ -704,16 +666,46 @@ export default function KoolLogisticsPage() {
                 <tbody className="divide-y divide-gray-100">
                   {filteredDroppingOrders.length === 0 ? (
                     <tr>
-                      <td
-                        colSpan={8}
-                        className="py-12 text-center text-gray-400"
-                      >
-                        <p className="font-bold text-gray-700 text-sm">
-                          No dropping orders found
-                        </p>
-                        <p className="text-xs text-gray-400 mt-1">
-                          Try resetting the search or filter.
-                        </p>
+                      <td colSpan={8} className="py-14 text-center">
+                        <div className="max-w-md mx-auto space-y-3">
+                          <EmptyDroppingOrdersIllustration className="w-52 h-40 mx-auto" />
+                          <div className="space-y-1">
+                            <p className="font-bold text-gray-800 text-sm">
+                              {dropSearch || dropStatusFilter !== "all" || dropHubFilter !== "all"
+                                ? "No matching dropping orders found"
+                                : "No dropping orders in the dispatch queue"}
+                            </p>
+                            <p className="text-xs text-gray-500 leading-relaxed max-w-sm mx-auto">
+                              {dropSearch || dropStatusFilter !== "all" || dropHubFilter !== "all"
+                                ? "Try resetting your search query or clear the status and hub filters to view all orders."
+                                : "Create your first dropping order to start dispatching shipments across regional hubs."}
+                            </p>
+                          </div>
+                          <div className="flex items-center justify-center gap-2 pt-1">
+                            {(dropSearch || dropStatusFilter !== "all" || dropHubFilter !== "all") && (
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setDropSearch("");
+                                  setDropStatusFilter("all");
+                                  setDropHubFilter("all");
+                                  setCurrentPage(1);
+                                }}
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors cursor-pointer"
+                              >
+                                Reset filters
+                              </button>
+                            )}
+                            <button
+                              type="button"
+                              onClick={() => setIsCreateDropModalOpen(true)}
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 transition-colors cursor-pointer"
+                            >
+                              <Icon name="plus" className="w-3.5 h-3.5" />
+                              <span>New Dropping Order</span>
+                            </button>
+                          </div>
+                        </div>
                       </td>
                     </tr>
                   ) : (
@@ -907,16 +899,37 @@ export default function KoolLogisticsPage() {
                 <tbody className="divide-y divide-gray-100">
                   {filteredVendors.length === 0 ? (
                     <tr>
-                      <td
-                        colSpan={7}
-                        className="py-12 text-center text-gray-400"
-                      >
-                        <p className="font-bold text-gray-700 text-sm">
-                          No vendor addresses found
-                        </p>
-                        <p className="text-xs text-gray-400 mt-1">
-                          Try resetting the search or state filter.
-                        </p>
+                      <td colSpan={7} className="py-14 text-center">
+                        <div className="max-w-md mx-auto space-y-3">
+                          <EmptyVendorWarehouseIllustration className="w-52 h-40 mx-auto" />
+                          <div className="space-y-1">
+                            <p className="font-bold text-gray-800 text-sm">
+                              {vendorSearch || vendorStateFilter !== "all"
+                                ? "No matching vendor addresses found"
+                                : "No vendor pickup locations registered"}
+                            </p>
+                            <p className="text-xs text-gray-500 leading-relaxed max-w-sm mx-auto">
+                              {vendorSearch || vendorStateFilter !== "all"
+                                ? "No vendor depots match your search criteria. Try clearing the state filter or search query."
+                                : "Add authorized vendor warehouses and depot locations for collection and stocking."}
+                            </p>
+                          </div>
+                          {(vendorSearch || vendorStateFilter !== "all") && (
+                            <div className="flex items-center justify-center gap-2 pt-1">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setVendorSearch("");
+                                  setVendorStateFilter("all");
+                                  setCurrentPage(1);
+                                }}
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors cursor-pointer"
+                              >
+                                Reset filters
+                              </button>
+                            </div>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   ) : (
@@ -1095,16 +1108,38 @@ export default function KoolLogisticsPage() {
                 <tbody className="divide-y divide-gray-100">
                   {filteredLgaPrices.length === 0 ? (
                     <tr>
-                      <td
-                        colSpan={8}
-                        className="py-12 text-center text-gray-400"
-                      >
-                        <p className="font-bold text-gray-700 text-sm">
-                          No LGA delivery rates found
-                        </p>
-                        <p className="text-xs text-gray-400 mt-1">
-                          Try resetting your state or zone filter.
-                        </p>
+                      <td colSpan={8} className="py-14 text-center">
+                        <div className="max-w-md mx-auto space-y-3">
+                          <EmptyDeliveryRatesIllustration className="w-52 h-40 mx-auto" />
+                          <div className="space-y-1">
+                            <p className="font-bold text-gray-800 text-sm">
+                              {lgaSearch || lgaStateFilter !== "all" || lgaZoneFilter !== "all"
+                                ? "No matching delivery rates found"
+                                : "No LGA delivery pricing configured"}
+                            </p>
+                            <p className="text-xs text-gray-500 leading-relaxed max-w-sm mx-auto">
+                              {lgaSearch || lgaStateFilter !== "all" || lgaZoneFilter !== "all"
+                                ? "Try resetting your search query or clear the state and logistics zone filters."
+                                : "Configure delivery tariffs and transit time by Local Government Area across hubs."}
+                            </p>
+                          </div>
+                          {(lgaSearch || lgaStateFilter !== "all" || lgaZoneFilter !== "all") && (
+                            <div className="flex items-center justify-center gap-2 pt-1">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setLgaSearch("");
+                                  setLgaStateFilter("all");
+                                  setLgaZoneFilter("all");
+                                  setCurrentPage(1);
+                                }}
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors cursor-pointer"
+                              >
+                                Reset filters
+                              </button>
+                            </div>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   ) : (
