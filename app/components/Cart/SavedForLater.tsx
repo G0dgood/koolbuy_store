@@ -26,7 +26,7 @@ const SavedForLater = () => {
 
   if (wishlistItems.length === 0) {
     return (
-      <section className="bg-white rounded-[24px] overflow-hidden p-6 md:p-8 flex flex-col gap-6 shadow-xs border border-black/[0.04]">
+      <section className="bg-white rounded-tile border border-light-gray overflow-hidden p-6 md:p-8 flex flex-col gap-6">
         <h3 className="text-[20px] md:text-[24px] font-semibold text-brand-charcoal tracking-[-0.02em]">
           Saved for later
         </h3>
@@ -46,7 +46,7 @@ const SavedForLater = () => {
   }
 
   return (
-    <section className="bg-white rounded-[22px] overflow-hidden">
+    <section className="bg-white rounded-tile border border-light-gray overflow-hidden">
       <div className="px-6 pt-6 md:px-8 md:pt-8">
         <h3 className="text-[20px] md:text-[24px] font-semibold text-brand-charcoal tracking-[-0.02em]">
           Saved for later <span className="text-faint tabular-nums">({wishlistItems.length})</span>

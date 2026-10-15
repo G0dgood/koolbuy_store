@@ -1,19 +1,20 @@
 "use client";
 
 import React from "react";
-import Modal from "../Modal/Modal";
+import { Modal } from "@/app/components/ui/Modal";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
 
-interface ConfirmationModalProps {
+export interface ConfirmationModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
   title: string;
-  message: string;
+  message: React.ReactNode;
   confirmText?: string;
   cancelText?: string;
   type?: "danger" | "warning" | "success" | "info";
+  isLoading?: boolean;
 }
 
 export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
@@ -25,79 +26,100 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   confirmText = "Confirm",
   cancelText = "Cancel",
   type = "danger",
+  isLoading = false,
 }) => {
   const typeConfig = {
     danger: {
-      icon: "delete_outline",
-      iconBg: "bg-red-50",
-      iconColor: "text-red-500",
-      buttonBg: "bg-red-500 hover:bg-red-600",
-      shadow: "shadow-red-100",
+      icon: "Delete",
+      iconFolder: "dashboardIcon" as const,
+      iconBg: "bg-rose-50 border-rose-100 text-rose-600",
+      buttonClass:
+        "bg-rose-600 hover:bg-rose-700 text-white font-semibold shadow-xs focus:ring-rose-500",
     },
     warning: {
       icon: "warning_amber",
-      iconBg: "bg-brand-orange-soft",
-      iconColor: "text-brand-orange",
-      buttonBg: "bg-brand-orange hover:bg-brand-orange",
-      shadow: "shadow-brand-charcoal",
+      iconFolder: "icon" as const,
+      iconBg: "bg-amber-50 border-amber-100 text-amber-600",
+      buttonClass:
+        "bg-amber-600 hover:bg-amber-700 text-white font-semibold shadow-xs focus:ring-amber-500",
     },
     success: {
       icon: "verified",
-      iconBg: "bg-brand-orange-soft",
-      iconColor: "text-brand-orange-text",
-      buttonBg: "bg-brand-charcoal hover:bg-brand-orange",
-      shadow: "shadow-brand-charcoal",
+      iconFolder: "icon" as const,
+      iconBg: "bg-emerald-50 border-emerald-100 text-emerald-600",
+      buttonClass:
+        "bg-brand-charcoal hover:bg-brand-charcoal/90 text-white font-semibold shadow-xs",
     },
     info: {
       icon: "help_outline",
-      iconBg: "bg-brand-orange-soft",
-      iconColor: "text-brand-orange-text",
-      buttonBg: "bg-brand-charcoal hover:bg-brand-orange",
-      shadow: "shadow-brand-charcoal",
+      iconFolder: "icon" as const,
+      iconBg: "bg-sky-50 border-sky-100 text-sky-600",
+      buttonClass:
+        "bg-brand-charcoal hover:bg-brand-charcoal/90 text-white font-semibold shadow-xs",
     },
   };
 
-  const config = typeConfig[type];
+  const config = typeConfig[type] || typeConfig.danger;
 
   return (
     <Modal
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={isLoading ? () => {} : onClose}
       size="sm"
-      title={title}
+      className="max-w-[440px]"
     >
-      <div className="flex flex-col items-center text-center gap-6 py-4">
-        <div className={`w-16 h-16 ${config.iconBg} rounded-2xl flex items-center justify-center ${config.iconColor} shadow-sm border border-current flex-shrink-0 mb-2 relative overflow-hidden`}>
-          <div className="absolute inset-0 bg-current opacity-10"></div>
-          <Icon name={config.icon} size="lg" className="relative z-10" />
+      <div className="p-6">
+        <div className="flex items-start gap-4">
+          <div
+            className={`w-11 h-11 rounded-xl border flex items-center justify-center shrink-0 ${config.iconBg}`}
+          >
+            <Icon
+              name={config.icon}
+              folder={config.iconFolder}
+              size="md"
+              className="text-current"
+            />
+          </div>
+
+          <div className="flex-1 min-w-0">
+            <h2 className="text-base font-semibold text-gray-900 leading-tight">
+              {title}
+            </h2>
+            <div className="mt-2 text-xs text-gray-500 leading-relaxed font-normal">
+              {message}
+            </div>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-2 mt-2">
-          <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-tight">{title}</h3>
-          <p className="text-[13px] sm:text-sm text-gray-500 font-medium leading-relaxed px-4">
-            {message}
-          </p>
-        </div>
-
-        <div className="flex flex-row w-full gap-3 mt-4">
+        <div className="flex items-center justify-end gap-2.5 mt-6 pt-4 border-t border-gray-100">
           <Button
-            variant="ghost"
-            className="flex-1 h-10 sm:h-12 font-bold text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+            variant="outline"
+            type="button"
+            className="px-4 h-9 text-xs font-medium rounded-lg text-gray-600 hover:text-gray-900"
             onClick={onClose}
+            disabled={isLoading}
           >
             {cancelText}
           </Button>
           <Button
-            className={`flex-1 h-10 sm:h-12 font-bold text-white border-transparent transition-all active:scale-95 ${config.buttonBg}`}
-            onClick={() => {
-              onConfirm();
-              onClose();
-            }}
+            type="button"
+            className={`px-4 h-9 text-xs rounded-lg transition-all disabled:opacity-50 ${config.buttonClass}`}
+            onClick={() => onConfirm()}
+            disabled={isLoading}
           >
-            {confirmText}
+            {isLoading ? (
+              <span className="flex items-center gap-2">
+                <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                Processing...
+              </span>
+            ) : (
+              confirmText
+            )}
           </Button>
         </div>
       </div>
     </Modal>
   );
 };
+
+export default ConfirmationModal;

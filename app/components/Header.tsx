@@ -44,7 +44,7 @@ export const Header: React.FC<{ className?: string }> = ({
   const handleMouseLeaveDropdown = () => {
     dropdownTimeoutRef.current = setTimeout(() => {
       setActiveDropdown(null);
-    }, 250);
+    }, 350);
   };
 
   useEffect(() => {

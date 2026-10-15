@@ -71,7 +71,7 @@ const Footer = () => {
       <Newsletter />
       <footer className="w-full bg-off-white text-[12px] text-subtle">
         <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-16 pt-10 pb-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-8 border-b border-black/[0.08]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-8 border-b border-light-gray">
             {/* Brand */}
             <div className="lg:col-span-4 flex flex-col gap-4">
               <img src="/images/koolboks/koolbuy_logo.webp" alt="KoolBuy" className="h-9 w-auto object-contain self-start" />
@@ -84,7 +84,7 @@ const Footer = () => {
                   <span
                     key={name}
                     aria-label={name}
-                    className="w-8 h-8 rounded-full bg-black/[0.05] flex items-center justify-center text-gray-600 hover:bg-brand-charcoal hover:text-white transition-colors cursor-pointer"
+                    className="w-8 h-8 rounded-full bg-black/[0.04] flex items-center justify-center text-gray-600 hover:bg-brand-charcoal hover:text-white transition-colors cursor-pointer"
                   >
                     <Icon name={`social/${name}`} size="sm" />
                   </span>
@@ -111,10 +111,12 @@ const Footer = () => {
 
             {/* Links */}
             <div className="lg:col-span-2 flex flex-col gap-2.5">
-              <h4 className="text-[12px] font-semibold text-brand-charcoal">Quick links</h4>
+              <h4 className="text-[12px] font-semibold text-brand-charcoal">Explore</h4>
+              <Link href="/products?category=Solar+Freezers" className="hover:text-brand-charcoal hover:underline">Solar freezers</Link>
+              <Link href="/products?category=Inverter+Refrigerators" className="hover:text-brand-charcoal hover:underline">Inverter cooling</Link>
+              <Link href="/products?category=Commercial+Freezers" className="hover:text-brand-charcoal hover:underline">Commercial freezers</Link>
               <Link href="/register" className="hover:text-brand-charcoal hover:underline">Vendor registration</Link>
-              <Link href="/help" className="hover:text-brand-charcoal hover:underline">Privacy policy</Link>
-              <Link href="/help/payment" className="hover:text-brand-charcoal hover:underline">BNPL terms &amp; conditions</Link>
+              <Link href="/help/payment" className="hover:text-brand-charcoal hover:underline">BNPL terms</Link>
             </div>
 
             {/* Payments + app */}

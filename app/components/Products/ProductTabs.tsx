@@ -8,7 +8,7 @@ const ProductTabs = () => {
   const tabs = ["Description", "Reviews"];
 
   return (
-    <div className="flex-1 w-full min-w-0 bg-white rounded-[22px] md:rounded-[32px] overflow-hidden flex flex-col min-h-[600px]">
+    <div className="flex-1 w-full min-w-0 bg-white rounded-tile border border-light-gray overflow-hidden flex flex-col min-h-[600px]">
       {/* Tab headers: pill segmented control */}
       <div className="px-6 md:px-10 pt-6 md:pt-8">
         <div className="inline-flex items-center gap-1 p-1 rounded-full bg-black/[0.04]">

@@ -132,34 +132,46 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
   );
 
   return (
-    <aside className="w-full lg:w-64 flex-shrink-0 flex flex-col bg-white rounded-[22px] px-5 py-1">
+    <aside className="w-full lg:w-64 flex-shrink-0 flex flex-col bg-white rounded-tile border border-light-gray px-5 py-1">
       {/* Categories */}
       <FilterSection title="Category">
         <ul className="flex flex-col gap-2.5 text-[14px]">
           {[
-            "Signature Fragrance",
-            "Luxury Skincare",
-            "Boutique Gift Sets",
-            "Body & Bath",
-            "Home Fragrance",
-          ].map((cat) => (
-            <li
-              key={cat}
-              onClick={() => handleCategoryClick(cat)}
-              className={`cursor-pointer transition-colors ${filters.category === cat ? "text-brand-orange-text font-semibold" : "text-subtle hover:text-brand-charcoal"}`}
-            >
-              {cat}
-            </li>
-          ))}
-          <li className="text-[13px] text-brand-orange-text font-medium mt-1 cursor-pointer hover:underline">
-            View all boutique
-          </li>
+            "All Categories",
+            "Single Door Chest Freezers",
+            "Double Door Chest Freezers",
+            "Chillers & Coolers",
+            "Solar & Power",
+            "Air Conditioners",
+            "Ice Makers",
+            "Fish & Seafood",
+            "Ice Blocks",
+          ].map((cat) => {
+            const isAll = cat === "All Categories";
+            const isActive = isAll ? !filters.category : filters.category === cat;
+            return (
+              <li
+                key={cat}
+                onClick={() => handleCategoryClick(isAll ? "" : cat)}
+                className={`cursor-pointer transition-colors flex items-center justify-between ${
+                  isActive
+                    ? "text-brand-orange-text font-semibold"
+                    : "text-subtle hover:text-brand-charcoal"
+                }`}
+              >
+                <span>{cat}</span>
+                {isActive && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-orange-text" />
+                )}
+              </li>
+            );
+          })}
         </ul>
       </FilterSection>
 
       {/* Brands */}
-      <FilterSection title="Artisanal houses">
-        {["Koolbuy Store", "Prada", "Versace", "Gucci", "Dior"].map((brand) => (
+      <FilterSection title="Verified brands">
+        {["Koolboks", "Scanfrost", "Thermocool", "Bruhm", "Hisense"].map((brand) => (
           <Checkbox
             key={brand}
             label={brand}
@@ -168,25 +180,22 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
             size="lg"
           />
         ))}
-        <span className="text-brand-orange-text text-[13px] font-medium mt-1 cursor-pointer hover:underline">
-          View all houses
-        </span>
       </FilterSection>
 
       {/* Price Range */}
-      <FilterSection title="Price range">
+      <FilterSection title="Price range (₦)">
         <div className="px-1 pt-2 pb-6">
           <RangeSlider
             min={0}
-            max={2000}
-            step={10}
+            max={5000000}
+            step={50000}
             value={filters.priceRange}
             onChange={handlePriceRangeChange}
           />
         </div>
         <div className="flex gap-2">
           <div className="flex flex-col gap-1 flex-1">
-            <span className="text-[12px] text-faint">Min</span>
+            <span className="text-[12px] text-faint">Min (₦)</span>
             <input
               type="number"
               value={filters.priceRange[0]}
@@ -195,7 +204,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
             />
           </div>
           <div className="flex flex-col gap-1 flex-1">
-            <span className="text-[12px] text-faint">Max</span>
+            <span className="text-[12px] text-faint">Max (₦)</span>
             <input
               type="number"
               value={filters.priceRange[1]}

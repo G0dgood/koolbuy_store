@@ -79,7 +79,7 @@ export default function ProductDetailPage() {
         </div>
 
         {/* Top product section: gallery and buy box */}
-        <div className="bg-white rounded-[22px] md:rounded-[32px] p-4 sm:p-6 md:p-10 flex flex-col lg:flex-row gap-8 lg:gap-14">
+        <div className="bg-white rounded-tile md:rounded-hero border border-light-gray p-4 sm:p-6 md:p-10 flex flex-col lg:flex-row gap-8 lg:gap-14">
           <ProductGallery />
           <ProductDetailsInfo />
         </div>

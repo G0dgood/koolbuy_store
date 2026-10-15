@@ -1,103 +1,235 @@
 "use client";
 
-import React, { useState } from "react";
-import Modal from "../Modal/Modal";
-import ModalBody from "../Modal/ModalBody";
-import ModalFooter from "../Modal/ModalFooter";
+import React, { useState, useMemo } from "react";
+import { Modal, ModalBody, ModalFooter } from "@/app/components/ui/Modal";
 import { Input, Textarea } from "../Form/Inputs";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
+import {
+  useCreateCategoryMutation,
+  type VatTreatment,
+} from "@/lib/store/api/categories-api";
+import { apiErrorMessage } from "@/lib/store/base-api";
+import { toast } from "sonner";
 
 interface AddCategoryModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSuccess?: () => void;
 }
 
-export function AddCategoryModal({ isOpen, onClose }: AddCategoryModalProps) {
+function deriveSlug(label: string): string {
+  return label
+    .normalize("NFKD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/&/g, " ")
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "")
+    .slice(0, 50)
+    .replace(/_+$/g, "");
+}
+
+export function AddCategoryModal({
+  isOpen,
+  onClose,
+  onSuccess,
+}: AddCategoryModalProps) {
+  const [createCategory, { isLoading }] = useCreateCategoryMutation();
+
   const [formData, setFormData] = useState({
     name: "",
+    customSlug: "",
+    vatTreatment: "standard" as VatTreatment,
     image: "",
     description: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const previewSlug = useMemo(() => {
+    return formData.customSlug.trim()
+      ? deriveSlug(formData.customSlug)
+      : deriveSlug(formData.name);
+  }, [formData.name, formData.customSlug]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Creating new category:", formData);
-    // Reset form
-    setFormData({
-      name: "",
-      image: "",
-      description: "",
-    });
-    onClose();
+    const label = formData.name.trim();
+    if (!label) {
+      toast.error("Please enter a category name.");
+      return;
+    }
+
+    try {
+      await createCategory({
+        label,
+        slug: previewSlug || undefined,
+        vat_treatment: formData.vatTreatment,
+      }).unwrap();
+
+      toast.success(`Category "${label}" created successfully.`);
+      // Reset form
+      setFormData({
+        name: "",
+        customSlug: "",
+        vatTreatment: "standard",
+        image: "",
+        description: "",
+      });
+      onSuccess?.();
+      onClose();
+    } catch (err: unknown) {
+      toast.error(apiErrorMessage(err, "Failed to create category. Please check your inputs."));
+    }
+  };
+
+  const handleClose = () => {
+    if (!isLoading) {
+      onClose();
+    }
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Add New Category" size="lg">
+    <Modal
+      isOpen={isOpen}
+      onClose={handleClose}
+      title="Add New Category"
+      description="Create a product category in the core catalog."
+      size="md"
+    >
       <form onSubmit={handleSubmit}>
-        <ModalBody className="flex flex-col gap-6">
-          <div className="flex flex-col gap-2">
-            <label className="text-[11px] sm:text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em]">Category Name</label>
+        <ModalBody className="space-y-4 py-4 text-xs">
+          {/* Category Name */}
+          <div>
+            <label className="text-xs font-semibold text-gray-700 mb-1.5 block">
+              Category Name <span className="text-rose-500">*</span>
+            </label>
             <Input
-              placeholder="e.g. Electronics, Fashion, etc."
+              placeholder="e.g. Solar Freezers, Poultry, Commercial Freezers"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="h-12 border-gray-100 font-bold"
+              className="h-10 text-xs rounded-lg border-gray-200"
               required
+              disabled={isLoading}
             />
+            {previewSlug && (
+              <p className="text-[11px] text-gray-500 mt-1 flex items-center gap-1.5">
+                <span>Unique slug:</span>
+                <code className="bg-gray-100 text-gray-800 px-1.5 py-0.5 rounded text-[10px] font-mono">
+                  {previewSlug}
+                </code>
+              </p>
+            )}
           </div>
 
-          <div className="flex flex-col gap-2">
-            <label className="text-[11px] sm:text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em]">Category Image Path</label>
-            <div className="flex gap-4">
+          {/* VAT Treatment */}
+          <div>
+            <label className="text-xs font-semibold text-gray-700 mb-1.5 block">
+              VAT Treatment
+            </label>
+            <div className="grid grid-cols-3 gap-2">
+              {[
+                { value: "standard", label: "Standard (7.5%)" },
+                { value: "zero_rated", label: "Zero-Rated" },
+                { value: "exempt", label: "VAT Exempt" },
+              ].map((vat) => (
+                <button
+                  key={vat.value}
+                  type="button"
+                  onClick={() =>
+                    setFormData({
+                      ...formData,
+                      vatTreatment: vat.value as VatTreatment,
+                    })
+                  }
+                  disabled={isLoading}
+                  className={`h-9 px-2 text-xs rounded-lg border text-center transition-all cursor-pointer font-medium ${
+                    formData.vatTreatment === vat.value
+                      ? "border-brand-charcoal bg-brand-charcoal text-white shadow-2xs"
+                      : "border-gray-200 bg-white text-gray-700 hover:bg-gray-50"
+                  }`}
+                >
+                  {vat.label}
+                </button>
+              ))}
+            </div>
+            <p className="text-[11px] text-gray-400 mt-1">
+              Determines tax application on products assigned to this category.
+            </p>
+          </div>
+
+          {/* Category Image Path (Optional) */}
+          <div>
+            <label className="text-xs font-semibold text-gray-700 mb-1.5 block">
+              Display Image Path (Optional)
+            </label>
+            <div className="flex gap-2">
               <Input
-                placeholder="/dashboardImage/example.png"
+                placeholder="/images/koolboks/items/1.webp"
                 value={formData.image}
                 onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                className="h-12 border-gray-100 font-bold flex-1"
-                required
+                className="h-10 text-xs rounded-lg border-gray-200 flex-1"
+                disabled={isLoading}
               />
-              <Button 
+              <button
                 type="button"
-                variant="outline"
-                shape="rounded-sm"
-                className="w-12 h-12 p-0 flex-shrink-0"
+                className="w-10 h-10 p-0 flex items-center justify-center rounded-lg border border-gray-200 bg-gray-50 text-gray-600 hover:bg-gray-100 transition-colors shrink-0 cursor-pointer"
+                title="Browse image"
+                disabled={isLoading}
               >
                 <Icon name="photo" folder="icon" size="sm" />
-              </Button>
+              </button>
             </div>
-            <p className="text-[11px] font-medium text-gray-400">Provide a path to an image in the public directory.</p>
+            <p className="text-[11px] text-gray-400 mt-1">
+              Path to category icon or hero photo in public storage.
+            </p>
           </div>
 
-          <div className="flex flex-col gap-2">
-            <label className="text-[11px] sm:text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em]">Description (Optional)</label>
+          {/* Description */}
+          <div>
+            <label className="text-xs font-semibold text-gray-700 mb-1.5 block">
+              Description (Optional)
+            </label>
             <Textarea
-              placeholder="Brief description of this category..."
+              placeholder="Brief description of this cooling or equipment category..."
               value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              className="min-h-[100px]"
+              onChange={(e) =>
+                setFormData({ ...formData, description: e.target.value })
+              }
+              className="min-h-[80px] text-xs rounded-lg border-gray-200 p-2.5"
+              disabled={isLoading}
             />
           </div>
         </ModalBody>
 
-        <ModalFooter className="flex justify-end gap-3 border-t border-gray-50 pt-6">
-          <Button 
-            variant="outline" 
-            type="button" 
-            onClick={onClose} 
-            className="px-8 h-10 sm:h-12 text-[11px] font-bold"
+        <ModalFooter className="flex justify-end gap-2 px-6 py-4 bg-gray-50/70 border-t border-gray-100">
+          <Button
+            variant="outline"
+            type="button"
+            onClick={handleClose}
+            disabled={isLoading}
+            className="px-4 h-9 text-xs font-medium rounded-lg"
           >
             Cancel
           </Button>
-          <Button 
-            variant="primary" 
-            type="submit" 
-            className="px-8 h-10 sm:h-12 text-[11px] font-bold uppercase tracking-wider "
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={isLoading}
+            className="px-5 h-9 text-xs font-semibold rounded-lg bg-brand-charcoal text-white hover:bg-brand-charcoal/90 disabled:opacity-50"
           >
-            Create Category
+            {isLoading ? (
+              <span className="flex items-center gap-2">
+                <span className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                Creating...
+              </span>
+            ) : (
+              "Create Category"
+            )}
           </Button>
         </ModalFooter>
       </form>
     </Modal>
   );
 }
+
+export default AddCategoryModal;

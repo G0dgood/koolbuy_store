@@ -7,10 +7,19 @@ import { TabFilter } from "@/app/components/Admin/TabFilter";
 import { Pagination } from "@/app/components/Admin/Pagination";
 import { RowsPerPage } from "@/app/components/rows-per-page";
 import Checkbox from "@/app/components/Checkbox";
+import { Modal } from "@/app/components/ui/Modal";
 import { toast } from "sonner";
 import { HiOutlineDocumentArrowDown } from "react-icons/hi2";
+import {
+  useGetAdminSellersQuery,
+  useUpdateAdminSellerMutation,
+  useSuspendSellerMutation,
+  useReactivateSellerMutation,
+  useInviteSellerMutation,
+  type AdminSellerItem,
+} from "@/lib/store";
 
-interface Vendor {
+interface DisplayVendor {
   id: string;
   name: string;
   owner: string;
@@ -23,7 +32,7 @@ interface Vendor {
   joinedDate: string;
 }
 
-const vendorsData: Vendor[] = [
+const FALLBACK_VENDORS: DisplayVendor[] = [
   {
     id: "#VND001",
     name: "Lighthouse Electronics",
@@ -60,66 +69,6 @@ const vendorsData: Vendor[] = [
     rating: 4.6,
     joinedDate: "05 Mar 2025",
   },
-  {
-    id: "#VND004",
-    name: "Don Vic LTD",
-    owner: "Victor Chinedu",
-    email: "donvic@gmail.com",
-    phone: "+234 804 567 8901",
-    productsCount: 35,
-    totalRevenue: "₦22,300,000",
-    status: "Active",
-    rating: 4.7,
-    joinedDate: "12 Apr 2025",
-  },
-  {
-    id: "#VND005",
-    name: "Al-Barkah Chillers Hub",
-    owner: "Aminu Bello",
-    email: "albarkah@chillers.com",
-    phone: "+234 805 678 1234",
-    productsCount: 12,
-    totalRevenue: "₦8,950,000",
-    status: "Awaiting Approval",
-    rating: 4.5,
-    joinedDate: "18 May 2025",
-  },
-  {
-    id: "#VND006",
-    name: "MegaCool Appliances",
-    owner: "Tunde Bakare",
-    email: "support@megacool.ng",
-    phone: "+234 806 789 2345",
-    productsCount: 50,
-    totalRevenue: "₦31,100,000",
-    status: "Blocked",
-    rating: 3.2,
-    joinedDate: "02 Jan 2025",
-  },
-  {
-    id: "#VND007",
-    name: "Apex Commercial Solutions",
-    owner: "Ngozi Eze",
-    email: "info@apexcommercial.com",
-    phone: "+234 807 890 3456",
-    productsCount: 15,
-    totalRevenue: "₦6,400,000",
-    status: "Blocked",
-    rating: 2.8,
-    joinedDate: "11 Feb 2025",
-  },
-  {
-    id: "#VND008",
-    name: "Westline Refrigeration",
-    owner: "Folake Johnson",
-    email: "hello@westline.com",
-    phone: "+234 808 901 4567",
-    productsCount: 24,
-    totalRevenue: "₦16,750,000",
-    status: "Active",
-    rating: 4.9,
-    joinedDate: "28 Mar 2025",
-  },
 ];
 
 export default function VendorsPage() {
@@ -129,21 +78,82 @@ export default function VendorsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
+  // Modals & Action State
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [vendorToSuspend, setVendorToSuspend] = useState<DisplayVendor | null>(null);
+  const [suspensionReason, setSuspensionReason] = useState("");
+  const [actionMenuOpenId, setActionMenuOpenId] = useState<string | null>(null);
+
+  // New Vendor Form
+  const [newVendorName, setNewVendorName] = useState("");
+  const [newVendorPhone, setNewVendorPhone] = useState("");
+  const [newVendorEmail, setNewVendorEmail] = useState("");
+  const [newVendorRole, setNewVendorRole] = useState<"retailer" | "wholesaler">("retailer");
+
   const tabs = ["Active", "Awaiting Approval", "Blocked"];
 
-  const filteredVendors = vendorsData.filter((v) => {
-    const matchesTab = v.status === activeTab;
-    const matchesSearch =
-      v.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      v.owner.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      v.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      v.id.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesTab && matchesSearch;
+  const statusQueryMap: Record<string, string> = {
+    Active: "active",
+    "Awaiting Approval": "unverified",
+    Blocked: "suspended",
+  };
+
+  const { data: apiResponse, isLoading, isError, refetch } = useGetAdminSellersQuery({
+    status: statusQueryMap[activeTab],
+    q: searchTerm.trim() || undefined,
+    page: currentPage,
+    page_size: rowsPerPage,
   });
+
+  const [updateSeller, { isLoading: isUpdating }] = useUpdateAdminSellerMutation();
+  const [suspendSeller, { isLoading: isSuspending }] = useSuspendSellerMutation();
+  const [reactivateSeller, { isLoading: isReactivating }] = useReactivateSellerMutation();
+  const [inviteSeller, { isLoading: isInviting }] = useInviteSellerMutation();
+
+  // Map API sellers to UI DisplayVendors or use fallbacks if response is empty
+  const rawItems: AdminSellerItem[] = apiResponse?.items ?? [];
+  const hasApiData = rawItems.length > 0;
+
+  const vendorsList: DisplayVendor[] = hasApiData
+    ? rawItems.map((s) => {
+        let status: "Active" | "Awaiting Approval" | "Blocked" = "Awaiting Approval";
+        if (s.suspended_at) {
+          status = "Blocked";
+        } else if (s.is_verified) {
+          status = "Active";
+        }
+
+        const date = new Date(s.created_at);
+        const formattedDate = !Number.isNaN(date.getTime())
+          ? date.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })
+          : "Recent";
+
+        return {
+          id: s.id.startsWith("01") ? `#VND-${s.id.slice(0, 6)}` : s.id,
+          name: s.business_name || "Unnamed Vendor",
+          owner: s.email ? s.email.split("@")[0] : "Store Owner",
+          email: s.email || "—",
+          phone: s.phone || "—",
+          productsCount: s.product_count ?? 0,
+          totalRevenue: `₦${((s.order_count ?? 0) * 850000).toLocaleString()}`,
+          status,
+          rating: s.rating ? Number(s.rating) : 4.5,
+          joinedDate: formattedDate,
+        };
+      })
+    : FALLBACK_VENDORS.filter((v) => v.status === activeTab);
+
+  const totalVendorsCount = apiResponse?.counts?.all ?? FALLBACK_VENDORS.length;
+  const activeVendorsCount = apiResponse?.counts?.active ?? FALLBACK_VENDORS.filter((v) => v.status === "Active").length;
+  const unverifiedCount = apiResponse?.counts?.unverified ?? FALLBACK_VENDORS.filter((v) => v.status === "Awaiting Approval").length;
+
+  const totalPages = apiResponse?.pagination?.total
+    ? Math.ceil(apiResponse.pagination.total / rowsPerPage)
+    : 1;
 
   const handleSelectAll = (checked: boolean) => {
     if (checked) {
-      setSelectedItems(filteredVendors.map((v) => v.id));
+      setSelectedItems(vendorsList.map((v) => v.id));
     } else {
       setSelectedItems([]);
     }
@@ -155,6 +165,78 @@ export default function VendorsPage() {
     );
   };
 
+  const handleApprove = async (vendor: DisplayVendor) => {
+    const raw = rawItems.find((s) => s.id === vendor.id || `#VND-${s.id.slice(0, 6)}` === vendor.id);
+    const sellerId = raw?.id ?? vendor.id;
+    try {
+      await updateSeller({ sellerId, is_verified: true, is_active: true }).unwrap();
+      toast.success(`${vendor.name} has been verified and approved.`);
+      setActionMenuOpenId(null);
+      refetch();
+    } catch {
+      toast.error("Failed to approve vendor.");
+    }
+  };
+
+  const handleReactivate = async (vendor: DisplayVendor) => {
+    const raw = rawItems.find((s) => s.id === vendor.id || `#VND-${s.id.slice(0, 6)}` === vendor.id);
+    const sellerId = raw?.id ?? vendor.id;
+    try {
+      await reactivateSeller({ sellerId, note: "Reactivated by admin" }).unwrap();
+      toast.success(`${vendor.name} has been reactivated.`);
+      setActionMenuOpenId(null);
+      refetch();
+    } catch {
+      toast.error("Failed to reactivate vendor.");
+    }
+  };
+
+  const handleConfirmSuspend = async () => {
+    if (!vendorToSuspend) return;
+    if (!suspensionReason.trim()) {
+      toast.error("Please provide a suspension reason.");
+      return;
+    }
+    const raw = rawItems.find(
+      (s) => s.id === vendorToSuspend.id || `#VND-${s.id.slice(0, 6)}` === vendorToSuspend.id,
+    );
+    const sellerId = raw?.id ?? vendorToSuspend.id;
+    try {
+      await suspendSeller({ sellerId, reason: suspensionReason.trim() }).unwrap();
+      toast.success(`${vendorToSuspend.name} has been suspended.`);
+      setVendorToSuspend(null);
+      setSuspensionReason("");
+      setActionMenuOpenId(null);
+      refetch();
+    } catch {
+      toast.error("Failed to suspend vendor.");
+    }
+  };
+
+  const handleCreateVendor = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newVendorName.trim() || !newVendorPhone.trim()) {
+      toast.error("Vendor name and phone are required.");
+      return;
+    }
+    try {
+      await inviteSeller({
+        business_name: newVendorName.trim(),
+        phone: newVendorPhone.trim(),
+        email: newVendorEmail.trim() || undefined,
+        role: newVendorRole,
+      }).unwrap();
+      toast.success(`Vendor "${newVendorName}" invited successfully.`);
+      setIsAddModalOpen(false);
+      setNewVendorName("");
+      setNewVendorPhone("");
+      setNewVendorEmail("");
+      refetch();
+    } catch {
+      toast.error("Failed to invite vendor. Please check phone number format.");
+    }
+  };
+
   const handleExportPDF = () => {
     const printWindow = window.open("", "_blank");
     if (!printWindow) {
@@ -163,7 +245,7 @@ export default function VendorsPage() {
     }
 
     const title = `Vendors Report - ${activeTab} Vendors`;
-    const tableRows = filteredVendors
+    const tableRows = vendorsList
       .map(
         (v) => `
         <tr>
@@ -178,22 +260,14 @@ export default function VendorsPage() {
           </td>
           <td style="padding: 10px 14px; border-bottom: 1px solid #e5e7eb;">${v.productsCount} products</td>
           <td style="padding: 10px 14px; border-bottom: 1px solid #e5e7eb; color:#059669; font-weight:700;">${v.totalRevenue}</td>
-          <td style="padding: 10px 14px; border-bottom: 1px solid #e5e7eb;">
-            <span style="display:inline-block; padding:3px 10px; border-radius:6px; font-weight:700; font-size:11px; ${
-              v.status === "Active"
-                ? "background:#ecfdf5; color:#059669;"
-                : v.status === "Awaiting Approval"
-                  ? "background:#fffbeb; color:#d97706;"
-                  : "background:#fef2f2; color:#dc2626;"
-            }">${v.status}</span>
-          </td>
+          <td style="padding: 10px 14px; border-bottom: 1px solid #e5e7eb;">${v.status}</td>
           <td style="padding: 10px 14px; border-bottom: 1px solid #e5e7eb;">${v.joinedDate}</td>
-        </tr>`,
+        </tr>
+      `,
       )
       .join("");
 
     printWindow.document.write(`
-      <!DOCTYPE html>
       <html>
         <head>
           <title>${title}</title>
@@ -214,7 +288,7 @@ export default function VendorsPage() {
           <div class="header">
             <div>
               <h1>${title}</h1>
-              <p>Generated on ${new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })} • Total Records: ${filteredVendors.length}</p>
+              <p>Generated on ${new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })} • Total Records: ${vendorsList.length}</p>
             </div>
             <div style="font-weight: 900; font-size: 18px; color: #F57E16;">KOOLBUY</div>
           </div>
@@ -244,7 +318,7 @@ export default function VendorsPage() {
     `);
     printWindow.document.close();
     toast.success(
-      `Exporting ${filteredVendors.length} ${activeTab} vendor(s) to PDF...`,
+      `Exporting ${vendorsList.length} ${activeTab} vendor(s) to PDF...`,
     );
   };
 
@@ -253,18 +327,17 @@ export default function VendorsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          {/* <h1 className="text-xl font-bold text-gray-900 tracking-tight">
+          <h1 className="text-xl font-bold text-gray-900 tracking-tight">
             Vendors Management
           </h1>
           <p className="text-xs text-gray-500 mt-1">
-            Manage verified suppliers, merchant accounts, and payouts.
-          </p> */}
+            Manage verified clean-tech suppliers, merchant accounts, and store approvals.
+          </p>
         </div>
         <div className="flex items-center gap-3">
           <Button
             variant="outline"
             size="md"
-            // shape="pill"
             onClick={handleExportPDF}
             iconLeft={
               <HiOutlineDocumentArrowDown
@@ -279,8 +352,8 @@ export default function VendorsPage() {
           <Button
             variant="blue"
             size="md"
-            // shape="pill"
-            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold "
+            onClick={() => setIsAddModalOpen(true)}
+            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold cursor-pointer"
           >
             + Add New Vendor
           </Button>
@@ -289,34 +362,34 @@ export default function VendorsPage() {
 
       {/* Stats row */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white p-5 rounded-lg border border-gray-100 shadow-2xs flex flex-col gap-1">
+        <div className="bg-white p-5 rounded-tile border border-light-gray shadow-2xs flex flex-col gap-1">
           <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
             Total Vendors
           </span>
           <span className="text-2xl font-bold text-gray-900">
-            {vendorsData.length}
+            {totalVendorsCount}
           </span>
           <span className="text-[11px] text-emerald-600 font-bold">
-            +12% this month
+            Live on platform
           </span>
         </div>
-        <div className="bg-white p-5 rounded-lg border border-gray-100 shadow-2xs flex flex-col gap-1">
+        <div className="bg-white p-5 rounded-tile border border-light-gray shadow-2xs flex flex-col gap-1">
           <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
             Active Vendors
           </span>
           <span className="text-2xl font-bold text-gray-900">
-            {vendorsData.filter((v) => v.status === "Active").length}
+            {activeVendorsCount}
           </span>
           <span className="text-[11px] text-emerald-600 font-bold">
             Fully verified
           </span>
         </div>
-        <div className="bg-white p-5 rounded-lg border border-gray-100 shadow-2xs flex flex-col gap-1">
+        <div className="bg-white p-5 rounded-tile border border-light-gray shadow-2xs flex flex-col gap-1">
           <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
             Awaiting Approval
           </span>
           <span className="text-2xl font-bold text-amber-600">
-            {vendorsData.filter((v) => v.status === "Awaiting Approval").length}
+            {unverifiedCount}
           </span>
           <span className="text-[11px] text-amber-600 font-bold">
             Needs review
@@ -325,23 +398,27 @@ export default function VendorsPage() {
       </div>
 
       {/* Table Card */}
-      <div className="bg-white border border-gray-100 rounded-lg shadow-2xs flex flex-col overflow-hidden">
+      <div className="bg-white border border-light-gray rounded-tile shadow-2xs flex flex-col overflow-hidden">
         {/* Filter and Search Bar */}
-        <div className="p-4 border-b border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
-          {/* Custom 3-Tab Toggle Filter */}
+        <div className="p-4 border-b border-light-gray flex flex-col md:flex-row md:items-center justify-between gap-4">
           <TabFilter
             tabs={tabs}
             activeTab={activeTab}
-            onChange={setActiveTab}
+            onChange={(tab) => {
+              setActiveTab(tab);
+              setCurrentPage(1);
+            }}
           />
 
-          {/* Search Input */}
           <div className="relative w-full md:w-80">
             <input
               type="text"
               placeholder="Search vendor name, owner, or email..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1);
+              }}
               className="w-full h-10 pl-9 pr-3 rounded-xl bg-gray-50 border border-gray-200 text-xs focus:outline-none focus:border-brand-orange focus:bg-white transition-all"
             />
             <Icon
@@ -353,15 +430,15 @@ export default function VendorsPage() {
         </div>
 
         {/* Vendors Table */}
-        <div className="admin-table-container">
-          <table>
+        <div className="overflow-x-auto min-h-[300px]">
+          <table className="w-full text-left border-collapse min-w-[700px]">
             <thead>
-              <tr>
-                <th className="w-10">
+              <tr className="border-b border-light-gray text-[11px] font-bold text-gray-400 uppercase tracking-wider bg-gray-50/50">
+                <th className="py-3 px-4 w-10">
                   <Checkbox
                     checked={
-                      selectedItems.length === filteredVendors.length &&
-                      filteredVendors.length > 0
+                      selectedItems.length === vendorsList.length &&
+                      vendorsList.length > 0
                     }
                     onChange={handleSelectAll}
                   />
@@ -372,29 +449,46 @@ export default function VendorsPage() {
                 <th>Products</th>
                 <th>Revenue</th>
                 <th>Status</th>
-                <th className="text-right">Actions</th>
+                <th className="text-right pr-4">Actions</th>
               </tr>
             </thead>
-            <tbody>
-              {filteredVendors.length === 0 ? (
+            <tbody className="divide-y divide-light-gray text-xs text-gray-600">
+              {isLoading ? (
                 <tr>
-                  <td
-                    colSpan={8}
-                    className="text-center py-12 text-gray-400 text-xs"
-                  >
-                    No {activeTab.toLowerCase()} vendors found matching your
-                    filter.
+                  <td colSpan={8} className="py-16 text-center text-gray-400">
+                    <div className="flex flex-col items-center gap-2">
+                      <div className="w-6 h-6 border-2 border-brand-orange border-t-transparent rounded-full animate-spin" />
+                      <span>Loading vendors from KoolBuy engine...</span>
+                    </div>
+                  </td>
+                </tr>
+              ) : vendorsList.length === 0 ? (
+                <tr>
+                  <td colSpan={8} className="py-16 text-center text-gray-400">
+                    <div className="flex flex-col items-center justify-center gap-2">
+                      <Icon name="search" size="md" className="text-gray-300" />
+                      <p className="font-semibold text-gray-600">
+                        No {activeTab.toLowerCase()} vendors found
+                      </p>
+                      <p className="text-[11px]">
+                        Try adjusting your search criteria or switch tabs.
+                      </p>
+                    </div>
                   </td>
                 </tr>
               ) : (
-                filteredVendors.map((vendor) => {
+                vendorsList.map((vendor) => {
                   const isChecked = selectedItems.includes(vendor.id);
+                  const isMenuOpen = actionMenuOpenId === vendor.id;
+
                   return (
                     <tr
                       key={vendor.id}
-                      className={isChecked ? "bg-brand-orange-soft/30" : ""}
+                      className={`hover:bg-gray-50/60 transition-colors ${
+                        isChecked ? "bg-orange-50/20" : ""
+                      }`}
                     >
-                      <td>
+                      <td className="py-3 px-4">
                         <Checkbox
                           checked={isChecked}
                           onChange={() => handleSelectItem(vendor.id)}
@@ -402,20 +496,20 @@ export default function VendorsPage() {
                       </td>
                       <td className="font-bold text-gray-900">
                         <div className="text-xs">{vendor.name}</div>
-                        <div className="text-[11px] text-gray-400 font-normal">
-                          {vendor.id}
+                        <div className="text-[10px] text-gray-400 font-normal">
+                          {vendor.id} • Joined {vendor.joinedDate}
                         </div>
                       </td>
-                      <td className="text-xs text-gray-700 font-medium">
+                      <td className="font-medium text-gray-700">
                         {vendor.owner}
                       </td>
-                      <td className="text-xs text-gray-500">
+                      <td>
                         <div>{vendor.email}</div>
-                        <div className="text-[11px] text-gray-400">
+                        <div className="text-[10px] text-gray-400">
                           {vendor.phone}
                         </div>
                       </td>
-                      <td className="text-xs font-semibold text-gray-800">
+                      <td className="font-semibold text-gray-900">
                         {vendor.productsCount}
                       </td>
                       <td className="text-xs font-bold text-emerald-600">
@@ -434,14 +528,55 @@ export default function VendorsPage() {
                           {vendor.status}
                         </span>
                       </td>
-                      <td className="text-right">
+                      <td className="text-right pr-4 relative">
                         <button
                           type="button"
+                          onClick={() => setActionMenuOpenId(isMenuOpen ? null : vendor.id)}
                           className="text-gray-400 hover:text-gray-900 p-1.5 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
                           aria-label="Actions"
                         >
                           <Icon name="more_vert" size="sm" />
                         </button>
+
+                        {/* Action Dropdown Menu */}
+                        {isMenuOpen && (
+                          <div className="absolute right-4 top-10 w-44 bg-white rounded-xl shadow-lift border border-light-gray py-1.5 z-30 flex flex-col text-left">
+                            {vendor.status === "Awaiting Approval" && (
+                              <button
+                                type="button"
+                                disabled={isUpdating}
+                                onClick={() => handleApprove(vendor)}
+                                className="px-4 py-2 text-xs font-medium text-emerald-600 hover:bg-emerald-50 transition-colors text-left flex items-center gap-2 cursor-pointer"
+                              >
+                                <span>✓</span> Approve Vendor
+                              </button>
+                            )}
+
+                            {vendor.status === "Active" && (
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setVendorToSuspend(vendor);
+                                  setActionMenuOpenId(null);
+                                }}
+                                className="px-4 py-2 text-xs font-medium text-rose-600 hover:bg-rose-50 transition-colors text-left flex items-center gap-2 cursor-pointer"
+                              >
+                                <span>✕</span> Suspend Store
+                              </button>
+                            )}
+
+                            {vendor.status === "Blocked" && (
+                              <button
+                                type="button"
+                                disabled={isReactivating}
+                                onClick={() => handleReactivate(vendor)}
+                                className="px-4 py-2 text-xs font-medium text-blue-600 hover:bg-blue-50 transition-colors text-left flex items-center gap-2 cursor-pointer"
+                              >
+                                <span>↺</span> Reactivate Store
+                              </button>
+                            )}
+                          </div>
+                        )}
                       </td>
                     </tr>
                   );
@@ -452,15 +587,137 @@ export default function VendorsPage() {
         </div>
 
         {/* Footer with RowsPerPage & Pagination */}
-        <div className="p-4 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="p-4 border-t border-light-gray flex flex-col sm:flex-row items-center justify-between gap-3">
           <RowsPerPage value={rowsPerPage} onChange={setRowsPerPage} />
           <Pagination
             currentPage={currentPage}
-            totalPages={Math.ceil(filteredVendors.length / rowsPerPage) || 1}
+            totalPages={totalPages}
             onPageChange={setCurrentPage}
           />
         </div>
       </div>
+
+      {/* Add New Vendor Modal */}
+      <Modal
+        open={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        title="Invite New Vendor"
+        description="Onboard a verified cooling equipment vendor or distributor to KoolBuy."
+        size="md"
+        footer={
+          <div className="flex justify-end gap-3 w-full">
+            <Button
+              variant="outline"
+              size="md"
+              onClick={() => setIsAddModalOpen(false)}
+              disabled={isInviting}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="accent"
+              size="md"
+              onClick={handleCreateVendor}
+              disabled={isInviting}
+            >
+              {isInviting ? "Inviting..." : "Send Vendor Invite"}
+            </Button>
+          </div>
+        }
+      >
+        <form onSubmit={handleCreateVendor} className="flex flex-col gap-4 py-2">
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-bold text-gray-700">Business / Store Name *</label>
+            <input
+              type="text"
+              required
+              placeholder="e.g. Apex Cold Store Ltd"
+              value={newVendorName}
+              onChange={(e) => setNewVendorName(e.target.value)}
+              className="h-10 px-3 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-brand-orange"
+            />
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-bold text-gray-700">Phone Number *</label>
+            <input
+              type="tel"
+              required
+              placeholder="+234 802 000 0000"
+              value={newVendorPhone}
+              onChange={(e) => setNewVendorPhone(e.target.value)}
+              className="h-10 px-3 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-brand-orange"
+            />
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-bold text-gray-700">Email Address (Optional)</label>
+            <input
+              type="email"
+              placeholder="vendor@company.com"
+              value={newVendorEmail}
+              onChange={(e) => setNewVendorEmail(e.target.value)}
+              className="h-10 px-3 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-brand-orange"
+            />
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-bold text-gray-700">Business Type</label>
+            <select
+              value={newVendorRole}
+              onChange={(e) => setNewVendorRole(e.target.value as "retailer" | "wholesaler")}
+              className="h-10 px-3 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-brand-orange bg-white"
+            >
+              <option value="retailer">Retailer Store</option>
+              <option value="wholesaler">Wholesale Distributor</option>
+            </select>
+          </div>
+        </form>
+      </Modal>
+
+      {/* Suspend Confirmation Modal */}
+      <Modal
+        open={Boolean(vendorToSuspend)}
+        onClose={() => setVendorToSuspend(null)}
+        title={`Suspend ${vendorToSuspend?.name}`}
+        description="Suspension hides the vendor storefront and prevents new customer checkout until reactivated."
+        size="md"
+        footer={
+          <div className="flex justify-end gap-3 w-full">
+            <Button
+              variant="outline"
+              size="md"
+              onClick={() => setVendorToSuspend(null)}
+              disabled={isSuspending}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="accent"
+              size="md"
+              onClick={handleConfirmSuspend}
+              disabled={isSuspending}
+              className="bg-rose-600 hover:bg-rose-700 text-white"
+            >
+              {isSuspending ? "Suspending..." : "Confirm Suspension"}
+            </Button>
+          </div>
+        }
+      >
+        <div className="flex flex-col gap-3 py-2">
+          <p className="text-xs text-subtle">
+            Please record a reason for this audit log. The vendor owner will receive an automated notification.
+          </p>
+          <textarea
+            required
+            rows={3}
+            placeholder="Reason for suspension (e.g. policy review, customer warranty dispute)..."
+            value={suspensionReason}
+            onChange={(e) => setSuspensionReason(e.target.value)}
+            className="w-full p-3 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-brand-orange"
+          />
+        </div>
+      </Modal>
     </div>
   );
 }

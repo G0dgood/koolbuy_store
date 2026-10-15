@@ -26,13 +26,13 @@ const FeatureHeader: React.FC<{ eyebrow: string; title: string; children: React.
   </div>
 );
 
-const tile = "w-full relative overflow-hidden bg-white rounded-[22px] md:rounded-[32px] flex items-center justify-center";
+const tile = "w-full relative overflow-hidden bg-white rounded-tile md:rounded-hero border border-light-gray flex items-center justify-center";
 
 export const ProductFeatureGallery: React.FC = () => {
   return (
     <div className="w-full flex flex-col gap-4 md:gap-6">
       {/* Product parameters */}
-      <div className="w-full bg-white rounded-[22px] md:rounded-[32px] p-6 sm:p-8 md:p-10">
+      <div className="w-full bg-white rounded-tile md:rounded-hero border border-light-gray p-6 sm:p-8 md:p-10">
         <h3 className="text-[22px] md:text-[26px] font-semibold text-brand-charcoal tracking-[-0.02em] mb-4">
           Product parameters
         </h3>

@@ -52,7 +52,7 @@ const CartSummary = () => {
    return (
       <div className="w-full lg:w-[360px] flex flex-col gap-4 lg:sticky lg:top-24">
          {/* Coupon Section */}
-         <div className="bg-white rounded-[22px] p-6 flex flex-col gap-3">
+         <div className="bg-white rounded-tile border border-light-gray p-6 flex flex-col gap-3">
             <span className="text-[13px] font-medium text-brand-charcoal">Have a coupon?</span>
             {appliedCoupon ? (
                <div className="flex items-center justify-between p-2.5 px-3 bg-brand-orange-soft rounded-xl text-xs font-semibold text-brand-orange-text">
@@ -77,7 +77,7 @@ const CartSummary = () => {
                         placeholder="e.g. KOOL10"
                         className="flex-1 min-w-0 h-10 px-4 rounded-full bg-black/[0.04] border border-transparent outline-none transition-colors text-[14px] text-brand-charcoal placeholder:text-faint focus:bg-white focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/15 uppercase"
                      />
-                     <Button type="submit" variant="primary" shape="pill" className="h-10 px-5 text-[14px]!">
+                     <Button type="submit" variant="primary" shape="pill" className="h-10 px-5 text-[14px]">
                         Apply
                      </Button>
                   </div>
@@ -89,7 +89,7 @@ const CartSummary = () => {
          </div>
 
          {/* Summary Section */}
-         <div className="bg-white rounded-[22px] p-6 flex flex-col gap-5">
+         <div className="bg-white rounded-tile border border-light-gray p-6 flex flex-col gap-5">
             <div className="flex flex-col gap-2.5 text-[14px]">
                <div className="flex justify-between">
                   <span className="text-subtle">Subtotal</span>

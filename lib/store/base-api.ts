@@ -107,6 +107,7 @@ export const baseApi = createApi({
     "Wishlist",
     "KoolBuy",
     "Store",
+    "Vendor",
     "AuditLog",
   ],
   endpoints: () => ({}),

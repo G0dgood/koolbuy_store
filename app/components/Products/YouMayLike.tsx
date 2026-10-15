@@ -12,11 +12,11 @@ const YouMayLike = () => {
   const { addToCart } = useCart();
 
   const items = [
-    { id: "yml1", name: "Men's T-shirt", price: "₦99.50", image: "/web_detail_images/Image copy.png" },
-    { id: "yml2", name: "Mens T-shirt Base Layer", price: "₦85.00", image: "/web_detail_images/Image copy 2.png" },
-    { id: "yml3", name: "Mens T-shirt Base Layer", price: "₦75.00", image: "/web_detail_images/Image copy 3.png" },
-    { id: "yml4", name: "Mens T-shirt Base Layer", price: "₦90.00", image: "/web_detail_images/Image copy 4.png" },
-    { id: "yml5", name: "Mens T-shirt Base Layer", price: "₦95.00", image: "/web_detail_images/Image copy 5.png" },
+    { id: "yml1", name: "Kool - Scanfrost 600L Inverter", price: "₦1,406,000", image: "/images/koolboks/items/5.webp" },
+    { id: "yml2", name: "Kool Scanfrost 60ah Pedestal", price: "₦1,287,600", image: "/images/koolboks/items/1.webp" },
+    { id: "yml3", name: "200L AC Inverter Freezers", price: "₦2,420,000", image: "/images/koolboks/items/3.webp" },
+    { id: "yml4", name: "Koolboks 600L AC Inverter", price: "₦1,468,000", image: "/images/koolboks/items/6.webp" },
+    { id: "yml5", name: "Koolboks 538L Refurbished", price: "₦1,538,000", image: "/images/koolboks/items/2.webp" },
   ];
 
   const handleAddToCart = (e: React.MouseEvent, item: any) => {
@@ -32,7 +32,7 @@ const YouMayLike = () => {
   };
 
   return (
-    <div className="w-full lg:w-80 flex-shrink-0 bg-white rounded-[22px] md:rounded-[32px] p-6 flex flex-col gap-5">
+    <div className="w-full lg:w-80 flex-shrink-0 bg-white rounded-tile border border-light-gray p-6 flex flex-col gap-5">
       <StoreSectionHeader title="You may like" />
       <div className="flex flex-col gap-2">
          {items.map((item, idx) => (

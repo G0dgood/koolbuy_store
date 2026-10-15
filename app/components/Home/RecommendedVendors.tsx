@@ -6,15 +6,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { motion } from "framer-motion";
+import { useGetVendorsQuery } from "@/lib/store";
 
-interface Vendor {
+interface VendorDisplay {
   id: string;
   name: string;
   image: string;
   link: string;
 }
 
-const vendors: Vendor[] = [
+const FALLBACK_VENDORS: VendorDisplay[] = [
   {
     id: "v1",
     name: "Koolbuy - Lighthouse Electronics",
@@ -63,10 +64,25 @@ export const RecommendedVendors: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
 
+  const { data: vendorsData } = useGetVendorsQuery({ page_size: 10 });
+
+  const vendors: VendorDisplay[] =
+    vendorsData?.items && vendorsData.items.length > 0
+      ? vendorsData.items.map((item, idx) => ({
+          id: item.id,
+          name: item.name,
+          image:
+            item.cover_image_url ||
+            item.image_url ||
+            FALLBACK_VENDORS[idx % FALLBACK_VENDORS.length]?.image ||
+            "/images/koolboks/vendors/12.webp",
+          link: `/products?vendor=${encodeURIComponent(item.id)}`,
+        }))
+      : FALLBACK_VENDORS;
+
   const scrollNext = useCallback(() => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      // If reached near the end, loop back to the start
       if (scrollLeft + clientWidth >= scrollWidth - 15) {
         scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
       } else {
@@ -105,7 +121,11 @@ export const RecommendedVendors: React.FC = () => {
       onTouchStart={() => setIsPaused(true)}
       onTouchEnd={() => setIsPaused(false)}
     >
-      <StoreSectionHeader title="Recommended vendors" subtitle="Verified sellers with great service." href="/products" />
+      <StoreSectionHeader
+        title="Recommended vendors"
+        subtitle="Verified sellers with great cooling service."
+        href="/products"
+      />
 
       {/* Relative container with arrows */}
       <div className="relative group/carousel">
@@ -130,14 +150,16 @@ export const RecommendedVendors: React.FC = () => {
             >
               <Link href={vendor.link} className="flex-1 flex flex-col">
                 <motion.div
-                  className="bg-white rounded-[22px] overflow-hidden flex flex-col h-full transition-shadow duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] group cursor-pointer"
+                  className="bg-white rounded-tile border border-light-gray overflow-hidden flex flex-col h-full transition-all duration-300 hover:shadow-lift group cursor-pointer"
                 >
                   {/* Vendor Image Banner */}
                   <div className="w-full aspect-square relative overflow-hidden bg-off-white">
                     <Image
                       src={vendor.image}
                       alt={vendor.name}
-                      fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                      fill
+                      unoptimized={vendor.image.startsWith("http")}
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     />
                   </div>

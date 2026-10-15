@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FiChevronDown } from "react-icons/fi";
 import { Button } from "../Button";
 
@@ -17,25 +16,12 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
   onMouseEnterDropdown,
   onToggleDropdown,
 }) => {
-  const pathname = usePathname();
-  const isActive = (path: string) => pathname === path;
+  const router = useRouter();
 
   return (
     <div className="hidden lg:flex items-center h-full">
       {/* Navigation Buttons Row */}
       <div className="flex items-center gap-5 xl:gap-7 text-[13px] font-medium text-gray-800 h-full">
-        {/* Home */}
-        <Link
-          href="/"
-          className={`transition-colors py-2 whitespace-nowrap ${
-            isActive("/")
-              ? "text-brand-orange-text font-semibold"
-              : "text-gray-600 hover:text-brand-charcoal"
-          }`}
-        >
-          Home
-        </Link>
-
         {/* All Categories Trigger */}
         <div
           className="relative h-full flex items-center"
@@ -43,10 +29,17 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
         >
           <button
             type="button"
-            onClick={() => onToggleDropdown("categories")}
+            onClick={() => {
+              if (activeDropdown === "categories") {
+                // If already open, clicking navigates to /products catalog
+                router.push("/products");
+              } else {
+                onToggleDropdown("categories");
+              }
+            }}
             className={`flex items-center gap-1.5 h-full py-2 transition-colors cursor-pointer outline-none whitespace-nowrap ${
               activeDropdown === "categories"
-                ? "text-brand-orange-text"
+                ? "text-brand-orange-text font-semibold"
                 : "text-gray-600 hover:text-brand-charcoal"
             }`}
           >

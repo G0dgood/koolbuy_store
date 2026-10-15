@@ -36,7 +36,7 @@ export const ProductGridItem: React.FC<{ product: ProductProps }> = ({ product }
    };
 
    return (
-      <div className="bg-white rounded-[20px] overflow-hidden transition-all duration-300 hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] group flex flex-col h-full relative">
+      <div className="bg-white rounded-tile border border-light-gray overflow-hidden transition-all duration-300 hover:shadow-lift group flex flex-col h-full relative">
          <Link href="/products/detail" className="flex flex-col flex-1">
             <div className="relative w-full aspect-[4/3] bg-off-white overflow-hidden">
                <Image
@@ -115,7 +115,7 @@ export const ProductListItem: React.FC<{
    };
 
    return (
-      <div className="bg-white rounded-[20px] overflow-hidden flex gap-3 md:gap-6 transition-shadow duration-300 hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] relative group">
+      <div className="bg-white rounded-tile border border-light-gray overflow-hidden flex gap-3 md:gap-6 transition-all duration-300 hover:shadow-lift relative group">
          {/* Product Image */}
          <Link href="/products/detail" className="relative w-32 md:w-48 self-stretch min-h-32 md:min-h-48 flex-shrink-0 bg-off-white cursor-pointer overflow-hidden">
             <Image

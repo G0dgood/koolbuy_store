@@ -1,8 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { StoreProductGrid, StoreSectionHeader, type StoreProduct } from "./StoreUi";
-import { categories } from "./IntroducingProducts";
+import { defaultCategories } from "./IntroducingProducts";
+import { useGetPublicCategoriesQuery } from "@/lib/store/api/categories-api";
+import { EmptyCategoryIllustration } from "./EmptyCategoryIllustration";
+import Link from "next/link";
 
 // Sample catalogue until the storefront is wired to real product data.
 // `category` matches the chip ids in IntroducingProducts.
@@ -30,22 +33,72 @@ const newProductsList: (StoreProduct & { category: string })[] = [
 ];
 
 export const NewProductsSection: React.FC<{ category?: string }> = ({ category = "all" }) => {
-  const active = categories.find((c) => c.id === category) ?? categories[0];
-  const isAll = active.id === "all";
-  const products = isAll ? newProductsList : newProductsList.filter((p) => p.category === active.id);
+  const { data: categoriesData } = useGetPublicCategoriesQuery();
+
+  const isAll = category === "all";
+
+  const categoryMeta = useMemo(() => {
+    if (isAll) {
+      return { title: "New products", link: "/products" };
+    }
+    const apiMatch = categoriesData?.items?.find((c) => c.value === category);
+    if (apiMatch) {
+      return {
+        title: apiMatch.label,
+        link: `/products?category=${encodeURIComponent(apiMatch.value)}`,
+      };
+    }
+    const defaultMatch = defaultCategories.find((c) => c.id === category);
+    if (defaultMatch) {
+      return {
+        title: defaultMatch.name.replace(/\n/g, " "),
+        link: defaultMatch.link,
+      };
+    }
+    return {
+      title: category.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
+      link: `/products?category=${encodeURIComponent(category)}`,
+    };
+  }, [category, isAll, categoriesData]);
+
+  const products = useMemo(() => {
+    if (isAll) return newProductsList;
+    return newProductsList.filter(
+      (p) =>
+        p.category === category ||
+        p.category === category.replace(/_/g, "-") ||
+        category.replace(/_/g, "-") === p.category
+    );
+  }, [category, isAll]);
 
   return (
     <section className="w-full flex flex-col gap-6">
       <StoreSectionHeader
-        title={isAll ? "New products" : active.name.replace(/\n/g, " ")}
+        title={categoryMeta.title}
         subtitle={isAll ? "Just arrived on KoolBuy." : "Fresh picks in this category."}
-        href={active.link}
+        href={categoryMeta.link}
       />
       {products.length > 0 ? (
         // key restarts the ease-in each time the category changes
-        <StoreProductGrid key={active.id} products={products} twoRows />
+        <StoreProductGrid key={category} products={products} twoRows />
       ) : (
-        <p className="py-12 text-center text-[15px] text-subtle">No products in this category yet.</p>
+        <div className="py-14 px-4 flex flex-col items-center justify-center text-center bg-gray-50/40 rounded-2xl border border-dashed border-gray-200/90 my-2">
+          <EmptyCategoryIllustration className="w-52 h-40 sm:w-64 sm:h-48 mb-2" />
+          <h3 className="text-base sm:text-lg font-semibold text-brand-charcoal mt-2">
+            No products in {categoryMeta.title} yet.
+          </h3>
+          <p className="text-xs sm:text-[13px] text-gray-500 max-w-md mt-1.5 leading-relaxed">
+            Verified suppliers are actively staging new inventory for {categoryMeta.title}. Check back shortly or browse other cooling classifications.
+          </p>
+          <div className="mt-5 flex items-center gap-2.5">
+            <Link
+              href="/products"
+              className="inline-flex items-center justify-center px-4 py-2 rounded-lg text-xs font-semibold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 transition-colors shadow-2xs"
+            >
+              Browse all products
+            </Link>
+          </div>
+        </div>
       )}
     </section>
   );

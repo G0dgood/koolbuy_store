@@ -30,10 +30,20 @@ export interface ProductsQueryParams {
 }
 
 export interface PaginatedProductsResponse {
+  success?: boolean;
   count?: number;
+  total?: number;
   next?: string | null;
   previous?: string | null;
   results?: ApiProduct[];
+  items?: ApiProduct[];
+  pagination?: {
+    total: number;
+    page: number;
+    page_size: number;
+    has_next: boolean;
+    has_prev: boolean;
+  };
 }
 
 export const productsApi = baseApi.injectEndpoints({
@@ -52,15 +62,17 @@ export const productsApi = baseApi.injectEndpoints({
         if (params?.ordering) queryParams.set("ordering", params.ordering);
 
         const qs = queryParams.toString();
-        return `/products/${qs ? `?${qs}` : ""}`;
+        return `/koolbuy/products/${qs ? `?${qs}` : ""}`;
       },
       providesTags: (result) =>
         result
           ? [
-              ...("results" in result && Array.isArray(result.results)
-                ? result.results.map(({ id }) => ({ type: "Product" as const, id }))
-                : Array.isArray(result)
+              ...(Array.isArray(result)
                 ? result.map(({ id }) => ({ type: "Product" as const, id }))
+                : "items" in result && Array.isArray(result.items)
+                ? result.items.map(({ id }) => ({ type: "Product" as const, id }))
+                : "results" in result && Array.isArray(result.results)
+                ? result.results.map(({ id }) => ({ type: "Product" as const, id }))
                 : []),
               { type: "Product", id: "LIST" },
             ]
@@ -68,12 +80,15 @@ export const productsApi = baseApi.injectEndpoints({
     }),
 
     getProductById: builder.query<ApiProduct, string>({
-      query: (id) => `/products/${id}/`,
+      query: (id) => `/koolbuy/products/${id}/`,
       providesTags: (_result, _error, id) => [{ type: "Product", id }],
     }),
 
-    getCategories: builder.query<string[] | { id: string; name: string }[], void>({
-      query: () => `/categories/`,
+    getCategories: builder.query<
+      { success: boolean; items: { value: string; label: string; slug?: string }[] },
+      void
+    >({
+      query: () => `/koolbuy/categories/`,
       providesTags: [{ type: "Category", id: "LIST" }],
     }),
   }),

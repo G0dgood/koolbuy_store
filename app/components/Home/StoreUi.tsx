@@ -57,7 +57,7 @@ const item: Variants = {
 export function StoreProductCard({ product, className = "" }: { product: StoreProduct; className?: string }) {
   return (
     <motion.div variants={item} className={`h-full ${className}`}>
-      <Link href={product.href ?? "/products/detail"} className="group flex flex-col h-full rounded-[22px] bg-white overflow-hidden transition-shadow duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
+      <Link href={product.href ?? "/products/detail"} className="group flex flex-col h-full rounded-tile bg-white border border-light-gray overflow-hidden transition-all duration-300 hover:shadow-lift">
         <div className="relative w-full aspect-square bg-off-white overflow-hidden">
           <Image
             src={product.image}
@@ -71,7 +71,7 @@ export function StoreProductCard({ product, className = "" }: { product: StorePr
         <div className="flex flex-col gap-0.5 px-4 pt-3 pb-4">
           <h3 className="text-[14px] font-semibold text-brand-charcoal leading-snug line-clamp-2">{product.name}</h3>
           {product.vendor && <p className="text-[12px] text-faint truncate">{product.vendor}</p>}
-          <p className="mt-1 text-[14px] text-brand-charcoal tabular-nums">{product.price}</p>
+          <p className="mt-1 text-[14px] font-semibold text-brand-charcoal tabular-nums">{product.price}</p>
         </div>
       </Link>
     </motion.div>

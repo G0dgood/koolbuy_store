@@ -137,8 +137,14 @@ export const megaMenuContent: MegaMenuData = {
             href: "/products?category=Ice+Makers",
           },
           {
-            label: "DC Solar Chest Freezers",
-            href: "/products?category=Single+Door+Chest+Freezers",
+            label: "Fish & Seafood",
+            href: "/products?category=Fish+%26+Seafood",
+            badge: "FRESH",
+          },
+          {
+            label: "Ice Blocks & Storage",
+            href: "/products?category=Ice+Blocks",
+            badge: "COLD",
           },
           {
             label: "Pure Sine Wave Inverters",
