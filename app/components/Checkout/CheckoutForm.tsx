@@ -12,7 +12,7 @@ const sectionVariants = {
 
 /* Apple-store style form pieces (DESIGN.md §13). The ! keeps these ahead of the
    shared Input's own border/background/radius classes. */
-const SECTION = "bg-white rounded-[22px] overflow-hidden";
+const SECTION = "bg-white rounded-tile overflow-hidden";
 const SECTION_TITLE = "text-[19px] md:text-[20px] font-semibold text-brand-charcoal tracking-[-0.01em] leading-tight";
 const SECTION_SUB = "text-[13px] text-subtle mt-0.5";
 const STEP = "w-8 h-8 rounded-full bg-brand-orange-soft text-brand-orange-text text-[14px] font-semibold flex items-center justify-center shrink-0";
@@ -97,7 +97,7 @@ export const CheckoutForm: React.FC = () => {
           <div className="flex flex-col md:flex-row gap-3 mb-6">
             <button
               onClick={() => setPaymentMethod("card")}
-              className={`flex-1 flex flex-col items-start p-5 rounded-[16px] bg-white transition-shadow gap-4 text-left relative overflow-hidden
+              className={`flex-1 flex flex-col items-start p-5 rounded-stage bg-white transition-shadow gap-4 text-left relative overflow-hidden
                 ${paymentMethod === "card"
                   ? "ring-2 ring-brand-orange"
                   : "ring-1 ring-black/[0.08] hover:ring-black/[0.16]"}`}
@@ -122,7 +122,7 @@ export const CheckoutForm: React.FC = () => {
 
             <button
               onClick={() => setPaymentMethod("paypal")}
-              className={`flex-1 flex flex-col items-start p-5 rounded-[16px] bg-white transition-shadow gap-4 text-left relative overflow-hidden
+              className={`flex-1 flex flex-col items-start p-5 rounded-stage bg-white transition-shadow gap-4 text-left relative overflow-hidden
                 ${paymentMethod === "paypal"
                   ? "ring-2 ring-brand-orange"
                   : "ring-1 ring-black/[0.08] hover:ring-black/[0.16]"}`}
@@ -179,7 +179,7 @@ export const CheckoutForm: React.FC = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="p-8 bg-off-white rounded-[16px] flex flex-col items-center text-center gap-3"
+              className="p-8 bg-off-white rounded-stage flex flex-col items-center text-center gap-3"
             >
               <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center">
                 <Icon name="paypal" size="lg" className="text-brand-charcoal" />

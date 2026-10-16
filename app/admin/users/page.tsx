@@ -139,7 +139,7 @@ export default function UsersManagement() {
           iconLeft={
             <Icon name="circle-plus" folder="dashboardIcon" size="sm" />
           }
-          className=" h-10 px-4 text-[11px] font-bold uppercase tracking-wider whitespace-nowrap"
+          className=" h-9 px-4 text-[11px] font-bold uppercase tracking-wider whitespace-nowrap"
           onClick={() => setIsAddUserModalOpen(true)}
         >
           Add User

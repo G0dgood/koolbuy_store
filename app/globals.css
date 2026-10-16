@@ -36,9 +36,9 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
   /* Storefront radii (DESIGN.md §5): rounded-stage, rounded-tile, rounded-hero */
-  --radius-stage: 16px;
-  --radius-tile: 22px;
-  --radius-hero: 32px;
+  --radius-stage: 10px;
+  --radius-tile: 14px;
+  --radius-hero: 20px;
   /* Motion (DESIGN.md §6): ease-apple, Apple-style ease-out */
   --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
   /* Elevation (DESIGN.md §5): shadow-lift for hover, shadow-float for floating panels */

@@ -108,10 +108,10 @@ export function TicketDetailDrawer({ isOpen, onClose, ticket }: TicketDetailDraw
 
         {/* Bottom Actions */}
         <div className="mt-auto pt-8 border-t border-gray-50 flex flex-col gap-3">
-           <Button variant="primary" className="w-full h-10 sm:h-12 text-[11px] font-bold uppercase tracking-wider ">
+           <Button variant="primary" className="w-full h-9 sm:h-10 text-[11px] font-bold uppercase tracking-wider ">
               Reply to Customer
            </Button>
-           <Button variant="outline" className="w-full h-10 sm:h-12 text-[11px] font-bold uppercase tracking-wider border-gray-200 text-gray-400 hover:text-brand-charcoal">
+           <Button variant="outline" className="w-full h-9 sm:h-10 text-[11px] font-bold uppercase tracking-wider border-gray-200 text-gray-400 hover:text-brand-charcoal">
               Escalate Ticket
            </Button>
         </div>

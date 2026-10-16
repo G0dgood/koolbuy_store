@@ -42,12 +42,17 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({
     }
   };
 
-  const baseStyles = "transition-all duration-200 flex items-center justify-center cursor-pointer";
+  // DESIGN.md: round, frosted white, no resting shadow, 150–200ms ease-apple colour changes.
+  // Saved = brand orange heart on orange-soft.
+  const baseStyles =
+    "flex items-center justify-center rounded-full cursor-pointer transition-colors duration-200 ease-apple focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50";
 
   const variants = {
-    outline: "border border-gray-200 rounded-md hover:text-red-500 hover:border-red-500 bg-white",
-    ghost: "text-gray-400 hover:text-red-500",
-    none: "",
+    outline: isFavorite
+      ? "bg-brand-orange-soft text-brand-orange border border-transparent"
+      : "bg-white/80 backdrop-blur-xl backdrop-saturate-150 text-brand-charcoal border border-black/[0.06] hover:bg-brand-orange-soft hover:text-brand-orange",
+    ghost: isFavorite ? "text-brand-orange" : "text-faint hover:text-brand-orange",
+    none: isFavorite ? "text-brand-orange" : "",
   };
 
   const sizes = {
@@ -55,16 +60,21 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({
     md: "w-9 h-9",
   };
 
-  const combinedClassName = `
-    ${baseStyles} 
-    ${variant === "outline" ? variants.outline : variant === "ghost" ? variants.ghost : variants.none} 
-    ${variant === "outline" ? sizes[size] : ""} 
-    ${isFavorite ? "text-red-500 border-red-200 bg-red-50" : ""} 
-    ${className}
-  `.trim();
+  const combinedClassName = [
+    baseStyles,
+    variants[variant],
+    variant === "outline" ? sizes[size] : "",
+    className,
+  ].join(" ");
 
   return (
-    <button className={combinedClassName} onClick={handleToggle} type="button">
+    <button
+      className={combinedClassName}
+      onClick={handleToggle}
+      type="button"
+      aria-pressed={isFavorite}
+      aria-label={isFavorite ? "Remove from wishlist" : "Add to wishlist"}
+    >
       {showIcon && (
         <Icon
           name={isFavorite ? "favorite" : "favorite_border"}

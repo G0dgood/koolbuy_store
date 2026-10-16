@@ -103,7 +103,7 @@ export const IntroducingProducts: React.FC<IntroducingProductsProps> = ({
     <section className="w-full flex flex-col items-center gap-6 pt-6 md:pt-10">
       {/* Large, tight headline with a short line under it */}
       <div className="text-center max-w-2xl px-4">
-        <h2 className="text-[32px] sm:text-[44px] md:text-[52px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+        <h2 className="text-[26px] sm:text-[36px] md:text-[42px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
           Introducing our products.
         </h2>
         <p className="mt-3 text-[17px] md:text-[19px] text-subtle leading-snug">

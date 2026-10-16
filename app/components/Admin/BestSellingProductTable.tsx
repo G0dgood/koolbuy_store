@@ -92,7 +92,7 @@ export function BestSellingProductTable() {
    <div className="flex justify-end pt-2">
     <Button
      variant="blue"
-     className="text-[11px] font-bold uppercase tracking-wider px-8 h-10 rounded-lg"
+     className="text-[11px] font-bold uppercase tracking-wider px-6 h-9 rounded-lg"
     >
      Details
     </Button>

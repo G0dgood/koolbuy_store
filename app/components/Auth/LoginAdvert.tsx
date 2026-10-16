@@ -78,7 +78,7 @@ export const LoginAdvert = () => {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
-                <h1 className="text-[44px] xl:text-[52px] font-semibold text-white tracking-[-0.03em] leading-[1.05]">
+                <h1 className="text-[36px] xl:text-[42px] font-semibold text-white tracking-[-0.03em] leading-[1.05]">
                   {config.showTitle && <span>{displayCopy.title} <br /></span>}
                   {config.showHighlight && <span className="text-white/60">{displayCopy.titleHighlight}</span>}
                 </h1>

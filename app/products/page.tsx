@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, Suspense } from "react";
+import React, { useState, useEffect, useMemo, useRef, Suspense } from "react";
 import { Header } from "@/app/components/Header";
 import { Footer } from "@/app/components/Footer";
 import { Icon } from "@/app/components/Icon";
 import { FilterSidebar } from "@/app/components/Products/FilterSidebar";
+import { EmptyProductsIllustration } from "@/app/components/Products/EmptyProductsIllustration";
 import { ListingControlBar } from "@/app/components/Products/ListingControlBar";
 import {
   ProductGridItem,
@@ -18,6 +19,7 @@ import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useGetProductsQuery, type ApiProduct } from "@/lib/store/api/products-api";
+import { useGetPublicCategoriesQuery } from "@/lib/store/api/categories-api";
 
 interface FilterState {
   category: string | null;
@@ -256,6 +258,13 @@ function matchCategory(productCategory: string, filterCategory: string): boolean
   const p = productCategory.toLowerCase().trim();
   const f = filterCategory.toLowerCase().trim();
 
+  // API category values are slugs ("fish_seafood"); compare letters and digits only
+  // so they match labels like "Fish & Seafood".
+  const norm = (v: string) => v.replace(/[^a-z0-9]/g, "");
+  if (norm(p) && norm(p) === norm(f)) {
+    return true;
+  }
+
   // Exact or direct inclusion match
   if (p === f || p.includes(f) || f.includes(p)) {
     return true;
@@ -346,7 +355,28 @@ const ProductsContent: React.FC = () => {
   const sortParam = searchParams.get("sort");
   const vendorParam = searchParams.get("vendor");
 
-  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+
+  // Sticky sidebar without its own scrollbar: pin it under the header when it
+  // fits; when it's taller than the screen, let it scroll with the page and pin
+  // once its last filter is in view.
+  const HEADER_OFFSET = 116;
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  const [sidebarTop, setSidebarTop] = useState(HEADER_OFFSET);
+  useEffect(() => {
+    const el = sidebarRef.current;
+    if (!el) return;
+    const update = () =>
+      setSidebarTop(Math.min(HEADER_OFFSET, window.innerHeight - el.offsetHeight - 16));
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    window.addEventListener("resize", update);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, []);
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
   const [filters, setFilters] = useState<FilterState>({
     category: categoryParam || null,
@@ -366,8 +396,14 @@ const ProductsContent: React.FC = () => {
   }, [categoryParam]);
 
   // Fetch live storefront products from backend
+  // Show the category's label (from the API), not its slug, in titles
+  const { data: categoriesData } = useGetPublicCategoriesQuery();
+  const categoryLabel =
+    categoriesData?.items?.find((c) => c.value === filters.category)?.label ?? filters.category;
+
+  // The products endpoint filters by category label ("Fish & Seafood"), not slug
   const { data: apiData } = useGetProductsQuery({
-    category: filters.category || undefined,
+    category: categoryLabel || undefined,
     search: searchParam || undefined,
   });
 
@@ -489,10 +525,10 @@ const ProductsContent: React.FC = () => {
 
       {/* Mobile Header */}
       <ProductMobileHeader
-        title={filters.category || (searchParam ? `Search: "${searchParam}"` : "All Categories")}
+        title={categoryLabel || (searchParam ? `Search: "${searchParam}"` : "All Categories")}
       />
 
-      <div className="flex-1 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-0 md:py-6 flex flex-col gap-0 md:gap-6 w-full">
+      <div className="flex-1 w-full max-w-360 mx-auto px-0 md:px-8 lg:px-10 xl:px-14 py-0 md:py-6 flex flex-col gap-0 md:gap-6">
         {/* Category Chips (Mobile & Tablet horizontal scroll) */}
         <CategoryChips
           categories={CHIPS_CATEGORIES}
@@ -502,7 +538,7 @@ const ProductsContent: React.FC = () => {
         />
 
         {/* Clean Breadcrumbs */}
-        <div className="hidden md:flex items-center gap-1.5 text-[12px] text-faint overflow-x-auto whitespace-nowrap scrollbar-none px-4 md:px-0">
+        <div className="hidden md:flex items-center gap-1.5 text-[12px] text-faint overflow-x-auto whitespace-nowrap scrollbar-none px-4 sm:px-6 md:px-0">
           <Link
             href="/"
             className="hover:text-brand-charcoal transition-colors font-medium"
@@ -523,13 +559,13 @@ const ProductsContent: React.FC = () => {
             ›
           </span>
           <span className="text-brand-orange-text font-semibold">
-            {filters.category || (searchParam ? `"${searchParam}"` : "All Categories")}
+            {categoryLabel || (searchParam ? `"${searchParam}"` : "All Categories")}
           </span>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-6 items-start px-4 md:px-0 mt-3 md:mt-0">
+        <div className="flex flex-col lg:flex-row gap-6 items-start px-4 sm:px-6 md:px-0 mt-3 md:mt-0">
           {/* Sidebar (Desktop) */}
-          <div className="hidden lg:block w-full lg:w-64 shrink-0">
+          <div ref={sidebarRef} style={{ top: sidebarTop }} className="hidden lg:block w-full lg:w-64 shrink-0 lg:sticky self-start">
             <FilterSidebar
               filters={filters}
               setFilters={setFilters}
@@ -545,6 +581,7 @@ const ProductsContent: React.FC = () => {
               filters={filters}
               onFiltersChange={setFilters}
               onFilterClick={() => setIsFilterDrawerOpen(true)}
+              categoryLabel={categoryLabel}
             />
 
             {/* Active Category Header Banner if filtered */}
@@ -552,10 +589,10 @@ const ProductsContent: React.FC = () => {
               <div className="bg-white rounded-2xl border border-black/[0.06] p-4 md:p-5 flex items-center justify-between gap-4 shadow-xs">
                 <div>
                   <h1 className="text-lg md:text-xl font-bold text-brand-charcoal tracking-[-0.02em]">
-                    {filters.category}
+                    {categoryLabel}
                   </h1>
                   <p className="text-xs text-gray-500 mt-0.5">
-                    Showing verified products matching &ldquo;{filters.category}&rdquo;
+                    Showing verified products matching &ldquo;{categoryLabel}&rdquo;
                   </p>
                 </div>
                 <button
@@ -570,14 +607,12 @@ const ProductsContent: React.FC = () => {
 
             {filteredProducts.length === 0 ? (
               <div className="bg-white rounded-2xl border border-black/[0.06] p-12 text-center flex flex-col items-center justify-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-brand-orange-soft flex items-center justify-center text-brand-orange-text">
-                  <Icon name="search" size="md" />
-                </div>
+                <EmptyProductsIllustration className="w-44 h-36 sm:w-52 sm:h-44" />
                 <h3 className="text-base font-semibold text-gray-800">
                   No products found
                 </h3>
                 <p className="text-xs text-gray-500 max-w-sm">
-                  We couldn&rsquo;t find any products in &ldquo;{filters.category || "this selection"}&rdquo;. Try browsing all categories or adjusting your filters.
+                  We couldn&rsquo;t find any products in &ldquo;{categoryLabel || "this selection"}&rdquo;. Try browsing all categories or adjusting your filters.
                 </p>
                 <button
                   type="button"
@@ -607,7 +642,7 @@ const ProductsContent: React.FC = () => {
             )}
 
             {/* Bottom Pagination */}
-            <div className="mt-4 flex justify-end px-4 md:px-0">
+            <div className="mt-4 flex justify-end px-4 sm:px-6 md:px-0">
               <Pagination
                 totalPages={Math.max(1, Math.ceil(filteredProducts.length / 10))}
                 currentPage={1}
@@ -669,7 +704,7 @@ const ProductsContent: React.FC = () => {
               className="fixed inset-y-0 right-0 w-[85%] max-w-sm bg-off-white z-110 lg:hidden flex flex-col rounded-l-[22px] overflow-hidden"
             >
               <div className="flex items-center justify-between px-5 py-4 bg-white border-b border-black/[0.06]">
-                <h2 className="text-[20px] font-semibold text-brand-charcoal tracking-[-0.02em]">
+                <h2 className="text-[16px] font-semibold text-brand-charcoal tracking-[-0.02em]">
                   Filters
                 </h2>
                 <button

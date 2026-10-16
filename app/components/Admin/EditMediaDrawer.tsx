@@ -128,7 +128,7 @@ export function EditMediaDrawer({ isOpen, onClose, media }: EditMediaDrawerProps
           <Button 
             variant="primary" 
             type="submit"
-            className="w-full h-12 text-[11px] font-bold uppercase tracking-wider "
+            className="w-full h-10 text-[11px] font-bold uppercase tracking-wider "
           >
             Update Asset Metadata
           </Button>
@@ -136,7 +136,7 @@ export function EditMediaDrawer({ isOpen, onClose, media }: EditMediaDrawerProps
             variant="ghost" 
             type="button" 
             onClick={onClose}
-            className="w-full h-12 text-[11px] font-bold text-gray-400 hover:text-gray-900"
+            className="w-full h-10 text-[11px] font-bold text-gray-400 hover:text-gray-900"
           >
             Discard Changes
           </Button>

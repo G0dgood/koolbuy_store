@@ -206,7 +206,7 @@ export function EditCategoryDrawer({
             type="button"
             onClick={onClose}
             disabled={isLoading}
-            className="flex-1 h-10 text-xs font-medium rounded-lg"
+            className="flex-1 h-9 text-xs font-medium rounded-lg"
           >
             Cancel
           </Button>
@@ -214,7 +214,7 @@ export function EditCategoryDrawer({
             variant="primary"
             type="submit"
             disabled={isLoading}
-            className="flex-1 h-10 text-xs font-semibold rounded-lg bg-brand-charcoal text-white hover:bg-brand-charcoal/90 disabled:opacity-50"
+            className="flex-1 h-9 text-xs font-semibold rounded-lg bg-brand-charcoal text-white hover:bg-brand-charcoal/90 disabled:opacity-50"
           >
             {isLoading ? "Saving..." : "Save Changes"}
           </Button>

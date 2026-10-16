@@ -187,7 +187,7 @@ export const HeaderNavMenu: React.FC<HeaderNavMenuProps> = ({
                 {/* Contact Section */}
                 <div className="p-4 border-t border-gray-100 bg-gray-50/50 flex flex-col gap-2.5">
                   <Button
-                    className="w-full text-white h-10 active:scale-95 transition-all hover:opacity-90 text-xs"
+                    className="w-full text-white h-9 active:scale-95 transition-all hover:opacity-90 text-xs"
                     style={{ backgroundColor: "#F57E16" }}
                     iconLeft={<Icon name="chat" size="sm" />}
                   >
@@ -195,7 +195,7 @@ export const HeaderNavMenu: React.FC<HeaderNavMenuProps> = ({
                   </Button>
                   <Button
                     variant="secondary"
-                    className="w-full h-10 border font-bold active:scale-95 transition-all text-xs"
+                    className="w-full h-9 border font-bold active:scale-95 transition-all text-xs"
                     style={{ borderColor: "#00B517", color: "#00B517" }}
                     iconLeft={<Icon name="social/whatsapp" size="sm" />}
                   >

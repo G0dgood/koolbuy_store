@@ -94,7 +94,7 @@ const AboutPage = () => {
               <span className="text-[13px] font-semibold text-brand-orange">
                 Established 2015
               </span>
-              <h1 className="text-[36px] sm:text-[44px] md:text-[56px] font-semibold text-white tracking-[-0.03em] leading-[1.05]">
+              <h1 className="text-[28px] sm:text-[36px] md:text-[44px] font-semibold text-white tracking-[-0.03em] leading-[1.05]">
                 Cultivating <span className="text-white/60">pure</span>{" "}
                 excellence.
               </h1>
@@ -116,7 +116,7 @@ const AboutPage = () => {
               transition={{ duration: 0.5, ease }}
               className="flex flex-col gap-5"
             >
-              <h2 className="text-[30px] md:text-[44px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
+              <h2 className="text-[24px] md:text-[36px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
                 The intersection <br />
                 of scent and skin.
               </h2>
@@ -170,7 +170,7 @@ const AboutPage = () => {
               transition={{ duration: 0.5, ease }}
               className="flex flex-col gap-5 order-1 lg:order-2"
             >
-              <h2 className="text-[30px] md:text-[44px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
+              <h2 className="text-[24px] md:text-[36px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
                 Sourced with soul, <br />
                 crafted for life.
               </h2>
@@ -209,7 +209,7 @@ const AboutPage = () => {
             <span className="text-[13px] font-semibold text-brand-orange-text">
               Our foundations
             </span>
-            <h2 className="text-[30px] md:text-[44px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
+            <h2 className="text-[24px] md:text-[36px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
               The Mist &amp; Bloom values.
             </h2>
           </div>
@@ -242,7 +242,7 @@ const AboutPage = () => {
         {/* Meet the team */}
         <section className="flex flex-col gap-8 md:gap-10">
           <div className="flex flex-col items-start gap-2">
-            <h2 className="text-[30px] md:text-[44px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
+            <h2 className="text-[24px] md:text-[36px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
               Meet the architects.
             </h2>
             <p className="text-subtle text-[17px] md:text-[19px] max-w-xl leading-snug">

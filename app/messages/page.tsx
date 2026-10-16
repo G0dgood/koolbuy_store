@@ -22,7 +22,7 @@ export default function MessagesPage() {
           </div>
 
           <div>
-            <h1 className="text-[24px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">My messages</h1>
+            <h1 className="text-[20px] md:text-[22px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">My messages</h1>
             <p className="mt-1 text-[14px] md:text-[15px] text-subtle">View and manage your conversations.</p>
           </div>
         </div>

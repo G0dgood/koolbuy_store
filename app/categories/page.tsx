@@ -96,7 +96,7 @@ const CategoriesPage = () => {
             <span className="text-[13px] font-semibold text-brand-orange-text">
               Koolbuy Store catalogs
             </span>
-            <h1 className="text-[36px] sm:text-[44px] md:text-[56px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+            <h1 className="text-[28px] sm:text-[36px] md:text-[44px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
               The <span className="text-faint">collections.</span>
             </h1>
             <p className="text-subtle max-w-xl mx-auto text-[17px] md:text-[19px] mt-1 leading-snug">
@@ -166,7 +166,7 @@ const CategoriesPage = () => {
               <span className="text-[13px] font-semibold text-brand-orange-text">
                 Deeper discovery
               </span>
-              <h2 className="text-[26px] md:text-[34px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
+              <h2 className="text-[20px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
                 Popular verticals.
               </h2>
             </div>
@@ -195,7 +195,7 @@ const CategoriesPage = () => {
         {/* Featured promotion: a charcoal band tile (dark band rules) */}
         <section className="bg-brand-charcoal rounded-tile md:rounded-hero py-16 md:py-20">
           <div className="px-6 md:px-10 flex flex-col items-center text-center gap-4">
-            <h2 className="text-[30px] md:text-[48px] font-semibold text-white tracking-[-0.03em] leading-[1.05]">
+            <h2 className="text-[24px] md:text-[38px] font-semibold text-white tracking-[-0.03em] leading-[1.05]">
               Can&apos;t find your <span className="text-white/60">bloom?</span>
             </h2>
             <p className="text-white/60 text-[17px] md:text-[19px] max-w-xl leading-snug">

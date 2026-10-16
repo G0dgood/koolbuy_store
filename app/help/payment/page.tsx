@@ -51,7 +51,7 @@ const PaymentOptionsPage = () => {
             <span className="text-[13px] font-semibold text-brand-orange-text">
               Security framework
             </span>
-            <h1 className="text-[34px] md:text-[52px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+            <h1 className="text-[28px] md:text-[42px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
               Secure orchestration.
             </h1>
             <p className="text-subtle max-w-2xl text-[17px] md:text-[19px] leading-snug">
@@ -107,7 +107,7 @@ const PaymentOptionsPage = () => {
                   <span className="text-[13px] font-semibold text-brand-orange-text">
                     Technical integrity
                   </span>
-                  <h2 className="text-[28px] md:text-[40px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-[1.1]">
+                  <h2 className="text-[22px] md:text-[32px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-[1.1]">
                     Artisanal encryption <br />
                     standards.
                   </h2>

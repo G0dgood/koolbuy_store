@@ -35,13 +35,13 @@ export const RecommendedProducts: React.FC<RecommendedProductsProps> = ({ produc
 
   return (
     <div className="flex flex-col gap-4 mt-8 px-4 md:px-0 md:hidden">
-      <h2 className="text-[22px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">You may also like</h2>
+      <h2 className="text-[18px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">You may also like</h2>
       
       <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-none -mx-4 px-4 md:mx-0 md:px-0">
         {products.map((product) => (
           <div 
             key={product.id}
-            className="flex-shrink-0 w-[160px] bg-white rounded-[22px] overflow-hidden flex flex-col gap-2 transition-shadow duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] relative group cursor-pointer active:scale-[0.98]"
+            className="flex-shrink-0 w-[160px] bg-white rounded-tile overflow-hidden flex flex-col gap-2 transition-shadow duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] relative group cursor-pointer active:scale-[0.98]"
           >
             <Link href={`/products/detail`} className="flex flex-col flex-1">
               <div className="w-full aspect-square relative bg-off-white overflow-hidden">

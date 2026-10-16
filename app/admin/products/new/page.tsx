@@ -253,7 +253,7 @@ export default function CreateProduct() {
        <Button
         variant="primary"
         shape="rounded-sm"
-        className="px-8 py-2.5"
+        className="px-6 py-2.5"
         onClick={() => setIsPublishConfirmOpen(true)}
        >
         Publish Product
@@ -597,7 +597,7 @@ export default function CreateProduct() {
     <ModalFooter className="flex flex-col gap-3 pb-8">
      <Button
       variant="primary"
-      className="w-full h-12 text-[11px] font-bold uppercase tracking-wider "
+      className="w-full h-10 text-[11px] font-bold uppercase tracking-wider "
       onClick={() => {
        setIsPublishSuccessOpen(false);
        router.push("/admin/products");
@@ -607,7 +607,7 @@ export default function CreateProduct() {
      </Button>
      <Button
       variant="ghost"
-      className="w-full h-12 text-[11px] font-bold text-gray-400"
+      className="w-full h-10 text-[11px] font-bold text-gray-400"
       onClick={() => setIsPublishSuccessOpen(false)}
      >
       View live product
@@ -635,7 +635,7 @@ export default function CreateProduct() {
     <ModalFooter className="flex flex-col gap-3 pb-8">
      <Button
       variant="primary"
-      className="w-full h-12 text-[11px] font-bold uppercase tracking-wider "
+      className="w-full h-10 text-[11px] font-bold uppercase tracking-wider "
       onClick={() => {
        setIsDraftSuccessOpen(false);
        router.push("/admin/products");
@@ -645,7 +645,7 @@ export default function CreateProduct() {
      </Button>
      <Button
       variant="ghost"
-      className="w-full h-12 text-[11px] font-bold text-gray-400"
+      className="w-full h-10 text-[11px] font-bold text-gray-400"
       onClick={() => setIsDraftSuccessOpen(false)}
      >
       Continue editing

@@ -31,7 +31,7 @@ export const LoginForm = () => {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="relative z-10 w-full max-w-[400px] bg-white rounded-[22px] overflow-hidden"
+      className="relative z-10 w-full max-w-[400px] bg-white rounded-tile overflow-hidden"
     >
       <div className="p-8 sm:p-10 flex flex-col gap-8">
         {/* Form Logo & Header */}
@@ -46,7 +46,7 @@ export const LoginForm = () => {
           </motion.div>
 
           <div className="flex flex-col gap-1">
-            <h2 className="text-[32px] md:text-[34px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-tight">Admin portal.</h2>
+            <h2 className="text-[26px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-tight">Admin portal.</h2>
             <p className="text-[15px] text-subtle">Control authority access</p>
           </div>
         </div>
@@ -93,7 +93,7 @@ export const LoginForm = () => {
             variant="accent"
             shape="pill"
             fullWidth
-            className="h-12 text-[16px]! mt-1"
+            className="h-10 text-[13px]! mt-1"
             isLoading={isLoading}
           >
             Initialize command

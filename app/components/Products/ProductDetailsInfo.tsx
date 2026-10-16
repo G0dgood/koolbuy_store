@@ -80,7 +80,7 @@ export const ProductDetailsInfo: React.FC = () => {
           <span className="w-1.5 h-1.5 rounded-full bg-success" aria-hidden />
           In stock
         </span>
-        <h1 className="text-[28px] md:text-[36px] font-semibold text-brand-charcoal leading-tight tracking-[-0.025em]">
+        <h1 className="text-[18px] md:text-[22px] font-semibold text-brand-charcoal leading-snug tracking-[-0.02em]">
           219L Thermocool Inverter Solar Freezer (Maxi (24V 60Ah battery + 40V
           PWM + 2 x 600W panels))
         </h1>
@@ -110,23 +110,23 @@ export const ProductDetailsInfo: React.FC = () => {
       </div>
 
       {/* Buy for as low as monthly (BNPL) */}
-      <div className="w-full rounded-[18px] overflow-hidden bg-off-white">
+      <div className="w-full rounded-stage overflow-hidden bg-brand-orange-soft ring-1 ring-brand-orange/25">
         <button
           type="button"
           onClick={() => setIsBnplOpen((prev) => !prev)}
-          className="w-full px-5 py-4 flex items-center justify-between gap-3 cursor-pointer outline-none hover:bg-black/[0.02] transition-colors text-left"
+          className="w-full px-5 py-4 flex items-center justify-between gap-3 cursor-pointer outline-none hover:bg-brand-orange/[0.06] focus-visible:ring-2 focus-visible:ring-brand-orange/50 transition-colors duration-200 ease-apple text-left"
         >
-          <span className="text-[15px] md:text-[16px] text-brand-charcoal">
-            Buy for as low as{" "}
-            <strong className="text-brand-orange-text font-semibold">
+          <span className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[15px] md:text-[16px] text-brand-charcoal">
+            Buy for as low as
+            <strong className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-brand-orange text-white font-semibold tabular-nums">
               ₦89,000
-            </strong>{" "}
+            </strong>
             monthly
           </span>
           {isBnplOpen ? (
-            <FiChevronUp className="text-subtle text-lg shrink-0" />
+            <FiChevronUp className="text-brand-charcoal text-lg shrink-0" />
           ) : (
-            <FiChevronDown className="text-subtle text-lg shrink-0" />
+            <FiChevronDown className="text-brand-charcoal text-lg shrink-0" />
           )}
         </button>
 
@@ -153,7 +153,7 @@ export const ProductDetailsInfo: React.FC = () => {
                         onClick={() => handleSelectFrequency(freq)}
                         className={`px-5 py-2 rounded-full font-medium text-[13px] cursor-pointer transition-colors outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50 ${
                           selectedFrequency === freq
-                            ? "bg-brand-charcoal text-white"
+                            ? "bg-brand-orange text-white"
                             : "bg-white text-brand-charcoal ring-1 ring-black/[0.08] hover:ring-black/20"
                         }`}
                       >
@@ -176,7 +176,7 @@ export const ProductDetailsInfo: React.FC = () => {
                         onClick={() => handleSelectInstallment(num)}
                         className={`w-10 h-10 rounded-full font-medium text-[13px] tabular-nums flex items-center justify-center cursor-pointer transition-colors outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50 ${
                           selectedInstallment === num
-                            ? "bg-brand-charcoal text-white"
+                            ? "bg-brand-orange text-white"
                             : "bg-white text-brand-charcoal ring-1 ring-black/[0.08] hover:ring-black/20"
                         }`}
                       >
@@ -187,7 +187,7 @@ export const ProductDetailsInfo: React.FC = () => {
                 </div>
 
                 {/* Step 3: summary */}
-                <div className="bg-white rounded-[14px] py-3.5 px-4 text-center">
+                <div className="bg-white rounded-stage py-3.5 px-4 text-center">
                   <p className="text-[14px] text-brand-charcoal leading-relaxed">
                     You will be paying{" "}
                     <strong className="text-brand-orange-text font-semibold">
@@ -255,7 +255,7 @@ export const ProductDetailsInfo: React.FC = () => {
             size="lg"
             onClick={handleAddToCart}
             iconRight={<FiShoppingCart size={16} />}
-            className="flex-1 h-12 text-[15px]"
+            className="flex-1 h-10 text-[13px]"
           >
             Add to cart
           </Button>

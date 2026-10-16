@@ -121,10 +121,10 @@ export function StaffDetailDrawer({ isOpen, onClose, staff }: StaffDetailDrawerP
 
         {/* Footer Actions */}
         <div className="mt-auto flex gap-3 pt-4">
-           <Button variant="outline" className="flex-1 font-bold text-xs h-12 uppercase tracking-wider">
+           <Button variant="outline" className="flex-1 font-bold text-xs h-10 uppercase tracking-wider">
               Lock Session
            </Button>
-           <Button variant="outline" className="flex-1 font-bold text-xs h-12 uppercase tracking-wider text-rose-500 border-rose-100 bg-rose-50/30 hover:bg-rose-100">
+           <Button variant="outline" className="flex-1 font-bold text-xs h-10 uppercase tracking-wider text-rose-500 border-rose-100 bg-rose-50/30 hover:bg-rose-100">
               Revoke Access
            </Button>
         </div>

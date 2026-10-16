@@ -19,7 +19,7 @@ export default function ModalDemo() {
  return (
   <div className="min-h-screen bg-off-white p-12 font-sans">
    <div className="max-w-7xl mx-auto bg-white rounded-xl  p-16 text-black">
-    <h1 className="text-5xl font-bold mb-16">Modal</h1>
+    <h1 className="text-4xl font-bold mb-16">Modal</h1>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
 
@@ -176,7 +176,7 @@ export default function ModalDemo() {
      <p className="text-gray-500 text-sm leading-relaxed">A critical error occurred while processing your request. Please check your connection and try again.</p>
     </ModalBody>
     <ModalFooter>
-     <Button size="sm" className="px-8" onClick={() => setOpenError(false)}>OK</Button>
+     <Button size="sm" className="px-6" onClick={() => setOpenError(false)}>OK</Button>
     </ModalFooter>
    </Modal>
 

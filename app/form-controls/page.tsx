@@ -13,13 +13,13 @@ export default function FormControlsDemo() {
   return (
     <div className="min-h-screen bg-off-white p-12 font-sans">
       <div className="max-w-4xl mx-auto bg-white rounded-xl  p-16">
-        <h1 className="text-5xl font-bold mb-16 text-black">Form - checks & radios</h1>
+        <h1 className="text-4xl font-bold mb-16 text-black">Form - checks & radios</h1>
 
         <div className="flex flex-col gap-16">
 
           {/* Checkboxes Section */}
           <section>
-            <h2 className="text-2xl font-bold mb-8 text-black">Checkboxes</h2>
+            <h2 className="text-xl font-bold mb-8 text-black">Checkboxes</h2>
             <div className="flex flex-col gap-10">
               <div className="flex gap-8">
                 <Checkbox
@@ -46,7 +46,7 @@ export default function FormControlsDemo() {
 
           {/* Radiobox Section */}
           <section>
-            <h2 className="text-2xl font-bold mb-8 text-black">Radiobox</h2>
+            <h2 className="text-xl font-bold mb-8 text-black">Radiobox</h2>
             <div className="flex flex-col gap-10">
               <div className="flex gap-8">
                 <Radio
@@ -76,7 +76,7 @@ export default function FormControlsDemo() {
 
           {/* Switch Section */}
           <section>
-            <h2 className="text-2xl font-bold mb-8 text-black">Switch</h2>
+            <h2 className="text-xl font-bold mb-8 text-black">Switch</h2>
             <div className="flex gap-12">
               <Switch
                 label="Switch label"

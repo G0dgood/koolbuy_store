@@ -20,14 +20,14 @@ export default function FormDemo() {
   return (
     <div className="min-h-screen bg-off-white p-12 font-sans">
       <div className="max-w-6xl mx-auto bg-white rounded-xl  p-16">
-        <h1 className="text-5xl font-bold mb-16 text-black">Form - textfields</h1>
+        <h1 className="text-4xl font-bold mb-16 text-black">Form - textfields</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-20">
 
           {/* Section 1: Base Inputs & Input Groups */}
           <div className="flex flex-col gap-12">
             <section>
-              <h2 className="text-2xl font-bold mb-8 text-black">Base inputs</h2>
+              <h2 className="text-xl font-bold mb-8 text-black">Base inputs</h2>
               <div className="flex flex-col gap-6">
                 <Input placeholder="Type here" />
                 <Textarea placeholder="Type here" />
@@ -35,7 +35,7 @@ export default function FormDemo() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-8 text-black">Input group</h2>
+              <h2 className="text-xl font-bold mb-8 text-black">Input group</h2>
               <div className="flex flex-col gap-6">
                 {/* Input with trailing icon button */}
                 <div className="flex -space-x-px">
@@ -89,7 +89,7 @@ export default function FormDemo() {
 
           {/* Section 2: Input with Label */}
           <section>
-            <h2 className="text-2xl font-bold mb-8 text-black">Input with label</h2>
+            <h2 className="text-xl font-bold mb-8 text-black">Input with label</h2>
             <div className="flex flex-col gap-8">
               <div>
                 <Label>Label</Label>
@@ -133,7 +133,7 @@ export default function FormDemo() {
           {/* Section 3: Search & Number */}
           <div className="flex flex-col gap-12">
             <section>
-              <h2 className="text-2xl font-bold mb-8 text-black">Search</h2>
+              <h2 className="text-xl font-bold mb-8 text-black">Search</h2>
               <div className="flex flex-col gap-8">
                 <SearchInput placeholder="Search" />
 
@@ -157,7 +157,7 @@ export default function FormDemo() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-8 text-black">Number</h2>
+              <h2 className="text-xl font-bold mb-8 text-black">Number</h2>
               <NumberInput
                 value={numberValue}
                 onChange={setNumberValue}

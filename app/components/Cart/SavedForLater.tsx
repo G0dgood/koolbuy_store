@@ -54,7 +54,7 @@ const SavedForLater = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 p-4 md:p-6">
         {wishlistItems.map((item) => (
-          <div key={item.id} className="flex flex-col gap-3 group cursor-pointer rounded-[22px] overflow-hidden border border-light-gray">
+          <div key={item.id} className="flex flex-col gap-3 group cursor-pointer rounded-tile overflow-hidden border border-light-gray">
             <div className="w-full aspect-square relative bg-off-white overflow-hidden">
               <Image
                 src={item.image}

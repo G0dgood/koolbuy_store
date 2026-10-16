@@ -42,7 +42,7 @@ export default function CheckoutPage() {
           {/* Page Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div className="flex flex-col gap-1">
-              <h1 className="text-[24px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">Finalize order</h1>
+              <h1 className="text-[20px] md:text-[22px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">Finalize order</h1>
               <p className="text-[14px] md:text-[15px] text-subtle">Complete your purchase safely and securely.</p>
             </div>
             <div className="flex items-center gap-2 text-[13px] text-subtle">

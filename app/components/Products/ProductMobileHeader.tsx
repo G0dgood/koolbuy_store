@@ -22,7 +22,7 @@ export const ProductMobileHeader: React.FC<ProductMobileHeaderProps> = ({ title 
           >
             <Icon name="arrow_back" size="md" />
           </button>
-          <h1 className="text-[20px] font-semibold text-brand-charcoal tracking-[-0.02em] truncate">{title}</h1>
+          <h1 className="text-[16px] font-semibold text-brand-charcoal tracking-[-0.02em] truncate">{title}</h1>
         </div>
         <div className="flex items-center gap-1">
           <button className="w-9 h-9 flex items-center justify-center text-brand-charcoal hover:bg-black/[0.04] rounded-full transition-colors">

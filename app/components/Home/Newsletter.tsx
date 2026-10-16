@@ -9,7 +9,7 @@ const Newsletter = () => {
   return (
     <section className="w-full bg-white py-16 md:py-20 px-6 text-center flex flex-col items-center gap-6">
       <div className="max-w-xl flex flex-col items-center gap-2">
-        <h2 className="text-[28px] md:text-[36px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
+        <h2 className="text-[22px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
           Stay in the loop.
         </h2>
         <p className="text-[16px] md:text-[17px] text-subtle leading-relaxed">
@@ -31,7 +31,7 @@ const Newsletter = () => {
           placeholder="Email address"
           className="flex-1 h-11 rounded-full bg-black/[0.04] border border-transparent px-5 text-[15px] outline-none focus:bg-white focus:border-light-gray focus:ring-4 focus:ring-black/[0.04] transition-all"
         />
-        <Button type="submit" shape="pill" className="h-11 px-6 text-[14px]">
+        <Button type="submit" shape="pill" className="h-9 px-6 text-[13px]">
           Subscribe
         </Button>
       </form>

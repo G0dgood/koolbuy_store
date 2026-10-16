@@ -64,7 +64,7 @@ const ShippingPage = () => {
             <span className="text-[13px] font-semibold text-brand-orange-text">
               Global logistics
             </span>
-            <h1 className="text-[34px] md:text-[52px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+            <h1 className="text-[28px] md:text-[42px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
               Delivering excellence <br className="hidden sm:block" />
               to your doorstep.
             </h1>
@@ -138,7 +138,7 @@ const ShippingPage = () => {
 
           <div className="mt-3 md:mt-4 flex flex-col lg:flex-row gap-8 lg:gap-12 items-center bg-white rounded-tile md:rounded-hero p-7 md:p-12">
             <div className="flex-1 flex flex-col gap-4">
-              <h2 className="text-[26px] md:text-[34px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
+              <h2 className="text-[20px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
                 Regional estimates.
               </h2>
               <p className="text-subtle text-[16px] md:text-[17px] leading-relaxed">
@@ -178,7 +178,7 @@ const ShippingPage = () => {
                 <span className="text-brand-orange font-semibold text-[13px]">
                   Stay connected
                 </span>
-                <h2 className="text-[28px] md:text-[40px] font-semibold text-white tracking-[-0.025em] leading-[1.1]">
+                <h2 className="text-[22px] md:text-[32px] font-semibold text-white tracking-[-0.025em] leading-[1.1]">
                   Follow your Bloom <br />
                   <span className="text-white/60">every step of the way.</span>
                 </h2>
@@ -220,7 +220,7 @@ const ShippingPage = () => {
                   variant="primary"
                   size="lg"
                   shape="pill"
-                  className="h-11 px-6 text-[15px]!"
+                  className="h-9 px-6 text-[13px]!"
                 >
                   Track my order
                 </Button>
@@ -251,7 +251,7 @@ const ShippingPage = () => {
         {/* FAQ Anchor CTA */}
         <section className="py-16 md:py-28">
           <div className="max-w-360 mx-auto px-4 sm:px-6 text-center flex flex-col items-center">
-            <h2 className="text-[28px] md:text-[34px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight mb-2">
+            <h2 className="text-[22px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight mb-2">
               Still have shipping questions?
             </h2>
             <p className="text-subtle text-[17px] leading-relaxed mb-8 max-w-xl">
@@ -263,7 +263,7 @@ const ShippingPage = () => {
               variant="ghost"
               size="lg"
               shape="pill"
-              className="h-11 px-6 text-[15px]! bg-black/[0.06] hover:bg-black/[0.1] text-brand-charcoal"
+              className="h-9 px-6 text-[13px]! bg-black/[0.06] hover:bg-black/[0.1] text-brand-charcoal"
             >
               Visit help center
             </Button>

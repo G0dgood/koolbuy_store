@@ -63,7 +63,7 @@ export const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose }) => {
 
       <div className="mt-8 flex justify-end">
         <Button 
-          className="w-full md:w-auto px-8 h-11 font-bold" 
+          className="w-full md:w-auto px-6 h-9 font-bold" 
           onClick={onClose}
         >
           I Understand

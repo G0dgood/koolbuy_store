@@ -256,14 +256,14 @@ export default function AccountingLoyaltyCardsPage() {
           </Link>
           <Button
             variant="outline"
-            className="flex-1 sm:flex-initial h-10 px-4 text-xs font-bold border-gray-200 text-gray-700 hover:bg-gray-50"
+            className="flex-1 sm:flex-initial h-9 px-4 text-xs font-bold border-gray-200 text-gray-700 hover:bg-gray-50"
             iconLeft={<HiOutlineArrowDownTray className="w-4 h-4" />}
             onClick={() => setIsExportModalOpen(true)}
           >
             Export Logs
           </Button>
           <Button
-            className="flex-1 sm:flex-initial h-10 px-4 text-xs font-bold bg-brand-charcoal hover:bg-brand-charcoal/90 text-white "
+            className="flex-1 sm:flex-initial h-9 px-4 text-xs font-bold bg-brand-charcoal hover:bg-brand-charcoal/90 text-white "
             iconLeft={<HiOutlineGift className="w-4 h-4" />}
             onClick={() => setIsIssueModalOpen(true)}
           >

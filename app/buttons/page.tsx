@@ -14,12 +14,12 @@ export default function ButtonsDemo() {
  return (
   <div className="min-h-screen bg-off-white p-12 font-sans">
    <div className="max-w-6xl mx-auto bg-white rounded-xl  p-16">
-    <h1 className="text-5xl font-bold mb-16 text-black">Buttons</h1>
+    <h1 className="text-4xl font-bold mb-16 text-black">Buttons</h1>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
      {/* Default Buttons Section */}
      <section>
-      <h2 className="text-2xl font-bold mb-8 text-black">Buttons</h2>
+      <h2 className="text-xl font-bold mb-8 text-black">Buttons</h2>
       <div className="border-[1.5px] border-dashed border-purple-200 rounded-xl p-8 flex flex-col gap-6">
 
        {/* Row 1: Primary with icons */}
@@ -44,9 +44,9 @@ export default function ButtonsDemo() {
 
        {/* Row 3: Large / Pill */}
        <div className="flex gap-4 items-center">
-        <Button variant="primary" size="lg" shape="pill" className="px-8">Button</Button>
-        <Button variant="primary" size="lg" shape="pill" className="px-8" iconLeft={<Icon name="grid_view" size="md" />}>Button</Button>
-        <Button variant="primary" size="lg" shape="pill" className="px-8" iconRight={<Icon name="grid_view" size="md" />}>Button</Button>
+        <Button variant="primary" size="lg" shape="pill" className="px-6">Button</Button>
+        <Button variant="primary" size="lg" shape="pill" className="px-6" iconLeft={<Icon name="grid_view" size="md" />}>Button</Button>
+        <Button variant="primary" size="lg" shape="pill" className="px-6" iconRight={<Icon name="grid_view" size="md" />}>Button</Button>
         <Button variant="primary" size="lg" shape="pill" className="px-4"><Icon name="grid_view" size="md" /></Button>
        </div>
 
@@ -78,7 +78,7 @@ export default function ButtonsDemo() {
 
      {/* Button Group Section */}
      <section>
-      <h2 className="text-2xl font-bold mb-8 text-black">Button group</h2>
+      <h2 className="text-xl font-bold mb-8 text-black">Button group</h2>
       <div className="border-[1.5px] border-dashed border-purple-200 rounded-xl p-8 flex flex-col gap-8">
 
        <div className="flex flex-col gap-6">
@@ -195,7 +195,7 @@ export default function ButtonsDemo() {
 
      {/* Button Dropdown Section */}
      <section className="col-span-1">
-      <h2 className="text-2xl font-bold mb-8 text-black">Button dropdown</h2>
+      <h2 className="text-xl font-bold mb-8 text-black">Button dropdown</h2>
       <div className="border-[1.5px] border-dashed border-purple-200 rounded-xl p-8 flex flex-col gap-4 max-w-[200px]">
        <ButtonDropdown label="Button" variant="primary" items={dropdownItems} />
        <ButtonDropdown label="Button" variant="secondary" items={dropdownItems} />

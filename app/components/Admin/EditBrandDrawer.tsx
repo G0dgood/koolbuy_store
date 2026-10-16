@@ -81,7 +81,7 @@ export function EditBrandDrawer({ isOpen, onClose, brand }: EditBrandDrawerProps
                 type="button"
                 variant="outline"
                 shape="rounded-sm"
-                className="w-12 h-12 p-0 flex-shrink-0"
+                className="w-12 h-10 p-0 flex-shrink-0"
               >
                 <Icon name="photo" folder="icon" size="sm" />
               </Button>
@@ -112,7 +112,7 @@ export function EditBrandDrawer({ isOpen, onClose, brand }: EditBrandDrawerProps
           <Button 
             variant="primary" 
             type="submit" 
-            className="w-full h-10 sm:h-12 text-[11px] font-bold uppercase tracking-wider "
+            className="w-full h-9 sm:h-10 text-[11px] font-bold uppercase tracking-wider "
           >
             Update Brand
           </Button>
@@ -120,7 +120,7 @@ export function EditBrandDrawer({ isOpen, onClose, brand }: EditBrandDrawerProps
             variant="outline" 
             type="button" 
             onClick={onClose} 
-            className="w-full h-10 sm:h-12 text-[11px] font-bold text-gray-400 hover:text-gray-900"
+            className="w-full h-9 sm:h-10 text-[11px] font-bold text-gray-400 hover:text-gray-900"
           >
             Cancel
           </Button>

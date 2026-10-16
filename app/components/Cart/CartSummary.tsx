@@ -77,7 +77,7 @@ const CartSummary = () => {
                         placeholder="e.g. KOOL10"
                         className="flex-1 min-w-0 h-10 px-4 rounded-full bg-black/[0.04] border border-transparent outline-none transition-colors text-[14px] text-brand-charcoal placeholder:text-faint focus:bg-white focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/15 uppercase"
                      />
-                     <Button type="submit" variant="primary" shape="pill" className="h-10 px-5 text-[14px]">
+                     <Button type="submit" variant="primary" shape="pill" className="h-9 px-5 text-[13px]">
                         Apply
                      </Button>
                   </div>
@@ -119,7 +119,7 @@ const CartSummary = () => {
                   size="lg"
                   fullWidth
                   disabled={cartItems.length === 0}
-                  className="text-[16px]!"
+                  className="text-[13px]!"
                >
                   {cartItems.length > 0 ? (
                     <Link href="/checkout" className="w-full h-full flex items-center justify-center">

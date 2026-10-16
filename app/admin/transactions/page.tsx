@@ -125,10 +125,9 @@ export default function TransactionsPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Top Grid: Stats & Payment Method */}
-      <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
-        {/* Stats Section (Left 2 columns in a 2x2 grid) */}
-        <div className="xl:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Top Grid: Stats */}
+      <div className="grid grid-cols-1 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           <StatCard
             title="Total Revenue"
             value="₦15,045"
@@ -157,116 +156,6 @@ export default function TransactionsPage() {
             trendIsUp={false}
             periodLabel="Last 7 days"
           />
-        </div>
-
-        {/* Payment Method Card (Right 2 columns) */}
-        <div className="xl:col-span-2 bg-white rounded-lg border border-[#1C1C1C1A] overflow-hidden flex flex-col p-6 gap-6">
-          <div className="flex justify-between items-center">
-            <h3 className="text-sm font-bold text-brand-charcoal">Payment Method</h3>
-            <Button
-              variant="ghost"
-              className="text-gray-300 hover:text-gray-600 p-1!"
-            >
-              <Icon name="DotsHorizontal" folder="dashboardIcon" size="sm" />
-            </Button>
-          </div>
-
-          <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
-            {/* Visual Card */}
-            <div className="relative w-full max-w-[320px] h-45 rounded-3xl overflow-hidden shadow-md shadow-brand-charcoal group">
-              <div className="absolute inset-0 bg-linear-to-br from-brand-charcoal via-brand-charcoal to-brand-orange-hover"></div>
-              {/* Pattern overlay */}
-              <div className="absolute inset-0 opacity-10 mix-blend-overlay bg-[url('/dashboardImage/image 270.png')] bg-cover"></div>
-
-              <div className="relative h-full p-6 flex flex-col justify-between text-white">
-                <div className="flex justify-between items-start">
-                  <span className="text-xl font-bold italic tracking-tighter">
-                    Finaci
-                  </span>
-                  <div className="flex gap-1 items-center">
-                    <div className="w-8 h-8 rounded-full bg-white/20"></div>
-                    <div className="w-8 h-8 rounded-full bg-white/40 -ml-4"></div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <p className="text-xs font-medium opacity-70">
-                    Card Holder name
-                  </p>
-                  <p className="text-sm font-bold tracking-wider uppercase">
-                    Noman Manzoor
-                  </p>
-                </div>
-
-                <div className="flex justify-between items-end">
-                  <div className="flex flex-col gap-1">
-                    <p className="text-lg font-bold tracking-wider">
-                      **** **** **** 2345
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-[11px] opacity-70">Expiry Date</p>
-                    <p className="text-xs font-bold">02/30</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Metadata Info */}
-            <div className="flex-1 flex flex-col gap-4 w-full">
-              <div className="flex flex-col gap-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-xs font-bold text-gray-400">
-                    Status:
-                  </span>
-                  <span className="text-xs font-bold text-brand-orange-text">
-                    Active
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-xs font-bold text-gray-400">
-                    Transactions:
-                  </span>
-                  <span className="text-xs font-bold text-brand-charcoal">
-                    1,250
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-xs font-bold text-gray-400">
-                    Revenue:
-                  </span>
-                  <span className="text-xs font-bold text-brand-charcoal">
-                    ₦50,000
-                  </span>
-                </div>
-              </div>
-              <Button
-                variant="ghost"
-                className="text-[11px] font-bold text-brand-orange-text uppercase tracking-wider hover:underline px-0! justify-start!"
-              >
-                View Transactions
-              </Button>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-3 mt-auto pt-4 border-t border-gray-50">
-            <Button
-              variant="secondary"
-              className="flex-1 h-12 rounded-lg border-dashed border-gray-200 text-gray-400 hover:text-brand-orange-text hover:border-brand-charcoal transition-all"
-              iconLeft={
-                <Icon name="circle-plus" folder="dashboardIcon" size="sm" />
-              }
-            >
-              Add Card
-            </Button>
-            <Button
-              variant="rose"
-              shape="rounded-sm"
-              className="h-12 px-6 w-full sm:w-auto"
-            >
-              Deactivate
-            </Button>
-          </div>
         </div>
       </div>
 

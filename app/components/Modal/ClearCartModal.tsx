@@ -37,7 +37,7 @@ export const ClearCartModal: React.FC<ClearCartModalProps> = ({
 
         <div className="flex flex-col w-full gap-3 mt-4">
           <Button 
-            className="w-full h-12 font-bold bg-red-500 hover:bg-red-600 text-white border-transparent hover:translate-y-[-1px] transition-all active:scale-95" 
+            className="w-full h-10 font-bold bg-red-500 hover:bg-red-600 text-white border-transparent hover:translate-y-[-1px] transition-all active:scale-95" 
             onClick={() => {
               onClear();
               onClose();
@@ -47,7 +47,7 @@ export const ClearCartModal: React.FC<ClearCartModalProps> = ({
           </Button>
           <Button 
             variant="ghost"
-            className="w-full h-10 font-bold text-gray-500 hover:text-gray-700 hover:bg-gray-50" 
+            className="w-full h-9 font-bold text-gray-500 hover:text-gray-700 hover:bg-gray-50" 
             onClick={onClose}
           >
             Cancel

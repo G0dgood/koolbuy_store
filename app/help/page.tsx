@@ -69,7 +69,7 @@ const HelpCenterPage = () => {
             <span className="text-[13px] font-semibold text-brand-orange-text">
               Support concierge
             </span>
-            <h1 className="text-[34px] md:text-[52px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+            <h1 className="text-[28px] md:text-[42px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
               How can we help you?
             </h1>
 
@@ -146,7 +146,7 @@ const HelpCenterPage = () => {
                 <span className="text-[13px] font-semibold text-brand-orange-text">
                   Discovery
                 </span>
-                <h2 className="text-[26px] md:text-[34px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
+                <h2 className="text-[20px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
                   Trending questions.
                 </h2>
               </div>

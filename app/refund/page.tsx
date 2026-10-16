@@ -73,7 +73,7 @@ const RefundPage = () => {
             <div className="w-14 h-14 rounded-stage bg-brand-orange-soft flex items-center justify-center text-brand-orange-text mb-2">
               <HiShieldCheck size={28} />
             </div>
-            <h1 className="text-[34px] md:text-[52px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+            <h1 className="text-[28px] md:text-[42px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
               Transparent refunds.
             </h1>
             <p className="text-subtle max-w-2xl text-[17px] md:text-[19px] leading-snug">
@@ -102,7 +102,7 @@ const RefundPage = () => {
               <span className="text-[13px] font-semibold text-brand-orange-text">
                 Policy foundations
               </span>
-              <h2 className="text-[28px] md:text-[34px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-[1.1]">
+              <h2 className="text-[22px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-[1.1]">
                 Eligibility <br className="hidden lg:block" />
                 criteria.
               </h2>
@@ -147,7 +147,7 @@ const RefundPage = () => {
         <section className="max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
           <div className="bg-white rounded-tile md:rounded-hero px-6 py-12 md:px-12 md:py-20">
             <div className="text-center mb-12 md:mb-16 flex flex-col items-center gap-2">
-              <h2 className="text-[28px] md:text-[40px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-[1.1]">
+              <h2 className="text-[22px] md:text-[32px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-[1.1]">
                 How the process works.
               </h2>
               <p className="text-subtle text-[17px] md:text-[19px] leading-snug max-w-xl">
@@ -194,7 +194,7 @@ const RefundPage = () => {
           <div className="max-w-360 mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
             <div className="w-full bg-white rounded-tile md:rounded-hero p-8 md:p-16 flex flex-col lg:flex-row items-center justify-between gap-8">
               <div className="flex flex-col gap-2 text-center lg:text-left">
-                <h2 className="text-[28px] md:text-[34px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
+                <h2 className="text-[22px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
                   Need to start a refund?
                 </h2>
                 <p className="text-subtle text-[17px]">
@@ -206,7 +206,7 @@ const RefundPage = () => {
                   variant="primary"
                   size="lg"
                   shape="pill"
-                  className="h-11 px-6 text-[15px]!"
+                  className="h-9 px-6 text-[13px]!"
                 >
                   Initiate now
                 </Button>
@@ -214,7 +214,7 @@ const RefundPage = () => {
                   variant="ghost"
                   size="lg"
                   shape="pill"
-                  className="h-11 px-6 text-[15px]! bg-black/[0.04] hover:bg-black/[0.08] text-brand-charcoal"
+                  className="h-9 px-6 text-[13px]! bg-black/[0.04] hover:bg-black/[0.08] text-brand-charcoal"
                 >
                   View orders
                 </Button>

@@ -20,7 +20,10 @@ import {
 } from "@/lib/store";
 
 interface DisplayVendor {
+  /** Full seller id: used for keys, selection and API calls */
   id: string;
+  /** Short display code, e.g. #VND-4F2K9Q (not unique enough to identify a seller) */
+  code?: string;
   name: string;
   owner: string;
   email: string;
@@ -129,7 +132,9 @@ export default function VendorsPage() {
           : "Recent";
 
         return {
-          id: s.id.startsWith("01") ? `#VND-${s.id.slice(0, 6)}` : s.id,
+          id: s.id,
+          // ULIDs share their first characters (timestamp), so show the random tail
+          code: `#VND-${s.id.slice(-6).toUpperCase()}`,
           name: s.business_name || "Unnamed Vendor",
           owner: s.email ? s.email.split("@")[0] : "Store Owner",
           email: s.email || "—",
@@ -166,7 +171,7 @@ export default function VendorsPage() {
   };
 
   const handleApprove = async (vendor: DisplayVendor) => {
-    const raw = rawItems.find((s) => s.id === vendor.id || `#VND-${s.id.slice(0, 6)}` === vendor.id);
+    const raw = rawItems.find((s) => s.id === vendor.id);
     const sellerId = raw?.id ?? vendor.id;
     try {
       await updateSeller({ sellerId, is_verified: true, is_active: true }).unwrap();
@@ -179,7 +184,7 @@ export default function VendorsPage() {
   };
 
   const handleReactivate = async (vendor: DisplayVendor) => {
-    const raw = rawItems.find((s) => s.id === vendor.id || `#VND-${s.id.slice(0, 6)}` === vendor.id);
+    const raw = rawItems.find((s) => s.id === vendor.id);
     const sellerId = raw?.id ?? vendor.id;
     try {
       await reactivateSeller({ sellerId, note: "Reactivated by admin" }).unwrap();
@@ -251,7 +256,7 @@ export default function VendorsPage() {
         <tr>
           <td style="padding: 10px 14px; border-bottom: 1px solid #e5e7eb;">
             <strong>${v.name}</strong><br/>
-            <span style="color:#6b7280; font-size:11px;">${v.id}</span>
+            <span style="color:#6b7280; font-size:11px;">${v.code ?? v.id}</span>
           </td>
           <td style="padding: 10px 14px; border-bottom: 1px solid #e5e7eb;">${v.owner}</td>
           <td style="padding: 10px 14px; border-bottom: 1px solid #e5e7eb;">
@@ -497,7 +502,7 @@ export default function VendorsPage() {
                       <td className="font-bold text-gray-900">
                         <div className="text-xs">{vendor.name}</div>
                         <div className="text-[10px] text-gray-400 font-normal">
-                          {vendor.id} • Joined {vendor.joinedDate}
+                          {vendor.code ?? vendor.id} • Joined {vendor.joinedDate}
                         </div>
                       </td>
                       <td className="font-medium text-gray-700">

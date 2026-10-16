@@ -102,7 +102,7 @@ const DiscountBanner = () => {
           variant="accent"
           shape="pill"
           size="lg"
-          className="group/cta relative overflow-hidden h-12 px-8 text-[15px]"
+          className="group/cta relative overflow-hidden h-10 px-6 text-[13px]"
           iconRight={<FiArrowRight className="transition-transform duration-300 group-hover/cta:translate-x-1" aria-hidden />}
         >
           Shop now

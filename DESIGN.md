@@ -16,7 +16,7 @@ There are two surfaces built on the same foundations:
 |---|---|---|
 | Feel | Apple store: spacious, editorial | CRM: dense, efficient, flat |
 | Primary colour | **Koolboks orange** | **Charcoal** |
-| Radius | 16 / 22 / 32px tiles, pill buttons | 12px cards, 12px buttons |
+| Radius | 10 / 14 / 20px tiles, pill buttons | 12px cards, 12px buttons |
 | Card edge | 1px `light-gray` border (as the CRM) | 1px `light-gray` border (as the CRM) |
 | Type | Large display headlines (34–52px) | 20px page titles, 13–14px UI text |
 | Theme | Light | Light or dark (header toggle) |
@@ -143,9 +143,9 @@ stretch, shadow or place it on orange; on dark backgrounds it sits on a small wh
 | Token / class | Value | Use |
 |---|---|---|
 | `rounded-lg` (`--radius`) | 12px | Admin cards, inputs, buttons; storefront inputs |
-| `rounded-stage` | 16px | Image stages inside tiles, small tiles, option cards |
-| `rounded-tile` | 22px | Storefront tiles, product cards, panels |
-| `rounded-hero` | 32px | Large storefront tiles and the hero (from `md:`) |
+| `rounded-stage` | 10px | Image stages inside tiles, small tiles, option cards |
+| `rounded-tile` | 14px | Storefront tiles, product cards, panels |
+| `rounded-hero` | 20px | Large storefront tiles and the hero (from `md:`) |
 | `rounded-full` | – | Pill buttons, chips, search, avatars |
 
 - **Card edge (as in the CRM):** every white rounded card, on the storefront and in the admin, has a 1px

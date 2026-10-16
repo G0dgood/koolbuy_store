@@ -110,10 +110,10 @@ export function AddOrderModal({ isOpen, onClose }: AddOrderModalProps) {
         </ModalBody>
 
         <ModalFooter className="flex justify-end gap-3 border-t border-gray-50 pt-6">
-          <Button variant="outline" type="button" onClick={onClose} shape="rounded-sm" className="px-8 flex-1 md:flex-none">
+          <Button variant="outline" type="button" onClick={onClose} shape="rounded-sm" className="px-6 flex-1 md:flex-none">
             Cancel
           </Button>
-          <Button variant="primary" type="submit" shape="rounded-sm" className="px-8 flex-1 md:flex-none">
+          <Button variant="primary" type="submit" shape="rounded-sm" className="px-6 flex-1 md:flex-none">
             Create Order
           </Button>
         </ModalFooter>

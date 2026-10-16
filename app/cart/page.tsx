@@ -28,7 +28,7 @@ export default function CartPage() {
 
       <div className="flex-1 max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-8 md:py-12 flex flex-col gap-8 md:gap-10 w-full">
         <div className="flex items-center justify-between">
-          <h1 className="text-[24px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
+          <h1 className="text-[20px] md:text-[22px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
             My cart <span className="text-faint tabular-nums font-normal">({cartItems.length})</span>
           </h1>
           {hasItems && (
@@ -51,7 +51,7 @@ export default function CartPage() {
                   <Button
                     variant="outline"
                     shape="pill"
-                    className="w-full md:w-fit px-6 h-10 text-[14px]"
+                    className="w-full md:w-fit px-6 h-9 text-[13px]"
                     iconLeft={<Icon name="arrow_back" size="xs" />}
                   >
                     Back to shop
@@ -61,7 +61,7 @@ export default function CartPage() {
                   onClick={() => setIsClearModalOpen(true)}
                   variant="ghost"
                   shape="pill"
-                  className="w-full md:w-auto px-5 h-10 text-[14px] font-medium text-brand-orange-text hover:bg-brand-orange-soft"
+                  className="w-full md:w-auto px-5 h-9 text-[13px] font-medium text-brand-orange-text hover:bg-brand-orange-soft"
                 >
                   Remove all
                 </Button>
@@ -74,10 +74,10 @@ export default function CartPage() {
         ) : (
           /* Empty State with Custom SVG */
           <div className="bg-white rounded-tile border border-light-gray px-6 py-12 md:py-16 flex flex-col items-center justify-center text-center gap-6">
-            <EmptyCartIllustration className="w-64 h-52 sm:w-80 sm:h-64" />
+            <EmptyCartIllustration className="w-44 h-36 sm:w-52 sm:h-44" />
 
             <div className="flex flex-col items-center gap-2 max-w-md">
-              <h2 className="text-[22px] md:text-[26px] font-bold text-brand-charcoal tracking-[-0.02em]">
+              <h2 className="text-[18px] md:text-[20px] font-bold text-brand-charcoal tracking-[-0.02em]">
                 Your cart is empty
               </h2>
               <p className="text-[15px] text-subtle leading-relaxed">
@@ -85,40 +85,12 @@ export default function CartPage() {
               </p>
             </div>
 
-            {/* Quick Category Suggestions */}
-            <div className="flex flex-wrap items-center justify-center gap-2 max-w-lg">
-              <Link
-                href="/products?category=freezers"
-                className="px-3.5 py-1.5 rounded-full bg-off-white hover:bg-brand-orange-soft text-[13px] font-medium text-brand-charcoal hover:text-brand-orange-text transition-colors border border-black/[0.04]"
-              >
-                Solar Freezers
-              </Link>
-              <Link
-                href="/products?category=coolers"
-                className="px-3.5 py-1.5 rounded-full bg-off-white hover:bg-brand-orange-soft text-[13px] font-medium text-brand-charcoal hover:text-brand-orange-text transition-colors border border-black/[0.04]"
-              >
-                AC/DC Hybrid Coolers
-              </Link>
-              <Link
-                href="/products?category=ice-makers"
-                className="px-3.5 py-1.5 rounded-full bg-off-white hover:bg-brand-orange-soft text-[13px] font-medium text-brand-charcoal hover:text-brand-orange-text transition-colors border border-black/[0.04]"
-              >
-                Ice Makers
-              </Link>
-              <Link
-                href="/products"
-                className="px-3.5 py-1.5 rounded-full bg-off-white hover:bg-brand-orange-soft text-[13px] font-medium text-brand-charcoal hover:text-brand-orange-text transition-colors border border-black/[0.04]"
-              >
-                Solar Kits & Batteries
-              </Link>
-            </div>
-
             <Link href="/products" className="mt-2">
               <Button
                 variant="accent"
                 shape="pill"
                 size="lg"
-                className="px-8 h-12 text-[15px]! font-semibold!"
+                className="px-6 h-10 text-[13px]! font-semibold!"
               >
                 Start shopping
               </Button>

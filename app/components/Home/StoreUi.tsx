@@ -24,7 +24,7 @@ export function StoreSectionHeader({
   return (
     <div className="flex items-end justify-between gap-4">
       <div>
-        <h2 className="text-[26px] md:text-[34px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
+        <h2 className="text-[20px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
           {title}
         </h2>
         {subtitle && <p className="mt-1 text-[15px] md:text-[17px] text-subtle">{subtitle}</p>}

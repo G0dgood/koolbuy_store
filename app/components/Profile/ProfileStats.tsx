@@ -9,7 +9,7 @@ interface StatProps {
 }
 
 const StatCard: React.FC<StatProps> = ({ label, value, icon, color }) => (
-  <div className="bg-white p-5 rounded-[22px] flex items-center gap-4 cursor-default">
+  <div className="bg-white p-5 rounded-tile flex items-center gap-4 cursor-default">
     <div className={`w-11 h-11 rounded-full ${color} flex items-center justify-center shrink-0`}>
       <Icon name={icon} size="sm" />
     </div>

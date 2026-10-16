@@ -35,7 +35,7 @@ export default function NotFound() {
             404
           </motion.div>
           <span className="text-[13px] font-semibold text-brand-orange-text">Environment alert</span>
-          <h1 className="text-[34px] md:text-[52px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+          <h1 className="text-[28px] md:text-[42px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
             Lost in the <br />
             <span className="text-subtle">Mist.</span>
           </h1>

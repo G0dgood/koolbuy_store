@@ -44,7 +44,7 @@ export const ColdFeaturesSection: React.FC = () => {
     <section className="w-full flex flex-col gap-6 md:gap-8">
       {/* Centered Heading */}
       <div className="text-center max-w-2xl mx-auto px-4">
-        <h2 className="text-[30px] md:text-[44px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
+        <h2 className="text-[24px] md:text-[36px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
           Start with Koolboks.
         </h2>
         <p className="mt-2 text-[17px] md:text-[19px] text-subtle">
@@ -61,7 +61,7 @@ export const ColdFeaturesSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: idx * 0.15 }}
-            className="group relative rounded-[22px] md:rounded-[32px] overflow-hidden min-h-115 sm:min-h-125 flex flex-col justify-between"
+            className="group relative rounded-tile md:rounded-hero overflow-hidden min-h-115 sm:min-h-125 flex flex-col justify-between"
           >
             {/* Background Image */}
             <Image

@@ -27,9 +27,9 @@ export const OrderSummary: React.FC = () => {
 
   return (
     <div className="w-full lg:w-[400px] xl:w-[420px] shrink-0 sticky top-28">
-      <section className="bg-white rounded-[22px] overflow-hidden">
+      <section className="bg-white rounded-tile overflow-hidden">
         <div className="px-6 pt-6 md:px-8 md:pt-8">
-          <h2 className="text-[19px] md:text-[20px] font-semibold text-brand-charcoal tracking-[-0.01em] leading-tight">Order summary</h2>
+          <h2 className="text-[19px] md:text-[16px] font-semibold text-brand-charcoal tracking-[-0.01em] leading-tight">Order summary</h2>
           <p className="text-[13px] text-subtle mt-0.5">Review items</p>
         </div>
 
@@ -43,7 +43,7 @@ export const OrderSummary: React.FC = () => {
             {cartItems.length > 0 ? (
               cartItems.map((item) => (
                 <motion.div key={item.id} variants={itemVariants} className="flex gap-4 py-4 first:pt-0 border-b border-black/[0.06] last:border-0 group">
-                  <div className="w-16 h-16 bg-off-white rounded-[16px] flex-shrink-0 relative overflow-hidden">
+                  <div className="w-16 h-16 bg-off-white rounded-stage flex-shrink-0 relative overflow-hidden">
                     <Image src={item.image} alt={item.title} fill sizes="64px" className="object-contain p-2 mix-blend-multiply" />
                   </div>
                   <div className="flex-1 min-w-0 flex items-start justify-between gap-3">
@@ -60,7 +60,7 @@ export const OrderSummary: React.FC = () => {
                 </motion.div>
               ))
             ) : (
-              <div className="py-8 text-center bg-off-white rounded-[16px]">
+              <div className="py-8 text-center bg-off-white rounded-stage">
                 <Icon name="shopping_bag" size="lg" className="text-faint mx-auto mb-2" />
                 <p className="text-[14px] text-subtle">Your cart is empty</p>
               </div>
@@ -95,7 +95,7 @@ export const OrderSummary: React.FC = () => {
             size="lg"
             shape="pill"
             fullWidth
-            className="text-[16px]!"
+            className="text-[13px]!"
             disabled={cartItems.length === 0}
           >
             <span>Complete order</span>

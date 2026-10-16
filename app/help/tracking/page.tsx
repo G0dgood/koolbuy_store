@@ -71,7 +71,7 @@ const TrackingPage = () => {
             <span className="text-[13px] font-semibold text-brand-orange-text">
               Real-time logistics
             </span>
-            <h1 className="text-[34px] md:text-[52px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+            <h1 className="text-[28px] md:text-[42px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
               Follow your journey.
             </h1>
             <p className="text-subtle max-w-xl text-[17px] md:text-[19px] leading-snug">
@@ -131,7 +131,7 @@ const TrackingPage = () => {
                   variant="primary"
                   size="lg"
                   shape="pill"
-                  className="w-full h-12 text-[15px]! mt-1"
+                  className="w-full h-10 text-[13px]! mt-1"
                 >
                   Visualize journey
                 </Button>
@@ -244,7 +244,7 @@ const TrackingPage = () => {
                         variant="primary"
                         size="lg"
                         shape="pill"
-                        className="h-11 px-6 text-[15px]! shrink-0"
+                        className="h-9 px-6 text-[13px]! shrink-0"
                       >
                         Request detail
                       </Button>

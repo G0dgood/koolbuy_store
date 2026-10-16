@@ -85,7 +85,7 @@ const BrandsPage = () => {
             <span className="text-[13px] font-semibold text-brand-orange-text">
               Artisanal houses
             </span>
-            <h1 className="text-[36px] sm:text-[44px] md:text-[56px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+            <h1 className="text-[28px] sm:text-[36px] md:text-[44px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
               The <span className="text-faint">brands.</span>
             </h1>
             <p className="text-subtle max-w-xl mx-auto text-[17px] md:text-[19px] mt-1 leading-snug">
@@ -157,7 +157,7 @@ const BrandsPage = () => {
               <span className="text-[13px] font-semibold text-brand-orange">
                 Custom procurement
               </span>
-              <h2 className="text-[30px] md:text-[48px] font-semibold text-white tracking-[-0.03em] leading-[1.05]">
+              <h2 className="text-[24px] md:text-[38px] font-semibold text-white tracking-[-0.03em] leading-[1.05]">
                 Looking for a specific{" "}
                 <span className="text-white/60">creator?</span>
               </h2>

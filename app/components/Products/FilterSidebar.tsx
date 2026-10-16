@@ -6,6 +6,7 @@ import { Radio } from "@/app/components/Form";
 import Checkbox from "@/app/components/Checkbox";
 import { RangeSlider } from "../Form/RangeSlider";
 import { Rating } from "../Other/Rating";
+import { useGetPublicCategoriesQuery } from "@/lib/store/api/categories-api";
 
 interface FilterSectionProps {
   title: string;
@@ -63,11 +64,12 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
   filters,
   setFilters,
 }) => {
+  const { data: categoriesData, isLoading: isLoadingCategories } = useGetPublicCategoriesQuery();
   const handleCategoryClick = useCallback(
     (category: string) => {
       setFilters((prev) => ({
         ...prev,
-        category: prev.category === category ? null : category,
+        category: !category || prev.category === category ? null : category,
       }));
     },
     [setFilters],
@@ -136,41 +138,38 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
       {/* Categories */}
       <FilterSection title="Category">
         <ul className="flex flex-col gap-2.5 text-[14px]">
-          {[
-            "All Categories",
-            "Single Door Chest Freezers",
-            "Double Door Chest Freezers",
-            "Chillers & Coolers",
-            "Solar & Power",
-            "Air Conditioners",
-            "Ice Makers",
-            "Fish & Seafood",
-            "Ice Blocks",
-          ].map((cat) => {
-            const isAll = cat === "All Categories";
-            const isActive = isAll ? !filters.category : filters.category === cat;
-            return (
-              <li
-                key={cat}
-                onClick={() => handleCategoryClick(isAll ? "" : cat)}
-                className={`cursor-pointer transition-colors flex items-center justify-between ${
-                  isActive
-                    ? "text-brand-orange-text font-semibold"
-                    : "text-subtle hover:text-brand-charcoal"
-                }`}
-              >
-                <span>{cat}</span>
-                {isActive && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-orange-text" />
-                )}
-              </li>
-            );
-          })}
+          {isLoadingCategories &&
+            Array.from({ length: 5 }).map((_, i) => (
+              <li key={i} aria-hidden="true" className="h-4 w-3/4 rounded-full bg-black/[0.04] animate-pulse" />
+            ))}
+          {!isLoadingCategories &&
+            [{ value: "", label: "All Categories" }, ...(categoriesData?.items ?? [])].map((cat) => {
+              const isAll = cat.value === "";
+              const isActive = isAll
+                ? !filters.category
+                : filters.category === cat.value || filters.category === cat.label;
+              return (
+                <li
+                  key={cat.value || "all"}
+                  onClick={() => handleCategoryClick(cat.value)}
+                  className={`cursor-pointer transition-colors flex items-center justify-between ${
+                    isActive
+                      ? "text-brand-orange-text font-semibold"
+                      : "text-subtle hover:text-brand-charcoal"
+                  }`}
+                >
+                  <span>{cat.label}</span>
+                  {isActive && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-orange-text" />
+                  )}
+                </li>
+              );
+            })}
         </ul>
       </FilterSection>
 
       {/* Brands */}
-      <FilterSection title="Verified brands">
+      <FilterSection title="Brands">
         {["Koolboks", "Scanfrost", "Thermocool", "Bruhm", "Hisense"].map((brand) => (
           <Checkbox
             key={brand}
@@ -184,7 +183,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
 
       {/* Price Range */}
       <FilterSection title="Price range (₦)">
-        <div className="px-1 pt-2 pb-6">
+        <div className="pt-1 pb-3">
           <RangeSlider
             min={0}
             max={5000000}

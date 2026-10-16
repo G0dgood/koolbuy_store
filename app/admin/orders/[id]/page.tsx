@@ -95,7 +95,7 @@ export default function OrderDetails() {
           <div className="flex gap-3 items-center">
             <Button
               variant="ghost"
-              className="bg-white border-gray-200 text-gray-700 font-bold px-6 h-12"
+              className="bg-white border-gray-200 text-gray-700 font-bold px-6 h-10"
             >
               <Icon name="file_download" size="xs" className="mr-2" />
               Print Invoice

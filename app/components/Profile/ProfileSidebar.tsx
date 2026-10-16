@@ -23,7 +23,7 @@ export const ProfileSidebar: React.FC = () => {
   ];
 
   return (
-    <aside className="w-full lg:w-72 shrink-0 bg-white rounded-[22px] overflow-hidden lg:sticky lg:top-24">
+    <aside className="w-full lg:w-72 shrink-0 bg-white rounded-tile overflow-hidden lg:sticky lg:top-24">
       {/* User Header */}
       <div className="px-6 pt-8 pb-6 flex flex-col items-center text-center">
         <div className="relative group cursor-pointer mb-4">

@@ -58,7 +58,7 @@ const ProductReviews = () => {
       className="flex flex-col gap-8"
     >
       {/* Rating summary */}
-      <div className="flex flex-col md:flex-row gap-8 md:items-center bg-off-white rounded-[22px] p-6 md:p-8">
+      <div className="flex flex-col md:flex-row gap-8 md:items-center bg-off-white rounded-tile p-6 md:p-8">
         <div className="flex flex-col items-center text-center md:border-r border-black/[0.06] md:pr-12">
           <span className="text-[48px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-none tabular-nums">4.8</span>
           <div className="flex gap-1 my-3">
@@ -111,7 +111,7 @@ const ProductReviews = () => {
 
         <div className="flex flex-col gap-3">
           {mockReviews.map((review) => (
-            <div key={review.id} className="bg-off-white rounded-[18px] p-5 md:p-6">
+            <div key={review.id} className="bg-off-white rounded-stage p-5 md:p-6">
               <div className="flex items-start justify-between gap-3 mb-3">
                 <div className="flex items-center gap-3">
                   <div className="relative w-10 h-10 rounded-full overflow-hidden bg-light-gray shrink-0">

@@ -41,12 +41,12 @@ export default function NavDemo() {
   return (
     <div className="min-h-screen bg-off-white p-12 font-sans">
       <div className="max-w-6xl mx-auto bg-white rounded-xl  p-16">
-        <h1 className="text-5xl font-bold mb-16 text-black">Nav, Tab, Pagination</h1>
+        <h1 className="text-4xl font-bold mb-16 text-black">Nav, Tab, Pagination</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
           {/* Vertical Menu Section */}
           <section>
-            <h2 className="text-2xl font-bold mb-8 text-black">Vertical menu</h2>
+            <h2 className="text-xl font-bold mb-8 text-black">Vertical menu</h2>
             <VerticalMenu
               items={menuItems}
               activeId={activeMenu}
@@ -56,7 +56,7 @@ export default function NavDemo() {
 
           {/* Tab Pills Section */}
           <section>
-            <h2 className="text-2xl font-bold mb-8 text-black">Tab pills</h2>
+            <h2 className="text-xl font-bold mb-8 text-black">Tab pills</h2>
             <div className="border border-gray-100 rounded-lg p-8 min-h-[250px] bg-white">
               <Tabs
                 variant="pill"
@@ -69,7 +69,7 @@ export default function NavDemo() {
 
           {/* Tabs Section */}
           <section>
-            <h2 className="text-2xl font-bold mb-8 text-black">Tabs</h2>
+            <h2 className="text-xl font-bold mb-8 text-black">Tabs</h2>
             <div className="border border-gray-100 rounded-lg p-0 min-h-[250px] bg-white overflow-hidden">
               <Tabs
                 variant="underline"
@@ -83,7 +83,7 @@ export default function NavDemo() {
 
         {/* Pagination Section */}
         <section className="mb-20">
-          <h2 className="text-2xl font-bold mb-8 text-black">Pagination</h2>
+          <h2 className="text-xl font-bold mb-8 text-black">Pagination</h2>
           <div className="flex flex-col gap-8">
             <Pagination
               currentPage={currentPage}

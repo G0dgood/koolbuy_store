@@ -76,7 +76,7 @@ const CookiePreferencesPage = () => {
               <span className="text-[13px] font-semibold text-brand-orange-text">
                 Privacy orchestration
               </span>
-              <h1 className="text-[34px] md:text-[52px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+              <h1 className="text-[28px] md:text-[42px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
                 Cookie preferences.
               </h1>
               <p className="text-subtle max-w-2xl text-[17px] md:text-[19px] leading-snug">
@@ -104,7 +104,7 @@ const CookiePreferencesPage = () => {
             {/* Policy Narrative */}
             <div className="lg:col-span-5 flex flex-col gap-3 md:gap-4">
               <div className="flex flex-col gap-3 p-2 md:p-4">
-                <h2 className="text-[26px] md:text-[34px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
+                <h2 className="text-[20px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
                   Our integrity.
                 </h2>
                 <p className="text-subtle leading-relaxed text-[17px]">
@@ -193,7 +193,7 @@ const CookiePreferencesPage = () => {
                     variant="ghost"
                     size="lg"
                     shape="pill"
-                    className="flex-1 md:flex-none h-11 px-6 text-[15px]! bg-black/[0.04] hover:bg-black/[0.08] text-brand-charcoal"
+                    className="flex-1 md:flex-none h-9 px-6 text-[13px]! bg-black/[0.04] hover:bg-black/[0.08] text-brand-charcoal"
                   >
                     Reject all
                   </Button>
@@ -201,7 +201,7 @@ const CookiePreferencesPage = () => {
                     variant="primary"
                     size="lg"
                     shape="pill"
-                    className="flex-1 md:flex-none h-11 px-6 text-[15px]!"
+                    className="flex-1 md:flex-none h-9 px-6 text-[13px]!"
                   >
                     Accept all
                   </Button>

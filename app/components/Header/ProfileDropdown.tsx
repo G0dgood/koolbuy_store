@@ -10,7 +10,7 @@ import {
   useLogoutMutation,
   type UserProfile,
 } from "@/lib/store/api/auth-api";
-import { readStoredTokens, readStoredUser } from "@/lib/api";
+import { AUTH_CHANGED_EVENT, readStoredTokens, readStoredUser } from "@/lib/api";
 import { toast } from "sonner";
 import {
   FiShield,
@@ -51,19 +51,34 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
   const [hasToken, setHasToken] = useState<boolean>(false);
   const [cachedUser, setCachedUser] = useState<UserProfile | null>(null);
 
-  useEffect(() => {
-    const tokens = readStoredTokens();
-    const tokenExists = Boolean(tokens?.access);
-    setHasToken(tokenExists);
-    if (tokenExists) {
-      setCachedUser(readStoredUser<UserProfile>());
-    }
-  }, [isOpen]);
-
   // Query server profile when token exists
-  const { data: profile, isLoading } = useGetProfileQuery(undefined, {
+  const { data: profile, isLoading, refetch } = useGetProfileQuery(undefined, {
     skip: !hasToken,
   });
+
+  // Re-read the stored session on mount, when the menu opens, and whenever
+  // login/logout changes it (here or in another tab), so the header updates
+  // straight after signing in without a page reload.
+  useEffect(() => {
+    const syncSession = () => {
+      const tokens = readStoredTokens();
+      const tokenExists = Boolean(tokens?.access);
+      setHasToken(tokenExists);
+      setCachedUser(tokenExists ? readStoredUser<UserProfile>() : null);
+    };
+    syncSession();
+    window.addEventListener(AUTH_CHANGED_EVENT, syncSession);
+    window.addEventListener("storage", syncSession);
+    return () => {
+      window.removeEventListener(AUTH_CHANGED_EVENT, syncSession);
+      window.removeEventListener("storage", syncSession);
+    };
+  }, [isOpen]);
+
+  // A new sign-in may be a different account: refresh the profile once the token appears
+  useEffect(() => {
+    if (hasToken) refetch();
+  }, [hasToken, refetch]);
 
   const [logoutUser, { isLoading: isLoggingOut }] = useLogoutMutation();
 

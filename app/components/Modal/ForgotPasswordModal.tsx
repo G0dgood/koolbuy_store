@@ -51,7 +51,7 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
           variant="accent"
           shape="pill"
           fullWidth
-          className="h-12 text-[16px]!"
+          className="h-10 text-[13px]!"
           size="lg"
           onClick={() => {
             // Logic for sending reset link would go here

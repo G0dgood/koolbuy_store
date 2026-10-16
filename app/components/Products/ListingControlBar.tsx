@@ -16,6 +16,8 @@ interface ListingControlBarProps {
   };
   onFiltersChange: (filters: any) => void;
   onFilterClick?: () => void;
+  /** Display name for the active category (the filter holds the API slug) */
+  categoryLabel?: string | null;
 }
 
 const ListingControlBar: React.FC<ListingControlBarProps> = ({
@@ -25,12 +27,13 @@ const ListingControlBar: React.FC<ListingControlBarProps> = ({
   filters,
   onFiltersChange,
   onFilterClick,
+  categoryLabel,
 }) => {
   const activeFilterTags = React.useMemo(() => {
     const tags: { id: string; label: string; type: string; value: any }[] = [];
 
     if (filters.category) {
-      tags.push({ id: `cat-${filters.category}`, label: filters.category, type: 'category', value: filters.category });
+      tags.push({ id: `cat-${filters.category}`, label: categoryLabel || filters.category, type: 'category', value: filters.category });
     }
 
     filters.brands.forEach(brand => {
@@ -65,11 +68,11 @@ const ListingControlBar: React.FC<ListingControlBarProps> = ({
   return (
     <div className="w-full flex flex-col gap-4">
       {/* Top Bar Desktop */}
-      <div className="hidden md:flex w-full bg-white rounded-[22px] h-16 items-center justify-between pl-6 pr-3">
+      <div className="hidden md:flex w-full bg-white rounded-tile h-16 items-center justify-between pl-6 pr-3">
         <div className="flex items-center gap-4">
           <span className="text-[14px] text-subtle">
             <span className="font-semibold text-brand-charcoal tabular-nums">{count.toLocaleString()}</span> products found
-            {filters.category && <span> in <span className="font-semibold text-brand-charcoal">{filters.category}</span></span>}
+            {filters.category && <span> in <span className="font-semibold text-brand-charcoal">{categoryLabel || filters.category}</span></span>}
           </span>
         </div>
 

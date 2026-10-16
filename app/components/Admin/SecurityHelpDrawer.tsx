@@ -69,7 +69,7 @@ export function SecurityHelpDrawer({ isOpen, onClose }: SecurityHelpDrawerProps)
         <div className="mt-auto flex flex-col gap-3 pb-8">
            <Button 
             variant="primary" 
-            className="w-full h-10 sm:h-12 text-[11px] font-bold uppercase tracking-wider "
+            className="w-full h-9 sm:h-10 text-[11px] font-bold uppercase tracking-wider "
             onClick={() => {
               console.log("Escalating to support...");
               onClose();

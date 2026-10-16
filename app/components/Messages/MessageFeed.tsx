@@ -89,7 +89,7 @@ export const MessageFeed: React.FC = () => {
  const TAB = "h-8 px-4 text-[14px] font-medium rounded-full transition-colors duration-200 cursor-pointer";
 
  return (
-  <div className="w-full bg-white rounded-[22px] overflow-hidden flex flex-col">
+  <div className="w-full bg-white rounded-tile overflow-hidden flex flex-col">
    {/* Feed Toolbar */}
    <div className="px-5 py-4 md:px-6 border-b border-black/[0.06] flex flex-col sm:flex-row justify-between items-center gap-4">
     <div className="flex gap-1 p-1 bg-black/[0.04] rounded-full">

@@ -74,12 +74,12 @@ export const UpdateTicketStatusModal: React.FC<UpdateTicketStatusModalProps> = (
 
             {/* Actions */}
             <div className="flex gap-3 pt-6 border-t border-gray-50">
-               <Button variant="ghost" className="flex-1 h-10 text-[11px] font-bold uppercase tracking-wider text-gray-400" onClick={onClose}>
+               <Button variant="ghost" className="flex-1 h-9 text-[11px] font-bold uppercase tracking-wider text-gray-400" onClick={onClose}>
                   Cancel
                </Button>
                <Button
                   variant="primary"
-                  className="flex-2 h-10 text-[11px] font-bold uppercase tracking-wider "
+                  className="flex-2 h-9 text-[11px] font-bold uppercase tracking-wider "
                   onClick={() => {
                      onConfirm(selectedStatus, note);
                      onClose();

@@ -169,7 +169,7 @@ export const PartnersCarousel: React.FC = () => {
             <Link
               key={partner.id}
               href={partner.link}
-              className="shrink-0 w-40 sm:w-48 md:w-56 h-24 sm:h-28 rounded-[18px] bg-white px-6 flex items-center justify-center transition-shadow duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] group"
+              className="shrink-0 w-40 sm:w-48 md:w-56 h-24 sm:h-28 rounded-stage bg-white px-6 flex items-center justify-center transition-shadow duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] group"
             >
               <div className="relative w-full h-14 flex items-center justify-center">
                 <Image

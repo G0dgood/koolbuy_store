@@ -23,7 +23,7 @@ export default function DropdownDemo() {
   return (
     <div className="min-h-screen bg-off-white p-12 font-sans">
       <div className="max-w-7xl mx-auto bg-white rounded-xl  p-16">
-        <h1 className="text-5xl font-bold mb-16 text-black">Dropdown selection</h1>
+        <h1 className="text-4xl font-bold mb-16 text-black">Dropdown selection</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
 

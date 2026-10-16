@@ -31,13 +31,13 @@ export default function FormSelectDemo() {
  return (
   <div className="min-h-screen bg-off-white p-12 font-sans">
    <div className="max-w-4xl mx-auto bg-white rounded-xl  p-16">
-    <h1 className="text-5xl font-bold mb-16 text-black">Form - select</h1>
+    <h1 className="text-4xl font-bold mb-16 text-black">Form - select</h1>
 
     <div className="flex flex-col gap-20">
 
      {/* Select Section */}
      <section>
-      <h2 className="text-2xl font-bold mb-8 text-black">Select</h2>
+      <h2 className="text-xl font-bold mb-8 text-black">Select</h2>
       <div className="flex flex-col gap-6 max-w-xs">
        <Select
         options={[options[0]]}
@@ -78,7 +78,7 @@ export default function FormSelectDemo() {
 
      {/* Datepicker Section */}
      <section>
-      <h2 className="text-2xl font-bold mb-8 text-black">Datepicker</h2>
+      <h2 className="text-xl font-bold mb-8 text-black">Datepicker</h2>
       <div className="flex gap-8 items-start">
        <div className="flex flex-col gap-4">
         <DatePicker

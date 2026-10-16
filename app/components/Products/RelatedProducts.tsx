@@ -22,7 +22,11 @@ export const RelatedProducts: React.FC<RelatedProductsProps> = ({ products }) =>
           name: item.name,
           price: item.price,
           image: item.image,
-          href: "/products/detail",
+          // A unique URL per product so the click navigates (and scrolls to the top)
+          // even when you're already on the detail page.
+          href: `/products/detail?product=${encodeURIComponent(
+            item.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+          )}`,
         }))}
       />
     </section>

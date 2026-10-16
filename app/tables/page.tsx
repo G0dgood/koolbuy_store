@@ -46,12 +46,12 @@ export default function TableDemo() {
   return (
     <div className="min-h-screen bg-off-white p-12 font-sans">
       <div className="max-w-7xl mx-auto bg-white rounded-xl  p-16 text-black">
-        <h1 className="text-5xl font-bold mb-16">Table</h1>
+        <h1 className="text-4xl font-bold mb-16">Table</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20 mb-20">
           {/* Simple Table Section */}
           <section>
-            <h2 className="text-2xl font-bold mb-8">Simple table</h2>
+            <h2 className="text-xl font-bold mb-8">Simple table</h2>
             <Table>
               <TableBody>
                 {rowData.map((row, i) => (
@@ -70,7 +70,7 @@ export default function TableDemo() {
 
           {/* Collapsible Table Section */}
           <section>
-            <h2 className="text-2xl font-bold mb-8">Collapsible table</h2>
+            <h2 className="text-xl font-bold mb-8">Collapsible table</h2>
             <CollapsibleTable
               groups={collapsibleGroups}
               renderRow={(row, idx) => (
@@ -87,7 +87,7 @@ export default function TableDemo() {
 
         {/* Large Table Section */}
         <section className="mb-20">
-          <h2 className="text-2xl font-bold mb-8">Large table</h2>
+          <h2 className="text-xl font-bold mb-8">Large table</h2>
           <Table>
             <TableHeader>
               <TableRow className="bg-gray-50/50">

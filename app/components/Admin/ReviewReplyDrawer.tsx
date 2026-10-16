@@ -61,10 +61,10 @@ export function ReviewReplyDrawer({ isOpen, onClose, review }: ReviewReplyDrawer
            </div>
 
            <div className="mt-auto pt-8 border-t border-gray-50 flex flex-col gap-3">
-              <Button variant="primary" type="submit" className="w-full h-10 sm:h-12 text-[11px] font-bold uppercase tracking-wider ">
+              <Button variant="primary" type="submit" className="w-full h-9 sm:h-10 text-[11px] font-bold uppercase tracking-wider ">
                  Publish Reply
               </Button>
-              <Button variant="ghost" type="button" onClick={onClose} className="w-full h-10 sm:h-12 text-[11px] font-bold text-gray-400">
+              <Button variant="ghost" type="button" onClick={onClose} className="w-full h-9 sm:h-10 text-[11px] font-bold text-gray-400">
                  Cancel
               </Button>
            </div>

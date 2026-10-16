@@ -96,7 +96,7 @@ export function NotificationDetailDrawer({ isOpen, onClose, notification }: Noti
         <div className="mt-auto pt-8 border-t border-gray-50 flex flex-col gap-3">
            <Button 
               variant="primary" 
-              className="w-full h-12 text-[11px] font-bold uppercase tracking-wider "
+              className="w-full h-10 text-[11px] font-bold uppercase tracking-wider "
               onClick={() => {
                  router.push(style.action);
                  onClose();
@@ -106,7 +106,7 @@ export function NotificationDetailDrawer({ isOpen, onClose, notification }: Noti
            </Button>
            <Button 
               variant="ghost" 
-              className="w-full h-12 text-[11px] font-bold text-gray-400 hover:text-rose-500 transition-colors"
+              className="w-full h-10 text-[11px] font-bold text-gray-400 hover:text-rose-500 transition-colors"
               onClick={onClose}
            >
               Dismiss Details

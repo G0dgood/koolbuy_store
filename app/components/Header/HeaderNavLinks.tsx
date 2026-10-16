@@ -64,35 +64,11 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
             target="_blank"
             rel="noopener noreferrer"
             shape="pill"
-            className="bg-brand-charcoal text-white hover:bg-brand-charcoal/85 w-full md:w-fit"
+            size="sm"
+            className="bg-brand-charcoal text-white hover:bg-brand-charcoal/85 w-full md:w-fit h-8 px-4! py-0! text-[12px]!"
           >
             Marketplace
           </Button>
-        </div>
-
-        {/* Quick Links */}
-        <div
-          className="relative h-full flex items-center"
-          onMouseEnter={() => onMouseEnterDropdown("quickLinks")}
-        >
-          <button
-            type="button"
-            onClick={() => onToggleDropdown("quickLinks")}
-            className={`flex items-center gap-1 transition-colors cursor-pointer py-2 outline-none whitespace-nowrap ${
-              activeDropdown === "quickLinks"
-                ? "text-brand-orange-text"
-                : "text-gray-600 hover:text-brand-charcoal"
-            }`}
-          >
-            <span>Quick Links</span>
-            <FiChevronDown
-              className={`text-xs transition-transform duration-200 ${
-                activeDropdown === "quickLinks"
-                  ? "rotate-180 text-brand-orange-text"
-                  : "text-gray-400"
-              }`}
-            />
-          </button>
         </div>
       </div>
     </div>

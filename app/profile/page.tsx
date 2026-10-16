@@ -59,14 +59,14 @@ export default function ProfilePage() {
             {/* Page Header */}
             {/* <motion.div variants={itemVariants} className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <h1 className="text-[24px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">My dashboard</h1>
+                <h1 className="text-[20px] md:text-[22px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">My dashboard</h1>
                 <p className="text-[14px] md:text-[15px] text-subtle">Manage your profile, orders, and account settings from one place.</p>
               </div>
               <div className="flex items-center gap-3">
-                 <Button variant="outline" shape="pill" className="h-10 px-5">
+                 <Button variant="outline" shape="pill" className="h-9 px-5">
                    Activity log
                  </Button>
-                 <Button variant="primary" shape="pill" className="h-10 px-6">
+                 <Button variant="primary" shape="pill" className="h-9 px-6">
                     Settings
                  </Button>
               </div>
@@ -80,11 +80,11 @@ export default function ProfilePage() {
             {/* Forms Section */}
             <motion.div variants={itemVariants} className="flex flex-col gap-4 md:gap-6">
               <div className="flex flex-col gap-1">
-                <h1 className="text-[24px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">Personal information</h1>
+                <h1 className="text-[20px] md:text-[22px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">Personal information</h1>
                 <p className="text-[14px] md:text-[15px] text-subtle">Update your basic account details and contact information.</p>
               </div>
 
-              <div className="bg-white rounded-[22px] overflow-hidden">
+              <div className="bg-white rounded-tile overflow-hidden">
                 <div className="p-6 md:p-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-5">
                     <div className="flex flex-col gap-1.5">
@@ -119,10 +119,10 @@ export default function ProfilePage() {
                     Your personal data is encrypted and secure.
                   </div>
                   <div className="flex gap-2">
-                    <Button variant="ghost" shape="pill" className="h-11 px-6 text-[15px]! font-medium! text-subtle hover:bg-black/[0.04]!">
+                    <Button variant="ghost" shape="pill" className="h-9 px-6 text-[13px]! font-medium! text-subtle hover:bg-black/[0.04]!">
                       Discard
                     </Button>
-                    <Button variant="accent" shape="pill" className="h-11 px-7 text-[15px]!">
+                    <Button variant="accent" shape="pill" className="h-9 px-7 text-[13px]!">
                       Save profile
                     </Button>
                   </div>
@@ -131,7 +131,7 @@ export default function ProfilePage() {
             </motion.div>
 
             {/* Newsletter Section - Subtle */}
-            <motion.div variants={itemVariants} className="bg-brand-charcoal p-6 md:p-8 rounded-[22px] flex flex-col md:flex-row items-center justify-between gap-6 text-white">
+            <motion.div variants={itemVariants} className="bg-brand-charcoal p-6 md:p-8 rounded-tile flex flex-col md:flex-row items-center justify-between gap-6 text-white">
               <div className="text-center md:text-left">
                 <h3 className="text-[22px] md:text-[24px] font-semibold tracking-[-0.02em] leading-tight">Stay updated on new deals!</h3>
                 <p className="mt-1 text-[15px] text-white/60">Subscribe to get the latest news on products and discounts.</p>

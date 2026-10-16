@@ -10,7 +10,7 @@ export const VendorshipSection = () => {
     <section className="w-full flex flex-col items-center gap-8 md:gap-10">
       {/* Centered Heading */}
       <div className="text-center max-w-2xl px-4">
-        <h2 className="text-[30px] md:text-[44px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
+        <h2 className="text-[24px] md:text-[36px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
           Sell with KoolBuy.
         </h2>
         <p className="mt-2 text-[17px] md:text-[19px] text-subtle">
@@ -21,7 +21,7 @@ export const VendorshipSection = () => {
       {/* Two-Column Grid */}
       <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-4 items-stretch">
         {/* Left Card: Become Our Verified Vendor */}
-        <div className="lg:col-span-5 bg-white rounded-[22px] md:rounded-[32px] p-8 sm:p-10 md:p-12 flex flex-col justify-center gap-4">
+        <div className="lg:col-span-5 bg-white rounded-tile md:rounded-hero p-8 sm:p-10 md:p-12 flex flex-col justify-center gap-4">
           <div className="inline-flex items-center gap-2 text-brand-orange-text text-[13px] font-semibold">
             <FiBox className="text-base" />
             <span>Vendorship</span>
@@ -47,7 +47,7 @@ export const VendorshipSection = () => {
         </div>
 
         {/* Right Card: Location Map */}
-        <div className="lg:col-span-7 bg-white rounded-[22px] md:rounded-[32px] overflow-hidden relative min-h-80 sm:min-h-85">
+        <div className="lg:col-span-7 bg-white rounded-tile md:rounded-hero overflow-hidden relative min-h-80 sm:min-h-85">
           {/* Google Maps Embed. Pulled up 140px so Google's built-in address card
               (top-left of the embed) is clipped off and only our card shows. */}
           <iframe

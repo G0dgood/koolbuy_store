@@ -156,7 +156,7 @@ const LoginForm = ({ onSwitch }: { onSwitch: () => void }) => {
         fullWidth
         isLoading={isLoading}
         disabled={isLoading}
-        className="h-12 text-[16px]!"
+        className="h-10 text-[13px]!"
       >
         Log in
       </Button>
@@ -357,7 +357,7 @@ const RegisterForm = ({
         fullWidth
         isLoading={isLoading}
         disabled={isLoading}
-        className="h-12 text-[16px]!"
+        className="h-10 text-[13px]!"
       >
         Create account
       </Button>
@@ -414,7 +414,7 @@ const ForgotPasswordForm = ({ onBack }: { onBack: () => void }) => (
       />
     </div>
 
-    <Button variant="accent" shape="pill" size="lg" fullWidth className="h-12 text-[16px]!">
+    <Button variant="accent" shape="pill" size="lg" fullWidth className="h-10 text-[13px]!">
       Send reset link
     </Button>
 

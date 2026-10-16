@@ -10,7 +10,7 @@ import { ChevronDownIcon } from "@radix-ui/react-icons";
    - ghost: text only; light grey on hover
    - danger: red fill
    - link: orange text link
-   Sizes: md (16×8px padding, 12px text, ≈34px tall) is the standard; sm for
+   Sizes: md (14×6px padding, 12px text, ≈30px tall) is the standard; sm for
    tight rows; lg only for hero banners. */
 
 type ButtonVariant =
@@ -59,9 +59,9 @@ const variants: Record<ButtonVariant, string> = {
 };
 
 const sizes: Record<ButtonSize, string> = {
-  sm: "px-3 py-2 text-[10px] md:text-[12px]",
-  md: "px-4 py-2 text-[10px] md:text-[12px]",
-  lg: "px-6 py-3 text-base",
+  sm: "px-3 py-1 text-[10px] md:text-[12px]",
+  md: "px-3.5 py-1.5 text-[10px] md:text-[12px]",
+  lg: "px-5 py-2.5 text-sm",
 };
 
 const shapes: Record<ButtonShape, string> = {

@@ -91,14 +91,14 @@ export function AddRoleModal({ isOpen, onClose }: AddRoleModalProps) {
             variant="outline" 
             type="button" 
             onClick={onClose} 
-            className="px-8 h-10 sm:h-12 text-[11px] font-bold"
+            className="px-6 h-9 sm:h-10 text-[11px] font-bold"
           >
             Cancel
           </Button>
           <Button 
             variant="primary" 
             type="submit" 
-            className="px-8 h-10 sm:h-12 text-[11px] font-bold uppercase tracking-wider "
+            className="px-6 h-9 sm:h-10 text-[11px] font-bold uppercase tracking-wider "
           >
             Create Role
           </Button>

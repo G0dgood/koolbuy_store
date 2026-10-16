@@ -40,7 +40,7 @@ const ContactPage = () => {
               <span className="text-[13px] font-semibold text-brand-orange-text">
                 Koolbuy Store support
               </span>
-              <h1 className="text-[34px] md:text-[52px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+              <h1 className="text-[28px] md:text-[42px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
                 How can we <br />
                 <span className="text-subtle">help you?</span>
               </h1>
@@ -76,7 +76,7 @@ const ContactPage = () => {
               className="lg:col-span-7 bg-white rounded-tile p-6 sm:p-8 md:p-10 flex flex-col gap-8"
             >
               <div className="flex flex-col gap-2">
-                <h2 className="text-[26px] md:text-[30px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-[1.1]">
+                <h2 className="text-[20px] md:text-[24px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-[1.1]">
                   Send us a message
                 </h2>
                 <p className="text-[15px] md:text-[17px] text-subtle leading-normal">
@@ -122,7 +122,7 @@ const ContactPage = () => {
                     size="lg"
                     shape="pill"
                     type="submit"
-                    className="w-full md:w-auto px-8! text-[15px]!"
+                    className="w-full md:w-auto px-6! text-[13px]!"
                   >
                     Submit inquiry
                   </Button>

@@ -64,11 +64,10 @@ export const WishlistProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, [wishlistItems, isInitialized]);
 
   const addToWishlist = (item: WishlistItem) => {
-    setWishlistItems(prev => {
-      if (prev.find(i => i.id === item.id)) return prev;
-      toast.success("Added to wishlist");
-      return [...prev, item];
-    });
+    // Toast outside the state updater: React runs updaters twice in dev, which showed it twice.
+    if (wishlistItems.some(i => i.id === item.id)) return;
+    setWishlistItems(prev => (prev.some(i => i.id === item.id) ? prev : [...prev, item]));
+    toast.success("Added to wishlist");
   };
 
   const removeFromWishlist = (id: string) => {

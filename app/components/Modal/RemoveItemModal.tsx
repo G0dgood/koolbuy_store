@@ -39,7 +39,7 @@ export const RemoveItemModal: React.FC<RemoveItemModalProps> = ({
 
         <div className="flex flex-col w-full gap-3 mt-2">
           <Button 
-            className="w-full h-12 font-bold bg-red-500 hover:bg-red-600 text-white border-transparent" 
+            className="w-full h-10 font-bold bg-red-500 hover:bg-red-600 text-white border-transparent" 
             onClick={() => {
               onConfirm();
               onClose();
@@ -49,7 +49,7 @@ export const RemoveItemModal: React.FC<RemoveItemModalProps> = ({
           </Button>
           <Button 
             variant="ghost"
-            className="w-full h-10 font-bold text-gray-500 hover:text-gray-700" 
+            className="w-full h-9 font-bold text-gray-500 hover:text-gray-700" 
             onClick={onClose}
           >
             Cancel

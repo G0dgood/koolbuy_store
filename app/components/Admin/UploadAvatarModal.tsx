@@ -106,7 +106,7 @@ export function UploadAvatarModal({ isOpen, onClose, onUploadSuccess }: UploadAv
         <Button 
           variant="outline" 
           onClick={onClose} 
-          className="px-8 h-12 text-[11px] font-bold"
+          className="px-6 h-10 text-[11px] font-bold"
         >
           Cancel
         </Button>
@@ -114,7 +114,7 @@ export function UploadAvatarModal({ isOpen, onClose, onUploadSuccess }: UploadAv
           variant="primary" 
           onClick={handleUpload}
           disabled={isUploading || !previewUrl}
-          className="px-8 h-12 text-[11px] font-bold uppercase tracking-wider "
+          className="px-6 h-10 text-[11px] font-bold uppercase tracking-wider "
         >
           {isUploading ? "Uploading..." : "Save Photo"}
         </Button>

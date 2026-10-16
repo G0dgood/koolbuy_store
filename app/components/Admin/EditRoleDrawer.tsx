@@ -147,7 +147,7 @@ export function EditRoleDrawer({ isOpen, onClose, role }: EditRoleDrawerProps) {
           <Button 
             variant="primary" 
             type="submit"
-            className="w-full h-12 text-[11px] font-bold uppercase tracking-wider animate-pulse-subtle"
+            className="w-full h-10 text-[11px] font-bold uppercase tracking-wider animate-pulse-subtle"
           >
             Deploy Governance Update
           </Button>
@@ -155,7 +155,7 @@ export function EditRoleDrawer({ isOpen, onClose, role }: EditRoleDrawerProps) {
             variant="outline" 
             type="button" 
             onClick={onClose}
-            className="w-full h-12 text-[11px] font-bold text-gray-400 group hover:text-gray-900 border-gray-100 transition-all"
+            className="w-full h-10 text-[11px] font-bold text-gray-400 group hover:text-gray-900 border-gray-100 transition-all"
           >
             Discard Changes
           </Button>

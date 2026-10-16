@@ -52,7 +52,7 @@ const CancelOrderPage = () => {
             <span className="text-[13px] font-semibold text-brand-orange-text">
               Policy framework
             </span>
-            <h1 className="text-[34px] md:text-[52px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+            <h1 className="text-[28px] md:text-[42px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
               Order cancellation.
             </h1>
             <p className="text-subtle max-w-2xl text-[17px] md:text-[19px] leading-snug">
@@ -116,7 +116,7 @@ const CancelOrderPage = () => {
                   <span className="text-[13px] font-semibold text-brand-orange-text">
                     Immediate request
                   </span>
-                  <h2 className="text-[28px] md:text-[40px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-[1.1]">
+                  <h2 className="text-[22px] md:text-[32px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-[1.1]">
                     Materialize your <br />
                     cancellation.
                   </h2>
@@ -132,7 +132,7 @@ const CancelOrderPage = () => {
                     variant="primary"
                     size="lg"
                     shape="pill"
-                    className="h-11 px-6 text-[15px]!"
+                    className="h-9 px-6 text-[13px]!"
                   >
                     Request cancellation
                   </Button>
@@ -140,7 +140,7 @@ const CancelOrderPage = () => {
                     variant="ghost"
                     size="lg"
                     shape="pill"
-                    className="h-11 px-6 text-[15px]! bg-black/[0.04] hover:bg-black/[0.08] text-brand-charcoal"
+                    className="h-9 px-6 text-[13px]! bg-black/[0.04] hover:bg-black/[0.08] text-brand-charcoal"
                   >
                     View my orders
                   </Button>

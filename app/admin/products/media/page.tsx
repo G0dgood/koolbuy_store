@@ -95,7 +95,7 @@ export default function ProductMediaListing() {
               <Button
                 variant="outline"
                 shape="rounded-sm"
-                className={`!p-2.5 w-10 h-10 transition-all
+                className={`!p-2.5 w-10 h-9 transition-all
                   ${viewType === "grid"
                     ? "border-brand-charcoal bg-brand-orange-soft text-brand-orange-text "
                     : "text-gray-400"}
@@ -108,7 +108,7 @@ export default function ProductMediaListing() {
               <Button
                 variant="outline"
                 shape="rounded-sm"
-                className={`!p-2.5 w-10 h-10 transition-all
+                className={`!p-2.5 w-10 h-9 transition-all
                   ${viewType === "list"
                     ? "border-brand-charcoal bg-brand-orange-soft text-brand-orange-text "
                     : "text-gray-400"}
@@ -121,7 +121,7 @@ export default function ProductMediaListing() {
               <Button
                 variant="outline"
                 shape="rounded-sm"
-                className="!p-2.5 w-10 h-10 text-gray-400"
+                className="!p-2.5 w-10 h-9 text-gray-400"
               >
                 <Icon name="DotsHorizontal" folder="dashboardIcon" size="sm" />
               </Button>

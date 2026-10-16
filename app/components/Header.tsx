@@ -219,7 +219,7 @@ export const Header: React.FC<{ className?: string }> = ({
           </button>
         </form>
 
-        {/* Desktop Navigation Links (Home, All categories, Marketplace, Quick Links) with Mega Menus */}
+        {/* Desktop Navigation Links (Home, All categories, Marketplace) with Mega Menus */}
         <div ref={navContainerRef}>
           <HeaderNavLinks
             activeDropdown={activeDropdown}

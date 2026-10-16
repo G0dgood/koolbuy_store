@@ -55,7 +55,7 @@ export const ProductGallery: React.FC = () => {
               type="button"
               onClick={() => setActiveImage(img)}
               className={`
-                relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-[14px] overflow-hidden bg-off-white p-1.5 transition-all duration-200 cursor-pointer
+                relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-stage overflow-hidden bg-off-white p-1.5 transition-all duration-200 cursor-pointer
                 ${
                   activeImage === img
                     ? "ring-2 ring-brand-orange"
@@ -87,7 +87,7 @@ export const ProductGallery: React.FC = () => {
       </div>
 
       {/* Main image stage */}
-      <div className="relative w-full aspect-square bg-off-white rounded-[22px] overflow-hidden flex items-center justify-center p-6 group">
+      <div className="relative w-full aspect-square bg-off-white rounded-tile overflow-hidden flex items-center justify-center p-6 group">
         <Image
           src={activeImage}
           alt="Koolbuy Solar Freezer Unit"

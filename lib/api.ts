@@ -49,6 +49,15 @@ export const readStoredTokens = (): StoredTokens | null => {
   return null;
 };
 
+/** Fired on window whenever stored tokens or the stored user change (login, logout, refresh). */
+export const AUTH_CHANGED_EVENT = "kb-auth-changed";
+
+const notifyAuthChanged = (): void => {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
+  }
+};
+
 export const writeStoredTokens = (tokens: StoredTokens): void => {
   const serialized = encodeURIComponent(JSON.stringify(tokens));
   if (typeof document !== "undefined") {
@@ -61,6 +70,7 @@ export const writeStoredTokens = (tokens: StoredTokens): void => {
       /* ignore */
     }
   }
+  notifyAuthChanged();
 };
 
 const USER_KEY = "kb_user";
@@ -89,6 +99,7 @@ export const writeStoredUser = (user: unknown): void => {
       /* ignore */
     }
   }
+  notifyAuthChanged();
 };
 
 export const clearStoredTokens = (): void => {
@@ -104,4 +115,5 @@ export const clearStoredTokens = (): void => {
       /* ignore */
     }
   }
+  notifyAuthChanged();
 };

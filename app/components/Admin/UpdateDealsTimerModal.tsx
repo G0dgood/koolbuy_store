@@ -124,14 +124,14 @@ export function UpdateDealsTimerModal({ isOpen, onClose, initialValues, onUpdate
           <Button
             variant="outline"
             onClick={onClose}
-            className="flex-1 h-11 text-[11px] font-bold uppercase tracking-wider border-gray-200 text-gray-400 hover:text-brand-charcoal"
+            className="flex-1 h-9 text-[11px] font-bold uppercase tracking-wider border-gray-200 text-gray-400 hover:text-brand-charcoal"
           >
             Cancel
           </Button>
           <Button
             type="submit"
             variant="primary"
-            className="flex-[2] h-11 text-[11px] font-bold uppercase tracking-wider "
+            className="flex-[2] h-9 text-[11px] font-bold uppercase tracking-wider "
           >
             Establish Timer
           </Button>

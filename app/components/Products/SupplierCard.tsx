@@ -23,7 +23,7 @@ const SupplierCard = () => {
 
    return (
       <div className="w-72 flex-shrink-0 flex flex-col gap-3">
-         <div className="bg-white rounded-[22px] p-6 flex flex-col gap-5">
+         <div className="bg-white rounded-tile p-6 flex flex-col gap-5">
             {/* Vendor Header */}
             <div className="flex gap-3 pb-5 border-b border-black/[0.06] items-center">
                <div className="w-12 h-12 bg-brand-orange-soft rounded-full flex items-center justify-center text-brand-orange-text font-semibold text-[18px]">
@@ -60,11 +60,11 @@ const SupplierCard = () => {
                   variant="accent"
                   shape="pill"
                   size="lg"
-                  className="w-full h-11 text-[15px] cursor-pointer"
+                  className="w-full h-9 text-[13px] cursor-pointer"
                >
                   Add to cart
                </Button>
-               {/* <Button variant="ghost" className="w-full bg-white text-brand-orange-text border border-gray-200 h-10 hover:bg-gray-50 cursor-pointer">Seller's profile</Button> */}
+               {/* <Button variant="ghost" className="w-full bg-white text-brand-orange-text border border-gray-200 h-9 hover:bg-gray-50 cursor-pointer">Seller's profile</Button> */}
             </div>
          </div>
 

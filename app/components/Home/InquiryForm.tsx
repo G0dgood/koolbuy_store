@@ -19,7 +19,7 @@ const InquiryForm = () => {
 
       <div className="relative z-10 w-full p-6 md:p-10 flex flex-col lg:flex-row justify-between gap-10">
         <div className="max-w-md text-white flex flex-col gap-4 z-10">
-          <h2 className="text-3xl md:text-[32px] font-bold leading-tight drop-shadow-sm pr-4 text-white">
+          <h2 className="text-2xl md:text-[26px] font-bold leading-tight drop-shadow-sm pr-4 text-white">
             An easy way to send requests to all suppliers
           </h2>
           <p className="text-base text-white hidden md:block leading-relaxed max-w-97.5 drop-shadow-md">
@@ -41,7 +41,7 @@ const InquiryForm = () => {
               <Icon name="expand_more" size="xs" className="text-gray-400" />
             </div>
           </div>
-          <Button className="w-fit bg-brand-charcoal text-white px-8 h-10 hover:bg-brand-charcoal/90 active:scale-95 transition-all">
+          <Button className="w-fit bg-brand-charcoal text-white px-6 h-9 hover:bg-brand-charcoal/90 active:scale-95 transition-all">
             Send inquiry
           </Button>
         </div>

@@ -100,10 +100,10 @@ export function TransactionDetailDrawer({ isOpen, onClose, transaction }: Transa
 
         {/* Bottom Actions */}
         <div className="mt-auto pt-8 border-t border-gray-50 flex flex-col gap-3">
-           <Button variant="primary" className="w-full h-10 sm:h-12 text-[11px] font-bold uppercase tracking-wider ">
+           <Button variant="primary" className="w-full h-9 sm:h-10 text-[11px] font-bold uppercase tracking-wider ">
               Download Invoice
            </Button>
-           <Button variant="ghost" className="w-full h-10 sm:h-12 text-[11px] font-bold text-rose-500 hover:bg-rose-50">
+           <Button variant="ghost" className="w-full h-9 sm:h-10 text-[11px] font-bold text-rose-500 hover:bg-rose-50">
               Report Issue
            </Button>
         </div>

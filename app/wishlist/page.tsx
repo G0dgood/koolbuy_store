@@ -52,7 +52,7 @@ const WishlistPage = () => {
         <div className="flex flex-col gap-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div className="flex flex-col gap-1">
-              <h1 className="text-[24px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
+              <h1 className="text-[20px] md:text-[22px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">
                 My wishlist
               </h1>
               <p className="text-[14px] md:text-[15px] text-subtle tabular-nums">{wishlistItems.length} items saved</p>
@@ -80,7 +80,7 @@ const WishlistPage = () => {
               ))}
             </div>
           ) : (
-            <div className="bg-white rounded-[22px] px-6 py-16 md:py-20 flex flex-col items-center text-center gap-5">
+            <div className="bg-white rounded-tile px-6 py-16 md:py-20 flex flex-col items-center text-center gap-5">
               <div className="w-16 h-16 bg-brand-orange-soft rounded-full flex items-center justify-center text-brand-orange-text">
                 <Icon name="favorite" size="md" />
               </div>
@@ -106,7 +106,7 @@ const WishlistPage = () => {
 
         {/* Recently Viewed */}
         <div className="mt-8 md:mt-16 pb-4">
-          <h2 className="text-[26px] md:text-[34px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight mb-5 md:mb-6">
+          <h2 className="text-[20px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight mb-5 md:mb-6">
             Recently viewed
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
@@ -151,7 +151,7 @@ const WishlistPage = () => {
               <Link
                 href="/products/detail"
                 key={item.id}
-                className="bg-white rounded-[22px] overflow-hidden flex flex-col transition-shadow duration-300 hover:shadow-lift group"
+                className="bg-white rounded-tile overflow-hidden flex flex-col transition-shadow duration-300 hover:shadow-lift group"
               >
                 <div className="aspect-square relative bg-off-white overflow-hidden">
                   <Image

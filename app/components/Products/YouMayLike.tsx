@@ -36,7 +36,7 @@ const YouMayLike = () => {
       <StoreSectionHeader title="You may like" />
       <div className="flex flex-col gap-2">
          {items.map((item, idx) => (
-            <div key={idx} className="flex items-center gap-3 group relative cursor-pointer rounded-[16px] p-2 -mx-2 hover:bg-off-white transition-colors">
+            <div key={idx} className="flex items-center gap-3 group relative cursor-pointer rounded-stage p-2 -mx-2 hover:bg-off-white transition-colors">
               <Link href="/products/detail" className="w-16 h-16 relative flex-shrink-0 rounded-[12px] p-1.5 overflow-hidden bg-off-white">
                  <Image src={item.image} alt={item.name} fill sizes="64px" className="object-contain p-1.5 mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-[1.04]" />
               </Link>

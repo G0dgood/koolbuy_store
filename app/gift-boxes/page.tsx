@@ -95,7 +95,7 @@ const GiftBoxesPage = () => {
                 <span className="text-[13px] font-semibold text-brand-orange">
                   Boutique curations
                 </span>
-                <h1 className="text-[40px] sm:text-[52px] md:text-[64px] font-semibold text-white tracking-[-0.03em] leading-[1.02]">
+                <h1 className="text-[32px] sm:text-[42px] md:text-[52px] font-semibold text-white tracking-[-0.03em] leading-[1.02]">
                   Artisanal <br />
                   <span className="text-white/60">gifts.</span>
                 </h1>
@@ -128,7 +128,7 @@ const GiftBoxesPage = () => {
             <span className="text-[13px] font-semibold text-brand-orange-text">
               The seasonal edit
             </span>
-            <h2 className="text-[30px] md:text-[44px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
+            <h2 className="text-[24px] md:text-[36px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
               Hand-wrapped <br />
               excellence.
             </h2>
@@ -192,7 +192,7 @@ const GiftBoxesPage = () => {
                 <div className="w-12 h-12 bg-brand-orange-soft rounded-stage flex items-center justify-center text-brand-orange-text">
                   <HiSparkles size={24} />
                 </div>
-                <h2 className="text-[30px] md:text-[44px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
+                <h2 className="text-[24px] md:text-[36px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.08]">
                   The bespoke <br />
                   <span className="text-faint">choice.</span>
                 </h2>

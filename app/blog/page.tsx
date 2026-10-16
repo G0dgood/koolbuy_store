@@ -89,7 +89,7 @@ const BlogPage = () => {
             <span className="text-[13px] font-semibold text-brand-orange-text">
               Koolbuy Store journal
             </span>
-            <h1 className="text-[36px] sm:text-[44px] md:text-[56px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
+            <h1 className="text-[28px] sm:text-[36px] md:text-[44px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.05]">
               Insights <span className="text-faint">&amp;</span> inspiration.
             </h1>
             <p className="text-subtle max-w-2xl text-[17px] md:text-[19px] mt-1 leading-snug">
@@ -119,7 +119,7 @@ const BlogPage = () => {
                 <span className="text-[13px] font-semibold text-brand-orange">
                   Featured story
                 </span>
-                <h2 className="text-[28px] md:text-[44px] font-semibold text-white tracking-[-0.03em] leading-[1.08]">
+                <h2 className="text-[22px] md:text-[36px] font-semibold text-white tracking-[-0.03em] leading-[1.08]">
                   Beyond the interface: <span className="text-white/60">the humanity of high-fidelity design.</span>
                 </h2>
                 <p className="text-white/70 text-[15px] md:text-[17px] max-w-2xl leading-normal">
@@ -216,7 +216,7 @@ const BlogPage = () => {
           </div>
 
           <div className="mt-6 md:mt-10 flex justify-center">
-            <Button variant="secondary" size="lg" shape="pill" className="px-8">
+            <Button variant="secondary" size="lg" shape="pill" className="px-6">
               Load older stories
             </Button>
           </div>

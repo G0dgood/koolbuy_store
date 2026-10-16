@@ -156,7 +156,7 @@ export const OrdersList: React.FC = () => {
             onClick={openLogin}
             variant="primary"
             shape="pill"
-            className="w-full sm:w-auto px-7 h-11 text-sm bg-brand-charcoal text-white hover:bg-brand-charcoal/85"
+            className="w-full sm:w-auto px-7 h-9 text-sm bg-brand-charcoal text-white hover:bg-brand-charcoal/85"
           >
             Sign in to account
           </Button>
@@ -164,7 +164,7 @@ export const OrdersList: React.FC = () => {
             href="/products"
             variant="secondary"
             shape="pill"
-            className="w-full sm:w-auto px-6 h-11 text-sm bg-black/[0.04] text-gray-700 hover:bg-black/[0.08]"
+            className="w-full sm:w-auto px-6 h-9 text-sm bg-black/[0.04] text-gray-700 hover:bg-black/[0.08]"
           >
             Browse Products
           </Button>
@@ -453,7 +453,7 @@ export const OrdersList: React.FC = () => {
                 onClick={() => setSelectedOrder(null)}
                 variant="secondary"
                 shape="pill"
-                className="px-5 h-10 text-xs font-medium bg-black/[0.04] text-gray-700 hover:bg-black/[0.08]"
+                className="px-5 h-9 text-xs font-medium bg-black/[0.04] text-gray-700 hover:bg-black/[0.08]"
               >
                 Close
               </Button>
@@ -464,7 +464,7 @@ export const OrdersList: React.FC = () => {
                 }}
                 variant="primary"
                 shape="pill"
-                className="px-6 h-10 text-xs font-semibold bg-brand-charcoal text-white hover:bg-brand-charcoal/85"
+                className="px-6 h-9 text-xs font-semibold bg-brand-charcoal text-white hover:bg-brand-charcoal/85"
               >
                 Reorder all items
               </Button>

@@ -102,14 +102,14 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
 
         <div className="flex flex-col sm:flex-row gap-3 mt-4">
           <Button 
-            className="flex-1 h-12 font-bold" 
+            className="flex-1 h-10 font-bold" 
             onClick={handleSubmit}
           >
             Submit Review
           </Button>
           <Button 
             variant="ghost" 
-            className="flex-1 h-12 font-bold text-gray-500" 
+            className="flex-1 h-10 font-bold text-gray-500" 
             onClick={onClose}
           >
             Cancel

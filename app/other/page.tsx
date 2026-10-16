@@ -7,11 +7,11 @@ export default function OtherDemo() {
   return (
     <div className="min-h-screen bg-off-white p-12 font-sans">
       <div className="max-w-7xl mx-auto bg-white rounded-xl  p-16">
-        <h1 className="text-5xl font-bold mb-16 text-black">Other</h1>
+        <h1 className="text-4xl font-bold mb-16 text-black">Other</h1>
 
         {/* Section: Alert */}
         <section className="mb-20">
-          <h2 className="text-2xl font-bold mb-8 text-black">Alert</h2>
+          <h2 className="text-xl font-bold mb-8 text-black">Alert</h2>
           <div className="flex flex-col gap-12 p-8 border border-dashed border-purple-200 rounded-xl w-fit">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="flex flex-col gap-4 w-[320px]">
@@ -30,7 +30,7 @@ export default function OtherDemo() {
 
         {/* Section: Avatars */}
         <section className="mb-20">
-          <h2 className="text-2xl font-bold mb-8 text-black">Avatars</h2>
+          <h2 className="text-xl font-bold mb-8 text-black">Avatars</h2>
           <div className="flex items-center gap-6 p-8 border border-dashed border-purple-200 rounded-xl w-fit">
             <Avatar src="" /> {/* Placeholder icon */}
             <Avatar src="/avatars/avatar=pic1.jpg" />
@@ -43,7 +43,7 @@ export default function OtherDemo() {
 
         {/* Section: Badge */}
         <section className="mb-20">
-          <h2 className="text-2xl font-bold mb-8 text-black">Badge</h2>
+          <h2 className="text-xl font-bold mb-8 text-black">Badge</h2>
           <div className="flex items-center gap-4">
             <Badge variant="success">Active</Badge>
             <Badge variant="warning">Pending</Badge>
@@ -54,7 +54,7 @@ export default function OtherDemo() {
 
         {/* Section: Misc */}
         <section className="mb-20">
-          <h2 className="text-2xl font-bold mb-8 text-black">Misc</h2>
+          <h2 className="text-xl font-bold mb-8 text-black">Misc</h2>
           <div className="flex flex-col gap-12">
             <PaymentIcons />
             <StoreButtons />

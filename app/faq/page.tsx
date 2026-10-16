@@ -138,7 +138,7 @@ export default function FAQPage() {
         <div className="flex flex-col gap-6">
           {searchQuery && (
             <div className="flex items-center justify-between">
-              <h2 className="text-[22px] md:text-[26px] font-semibold text-brand-charcoal tracking-[-0.02em]">Search results</h2>
+              <h2 className="text-[18px] md:text-[20px] font-semibold text-brand-charcoal tracking-[-0.02em]">Search results</h2>
               <button
                 onClick={() => setSearchQuery("")}
                 className="text-[14px] font-medium text-brand-orange-text hover:underline"
@@ -170,7 +170,7 @@ export default function FAQPage() {
       {/* Contact CTA */}
       <section className="bg-off-white py-16 md:py-24">
         <div className="max-w-360 mx-auto px-4 sm:px-6 flex flex-col items-center text-center">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight mb-2">Still have questions?</h2>
+          <h2 className="text-[22px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight mb-2">Still have questions?</h2>
           <p className="text-subtle text-[17px] md:text-[19px] leading-snug mb-10 max-w-xl">
             Contact our dedicated support team. We&apos;re here to help you solve any issues as quickly as possible.
           </p>

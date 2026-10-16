@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Rating, FavoriteButton } from "../Other";
 import { Button } from "../Button/Button";
 import { useCart } from "@/app/context/CartContext";
+import { useWishlist } from "@/app/context/WishlistContext";
 import { toast } from "sonner";
 
 interface ProductProps {
@@ -22,6 +23,8 @@ interface ProductProps {
 
 export const ProductGridItem: React.FC<{ product: ProductProps }> = ({ product }) => {
    const { addToCart } = useCart();
+   const { isInWishlist } = useWishlist();
+   const saved = isInWishlist(product.id);
 
    const handleAddToCart = (e: React.MouseEvent) => {
       e.preventDefault();
@@ -47,8 +50,9 @@ export const ProductGridItem: React.FC<{ product: ProductProps }> = ({ product }
                   className="object-contain mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                />
                {/* Heart Icon (Overlay) */}
-               <div className="absolute top-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <FavoriteButton item={product as any} variant="outline" size="sm" className="rounded-full! border-transparent! bg-white/90! backdrop-blur shadow-xs" />
+               {/* Shown on hover; a saved heart stays visible */}
+               <div className={`absolute top-3 right-3 z-10 transition-opacity duration-200 ease-apple ${saved ? "opacity-100" : "opacity-0 group-hover:opacity-100 focus-within:opacity-100"}`}>
+                  <FavoriteButton item={product as any} variant="outline" size="sm" />
                </div>
             </div>
             <div className="p-4 flex flex-col gap-1.5 flex-1 justify-between">
@@ -179,32 +183,37 @@ export const ProductListItem: React.FC<{
             </div>
          </div>
 
-         {/* Actions Section (Right Side) */}
-         <div className="hidden md:flex flex-col items-end justify-between py-4 pr-5 min-w-[150px]">
+         {/* Actions Section (Right Side): favourite at the top, Add to cart at the bottom */}
+         <div className="hidden md:flex flex-col items-end justify-between gap-3 py-4 pr-5 min-w-[150px]">
+            {showFavorite ? (
+               <FavoriteButton item={product as any} className="flex-shrink-0" />
+            ) : (
+               <span aria-hidden="true" />
+            )}
+
             <div className="flex flex-col gap-2 items-end w-full">
-               {showFavorite && <FavoriteButton item={product as any} className="flex-shrink-0 rounded-full! border-transparent!" />}
                <Button 
                   onClick={handleAddToCart}
                   variant="accent" 
                   size="sm" 
                   shape="pill"
-                  className="w-full font-medium mt-1 text-[14px]!"
+                  className="w-full font-medium text-[13px]!"
                >
                   Add to cart
                </Button>
-            </div>
 
-            {onRemove && (
-               <button 
-                  onClick={(e) => {
-                     e.stopPropagation();
-                     onRemove();
-                  }}
-                  className="text-error font-medium text-[13px] hover:underline cursor-pointer transition-all mt-auto"
-               >
-                  Remove
-               </button>
-            )}
+               {onRemove && (
+                  <button 
+                     onClick={(e) => {
+                        e.stopPropagation();
+                        onRemove();
+                     }}
+                     className="text-error font-medium text-[13px] hover:underline cursor-pointer transition-all"
+                  >
+                     Remove
+                  </button>
+               )}
+            </div>
          </div>
 
          {/* Heart Icon (Mobile) */}

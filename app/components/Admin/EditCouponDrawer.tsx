@@ -131,7 +131,7 @@ export function EditCouponDrawer({ isOpen, onClose, coupon }: EditCouponDrawerPr
           <Button 
             variant="primary" 
             type="submit" 
-            className="w-full h-10 sm:h-12 text-[11px] font-bold uppercase tracking-wider "
+            className="w-full h-9 sm:h-10 text-[11px] font-bold uppercase tracking-wider "
           >
             Update Coupon
           </Button>
@@ -139,7 +139,7 @@ export function EditCouponDrawer({ isOpen, onClose, coupon }: EditCouponDrawerPr
             variant="outline" 
             type="button" 
             onClick={onClose} 
-            className="w-full h-10 sm:h-12 text-[11px] font-bold text-gray-400 hover:text-gray-900"
+            className="w-full h-9 sm:h-10 text-[11px] font-bold text-gray-400 hover:text-gray-900"
           >
             Cancel
           </Button>

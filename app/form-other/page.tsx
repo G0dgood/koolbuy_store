@@ -20,13 +20,13 @@ export default function FormOtherDemo() {
   return (
     <div className="min-h-screen bg-off-white p-12 font-sans">
       <div className="max-w-4xl mx-auto bg-white rounded-xl  p-16 text-black">
-        <h1 className="text-5xl font-bold mb-16">Form - Other</h1>
+        <h1 className="text-4xl font-bold mb-16">Form - Other</h1>
 
         <div className="flex flex-col gap-20">
 
           {/* Uploader Section */}
           <section>
-            <h2 className="text-2xl font-bold mb-8">Uploader</h2>
+            <h2 className="text-xl font-bold mb-8">Uploader</h2>
             <div className="flex gap-4">
               <Uploader variant="dashed" />
               <Uploader variant="solid" icon="photo" />
@@ -35,7 +35,7 @@ export default function FormOtherDemo() {
 
           {/* Range Slider Section */}
           <section>
-            <h2 className="text-2xl font-bold mb-8">Number, range</h2>
+            <h2 className="text-xl font-bold mb-8">Number, range</h2>
             <RangeSlider
               min={0}
               max={100}
@@ -47,7 +47,7 @@ export default function FormOtherDemo() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
             {/* Inline Label Section */}
             <section>
-              <h2 className="text-2xl font-bold mb-8">Inline label</h2>
+              <h2 className="text-xl font-bold mb-8">Inline label</h2>
               <div className="flex flex-col gap-6">
                 <InlineField label="Label">
                   <Input placeholder="Type here" className="max-w-[200px]" />
@@ -86,7 +86,7 @@ export default function FormOtherDemo() {
 
             {/* Floating Input Section */}
             <section>
-              <h2 className="text-2xl font-bold mb-8">Floating input</h2>
+              <h2 className="text-xl font-bold mb-8">Floating input</h2>
               <div className="flex flex-col gap-8 max-w-sm">
                 <div>
                   <span className="text-xs text-gray-500 font-bold ml-1 mb-1 block">Label name</span>

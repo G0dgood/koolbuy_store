@@ -19,7 +19,7 @@ const FeatureHeader: React.FC<{ eyebrow: string; title: string; children: React.
 }) => (
   <div className="text-center py-6 sm:py-10 max-w-3xl mx-auto px-4">
     <span className="text-[13px] font-semibold text-brand-orange-text">{eyebrow}</span>
-    <h2 className="text-[30px] md:text-[44px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.1] mt-2 mb-4">
+    <h2 className="text-[24px] md:text-[36px] font-semibold text-brand-charcoal tracking-[-0.03em] leading-[1.1] mt-2 mb-4">
       {title}
     </h2>
     <p className="text-[17px] md:text-[19px] text-subtle leading-relaxed max-w-2xl mx-auto">{children}</p>

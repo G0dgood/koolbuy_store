@@ -10,7 +10,7 @@ interface PriceTier {
 
 export const PriceTiers: React.FC<{ tiers: PriceTier[] }> = ({ tiers }) => {
   return (
-    <div className="bg-brand-orange-soft p-4 rounded-[18px] grid grid-cols-3 divide-x divide-black/[0.06]">
+    <div className="bg-brand-orange-soft p-4 rounded-stage grid grid-cols-3 divide-x divide-black/[0.06]">
       {tiers.map((tier, idx) => (
         <div key={idx} className="flex flex-col gap-1 px-4 first:pl-0 last:pr-0">
           <span className={`text-[20px] font-semibold tracking-[-0.02em] tabular-nums ${tier.isActive ? "text-brand-orange-text" : "text-brand-charcoal"}`}>

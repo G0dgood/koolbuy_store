@@ -37,7 +37,7 @@ function Message({ m }: { m: (typeof MESSAGES)[number] }) {
 }
 
 export const AdvertBanner: React.FC = () => (
-  <div className="w-full bg-black/[0.03] border-t border-black/[0.04] relative z-60 overflow-hidden advert-banner-container">
+  <div className="w-full bg-black/[0.03] border-t border-black/[0.04] relative z-10 overflow-hidden advert-banner-container">
     {/* Two identical runs side by side; the strip slides by one run and loops seamlessly. */}
     <div className="advert-marquee py-2" role="marquee" aria-label="Announcements">
       {[0, 1].map((run) => (
