@@ -36,47 +36,7 @@ interface DisplayVendor {
   joinedDate: string;
 }
 
-const FALLBACK_VENDORS: DisplayVendor[] = [
-  {
-    id: "#VND001",
-    name: "Lighthouse Electronics",
-    owner: "Samuel Adebayo",
-    email: "contact@lighthouse-elec.com",
-    phone: "+234 801 234 5678",
-    productsCount: 42,
-    totalRevenue: "₦28,450,000",
-    status: "Active",
-    role: "retailer",
-    rating: 4.8,
-    joinedDate: "15 Jan 2025",
-  },
-  {
-    id: "#VND002",
-    name: "Biizinilah Cold Stores",
-    owner: "Fatima Ibrahim",
-    email: "info@biizinilah.ng",
-    phone: "+234 802 345 6789",
-    productsCount: 18,
-    totalRevenue: "₦14,200,000",
-    status: "Active",
-    role: "wholesaler",
-    rating: 4.9,
-    joinedDate: "20 Feb 2025",
-  },
-  {
-    id: "#VND003",
-    name: "Modus Ideal Electronics",
-    owner: "Emeka Okonkwo",
-    email: "sales@modusideal.com",
-    phone: "+234 803 456 7890",
-    productsCount: 29,
-    totalRevenue: "₦19,800,000",
-    status: "Awaiting Approval",
-    role: "retailer",
-    rating: 4.6,
-    joinedDate: "05 Mar 2025",
-  },
-];
+
 
 export default function VendorsPage() {
   const [activeTab, setActiveTab] = useState("Active");
@@ -117,45 +77,42 @@ export default function VendorsPage() {
   const [reactivateSeller, { isLoading: isReactivating }] = useReactivateSellerMutation();
   const [inviteSeller, { isLoading: isInviting }] = useInviteSellerMutation();
 
-  // Map API sellers to UI DisplayVendors or use fallbacks if response is empty
+  // Map API sellers to UI DisplayVendors
   const rawItems: AdminSellerItem[] = apiResponse?.items ?? [];
-  const hasApiData = rawItems.length > 0;
 
-  const vendorsList: DisplayVendor[] = hasApiData
-    ? rawItems.map((s) => {
-        let status: "Active" | "Awaiting Approval" | "Blocked" = "Awaiting Approval";
-        if (s.suspended_at) {
-          status = "Blocked";
-        } else if (s.is_verified) {
-          status = "Active";
-        }
+  const vendorsList: DisplayVendor[] = rawItems.map((s) => {
+    let status: "Active" | "Awaiting Approval" | "Blocked" = "Awaiting Approval";
+    if (s.suspended_at) {
+      status = "Blocked";
+    } else if (s.is_verified) {
+      status = "Active";
+    }
 
-        const date = new Date(s.created_at);
-        const formattedDate = !Number.isNaN(date.getTime())
-          ? date.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })
-          : "Recent";
+    const date = new Date(s.created_at);
+    const formattedDate = !Number.isNaN(date.getTime())
+      ? date.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })
+      : "Recent";
 
-        return {
-          id: s.id,
-          // ULIDs share their first characters (timestamp), so show the random tail
-          code: `#VND-${s.id.slice(-6).toUpperCase()}`,
-          name: s.business_name || "Unnamed Vendor",
-          owner: s.email ? s.email.split("@")[0] : "Store Owner",
-          email: s.email || "—",
-          phone: s.phone || "—",
-          productsCount: s.product_count ?? 0,
-          totalRevenue: `₦${((s.order_count ?? 0) * 850000).toLocaleString()}`,
-          status,
-          role: s.role === "wholesaler" ? "wholesaler" : "retailer",
-          rating: s.rating ? Number(s.rating) : 4.5,
-          joinedDate: formattedDate,
-        };
-      })
-    : FALLBACK_VENDORS.filter((v) => v.status === activeTab);
+    return {
+      id: s.id,
+      // ULIDs share their first characters (timestamp), so show the random tail
+      code: `#VND-${s.id.slice(-6).toUpperCase()}`,
+      name: s.business_name || "Unnamed Vendor",
+      owner: s.email ? s.email.split("@")[0] : "Store Owner",
+      email: s.email || "—",
+      phone: s.phone || "—",
+      productsCount: s.product_count ?? 0,
+      totalRevenue: `₦${((s.order_count ?? 0) * 850000).toLocaleString()}`,
+      status,
+      role: s.role === "wholesaler" ? "wholesaler" : "retailer",
+      rating: s.rating ? Number(s.rating) : 4.5,
+      joinedDate: formattedDate,
+    };
+  });
 
-  const totalVendorsCount = apiResponse?.counts?.all ?? FALLBACK_VENDORS.length;
-  const activeVendorsCount = apiResponse?.counts?.active ?? FALLBACK_VENDORS.filter((v) => v.status === "Active").length;
-  const unverifiedCount = apiResponse?.counts?.unverified ?? FALLBACK_VENDORS.filter((v) => v.status === "Awaiting Approval").length;
+  const totalVendorsCount = apiResponse?.counts?.all ?? 0;
+  const activeVendorsCount = apiResponse?.counts?.active ?? 0;
+  const unverifiedCount = apiResponse?.counts?.unverified ?? 0;
 
   const totalPages = apiResponse?.pagination?.total
     ? Math.ceil(apiResponse.pagination.total / rowsPerPage)
