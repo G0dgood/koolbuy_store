@@ -1,808 +1,759 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
+import Link from "next/link";
+import { toast } from "sonner";
+import {
+  HiOutlineCheck,
+  HiOutlineXMark,
+  HiOutlinePlus,
+} from "react-icons/hi2";
 import { StatCard } from "@/app/components/Admin/StatCard";
 import { TabFilter } from "@/app/components/Admin/TabFilter";
 import { Pagination } from "@/app/components/Admin/Pagination";
 import { RowsPerPage } from "@/app/components/rows-per-page";
-import { Input } from "@/app/components/Form/Inputs";
 import { Button } from "@/app/components/Button";
-import { Icon } from "@/app/components/Icon";
+import { EmptyTableRow } from "@/app/components/EmptyState";
 import { Modal, ModalBody } from "@/app/components/Modal";
 import {
-  HiOutlineBanknotes,
-  HiOutlineBuildingStorefront,
-  HiOutlineDocumentArrowDown,
-  HiOutlineCheck,
-  HiOutlineXMark,
-  HiOutlineEye,
-} from "react-icons/hi2";
+  useGetAdminRefundsQuery,
+  useCreateAdminRefundMutation,
+  useApproveAdminRefundMutation,
+  useRejectAdminRefundMutation,
+  apiErrorMessage,
+  formatMoney,
+  formatDate,
+  humanize,
+  type AdminRefund,
+  type RefundStatus,
+} from "@/lib/store";
 
-interface PayoutRequestRecord {
-  id: string;
-  reference: string;
-  date: string;
-  vendor: string;
-  vendorEmail: string;
-  requestedBy: string;
-  requesterRole: string;
-  amount: string;
-  payoutType:
-    | "Bank Transfer"
-    | "Instant Wire"
-    | "Wallet Withdrawal"
-    | "Weekly Settlement";
-  status: "Pending" | "Completed" | "Rejected";
-  accountDetails: {
-    bankName: string;
-    accountNumber: string;
-    accountName: string;
-  };
-}
+/* Buyer refunds. Rows come from GET /admin/refunds/; approving one calls the
+   Paystack Refund API on the backend. Refunds are raised automatically when an
+   admin cancels a paid order, or manually with "New refund". */
 
-const initialPayoutRequests: PayoutRequestRecord[] = [
-  {
-    id: "1",
-    reference: "PAY-98421",
-    date: "18-09-2026 14:20",
-    vendor: "Scanfrost Official Store",
-    vendorEmail: "finance@scanfrost.ng",
-    requestedBy: "Alhaji Musa Danjuma",
-    requesterRole: "Finance Director",
-    amount: "₦1,850,000",
-    payoutType: "Weekly Settlement",
-    status: "Pending",
-    accountDetails: {
-      bankName: "Zenith Bank",
-      accountNumber: "1012938475",
-      accountName: "Scanfrost Nigeria Ltd",
-    },
-  },
-  {
-    id: "2",
-    reference: "PAY-98418",
-    date: "18-09-2026 11:45",
-    vendor: "Bruhm Appliances Hub",
-    vendorEmail: "accounts@bruhm.ng",
-    requestedBy: "Chidinma Okeke",
-    requesterRole: "Store Admin",
-    amount: "₦1,240,000",
-    payoutType: "Instant Wire",
-    status: "Pending",
-    accountDetails: {
-      bankName: "Guaranty Trust Bank",
-      accountNumber: "0123984756",
-      accountName: "Bruhm Appliances Nig",
-    },
-  },
-  {
-    id: "3",
-    reference: "PAY-98410",
-    date: "17-09-2026 16:30",
-    vendor: "Somotex Mega Store",
-    vendorEmail: "settlements@somotex.com",
-    requestedBy: "Olufemi Adeleke",
-    requesterRole: "Managing Partner",
-    amount: "₦2,150,000",
-    payoutType: "Bank Transfer",
-    status: "Pending",
-    accountDetails: {
-      bankName: "Access Bank",
-      accountNumber: "0098765432",
-      accountName: "Somotex Group",
-    },
-  },
-  {
-    id: "4",
-    reference: "PAY-98380",
-    date: "17-09-2026 10:15",
-    vendor: "Thermocool Direct",
-    vendorEmail: "payouts@pzcussons.ng",
-    requestedBy: "Ibrahim Yusuf",
-    requesterRole: "Chief Accountant",
-    amount: "₦1,080,000",
-    payoutType: "Weekly Settlement",
-    status: "Pending",
-    accountDetails: {
-      bankName: "First Bank of Nigeria",
-      accountNumber: "3029184756",
-      accountName: "PZ Cussons Nig Plc",
-    },
-  },
-  {
-    id: "5",
-    reference: "PAY-98372",
-    date: "16-09-2026 15:40",
-    vendor: "Hisense Official",
-    vendorEmail: "finance@hisense.ng",
-    requestedBy: "Linda Chen",
-    requesterRole: "Regional Treasury",
-    amount: "₦2,450,000",
-    payoutType: "Instant Wire",
-    status: "Completed",
-    accountDetails: {
-      bankName: "Stanbic IBTC Bank",
-      accountNumber: "0039485721",
-      accountName: "Hisense Appliances Ltd",
-    },
-  },
-  {
-    id: "6",
-    reference: "PAY-98330",
-    date: "16-09-2026 09:20",
-    vendor: "Maxi Appliances",
-    vendorEmail: "store@maxiappliances.com",
-    requestedBy: "Sunday Eze",
-    requesterRole: "Operations Lead",
-    amount: "₦780,000",
-    payoutType: "Wallet Withdrawal",
-    status: "Completed",
-    accountDetails: {
-      bankName: "United Bank for Africa",
-      accountNumber: "2019485762",
-      accountName: "Maxi Retail Hub",
-    },
-  },
-  {
-    id: "7",
-    reference: "PAY-98315",
-    date: "15-09-2026 17:10",
-    vendor: "Skyrun Solar Systems",
-    vendorEmail: "treasury@skyrunsolar.ng",
-    requestedBy: "Emeka Anozie",
-    requesterRole: "Store Owner",
-    amount: "₦3,200,000",
-    payoutType: "Weekly Settlement",
-    status: "Completed",
-    accountDetails: {
-      bankName: "Zenith Bank",
-      accountNumber: "1092837465",
-      accountName: "Skyrun Solar Hub",
-    },
-  },
-  {
-    id: "8",
-    reference: "PAY-98302",
-    date: "15-09-2026 12:00",
-    vendor: "Polystar Electronics",
-    vendorEmail: "accounts@polystar.com",
-    requestedBy: "Grace Nwachukwu",
-    requesterRole: "Finance Officer",
-    amount: "₦950,000",
-    payoutType: "Bank Transfer",
-    status: "Completed",
-    accountDetails: {
-      bankName: "Fidelity Bank",
-      accountNumber: "5029384756",
-      accountName: "Polystar Electronics",
-    },
-  },
-  {
-    id: "9",
-    reference: "PAY-98290",
-    date: "14-09-2026 14:55",
-    vendor: "Restpoint Cooling Hub",
-    vendorEmail: "info@restpointcooling.ng",
-    requestedBy: "Kunle Ajayi",
-    requesterRole: "Vendor Representative",
-    amount: "₦620,000",
-    payoutType: "Wallet Withdrawal",
-    status: "Completed",
-    accountDetails: {
-      bankName: "Wema Bank",
-      accountNumber: "0192837465",
-      accountName: "Restpoint Hub",
-    },
-  },
-  {
-    id: "10",
-    reference: "PAY-98275",
-    date: "14-09-2026 10:30",
-    vendor: "Haier Thermocool Flagship",
-    vendorEmail: "settlements@haierthermocool.ng",
-    requestedBy: "Babatunde Lawal",
-    requesterRole: "Account Manager",
-    amount: "₦1,890,000",
-    payoutType: "Weekly Settlement",
-    status: "Completed",
-    accountDetails: {
-      bankName: "First Bank of Nigeria",
-      accountNumber: "2039485761",
-      accountName: "Haier Commercial Nig",
-    },
-  },
+type TabKey = RefundStatus | "all";
+
+const TAB_DEFS: { key: TabKey; label: string }[] = [
+  { key: "all", label: "All" },
+  { key: "requested", label: "Requested" },
+  { key: "approved", label: "Approved" },
+  { key: "processing", label: "Processing" },
+  { key: "processed", label: "Processed" },
+  { key: "rejected", label: "Rejected" },
+  { key: "failed", label: "Failed" },
 ];
 
-const toggleOptions = ["Pending", "Completed"];
+const PAGE_SIZE_OPTIONS = [10, 20, 50, 100];
+const MIN_REASON = 5;
 
-export default function PayoutRequestsPage() {
-  const [requests, setRequests] = useState<PayoutRequestRecord[]>(
-    initialPayoutRequests,
+type Tone = "success" | "warning" | "error" | "neutral";
+
+const TONE_CLASSES: Record<Tone, string> = {
+  success: "bg-success-soft text-success",
+  warning: "bg-warning/10 text-warning",
+  error: "bg-error-soft text-error",
+  neutral: "bg-off-white text-subtle",
+};
+
+function statusTone(status: string): Tone {
+  switch (status) {
+    case "processed":
+      return "success";
+    case "requested":
+    case "approved":
+    case "processing":
+      return "warning";
+    case "failed":
+    case "rejected":
+      return "error";
+    default:
+      return "neutral";
+  }
+}
+
+function StatusBadge({ status }: { status: string }) {
+  return (
+    <span
+      className={`inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold whitespace-nowrap ${TONE_CLASSES[statusTone(status)]}`}
+    >
+      {humanize(status)}
+    </span>
   );
-  const [activeToggle, setActiveToggle] = useState<"Pending" | "Completed">(
-    "Pending",
-  );
-  const [searchQuery, setSearchQuery] = useState("");
+}
+
+function formatDateTime(iso: string | null | undefined): string {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "—";
+  return `${formatDate(iso)}, ${d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })}`;
+}
+
+function requesterLabel(requestedBy: string | null | undefined): string {
+  if (!requestedBy) return "—";
+  return requestedBy === "system" ? "System" : requestedBy;
+}
+
+const inputClass =
+  "w-full h-10 px-3 rounded-xl border border-light-gray text-xs focus:outline-none focus:border-brand-orange bg-white";
+const textareaClass =
+  "w-full min-h-20 px-3 py-2 rounded-xl border border-light-gray text-xs focus:outline-none focus:border-brand-orange bg-white resize-y";
+
+export default function RefundsPage() {
+  const [activeTab, setActiveTab] = useState<TabKey>("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
-  const [selectedRequest, setSelectedRequest] =
-    useState<PayoutRequestRecord | null>(null);
-  const [actionConfirmRequest, setActionConfirmRequest] = useState<{
-    request: PayoutRequestRecord;
+  const [rowsPerPage, setRowsPerPage] = useState(20);
+
+  const [selectedRefund, setSelectedRefund] = useState<AdminRefund | null>(null);
+  const [pendingAction, setPendingAction] = useState<{
+    refund: AdminRefund;
     action: "approve" | "reject";
   } | null>(null);
+  const [actionText, setActionText] = useState("");
+  const [actionError, setActionError] = useState<string | null>(null);
 
-  // Filter requests based on Pending / Completed toggle and search query
-  const filteredRequests = useMemo(() => {
-    return requests.filter((req) => {
-      // Toggle filter for Pending vs Completed
-      if (activeToggle === "Pending" && req.status !== "Pending") {
-        return false;
-      }
-      if (activeToggle === "Completed" && req.status !== "Completed") {
-        return false;
-      }
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [createTarget, setCreateTarget] = useState<"order" | "payment">("order");
+  const [createRef, setCreateRef] = useState("");
+  const [createAmount, setCreateAmount] = useState("");
+  const [createReason, setCreateReason] = useState("");
+  const [createErrors, setCreateErrors] = useState<Record<string, string>>({});
 
-      // Search filter
-      if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase();
-        const matchVendor = req.vendor.toLowerCase().includes(q);
-        const matchRequester = req.requestedBy.toLowerCase().includes(q);
-        const matchType = req.payoutType.toLowerCase().includes(q);
-        const matchAmount = req.amount.toLowerCase().includes(q);
-        const matchRef = req.reference.toLowerCase().includes(q);
-        return (
-          matchVendor || matchRequester || matchType || matchAmount || matchRef
+  const { data, isLoading, isFetching, isError, error, refetch } = useGetAdminRefundsQuery({
+    status: activeTab,
+    page: currentPage,
+    page_size: rowsPerPage,
+  });
+  const [createRefund, { isLoading: isCreating }] = useCreateAdminRefundMutation();
+  const [approveRefund, { isLoading: isApproving }] = useApproveAdminRefundMutation();
+  const [rejectRefund, { isLoading: isRejecting }] = useRejectAdminRefundMutation();
+  const isMutating = isApproving || isRejecting;
+
+  const refunds = data?.items ?? [];
+  const counts = data?.counts;
+  const total = data?.pagination.total ?? 0;
+  const totalPages = Math.max(1, Math.ceil(total / rowsPerPage));
+  const count = (key: TabKey) => counts?.[key] ?? 0;
+
+  // "Approved" is a short-lived state between the decision and Paystack's
+  // answer, so its tab only appears when something is sitting there.
+  const visibleTabs = TAB_DEFS.filter((t) => t.key !== "approved" || count("approved") > 0 || activeTab === "approved");
+  const tabLabel = (t: { key: TabKey; label: string }) => (counts ? `${t.label} (${count(t.key)})` : t.label);
+  const activeDef = TAB_DEFS.find((t) => t.key === activeTab) ?? TAB_DEFS[0];
+
+  /* ── Approve / reject ── */
+
+  const openAction = (refund: AdminRefund, action: "approve" | "reject") => {
+    setPendingAction({ refund, action });
+    setActionText("");
+    setActionError(null);
+  };
+
+  const closeAction = () => {
+    if (isMutating) return;
+    setPendingAction(null);
+  };
+
+  const handleConfirmAction = async () => {
+    if (!pendingAction) return;
+    const { refund, action } = pendingAction;
+    const text = actionText.trim();
+    const label = refund.order?.order_number ? `order ${refund.order.order_number}` : "this payment";
+
+    if (action === "reject") {
+      if (text.length < MIN_REASON) {
+        setActionError(`Give a reason (at least ${MIN_REASON} characters).`);
+        return;
+      }
+      try {
+        await rejectRefund({ refundId: refund.id, reason: text }).unwrap();
+        toast.success(`Refund for ${label} rejected.`);
+        setPendingAction(null);
+        setSelectedRefund(null);
+      } catch (e) {
+        toast.error(apiErrorMessage(e, "Couldn't reject the refund."));
+      }
+      return;
+    }
+
+    try {
+      const res = await approveRefund({ refundId: refund.id, note: text || undefined }).unwrap();
+      const status = res.refund?.status;
+      if (status === "failed") {
+        toast.error(
+          `Paystack refused the refund for ${label}${res.refund?.failure_reason ? `: ${res.refund.failure_reason}` : "."}`,
+        );
+      } else {
+        toast.success(
+          status === "processed"
+            ? `Refund of ${formatMoney(refund.amount, refund.currency)} for ${label} processed.`
+            : `Refund for ${label} approved and sent to Paystack.`,
         );
       }
+      setPendingAction(null);
+      setSelectedRefund(null);
+    } catch (e) {
+      toast.error(apiErrorMessage(e, "Couldn't approve the refund."));
+    }
+  };
 
-      return true;
-    });
-  }, [requests, activeToggle, searchQuery]);
+  /* ── New refund ── */
 
-  // Paginated records
-  const paginatedRequests = useMemo(() => {
-    const start = (currentPage - 1) * rowsPerPage;
-    return filteredRequests.slice(start, start + rowsPerPage);
-  }, [filteredRequests, currentPage, rowsPerPage]);
+  const openCreate = () => {
+    setCreateTarget("order");
+    setCreateRef("");
+    setCreateAmount("");
+    setCreateReason("");
+    setCreateErrors({});
+    setIsCreateOpen(true);
+  };
 
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredRequests.length / rowsPerPage),
-  );
+  const handleCreate = async (e?: React.FormEvent) => {
+    e?.preventDefault();
+    const ref = createRef.trim();
+    const reason = createReason.trim();
+    const amount = Number(createAmount);
+    const errors: Record<string, string> = {};
+    if (!ref) {
+      errors.ref = createTarget === "order" ? "Enter the order number or order ID." : "Enter the payment ID.";
+    }
+    if (!createAmount.trim() || !Number.isFinite(amount) || amount <= 0) {
+      errors.amount = "Enter an amount greater than zero.";
+    } else if (Math.round(amount * 100) !== amount * 100) {
+      errors.amount = "Use at most two decimal places.";
+    }
+    if (reason.length < MIN_REASON) errors.reason = `Give a reason (at least ${MIN_REASON} characters).`;
+    setCreateErrors(errors);
+    if (Object.keys(errors).length > 0) return;
 
-  // Approve / Reject handler
-  const handleConfirmAction = () => {
-    if (!actionConfirmRequest) return;
-    const { request, action } = actionConfirmRequest;
-    setRequests((prev) =>
-      prev.map((r) => {
-        if (r.id === request.id) {
-          return {
-            ...r,
-            status: action === "approve" ? "Completed" : "Rejected",
-          };
-        }
-        return r;
-      }),
-    );
-    setActionConfirmRequest(null);
+    try {
+      await createRefund({
+        ...(createTarget === "order" ? { order_id: ref } : { payment_id: ref }),
+        amount,
+        reason,
+      }).unwrap();
+      toast.success("Refund requested. Approve it to send the money back to the buyer.");
+      setIsCreateOpen(false);
+    } catch (err) {
+      toast.error(apiErrorMessage(err, "Couldn't create the refund."));
+    }
+  };
+
+  const changeTab = (label: string) => {
+    const def = visibleTabs.find((t) => tabLabel(t) === label);
+    if (!def) return;
+    setActiveTab(def.key);
+    setCurrentPage(1);
   };
 
   return (
     <div className="flex flex-col gap-6 pb-12">
-      {/* Top Header Area */}
+      {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          {/* <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
-            Payout Requests
-          </h1>
-          <p className="text-xs text-gray-500 mt-0.5">
-            Authorize vendor settlement withdrawals, track disbursement queues, and verify bank details
-          </p> */}
+          <h1 className="text-xl font-semibold text-brand-charcoal">Refunds</h1>
+          <p className="text-xs text-subtle mt-0.5">
+            Review buyer refunds and send approved ones back through Paystack.
+          </p>
         </div>
-
-        <div className="flex items-center gap-3 w-full sm:w-auto">
-          <Button
-            variant="blue"
-            size="md"
-            iconLeft={<HiOutlineDocumentArrowDown size={18} />}
-            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold bg-brand-charcoal hover:bg-brand-charcoal/90 text-white"
-            onClick={() => setIsExportModalOpen(true)}
-          >
-            Export Payouts
-          </Button>
-        </div>
+        <Button variant="accent" size="md" iconLeft={<HiOutlinePlus size={16} />} onClick={openCreate}>
+          New refund
+        </Button>
       </div>
 
-      {/* 4 Cards: Total Order Value, Total Available Funds, Pending Payout Value, Completed Payout Value */}
+      {/* Counts */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* 1. Total Order Value */}
         <StatCard
           size="sm"
-          title="Total Order Value"
-          value="₦48,850,000"
-          trendValue="14.2%"
-          trendIsUp={true}
-          subtitle="Across all orders"
+          title="Requested"
+          value={counts ? count("requested") : "—"}
+          subtitle="Awaiting a decision"
         />
-
-        {/* 2. Total Available Funds */}
         <StatCard
           size="sm"
-          title="Total Available Funds"
-          value="₦28,450,000"
-          trendValue="11.5%"
-          trendIsUp={true}
-          subtitle="Ready for disbursement"
+          title="Processing"
+          value={counts ? count("approved") + count("processing") : "—"}
+          subtitle="Approved, waiting on Paystack"
         />
-
-        {/* 3. Pending Payout Value */}
         <StatCard
           size="sm"
-          title="Pending Payout Value"
-          value="₦6,320,000"
-          trendValue="4 Pending"
-          trendIsUp={false}
-          subtitle="Awaiting admin approval"
+          title="Processed"
+          value={counts ? count("processed") : "—"}
+          subtitle="Money returned to the buyer"
         />
-
-        {/* 4. Completed Payout Value */}
         <StatCard
           size="sm"
-          title="Completed Payout Value"
-          value="₦22,130,000"
-          trendValue="18.0%"
-          trendIsUp={true}
-          subtitle="Disbursed to date"
+          title="Rejected / Failed"
+          value={counts ? count("rejected") + count("failed") : "—"}
+          subtitle={counts ? `${count("rejected")} rejected, ${count("failed")} failed` : "Not refunded"}
         />
       </div>
 
-      {/* Main Table Card with Pending / Completed Toggle */}
-      <div className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden flex flex-col">
-        {/* Controls Row */}
-        <div className="p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between border-b border-gray-50">
-          {/* Toggle for pending and completed */}
-          <div role="tablist" className="flex sm:inline-flex rounded-lg border border-light-gray overflow-hidden bg-white w-full sm:w-auto">
-            {toggleOptions.map((opt) => {
-              const count = requests.filter((r) => r.status === opt).length;
-              const isActive = activeToggle === opt;
-              return (
-                <button
-                  key={opt}
-                  onClick={() => {
-                    setActiveToggle(opt as "Pending" | "Completed");
-                    setCurrentPage(1);
-                  }}
-                  role="tab"
-                  aria-selected={isActive}
-                  className={`flex-1 sm:flex-initial h-9 px-3.5 text-[13px] font-medium transition-colors flex items-center justify-center gap-2 border-r border-light-gray last:border-r-0 cursor-pointer ${
-                    isActive
-                      ? "bg-brand-orange-soft text-brand-charcoal shadow-[inset_0_-3px_0_var(--brand-orange)]"
-                      : "bg-white text-subtle hover:text-brand-charcoal"
-                  }`}
-                >
-                  <span>{opt}</span>
-                  <span
-                    className={`px-1.5 py-0.5 rounded-full text-[11px] font-semibold tabular-nums ${
-                      isActive ? "bg-white text-brand-charcoal" : "bg-off-white text-subtle"
-                    }`}
-                  >
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
-            <Input
-              type="text"
-              placeholder="Search vendor, requester, amount..."
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setCurrentPage(1);
-              }}
-              containerClassName="w-full lg:w-80 xl:w-96"
-              className="bg-white border-gray-100 placeholder:text-gray-400 text-xs font-medium"
-              suffixElement={
-                <Icon
-                  name="search-01"
-                  folder="dashboardIcon"
-                  size="sm"
-                  className="text-gray-400"
-                />
-              }
-            />
-
-            <div className="flex items-center gap-3 w-full sm:w-auto">
-              <RowsPerPage
-                value={rowsPerPage}
-                onChange={(val) => {
-                  setRowsPerPage(val);
-                  setCurrentPage(1);
-                }}
-              />
-            </div>
-          </div>
+      {/* Table card */}
+      <div className="bg-white border border-light-gray rounded-lg shadow-2xs flex flex-col overflow-hidden">
+        <div className="p-4 border-b border-light-gray flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <TabFilter tabs={visibleTabs.map(tabLabel)} activeTab={tabLabel(activeDef)} onChange={changeTab} />
+          {isFetching && !isLoading && <span className="text-[11px] text-faint">Refreshing…</span>}
         </div>
 
-        {/* Table Area with exact 6 headers: Date, Vendor, Requested By, Amount, Payout Type, Action */}
         <div className="admin-table-container">
           <table>
             <thead>
               <tr>
                 <th>Date</th>
-                <th>Vendor</th>
-                <th>Requested By</th>
+                <th>Order #</th>
+                <th>Buyer</th>
                 <th>Amount</th>
-                <th>Payout Type</th>
-                <th className="text-right">Action</th>
+                <th>Reason</th>
+                <th>Requested by</th>
+                <th>Status</th>
+                <th className="text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {paginatedRequests.length > 0 ? (
-                paginatedRequests.map((req) => (
+              {isLoading ? (
+                Array.from({ length: 5 }).map((_, i) => (
+                  <tr key={i} aria-hidden="true">
+                    {Array.from({ length: 8 }).map((__, j) => (
+                      <td key={j}>
+                        <div className="h-3 rounded bg-off-white animate-pulse" style={{ width: `${50 + ((i + j) % 4) * 12}%` }} />
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              ) : isError ? (
+                <tr>
+                  <td colSpan={8} className="py-16 text-center">
+                    <div className="flex flex-col items-center gap-3">
+                      <p className="text-xs font-semibold text-error">
+                        {apiErrorMessage(error, "Couldn't load refunds.")}
+                      </p>
+                      <Button variant="outline" size="sm" onClick={() => refetch()}>
+                        Try again
+                      </Button>
+                    </div>
+                  </td>
+                </tr>
+              ) : refunds.length === 0 ? (
+                activeTab === "all" ? (
+                  <EmptyTableRow
+                    colSpan={8}
+                    illustration="refunds"
+                    title="No refunds yet"
+                    description="Refunds will appear here when a paid order is cancelled or you raise one."
+                    action={{ label: "New refund", onClick: openCreate }}
+                  />
+                ) : (
+                  <EmptyTableRow
+                    colSpan={8}
+                    illustration="refunds"
+                    title={`No ${activeDef.label.toLowerCase()} refunds`}
+                    description="Refunds with this status will appear here."
+                    action={{
+                      label: "Show all refunds",
+                      onClick: () => {
+                        setActiveTab("all");
+                        setCurrentPage(1);
+                      },
+                    }}
+                  />
+                )
+              ) : (
+                refunds.map((refund) => (
                   <tr
-                    key={req.id}
-                    onClick={() => setSelectedRequest(req)}
-                    className="hover:bg-gray-50/60 transition-colors"
+                    key={refund.id}
+                    onClick={() => setSelectedRefund(refund)}
+                    className="cursor-pointer hover:bg-off-white transition-colors"
                   >
-                    {/* Date */}
-                    <td className="text-xs text-gray-500 whitespace-nowrap">
-                      {req.date}
+                    <td className="text-xs text-subtle whitespace-nowrap">{formatDateTime(refund.created_at)}</td>
+                    <td className="text-xs whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
+                      {refund.order ? (
+                        <Link
+                          href={`/admin/orders/${refund.order.id}`}
+                          className="font-semibold text-brand-orange-text hover:underline"
+                        >
+                          {refund.order.order_number}
+                        </Link>
+                      ) : (
+                        <span className="text-faint">—</span>
+                      )}
                     </td>
-
-                    {/* Vendor */}
                     <td>
-                      <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-md bg-brand-orange-soft text-brand-orange-text flex items-center justify-center shrink-0">
-                          <HiOutlineBuildingStorefront size={14} />
-                        </div>
+                      {refund.buyer ? (
                         <div className="flex flex-col">
-                          <span className="font-bold text-xs text-gray-900 whitespace-nowrap">
-                            {req.vendor}
+                          <span className="font-semibold text-xs text-brand-charcoal whitespace-nowrap">
+                            {refund.buyer.name || "—"}
                           </span>
-                          <span className="text-[11px] text-gray-400">
-                            {req.accountDetails.bankName} ••••{" "}
-                            {req.accountDetails.accountNumber.slice(-4)}
-                          </span>
+                          <span className="text-[11px] text-faint">{refund.buyer.email}</span>
                         </div>
-                      </div>
+                      ) : (
+                        <span className="text-xs text-faint">—</span>
+                      )}
                     </td>
-
-                    {/* Requested By */}
-                    <td>
-                      <div className="flex flex-col">
-                        <span className="font-bold text-xs text-gray-900 whitespace-nowrap">
-                          {req.requestedBy}
-                        </span>
-                        <span className="text-[11px] text-gray-400">
-                          {req.requesterRole}
-                        </span>
-                      </div>
+                    <td className="font-semibold text-xs text-brand-charcoal whitespace-nowrap tabular-nums">
+                      {formatMoney(refund.amount, refund.currency)}
                     </td>
-
-                    {/* Amount */}
-                    <td className="font-bold text-xs text-gray-900 whitespace-nowrap">
-                      {req.amount}
-                    </td>
-
-                    {/* Payout Type */}
-                    <td className="text-xs whitespace-nowrap">
-                      <span className="font-medium text-gray-700 bg-gray-50 px-2.5 py-1 rounded-md border border-gray-200">
-                        {req.payoutType}
+                    <td className="text-xs text-subtle max-w-56">
+                      <span className="line-clamp-2" title={refund.reason}>
+                        {refund.reason || "—"}
                       </span>
                     </td>
-
-                    {/* Action */}
+                    <td className="text-xs text-subtle whitespace-nowrap">{requesterLabel(refund.requested_by)}</td>
+                    <td>
+                      <StatusBadge status={refund.status} />
+                    </td>
                     <td className="text-right whitespace-nowrap">
-                      <div
-                        className="flex items-center justify-end gap-1.5"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        {req.status === "Pending" ? (
-                          <>
-                            <button
-                              onClick={() =>
-                                setActionConfirmRequest({
-                                  request: req,
-                                  action: "approve",
-                                })
-                              }
-                              className="inline-flex items-center gap-1 px-3 py-1.5 bg-brand-charcoal hover:bg-brand-charcoal/90 text-white rounded-md text-xs font-bold transition-colors"
-                              title="Approve and disburse payout"
-                            >
-                              <HiOutlineCheck size={14} />
-                              Approve
-                            </button>
-                            <button
-                              onClick={() =>
-                                setActionConfirmRequest({
-                                  request: req,
-                                  action: "reject",
-                                })
-                              }
-                              className="inline-flex items-center gap-1 px-2.5 py-1.5 border border-rose-200 text-rose-600 hover:bg-rose-50 rounded-md text-xs font-semibold transition-colors"
-                              title="Reject payout request"
-                            >
-                              <HiOutlineXMark size={14} />
-                              Reject
-                            </button>
-                          </>
-                        ) : (
-                          <button
-                            onClick={() => setSelectedRequest(req)}
-                            className="inline-flex items-center gap-1 px-3 py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded-md text-xs font-semibold border border-gray-200 transition-colors"
+                      {refund.status === "requested" ? (
+                        <div className="flex items-center justify-end gap-1.5" onClick={(e) => e.stopPropagation()}>
+                          <Button
+                            size="sm"
+                            variant="primary"
+                            iconLeft={<HiOutlineCheck size={14} />}
+                            disabled={isMutating}
+                            onClick={() => openAction(refund, "approve")}
                           >
-                            <HiOutlineEye size={14} />
-                            Receipt
-                          </button>
-                        )}
-                      </div>
+                            Approve
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="rose"
+                            iconLeft={<HiOutlineXMark size={14} />}
+                            disabled={isMutating}
+                            onClick={() => openAction(refund, "reject")}
+                          >
+                            Reject
+                          </Button>
+                        </div>
+                      ) : (
+                        <span className="text-[11px] text-faint">—</span>
+                      )}
                     </td>
                   </tr>
                 ))
-              ) : (
-                <tr>
-                  <td
-                    colSpan={6}
-                    className="py-12 text-center text-gray-400 text-xs"
-                  >
-                    No {activeToggle.toLowerCase()} payout requests found.
-                  </td>
-                </tr>
               )}
             </tbody>
           </table>
         </div>
 
-        {/* Pagination Footer */}
         <div className="admin-pagination-footer">
-          <p className="text-xs text-gray-400">
-            Showing{" "}
-            <span className="font-bold text-gray-700">
-              {filteredRequests.length === 0
-                ? 0
-                : (currentPage - 1) * rowsPerPage + 1}
-            </span>{" "}
-            to{" "}
-            <span className="font-bold text-gray-700">
-              {Math.min(currentPage * rowsPerPage, filteredRequests.length)}
-            </span>{" "}
-            of{" "}
-            <span className="font-bold text-gray-700">
-              {filteredRequests.length}
-            </span>{" "}
-            entries
-          </p>
-
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
-          />
+          <div className="flex items-center gap-4">
+            <RowsPerPage
+              value={rowsPerPage}
+              options={PAGE_SIZE_OPTIONS}
+              onChange={(val) => {
+                setRowsPerPage(val);
+                setCurrentPage(1);
+              }}
+            />
+            <p className="text-xs text-faint">
+              Showing{" "}
+              <span className="font-semibold text-brand-charcoal">
+                {total === 0 ? 0 : (currentPage - 1) * rowsPerPage + 1}
+              </span>{" "}
+              to{" "}
+              <span className="font-semibold text-brand-charcoal">{Math.min(currentPage * rowsPerPage, total)}</span>{" "}
+              of <span className="font-semibold text-brand-charcoal">{total}</span>
+            </p>
+          </div>
+          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
         </div>
       </div>
 
-      {/* Payout Details Modal */}
-      {selectedRequest && (
-        <Modal
-          isOpen={!!selectedRequest}
-          onClose={() => setSelectedRequest(null)}
-        >
-          <ModalBody>
-            <div className="space-y-4 pt-2">
-              <div className="flex items-center justify-between border-b border-gray-100 pb-3">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center">
-                    <HiOutlineBanknotes className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-gray-900 text-sm">
-                      Payout Request {selectedRequest.reference}
-                    </h3>
-                    <p className="text-xs text-gray-400">
-                      Requested {selectedRequest.date}
-                    </p>
-                  </div>
+      {/* Details */}
+      <Modal isOpen={!!selectedRefund} onClose={() => setSelectedRefund(null)} title="Refund details">
+        {selectedRefund && (
+          <ModalBody className="!p-0">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between gap-3 border-b border-light-gray pb-3">
+                <div>
+                  <p className="text-lg font-semibold text-brand-charcoal tabular-nums">
+                    {formatMoney(selectedRefund.amount, selectedRefund.currency)}
+                  </p>
+                  <p className="text-xs text-faint">Requested {formatDateTime(selectedRefund.created_at)}</p>
                 </div>
-                <span
-                  className={`px-2.5 py-1 rounded-md text-xs font-bold ${
-                    selectedRequest.status === "Pending"
-                      ? "bg-amber-50 text-amber-600 border border-amber-100"
-                      : "bg-emerald-50 text-emerald-600 border border-emerald-100"
-                  }`}
-                >
-                  {selectedRequest.status}
-                </span>
+                <StatusBadge status={selectedRefund.status} />
               </div>
 
-              <div className="grid grid-cols-2 gap-3 text-xs">
-                <div className="p-3 bg-gray-50 rounded-lg border border-gray-100">
-                  <span className="text-gray-400">Vendor Store</span>
-                  <p className="font-bold text-gray-900 mt-0.5">
-                    {selectedRequest.vendor}
-                  </p>
-                  <p className="text-[11px] text-gray-500">
-                    {selectedRequest.vendorEmail}
-                  </p>
-                </div>
-
-                <div className="p-3 bg-gray-50 rounded-lg border border-gray-100">
-                  <span className="text-gray-400">Requested By</span>
-                  <p className="font-bold text-gray-900 mt-0.5">
-                    {selectedRequest.requestedBy}
-                  </p>
-                  <p className="text-[11px] text-gray-500">
-                    {selectedRequest.requesterRole}
-                  </p>
-                </div>
-
-                <div className="p-3 bg-gray-50 rounded-lg border border-gray-100 col-span-2 space-y-1.5">
-                  <span className="text-gray-400">
-                    Beneficiary Bank Account
-                  </span>
-                  <div className="flex justify-between items-center text-xs pt-1">
-                    <span className="font-bold text-gray-900">
-                      {selectedRequest.accountDetails.accountName}
-                    </span>
-                    <span className="font-mono font-bold text-brand-orange-text">
-                      {selectedRequest.accountDetails.accountNumber}
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-gray-500">
-                    {selectedRequest.accountDetails.bankName} • Verified Vendor
-                    Payout Account
-                  </p>
-                </div>
-
-                <div className="p-3 bg-brand-orange-soft/50 rounded-lg border border-brand-orange/15 col-span-2 flex justify-between items-center">
-                  <div>
-                    <span className="text-xs text-gray-500">
-                      Requested Amount
-                    </span>
-                    <p className="text-[11px] text-gray-400">
-                      Via {selectedRequest.payoutType}
-                    </p>
-                  </div>
-                  <span className="text-lg font-bold text-gray-900">
-                    {selectedRequest.amount}
-                  </span>
-                </div>
-              </div>
+              <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <DetailItem label="Order">
+                  {selectedRefund.order ? (
+                    <Link
+                      href={`/admin/orders/${selectedRefund.order.id}`}
+                      className="font-semibold text-brand-orange-text hover:underline"
+                    >
+                      {selectedRefund.order.order_number}
+                    </Link>
+                  ) : (
+                    "—"
+                  )}
+                </DetailItem>
+                <DetailItem label="Buyer">
+                  {selectedRefund.buyer ? (
+                    <>
+                      <span className="block">{selectedRefund.buyer.name || "—"}</span>
+                      <span className="block text-[11px] font-normal text-faint">{selectedRefund.buyer.email}</span>
+                    </>
+                  ) : (
+                    "—"
+                  )}
+                </DetailItem>
+                <DetailItem label="Payment reference" mono>
+                  {selectedRefund.payment?.reference || "—"}
+                </DetailItem>
+                <DetailItem label="Paystack refund ID" mono>
+                  {selectedRefund.gateway_refund_id || "—"}
+                </DetailItem>
+                <DetailItem label="Requested by">{requesterLabel(selectedRefund.requested_by)}</DetailItem>
+                <DetailItem label="Decided by">{selectedRefund.decided_by || "—"}</DetailItem>
+                <DetailItem label="Decided at">{formatDateTime(selectedRefund.decided_at)}</DetailItem>
+                <DetailItem label="Processed at">{formatDateTime(selectedRefund.processed_at)}</DetailItem>
+                <DetailItem label="Reason" wide>
+                  <span className="font-normal whitespace-pre-wrap">{selectedRefund.reason || "—"}</span>
+                </DetailItem>
+                {selectedRefund.decision_note && (
+                  <DetailItem label="Decision note" wide>
+                    <span className="font-normal whitespace-pre-wrap">{selectedRefund.decision_note}</span>
+                  </DetailItem>
+                )}
+                {selectedRefund.failure_reason && (
+                  <DetailItem label="Failure reason" wide tone="error">
+                    <span className="font-normal whitespace-pre-wrap">{selectedRefund.failure_reason}</span>
+                  </DetailItem>
+                )}
+              </dl>
 
               <div className="flex justify-end gap-2 pt-2">
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => setSelectedRequest(null)}
-                >
+                <Button size="sm" variant="outline" onClick={() => setSelectedRefund(null)}>
                   Close
                 </Button>
-                {selectedRequest.status === "Pending" && (
-                  <Button
-                    size="sm"
-                    className="bg-brand-charcoal text-white"
-                    onClick={() => {
-                      setActionConfirmRequest({
-                        request: selectedRequest,
-                        action: "approve",
-                      });
-                      setSelectedRequest(null);
-                    }}
-                  >
-                    Approve Payout
-                  </Button>
+                {selectedRefund.status === "requested" && (
+                  <>
+                    <Button
+                      size="sm"
+                      variant="rose"
+                      disabled={isMutating}
+                      onClick={() => openAction(selectedRefund, "reject")}
+                    >
+                      Reject
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="primary"
+                      disabled={isMutating}
+                      onClick={() => openAction(selectedRefund, "approve")}
+                    >
+                      Approve refund
+                    </Button>
+                  </>
                 )}
               </div>
             </div>
           </ModalBody>
-        </Modal>
-      )}
+        )}
+      </Modal>
 
-      {/* Confirmation Modal for Approve / Reject */}
-      {actionConfirmRequest && (
-        <Modal
-          isOpen={!!actionConfirmRequest}
-          onClose={() => setActionConfirmRequest(null)}
-        >
-          <ModalBody>
-            <div className="space-y-4 pt-2 text-center">
+      {/* Approve / reject confirmation */}
+      <Modal isOpen={!!pendingAction} onClose={closeAction} size="sm">
+        {pendingAction && (
+          <ModalBody className="!p-0">
+            <div className="space-y-4 text-center">
               <div
                 className={`w-12 h-12 rounded-lg flex items-center justify-center mx-auto ${
-                  actionConfirmRequest.action === "approve"
+                  pendingAction.action === "approve"
                     ? "bg-brand-orange-soft text-brand-orange-text"
-                    : "bg-rose-50 text-rose-600"
+                    : "bg-error-soft text-error"
                 }`}
               >
-                {actionConfirmRequest.action === "approve" ? (
-                  <HiOutlineCheck size={24} />
-                ) : (
-                  <HiOutlineXMark size={24} />
-                )}
+                {pendingAction.action === "approve" ? <HiOutlineCheck size={24} /> : <HiOutlineXMark size={24} />}
               </div>
 
               <div>
-                <h3 className="font-bold text-gray-900 text-base">
-                  {actionConfirmRequest.action === "approve"
-                    ? "Approve Payout Request?"
-                    : "Reject Payout Request?"}
+                <h3 className="font-semibold text-brand-charcoal text-base">
+                  {pendingAction.action === "approve" ? "Approve this refund?" : "Reject this refund?"}
                 </h3>
-                <p className="text-xs text-gray-500 mt-1">
-                  {actionConfirmRequest.action === "approve"
-                    ? `Are you sure you want to authorize the disbursement of ${actionConfirmRequest.request.amount} to ${actionConfirmRequest.request.vendor}?`
-                    : `Are you sure you want to decline the payout request for ${actionConfirmRequest.request.amount} from ${actionConfirmRequest.request.vendor}?`}
+                <p className="text-xs text-subtle mt-1">
+                  {pendingAction.action === "approve"
+                    ? `This sends ${formatMoney(pendingAction.refund.amount, pendingAction.refund.currency)} back to ${
+                        pendingAction.refund.buyer?.name || "the buyer"
+                      } through Paystack. It can't be undone.`
+                    : `The buyer won't be refunded ${formatMoney(
+                        pendingAction.refund.amount,
+                        pendingAction.refund.currency,
+                      )}${pendingAction.refund.order ? ` for order ${pendingAction.refund.order.order_number}` : ""}.`}
                 </p>
               </div>
 
+              <div className="text-left flex flex-col gap-1.5">
+                <label htmlFor="refund-action-text" className="text-xs font-semibold text-brand-charcoal">
+                  {pendingAction.action === "approve" ? "Note (optional)" : "Reason *"}
+                </label>
+                <textarea
+                  id="refund-action-text"
+                  value={actionText}
+                  maxLength={2000}
+                  onChange={(e) => {
+                    setActionText(e.target.value);
+                    if (actionError) setActionError(null);
+                  }}
+                  placeholder={
+                    pendingAction.action === "approve"
+                      ? "Anything the team should know"
+                      : "Why is this refund being rejected?"
+                  }
+                  className={`${textareaClass} ${actionError ? "border-error" : ""}`}
+                  aria-invalid={!!actionError}
+                />
+                {actionError && <p className="text-[11px] text-error">{actionError}</p>}
+              </div>
+
               <div className="flex justify-center gap-3 pt-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setActionConfirmRequest(null)}
-                >
+                <Button variant="outline" size="sm" onClick={closeAction} disabled={isMutating}>
                   Cancel
                 </Button>
                 <Button
                   size="sm"
-                  className={`${
-                    actionConfirmRequest.action === "approve"
-                      ? "bg-brand-charcoal hover:bg-brand-charcoal/90 text-white"
-                      : "bg-rose-600 hover:bg-rose-700 text-white"
-                  }`}
+                  variant={pendingAction.action === "approve" ? "primary" : "danger"}
                   onClick={handleConfirmAction}
+                  disabled={isMutating}
                 >
-                  {actionConfirmRequest.action === "approve"
-                    ? "Confirm Approval"
-                    : "Confirm Rejection"}
+                  {pendingAction.action === "approve"
+                    ? isApproving
+                      ? "Approving…"
+                      : "Approve and refund"
+                    : isRejecting
+                      ? "Rejecting…"
+                      : "Reject refund"}
                 </Button>
               </div>
             </div>
           </ModalBody>
-        </Modal>
-      )}
-
-      {/* Export Payouts Modal */}
-      <Modal
-        isOpen={isExportModalOpen}
-        onClose={() => setIsExportModalOpen(false)}
-      >
-        <ModalBody>
-          <div className="space-y-4 pt-2 text-center">
-            <div className="w-12 h-12 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center mx-auto">
-              <HiOutlineDocumentArrowDown className="w-6 h-6" />
-            </div>
-            <div>
-              <h3 className="font-bold text-gray-900 text-base">
-                Export Payout Requests Ledger
-              </h3>
-              <p className="text-xs text-gray-500 mt-1">
-                Download complete disbursement audit trail including bank
-                account numbers, approval timestamps, and payout statuses.
-              </p>
-            </div>
-            <div className="flex justify-center gap-3 pt-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setIsExportModalOpen(false)}
-              >
-                Cancel
-              </Button>
-              <Button
-                size="sm"
-                className="bg-brand-charcoal text-white"
-                onClick={() => setIsExportModalOpen(false)}
-              >
-                Download CSV
-              </Button>
-            </div>
-          </div>
-        </ModalBody>
+        )}
       </Modal>
+
+      {/* New refund */}
+      <Modal
+        isOpen={isCreateOpen}
+        onClose={() => !isCreating && setIsCreateOpen(false)}
+        title="New refund"
+        footer={
+          <div className="flex justify-end gap-3 w-full">
+            <Button variant="outline" size="md" onClick={() => setIsCreateOpen(false)} disabled={isCreating}>
+              Cancel
+            </Button>
+            <Button variant="accent" size="md" onClick={() => handleCreate()} disabled={isCreating}>
+              {isCreating ? "Creating…" : "Create refund"}
+            </Button>
+          </div>
+        }
+      >
+        <form onSubmit={handleCreate} className="flex flex-col gap-4" noValidate>
+          <p className="text-xs text-subtle">
+            This records a refund request. Nothing is paid until someone approves it.
+          </p>
+
+          <div className="flex flex-col gap-1.5">
+            <span className="text-xs font-semibold text-brand-charcoal">Refund against</span>
+            <TabFilter
+              tabs={["Order", "Payment"]}
+              activeTab={createTarget === "order" ? "Order" : "Payment"}
+              onChange={(t) => {
+                setCreateTarget(t === "Order" ? "order" : "payment");
+                setCreateErrors((prev) => ({ ...prev, ref: "" }));
+              }}
+            />
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="refund-ref" className="text-xs font-semibold text-brand-charcoal">
+              {createTarget === "order" ? "Order number or order ID *" : "Payment ID *"}
+            </label>
+            <input
+              id="refund-ref"
+              type="text"
+              value={createRef}
+              onChange={(e) => setCreateRef(e.target.value)}
+              placeholder={createTarget === "order" ? "e.g. KB-10234 or the order UUID" : "Payment UUID"}
+              className={`${inputClass} ${createErrors.ref ? "border-error" : ""}`}
+              aria-invalid={!!createErrors.ref}
+            />
+            {createErrors.ref ? (
+              <p className="text-[11px] text-error">{createErrors.ref}</p>
+            ) : (
+              <p className="text-[11px] text-faint">
+                {createTarget === "order"
+                  ? "The order must have a payment on record."
+                  : "The payment's ID, not its Paystack reference."}
+              </p>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="refund-amount" className="text-xs font-semibold text-brand-charcoal">
+              Amount (₦) *
+            </label>
+            <input
+              id="refund-amount"
+              type="number"
+              inputMode="decimal"
+              min="0"
+              step="0.01"
+              value={createAmount}
+              onChange={(e) => setCreateAmount(e.target.value)}
+              placeholder="0.00"
+              className={`${inputClass} ${createErrors.amount ? "border-error" : ""}`}
+              aria-invalid={!!createErrors.amount}
+            />
+            {createErrors.amount && <p className="text-[11px] text-error">{createErrors.amount}</p>}
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="refund-reason" className="text-xs font-semibold text-brand-charcoal">
+              Reason *
+            </label>
+            <textarea
+              id="refund-reason"
+              value={createReason}
+              maxLength={2000}
+              onChange={(e) => setCreateReason(e.target.value)}
+              placeholder="e.g. Item out of stock after payment"
+              className={`${textareaClass} ${createErrors.reason ? "border-error" : ""}`}
+              aria-invalid={!!createErrors.reason}
+            />
+            {createErrors.reason && <p className="text-[11px] text-error">{createErrors.reason}</p>}
+          </div>
+        </form>
+      </Modal>
+    </div>
+  );
+}
+
+function DetailItem({
+  label,
+  children,
+  wide,
+  mono,
+  tone,
+}: {
+  label: string;
+  children: React.ReactNode;
+  wide?: boolean;
+  mono?: boolean;
+  tone?: "error";
+}) {
+  return (
+    <div
+      className={`p-3 rounded-lg border ${
+        tone === "error" ? "bg-error-soft border-error/20" : "bg-off-white border-light-gray"
+      } ${wide ? "sm:col-span-2" : ""}`}
+    >
+      <dt className="text-faint">{label}</dt>
+      <dd
+        className={`mt-0.5 font-semibold break-words ${tone === "error" ? "text-error" : "text-brand-charcoal"} ${
+          mono ? "font-mono" : ""
+        }`}
+      >
+        {children}
+      </dd>
     </div>
   );
 }

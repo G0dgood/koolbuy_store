@@ -1,656 +1,597 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { HiOutlineArrowDownTray, HiOutlineBuildingStorefront, HiOutlineDocumentText } from "react-icons/hi2";
 import { StatCard } from "@/app/components/Admin/StatCard";
-import { TabFilter } from "@/app/components/Admin/TabFilter";
 import { Pagination } from "@/app/components/Admin/Pagination";
+import { StatusBadge } from "@/app/components/Admin/Orders/StatusBadge";
 import { RowsPerPage } from "@/app/components/rows-per-page";
 import { Input } from "@/app/components/Form/Inputs";
+import { DatePicker } from "@/app/components/Form/DatePicker";
 import { Button } from "@/app/components/Button";
+import { EmptyTableRow } from "@/app/components/EmptyState";
 import { Icon } from "@/app/components/Icon";
-import { Modal, ModalBody } from "@/app/components/Modal";
+import Drawer from "@/app/components/Drawer/Drawer";
 import {
-  HiOutlineDocumentArrowDown,
-  HiOutlineBuildingStorefront,
-} from "react-icons/hi2";
+  apiErrorMessage,
+  formatDate,
+  formatMoney,
+  humanize,
+  useGetVendorSettlementOrdersQuery,
+  useGetVendorSettlementsQuery,
+  type VendorSettlementRow,
+} from "@/lib/store";
 
-interface VendorSettlementRecord {
-  id: string;
-  vendorName: string;
-  orderId: string;
-  dateTime: string;
-  orderValue: string;
-  deliveryFees: string;
-  adminCommissions: string;
-  promoVendor: string;
-  promoAdmin: string;
-  serviceFee: string;
-  fixedFee: string;
-  cashCollected: string;
-  paymentGateway: string;
-  vendorEarning: string;
+/* Vendor settlements, one row per (seller, currency), from
+   GET /admin/accounting/vendors/. Orders awaiting payment or credit review,
+   cancelled, expired, declined or refund-due orders are left out by the
+   backend. Cost, margin, deduction and earning figures need the
+   procurement.margins permission; without it they come back null. */
+
+const HINTS = {
+  orders: "Orders that count toward settlement: excludes ones awaiting payment or credit review, cancelled, expired, declined and refund due.",
+  orderValue: "Goods subtotal at customer prices (order total_amount), delivery excluded.",
+  paid: "Amount of the order's payment when that payment is paid; 0 otherwise.",
+  delivery: "Delivery fees charged on these orders.",
+  vendorCost: "What the platform owes the vendor for the goods: sum of recorded vendor line costs (lines without a cost count as 0).",
+  margin: "Selling price minus vendor cost, on lines that have a vendor cost.",
+  deductions: "Active procurement deductions recorded against these orders (removed ones excluded).",
+  gateway: "Payment provider fees on paid payments.",
+} as const;
+
+const COLUMNS = 9;
+const MARGINS_HIDDEN_NOTE = "Margins hidden: needs margin permission";
+
+const Skel = ({ className = "w-20" }: { className?: string }) => (
+  <span className={`inline-block h-3 rounded bg-black/[0.06] animate-pulse align-middle ${className}`} />
+);
+
+function Th({ children, hint, className = "" }: { children: React.ReactNode; hint?: string; className?: string }) {
+  return (
+    <th className={className} title={hint}>
+      <span className={hint ? "underline decoration-dotted decoration-faint underline-offset-4 cursor-help" : undefined}>
+        {children}
+      </span>
+    </th>
+  );
 }
 
-const initialSettlements: VendorSettlementRecord[] = [
-  {
-    id: "1",
-    vendorName: "Scanfrost Official Store",
-    orderId: "#ORD-98421",
-    dateTime: "18-09-2026 14:32",
-    orderValue: "₦1,406,000",
-    deliveryFees: "₦15,000",
-    adminCommissions: "₦140,600",
-    promoVendor: "₦20,000",
-    promoAdmin: "₦10,000",
-    serviceFee: "₦5,000",
-    fixedFee: "₦500",
-    cashCollected: "₦1,391,000",
-    paymentGateway: "Paystack (₦2,000)",
-    vendorEarning: "₦1,237,900",
-  },
-  {
-    id: "2",
-    vendorName: "Bruhm Appliances Hub",
-    orderId: "#ORD-98418",
-    dateTime: "18-09-2026 12:15",
-    orderValue: "₦1,662,370",
-    deliveryFees: "₦18,000",
-    adminCommissions: "₦166,237",
-    promoVendor: "₦25,000",
-    promoAdmin: "₦0",
-    serviceFee: "₦5,000",
-    fixedFee: "₦500",
-    cashCollected: "₦1,655,370",
-    paymentGateway: "Flutterwave (₦2,000)",
-    vendorEarning: "₦1,465,633",
-  },
-  {
-    id: "3",
-    vendorName: "Somotex Mega Store",
-    orderId: "#ORD-98410",
-    dateTime: "17-09-2026 18:40",
-    orderValue: "₦2,100,000",
-    deliveryFees: "₦22,000",
-    adminCommissions: "₦210,000",
-    promoVendor: "₦30,000",
-    promoAdmin: "₦15,000",
-    serviceFee: "₦6,000",
-    fixedFee: "₦500",
-    cashCollected: "₦2,077,000",
-    paymentGateway: "Monnify (₦2,000)",
-    vendorEarning: "₦1,851,500",
-  },
-  {
-    id: "4",
-    vendorName: "Thermocool Direct",
-    orderId: "#ORD-98380",
-    dateTime: "17-09-2026 16:50",
-    orderValue: "₦2,420,000",
-    deliveryFees: "₦25,000",
-    adminCommissions: "₦242,000",
-    promoVendor: "₦0",
-    promoAdmin: "₦50,000",
-    serviceFee: "₦7,000",
-    fixedFee: "₦500",
-    cashCollected: "₦2,395,000",
-    paymentGateway: "Bank Wire (₦1,500)",
-    vendorEarning: "₦2,169,000",
-  },
-  {
-    id: "5",
-    vendorName: "Hisense Official",
-    orderId: "#ORD-98372",
-    dateTime: "16-09-2026 11:35",
-    orderValue: "₦430,000",
-    deliveryFees: "₦10,000",
-    adminCommissions: "₦43,000",
-    promoVendor: "₦15,000",
-    promoAdmin: "₦0",
-    serviceFee: "₦2,500",
-    fixedFee: "₦500",
-    cashCollected: "₦425,000",
-    paymentGateway: "Paystack (₦850)",
-    vendorEarning: "₦368,150",
-  },
-  {
-    id: "6",
-    vendorName: "Haier Thermocool Flagship",
-    orderId: "#ORD-98330",
-    dateTime: "16-09-2026 10:20",
-    orderValue: "₦1,890,000",
-    deliveryFees: "₦20,000",
-    adminCommissions: "₦189,000",
-    promoVendor: "₦0",
-    promoAdmin: "₦20,000",
-    serviceFee: "₦5,500",
-    fixedFee: "₦500",
-    cashCollected: "₦1,890,000",
-    paymentGateway: "Paystack (₦2,000)",
-    vendorEarning: "₦1,693,000",
-  },
-  {
-    id: "7",
-    vendorName: "Maxi Appliances",
-    orderId: "#ORD-98315",
-    dateTime: "15-09-2026 15:10",
-    orderValue: "₦1,287,600",
-    deliveryFees: "₦15,000",
-    adminCommissions: "₦128,760",
-    promoVendor: "₦12,800",
-    promoAdmin: "₦0",
-    serviceFee: "₦4,000",
-    fixedFee: "₦500",
-    cashCollected: "₦1,289,800",
-    paymentGateway: "Flutterwave (₦1,800)",
-    vendorEarning: "₦1,139,740",
-  },
-  {
-    id: "8",
-    vendorName: "Polystar Electronics",
-    orderId: "#ORD-98302",
-    dateTime: "15-09-2026 11:45",
-    orderValue: "₦950,000",
-    deliveryFees: "₦12,000",
-    adminCommissions: "₦95,000",
-    promoVendor: "₦10,000",
-    promoAdmin: "₦5,000",
-    serviceFee: "₦3,000",
-    fixedFee: "₦500",
-    cashCollected: "₦947,000",
-    paymentGateway: "Monnify (₦1,200)",
-    vendorEarning: "₦839,100",
-  },
-  {
-    id: "9",
-    vendorName: "Skyrun Solar Systems",
-    orderId: "#ORD-98290",
-    dateTime: "14-09-2026 16:30",
-    orderValue: "₦3,150,000",
-    deliveryFees: "₦30,000",
-    adminCommissions: "₦315,000",
-    promoVendor: "₦35,000",
-    promoAdmin: "₦0",
-    serviceFee: "₦8,000",
-    fixedFee: "₦500",
-    cashCollected: "₦3,145,000",
-    paymentGateway: "Bank Wire (₦2,000)",
-    vendorEarning: "₦2,789,500",
-  },
-  {
-    id: "10",
-    vendorName: "Restpoint Cooling Hub",
-    orderId: "#ORD-98275",
-    dateTime: "14-09-2026 13:15",
-    orderValue: "₦620,000",
-    deliveryFees: "₦10,000",
-    adminCommissions: "₦62,000",
-    promoVendor: "₦0",
-    promoAdmin: "₦10,000",
-    serviceFee: "₦2,500",
-    fixedFee: "₦500",
-    cashCollected: "₦620,000",
-    paymentGateway: "Paystack (₦1,100)",
-    vendorEarning: "₦553,900",
-  },
-];
-
-const tabs = [
-  "All Vendors",
-  "Top Earners",
-  "With Promo Deductions",
-  "High Volume",
-];
+const csvCell = (v: string | number | null | undefined) => {
+  const s = v === null || v === undefined ? "" : String(v);
+  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+};
 
 export default function VendorAccountingPage() {
-  const [activeTab, setActiveTab] = useState("All Vendors");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
-  const [selectedSettlement, setSelectedSettlement] =
-    useState<VendorSettlementRecord | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currencyPick, setCurrencyPick] = useState<string | null>(null);
+  const [selected, setSelected] = useState<VendorSettlementRow | null>(null);
 
-  // Filter records
-  const filteredSettlements = useMemo(() => {
-    return initialSettlements.filter((item) => {
-      // Tab filter
-      if (activeTab === "With Promo Deductions" && item.promoVendor === "₦0") {
-        return false;
-      }
-      if (
-        activeTab === "Top Earners" &&
-        ![
-          "Somotex Mega Store",
-          "Thermocool Direct",
-          "Skyrun Solar Systems",
-        ].includes(item.vendorName)
-      ) {
-        return false;
-      }
+  // Debounce the search box into the query sent to the server.
+  useEffect(() => {
+    const id = setTimeout(() => setQuery(search.trim()), 300);
+    return () => clearTimeout(id);
+  }, [search]);
 
-      // Search query
-      if (searchQuery.trim()) {
-        const query = searchQuery.toLowerCase();
-        const matchesVendor = item.vendorName.toLowerCase().includes(query);
-        const matchesOrder = item.orderId.toLowerCase().includes(query);
-        const matchesGateway = item.paymentGateway
-          .toLowerCase()
-          .includes(query);
-        const matchesAmount = item.vendorEarning.toLowerCase().includes(query);
+  const range = { from: from || undefined, to: to || undefined };
+  const { data, isLoading, isFetching, isError, error, refetch } = useGetVendorSettlementsQuery({
+    ...range,
+    q: query || undefined,
+    page: currentPage,
+    page_size: rowsPerPage,
+  });
 
-        return matchesVendor || matchesOrder || matchesGateway || matchesAmount;
-      }
+  const items = data?.items ?? [];
+  const totals = data?.totals ?? [];
+  const marginsVisible = data?.margins_visible ?? true;
+  const total = data?.pagination?.total ?? 0;
+  const totalPages = Math.max(1, Math.ceil(total / rowsPerPage));
+  const summary = totals.find((t) => t.currency === currencyPick) ?? totals[0];
+  const currency = summary?.currency ?? "NGN";
+  const filtered = !!(query || from || to);
 
-      return true;
-    });
-  }, [activeTab, searchQuery]);
+  const statValue = (v: number | null | undefined) =>
+    isLoading ? <Skel className="h-7 w-24" /> : isError ? "—" : formatMoney(v ?? 0, currency);
+  const marginValue = (v: number | null | undefined) =>
+    isLoading ? <Skel className="h-7 w-24" /> : isError || v === null ? "—" : formatMoney(v ?? 0, currency);
 
-  // Paginated records
-  const paginatedSettlements = useMemo(() => {
-    const start = (currentPage - 1) * rowsPerPage;
-    return filteredSettlements.slice(start, start + rowsPerPage);
-  }, [filteredSettlements, currentPage, rowsPerPage]);
+  const resetPage = () => setCurrentPage(1);
 
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredSettlements.length / rowsPerPage),
-  );
+  const exportPage = () => {
+    const header = [
+      "Vendor",
+      "Currency",
+      "Orders",
+      "Order value",
+      "Paid",
+      "Delivery fees",
+      "Vendor cost / earning",
+      "Admin margin",
+      "Deductions",
+      "Gateway fees",
+    ];
+    const lines = items.map((r) =>
+      [
+        r.name,
+        r.currency,
+        r.orders_count,
+        r.order_value,
+        r.paid_value,
+        r.delivery_fees,
+        r.vendor_earning,
+        r.admin_margin,
+        r.deductions_total,
+        r.gateway_fees,
+      ]
+        .map(csvCell)
+        .join(","),
+    );
+    const blob = new Blob([[header.join(","), ...lines].join("\n")], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `vendor-settlements-page-${currentPage}-${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="flex flex-col gap-6 pb-12">
-      {/* Header Area */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          {/* <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
-            Vendors Accounting
-          </h1>
-          <p className="text-xs text-gray-500 mt-0.5">
-            Vendor commission reconciliations, promo absorption, fee deductions, and net payouts
-          </p> */}
+      {/* Currency switch (totals are never summed across currencies) */}
+      {totals.length > 1 && (
+        <div className="flex items-center gap-2" role="group" aria-label="Totals currency">
+          <span className="text-xs text-faint">Totals in</span>
+          {totals.map((t) => (
+            <Button
+              key={t.currency}
+              size="sm"
+              variant={t.currency === currency ? "blue" : "outline"}
+              shape="rounded-sm"
+              onClick={() => setCurrencyPick(t.currency)}
+              aria-pressed={t.currency === currency}
+            >
+              {t.currency}
+            </Button>
+          ))}
         </div>
+      )}
 
-        <div className="flex items-center gap-3 w-full sm:w-auto">
-          <Button
-            variant="blue"
-            size="md"
-            iconLeft={<HiOutlineDocumentArrowDown size={18} />}
-            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold bg-brand-charcoal hover:bg-brand-charcoal/90 text-white"
-            onClick={() => setIsExportModalOpen(true)}
-          >
-            Export Settlements
-          </Button>
-        </div>
+      {/* Totals for the current filters */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+        <StatCard
+          size="sm"
+          title="Order value"
+          value={statValue(summary?.order_value)}
+          periodLabel={
+            summary ? `${summary.vendors_count.toLocaleString()} vendor${summary.vendors_count === 1 ? "" : "s"} · goods subtotal, delivery excluded` : HINTS.orderValue
+          }
+        />
+        <StatCard size="sm" title="Paid value" value={statValue(summary?.paid_value)} periodLabel="Collected on paid payments" />
+        <StatCard
+          size="sm"
+          title="Vendor earnings"
+          value={marginValue(summary?.vendor_earning)}
+          periodLabel={marginsVisible ? "Owed to vendors (their recorded cost)" : MARGINS_HIDDEN_NOTE}
+        />
+        <StatCard
+          size="sm"
+          title="Admin margin"
+          value={marginValue(summary?.admin_margin)}
+          periodLabel={marginsVisible ? "Selling price minus vendor cost" : MARGINS_HIDDEN_NOTE}
+        />
+        <StatCard
+          size="sm"
+          title="Delivery fees"
+          value={statValue(summary?.delivery_fees)}
+          periodLabel="Charged on these orders"
+        />
+        <StatCard
+          size="sm"
+          title="Gateway fees · Deductions"
+          value={
+            isLoading ? (
+              <Skel className="h-7 w-24" />
+            ) : (
+              <>
+                {isError ? "—" : formatMoney(summary?.gateway_fees ?? 0, currency)}
+                <span className="text-faint font-normal"> · </span>
+                {isError || summary?.deductions_total === null ? "—" : formatMoney(summary?.deductions_total ?? 0, currency)}
+              </>
+            )
+          }
+          periodLabel={marginsVisible ? "Provider fees · active procurement deductions" : `Provider fees · ${MARGINS_HIDDEN_NOTE.toLowerCase()}`}
+        />
       </div>
 
-      {/* 3 Cards (Total Order Value, Total Delivery Fees, Total Admin Commissions) */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {/* 1. Total Order Value */}
-        <StatCard
-          size="sm"
-          title="Total Order Value"
-          value="₦48,850,000"
-          trendValue="16.4%"
-          trendIsUp={true}
-          subtitle="Gross merchandise value"
-        />
-
-        {/* 2. Total Delivery Fees */}
-        <StatCard
-          size="sm"
-          title="Total Delivery Fees"
-          value="₦3,420,000"
-          trendValue="8.2%"
-          trendIsUp={true}
-          subtitle="Logistics fulfillment value"
-        />
-
-        {/* 3. Total Admin Commissions */}
-        <StatCard
-          size="sm"
-          title="Total Admin Commissions"
-          value="₦4,885,000"
-          trendValue="14.5%"
-          trendIsUp={true}
-          subtitle="10% average platform cut"
-        />
-      </div>
-
-      {/* Main Table Card */}
-      <div className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden flex flex-col">
-        {/* Filter Controls Row */}
-        <div className="p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between border-b border-gray-50">
-          <TabFilter
-            tabs={tabs}
-            activeTab={activeTab}
-            onChange={(tab) => {
-              setActiveTab(tab);
-              setCurrentPage(1);
-            }}
-            id="vendor-accounting-tab-filter"
-          />
-
-          <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
-            <Input
-              type="text"
-              placeholder="Search vendor name, order ID, gateway..."
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setCurrentPage(1);
+      {/* Settlements table */}
+      <div className="bg-white rounded-lg border border-light-gray overflow-hidden flex flex-col">
+        <div className="p-4 sm:p-6 flex flex-col xl:flex-row gap-4 xl:items-end justify-between border-b border-light-gray">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full xl:w-auto xl:min-w-[360px]">
+            <DatePicker
+              label="From"
+              hideLabel
+              placeholder="From date"
+              value={from}
+              max={to || undefined}
+              onChange={(v: string) => {
+                setFrom(v);
+                resetPage();
               }}
-              containerClassName="w-full lg:w-80 xl:w-96"
-              className="bg-white border-gray-100 placeholder:text-gray-400 text-xs font-medium"
-              suffixElement={
-                <Icon
-                  name="search-01"
-                  folder="dashboardIcon"
-                  size="sm"
-                  className="text-gray-400"
-                />
-              }
+              align="left"
+              clearable
             />
+            <DatePicker
+              label="To"
+              hideLabel
+              placeholder="To date"
+              value={to}
+              min={from || undefined}
+              onChange={(v: string) => {
+                setTo(v);
+                resetPage();
+              }}
+              align="left"
+              clearable
+            />
+          </div>
 
-            <div className="flex items-center gap-3 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 w-full xl:w-auto">
+            <Input
+              type="search"
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                resetPage();
+              }}
+              placeholder="Search vendor name"
+              aria-label="Search vendors"
+              containerClassName="w-full sm:w-72"
+              className="bg-white border-light-gray placeholder:text-faint text-xs font-medium"
+              suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-faint" />}
+            />
+            <div className="flex items-center gap-3">
               <RowsPerPage
                 value={rowsPerPage}
-                onChange={(val) => {
-                  setRowsPerPage(val);
-                  setCurrentPage(1);
+                options={[10, 20, 50, 100]}
+                onChange={(n) => {
+                  setRowsPerPage(n);
+                  resetPage();
                 }}
               />
+              <Button
+                variant="outline"
+                shape="rounded-sm"
+                className="ml-auto sm:ml-0 whitespace-nowrap"
+                onClick={exportPage}
+                disabled={items.length === 0}
+                iconLeft={<HiOutlineArrowDownTray size={14} />}
+                title="Download the rows shown on this page as CSV (not every page)"
+              >
+                Export this page
+              </Button>
             </div>
           </div>
         </div>
 
-        {/* Table Area with the exact 11 requested headers */}
-        <div className="admin-table-container">
+        {!marginsVisible && <p className="px-4 sm:px-6 pt-3 text-[12px] text-faint">{MARGINS_HIDDEN_NOTE}.</p>}
+
+        <div className={`admin-table-container transition-opacity ${isFetching && !isLoading ? "opacity-60" : ""}`}>
           <table>
             <thead>
               <tr>
-                <th>Vendor Name</th>
-                <th>Order Value</th>
-                <th>Delivery Fees</th>
-                <th>Admin Commissions</th>
-                <th>Promo [Vendor]</th>
-                <th>Promo [Admin]</th>
-                <th>Service Fee</th>
-                <th>Fixed Fee</th>
-                <th>Cash Collected</th>
-                <th>Payment Gateway</th>
-                <th>Vendor Earning</th>
+                <Th hint={HINTS.orders}>Vendor</Th>
+                <Th hint={HINTS.orderValue}>Order value</Th>
+                <Th hint={HINTS.paid}>Paid</Th>
+                <Th hint={HINTS.delivery}>Delivery fees</Th>
+                <Th hint={HINTS.vendorCost}>Vendor cost / earning</Th>
+                <Th hint={HINTS.margin}>Admin margin</Th>
+                <Th hint={HINTS.deductions}>Deductions</Th>
+                <Th hint={HINTS.gateway}>Gateway fees</Th>
+                <th className="text-right">Action</th>
               </tr>
             </thead>
             <tbody>
-              {paginatedSettlements.length > 0 ? (
-                paginatedSettlements.map((row) => (
-                  <tr
-                    key={row.id}
-                    onClick={() => setSelectedSettlement(row)}
-                    className="hover:bg-gray-50/60 transition-colors"
-                  >
-                    {/* Vendor Name */}
-                    <td>
-                      <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-md bg-brand-orange-soft text-brand-orange-text flex items-center justify-center shrink-0">
-                          <HiOutlineBuildingStorefront size={14} />
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="font-bold text-xs text-gray-900 whitespace-nowrap">
-                            {row.vendorName}
-                          </span>
-                          <span className="text-[11px] font-mono text-gray-400">
-                            {row.orderId}
-                          </span>
-                        </div>
-                      </div>
-                    </td>
-
-                    {/* Order Value */}
-                    <td className="font-bold text-xs text-gray-900 whitespace-nowrap">
-                      {row.orderValue}
-                    </td>
-
-                    {/* Delivery Fees */}
-                    <td className="text-xs text-gray-600 whitespace-nowrap">
-                      {row.deliveryFees}
-                    </td>
-
-                    {/* Admin Commissions */}
-                    <td className="font-semibold text-xs text-brand-orange-text whitespace-nowrap">
-                      {row.adminCommissions}
-                    </td>
-
-                    {/* Promo [Vendor] */}
-                    <td className="text-xs whitespace-nowrap">
-                      {row.promoVendor !== "₦0" ? (
-                        <span className="font-semibold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-100">
-                          {row.promoVendor}
-                        </span>
-                      ) : (
-                        <span className="text-gray-400">-</span>
-                      )}
-                    </td>
-
-                    {/* Promo [Admin] */}
-                    <td className="text-xs whitespace-nowrap">
-                      {row.promoAdmin !== "₦0" ? (
-                        <span className="font-semibold text-brand-orange-text bg-brand-orange-soft px-2 py-0.5 rounded border border-brand-orange/15">
-                          {row.promoAdmin}
-                        </span>
-                      ) : (
-                        <span className="text-gray-400">-</span>
-                      )}
-                    </td>
-
-                    {/* Service Fee */}
-                    <td className="text-xs text-gray-600 whitespace-nowrap">
-                      {row.serviceFee}
-                    </td>
-
-                    {/* Fixed Fee */}
-                    <td className="text-xs text-gray-500 whitespace-nowrap">
-                      {row.fixedFee}
-                    </td>
-
-                    {/* Cash Collected */}
-                    <td className="font-bold text-xs text-gray-900 whitespace-nowrap">
-                      {row.cashCollected}
-                    </td>
-
-                    {/* Payment Gateway */}
-                    <td className="text-xs text-gray-600 whitespace-nowrap">
-                      <span className="bg-gray-50 px-2 py-0.5 rounded border border-gray-200">
-                        {row.paymentGateway}
-                      </span>
-                    </td>
-
-                    {/* Vendor Earning */}
-                    <td className="font-bold text-xs text-emerald-600 whitespace-nowrap">
-                      {row.vendorEarning}
-                    </td>
+              {isLoading ? (
+                Array.from({ length: Math.min(rowsPerPage, 6) }, (_, i) => (
+                  <tr key={`sk-${i}`} aria-hidden>
+                    {Array.from({ length: COLUMNS }, (_, j) => (
+                      <td key={j}>
+                        <Skel className={j === 0 ? "w-32" : "w-16"} />
+                      </td>
+                    ))}
                   </tr>
                 ))
-              ) : (
+              ) : isError ? (
                 <tr>
-                  <td
-                    colSpan={11}
-                    className="py-12 text-center text-gray-400 text-xs"
-                  >
-                    No vendor accounting settlements found matching your
-                    criteria.
+                  <td colSpan={COLUMNS} className="py-16 text-center">
+                    <div className="flex flex-col items-center gap-3">
+                      <p className="text-[13px] text-error">{apiErrorMessage(error, "Couldn't load vendor settlements.")}</p>
+                      <Button variant="outline" size="sm" onClick={() => refetch()}>
+                        Try again
+                      </Button>
+                    </div>
                   </td>
                 </tr>
+              ) : items.length === 0 ? (
+                filtered ? (
+                  <EmptyTableRow
+                    colSpan={COLUMNS}
+                    illustration="search"
+                    title="No matches"
+                    description="No vendor settlements match this search or date range."
+                    action={{
+                      label: "Clear filters",
+                      onClick: () => {
+                        setSearch("");
+                        setQuery("");
+                        setFrom("");
+                        setTo("");
+                        resetPage();
+                      },
+                    }}
+                  />
+                ) : (
+                  <EmptyTableRow
+                    colSpan={COLUMNS}
+                    illustration="vendors"
+                    title="No vendor settlements yet"
+                    description="Vendor settlements will appear here once vendors receive orders that are paid or in fulfilment."
+                  />
+                )
+              ) : (
+                items.map((row) => {
+                  const money = (v: number | null) => formatMoney(v, row.currency);
+                  return (
+                    <tr
+                      key={`${row.id}-${row.currency}`}
+                      onClick={() => row.id && setSelected(row)}
+                      className={row.id ? "cursor-pointer" : undefined}
+                    >
+                      <td>
+                        <div className="flex items-center gap-2">
+                          <div className="w-7 h-7 rounded-md bg-brand-orange-soft text-brand-orange-text flex items-center justify-center shrink-0">
+                            <HiOutlineBuildingStorefront size={14} />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-semibold text-xs text-brand-charcoal whitespace-nowrap">{row.name}</span>
+                            <span className="text-[11px] text-faint">
+                              {row.orders_count.toLocaleString()} order{row.orders_count === 1 ? "" : "s"}
+                              {totals.length > 1 ? ` · ${row.currency}` : ""}
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="text-xs font-semibold text-brand-charcoal tabular-nums whitespace-nowrap">
+                        {money(row.order_value)}
+                      </td>
+                      <td className="text-xs text-subtle tabular-nums whitespace-nowrap">{money(row.paid_value)}</td>
+                      <td className="text-xs text-subtle tabular-nums whitespace-nowrap">{money(row.delivery_fees)}</td>
+                      <td className="text-xs font-semibold text-success tabular-nums whitespace-nowrap">
+                        {money(row.vendor_earning)}
+                      </td>
+                      <td className="text-xs font-semibold text-brand-orange-text tabular-nums whitespace-nowrap">
+                        {money(row.admin_margin)}
+                      </td>
+                      <td className="text-xs text-subtle tabular-nums whitespace-nowrap">{money(row.deductions_total)}</td>
+                      <td className="text-xs text-subtle tabular-nums whitespace-nowrap">{money(row.gateway_fees)}</td>
+                      <td className="text-right">
+                        <div className="flex justify-end pr-4">
+                          <Button
+                            variant="outline"
+                            shape="rounded-sm"
+                            aria-label={`View orders for ${row.name}`}
+                            title={row.id ? "View orders" : "This vendor has no public id"}
+                            disabled={!row.id}
+                            className="p-1.5! text-faint hover:text-brand-orange-text hover:bg-brand-orange-soft transition-all"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelected(row);
+                            }}
+                          >
+                            <HiOutlineDocumentText size={14} />
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
               )}
             </tbody>
           </table>
         </div>
 
-        {/* Pagination Footer */}
         <div className="admin-pagination-footer">
-          <p className="text-xs text-gray-400">
-            Showing{" "}
-            <span className="font-bold text-gray-700">
-              {filteredSettlements.length === 0
-                ? 0
-                : (currentPage - 1) * rowsPerPage + 1}
-            </span>{" "}
-            to{" "}
-            <span className="font-bold text-gray-700">
-              {Math.min(currentPage * rowsPerPage, filteredSettlements.length)}
-            </span>{" "}
-            of{" "}
-            <span className="font-bold text-gray-700">
-              {filteredSettlements.length}
-            </span>{" "}
-            entries
+          <p className="text-xs text-faint">
+            {total === 0 ? (
+              "No entries"
+            ) : (
+              <>
+                Showing{" "}
+                <span className="font-semibold text-brand-charcoal">{(currentPage - 1) * rowsPerPage + 1}</span> to{" "}
+                <span className="font-semibold text-brand-charcoal">{Math.min(currentPage * rowsPerPage, total)}</span>{" "}
+                of <span className="font-semibold text-brand-charcoal">{total}</span> entries
+              </>
+            )}
           </p>
-
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
-          />
+          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
         </div>
       </div>
 
-      {/* Settlement Breakdown Modal */}
-      {selectedSettlement && (
-        <Modal
-          isOpen={!!selectedSettlement}
-          onClose={() => setSelectedSettlement(null)}
-        >
-          <ModalBody>
-            <div className="space-y-4 pt-2">
-              <div className="flex items-center justify-between border-b border-gray-100 pb-3">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center">
-                    <HiOutlineBuildingStorefront className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-gray-900 text-sm">
-                      {selectedSettlement.vendorName}
-                    </h3>
-                    <p className="text-xs text-gray-400">
-                      Order {selectedSettlement.orderId} •{" "}
-                      {selectedSettlement.dateTime}
-                    </p>
-                  </div>
-                </div>
-                <span className="font-bold text-xs bg-emerald-50 text-emerald-600 px-2.5 py-1 rounded-md border border-emerald-100">
-                  Settled
-                </span>
-              </div>
-
-              {/* Breakdown Ledger */}
-              <div className="space-y-2 text-xs">
-                <div className="flex justify-between py-1.5 border-b border-gray-50">
-                  <span className="text-gray-500">Gross Order Value</span>
-                  <span className="font-bold text-gray-900">
-                    {selectedSettlement.orderValue}
-                  </span>
-                </div>
-                <div className="flex justify-between py-1.5 border-b border-gray-50">
-                  <span className="text-gray-500">Delivery Fees</span>
-                  <span className="font-medium text-gray-700">
-                    +{selectedSettlement.deliveryFees}
-                  </span>
-                </div>
-                <div className="flex justify-between py-1.5 border-b border-gray-50">
-                  <span className="text-gray-500">
-                    Admin Commission (Platform cut)
-                  </span>
-                  <span className="font-bold text-brand-orange-text">
-                    -{selectedSettlement.adminCommissions}
-                  </span>
-                </div>
-                <div className="flex justify-between py-1.5 border-b border-gray-50">
-                  <span className="text-gray-500">
-                    Promo Discount [Vendor Paid]
-                  </span>
-                  <span className="font-medium text-purple-700">
-                    -{selectedSettlement.promoVendor}
-                  </span>
-                </div>
-                <div className="flex justify-between py-1.5 border-b border-gray-50">
-                  <span className="text-gray-500">Service Fee</span>
-                  <span className="font-medium text-gray-700">
-                    -{selectedSettlement.serviceFee}
-                  </span>
-                </div>
-                <div className="flex justify-between py-1.5 border-b border-gray-50">
-                  <span className="text-gray-500">Fixed Transaction Fee</span>
-                  <span className="font-medium text-gray-700">
-                    -{selectedSettlement.fixedFee}
-                  </span>
-                </div>
-                <div className="flex justify-between py-1.5 border-b border-gray-50">
-                  <span className="text-gray-500">Payment Gateway Fee</span>
-                  <span className="font-medium text-gray-700">
-                    {selectedSettlement.paymentGateway}
-                  </span>
-                </div>
-                <div className="flex justify-between py-2 bg-emerald-50/60 p-3 rounded-lg border border-emerald-100 mt-2">
-                  <span className="font-bold text-emerald-900 text-xs">
-                    Net Vendor Earning
-                  </span>
-                  <span className="font-bold text-emerald-600 text-sm">
-                    {selectedSettlement.vendorEarning}
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex justify-end pt-2">
-                <Button
-                  size="sm"
-                  className="bg-brand-charcoal text-white"
-                  onClick={() => setSelectedSettlement(null)}
-                >
-                  Close
-                </Button>
-              </div>
-            </div>
-          </ModalBody>
-        </Modal>
-      )}
-
-      {/* Export Settlements Modal */}
-      <Modal
-        isOpen={isExportModalOpen}
-        onClose={() => setIsExportModalOpen(false)}
-      >
-        <ModalBody>
-          <div className="space-y-4 pt-2 text-center">
-            <div className="w-12 h-12 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center mx-auto">
-              <HiOutlineDocumentArrowDown className="w-6 h-6" />
-            </div>
-            <div>
-              <h3 className="font-bold text-gray-900 text-base">
-                Export Vendor Accounting Ledger
-              </h3>
-              <p className="text-xs text-gray-500 mt-1">
-                Download comprehensive commission breakdowns, promo absorption
-                records, and net payouts for merchant remittance.
-              </p>
-            </div>
-            <div className="flex justify-center gap-3 pt-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setIsExportModalOpen(false)}
-              >
-                Cancel
-              </Button>
-              <Button
-                size="sm"
-                className="bg-brand-charcoal text-white"
-                onClick={() => setIsExportModalOpen(false)}
-              >
-                Download CSV
-              </Button>
-            </div>
-          </div>
-        </ModalBody>
-      </Modal>
+      <VendorOrdersDrawer vendor={selected} from={range.from} to={range.to} onClose={() => setSelected(null)} />
     </div>
+  );
+}
+
+/* ───────────── One vendor's orders (GET /admin/accounting/vendors/:id/orders/) ───────────── */
+
+const ORDER_COLUMNS = 8;
+
+function VendorOrdersDrawer({
+  vendor,
+  from,
+  to,
+  onClose,
+}: {
+  vendor: VendorSettlementRow | null;
+  from?: string;
+  to?: string;
+  onClose: () => void;
+}) {
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [seenId, setSeenId] = useState<string | null>(null);
+
+  // Start from page 1 whenever a different vendor is opened.
+  const vendorId = vendor?.id ?? null;
+  if (vendorId !== seenId) {
+    setSeenId(vendorId);
+    setPage(1);
+  }
+
+  const { data, isLoading, isFetching, isError, error, refetch } = useGetVendorSettlementOrdersQuery(
+    { sellerId: vendorId ?? "", from, to, page, page_size: pageSize },
+    { skip: !vendorId },
+  );
+
+  const orders = data?.items ?? [];
+  const total = data?.pagination?.total ?? 0;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const marginsVisible = data?.margins_visible ?? true;
+  const rangeLabel =
+    from || to ? `${from ? formatDate(from) : "Start"} – ${to ? formatDate(to) : "today"}` : "All time";
+
+  return (
+    <Drawer isOpen={!!vendor} onClose={onClose} title={vendor?.name ?? "Vendor orders"} width="max-w-4xl">
+      {vendor && (
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs text-subtle">
+            <span>{rangeLabel}</span>
+            <span>
+              {vendor.orders_count.toLocaleString()} order{vendor.orders_count === 1 ? "" : "s"} · order value{" "}
+              <span className="font-semibold text-brand-charcoal">{formatMoney(vendor.order_value, vendor.currency)}</span>
+            </span>
+            {vendor.vendor_earning !== null && (
+              <span>
+                Owed to vendor{" "}
+                <span className="font-semibold text-success">{formatMoney(vendor.vendor_earning, vendor.currency)}</span>
+              </span>
+            )}
+          </div>
+          {!marginsVisible && <p className="text-[12px] text-faint">{MARGINS_HIDDEN_NOTE}.</p>}
+
+          {/* The drawer renders outside #page-wrapper, so the admin table styles are applied here. */}
+          <div
+            className={`overflow-x-auto border border-light-gray rounded-lg transition-opacity ${
+              isFetching && !isLoading ? "opacity-60" : ""
+            }`}
+          >
+            <table className="w-full text-left border-collapse [&_th]:px-3 [&_th]:py-2.5 [&_th]:text-[12px] [&_th]:font-semibold [&_th]:text-faint [&_th]:bg-off-white [&_th]:whitespace-nowrap [&_td]:px-3 [&_td]:py-3 [&_tbody_tr]:border-t [&_tbody_tr]:border-light-gray">
+              <thead>
+                <tr>
+                  <th>Order</th>
+                  <th>Status</th>
+                  <Th hint={HINTS.orderValue}>Order value</Th>
+                  <Th hint={HINTS.delivery}>Delivery</Th>
+                  <Th hint={HINTS.paid}>Paid</Th>
+                  <Th hint={HINTS.vendorCost}>Vendor cost</Th>
+                  <Th hint={HINTS.margin}>Margin</Th>
+                  <Th hint={HINTS.deductions}>Deductions</Th>
+                </tr>
+              </thead>
+              <tbody>
+                {isLoading ? (
+                  Array.from({ length: 4 }, (_, i) => (
+                    <tr key={`sk-${i}`} aria-hidden>
+                      {Array.from({ length: ORDER_COLUMNS }, (_, j) => (
+                        <td key={j}>
+                          <Skel className={j === 0 ? "w-28" : "w-14"} />
+                        </td>
+                      ))}
+                    </tr>
+                  ))
+                ) : isError ? (
+                  <tr>
+                    <td colSpan={ORDER_COLUMNS} className="py-12 text-center">
+                      <div className="flex flex-col items-center gap-3">
+                        <p className="text-[13px] text-error">{apiErrorMessage(error, "Couldn't load this vendor's orders.")}</p>
+                        <Button variant="outline" size="sm" onClick={() => refetch()}>
+                          Try again
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                ) : orders.length === 0 ? (
+                  <EmptyTableRow
+                    colSpan={ORDER_COLUMNS}
+                    size="sm"
+                    illustration="orders"
+                    title="No orders in this range"
+                    description="This vendor's orders will appear here once they're paid or in fulfilment."
+                  />
+                ) : (
+                  orders.map((o) => {
+                    const money = (v: number | null) => formatMoney(v, o.currency);
+                    return (
+                      <tr key={o.order_id}>
+                        <td>
+                          <div className="flex flex-col">
+                            <Link
+                              href={`/admin/orders/${o.order_id}`}
+                              className="text-xs font-semibold text-brand-orange-text hover:underline whitespace-nowrap"
+                            >
+                              {o.order_number}
+                            </Link>
+                            <span className="text-[11px] text-faint whitespace-nowrap">{formatDate(o.created_at)}</span>
+                          </div>
+                        </td>
+                        <td>
+                          <div className="flex flex-col items-start gap-1">
+                            <StatusBadge status={o.status} />
+                            <span className="text-[11px] text-faint whitespace-nowrap">
+                              Payment: {o.payment_status ? humanize(o.payment_status) : "none"}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="text-xs font-semibold text-brand-charcoal tabular-nums whitespace-nowrap">
+                          {money(o.order_value)}
+                        </td>
+                        <td className="text-xs text-subtle tabular-nums whitespace-nowrap">{money(o.delivery_fee)}</td>
+                        <td className="text-xs text-subtle tabular-nums whitespace-nowrap">{money(o.paid_value)}</td>
+                        <td className="text-xs font-semibold text-success tabular-nums whitespace-nowrap">
+                          {money(o.vendor_cost_total)}
+                        </td>
+                        <td className="text-xs text-brand-orange-text tabular-nums whitespace-nowrap">
+                          {money(o.admin_margin)}
+                        </td>
+                        <td className="text-xs text-subtle tabular-nums whitespace-nowrap">{money(o.deductions_total)}</td>
+                      </tr>
+                    );
+                  })
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+            <RowsPerPage
+              value={pageSize}
+              options={[10, 20, 50, 100]}
+              onChange={(n) => {
+                setPageSize(n);
+                setPage(1);
+              }}
+            />
+            <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
+          </div>
+        </div>
+      )}
+    </Drawer>
   );
 }

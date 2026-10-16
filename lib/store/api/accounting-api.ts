@@ -5,6 +5,9 @@
  * - /admin/transactions/  (orders_payment rows: one payment per order)
  * - /admin/orders/        (orders_order: same table the storefront writes to)
  * - /admin/financing/     (BNPL: financing invoices, repayments, dashboard)
+ * - /admin/refunds/        (buyer refunds)
+ * KoolBuy engine:
+ * - /koolbuy/admin/accounting/  (vendor settlements, loyalty points, VAT)
  *
  * Money values are numbers (2dp) in the row's currency. Totals are grouped per
  * currency by the backend and must never be summed across currencies.
@@ -256,6 +259,191 @@ export interface RecordRepaymentPayload {
   reason: string;
 }
 
+/* ───────────────────────── Refunds ───────────────────────── */
+
+export type RefundStatus = "requested" | "approved" | "processing" | "processed" | "failed" | "rejected";
+
+export interface AdminRefund {
+  id: string;
+  status: RefundStatus | string;
+  amount: number;
+  currency: string;
+  reason: string;
+  order: { id: string; order_number: string } | null;
+  buyer: { name: string; email: string } | null;
+  payment: { id: string; reference: string } | null;
+  /** "system" when raised automatically (e.g. a paid order was cancelled) */
+  requested_by: string;
+  decided_by: string | null;
+  decision_note: string | null;
+  failure_reason: string | null;
+  gateway_refund_id: string | null;
+  created_at: string;
+  decided_at: string | null;
+  processed_at: string | null;
+}
+
+export interface AdminRefundsResponse {
+  success: boolean;
+  items: AdminRefund[];
+  counts: Record<RefundStatus | "all", number>;
+  pagination: Pagination;
+}
+
+/* ───────────────────────── Vendor accounting ───────────────────────── */
+
+export interface VendorSettlementRow {
+  /** Seller public id (null for legacy sellers without one) */
+  id: string | null;
+  name: string;
+  currency: string;
+  orders_count: number;
+  order_value: number;
+  paid_value: number;
+  delivery_fees: number;
+  /** null when the caller can't see margins (margins_visible: false) */
+  vendor_cost_total: number | null;
+  admin_margin: number | null;
+  /** Treated as margin data: null without margin access */
+  deductions_total: number | null;
+  gateway_fees: number;
+  /** What the platform owes the vendor (their cost); null without margin access */
+  vendor_earning: number | null;
+}
+
+export interface VendorSettlementTotals extends Omit<VendorSettlementRow, "id" | "name" | "orders_count"> {
+  vendors_count: number;
+}
+
+export interface VendorSettlementsResponse {
+  success: boolean;
+  items: VendorSettlementRow[];
+  totals: VendorSettlementTotals[];
+  margins_visible: boolean;
+  pagination: Pagination;
+}
+
+export interface VendorSettlementOrderRow {
+  order_id: string;
+  order_number: string;
+  created_at: string;
+  status: string;
+  order_value: number;
+  delivery_fee: number;
+  paid_value: number;
+  payment_status: string | null;
+  vendor_cost_total: number | null;
+  admin_margin: number | null;
+  deductions_total: number | null;
+  currency: string;
+}
+
+export interface VendorSettlementOrdersResponse {
+  success: boolean;
+  items: VendorSettlementOrderRow[];
+  seller: { id: string; name: string; currency: string };
+  margins_visible: boolean;
+  pagination: Pagination;
+}
+
+/* ───────────────────────── Loyalty (points) ───────────────────────── */
+
+export interface LoyaltySummaryResponse {
+  success: boolean;
+  market: string | null;
+  policy: {
+    enabled: boolean;
+    market: string;
+    /** What one point is worth when redeemed (points × point_value, capped at the equipment price) */
+    point_value: number;
+    accrual_period: string;
+    redemption_requires_approval: boolean;
+    version: number;
+  } | null;
+  totals: {
+    accounts: number;
+    points_earned: number;
+    points_redeemed: number;
+    points_balance: number;
+    redemptions_pending: number;
+    redemptions_approved: number;
+    redemption_value_by_currency: { currency: string; total: number }[];
+  };
+}
+
+export interface LoyaltyUser {
+  id: string;
+  name: string | null;
+  email: string | null;
+}
+
+export interface LoyaltyAccount {
+  id: string;
+  user: LoyaltyUser;
+  total_points: number;
+  points_redeemed: number;
+  balance: number;
+  last_earned_at: string | null;
+}
+
+export interface LoyaltyLedgerEntry {
+  id: string;
+  user: LoyaltyUser;
+  period_start: string;
+  period_end: string;
+  qualifying_value: number;
+  points_earned: number;
+  created_at: string;
+  rule_id: string | null;
+}
+
+export interface LoyaltyRedemption {
+  id: string;
+  user: LoyaltyUser;
+  points_spent: number;
+  point_value: number;
+  currency_value: number;
+  equipment_price: number | null;
+  currency: string;
+  status: string;
+  decided_at: string | null;
+  notes: string | null;
+  created_at: string;
+}
+
+export interface Paged<T> {
+  success: boolean;
+  items: T[];
+  pagination: Pagination;
+}
+
+/* ───────────────────────── Taxes (VAT) ───────────────────────── */
+
+export interface TaxInvoiceRow {
+  id: string;
+  invoice_number: string;
+  issued_at: string | null;
+  retailer: { name: string | null; business_name: string | null; email: string | null } | null;
+  taxable_subtotal: number;
+  /** Fraction, e.g. 0.075 = 7.5% */
+  vat_rate: number;
+  vat_amount: number;
+  total_payable: number;
+  currency: string;
+  status: string;
+}
+
+export interface TaxesResponse {
+  success: boolean;
+  items: TaxInvoiceRow[];
+  totals: { currency: string; vat_total: number; taxable_total: number; invoices_count: number }[];
+  policy: { market: string; version: number; vat_rate: number; vat_applies_to: string; delivery_fee_vatable: boolean } | null;
+  pagination: Pagination;
+}
+
+type ListParams = { page?: number; page_size?: number };
+type DateRange = { from?: string; to?: string };
+
 /* ───────────────────────── Helpers ───────────────────────── */
 
 function toQuery(params: Record<string, string | number | boolean | undefined | null> | void): string {
@@ -363,6 +551,90 @@ export const accountingApi = baseApi.injectEndpoints({
         { type: "Transaction", id: "SUMMARY" },
       ],
     }),
+
+    /* Refunds (buyer refunds; approving calls the Paystack Refund API) */
+    getAdminRefunds: builder.query<AdminRefundsResponse, { status?: RefundStatus | "all"; page?: number; page_size?: number } | void>({
+      query: (params) => `/admin/refunds/${toQuery(params ? { ...params } : undefined)}`,
+      providesTags: (result) =>
+        result?.items
+          ? [
+              ...result.items.map(({ id }) => ({ type: "Refund" as const, id })),
+              { type: "Refund", id: "LIST" },
+            ]
+          : [{ type: "Refund", id: "LIST" }],
+    }),
+    createAdminRefund: builder.mutation<
+      { success: boolean; refund: AdminRefund },
+      { order_id?: string; payment_id?: string; amount: number; reason: string }
+    >({
+      query: (body) => ({ url: `/admin/refunds/`, method: "POST", body }),
+      invalidatesTags: [{ type: "Refund", id: "LIST" }],
+    }),
+    approveAdminRefund: builder.mutation<{ success: boolean; refund: AdminRefund }, { refundId: string; note?: string }>({
+      query: ({ refundId, ...body }) => ({
+        url: `/admin/refunds/${encodeURIComponent(refundId)}/approve/`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: (_r, _e, { refundId }) => [
+        { type: "Refund", id: refundId },
+        { type: "Refund", id: "LIST" },
+        { type: "Transaction", id: "LIST" },
+        { type: "Transaction", id: "SUMMARY" },
+      ],
+    }),
+    rejectAdminRefund: builder.mutation<{ success: boolean; refund: AdminRefund }, { refundId: string; reason: string }>({
+      query: ({ refundId, ...body }) => ({
+        url: `/admin/refunds/${encodeURIComponent(refundId)}/reject/`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: (_r, _e, { refundId }) => [
+        { type: "Refund", id: refundId },
+        { type: "Refund", id: "LIST" },
+      ],
+    }),
+
+    /* Vendor accounting (settlements per seller) */
+    getVendorSettlements: builder.query<VendorSettlementsResponse, (ListParams & DateRange & { q?: string }) | void>({
+      query: (params) => `/koolbuy/admin/accounting/vendors/${toQuery(params ? { ...params } : undefined)}`,
+      providesTags: [{ type: "Accounting", id: "VENDORS" }],
+    }),
+    getVendorSettlementOrders: builder.query<
+      VendorSettlementOrdersResponse,
+      { sellerId: string } & ListParams & DateRange
+    >({
+      query: ({ sellerId, ...params }) =>
+        `/koolbuy/admin/accounting/vendors/${encodeURIComponent(sellerId)}/orders/${toQuery({ ...params })}`,
+      providesTags: (_r, _e, { sellerId }) => [{ type: "Accounting", id: `VENDOR_${sellerId}` }],
+    }),
+
+    /* Loyalty (points) */
+    getLoyaltySummary: builder.query<LoyaltySummaryResponse, { market?: string } | void>({
+      query: (params) => `/koolbuy/admin/accounting/loyalty/summary/${toQuery(params ? { ...params } : undefined)}`,
+      providesTags: [{ type: "Accounting", id: "LOYALTY_SUMMARY" }],
+    }),
+    getLoyaltyAccounts: builder.query<Paged<LoyaltyAccount>, (ListParams & { q?: string }) | void>({
+      query: (params) => `/koolbuy/admin/accounting/loyalty/accounts/${toQuery(params ? { ...params } : undefined)}`,
+      providesTags: [{ type: "Accounting", id: "LOYALTY_ACCOUNTS" }],
+    }),
+    getLoyaltyLedger: builder.query<Paged<LoyaltyLedgerEntry>, (ListParams & DateRange & { user_id?: string }) | void>({
+      query: (params) => `/koolbuy/admin/accounting/loyalty/ledger/${toQuery(params ? { ...params } : undefined)}`,
+      providesTags: [{ type: "Accounting", id: "LOYALTY_LEDGER" }],
+    }),
+    getLoyaltyRedemptions: builder.query<
+      Paged<LoyaltyRedemption> & { counts: Record<string, number> },
+      (ListParams & { status?: string }) | void
+    >({
+      query: (params) => `/koolbuy/admin/accounting/loyalty/redemptions/${toQuery(params ? { ...params } : undefined)}`,
+      providesTags: [{ type: "Accounting", id: "LOYALTY_REDEMPTIONS" }],
+    }),
+
+    /* Taxes (VAT on financing invoices) */
+    getTaxes: builder.query<TaxesResponse, (ListParams & DateRange & { q?: string; vat_only?: boolean; market?: string }) | void>({
+      query: (params) => `/koolbuy/admin/accounting/taxes/${toQuery(params ? { ...params } : undefined)}`,
+      providesTags: [{ type: "Accounting", id: "TAXES" }],
+    }),
   }),
   overrideExisting: false,
 });
@@ -378,6 +650,17 @@ export const {
   useGetFinancingInvoiceQuery,
   useGetFinancingDashboardQuery,
   useRecordFinancingRepaymentMutation,
+  useGetAdminRefundsQuery,
+  useCreateAdminRefundMutation,
+  useApproveAdminRefundMutation,
+  useRejectAdminRefundMutation,
+  useGetVendorSettlementsQuery,
+  useGetVendorSettlementOrdersQuery,
+  useGetLoyaltySummaryQuery,
+  useGetLoyaltyAccountsQuery,
+  useGetLoyaltyLedgerQuery,
+  useGetLoyaltyRedemptionsQuery,
+  useGetTaxesQuery,
 } = accountingApi;
 
 /* ───────────────────────── Formatting ───────────────────────── */

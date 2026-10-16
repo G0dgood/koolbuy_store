@@ -165,7 +165,7 @@ export const AdminHeader: React.FC<HeaderProps> = ({
     if (pathname.startsWith("/admin/subscription-discounts"))
       return "Subscription Discount";
     if (pathname.startsWith("/admin/accounting-promos")) return "Promo Codes";
-    if (pathname.startsWith("/admin/accounting-loyalty")) return "Loyalty Cards";
+    if (pathname.startsWith("/admin/accounting-loyalty")) return "Loyalty Points";
     if (pathname.startsWith("/admin/coupons")) return "Promocode";
     if (pathname.startsWith("/admin/promocodes")) return "Promocode";
     if (pathname.startsWith("/admin/loyalty-cards")) return "Loyalty Cards";
@@ -178,7 +178,7 @@ export const AdminHeader: React.FC<HeaderProps> = ({
     if (pathname.startsWith("/admin/notifications")) return "Notifications";
     if (pathname.startsWith("/admin/faq")) return "FAQ";
     if (pathname.startsWith("/admin/payout-requests")) return "Payout Requests";
-    if (pathname.startsWith("/admin/refunds")) return "Payout Requests";
+    if (pathname.startsWith("/admin/refunds")) return "Refunds";
     if (pathname.startsWith("/admin/support")) return "Support";
     if (pathname.startsWith("/admin/users")) return "Users";
 

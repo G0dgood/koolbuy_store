@@ -34,3 +34,4 @@ export * from "./api/audit-logs-api";
 export * from "./api/categories-api";
 export * from "./api/vendors-api";
 export * from "./api/accounting-api";
+export * from "./api/customers-api";

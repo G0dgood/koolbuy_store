@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Icon } from "../../components/Icon";
 import { StatCard } from "../../components/Admin/StatCard";
 import { TabFilter } from "../../components/Admin/TabFilter";
@@ -25,215 +25,12 @@ import {
   HiXMark,
   HiCheck,
 } from "react-icons/hi2";
-
-const padZero = (n: number) => (n < 10 ? `0${n}` : `${n}`);
-
-const formatDate = (d: Date) =>
-  `${padZero(d.getDate())}.${padZero(d.getMonth() + 1)}.${d.getFullYear()}`;
-
-const parseRegistrationDate = (dateStr: string): Date | null => {
-  if (!dateStr) return null;
-  if (dateStr.includes(".")) {
-    const parts = dateStr.split(".");
-    if (parts.length === 3) {
-      const day = parseInt(parts[0], 10);
-      const month = parseInt(parts[1], 10) - 1;
-      const year = parseInt(parts[2], 10);
-      return new Date(year, month, day);
-    }
-  }
-  const parsed = new Date(dateStr);
-  return isNaN(parsed.getTime()) ? null : parsed;
-};
-
-// Generate relative customer data so presets always find matching rows
-const generateCustomersData = () => {
-  const now = new Date();
-  const daysAgo = (days: number) => {
-    const d = new Date(now);
-    d.setDate(d.getDate() - days);
-    return d;
-  };
-  const monthsAgo = (months: number, dayOfMonth: number = 14) => {
-    const d = new Date(now.getFullYear(), now.getMonth() - months, dayOfMonth);
-    return d;
-  };
-  const yearsAgo = (years: number, month: number = 4, dayOfMonth: number = 10) => {
-    const d = new Date(now.getFullYear() - years, month, dayOfMonth);
-    return d;
-  };
-
-  return [
-    {
-      id: "#CUST001",
-      name: "John Doe",
-      email: "john.doe@example.com",
-      phone: "+1234567890",
-      address: "123 Main St, NY",
-      orderCount: 25,
-      totalSpend: "3,450.00",
-      status: "Active",
-      registration: formatDate(now), // Today
-      lastPurchase: formatDate(now),
-    },
-    {
-      id: "#CUST002",
-      name: "Jane Smith",
-      email: "jane.smith@example.com",
-      phone: "+1234567891",
-      address: "456 Oak Ave, CA",
-      orderCount: 5,
-      totalSpend: "250.00",
-      status: "InActive",
-      registration: formatDate(daysAgo(2)), // Last 7 days
-      lastPurchase: formatDate(daysAgo(3)),
-    },
-    {
-      id: "#CUST003",
-      name: "Michael Chang",
-      email: "michael.chang@example.com",
-      phone: "+1234567892",
-      address: "88 Market St, SF",
-      orderCount: 12,
-      totalSpend: "1,850.00",
-      status: "Deleted",
-      registration: formatDate(daysAgo(4)), // Last 7 days
-      lastPurchase: formatDate(daysAgo(6)),
-    },
-    {
-      id: "#CUST004",
-      name: "Sarah Jenkins",
-      email: "sarah.j@example.com",
-      phone: "+1234567893",
-      address: "789 Pine Rd, TX",
-      orderCount: 18,
-      totalSpend: "2,980.00",
-      status: "Active",
-      registration: formatDate(daysAgo(10)), // Last 30 days
-      lastPurchase: formatDate(daysAgo(4)),
-    },
-    {
-      id: "#CUST005",
-      name: "David Kim",
-      email: "david.kim@example.com",
-      phone: "+1234567894",
-      address: "101 Cedar Ln, WA",
-      orderCount: 4,
-      totalSpend: "420.00",
-      status: "InActive",
-      registration: formatDate(daysAgo(18)), // Last 30 days
-      lastPurchase: formatDate(daysAgo(15)),
-    },
-    {
-      id: "#CUST006",
-      name: "Emily Watson",
-      email: "emily.w@example.com",
-      phone: "+1234567895",
-      address: "55 Elm St, IL",
-      orderCount: 2,
-      totalSpend: "180.00",
-      status: "Deleted",
-      registration: formatDate(daysAgo(22)), // Last 30 days
-      lastPurchase: formatDate(daysAgo(20)),
-    },
-    {
-      id: "#CUST007",
-      name: "Robert Taylor",
-      email: "robert.t@example.com",
-      phone: "+1234567896",
-      address: "32 Maple Ave, FL",
-      orderCount: 33,
-      totalSpend: "5,120.00",
-      status: "Active",
-      registration: formatDate(monthsAgo(1, 10)), // Last month
-      lastPurchase: formatDate(daysAgo(10)),
-    },
-    {
-      id: "#CUST008",
-      name: "Amanda Martinez",
-      email: "amanda.m@example.com",
-      phone: "+1234567897",
-      address: "410 Birch Blvd, CO",
-      orderCount: 7,
-      totalSpend: "890.00",
-      status: "InActive",
-      registration: formatDate(monthsAgo(1, 16)), // Last month
-      lastPurchase: formatDate(monthsAgo(1, 12)),
-    },
-    {
-      id: "#CUST009",
-      name: "Brian Wilson",
-      email: "brian.w@example.com",
-      phone: "+1234567898",
-      address: "92 High St, Boston",
-      orderCount: 1,
-      totalSpend: "65.00",
-      status: "Deleted",
-      registration: formatDate(monthsAgo(1, 24)), // Last month
-      lastPurchase: formatDate(monthsAgo(1, 20)),
-    },
-    {
-      id: "#CUST010",
-      name: "Jessica Brown",
-      email: "jessica.b@example.com",
-      phone: "+1234567899",
-      address: "67 Sunset Blvd, CA",
-      orderCount: 42,
-      totalSpend: "6,740.00",
-      status: "Active",
-      registration: formatDate(monthsAgo(3, 14)), // This year
-      lastPurchase: formatDate(daysAgo(2)),
-    },
-    {
-      id: "#CUST011",
-      name: "Daniel White",
-      email: "daniel.w@example.com",
-      phone: "+1234567800",
-      address: "14 Spruce St, OR",
-      orderCount: 9,
-      totalSpend: "1,150.00",
-      status: "InActive",
-      registration: formatDate(monthsAgo(5, 5)), // This year
-      lastPurchase: formatDate(monthsAgo(2, 1)),
-    },
-    {
-      id: "#CUST012",
-      name: "Lucas Garcia",
-      email: "lucas.g@example.com",
-      phone: "+1234567801",
-      address: "23 Lake Dr, MI",
-      orderCount: 15,
-      totalSpend: "2,300.00",
-      status: "Active",
-      registration: formatDate(yearsAgo(1, 4, 12)), // Last year
-      lastPurchase: formatDate(daysAgo(30)),
-    },
-    {
-      id: "#CUST013",
-      name: "Olivia Miller",
-      email: "olivia.m@example.com",
-      phone: "+1234567802",
-      address: "76 Forest Rd, GA",
-      orderCount: 8,
-      totalSpend: "920.00",
-      status: "InActive",
-      registration: formatDate(yearsAgo(1, 8, 20)), // Last year
-      lastPurchase: formatDate(monthsAgo(8, 1)),
-    },
-    {
-      id: "#CUST014",
-      name: "Ethan Davis",
-      email: "ethan.d@example.com",
-      phone: "+1234567803",
-      address: "88 Valley Way, AZ",
-      orderCount: 3,
-      totalSpend: "310.00",
-      status: "Deleted",
-      registration: formatDate(yearsAgo(1, 10, 5)), // Last year
-      lastPurchase: formatDate(yearsAgo(1, 10, 15)),
-    },
-  ];
-};
+import {
+  useGetAdminCustomersQuery,
+  useDeleteAdminCustomerMutation,
+  useBulkDeleteAdminCustomersMutation,
+  type AdminCustomerItem,
+} from "@/lib/store";
 
 const statusStyles: Record<string, string> = {
   Active: "text-emerald-600",
@@ -271,18 +68,17 @@ const DATE_PRESETS: { id: DatePreset; label: string }[] = [
 ];
 
 export default function CustomersListing() {
-  const [customersData] = useState(generateCustomersData);
   const [activeMetric, setActiveMetric] = useState<MetricType>("active");
   const [chartTab, setChartTab] = useState("This week");
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [statusFilter, setStatusFilter] = useState("Active");
-  const [selectedCustomer, setSelectedCustomer] = useState<any>(null);
+  const [selectedCustomer, setSelectedCustomer] = useState<AdminCustomerItem | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [customerToDelete, setCustomerToDelete] = useState<any>(null);
+  const [customerToDelete, setCustomerToDelete] = useState<AdminCustomerItem | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isMessageDrawerOpen, setIsMessageDrawerOpen] = useState(false);
-  const [customerToMessage, setCustomerToMessage] = useState<any>(null);
+  const [customerToMessage, setCustomerToMessage] = useState<AdminCustomerItem | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
   // Signup Date Filter State
@@ -306,152 +102,66 @@ export default function CustomersListing() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Filter logic
-  const filteredCustomers = useMemo(() => {
-    const now = new Date();
-    const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const endOfToday = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate(),
-      23,
-      59,
-      59,
-      999
-    );
+  // Fetch real customer data from backend
+  const {
+    data,
+    isLoading,
+    isFetching,
+    error,
+    refetch,
+  } = useGetAdminCustomersQuery({
+    search: searchQuery.trim() || undefined,
+    status: statusFilter.toLowerCase(),
+    date_preset:
+      selectedDatePreset !== "all" && selectedDatePreset !== "date_range"
+        ? selectedDatePreset
+        : undefined,
+    from:
+      selectedDatePreset === "date_range" && customStartDate
+        ? customStartDate
+        : undefined,
+    to:
+      selectedDatePreset === "date_range" && customEndDate
+        ? customEndDate
+        : undefined,
+    page: currentPage,
+    page_size: rowsPerPage,
+  });
 
-    return customersData.filter((customer) => {
-      // Status filter: Active, InActive, Deleted
-      if (
-        customer.status.toLowerCase() !== statusFilter.toLowerCase()
-      ) {
-        return false;
-      }
+  const [deleteCustomer, { isLoading: isDeleting }] = useDeleteAdminCustomerMutation();
+  const [bulkDeleteCustomers, { isLoading: isBulkDeleting }] = useBulkDeleteAdminCustomersMutation();
 
-      // Search filter
-      if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase().trim();
-        const matchesQuery =
-          customer.name.toLowerCase().includes(q) ||
-          customer.email.toLowerCase().includes(q) ||
-          customer.phone.toLowerCase().includes(q) ||
-          customer.id.toLowerCase().includes(q);
-        if (!matchesQuery) return false;
-      }
-
-      // Signup Date filter
-      if (selectedDatePreset !== "all") {
-        const date = parseRegistrationDate(customer.registration);
-        if (!date) return false;
-
-        switch (selectedDatePreset) {
-          case "today": {
-            if (
-              date.getFullYear() !== now.getFullYear() ||
-              date.getMonth() !== now.getMonth() ||
-              date.getDate() !== now.getDate()
-            ) {
-              return false;
-            }
-            break;
-          }
-          case "last_7_days": {
-            const sevenDaysAgo = new Date(startOfToday);
-            sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 6);
-            if (date < sevenDaysAgo || date > endOfToday) return false;
-            break;
-          }
-          case "last_30_days": {
-            const thirtyDaysAgo = new Date(startOfToday);
-            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 29);
-            if (date < thirtyDaysAgo || date > endOfToday) return false;
-            break;
-          }
-          case "this_month": {
-            if (
-              date.getFullYear() !== now.getFullYear() ||
-              date.getMonth() !== now.getMonth()
-            ) {
-              return false;
-            }
-            break;
-          }
-          case "last_month": {
-            const targetYear =
-              now.getMonth() === 0 ? now.getFullYear() - 1 : now.getFullYear();
-            const targetMonth = now.getMonth() === 0 ? 11 : now.getMonth() - 1;
-            if (
-              date.getFullYear() !== targetYear ||
-              date.getMonth() !== targetMonth
-            ) {
-              return false;
-            }
-            break;
-          }
-          case "this_year": {
-            if (date.getFullYear() !== now.getFullYear()) return false;
-            break;
-          }
-          case "last_year": {
-            if (date.getFullYear() !== now.getFullYear() - 1) return false;
-            break;
-          }
-          case "date_range": {
-            if (customStartDate) {
-              const start = new Date(customStartDate);
-              start.setHours(0, 0, 0, 0);
-              if (date < start) return false;
-            }
-            if (customEndDate) {
-              const end = new Date(customEndDate);
-              end.setHours(23, 59, 59, 999);
-              if (date > end) return false;
-            }
-            break;
-          }
-        }
-      }
-
-      return true;
-    });
-  }, [
-    customersData,
-    statusFilter,
-    searchQuery,
-    selectedDatePreset,
-    customStartDate,
-    customEndDate,
-  ]);
-
-  const totalPages = Math.ceil(filteredCustomers.length / rowsPerPage) || 1;
-  const paginatedCustomers = useMemo(() => {
-    const start = (currentPage - 1) * rowsPerPage;
-    return filteredCustomers.slice(start, start + rowsPerPage);
-  }, [filteredCustomers, currentPage, rowsPerPage]);
+  const customers = data?.items ?? [];
+  const totalCount = data?.pagination?.total ?? 0;
+  const totalPages = Math.ceil(totalCount / rowsPerPage) || 1;
 
   const toggleAll = () => {
-    if (selectedIds.length === filteredCustomers.length && filteredCustomers.length > 0) {
+    if (selectedIds.length === customers.length && customers.length > 0) {
       setSelectedIds([]);
     } else {
-      setSelectedIds(filteredCustomers.map((c) => c.id));
+      setSelectedIds(customers.map((c) => c.id));
     }
   };
 
   const toggleItem = (id: string) => {
     setSelectedIds((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
   };
 
-  const chartDataMap: Record<MetricType, number[]> = {
-    active: [18, 18.5, 17, 16, 11, 12, 11],
-    repeat: [5.2, 6.8, 8.5, 7.2, 5.6, 9.1, 10.4],
-    visitor: [120, 150, 180, 250, 210, 230, 250],
-    conversion: [2.5, 3.8, 4.2, 5.5, 4.8, 5.2, 5.8],
-  };
+  const chartLabels = data?.metrics?.chart?.labels ?? [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+  ];
 
-  const chartLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const currentChartDataset = chartDataMap[activeMetric];
+  const currentChartDataset = data?.metrics?.chart
+    ? data.metrics.chart[activeMetric] || [0, 0, 0, 0, 0, 0, 0]
+    : [0, 0, 0, 0, 0, 0, 0];
 
   const getDropdownButtonLabel = () => {
     if (selectedDatePreset === "all") return "Signup Date";
@@ -471,6 +181,14 @@ export default function CustomersListing() {
     return item ? item.label : "Signup Date";
   };
 
+  const handleResetFilters = () => {
+    setSelectedDatePreset("all");
+    setCustomStartDate("");
+    setCustomEndDate("");
+    setSearchQuery("");
+    setCurrentPage(1);
+  };
+
   return (
     <div className="flex flex-col gap-6 mx-auto pb-12 overflow-hidden">
       {/* Top Section: Sidebar Stats & Overview Chart */}
@@ -478,13 +196,25 @@ export default function CustomersListing() {
         <div className="flex flex-col gap-3 w-full xl:w-70">
           <StatCard
             title="Total Customers"
-            value="11,040"
+            value={
+              data?.metrics?.total_customers !== undefined
+                ? data.metrics.total_customers.toLocaleString()
+                : isLoading
+                ? "..."
+                : "0"
+            }
             trendValue="14.4%"
             trendIsUp={true}
           />
           <StatCard
             title="Visitor"
-            value="250k"
+            value={
+              data?.metrics?.visitors_estimate !== undefined
+                ? `${Math.round(data.metrics.visitors_estimate / 1000)}k`
+                : isLoading
+                ? "..."
+                : "0"
+            }
             trendValue="20%"
             trendIsUp={true}
           />
@@ -505,6 +235,12 @@ export default function CustomersListing() {
           <CustomerMetrics
             activeMetric={activeMetric}
             onMetricClick={setActiveMetric}
+            data={{
+              active: data?.metrics?.active_customers,
+              repeat: data?.metrics?.repeat_customers,
+              visitor: data?.metrics?.visitors_estimate,
+              conversion: data?.metrics?.conversion_rate,
+            }}
           />
 
           <div className="h-64 w-full mt-2">
@@ -535,25 +271,13 @@ export default function CustomersListing() {
                 scales: {
                   y: {
                     min: 0,
-                    max:
-                      activeMetric === "visitor"
-                        ? 300
-                        : activeMetric === "conversion"
-                          ? 10
-                          : 50,
                     ticks: {
-                      stepSize:
-                        activeMetric === "visitor"
-                          ? 50
-                          : activeMetric === "conversion"
-                            ? 2
-                            : 10,
                       callback: (value: string | number) =>
                         activeMetric === "conversion"
                           ? `${value}%`
                           : activeMetric === "visitor"
-                            ? `${value}k`
-                            : `${value}k`,
+                          ? `${value}k`
+                          : `${value}`,
                     },
                   },
                 },
@@ -568,7 +292,9 @@ export default function CustomersListing() {
         <motion.div
           layout
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className={`bg-white overflow-hidden flex flex-col ${selectedCustomer ? "flex-1" : "w-full"}`}
+          className={`bg-white overflow-hidden flex flex-col ${
+            selectedCustomer ? "flex-1" : "w-full"
+          }`}
         >
           <div className="p-4 sm:p-6 border-b border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="w-full flex flex-col lg:flex-row justify-between items-start lg:items-center gap-3">
@@ -579,6 +305,7 @@ export default function CustomersListing() {
                 onChange={(tab) => {
                   setStatusFilter(tab);
                   setCurrentPage(1);
+                  setSelectedIds([]);
                 }}
               />
 
@@ -761,6 +488,8 @@ export default function CustomersListing() {
                   variant="outline"
                   shape="rounded-sm"
                   className="p-1.5! text-gray-300"
+                  onClick={() => refetch()}
+                  title="Refresh customer list"
                 >
                   <Icon
                     name="DotsHorizontal"
@@ -779,8 +508,8 @@ export default function CustomersListing() {
                   <th className="w-10 pl-6">
                     <Checkbox
                       checked={
-                        selectedIds.length === paginatedCustomers.length &&
-                        paginatedCustomers.length > 0
+                        selectedIds.length === customers.length &&
+                        customers.length > 0
                       }
                       onChange={toggleAll}
                     />
@@ -796,8 +525,40 @@ export default function CustomersListing() {
                 </tr>
               </thead>
               <tbody>
-                {paginatedCustomers.length > 0 ? (
-                  paginatedCustomers.map((customer) => (
+                {isLoading ? (
+                  Array.from({ length: 6 }).map((_, i) => (
+                    <tr key={`skeleton-${i}`} className="animate-pulse">
+                      <td className="w-10 pl-6">
+                        <div className="w-4 h-4 bg-gray-200 rounded"></div>
+                      </td>
+                      <td>
+                        <div className="h-4 bg-gray-200 rounded w-20"></div>
+                      </td>
+                      <td>
+                        <div className="h-4 bg-gray-200 rounded w-32"></div>
+                      </td>
+                      <td>
+                        <div className="h-4 bg-gray-200 rounded w-24"></div>
+                      </td>
+                      <td>
+                        <div className="h-4 bg-gray-200 rounded w-20"></div>
+                      </td>
+                      <td className="text-center">
+                        <div className="h-4 bg-gray-200 rounded w-8 mx-auto"></div>
+                      </td>
+                      <td>
+                        <div className="h-4 bg-gray-200 rounded w-16"></div>
+                      </td>
+                      <td>
+                        <div className="h-4 bg-gray-200 rounded w-14"></div>
+                      </td>
+                      <td className="text-right">
+                        <div className="h-6 bg-gray-200 rounded w-16 ml-auto"></div>
+                      </td>
+                    </tr>
+                  ))
+                ) : customers.length > 0 ? (
+                  customers.map((customer) => (
                     <tr
                       key={customer.id}
                       onClick={() => setSelectedCustomer(customer)}
@@ -818,7 +579,7 @@ export default function CustomersListing() {
                       </td>
                       <td>
                         <span className="text-sm font-semibold text-gray-900">
-                          {customer.id}
+                          {customer.customer_code || customer.id}
                         </span>
                       </td>
                       <td className="whitespace-nowrap">
@@ -826,14 +587,14 @@ export default function CustomersListing() {
                           {customer.name}
                         </span>
                       </td>
-                      <td>{customer.phone}</td>
+                      <td>{customer.phone || "—"}</td>
                       <td>
                         <span className="text-xs font-medium text-gray-600">
                           {customer.registration}
                         </span>
                       </td>
-                      <td className="text-center">{customer.orderCount}</td>
-                      <td>{customer.totalSpend}</td>
+                      <td className="text-center">{customer.order_count}</td>
+                      <td>{customer.formatted_total_spend}</td>
                       <td>
                         <div className="flex items-center gap-2">
                           <span
@@ -875,7 +636,6 @@ export default function CustomersListing() {
                             onClick={(e) => {
                               e.stopPropagation();
                               setCustomerToDelete(customer);
-                              setIsDeleteModalOpen(true);
                             }}
                           >
                             <Icon
@@ -893,16 +653,11 @@ export default function CustomersListing() {
                     <td colSpan={9} className="text-center py-12">
                       <div className="flex flex-col items-center justify-center gap-2 text-gray-400">
                         <span className="text-sm font-medium">
-                          No {statusFilter} customers found matching the selected date or search filter.
+                          No {statusFilter.toLowerCase()} customers found matching the selected filter.
                         </span>
                         <button
                           type="button"
-                          onClick={() => {
-                            setSelectedDatePreset("all");
-                            setCustomStartDate("");
-                            setCustomEndDate("");
-                            setSearchQuery("");
-                          }}
+                          onClick={handleResetFilters}
                           className="text-xs font-semibold text-brand-orange-text hover:underline cursor-pointer"
                         >
                           Clear all filters
@@ -933,16 +688,42 @@ export default function CustomersListing() {
         </AnimatePresence>
       </div>
 
+      {/* Delete Confirmation Modal */}
       <ConfirmationModal
         isOpen={!!customerToDelete}
         onClose={() => setCustomerToDelete(null)}
-        onConfirm={() => {
-          console.log(`Deleting customer ${customerToDelete?.name}...`);
-          setCustomerToDelete(null);
+        onConfirm={async () => {
+          if (customerToDelete) {
+            try {
+              await deleteCustomer(customerToDelete.id).unwrap();
+            } catch (err) {
+              console.error("Failed to delete customer:", err);
+            }
+            setCustomerToDelete(null);
+          }
         }}
         title="Delete Customer"
-        message={`Are you sure you want to delete ${customerToDelete?.name}? This will remove all their data from the platform permanently.`}
-        confirmText="Yes, delete customer"
+        message={`Are you sure you want to delete ${customerToDelete?.name}? This will deactivate their account.`}
+        confirmText={isDeleting ? "Deleting..." : "Yes, delete customer"}
+        type="danger"
+      />
+
+      {/* Bulk Delete Confirmation Modal */}
+      <ConfirmationModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onConfirm={async () => {
+          try {
+            await bulkDeleteCustomers({ customer_ids: selectedIds }).unwrap();
+            setSelectedIds([]);
+          } catch (err) {
+            console.error("Failed to bulk delete customers:", err);
+          }
+          setIsDeleteModalOpen(false);
+        }}
+        title="Delete Selected Customers"
+        message={`Are you sure you want to deactivate ${selectedIds.length} selected customer accounts?`}
+        confirmText={isBulkDeleting ? "Deleting..." : "Yes, delete selected"}
         type="danger"
       />
 
@@ -950,7 +731,7 @@ export default function CustomersListing() {
         isOpen={selectedIds.length > 0}
         onClose={() => setSelectedIds([])}
         selectedIds={selectedIds}
-        items={customersData}
+        items={customers}
         onClearSelection={() => setSelectedIds([])}
         title="Customers Selected"
         actions={[
@@ -960,7 +741,6 @@ export default function CustomersListing() {
             icon: "tabler_message",
             folder: "dashboardIcon",
             onClick: () => {
-              console.log("Messaging selected customers...");
               setIsMessageDrawerOpen(true);
             },
           },

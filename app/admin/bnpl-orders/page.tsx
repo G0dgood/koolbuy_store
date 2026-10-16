@@ -1,171 +1,185 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import {
   OrderListingView,
-  OrderItem,
-  StatItem,
+  type ListingColumn,
+  type StatItem,
 } from "../../components/Admin/Orders/OrderListingView";
+import { StatusBadge } from "../../components/Admin/Orders/StatusBadge";
+import {
+  apiErrorMessage,
+  formatDate,
+  formatMoney,
+  useGetFinancingDashboardQuery,
+  useGetFinancingInvoicesQuery,
+  type FinancingDashboardRow,
+  type FinancingInvoice,
+} from "@/lib/store";
 
-const bnplOrdersData: OrderItem[] = [
-  {
-    id: "#BNPL0001",
-    product: "Kool - Scanfrost 600L Inverter Chest Freezer",
-    image: "/images/koolboks/items/5.webp",
-    date: "12-01-2025",
-    price: "1,406,000",
-    plan: "3 Months • ₦468,666/mo",
-    deposit: "₦281,200 (Paid)",
-    payment: "Installment Active (2/3 Paid)",
-    status: "Delivered",
-  },
-  {
-    id: "#BNPL0002",
-    product: "Kool Bruhm 100ah Solar Pedestal Freezer",
-    image: "/images/koolboks/items/4.webp",
-    date: "10-01-2025",
-    price: "1,662,370",
-    plan: "6 Months • ₦277,061/mo",
-    deposit: "₦332,474 (Paid)",
-    payment: "Installment Active (4/6 Paid)",
-    status: "Delivered",
-  },
-  {
-    id: "#BNPL0003",
-    product: "Kool-242L Somotex Glass Door Display Freezer",
-    image: "/images/koolboks/items/3.webp",
-    date: "08-01-2025",
-    price: "2,100,000",
-    plan: "12 Months • ₦175,000/mo",
-    deposit: "₦420,000 (Paid)",
-    payment: "Completed",
-    status: "Delivered",
-  },
-  {
-    id: "#BNPL0004",
-    product: "Kool Scanfrost 60ah Single Door Chest Freezer",
-    image: "/images/koolboks/items/1.webp",
-    date: "05-01-2025",
-    price: "1,287,600",
-    plan: "4 Months • ₦321,900/mo",
-    deposit: "₦257,520 (Pending)",
-    payment: "Pending Downpayment",
-    status: "Pending",
-  },
-  {
-    id: "#BNPL0005",
-    product: "200L AC Inverter Deep Freezer",
-    image: "/images/koolboks/items/2.webp",
-    date: "03-01-2025",
-    price: "2,420,000",
-    plan: "6 Months • ₦403,333/mo",
-    deposit: "₦484,000 (Paid)",
-    payment: "Overdue (1 missed)",
-    status: "Delivered",
-  },
-  {
-    id: "#BNPL0006",
-    product: "230L Hisense Deep Chest Freezer",
-    image: "/images/koolboks/items/6.webp",
-    date: "01-01-2025",
-    price: "430,000",
-    plan: "3 Months • ₦143,333/mo",
-    deposit: "₦86,000 (Unpaid)",
-    payment: "Cancelled Plan",
-    status: "Cancelled",
-  },
-  {
-    id: "#BNPL0007",
-    product: "Kool Thermocool 100ah Solar Inverter Freezer",
-    image: "/images/koolboks/items/4.webp",
-    date: "28-12-2024",
-    price: "1,662,370",
-    plan: "6 Months • ₦277,061/mo",
-    deposit: "₦332,474 (Paid)",
-    payment: "Installment Active (5/6 Paid)",
-    status: "Delivered",
-  },
-  {
-    id: "#BNPL0008",
-    product: "Kool Bruhm 60ah Pedestal Solar Freezer",
-    image: "/images/koolboks/items/1.webp",
-    date: "26-12-2024",
-    price: "1,287,600",
-    plan: "3 Months • ₦429,200/mo",
-    deposit: "₦257,520 (Paid)",
-    payment: "Completed",
-    status: "Delivered",
-  },
-  {
-    id: "#BNPL0009",
-    product: "Kool - Scanfrost 600L Inverter Chest Freezer",
-    image: "/images/koolboks/items/5.webp",
-    date: "20-12-2024",
-    price: "1,406,000",
-    plan: "6 Months • ₦234,333/mo",
-    deposit: "₦281,200 (Paid)",
-    payment: "Installment Active (3/6 Paid)",
-    status: "Shipped",
-  },
-  {
-    id: "#BNPL0010",
-    product: "Kool-242L Somotex Glass Door Display Freezer",
-    image: "/images/koolboks/items/3.webp",
-    date: "15-12-2024",
-    price: "2,100,000",
-    plan: "12 Months • ₦175,000/mo",
-    deposit: "₦420,000 (Paid)",
-    payment: "Installment Active (10/12 Paid)",
-    status: "Delivered",
-  },
-];
+/** Tab label → /admin/financing/invoices/?status= */
+const TAB_STATUS: Record<string, string> = {
+  All: "all",
+  Outstanding: "outstanding",
+  "Pending approval": "pending_approval",
+  Overdue: "overdue",
+  Paid: "paid",
+  Declined: "declined",
+  Cancelled: "cancelled",
+};
+const TABS = Object.keys(TAB_STATUS);
 
-const bnplStats: StatItem[] = [
-  {
-    title: "Total BNPL Orders",
-    value: "480",
-    trendValue: "18.2%",
-    trendIsUp: true,
-  },
-  {
-    title: "Active Plans",
-    value: "310",
-    trendValue: "12.4%",
-    trendIsUp: true,
-  },
-  {
-    title: "Completed Plans",
-    value: "145",
-    trendValue: "24.0%",
-    trendIsUp: true,
-  },
-  {
-    title: "Overdue / Missed",
-    value: "25",
-    trendValue: "3.2%",
-    trendIsUp: false,
-  },
-];
+/** Money per currency, never summed across currencies, e.g. "₦85,850 · $120" */
+function perCurrency(rows: FinancingDashboardRow[], pick: (r: FinancingDashboardRow) => number): string {
+  if (rows.length === 0) return formatMoney(0);
+  return rows.map((r) => formatMoney(pick(r), r.currency)).join(" · ");
+}
 
-const bnplTabs = [
-  "All BNPL order (480)",
-  "Active Plan",
-  "Completed",
-  "Pending",
-  "Canceled",
+function sumCount(rows: FinancingDashboardRow[], pick: (r: FinancingDashboardRow) => number): number {
+  return rows.reduce((n, r) => n + pick(r), 0);
+}
+
+const plural = (n: number, word: string) => `${n.toLocaleString()} ${word}${n === 1 ? "" : "s"}`;
+
+const columns: ListingColumn<FinancingInvoice>[] = [
+  {
+    key: "invoice",
+    header: "Invoice #",
+    render: (inv) => (
+      <div className="flex flex-col">
+        <span className="font-mono text-sm text-gray-900 whitespace-nowrap">{inv.invoice_number}</span>
+        {inv.central_order_number && (
+          <span className="text-[11px] text-faint whitespace-nowrap">{inv.central_order_number}</span>
+        )}
+      </div>
+    ),
+  },
+  {
+    key: "retailer",
+    header: "Retailer",
+    render: (inv) => (
+      <div className="flex flex-col min-w-40">
+        <span className="text-sm text-gray-900">{inv.retailer?.business_name || inv.retailer?.name || "—"}</span>
+        {inv.retailer?.business_name && inv.retailer.name && (
+          <span className="text-[11px] text-faint">{inv.retailer.name}</span>
+        )}
+      </div>
+    ),
+  },
+  {
+    key: "dates",
+    header: "Issued / Due",
+    render: (inv) => (
+      <div className="flex flex-col whitespace-nowrap">
+        <span className="text-sm text-subtle">{formatDate(inv.issued_at)}</span>
+        <span className="text-[11px] text-faint">Due {formatDate(inv.due_date)}</span>
+      </div>
+    ),
+  },
+  {
+    key: "payable",
+    header: "Total payable",
+    render: (inv) => (
+      <div className="flex flex-col whitespace-nowrap">
+        <span className="font-mono text-sm text-gray-900">{formatMoney(inv.total_payable, inv.currency)}</span>
+        <span className={`text-[11px] ${inv.balance > 0 ? "text-brand-orange-text" : "text-faint"}`}>
+          Balance {formatMoney(inv.balance, inv.currency)}
+        </span>
+      </div>
+    ),
+  },
+  {
+    key: "paid",
+    header: "Paid so far",
+    render: (inv) => (
+      <span className="font-mono text-sm text-gray-700 whitespace-nowrap">{formatMoney(inv.amount_paid, inv.currency)}</span>
+    ),
+  },
+  { key: "status", header: "Status", render: (inv) => <StatusBadge status={inv.status} /> },
 ];
 
 export default function BnplOrderListing() {
+  const [activeTab, setActiveTab] = useState(TABS[0]);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+
+  const { data, currentData, isFetching, error, refetch } = useGetFinancingInvoicesQuery({
+    status: TAB_STATUS[activeTab],
+    search: search || undefined,
+    page,
+    page_size: pageSize,
+  });
+
+  const dashboard = useGetFinancingDashboardQuery();
+  const byCurrency = dashboard.data?.by_currency;
+
+  const stats: StatItem[] = useMemo(() => {
+    const rows = byCurrency ?? [];
+    const overdue = sumCount(rows, (r) => r.overdue_count);
+    const dueSoon = sumCount(rows, (r) => r.due_next_7_days_count);
+    const pending = sumCount(rows, (r) => r.pending_count);
+    return [
+      { title: "Outstanding", value: perCurrency(rows, (r) => r.outstanding_total), hint: "Unpaid balance on open invoices" },
+      { title: "Overdue", value: perCurrency(rows, (r) => r.overdue_total), hint: plural(overdue, "invoice") },
+      { title: "Due next 7 days", value: perCurrency(rows, (r) => r.due_next_7_days_total), hint: plural(dueSoon, "invoice") },
+      { title: "Paid this month", value: perCurrency(rows, (r) => r.paid_this_month_total), hint: "Repayments received" },
+      {
+        title: "Approved applications",
+        value: sumCount(rows, (r) => r.approved_count).toLocaleString(),
+        hint: `${pending.toLocaleString()} pending review`,
+      },
+    ];
+  }, [byCurrency]);
+
+  const handleSearch = useCallback((value: string) => {
+    setSearch(value);
+    setPage(1);
+  }, []);
+
+  const listError = !currentData && !isFetching && error ? apiErrorMessage(error, "Couldn't load BNPL invoices.") : null;
+
   return (
     <OrderListingView
-      pageType="bnpl"
-      title="BNPL Orders"
-      stats={bnplStats}
-      tabs={bnplTabs}
-      initialOrders={bnplOrdersData}
-      searchPlaceholder="Search BNPL orders, customer, plan..."
-      addOrderButtonLabel="Add BNPL Order"
-      baseDetailUrl="/admin/bnpl-orders"
+      stats={stats}
+      statsLoading={dashboard.isLoading}
+      statsError={dashboard.isError ? apiErrorMessage(dashboard.error, "Couldn't load the BNPL summary.") : null}
+      onStatsRetry={dashboard.refetch}
+      tabs={TABS}
+      activeTab={activeTab}
+      onTabChange={(tab) => {
+        setActiveTab(tab);
+        setPage(1);
+      }}
+      search={search}
+      onSearchChange={handleSearch}
+      searchPlaceholder="Search invoice, order or retailer"
+      columns={columns}
+      rows={currentData?.items ?? []}
+      getRowId={(inv) => inv.id}
+      getRowHref={(inv) => `/admin/bnpl-orders/${inv.id}`}
+      getRowLabel={(inv) => `invoice ${inv.invoice_number}`}
+      total={(currentData ?? data)?.pagination.total ?? 0}
+      page={page}
+      pageSize={pageSize}
+      pageSizeOptions={[10, 20, 50]}
+      onPageChange={setPage}
+      onPageSizeChange={(size) => {
+        setPageSize(size);
+        setPage(1);
+      }}
+      isLoading={isFetching && !currentData}
+      isRefreshing={isFetching && !!currentData}
+      error={listError}
+      onRetry={refetch}
+      emptyIllustration="invoices"
+      emptyTitle={activeTab === TABS[0] ? "No BNPL invoices yet" : `No ${activeTab.toLowerCase()} invoices`}
+      emptyHint={
+        activeTab === TABS[0]
+          ? "BNPL invoices will appear here once a financing request is approved."
+          : "Invoices with this status will appear here."
+      }
+      emptySearchHint="Search matches invoice number, group order number or retailer."
     />
   );
 }

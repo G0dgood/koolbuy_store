@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Button } from "@/app/components/Button";
 import { ConfirmationModal } from "@/app/components/Admin/ConfirmationModal";
+import Dropdown from "@/app/components/Form/Dropdown";
 import {
   HiOutlineReceiptPercent,
   HiOutlineTag,
@@ -796,21 +797,26 @@ export default function TaxPage() {
                 />
               </div>
 
-              <div className="flex items-center justify-between p-3 rounded-lg border border-gray-100 bg-gray-50/50">
-                <span className="text-xs font-bold text-gray-700">Status</span>
-                <select
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  Status
+                </label>
+                <Dropdown
+                  options={[
+                    { value: "Active", label: "Active" },
+                    { value: "Inactive", label: "Inactive" },
+                  ]}
                   value={categoryForm.status}
-                  onChange={(e) =>
+                  onChange={(val) =>
                     setCategoryForm((prev) => ({
                       ...prev,
-                      status: e.target.value as "Active" | "Inactive",
+                      status: val as "Active" | "Inactive",
                     }))
                   }
-                  className="text-xs font-semibold px-2.5 py-1 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange text-gray-800"
-                >
-                  <option value="Active">Active</option>
-                  <option value="Inactive">Inactive</option>
-                </select>
+                  searchable={false}
+                  size="sm"
+                  placeholder="Select status"
+                />
               </div>
 
               <div className="pt-2 border-t border-gray-100 flex items-center justify-end gap-2">
@@ -877,22 +883,23 @@ export default function TaxPage() {
                 <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
                   Tax Category *
                 </label>
-                <select
+                <Dropdown
+                  options={categories.map((c) => ({
+                    value: c.name,
+                    label: `${c.name} (${c.code})`,
+                  }))}
                   value={rateForm.categoryName}
-                  onChange={(e) =>
+                  onChange={(val) =>
                     setRateForm((prev) => ({
                       ...prev,
-                      categoryName: e.target.value,
+                      categoryName: val as string,
                     }))
                   }
-                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
-                >
-                  {categories.map((c) => (
-                    <option key={c.id} value={c.name}>
-                      {c.name} ({c.code})
-                    </option>
-                  ))}
-                </select>
+                  searchable={true}
+                  searchPlaceholder="Search category..."
+                  placeholder="Select tax category"
+                  size="sm"
+                />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
@@ -919,19 +926,22 @@ export default function TaxPage() {
                   <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
                     Rate Type
                   </label>
-                  <select
+                  <Dropdown
+                    options={[
+                      { value: "Percentage", label: "Percentage (%)" },
+                      { value: "Fixed", label: "Fixed Amount" },
+                    ]}
                     value={rateForm.type}
-                    onChange={(e) =>
+                    onChange={(val) =>
                       setRateForm((prev) => ({
                         ...prev,
-                        type: e.target.value as "Percentage" | "Fixed",
+                        type: val as "Percentage" | "Fixed",
                       }))
                     }
-                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
-                  >
-                    <option value="Percentage">Percentage (%)</option>
-                    <option value="Fixed">Fixed Amount</option>
-                  </select>
+                    searchable={false}
+                    size="sm"
+                    placeholder="Select rate type"
+                  />
                 </div>
               </div>
 
@@ -958,19 +968,22 @@ export default function TaxPage() {
                   <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
                     Status
                   </label>
-                  <select
+                  <Dropdown
+                    options={[
+                      { value: "Active", label: "Active" },
+                      { value: "Inactive", label: "Inactive" },
+                    ]}
                     value={rateForm.status}
-                    onChange={(e) =>
+                    onChange={(val) =>
                       setRateForm((prev) => ({
                         ...prev,
-                        status: e.target.value as "Active" | "Inactive",
+                        status: val as "Active" | "Inactive",
                       }))
                     }
-                    className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
-                  >
-                    <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
-                  </select>
+                    searchable={false}
+                    size="sm"
+                    placeholder="Select status"
+                  />
                 </div>
               </div>
 

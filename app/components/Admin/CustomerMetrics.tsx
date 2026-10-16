@@ -4,6 +4,13 @@ import React from "react";
 
 export type MetricType = "active" | "repeat" | "visitor" | "conversion";
 
+export interface CustomerMetricsData {
+  active?: string | number;
+  repeat?: string | number;
+  visitor?: string | number;
+  conversion?: string | number;
+}
+
 interface MetricItem {
   id: MetricType;
   value: string;
@@ -14,16 +21,43 @@ interface MetricItem {
 interface CustomerMetricsProps {
   activeMetric: MetricType;
   onMetricClick: (metric: MetricType) => void;
+  data?: CustomerMetricsData;
 }
 
-const metrics: MetricItem[] = [
-  { id: "active", value: "25k", label: "Active Customers", hasDivider: true },
-  { id: "repeat", value: "5.6k", label: "Repeat Customers", hasDivider: true },
-  { id: "visitor", value: "250k", label: "Shop Visitor", hasDivider: true },
-  { id: "conversion", value: "5.5%", label: "Conversion Rate" },
-];
+function formatMetricVal(val: string | number | undefined, fallback: string): string {
+  if (val === undefined || val === null) return fallback;
+  if (typeof val === "string") return val;
+  if (val >= 1_000_000) return `${(val / 1_000_000).toFixed(1)}M`;
+  if (val >= 1_000) return `${(val / 1_000).toFixed(1)}k`;
+  return String(val);
+}
 
-export function CustomerMetrics({ activeMetric, onMetricClick }: CustomerMetricsProps) {
+export function CustomerMetrics({ activeMetric, onMetricClick, data }: CustomerMetricsProps) {
+  const metrics: MetricItem[] = [
+    {
+      id: "active",
+      value: data?.active !== undefined ? formatMetricVal(data.active, "0") : "0",
+      label: "Active Customers",
+      hasDivider: true,
+    },
+    {
+      id: "repeat",
+      value: data?.repeat !== undefined ? formatMetricVal(data.repeat, "0") : "0",
+      label: "Repeat Customers",
+      hasDivider: true,
+    },
+    {
+      id: "visitor",
+      value: data?.visitor !== undefined ? formatMetricVal(data.visitor, "0") : "0",
+      label: "Shop Visitor",
+      hasDivider: true,
+    },
+    {
+      id: "conversion",
+      value: data?.conversion !== undefined ? `${data.conversion}%` : "0%",
+      label: "Conversion Rate",
+    },
+  ];
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4 items-start border-b border-gray-50 pb-6 md:pb-4">
       {metrics.map((metric) => (

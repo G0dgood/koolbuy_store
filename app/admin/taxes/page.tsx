@@ -1,532 +1,456 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { HiOutlineArrowDownTray, HiOutlineInformationCircle } from "react-icons/hi2";
 import { StatCard } from "@/app/components/Admin/StatCard";
-import { TabFilter } from "@/app/components/Admin/TabFilter";
 import { Pagination } from "@/app/components/Admin/Pagination";
+import { StatusBadge } from "@/app/components/Admin/Orders/StatusBadge";
 import { RowsPerPage } from "@/app/components/rows-per-page";
 import { Input } from "@/app/components/Form/Inputs";
+import { DatePicker } from "@/app/components/Form/DatePicker";
 import { Button } from "@/app/components/Button";
 import { Icon } from "@/app/components/Icon";
-import { Modal, ModalBody } from "@/app/components/Modal";
+import Dropdown from "@/app/components/Form/Dropdown";
+import { EmptyTableRow } from "@/app/components/EmptyState";
 import {
-  HiOutlineReceiptPercent,
-  HiOutlineDocumentArrowDown,
-  HiOutlineAdjustmentsHorizontal,
-} from "react-icons/hi2";
-import Link from "next/link";
+  apiErrorMessage,
+  formatDate,
+  formatMoney,
+  humanize,
+  useGetTaxesQuery,
+  type TaxInvoiceRow,
+  type TaxesResponse,
+} from "@/lib/store";
 
-interface TaxRecord {
-  id: string;
-  orderId: string;
-  dateTime: string;
-  customerName: string;
-  customerEmail: string;
-  finalAmount: string;
-  taxAmount: string;
-  paymentMethods: string;
-  taxType: "VAT (7.5%)" | "WHT (5%)" | "VAT + WHT";
+/* VAT report. Tax in the backend exists only as VAT on BNPL financing
+   invoices (GET /admin/accounting/taxes/), set by the active financing policy.
+   Regular orders and payments carry no VAT, and there is no withholding tax.
+   Rates come back as fractions (0.075 = 7.5%). Totals are per currency and are
+   never summed across currencies. Totals skip invoices never issued or voided
+   (pending approval, declined, cancelled); those still appear in the list. */
+
+const COLUMNS = 8;
+
+type Policy = NonNullable<TaxesResponse["policy"]>;
+
+const pct = (fraction: number | null | undefined) =>
+  fraction === null || fraction === undefined
+    ? "—"
+    : `${(fraction * 100).toLocaleString("en-NG", { maximumFractionDigits: 3 })}%`;
+
+const vatIsOn = (p: Policy | null | undefined) => !!p && p.vat_rate > 0 && p.vat_applies_to !== "none";
+
+const retailerName = (r: TaxInvoiceRow["retailer"]) => r?.business_name || r?.name || "—";
+
+/* Client-side CSV of the rows currently on screen (there's no export endpoint). */
+function downloadPageCsv(rows: TaxInvoiceRow[]) {
+  const header = [
+    "Invoice number",
+    "Issued",
+    "Retailer",
+    "Contact name",
+    "Email",
+    "Currency",
+    "Taxable subtotal",
+    "VAT rate (%)",
+    "VAT amount",
+    "Total payable",
+    "Status",
+  ];
+  const cell = (v: string | number | null | undefined) => {
+    const s = v === null || v === undefined ? "" : String(v);
+    return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+  };
+  const lines = rows.map((r) =>
+    [
+      r.invoice_number,
+      r.issued_at ? r.issued_at.slice(0, 10) : "",
+      r.retailer?.business_name ?? "",
+      r.retailer?.name ?? "",
+      r.retailer?.email ?? "",
+      r.currency,
+      r.taxable_subtotal,
+      Math.round(r.vat_rate * 100000) / 1000,
+      r.vat_amount,
+      r.total_payable,
+      r.status,
+    ]
+      .map(cell)
+      .join(","),
+  );
+  const blob = new Blob([[header.join(","), ...lines].join("\n")], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `vat-invoices-page-${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
 }
 
-const initialTaxRecords: TaxRecord[] = [
-  {
-    id: "1",
-    orderId: "#ORD-98421",
-    dateTime: "18-09-2026 14:32",
-    customerName: "Adebayo Olumide",
-    customerEmail: "adebayo@koolboks.com",
-    finalAmount: "₦1,406,000",
-    taxAmount: "₦105,450",
-    paymentMethods: "Debit Card",
-    taxType: "VAT (7.5%)",
-  },
-  {
-    id: "2",
-    orderId: "#ORD-98418",
-    dateTime: "18-09-2026 12:15",
-    customerName: "Chioma Nwosu",
-    customerEmail: "chioma.n@gmail.com",
-    finalAmount: "₦1,662,370",
-    taxAmount: "₦124,678",
-    paymentMethods: "BNPL Installment",
-    taxType: "VAT (7.5%)",
-  },
-  {
-    id: "3",
-    orderId: "#ORD-98410",
-    dateTime: "17-09-2026 18:40",
-    customerName: "Babatunde Lawal",
-    customerEmail: "babatunde.l@yahoo.com",
-    finalAmount: "₦2,100,000",
-    taxAmount: "₦157,500",
-    paymentMethods: "Bank Transfer",
-    taxType: "VAT (7.5%)",
-  },
-  {
-    id: "4",
-    orderId: "#ORD-98395",
-    dateTime: "17-09-2026 11:20",
-    customerName: "Fatima Al-Hassan",
-    customerEmail: "fatima.h@gmail.com",
-    finalAmount: "₦430,000",
-    taxAmount: "₦32,250",
-    paymentMethods: "Debit Card",
-    taxType: "VAT (7.5%)",
-  },
-  {
-    id: "5",
-    orderId: "#ORD-98380",
-    dateTime: "16-09-2026 16:05",
-    customerName: "Emeka Okafor",
-    customerEmail: "emeka.o@enterprise.ng",
-    finalAmount: "₦3,250,000",
-    taxAmount: "₦243,750",
-    paymentMethods: "Corporate Wire",
-    taxType: "VAT + WHT",
-  },
-  {
-    id: "6",
-    orderId: "#ORD-98372",
-    dateTime: "16-09-2026 10:45",
-    customerName: "Zainab Bello",
-    customerEmail: "zainab.b@outlook.com",
-    finalAmount: "₦1,287,600",
-    taxAmount: "₦96,570",
-    paymentMethods: "KoolPay Wallet",
-    taxType: "VAT (7.5%)",
-  },
-  {
-    id: "7",
-    orderId: "#ORD-98360",
-    dateTime: "15-09-2026 15:22",
-    customerName: "Kelechi Eze",
-    customerEmail: "kelechi.eze@gmail.com",
-    finalAmount: "₦620,000",
-    taxAmount: "₦46,500",
-    paymentMethods: "Debit Card",
-    taxType: "VAT (7.5%)",
-  },
-  {
-    id: "8",
-    orderId: "#ORD-98351",
-    dateTime: "15-09-2026 09:18",
-    customerName: "Tunde Babalola",
-    customerEmail: "tunde.b@example.com",
-    finalAmount: "₦1,662,370",
-    taxAmount: "₦124,678",
-    paymentMethods: "BNPL Installment",
-    taxType: "VAT (7.5%)",
-  },
-  {
-    id: "9",
-    orderId: "#ORD-98344",
-    dateTime: "14-09-2026 17:50",
-    customerName: "Folake Adeleke",
-    customerEmail: "folake.a@gmail.com",
-    finalAmount: "₦940,000",
-    taxAmount: "₦70,500",
-    paymentMethods: "Debit Card",
-    taxType: "VAT (7.5%)",
-  },
-  {
-    id: "10",
-    orderId: "#ORD-98330",
-    dateTime: "14-09-2026 13:10",
-    customerName: "Ibrahim Musa",
-    customerEmail: "ibrahim.m@north.ng",
-    finalAmount: "₦1,890,000",
-    taxAmount: "₦141,750",
-    paymentMethods: "Bank Transfer",
-    taxType: "VAT (7.5%)",
-  },
-];
-
-const tabs = ["All Taxes", "VAT (7.5%)", "Withholding Tax (5%)"];
-
 export default function TaxesReportPage() {
-  const [activeTab, setActiveTab] = useState("All Taxes");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
+  const router = useRouter();
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+  const [vatOnly, setVatOnly] = useState(false);
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
-  const [selectedRecord, setSelectedRecord] = useState<TaxRecord | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // Filter records
-  const filteredRecords = useMemo(() => {
-    return initialTaxRecords.filter((record) => {
-      // Tab filter
-      if (activeTab === "VAT (7.5%)" && !record.taxType.includes("VAT")) {
-        return false;
-      }
-      if (
-        activeTab === "Withholding Tax (5%)" &&
-        !record.taxType.includes("WHT")
-      ) {
-        return false;
-      }
+  // Debounce the search box into the query sent to the server.
+  useEffect(() => {
+    const id = setTimeout(() => setQuery(search.trim()), 300);
+    return () => clearTimeout(id);
+  }, [search]);
 
-      // Search query
-      if (searchQuery.trim()) {
-        const query = searchQuery.toLowerCase();
-        const matchesOrder = record.orderId.toLowerCase().includes(query);
-        const matchesCustomer = record.customerName
-          .toLowerCase()
-          .includes(query);
-        const matchesPayment = record.paymentMethods
-          .toLowerCase()
-          .includes(query);
-        const matchesAmount = record.finalAmount.toLowerCase().includes(query);
-        const matchesTax = record.taxAmount.toLowerCase().includes(query);
+  const rangeInvalid = !!from && !!to && from > to;
 
-        return (
-          matchesOrder ||
-          matchesCustomer ||
-          matchesPayment ||
-          matchesAmount ||
-          matchesTax
-        );
-      }
-
-      return true;
-    });
-  }, [activeTab, searchQuery]);
-
-  // Paginated records
-  const paginatedRecords = useMemo(() => {
-    const start = (currentPage - 1) * rowsPerPage;
-    return filteredRecords.slice(start, start + rowsPerPage);
-  }, [filteredRecords, currentPage, rowsPerPage]);
-
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredRecords.length / rowsPerPage),
+  const { data, isLoading, isFetching, isError, error, refetch } = useGetTaxesQuery(
+    {
+      q: query || undefined,
+      vat_only: vatOnly || undefined,
+      from: from || undefined,
+      to: to || undefined,
+      page: currentPage,
+      page_size: rowsPerPage,
+    },
+    { skip: rangeInvalid },
   );
+
+  const items = data?.items ?? [];
+  const totals = data?.totals ?? [];
+  const policy = data?.policy ?? null;
+  const totalPages = data?.pagination ? Math.max(1, Math.ceil(data.pagination.total / rowsPerPage)) : 1;
+  const filtered = !!(query || vatOnly || from || to);
+  const on = vatIsOn(policy);
+
+  const statValue = (render: (t: TaxesResponse["totals"][number]) => string, empty: string) => {
+    if (isLoading) return <span className="inline-block h-7 w-20 rounded bg-black/[0.06] animate-pulse align-middle" />;
+    if (totals.length === 0) return empty;
+    return (
+      <span className="flex flex-col gap-0.5">
+        {totals.map((t) => (
+          <span key={t.currency}>{render(t)}</span>
+        ))}
+      </span>
+    );
+  };
+
+  const resetPage = () => setCurrentPage(1);
 
   return (
     <div className="flex flex-col gap-6 pb-12">
-      {/* Header Area */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          {/* <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
-            Taxes
-          </h1>
-          <p className="text-xs text-gray-500 mt-0.5">
-            Audit collected tax transactions, VAT applied, and revenue compliance
-          </p> */}
-        </div>
-
-        <div className="flex items-center gap-3 w-full sm:w-auto">
-          <Link href="/admin/tax">
-            <Button
-              variant="outline"
-              size="md"
-              iconLeft={<HiOutlineAdjustmentsHorizontal size={18} />}
-              className="border-gray-200 text-gray-800 hover:bg-gray-50 px-4 py-2 text-xs sm:text-sm font-semibold"
+      {/* Financing policy (read-only: VAT can't be changed through the API) */}
+      <div className="bg-white rounded-lg border border-light-gray p-4 sm:p-6 flex flex-col gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h2 className="text-sm font-semibold text-brand-charcoal">VAT policy</h2>
+            <p className="text-[12px] text-faint">From the active BNPL financing policy</p>
+          </div>
+          {policy && (
+            <span
+              className={`self-start sm:self-auto inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold ${
+                on ? "bg-success-soft text-success" : "bg-off-white text-subtle"
+              }`}
             >
-              Configure Tax Rates
-            </Button>
-          </Link>
-
-          <Button
-            variant="blue"
-            size="md"
-            iconLeft={<HiOutlineDocumentArrowDown size={18} />}
-            className="px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold bg-brand-charcoal hover:bg-brand-charcoal/90 text-white"
-            onClick={() => setIsExportModalOpen(true)}
-          >
-            Export Tax Report
-          </Button>
+              {on ? `VAT on at ${pct(policy.vat_rate)}` : "VAT off"}
+            </span>
+          )}
         </div>
+
+        {isLoading ? (
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4" aria-hidden>
+            {Array.from({ length: 5 }, (_, i) => (
+              <span key={i} className="block h-9 rounded bg-black/[0.06] animate-pulse" />
+            ))}
+          </div>
+        ) : policy ? (
+          <dl className="grid grid-cols-2 md:grid-cols-5 gap-4 text-xs">
+            {[
+              ["VAT", on ? `On at ${pct(policy.vat_rate)}` : "Off"],
+              ["Applies to", humanize(policy.vat_applies_to)],
+              ["Delivery fee VAT-able", policy.delivery_fee_vatable ? "Yes" : "No"],
+              ["Market", policy.market],
+              ["Policy version", `v${policy.version}`],
+            ].map(([label, value]) => (
+              <div key={label} className="flex flex-col gap-0.5">
+                <dt className="text-faint">{label}</dt>
+                <dd className="font-semibold text-brand-charcoal">{value}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : !isError ? (
+          <p className="text-xs text-subtle">No active financing policy was found.</p>
+        ) : null}
+
+        {!isLoading && !on && (
+          <div className="flex items-start gap-2 rounded-md bg-off-white p-3 text-xs text-subtle">
+            <HiOutlineInformationCircle size={16} className="shrink-0 mt-px text-faint" />
+            <p>
+              VAT is currently off in the financing policy, so no VAT has been charged. Only BNPL financing invoices
+              can carry VAT; regular orders don&apos;t.
+            </p>
+          </div>
+        )}
       </div>
 
-      {/* 2 Cards (Type Of Taxes Applied, Total Tax Collected) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {/* 1. Type Of Taxes Applied */}
+      {/* Totals for the current filters, per currency */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
         <StatCard
-          size="sm"
-          title="Type Of Taxes Applied"
-          value="VAT (7.5%), WHT (5%)"
-          trendValue="100% Active"
-          trendIsUp={true}
-          subtitle="Standard VAT & Withholding Tax"
+          title="VAT collected"
+          value={statValue((t) => formatMoney(t.vat_total, t.currency), formatMoney(0))}
+          periodLabel={filtered ? "Matching filters" : "All issued invoices"}
         />
-
-        {/* 2. Total Tax Collected */}
         <StatCard
-          size="sm"
-          title="Total Tax Collected"
-          value="₦14,820,000"
-          trendValue="11.8%"
-          trendIsUp={true}
-          subtitle="+₦1.2M this month"
+          title="Taxable amount"
+          value={statValue((t) => formatMoney(t.taxable_total, t.currency), formatMoney(0))}
+          periodLabel="Base VAT was charged on"
+        />
+        <StatCard
+          title="Invoices"
+          value={statValue(
+            (t) => (totals.length > 1 ? `${t.invoices_count.toLocaleString()} ${t.currency}` : t.invoices_count.toLocaleString()),
+            "0",
+          )}
+          periodLabel="Issued, not voided"
+        />
+        <StatCard
+          title="Current VAT rate"
+          value={
+            isLoading ? (
+              <span className="inline-block h-7 w-20 rounded bg-black/[0.06] animate-pulse align-middle" />
+            ) : on ? (
+              pct(policy?.vat_rate)
+            ) : (
+              "0%"
+            )
+          }
+          periodLabel={on ? `On ${humanize(policy?.vat_applies_to).toLowerCase()}` : "VAT is off"}
         />
       </div>
 
-      {/* Main Table Card */}
-      <div className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden flex flex-col">
-        {/* Filter Controls Row */}
-        <div className="p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between border-b border-gray-50">
-          <TabFilter
-            tabs={tabs}
-            activeTab={activeTab}
-            onChange={(tab) => {
-              setActiveTab(tab);
-              setCurrentPage(1);
-            }}
-            id="taxes-tab-filter"
-          />
-
-          <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
-            <Input
-              type="text"
-              placeholder="Search order ID, customer, payment..."
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setCurrentPage(1);
+      {/* Invoices */}
+      <div className="bg-white rounded-lg overflow-hidden flex flex-col border border-light-gray">
+        <div className="p-4 sm:p-6 flex flex-col xl:flex-row gap-4 xl:items-end justify-between border-b border-light-gray">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+            <Dropdown
+              options={[
+                { value: "all", label: "All invoices" },
+                { value: "vat_only", label: "VAT-charged only" },
+              ]}
+              value={vatOnly ? "vat_only" : "all"}
+              onChange={(val) => {
+                setVatOnly(val === "vat_only");
+                resetPage();
               }}
-              containerClassName="w-full lg:w-80 xl:w-96"
-              className="bg-white border-gray-100 placeholder:text-gray-400 text-xs font-medium"
-              suffixElement={
-                <Icon
-                  name="search-01"
-                  folder="dashboardIcon"
-                  size="sm"
-                  className="text-gray-400"
-                />
-              }
+              searchable={false}
+              size="sm"
+              className="w-full sm:w-44"
             />
 
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full sm:w-auto sm:min-w-[320px]">
+              <DatePicker
+                label="From"
+                hideLabel
+                placeholder="From date"
+                value={from}
+                max={to || undefined}
+                onChange={(v: string) => {
+                  setFrom(v);
+                  resetPage();
+                }}
+                align="left"
+                clearable
+              />
+              <DatePicker
+                label="To"
+                hideLabel
+                placeholder="To date"
+                value={to}
+                min={from || undefined}
+                onChange={(v: string) => {
+                  setTo(v);
+                  resetPage();
+                }}
+                align="left"
+                clearable
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-3 w-full xl:w-auto">
+            <Input
+              type="search"
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                resetPage();
+              }}
+              placeholder="Search invoice number or retailer"
+              aria-label="Search invoices"
+              containerClassName="w-full xl:w-80"
+              className="bg-white border-light-gray placeholder:text-faint text-xs font-medium"
+              suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-faint" />}
+            />
             <div className="flex items-center gap-3 w-full sm:w-auto">
               <RowsPerPage
                 value={rowsPerPage}
-                onChange={(val) => {
-                  setRowsPerPage(val);
-                  setCurrentPage(1);
+                options={[10, 20, 50, 100]}
+                onChange={(n) => {
+                  setRowsPerPage(n);
+                  resetPage();
                 }}
               />
+              <Button
+                variant="outline"
+                shape="rounded-sm"
+                className="ml-auto sm:ml-0 whitespace-nowrap"
+                onClick={() => downloadPageCsv(items)}
+                disabled={items.length === 0}
+                iconLeft={<HiOutlineArrowDownTray size={14} />}
+                title="Download the rows shown on this page as CSV"
+              >
+                Export this page
+              </Button>
             </div>
           </div>
         </div>
 
-        {/* Table Area */}
-        <div className="admin-table-container">
+        <div className={`admin-table-container transition-opacity ${isFetching && !isLoading ? "opacity-60" : ""}`}>
           <table>
             <thead>
               <tr>
-                <th>Order ID</th>
-                <th>Date & Time</th>
-                <th>Customer Name</th>
-                <th>Final Amount</th>
-                <th>Tax Amount</th>
-                <th>Payment Methods</th>
+                <th>Invoice #</th>
+                <th>Issued</th>
+                <th>Retailer</th>
+                <th>Taxable subtotal</th>
+                <th>VAT rate</th>
+                <th>VAT amount</th>
+                <th>Total payable</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
-              {paginatedRecords.length > 0 ? (
-                paginatedRecords.map((record) => (
+              {rangeInvalid ? (
+                <tr>
+                  <td colSpan={COLUMNS} className="py-16 text-center text-[13px] text-error">
+                    The start date is after the end date.
+                  </td>
+                </tr>
+              ) : isLoading ? (
+                Array.from({ length: Math.min(rowsPerPage, 8) }, (_, i) => (
+                  <tr key={`sk-${i}`} aria-hidden>
+                    {Array.from({ length: COLUMNS }, (_, j) => (
+                      <td key={j}>
+                        <span className="block h-3 w-20 rounded bg-black/[0.06] animate-pulse" />
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              ) : isError ? (
+                <tr>
+                  <td colSpan={COLUMNS} className="py-16 text-center">
+                    <div className="flex flex-col items-center gap-3">
+                      <p className="text-[13px] text-error">{apiErrorMessage(error, "Couldn't load VAT invoices.")}</p>
+                      <Button variant="outline" size="sm" onClick={() => refetch()}>
+                        Try again
+                      </Button>
+                    </div>
+                  </td>
+                </tr>
+              ) : items.length === 0 ? (
+                vatOnly && !on ? (
+                  <EmptyTableRow
+                    colSpan={COLUMNS}
+                    illustration="invoices"
+                    title="No VAT charged"
+                    description="No invoice has VAT charged, because VAT is off in the financing policy."
+                    action={{
+                      label: "Show all invoices",
+                      onClick: () => {
+                        setVatOnly(false);
+                        resetPage();
+                      },
+                    }}
+                  />
+                ) : filtered ? (
+                  <EmptyTableRow
+                    colSpan={COLUMNS}
+                    illustration="search"
+                    title="No matches"
+                    description="No invoices match these filters."
+                    action={{
+                      label: "Clear filters",
+                      onClick: () => {
+                        setSearch("");
+                        setQuery("");
+                        setVatOnly(false);
+                        setFrom("");
+                        setTo("");
+                        resetPage();
+                      },
+                    }}
+                  />
+                ) : (
+                  <EmptyTableRow
+                    colSpan={COLUMNS}
+                    illustration="invoices"
+                    title="No VAT yet"
+                    description="VAT will appear here once invoices are issued with VAT. Only BNPL financing invoices carry it."
+                  />
+                )
+              ) : (
+                items.map((row) => (
                   <tr
-                    key={record.id}
-                    onClick={() => setSelectedRecord(record)}
-                    className="hover:bg-gray-50/60 transition-colors"
+                    key={row.id}
+                    onClick={() => router.push(`/admin/bnpl-orders/${row.id}`)}
+                    className="cursor-pointer"
                   >
-                    {/* Order ID */}
-                    <td className="font-mono font-bold text-xs text-brand-orange-text whitespace-nowrap">
-                      {record.orderId}
+                    <td className="whitespace-nowrap">
+                      <Link
+                        href={`/admin/bnpl-orders/${row.id}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-xs font-semibold text-brand-orange-text hover:underline"
+                      >
+                        {row.invoice_number}
+                      </Link>
                     </td>
-
-                    {/* Date & Time */}
-                    <td className="text-xs text-gray-500 whitespace-nowrap">
-                      {record.dateTime}
-                    </td>
-
-                    {/* Customer Name */}
+                    <td className="text-xs text-subtle whitespace-nowrap">{formatDate(row.issued_at)}</td>
                     <td>
                       <div className="flex flex-col">
-                        <span className="text-xs font-bold text-gray-900 whitespace-nowrap">
-                          {record.customerName}
-                        </span>
-                        <span className="text-[11px] text-gray-400">
-                          {record.customerEmail}
-                        </span>
+                        <span className="text-xs font-medium text-brand-charcoal">{retailerName(row.retailer)}</span>
+                        {row.retailer?.business_name && row.retailer?.name && (
+                          <span className="text-[11px] text-subtle">{row.retailer.name}</span>
+                        )}
+                        {row.retailer?.email && <span className="text-[11px] text-faint">{row.retailer.email}</span>}
                       </div>
                     </td>
-
-                    {/* Final Amount */}
-                    <td className="font-bold text-xs text-gray-900 whitespace-nowrap">
-                      {record.finalAmount}
+                    <td className="text-xs text-brand-charcoal tabular-nums whitespace-nowrap">
+                      {formatMoney(row.taxable_subtotal, row.currency)}
                     </td>
-
-                    {/* Tax Amount */}
-                    <td className="text-xs whitespace-nowrap">
-                      <span className="font-bold text-brand-orange-text bg-brand-orange-soft px-2.5 py-1 rounded-md border border-brand-orange/15">
-                        {record.taxAmount}
-                      </span>
+                    <td className="text-xs text-subtle tabular-nums whitespace-nowrap">{pct(row.vat_rate)}</td>
+                    <td className="text-xs font-semibold text-brand-charcoal tabular-nums whitespace-nowrap">
+                      {formatMoney(row.vat_amount, row.currency)}
                     </td>
-
-                    {/* Payment Methods */}
-                    <td className="text-xs whitespace-nowrap">
-                      <span className="font-medium text-gray-700 bg-gray-50 px-2.5 py-1 rounded-md border border-gray-200">
-                        {record.paymentMethods}
-                      </span>
+                    <td className="text-xs text-brand-charcoal tabular-nums whitespace-nowrap">
+                      {formatMoney(row.total_payable, row.currency)}
+                    </td>
+                    <td>
+                      <StatusBadge status={row.status} />
                     </td>
                   </tr>
                 ))
-              ) : (
-                <tr>
-                  <td
-                    colSpan={6}
-                    className="py-12 text-center text-gray-400 text-xs"
-                  >
-                    No tax records found matching your criteria.
-                  </td>
-                </tr>
               )}
             </tbody>
           </table>
         </div>
 
-        {/* Pagination Footer */}
-        <div className="admin-pagination-footer">
-          <p className="text-xs text-gray-400">
-            Showing{" "}
-            <span className="font-bold text-gray-700">
-              {filteredRecords.length === 0
-                ? 0
-                : (currentPage - 1) * rowsPerPage + 1}
-            </span>{" "}
-            to{" "}
-            <span className="font-bold text-gray-700">
-              {Math.min(currentPage * rowsPerPage, filteredRecords.length)}
-            </span>{" "}
-            of{" "}
-            <span className="font-bold text-gray-700">
-              {filteredRecords.length}
-            </span>{" "}
-            entries
-          </p>
-
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
-          />
-        </div>
+        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
       </div>
-
-      {/* Tax Record Details Modal */}
-      {selectedRecord && (
-        <Modal
-          isOpen={!!selectedRecord}
-          onClose={() => setSelectedRecord(null)}
-        >
-          <ModalBody>
-            <div className="space-y-4 pt-2">
-              <div className="flex items-center justify-between border-b border-gray-100 pb-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center">
-                    <HiOutlineReceiptPercent className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-gray-900 text-sm">
-                      Tax Assessment for {selectedRecord.orderId}
-                    </h3>
-                    <p className="text-xs text-gray-400">
-                      {selectedRecord.dateTime}
-                    </p>
-                  </div>
-                </div>
-                <span className="font-bold text-xs bg-brand-orange-soft text-brand-orange-text px-2.5 py-1 rounded-md border border-brand-orange/15">
-                  {selectedRecord.taxType}
-                </span>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3 text-xs">
-                <div className="p-3 bg-gray-50 rounded-lg border border-gray-100">
-                  <span className="text-gray-400">Customer</span>
-                  <p className="font-bold text-gray-900 mt-0.5">
-                    {selectedRecord.customerName}
-                  </p>
-                  <p className="text-[11px] text-gray-500">
-                    {selectedRecord.customerEmail}
-                  </p>
-                </div>
-
-                <div className="p-3 bg-gray-50 rounded-lg border border-gray-100">
-                  <span className="text-gray-400">Final Order Amount</span>
-                  <p className="font-bold text-gray-900 text-sm mt-0.5">
-                    {selectedRecord.finalAmount}
-                  </p>
-                  <p className="text-[11px] text-gray-500">
-                    Via {selectedRecord.paymentMethods}
-                  </p>
-                </div>
-
-                <div className="p-3 bg-brand-orange-soft/50 rounded-lg border border-brand-orange/15 col-span-2 flex items-center justify-between">
-                  <div>
-                    <span className="text-gray-500">Total Tax Levied</span>
-                    <p className="text-[11px] text-gray-400">
-                      Standard VAT calculation on taxable merchandise
-                    </p>
-                  </div>
-                  <span className="text-base font-bold text-brand-orange-text">
-                    {selectedRecord.taxAmount}
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex justify-end pt-2">
-                <Button
-                  size="sm"
-                  className="bg-brand-charcoal text-white"
-                  onClick={() => setSelectedRecord(null)}
-                >
-                  Close
-                </Button>
-              </div>
-            </div>
-          </ModalBody>
-        </Modal>
-      )}
-
-      {/* Export Tax Report Modal */}
-      <Modal
-        isOpen={isExportModalOpen}
-        onClose={() => setIsExportModalOpen(false)}
-      >
-        <ModalBody>
-          <div className="space-y-4 pt-2 text-center">
-            <div className="w-12 h-12 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center mx-auto">
-              <HiOutlineDocumentArrowDown className="w-6 h-6" />
-            </div>
-            <div>
-              <h3 className="font-bold text-gray-900 text-base">
-                Export Tax & VAT Audit Report
-              </h3>
-              <p className="text-xs text-gray-500 mt-1">
-                Download tax ledger for statutory compliance, FIRS submission,
-                and accounting reconciliation.
-              </p>
-            </div>
-            <div className="flex justify-center gap-3 pt-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setIsExportModalOpen(false)}
-              >
-                Cancel
-              </Button>
-              <Button
-                size="sm"
-                className="bg-brand-charcoal text-white"
-                onClick={() => setIsExportModalOpen(false)}
-              >
-                Download CSV
-              </Button>
-            </div>
-          </div>
-        </ModalBody>
-      </Modal>
     </div>
   );
 }

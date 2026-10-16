@@ -87,11 +87,11 @@ export function CustomerSideCard({ customer, onClose }: CustomerSideCardProps) {
         <div className="flex flex-col gap-3">
           <div className="flex justify-between items-baseline p-2.5 bg-gray-50/30 rounded-lg">
             <span className="text-xs font-medium text-gray-400">Registration:</span>
-            <span className="text-xs font-bold text-gray-700">{customer.registration}</span>
+            <span className="text-xs font-bold text-gray-700">{customer.registration || "—"}</span>
           </div>
           <div className="flex justify-between items-baseline p-2.5 bg-gray-50/30 rounded-lg">
             <span className="text-xs font-medium text-gray-400">Last purchase:</span>
-            <span className="text-xs font-bold text-gray-700">{customer.lastPurchase}</span>
+            <span className="text-xs font-bold text-gray-700">{customer.last_purchase || customer.lastPurchase || "—"}</span>
           </div>
         </div>
       </div>
@@ -102,17 +102,23 @@ export function CustomerSideCard({ customer, onClose }: CustomerSideCardProps) {
         </span>
         <div className="grid grid-cols-3 gap-3">
           <div className="p-3 bg-white border border-gray-50 rounded-lg flex flex-col items-center gap-1 shadow-sm">
-            <span className="text-lg font-bold text-brand-charcoal">150</span>
+            <span className="text-lg font-bold text-brand-charcoal">
+              {customer.orders_summary?.total ?? customer.order_count ?? customer.orderCount ?? 0}
+            </span>
             <span className="text-[11px] font-bold text-gray-400 uppercase">Total order</span>
           </div>
           <div className="p-3 bg-white border border-gray-50 rounded-lg flex flex-col items-center gap-1 shadow-sm border-brand-orange/15">
-            <span className="text-lg font-bold text-brand-orange-text">140</span>
+            <span className="text-lg font-bold text-brand-orange-text">
+              {customer.orders_summary?.completed ?? 0}
+            </span>
             <span className="text-[11px] font-bold text-brand-orange-text/60 uppercase text-center">
               Completed
             </span>
           </div>
           <div className="p-3 bg-white border border-gray-50 rounded-lg flex flex-col items-center gap-1 shadow-sm border-rose-50">
-            <span className="text-lg font-bold text-rose-500">10</span>
+            <span className="text-lg font-bold text-rose-500">
+              {customer.orders_summary?.cancelled ?? 0}
+            </span>
             <span className="text-[11px] font-bold text-rose-500/60 uppercase">Canceled</span>
           </div>
         </div>
