@@ -31,6 +31,7 @@ interface DisplayVendor {
   productsCount: number;
   totalRevenue: string;
   status: "Active" | "Awaiting Approval" | "Blocked";
+  role?: "retailer" | "wholesaler";
   rating: number;
   joinedDate: string;
 }
@@ -45,6 +46,7 @@ const FALLBACK_VENDORS: DisplayVendor[] = [
     productsCount: 42,
     totalRevenue: "₦28,450,000",
     status: "Active",
+    role: "retailer",
     rating: 4.8,
     joinedDate: "15 Jan 2025",
   },
@@ -57,6 +59,7 @@ const FALLBACK_VENDORS: DisplayVendor[] = [
     productsCount: 18,
     totalRevenue: "₦14,200,000",
     status: "Active",
+    role: "wholesaler",
     rating: 4.9,
     joinedDate: "20 Feb 2025",
   },
@@ -69,6 +72,7 @@ const FALLBACK_VENDORS: DisplayVendor[] = [
     productsCount: 29,
     totalRevenue: "₦19,800,000",
     status: "Awaiting Approval",
+    role: "retailer",
     rating: 4.6,
     joinedDate: "05 Mar 2025",
   },
@@ -142,6 +146,7 @@ export default function VendorsPage() {
           productsCount: s.product_count ?? 0,
           totalRevenue: `₦${((s.order_count ?? 0) * 850000).toLocaleString()}`,
           status,
+          role: s.role === "wholesaler" ? "wholesaler" : "retailer",
           rating: s.rating ? Number(s.rating) : 4.5,
           joinedDate: formattedDate,
         };
@@ -215,6 +220,25 @@ export default function VendorsPage() {
       refetch();
     } catch {
       toast.error("Failed to suspend vendor.");
+    }
+  };
+
+  const handleToggleRole = async (vendor: DisplayVendor) => {
+    const raw = rawItems.find((s) => s.id === vendor.id);
+    const sellerId = raw?.id ?? vendor.id;
+    const currentRole = vendor.role === "wholesaler" ? "wholesaler" : "retailer";
+    const targetRole: "wholesaler" | "retailer" = currentRole === "wholesaler" ? "retailer" : "wholesaler";
+    try {
+      await updateSeller({
+        sellerId,
+        role: targetRole,
+      }).unwrap();
+      toast.success(`${vendor.name} role switched to ${targetRole}.`);
+      setActionMenuOpenId(null);
+      refetch();
+    } catch (err: unknown) {
+      const errObj = err as { data?: { message?: string; error?: string } };
+      toast.error(errObj?.data?.message || errObj?.data?.error || "Failed to switch vendor role.");
     }
   };
 
@@ -451,6 +475,7 @@ export default function VendorsPage() {
                 <th>Vendor</th>
                 <th>Owner</th>
                 <th>Contact</th>
+                <th className="px-3">Role</th>
                 <th>Products</th>
                 <th>Revenue</th>
                 <th>Status</th>
@@ -460,7 +485,7 @@ export default function VendorsPage() {
             <tbody className="divide-y divide-light-gray text-xs text-gray-600">
               {isLoading ? (
                 <tr>
-                  <td colSpan={8} className="py-16 text-center text-gray-400">
+                  <td colSpan={9} className="py-16 text-center text-gray-400">
                     <div className="flex flex-col items-center gap-2">
                       <div className="w-6 h-6 border-2 border-brand-orange border-t-transparent rounded-full animate-spin" />
                       <span>Loading vendors from KoolBuy engine...</span>
@@ -469,7 +494,7 @@ export default function VendorsPage() {
                 </tr>
               ) : vendorsList.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="py-16 text-center text-gray-400">
+                  <td colSpan={9} className="py-16 text-center text-gray-400">
                     <div className="flex flex-col items-center justify-center gap-2">
                       <Icon name="search" size="md" className="text-gray-300" />
                       <p className="font-semibold text-gray-600">
@@ -514,6 +539,17 @@ export default function VendorsPage() {
                           {vendor.phone}
                         </div>
                       </td>
+                      <td className="px-3">
+                        <span
+                          className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold capitalize ${
+                            vendor.role === "wholesaler"
+                              ? "bg-purple-50 text-purple-700 border border-purple-200"
+                              : "bg-blue-50 text-blue-700 border border-blue-200"
+                          }`}
+                        >
+                          {vendor.role || "retailer"}
+                        </span>
+                      </td>
                       <td className="font-semibold text-gray-900">
                         {vendor.productsCount}
                       </td>
@@ -545,13 +581,23 @@ export default function VendorsPage() {
 
                         {/* Action Dropdown Menu */}
                         {isMenuOpen && (
-                          <div className="absolute right-4 top-10 w-44 bg-white rounded-xl shadow-lift border border-light-gray py-1.5 z-30 flex flex-col text-left">
+                          <div className="absolute right-4 top-10 w-48 bg-white rounded-xl shadow-lift border border-light-gray py-1.5 z-30 flex flex-col text-left">
+                            {/* Role Switch Action */}
+                            <button
+                              type="button"
+                              disabled={isUpdating}
+                              onClick={() => handleToggleRole(vendor)}
+                              className="px-4 py-2 text-xs font-medium text-purple-700 hover:bg-purple-50 transition-colors text-left flex items-center gap-2 cursor-pointer"
+                            >
+                              <span className="text-sm">⇄</span> Switch to {vendor.role === "wholesaler" ? "Retailer" : "Wholesaler"}
+                            </button>
+
                             {vendor.status === "Awaiting Approval" && (
                               <button
                                 type="button"
                                 disabled={isUpdating}
                                 onClick={() => handleApprove(vendor)}
-                                className="px-4 py-2 text-xs font-medium text-emerald-600 hover:bg-emerald-50 transition-colors text-left flex items-center gap-2 cursor-pointer"
+                                className="px-4 py-2 text-xs font-medium text-emerald-600 hover:bg-emerald-50 transition-colors text-left flex items-center gap-2 cursor-pointer border-t border-light-gray"
                               >
                                 <span>✓</span> Approve Vendor
                               </button>
@@ -564,7 +610,7 @@ export default function VendorsPage() {
                                   setVendorToSuspend(vendor);
                                   setActionMenuOpenId(null);
                                 }}
-                                className="px-4 py-2 text-xs font-medium text-rose-600 hover:bg-rose-50 transition-colors text-left flex items-center gap-2 cursor-pointer"
+                                className="px-4 py-2 text-xs font-medium text-rose-600 hover:bg-rose-50 transition-colors text-left flex items-center gap-2 cursor-pointer border-t border-light-gray"
                               >
                                 <span>✕</span> Suspend Store
                               </button>
@@ -575,7 +621,7 @@ export default function VendorsPage() {
                                 type="button"
                                 disabled={isReactivating}
                                 onClick={() => handleReactivate(vendor)}
-                                className="px-4 py-2 text-xs font-medium text-blue-600 hover:bg-blue-50 transition-colors text-left flex items-center gap-2 cursor-pointer"
+                                className="px-4 py-2 text-xs font-medium text-blue-600 hover:bg-blue-50 transition-colors text-left flex items-center gap-2 cursor-pointer border-t border-light-gray"
                               >
                                 <span>↺</span> Reactivate Store
                               </button>

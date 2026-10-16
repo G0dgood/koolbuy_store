@@ -123,6 +123,8 @@ export interface UpdateAdminSellerPayload {
   sellerId: string;
   is_verified?: boolean;
   is_active?: boolean;
+  role?: "retailer" | "wholesaler";
+  business_type?: string;
   reason?: string;
 }
 
