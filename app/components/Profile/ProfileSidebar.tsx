@@ -1,8 +1,19 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Icon } from "../Icon";
+import { useGetProfileQuery, useLogoutMutation, type UserProfile } from "@/lib/store/api/auth-api";
+import {
+  readStoredTokens,
+  readStoredUser,
+  clearStoredTokens,
+  writeStoredUser,
+  AUTH_CHANGED_EVENT,
+} from "@/lib/api";
+import { toast } from "sonner";
 
 interface NavItem {
   label: string;
@@ -13,11 +24,57 @@ interface NavItem {
 
 export const ProfileSidebar: React.FC = () => {
   const pathname = usePathname();
+  const [hasToken, setHasToken] = useState<boolean>(false);
+  const [cachedUser, setCachedUser] = useState<UserProfile | null>(null);
+
+  const { data: profile } = useGetProfileQuery(undefined, {
+    skip: !hasToken,
+  });
+
+  useEffect(() => {
+    const syncSession = () => {
+      const tokens = readStoredTokens();
+      const tokenExists = Boolean(tokens?.access);
+      setHasToken(tokenExists);
+      setCachedUser(tokenExists ? readStoredUser<UserProfile>() : null);
+    };
+    syncSession();
+    window.addEventListener(AUTH_CHANGED_EVENT, syncSession);
+    window.addEventListener("storage", syncSession);
+    return () => {
+      window.removeEventListener(AUTH_CHANGED_EVENT, syncSession);
+      window.removeEventListener("storage", syncSession);
+    };
+  }, []);
+
+  const [logoutUser] = useLogoutMutation();
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser().unwrap();
+    } catch {
+      /* ignore */
+    } finally {
+      clearStoredTokens();
+      writeStoredUser(null);
+      toast.success("Logged out successfully");
+      window.location.href = "/";
+    }
+  };
+
+  const user = profile || cachedUser;
+  const displayName =
+    user?.name ||
+    [user?.first_name, user?.last_name].filter(Boolean).join(" ") ||
+    user?.email?.split("@")[0] ||
+    "My Account";
+
+  const displayRole = user?.role
+    ? user.role.charAt(0).toUpperCase() + user.role.slice(1)
+    : "Verified user";
 
   const navItems: NavItem[] = [
     { label: "Personal info", href: "/profile", icon: "profile" },
-    // { label: "My orders", href: "/orders", icon: "favorite" },
-    // { label: "Messages", href: "/messages", icon: "message_header", badge: 2 },
     { label: "My wishlist", href: "/wishlist", icon: "favorite" },
     { label: "Settings", href: "/settings", icon: "Settings" },
   ];
@@ -29,7 +86,7 @@ export const ProfileSidebar: React.FC = () => {
         <div className="relative group cursor-pointer mb-4">
           <div className="w-20 h-20 rounded-full overflow-hidden bg-off-white">
             <Image
-              src="/avatars/avatar=pic1.jpg"
+              src={user?.profile_image_url || "/avatars/avatar=pic1.jpg"}
               alt="User Avatar"
               width={96}
               height={96}
@@ -40,10 +97,14 @@ export const ProfileSidebar: React.FC = () => {
             <Icon name="edit" size="xs" />
           </div>
         </div>
-        <h3 className="text-[19px] font-semibold text-brand-charcoal tracking-[-0.01em] leading-tight">Alex John</h3>
-        <p className="mt-0.5 text-[13px] text-subtle">Premium member</p>
+        <h3 className="text-[19px] font-semibold text-brand-charcoal tracking-[-0.01em] leading-tight">
+          {displayName}
+        </h3>
+        <p className="mt-0.5 text-[13px] text-subtle">
+          {user?.email || "Account overview"}
+        </p>
         <span className="mt-3 px-2.5 py-0.5 bg-brand-orange-soft text-brand-charcoal text-[12px] font-medium rounded-full">
-          Verified buyer
+          {displayRole}
         </span>
       </div>
 
@@ -56,19 +117,29 @@ export const ProfileSidebar: React.FC = () => {
               key={item.href}
               href={item.href}
               className={`flex items-center gap-3 px-4 h-11 rounded-xl text-[15px] transition-colors duration-200 group
-                ${isActive
-                  ? "bg-brand-orange-soft text-brand-charcoal font-medium"
-                  : "text-brand-charcoal hover:bg-black/[0.04]"}`}
+                ${
+                  isActive
+                    ? "bg-brand-orange-soft text-brand-charcoal font-medium"
+                    : "text-brand-charcoal hover:bg-black/[0.04]"
+                }`}
             >
               <Icon
                 name={item.icon}
                 size="sm"
-                className={`transition-colors ${isActive ? "text-brand-orange-text" : "text-faint"}`}
+                className={`transition-colors ${
+                  isActive ? "text-brand-orange-text" : "text-faint"
+                }`}
               />
               <span className="flex-1">{item.label}</span>
               {item.badge && (
-                <span className={`min-w-5 h-5 px-1.5 rounded-full flex items-center justify-center text-[11px] font-semibold tabular-nums
-                  ${isActive ? "bg-brand-orange text-white" : "bg-black/[0.06] text-subtle"}`}>
+                <span
+                  className={`min-w-5 h-5 px-1.5 rounded-full flex items-center justify-center text-[11px] font-semibold tabular-nums
+                  ${
+                    isActive
+                      ? "bg-brand-orange text-white"
+                      : "bg-black/[0.06] text-subtle"
+                  }`}
+                >
                   {item.badge}
                 </span>
               )}
@@ -79,7 +150,11 @@ export const ProfileSidebar: React.FC = () => {
 
       {/* Footer Action */}
       <div className="p-3 border-t border-black/[0.06]">
-        <button className="flex items-center gap-3 px-4 h-11 text-error transition-colors w-full rounded-xl text-[15px] hover:bg-error-soft cursor-pointer">
+        <button
+          type="button"
+          onClick={handleLogout}
+          className="flex items-center gap-3 px-4 h-11 text-error transition-colors w-full rounded-xl text-[15px] hover:bg-error-soft cursor-pointer"
+        >
           <Icon name="logout" size="sm" />
           Log out
         </button>

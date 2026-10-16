@@ -8,7 +8,7 @@ import { useMobileMenu } from "@/app/context/MobileMenuContext";
 
 import { useAuthModal } from "@/app/context/AuthModalContext";
 import { useGetProfileQuery, useLogoutMutation, type UserProfile } from "@/lib/store/api/auth-api";
-import { readStoredTokens, readStoredUser } from "@/lib/api";
+import { readStoredTokens, readStoredUser, clearStoredTokens, writeStoredUser } from "@/lib/api";
 import { toast } from "sonner";
 import { FiShield, FiArrowRight, FiLogOut } from "react-icons/fi";
 
@@ -51,12 +51,16 @@ const MobileMenuSidebar = () => {
   const handleLogout = async () => {
     try {
       await logoutUser().unwrap();
+    } catch {
+      /* ignore */
+    } finally {
+      clearStoredTokens();
+      writeStoredUser(null);
       setHasToken(false);
       setCachedUser(null);
       closeMenu();
       toast.success("Logged out successfully");
-    } catch {
-      toast.error("Failed to log out");
+      window.location.href = "/";
     }
   };
 

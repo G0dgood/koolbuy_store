@@ -10,7 +10,13 @@ import {
   useLogoutMutation,
   type UserProfile,
 } from "@/lib/store/api/auth-api";
-import { AUTH_CHANGED_EVENT, readStoredTokens, readStoredUser } from "@/lib/api";
+import {
+  AUTH_CHANGED_EVENT,
+  readStoredTokens,
+  readStoredUser,
+  clearStoredTokens,
+  writeStoredUser,
+} from "@/lib/api";
 import { toast } from "sonner";
 import {
   FiShield,
@@ -122,13 +128,16 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
   const handleLogout = async () => {
     try {
       await logoutUser().unwrap();
+    } catch {
+      /* ignore */
+    } finally {
+      clearStoredTokens();
+      writeStoredUser(null);
       setIsOpen(false);
       setHasToken(false);
       setCachedUser(null);
       toast.success("Logged out successfully");
-      router.push("/");
-    } catch {
-      toast.error("Failed to log out. Please try again.");
+      window.location.href = "/";
     }
   };
 

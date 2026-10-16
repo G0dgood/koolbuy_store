@@ -4,10 +4,13 @@ import { Icon } from "../Icon";
 import { DropdownMenu, DropdownFooterAction } from "../Dropdown/DropdownMenu";
 import { useState } from "react";
 import { ConfirmationModal } from "./ConfirmationModal";
+import { useLogoutMutation } from "@/lib/store/api/auth-api";
+import { clearStoredTokens, writeStoredUser } from "@/lib/api";
 
 export const AdminProfileDropdown: React.FC = () => {
   const { userImage } = useUser();
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [logoutUser, { isLoading: isLoggingOut }] = useLogoutMutation();
   return (
     <div className="absolute top-full right-0 pt-4 z-50 cursor-default">
       <DropdownMenu
@@ -94,13 +97,21 @@ export const AdminProfileDropdown: React.FC = () => {
       <ConfirmationModal
         isOpen={isLogoutModalOpen}
         onClose={() => setIsLogoutModalOpen(false)}
-        onConfirm={() => {
-          console.log("Session terminated. Redirecting to login...");
-          // Implement actual logout logic/redirect here
+        onConfirm={async () => {
+          try {
+            await logoutUser().unwrap();
+          } catch {
+            /* ignore */
+          } finally {
+            clearStoredTokens();
+            writeStoredUser(null);
+            setIsLogoutModalOpen(false);
+            window.location.href = "/admin/login";
+          }
         }}
         title="Logout Session"
         message="Are you sure you want to end your current session? You will need to sign in again to access the administrative dashboard."
-        confirmText="Yes, Logout Now"
+        confirmText={isLoggingOut ? "Logging out..." : "Yes, Logout Now"}
         cancelText="Stay Logged In"
         type="danger"
       />
