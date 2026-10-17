@@ -102,7 +102,7 @@ export default function OrderDetails() {
     const notFound = !!error && typeof error === "object" && "status" in error && error.status === 404;
     return (
       <div className="flex flex-col gap-6 pb-12">
-        <Breadcrumbs items={[{ label: "Orders", href: "/admin/orders" }, { label: orderId || "Order" }]} />
+        <Breadcrumbs hideHome items={[{ label: "Orders", href: "/admin/orders" }, { label: orderId || "Order" }]} />
         {notFound ? (
           <EmptyState
             variant="card"
@@ -155,7 +155,7 @@ export default function OrderDetails() {
     <div className="flex flex-col gap-8 mx-auto pb-12">
       {/* Header */}
       <div className="flex flex-col gap-4">
-        <Breadcrumbs items={[{ label: "Orders", href: "/admin/orders" }, { label: order.order_number }]} />
+        <Breadcrumbs hideHome items={[{ label: "Orders", href: "/admin/orders" }, { label: order.order_number }]} />
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div className="flex flex-wrap items-center gap-3">
             <h1 className="font-mono text-2xl font-semibold text-brand-charcoal tracking-tight">{order.order_number}</h1>

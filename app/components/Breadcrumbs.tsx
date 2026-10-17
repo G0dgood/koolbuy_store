@@ -10,24 +10,29 @@ interface BreadcrumbItem {
 interface BreadcrumbsProps {
   items: BreadcrumbItem[];
   className?: string;
+  hideHome?: boolean;
 }
 
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = "" }) => {
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = "", hideHome = false }) => {
   return (
     <nav
       aria-label="Breadcrumb"
       className={`flex items-center gap-1.5 text-[12px] md:text-[13px] text-faint whitespace-nowrap overflow-x-auto scrollbar-none ${className}`}
     >
-      <Link
-        href="/"
-        aria-label="Home"
-        className="flex items-center text-faint hover:text-brand-charcoal transition-colors duration-200"
-      >
-        <Icon name="home" size="sm" />
-      </Link>
+      {!hideHome && (
+        <Link
+          href="/"
+          aria-label="Home"
+          className="flex items-center text-faint hover:text-brand-charcoal transition-colors duration-200"
+        >
+          <Icon name="home" size="sm" />
+        </Link>
+      )}
       {items.map((item, idx) => (
         <React.Fragment key={idx}>
-          <span aria-hidden="true" className="text-medium-gray">›</span>
+          {(!hideHome || idx > 0) && (
+            <span aria-hidden="true" className="text-medium-gray">›</span>
+          )}
           {item.href ? (
             <Link href={item.href} className="text-faint hover:text-brand-charcoal transition-colors duration-200">
               {item.label}

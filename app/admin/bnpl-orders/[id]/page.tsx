@@ -240,7 +240,7 @@ export default function BnplOrderDetails() {
     const notFound = !!error && typeof error === "object" && "status" in error && error.status === 404;
     return (
       <div className="flex flex-col gap-6 pb-12">
-        <Breadcrumbs items={[{ label: "BNPL Orders", href: "/admin/bnpl-orders" }, { label: invoiceId || "Invoice" }]} />
+        <Breadcrumbs hideHome items={[{ label: "BNPL Orders", href: "/admin/bnpl-orders" }, { label: invoiceId || "Invoice" }]} />
         {notFound ? (
           <EmptyState
             variant="card"
@@ -277,7 +277,7 @@ export default function BnplOrderDetails() {
     <div className="flex flex-col gap-8 mx-auto pb-12">
       {/* Header */}
       <div className="flex flex-col gap-4">
-        <Breadcrumbs items={[{ label: "BNPL Orders", href: "/admin/bnpl-orders" }, { label: invoice.invoice_number }]} />
+        <Breadcrumbs hideHome items={[{ label: "BNPL Orders", href: "/admin/bnpl-orders" }, { label: invoice.invoice_number }]} />
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div className="flex flex-wrap items-center gap-3">
             <h1 className="font-mono text-2xl font-semibold text-brand-charcoal tracking-tight">{invoice.invoice_number}</h1>
