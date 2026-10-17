@@ -406,13 +406,13 @@ export default function SMSTemplatesPage() {
         >
           <ModalBody className="flex flex-col gap-4 py-4">
             <div>
-              <label className="block text-[12px] font-medium text-subtle mb-1">Sender ID</label>
+              <label className="block text-[12px] font-medium text-subtle mb-1.5">Sender ID</label>
               <input
                 type="text"
                 value={editSenderId}
                 onChange={(e) => setEditSenderId(e.target.value.toUpperCase().slice(0, 11))}
                 maxLength={11}
-                className="w-full text-xs font-mono font-semibold px-3 py-2 bg-white border border-light-gray rounded-lg focus:outline-none focus:border-brand-orange"
+                className="w-full h-9 px-3 text-xs font-mono font-normal text-brand-charcoal bg-white border border-light-gray rounded-lg placeholder:text-faint focus:outline-none focus:ring-1 focus:ring-brand-orange/30 focus:border-brand-orange transition-all"
               />
               <span className="text-[11px] text-faint mt-1 block">Maximum 11 alphanumeric characters</span>
             </div>
@@ -438,7 +438,7 @@ export default function SMSTemplatesPage() {
             </div>
 
             <div>
-              <div className="flex items-center justify-between mb-1">
+              <div className="flex items-center justify-between mb-1.5">
                 <label className="block text-[12px] font-medium text-subtle">SMS Body Text</label>
                 <span className={`text-[11px] font-medium ${charCount > 160 ? "text-brand-orange-text" : "text-faint"}`}>
                   {charCount} / 160 chars ({smsParts} {smsParts === 1 ? "SMS" : "SMS parts"})
@@ -448,7 +448,7 @@ export default function SMSTemplatesPage() {
                 value={editBody}
                 onChange={(e) => setEditBody(e.target.value)}
                 rows={4}
-                className="w-full text-xs p-3 bg-white border border-light-gray rounded-lg focus:outline-none focus:border-brand-orange text-subtle leading-relaxed"
+                className="w-full text-xs font-normal text-brand-charcoal p-3 bg-white border border-light-gray rounded-lg placeholder:text-faint focus:outline-none focus:ring-1 focus:ring-brand-orange/30 focus:border-brand-orange transition-all leading-relaxed resize-none"
               />
             </div>
           </ModalBody>

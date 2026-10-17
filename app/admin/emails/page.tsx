@@ -499,12 +499,12 @@ export default function EmailTemplatesPage() {
         >
           <ModalBody className="flex flex-col gap-4 py-4 max-h-[75vh] overflow-y-auto">
             <div>
-              <label className="block text-[12px] font-medium text-subtle mb-1">Subject line</label>
+              <label className="block text-[12px] font-medium text-subtle mb-1.5">Subject line</label>
               <input
                 type="text"
                 value={editSubject}
                 onChange={(e) => setEditSubject(e.target.value)}
-                className="w-full text-xs font-semibold px-3 py-2 bg-white border border-light-gray rounded-lg focus:outline-none focus:border-brand-orange"
+                className="w-full h-9 px-3 text-xs font-normal text-brand-charcoal bg-white border border-light-gray rounded-lg placeholder:text-faint focus:outline-none focus:ring-1 focus:ring-brand-orange/30 focus:border-brand-orange transition-all"
               />
             </div>
 
@@ -530,12 +530,12 @@ export default function EmailTemplatesPage() {
             </div>
 
             <div>
-              <label className="block text-[12px] font-medium text-subtle mb-1">Email HTML / Body Content</label>
+              <label className="block text-[12px] font-medium text-subtle mb-1.5">Email HTML / Body Content</label>
               <textarea
                 value={editBody}
                 onChange={(e) => setEditBody(e.target.value)}
                 rows={10}
-                className="w-full text-xs font-mono p-3 bg-white border border-light-gray rounded-lg focus:outline-none focus:border-brand-orange text-subtle leading-relaxed"
+                className="w-full text-xs font-mono p-3 bg-white border border-light-gray rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-orange/30 focus:border-brand-orange text-brand-charcoal leading-relaxed resize-y"
               />
             </div>
           </ModalBody>

@@ -499,19 +499,19 @@ export default function BNPLFormsPage() {
         >
           <ModalBody className="flex flex-col gap-4 py-4">
             <div>
-              <label className="block text-[12px] font-medium text-subtle mb-1">Field Label</label>
+              <label className="block text-[12px] font-medium text-subtle mb-1.5">Field Label</label>
               <input
                 type="text"
                 value={newLabel}
                 onChange={(e) => setNewLabel(e.target.value)}
                 placeholder="e.g. Alternate Contact Number"
-                className="w-full text-xs font-semibold px-3 py-2 bg-white border border-light-gray rounded-lg focus:outline-none focus:border-brand-orange"
+                className="w-full h-9 px-3 text-xs font-normal text-brand-charcoal bg-white border border-light-gray rounded-lg placeholder:text-faint focus:outline-none focus:ring-1 focus:ring-brand-orange/30 focus:border-brand-orange transition-all"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-[12px] font-medium text-subtle mb-1">Section</label>
+                <label className="block text-[12px] font-medium text-subtle mb-1.5">Section</label>
                 <Dropdown
                   options={[
                     { value: "personal", label: "Personal Information" },
@@ -527,7 +527,7 @@ export default function BNPLFormsPage() {
               </div>
 
               <div>
-                <label className="block text-[12px] font-medium text-subtle mb-1">Field Type</label>
+                <label className="block text-[12px] font-medium text-subtle mb-1.5">Field Type</label>
                 <Dropdown
                   options={[
                     { value: "text", label: "Text String" },
@@ -547,7 +547,7 @@ export default function BNPLFormsPage() {
             </div>
 
             <div>
-              <label className="block text-[12px] font-medium text-subtle mb-1">Requirement Level</label>
+              <label className="block text-[12px] font-medium text-subtle mb-1.5">Requirement Level</label>
               <Dropdown
                 options={[
                   { value: "mandatory", label: "Mandatory (Blocks submission if empty)" },
@@ -561,15 +561,15 @@ export default function BNPLFormsPage() {
             </div>
 
             <div>
-              <label className="block text-[12px] font-medium text-subtle mb-1">
+              <label className="block text-[12px] font-medium text-subtle mb-1.5">
                 Instruction / Helper Text
               </label>
               <textarea
                 value={newHelper}
                 onChange={(e) => setNewHelper(e.target.value)}
-                rows={2}
+                rows={3}
                 placeholder="e.g. Enter a valid Nigerian mobile phone number."
-                className="w-full text-xs p-2.5 bg-white border border-light-gray rounded-lg focus:outline-none focus:border-brand-orange text-subtle"
+                className="w-full text-xs font-normal text-brand-charcoal p-3 bg-white border border-light-gray rounded-lg placeholder:text-faint focus:outline-none focus:ring-1 focus:ring-brand-orange/30 focus:border-brand-orange transition-all resize-none leading-relaxed"
               />
             </div>
           </ModalBody>
@@ -617,7 +617,7 @@ export default function BNPLFormsPage() {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {secFields.map((f) => (
-                        <div key={f.id} className="flex flex-col gap-1">
+                        <div key={f.id} className="flex flex-col gap-1.5">
                           <label className="text-[11px] font-medium text-subtle flex items-center justify-between">
                             <span>
                               {f.label}{" "}
@@ -629,7 +629,7 @@ export default function BNPLFormsPage() {
                             type="text"
                             disabled
                             placeholder={`Enter ${f.label.toLowerCase()}...`}
-                            className="w-full text-xs px-3 py-2 bg-white border border-light-gray rounded-lg text-faint cursor-not-allowed"
+                            className="w-full h-9 px-3 text-xs bg-white border border-light-gray rounded-lg text-faint cursor-not-allowed"
                           />
                         </div>
                       ))}

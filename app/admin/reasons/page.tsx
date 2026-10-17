@@ -489,19 +489,19 @@ export default function ReasonsManagementPage() {
         >
           <ModalBody className="flex flex-col gap-4 py-4">
             <div>
-              <label className="block text-[12px] font-medium text-subtle mb-1">Reason Label (Visible to user)</label>
+              <label className="block text-[12px] font-medium text-subtle mb-1.5">Reason Label (Visible to user)</label>
               <input
                 type="text"
                 value={formLabel}
                 onChange={(e) => setFormLabel(e.target.value)}
                 placeholder="e.g. Defective compressor / cooling unit not chilling"
-                className="w-full text-xs font-semibold px-3 py-2 bg-white border border-light-gray rounded-lg focus:outline-none focus:border-brand-orange"
+                className="w-full h-9 px-3 text-xs font-normal text-brand-charcoal bg-white border border-light-gray rounded-lg placeholder:text-faint focus:outline-none focus:ring-1 focus:ring-brand-orange/30 focus:border-brand-orange transition-all"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-[12px] font-medium text-subtle mb-1">Category</label>
+                <label className="block text-[12px] font-medium text-subtle mb-1.5">Category</label>
                 <Dropdown
                   options={[
                     { value: "cancellation", label: "Order Cancellation" },
@@ -518,7 +518,7 @@ export default function ReasonsManagementPage() {
               </div>
 
               <div>
-                <label className="block text-[12px] font-medium text-subtle mb-1">Applies To (Actor)</label>
+                <label className="block text-[12px] font-medium text-subtle mb-1.5">Applies To (Actor)</label>
                 <Dropdown
                   options={[
                     { value: "customer", label: "Buyer / Customer" },
@@ -535,13 +535,13 @@ export default function ReasonsManagementPage() {
             </div>
 
             <div>
-              <label className="block text-[12px] font-medium text-subtle mb-1">Unique Identifier Code</label>
+              <label className="block text-[12px] font-medium text-subtle mb-1.5">Unique Identifier Code</label>
               <input
                 type="text"
                 value={formCode}
                 onChange={(e) => setFormCode(e.target.value.toLowerCase().replace(/[^a-z0-9_]+/g, ""))}
                 placeholder="e.g. defective_compressor (auto-generated if empty)"
-                className="w-full text-xs font-mono px-3 py-2 bg-white border border-light-gray rounded-lg focus:outline-none focus:border-brand-orange text-subtle"
+                className="w-full h-9 px-3 text-xs font-mono font-normal text-brand-charcoal bg-white border border-light-gray rounded-lg placeholder:text-faint focus:outline-none focus:ring-1 focus:ring-brand-orange/30 focus:border-brand-orange transition-all"
               />
             </div>
           </ModalBody>
