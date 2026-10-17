@@ -36,8 +36,10 @@ const COLS = 7;
 const STATUS_FILTERS: { value: string; label: string }[] = [
   { value: "", label: "All statuses" },
   { value: "problem", label: "Problems (failed, dead, not configured)" },
-  { value: "pending", label: "Waiting (pending, processing)" },
-  ...DELIVERY_STATUSES.map((s) => ({ value: s, label: statusLabel(s) })),
+  ...DELIVERY_STATUSES.map((s) => ({
+    value: s,
+    label: s === "pending" ? "Waiting (pending, processing)" : statusLabel(s),
+  })),
 ];
 
 function statusLabel(s: string) {
@@ -231,7 +233,7 @@ export default function NotificationsLogPage() {
           <div className="flex flex-wrap items-center gap-3">
             <select value={status} onChange={(e) => filterChange(setStatus)(e.target.value)} aria-label="Status" className={selectClass}>
               {STATUS_FILTERS.map((s) => (
-                <option key={s.value} value={s.value}>
+                <option key={s.value || "all"} value={s.value}>
                   {s.label}
                 </option>
               ))}
