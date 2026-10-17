@@ -129,9 +129,9 @@ export const AdminSearchDropdown: React.FC<{ query: string; onNavigate?: () => v
   const shown = groups.filter((g) => g.rows.length || g.error);
 
   return (
-    <div className="absolute top-full left-0 pt-4 z-50 cursor-default">
-      <DropdownMenu width={480} className="shadow-float border-light-gray p-0 overflow-hidden max-h-150 flex flex-col">
-        <div className="px-5 py-3 border-b border-light-gray">
+    <div className="absolute top-full left-0 right-0 mt-2 z-50 cursor-default">
+      <DropdownMenu width="100%" className="w-full shadow-2xl border border-light-gray dark:border-white/10 bg-white dark:bg-card p-0 rounded-xl overflow-hidden max-h-150 flex flex-col">
+        <div className={`px-5 py-3.5 ${skip ? "" : "border-b border-light-gray dark:border-white/10"}`}>
           <span className="block font-semibold text-brand-charcoal text-[14px] truncate">
             {skip ? "Search the store" : `Results for "${q}"`}
           </span>
