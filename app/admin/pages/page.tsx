@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { Icon } from "../../components/Icon";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Form/Inputs";
 import { TabFilter } from "../../components/Admin/TabFilter";
@@ -11,7 +10,6 @@ import ModalFooter from "../../components/Modal/ModalFooter";
 import Dropdown from "@/app/components/ui/Dropdown";
 import {
   HiOutlineGlobeAlt,
-  HiOutlineDocumentText,
   HiOutlineEye,
   HiOutlineCheck,
   HiOutlineArrowTopRightOnSquare,
@@ -295,7 +293,7 @@ export default function CMSPagesManagement() {
       )}
 
       {/* Page Tabs */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-white p-3 rounded-lg border border-light-gray">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <TabFilter
           tabs={tabs}
           activeTab={activeTab}
@@ -321,8 +319,7 @@ export default function CMSPagesManagement() {
         <div className="lg:col-span-2 flex flex-col gap-6">
           {/* Banner & Hero Settings */}
           <div className="bg-white rounded-lg border border-light-gray p-5 sm:p-6 flex flex-col gap-4">
-            <div className="flex items-center gap-2 border-b border-light-gray pb-3">
-              <HiOutlineDocumentText className="w-5 h-5 text-brand-orange-text" />
+            <div className="border-b border-light-gray pb-3">
               <h3 className="text-sm font-semibold text-brand-charcoal">
                 Page Header & Hero Banner
               </h3>
@@ -363,17 +360,9 @@ export default function CMSPagesManagement() {
           {/* Sections Editor */}
           <div className="bg-white rounded-lg border border-light-gray p-5 sm:p-6 flex flex-col gap-4">
             <div className="flex items-center justify-between border-b border-light-gray pb-3">
-              <div className="flex items-center gap-2">
-                <Icon
-                  name="layer"
-                  folder="dashboardIcon"
-                  size="sm"
-                  className="text-brand-orange-text"
-                />
-                <h3 className="text-sm font-semibold text-brand-charcoal">
-                  Content Sections ({currentPage.sections.length})
-                </h3>
-              </div>
+              <h3 className="text-sm font-semibold text-brand-charcoal">
+                Content Sections ({currentPage.sections.length})
+              </h3>
               <Button
                 variant="outline"
                 size="sm"
