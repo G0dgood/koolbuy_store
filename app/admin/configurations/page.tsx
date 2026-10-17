@@ -340,7 +340,7 @@ function MinimumModal({
 }) {
   const isNew = rule === "new";
   const current = rule && rule !== "new" ? rule : null;
-  const [market, setMarket] = useState<"NG" | "KE">("NG");
+  const [market, setMarket] = useState<"NG" | "KE" | "UG">("NG");
   const [audience, setAudience] = useState<MinimumAudience>("retailer");
   const [metric, setMetric] = useState<MinimumMetric>("ngn");
   const [threshold, setThreshold] = useState("");
@@ -404,9 +404,10 @@ function MinimumModal({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <label className="flex flex-col gap-1.5">
             <span className="text-xs font-semibold text-brand-charcoal">Market</span>
-            <select className={inputClass} value={market} onChange={(e) => setMarket(e.target.value as "NG" | "KE")} disabled={!isNew}>
+            <select className={inputClass} value={market} onChange={(e) => setMarket(e.target.value as "NG" | "KE" | "UG")} disabled={!isNew}>
               <option value="NG">Nigeria (NG)</option>
               <option value="KE">Kenya (KE)</option>
+              <option value="UG">Uganda (UG)</option>
             </select>
           </label>
           <label className="flex flex-col gap-1.5">

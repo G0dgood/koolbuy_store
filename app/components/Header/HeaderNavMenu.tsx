@@ -57,6 +57,8 @@ export const HeaderNavMenu: React.FC<HeaderNavMenuProps> = ({
     { code: "EUR", symbol: "€", label: "EUR - Euro" },
     { code: "GBP", symbol: "£", label: "GBP - British Pound" },
     { code: "NGN", symbol: "₦", label: "NGN - Nigerian Naira" },
+    { code: "KES", symbol: "KSh", label: "KES - Kenyan Shilling" },
+    { code: "UGX", symbol: "USh", label: "UGX - Ugandan Shilling" },
     { code: "AED", symbol: "د.إ", label: "AED - UAE Dirham" },
     { code: "CAD", symbol: "$", label: "CAD - Canadian Dollar" },
   ];

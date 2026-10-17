@@ -20,7 +20,7 @@ interface EmptyStateProps {
    * inline: no panel (use inside a table cell, drawer or an existing card)
    */
   variant?: "card" | "inline";
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "lg";
   className?: string;
 }
 
@@ -58,8 +58,8 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   className = "",
 }) => {
   const panel = variant === "card" ? "bg-white rounded-lg border border-light-gray" : "";
-  const pad = size === "sm" ? "py-6 px-4 gap-2" : "py-10 md:py-12 px-6 gap-3";
-  const art = size === "sm" ? "w-28 h-22" : "w-40 h-32 md:w-44 md:h-36";
+  const pad = size === "sm" ? "py-6 px-4 gap-2" : size === "lg" ? "py-12 px-8 gap-4" : "py-10 md:py-12 px-6 gap-3";
+  const art = size === "sm" ? "w-[150px] h-[120px]" : size === "lg" ? "w-[220px] h-[176px]" : "w-[180px] h-[144px]";
 
   return (
     <div

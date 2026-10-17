@@ -51,12 +51,13 @@ const STATUS_COLOR: Record<string, string> = {
 
 export const statusColor = (status: string) => STATUS_COLOR[status] ?? "#94a3b8";
 
-export const MARKET_NAMES: Record<string, string> = { NG: "Nigeria", KE: "Kenya" };
+export const MARKET_NAMES: Record<string, string> = { NG: "Nigeria", KE: "Kenya", UG: "Uganda" };
 
 /** An amount in its currency, e.g. ₦85,000, or short (₦1.2M) for axes and tiles. */
 export function money(v: number, currency = "NGN", short = false): string {
   try {
-    return new Intl.NumberFormat("en-NG", {
+    const locale = currency === "KES" ? "en-KE" : currency === "UGX" ? "en-UG" : "en-NG";
+    return new Intl.NumberFormat(locale, {
       style: "currency",
       currency,
       notation: short && Math.abs(v) >= 1_000 ? "compact" : "standard",

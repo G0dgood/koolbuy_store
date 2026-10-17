@@ -199,7 +199,7 @@ export default function ServiceAreaPage() {
 function RegionModal({ region, onClose }: { region: PricingRegion | "new" | null; onClose: () => void }) {
   const isNew = region === "new";
   const current = region && region !== "new" ? region : null;
-  const [market, setMarket] = useState<"NG" | "KE">("NG");
+  const [market, setMarket] = useState<"NG" | "KE" | "UG">("NG");
   const [name, setName] = useState("");
   const [states, setStates] = useState("");
   const [cities, setCities] = useState("");
@@ -274,11 +274,12 @@ function RegionModal({ region, onClose }: { region: PricingRegion | "new" | null
             <select
               className={inputClass}
               value={market}
-              onChange={(e) => setMarket(e.target.value as "NG" | "KE")}
+              onChange={(e) => setMarket(e.target.value as "NG" | "KE" | "UG")}
               disabled={!isNew}
             >
               <option value="NG">Nigeria (NG)</option>
               <option value="KE">Kenya (KE)</option>
+              <option value="UG">Uganda (UG)</option>
             </select>
           </label>
           <label className="flex flex-col gap-1.5 sm:col-span-2">

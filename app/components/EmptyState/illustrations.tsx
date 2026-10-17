@@ -309,7 +309,7 @@ const scenes: Record<IllustrationName, React.ReactNode> = {
 
 export const EmptyIllustration: React.FC<{ name: IllustrationName; className?: string; label?: string }> = ({
   name,
-  className = "w-40 h-32",
+  className = "w-[180px] h-[144px]",
   label,
 }) => (
   <svg

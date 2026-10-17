@@ -201,7 +201,7 @@ export interface PricingRegion {
 }
 
 export interface PricingRegionPayload {
-  market: "NG" | "KE";
+  market: "NG" | "KE" | "UG";
   name: string;
   states: string[];
   cities: string[];
@@ -344,7 +344,7 @@ export interface CheckoutMinimum {
 }
 
 export interface CheckoutMinimumPayload {
-  market: "NG" | "KE";
+  market: "NG" | "KE" | "UG";
   audience: MinimumAudience;
   metric: MinimumMetric;
   threshold: number;
