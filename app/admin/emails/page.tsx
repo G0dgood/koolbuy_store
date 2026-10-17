@@ -261,28 +261,19 @@ export default function EmailTemplatesPage() {
 
   return (
     <div className="flex flex-col gap-6 pb-16">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-light-gray pb-5">
-        <div>
-          <h1 className="text-xl font-semibold text-brand-charcoal">Email Templates</h1>
-          <p className="text-xs text-subtle mt-0.5">
-            Configure automated transactional email subjects, HTML bodies, and dynamic variables.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" href="/admin/notifications" iconLeft={<HiOutlineBell className="w-4 h-4 text-brand-orange-text" />}>
-            Notifications Log
-          </Button>
-          <Button
-            variant="primary"
-            size="sm"
-            iconLeft={<HiOutlinePaperAirplane className="w-4 h-4" />}
-            onClick={() => toast.success("Test email triggered to admin email.")}
-          >
-            Send Test Email
-          </Button>
-        </div>
+      {/* Action Bar */}
+      <div className="flex items-center justify-end gap-2">
+        <Button variant="outline" size="sm" href="/admin/notifications" iconLeft={<HiOutlineBell className="w-4 h-4 text-brand-orange-text" />}>
+          Notifications Log
+        </Button>
+        <Button
+          variant="primary"
+          size="sm"
+          iconLeft={<HiOutlinePaperAirplane className="w-4 h-4" />}
+          onClick={() => toast.success("Test email triggered to admin email.")}
+        >
+          Send Test Email
+        </Button>
       </div>
 
       {/* Stat Cards */}
@@ -425,9 +416,9 @@ export default function EmailTemplatesPage() {
                     <td className="text-right">
                       <div className="inline-flex items-center gap-2">
                         <Button
-                          variant="ghost"
+                          variant="outline"
                           size="sm"
-                          iconLeft={<HiOutlineEye className="w-3.5 h-3.5" />}
+                          iconLeft={<HiOutlineEye className="w-3.5 h-3.5 text-brand-orange-text" />}
                           onClick={() => setPreviewTemplate(t)}
                         >
                           Preview

@@ -286,31 +286,22 @@ export default function ReasonsManagementPage() {
 
   return (
     <div className="flex flex-col gap-6 pb-16">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-light-gray pb-5">
-        <div>
-          <h1 className="text-xl font-semibold text-brand-charcoal">Reasons Management</h1>
-          <p className="text-xs text-subtle mt-0.5">
-            Standardize selectable options for order cancellations, refund claims, returns, and vendor rejections.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" href="/admin/refunds">
-            Refunds
-          </Button>
-          <Button variant="outline" size="sm" href="/admin/orders">
-            Orders
-          </Button>
-          <Button
-            variant="primary"
-            size="sm"
-            iconLeft={<HiOutlinePlus className="w-4 h-4" />}
-            onClick={handleOpenAdd}
-          >
-            Add Reason
-          </Button>
-        </div>
+      {/* Action Bar */}
+      <div className="flex items-center justify-end gap-2">
+        <Button variant="outline" size="sm" href="/admin/refunds">
+          Refunds
+        </Button>
+        <Button variant="outline" size="sm" href="/admin/orders">
+          Orders
+        </Button>
+        <Button
+          variant="primary"
+          size="sm"
+          iconLeft={<HiOutlinePlus className="w-4 h-4" />}
+          onClick={handleOpenAdd}
+        >
+          Add Reason
+        </Button>
       </div>
 
       {/* Stat Cards */}
@@ -460,21 +451,21 @@ export default function ReasonsManagementPage() {
                     <td className="text-right">
                       <div className="inline-flex items-center gap-1.5">
                         <Button
-                          variant="ghost"
+                          variant="outline"
                           size="sm"
                           iconLeft={<HiOutlinePencilSquare className="w-3.5 h-3.5" />}
                           onClick={() => handleOpenEdit(r)}
                         >
                           Edit
                         </Button>
-                        <button
-                          type="button"
-                          onClick={() => handleDelete(r.id)}
-                          className="p-1.5 text-faint hover:text-error transition-colors"
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="text-error hover:bg-error-soft hover:text-error"
                           title="Delete reason"
-                        >
-                          <HiOutlineTrash className="w-4 h-4" />
-                        </button>
+                          onClick={() => handleDelete(r.id)}
+                          iconLeft={<HiOutlineTrash className="w-4 h-4" />}
+                        />
                       </div>
                     </td>
                   </tr>

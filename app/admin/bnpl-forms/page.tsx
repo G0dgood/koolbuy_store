@@ -324,36 +324,27 @@ export default function BNPLFormsPage() {
 
   return (
     <div className="flex flex-col gap-6 pb-16">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-light-gray pb-5">
-        <div>
-          <h1 className="text-xl font-semibold text-brand-charcoal">BNPL Application Form</h1>
-          <p className="text-xs text-subtle mt-0.5">
-            Configure application steps, required documentation, and verification criteria for Pay-Later financing.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" href="/admin/bnpl-orders">
-            BNPL Orders
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            iconLeft={<HiOutlineEye className="w-4 h-4 text-brand-orange-text" />}
-            onClick={() => setIsPreviewOpen(true)}
-          >
-            Preview Form
-          </Button>
-          <Button
-            variant="primary"
-            size="sm"
-            iconLeft={<HiOutlineCheck className="w-4 h-4" />}
-            onClick={handleSaveForm}
-          >
-            Save Configuration
-          </Button>
-        </div>
+      {/* Action Bar */}
+      <div className="flex items-center justify-end gap-2">
+        <Button variant="outline" size="sm" href="/admin/bnpl-orders">
+          BNPL Orders
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          iconLeft={<HiOutlineEye className="w-4 h-4 text-brand-orange-text" />}
+          onClick={() => setIsPreviewOpen(true)}
+        >
+          Preview Form
+        </Button>
+        <Button
+          variant="primary"
+          size="sm"
+          iconLeft={<HiOutlineCheck className="w-4 h-4" />}
+          onClick={handleSaveForm}
+        >
+          Save Configuration
+        </Button>
       </div>
 
       {/* Stat Cards */}
@@ -479,14 +470,14 @@ export default function BNPLFormsPage() {
                         </div>
 
                         {field.id.startsWith("custom-") && (
-                          <button
-                            type="button"
-                            onClick={() => handleDeleteField(field.id)}
-                            className="text-faint hover:text-error transition-colors p-1"
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="text-error hover:bg-error-soft hover:text-error"
                             title="Delete custom field"
-                          >
-                            <HiOutlineTrash className="w-4 h-4" />
-                          </button>
+                            onClick={() => handleDeleteField(field.id)}
+                            iconLeft={<HiOutlineTrash className="w-4 h-4" />}
+                          />
                         )}
                       </div>
                     </div>

@@ -254,34 +254,25 @@ export default function CMSPagesManagement() {
 
   return (
     <div className="flex flex-col gap-6 mx-auto pb-16">
-      {/* Header Area */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-light-gray pb-5">
-        <div>
-          <h1 className="text-xl font-semibold text-brand-charcoal">CMS Pages</h1>
-          <p className="text-xs text-subtle mt-0.5">
-            Edit content, legal disclosures, and customer-facing informational landing pages
-          </p>
-        </div>
+      {/* Action Bar */}
+      <div className="flex items-center justify-end gap-3 w-full">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setIsPreviewOpen(true)}
+          iconLeft={<HiOutlineEye className="w-4 h-4 text-brand-orange-text" />}
+        >
+          Preview Page
+        </Button>
 
-        <div className="flex items-center gap-3 w-full sm:w-auto">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setIsPreviewOpen(true)}
-            iconLeft={<HiOutlineEye className="w-4 h-4 text-brand-orange-text" />}
-          >
-            Preview Page
-          </Button>
-
-          <Button
-            variant="primary"
-            size="sm"
-            onClick={handleSave}
-            iconLeft={<HiOutlineCheck className="w-4 h-4" />}
-          >
-            Save Changes
-          </Button>
-        </div>
+        <Button
+          variant="primary"
+          size="sm"
+          onClick={handleSave}
+          iconLeft={<HiOutlineCheck className="w-4 h-4" />}
+        >
+          Save Changes
+        </Button>
       </div>
 
       {/* Save Success Alert Banner */}
@@ -404,14 +395,14 @@ export default function CMSPagesManagement() {
                       Section #{idx + 1}
                     </span>
                     {currentPage.sections.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => handleDeleteSection(section.id)}
-                        className="text-faint hover:text-error transition-colors p-1"
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-error hover:bg-error-soft hover:text-error !p-1"
                         title="Delete section"
-                      >
-                        <HiOutlineTrash className="w-4 h-4" />
-                      </button>
+                        onClick={() => handleDeleteSection(section.id)}
+                        iconLeft={<HiOutlineTrash className="w-4 h-4" />}
+                      />
                     )}
                   </div>
 

@@ -158,21 +158,13 @@ export default function NotificationsLogPage() {
 
   return (
     <div className="flex flex-col gap-6 pb-12">
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-        <div>
-          <h1 className="text-xl font-semibold text-brand-charcoal">Notifications</h1>
-          <p className="text-xs text-subtle mt-0.5">
-            Every notification sent to buyers, sellers and staff, and whether it arrived.
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" href="/admin/emails">
-            Emails
-          </Button>
-          <Button variant="outline" size="sm" href="/admin/sms">
-            SMS
-          </Button>
-        </div>
+      <div className="flex items-center justify-end gap-2">
+        <Button variant="outline" size="sm" href="/admin/emails">
+          Emails
+        </Button>
+        <Button variant="outline" size="sm" href="/admin/sms">
+          SMS
+        </Button>
       </div>
 
       {stats.isError ? (
