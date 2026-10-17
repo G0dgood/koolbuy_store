@@ -7,11 +7,12 @@ import { HiOutlineArrowPath } from "react-icons/hi2";
 import { StatCard } from "@/app/components/Admin/StatCard";
 import { Pagination } from "@/app/components/Admin/Pagination";
 import { RowsPerPage } from "@/app/components/rows-per-page";
-import { Input } from "@/app/components/Form/Inputs";
 import { Button } from "@/app/components/Button";
-import { Icon } from "@/app/components/Icon";
 import Modal from "@/app/components/Modal/Modal";
 import { EmptyTableRow } from "@/app/components/EmptyState";
+import Search from "@/app/components/ui/Search";
+import Dropdown from "@/app/components/ui/Dropdown";
+import { DatePicker } from "@/app/components/Form/DatePicker";
 import { apiErrorMessage } from "@/lib/store/base-api";
 import { humanize } from "@/lib/store/api/accounting-api";
 import {
@@ -74,9 +75,6 @@ function formatDateTime(iso: string | null | undefined) {
     ? "—"
     : d.toLocaleString("en-GB", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
 }
-
-const selectClass =
-  "h-9 px-2 rounded-lg border border-light-gray bg-white text-[12px] text-brand-charcoal focus:outline-none focus:border-brand-orange";
 
 export default function NotificationsLogPage() {
   const [status, setStatus] = useState("");
@@ -167,13 +165,13 @@ export default function NotificationsLogPage() {
             Every notification sent to buyers, sellers and staff, and whether it arrived.
           </p>
         </div>
-        <div className="flex items-center gap-4 text-xs font-semibold">
-          <Link href="/admin/emails" className="text-brand-orange-text hover:underline">
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm" href="/admin/emails">
             Emails
-          </Link>
-          <Link href="/admin/sms" className="text-brand-orange-text hover:underline">
+          </Button>
+          <Button variant="outline" size="sm" href="/admin/sms">
             SMS
-          </Link>
+          </Button>
         </div>
       </div>
 
@@ -215,72 +213,81 @@ export default function NotificationsLogPage() {
       <div className="bg-white border border-light-gray rounded-lg flex flex-col overflow-hidden">
         <div className="p-4 sm:px-6 flex flex-col gap-3 border-b border-light-gray">
           <div className="flex flex-col lg:flex-row gap-3 lg:items-center justify-between">
-            <Input
-              type="search"
+            <Search
               value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
+              onChange={(val) => {
+                setSearch(val);
                 setPage(1);
               }}
               placeholder="Search recipient, subject or user"
-              aria-label="Search notifications"
-              containerClassName="w-full lg:w-80"
-              className="bg-white border-light-gray placeholder:text-faint text-xs font-medium"
-              suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-faint" />}
+              maxWidth="max-w-none"
+              className="w-full lg:w-80"
             />
             <RowsPerPage value={pageSize} options={PAGE_SIZES} onChange={filterChange(setPageSize)} />
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <select value={status} onChange={(e) => filterChange(setStatus)(e.target.value)} aria-label="Status" className={selectClass}>
-              {STATUS_FILTERS.map((s) => (
-                <option key={s.value || "all"} value={s.value}>
-                  {s.label}
-                </option>
-              ))}
-            </select>
-            <select value={channel} onChange={(e) => filterChange(setChannel)(e.target.value)} aria-label="Channel" className={selectClass}>
-              <option value="">All channels</option>
-              {DELIVERY_CHANNELS.map((c) => (
-                <option key={c} value={c}>
-                  {channelLabel(c)}
-                </option>
-              ))}
-            </select>
-            <select
-              value={kind}
-              onChange={(e) => filterChange(setKind)(e.target.value)}
-              aria-label="Notification type"
-              className={`${selectClass} max-w-64`}
-            >
-              <option value="">All types</option>
-              {kinds.map((k) => (
-                <option key={k.kind} value={k.kind}>
-                  {k.label}
-                </option>
-              ))}
-            </select>
-            <label className="flex items-center gap-2 text-[12px] text-subtle">
-              From
-              <Input
-                type="date"
-                value={from}
-                onChange={(e) => filterChange(setFrom)(e.target.value)}
-                aria-label="Created from"
-                containerClassName="w-40"
-                className="bg-white border-light-gray text-xs font-medium"
+            <div className="w-48">
+              <Dropdown
+                options={STATUS_FILTERS.map((s) => ({ value: s.value, label: s.label }))}
+                value={status}
+                onChange={(val) => filterChange(setStatus)(String(val ?? ""))}
+                placeholder="All statuses"
+                searchable={false}
+                size="sm"
               />
-            </label>
-            <label className="flex items-center gap-2 text-[12px] text-subtle">
-              To
-              <Input
-                type="date"
-                value={to}
-                onChange={(e) => filterChange(setTo)(e.target.value)}
-                aria-label="Created to"
-                containerClassName="w-40"
-                className="bg-white border-light-gray text-xs font-medium"
+            </div>
+            <div className="w-40">
+              <Dropdown
+                options={[
+                  { value: "", label: "All channels" },
+                  ...DELIVERY_CHANNELS.map((c) => ({ value: c, label: channelLabel(c) })),
+                ]}
+                value={channel}
+                onChange={(val) => filterChange(setChannel)(String(val ?? ""))}
+                placeholder="All channels"
+                searchable={false}
+                size="sm"
               />
-            </label>
+            </div>
+            <div className="w-52">
+              <Dropdown
+                options={[
+                  { value: "", label: "All types" },
+                  ...kinds.map((k) => ({ value: k.kind, label: k.label })),
+                ]}
+                value={kind}
+                onChange={(val) => filterChange(setKind)(String(val ?? ""))}
+                placeholder="All types"
+                searchable={true}
+                size="sm"
+              />
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-[12px] font-medium text-subtle">From</span>
+              <div className="w-36">
+                <DatePicker
+                  value={from}
+                  onChange={(v) => filterChange(setFrom)(v ? String(v) : "")}
+                  placeholder="Start date"
+                  clearable
+                  hideLabel
+                  align="left"
+                />
+              </div>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-[12px] font-medium text-subtle">To</span>
+              <div className="w-36">
+                <DatePicker
+                  value={to}
+                  onChange={(v) => filterChange(setTo)(v ? String(v) : "")}
+                  placeholder="End date"
+                  clearable
+                  hideLabel
+                  align="left"
+                />
+              </div>
+            </div>
             {filtered && (
               <Button variant="outline" size="sm" onClick={reset}>
                 Clear filters

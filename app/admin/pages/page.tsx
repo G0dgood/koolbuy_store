@@ -8,6 +8,7 @@ import { TabFilter } from "../../components/Admin/TabFilter";
 import Modal from "../../components/Modal/Modal";
 import ModalBody from "../../components/Modal/ModalBody";
 import ModalFooter from "../../components/Modal/ModalFooter";
+import Dropdown from "@/app/components/ui/Dropdown";
 import {
   HiOutlineGlobeAlt,
   HiOutlineDocumentText,
@@ -256,34 +257,29 @@ export default function CMSPagesManagement() {
       {/* Header Area */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-light-gray pb-5">
         <div>
-          {/* <h1 className="text-2xl font-semibold text-brand-charcoal tracking-tight">
-            CMS Pages
-          </h1>
-          <p className="text-xs text-faint mt-1">
-            Edit content, legal disclosures, and customer-facing informational
-            landing pages
-          </p> */}
+          <h1 className="text-xl font-semibold text-brand-charcoal">CMS Pages</h1>
+          <p className="text-xs text-subtle mt-0.5">
+            Edit content, legal disclosures, and customer-facing informational landing pages
+          </p>
         </div>
 
         <div className="flex items-center gap-3 w-full sm:w-auto">
           <Button
             variant="outline"
-            shape="rounded-sm"
-            className="flex items-center gap-1.5 text-xs font-semibold text-subtle hover:bg-off-white cursor-pointer"
+            size="sm"
             onClick={() => setIsPreviewOpen(true)}
+            iconLeft={<HiOutlineEye className="w-4 h-4 text-brand-orange-text" />}
           >
-            <HiOutlineEye className="w-4 h-4 text-brand-orange-text" />
-            <span>Preview Page</span>
+            Preview Page
           </Button>
 
           <Button
             variant="primary"
-            shape="rounded-sm"
-            className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer "
+            size="sm"
             onClick={handleSave}
+            iconLeft={<HiOutlineCheck className="w-4 h-4" />}
           >
-            <HiOutlineCheck className="w-4 h-4" />
-            <span>Save Changes</span>
+            Save Changes
           </Button>
         </div>
       </div>
@@ -389,12 +385,11 @@ export default function CMSPagesManagement() {
               </div>
               <Button
                 variant="outline"
-                shape="rounded-sm"
-                className="text-xs font-semibold text-brand-orange-text border-brand-orange/30 hover:bg-brand-orange/10 flex items-center gap-1.5 cursor-pointer"
+                size="sm"
+                iconLeft={<HiOutlinePlus className="w-3.5 h-3.5" />}
                 onClick={handleAddSection}
               >
-                <HiOutlinePlus className="w-3.5 h-3.5" />
-                <span>Add Section</span>
+                Add Section
               </Button>
             </div>
 
@@ -430,7 +425,7 @@ export default function CMSPagesManagement() {
                       onChange={(e) =>
                         handleUpdateSection(section.id, "title", e.target.value)
                       }
-                      className="w-full text-xs font-semibold px-3 py-2 bg-white border border-light-gray rounded-md focus:outline-none focus:border-brand-orange"
+                      className="w-full text-xs font-semibold px-3 py-2 bg-white border border-light-gray rounded-lg focus:outline-none focus:border-brand-orange"
                     />
                   </div>
 
@@ -448,7 +443,7 @@ export default function CMSPagesManagement() {
                         )
                       }
                       rows={4}
-                      className="w-full text-xs p-3 bg-white border border-light-gray rounded-md focus:outline-none focus:border-brand-orange text-subtle leading-relaxed font-normal"
+                      className="w-full text-xs p-3 bg-white border border-light-gray rounded-lg focus:outline-none focus:border-brand-orange text-subtle leading-relaxed font-normal"
                     />
                   </div>
                 </div>
@@ -470,18 +465,20 @@ export default function CMSPagesManagement() {
                 <label className="block text-[12px] font-medium text-subtle mb-1">
                   Publication status
                 </label>
-                <select
+                <Dropdown
+                  options={[
+                    { value: "Published", label: "Published (Live to public)" },
+                    { value: "Draft", label: "Draft (Internal review only)" },
+                  ]}
                   value={currentPage.status}
-                  onChange={(e) =>
+                  onChange={(val) =>
                     updateCurrentPage({
-                      status: e.target.value as "Published" | "Draft",
+                      status: val as "Published" | "Draft",
                     })
                   }
-                  className="w-full text-xs font-semibold px-3 py-2 border border-light-gray rounded-lg bg-white focus:outline-none focus:border-brand-orange"
-                >
-                  <option value="Published">Published (Live to public)</option>
-                  <option value="Draft">Draft (Internal review only)</option>
-                </select>
+                  searchable={false}
+                  size="sm"
+                />
               </div>
 
               <div>
@@ -595,7 +592,7 @@ export default function CMSPagesManagement() {
           </div>
         </ModalBody>
         <ModalFooter>
-          <Button variant="outline" onClick={() => setIsPreviewOpen(false)}>
+          <Button variant="outline" size="sm" onClick={() => setIsPreviewOpen(false)}>
             Close Preview
           </Button>
         </ModalFooter>
