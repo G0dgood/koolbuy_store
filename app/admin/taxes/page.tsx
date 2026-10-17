@@ -9,6 +9,7 @@ import { Pagination } from "@/app/components/Admin/Pagination";
 import { StatusBadge } from "@/app/components/Admin/Orders/StatusBadge";
 import { RowsPerPage } from "@/app/components/rows-per-page";
 import { Input } from "@/app/components/Form/Inputs";
+import Search from "@/app/components/ui/Search";
 import { DatePicker } from "@/app/components/Form/DatePicker";
 import { Button } from "@/app/components/Button";
 import { Icon } from "@/app/components/Icon";
@@ -283,18 +284,16 @@ export default function TaxesReportPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full xl:w-auto">
-            <Input
-              type="search"
+            <Search
               value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
+              onChange={(val) => {
+                const s = typeof val === "string" ? val : (val as any).target?.value ?? "";
+                setSearch(s);
                 resetPage();
               }}
               placeholder="Search invoice number or retailer"
-              aria-label="Search invoices"
-              containerClassName="w-full xl:w-80"
-              className="bg-white border-light-gray placeholder:text-faint text-xs font-medium"
-              suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-faint" />}
+              className="w-full xl:!w-80"
+              maxWidth="max-w-none"
             />
             <div className="flex items-center gap-3 w-full sm:w-auto">
               <RowsPerPage

@@ -6,6 +6,8 @@ import { toast } from "sonner";
 import { Button } from "@/app/components/Button";
 import { Icon } from "@/app/components/Icon";
 import { Input } from "@/app/components/Form/Inputs";
+import Search from "@/app/components/ui/Search";
+import Dropdown from "@/app/components/ui/Dropdown";
 import { TabFilter } from "@/app/components/Admin/TabFilter";
 import { EmptyTableRow } from "@/app/components/EmptyState";
 import { apiErrorMessage } from "@/lib/store/base-api";
@@ -112,15 +114,12 @@ export default function TaxSettingsPage() {
               if (next) setFilter(next);
             }}
           />
-          <Input
-            type="search"
+          <Search
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(val) => setSearch(typeof val === "string" ? val : (val as any).target?.value ?? "")}
             placeholder="Search categories"
-            aria-label="Search categories"
-            containerClassName="w-full lg:w-72"
-            className="bg-white border-light-gray placeholder:text-faint text-xs font-medium"
-            suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-faint" />}
+            className="w-full lg:!w-72"
+            maxWidth="max-w-none"
           />
         </div>
 
@@ -203,20 +202,16 @@ export default function TaxSettingsPage() {
                         </span>
                       </td>
                       <td className="text-xs text-subtle tabular-nums">{c.usage_count.toLocaleString()}</td>
-                      <td>
-                        <select
+                      <td className="w-48">
+                        <Dropdown
+                          options={TREATMENTS.map((o) => ({ value: o.value, label: o.label }))}
                           value={t}
-                          onChange={(e) => change(c, e.target.value as VatTreatment)}
+                          onChange={(val) => change(c, val as VatTreatment)}
                           disabled={savingSlug === c.slug}
-                          aria-label={`VAT treatment for ${c.label}`}
-                          className={selectClass}
-                        >
-                          {TREATMENTS.map((o) => (
-                            <option key={o.value} value={o.value}>
-                              {o.label}
-                            </option>
-                          ))}
-                        </select>
+                          searchable={false}
+                          size="sm"
+                          className="w-36"
+                        />
                       </td>
                       <td className="text-xs text-subtle">{TREATMENTS.find((o) => o.value === t)?.hint}</td>
                     </tr>

@@ -7,7 +7,13 @@ import { ConfirmationModal } from "./ConfirmationModal";
 import { useLogoutMutation } from "@/lib/store/api/auth-api";
 import { clearStoredTokens, writeStoredUser } from "@/lib/api";
 
-export const AdminProfileDropdown: React.FC = () => {
+import Link from "next/link";
+
+interface AdminProfileDropdownProps {
+  onClose?: () => void;
+}
+
+export const AdminProfileDropdown: React.FC<AdminProfileDropdownProps> = ({ onClose }) => {
   const { userImage } = useUser();
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [logoutUser, { isLoading: isLoggingOut }] = useLogoutMutation();
@@ -42,47 +48,47 @@ export const AdminProfileDropdown: React.FC = () => {
 
         {/* Action List */}
         <div className="p-2 flex flex-col">
-          <button className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-orange-soft hover:text-brand-orange-text transition-all group text-brand-charcoal">
+          <Link
+            href="/admin/profile"
+            onClick={onClose}
+            className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-orange-soft hover:text-brand-orange-text transition-all group text-brand-charcoal"
+          >
             <Icon
               name="user-profile-circle"
               folder="dashboardIcon"
               size="sm"
               className="text-faint group-hover:text-brand-orange-text"
             />
-            <span className="text-[13px] font-semibold">View Profile</span>
-          </button>
+            <span className="text-[13px] font-semibold">Profile</span>
+          </Link>
 
-          <button className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-orange-soft hover:text-brand-orange-text transition-all group text-brand-charcoal">
-            <Icon
-              name="settings"
-              folder="dashboardIcon"
-              size="sm"
-              className="text-faint group-hover:text-brand-orange-text"
-            />
-            <span className="text-[13px] font-semibold">Account Settings</span>
-          </button>
-
-          <button className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-orange-soft hover:text-brand-orange-text transition-all group text-brand-charcoal">
+          <Link
+            href="/admin/roles"
+            onClick={onClose}
+            className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-orange-soft hover:text-brand-orange-text transition-all group text-brand-charcoal"
+          >
             <Icon
               name="security"
               folder="icon"
               size="sm"
               className="text-faint group-hover:text-brand-orange-text"
             />
-            <span className="text-[13px] font-semibold">Security & Audit</span>
-          </button>
+            <span className="text-[13px] font-semibold">Manage Roles</span>
+          </Link>
 
-          <div className="h-px bg-off-white my-2 mx-4"></div>
-
-          <button className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-orange-soft hover:text-brand-orange-text transition-all group text-brand-charcoal">
+          <Link
+            href="/admin/audit-logs"
+            onClick={onClose}
+            className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-orange-soft hover:text-brand-orange-text transition-all group text-brand-charcoal"
+          >
             <Icon
-              name="info-circle"
+              name="time"
               folder="dashboardIcon"
               size="sm"
               className="text-faint group-hover:text-brand-orange-text"
             />
-            <span className="text-[13px] font-semibold">Help & Support</span>
-          </button>
+            <span className="text-[13px] font-semibold">Audit Logs</span>
+          </Link>
         </div>
 
         {/* Footer Logout */}

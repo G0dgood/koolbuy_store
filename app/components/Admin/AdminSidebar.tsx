@@ -146,7 +146,6 @@ const navSections: NavItemConfig[][] = [
         { name: "Delivery Slots", href: "/admin/delivery-slots", icon: CalendarIcon },
       ],
     },
-    { name: "Manage Roles", href: "/admin/roles", icon: LockClosedIcon },
     { name: "Cache Control", href: "/admin/cache", icon: ReloadIcon },
   ],
   [
@@ -167,8 +166,16 @@ const navSections: NavItemConfig[][] = [
     { name: "Errors & Health", href: "/admin/health", icon: ActivityLogIcon },
     { name: "Tools", href: "/admin/tools", icon: HobbyKnifeIcon },
     { name: "Kool Logistics", href: "/admin/logistics", icon: GlobeIcon },
-    { name: "Profile", href: "/admin/profile", icon: AvatarIcon },
-    { name: "Audit Logs", href: "/admin/audit-logs", icon: ClockIcon },
+    {
+      name: "Profile & Roles",
+      href: "/admin/profile",
+      icon: AvatarIcon,
+      subItems: [
+        { name: "Profile", href: "/admin/profile", icon: AvatarIcon },
+        { name: "Manage Roles", href: "/admin/roles", icon: LockClosedIcon },
+        { name: "Audit Logs", href: "/admin/audit-logs", icon: ClockIcon },
+      ],
+    },
   ],
 ];
 

@@ -3,6 +3,7 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import { Input } from "../Form/Inputs";
+import Search from "../ui/Search";
 import { AdminNotificationDropdown, NotificationList, useUnreadNotificationCount } from "./AdminNotificationDropdown";
 import { getAdminTheme, onAdminThemeChange, setAdminTheme, type AdminTheme } from "./adminTheme";
 import { AdminProfileDropdown } from "./AdminProfileDropdown";
@@ -244,17 +245,14 @@ export const AdminHeader: React.FC<HeaderProps> = ({
           className="relative hidden lg:flex w-full max-w-120 z-30"
           ref={searchRef}
         >
-          <Input
-            type="text"
+          <Search
             placeholder="Search data, users, or reports"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(val) => setSearchQuery(typeof val === "string" ? val : (val as any).target?.value ?? "")}
             onFocus={handleSearchFocus}
-            containerClassName="w-full"
-            className={`bg-off-white border-light-gray placeholder:text-faint text-[13px] transition-all
-              ${isSearchOpen ? "bg-white border-brand-orange ring-2 ring-brand-orange/15" : ""}
-            `}
-            suffixElement={<MagnifyingGlassIcon className="w-4 h-4 text-faint" />}
+            active={isSearchOpen}
+            className="w-full !max-w-none"
+            maxWidth="max-w-none"
           />
 
           {isSearchOpen && <AdminSearchDropdown query={searchQuery} onNavigate={() => setIsSearchOpen(false)} />}
@@ -344,7 +342,7 @@ export const AdminHeader: React.FC<HeaderProps> = ({
               )}
             </div>
 
-            {isProfileOpen && <AdminProfileDropdown />}
+            {isProfileOpen && <AdminProfileDropdown onClose={() => setIsProfileOpen(false)} />}
           </div>
         </div>
       </div>
