@@ -9,13 +9,6 @@ import { Input, Textarea } from "@/app/components/Form/Inputs";
 import { Select } from "@/app/components/Form/Select";
 import { ConfirmationModal } from "@/app/components/Admin/ConfirmationModal";
 import {
-  HiGlobeAlt,
-  HiBuildingStorefront,
-  HiLink,
-  HiTag,
-  HiUserGroup,
-  HiAdjustmentsHorizontal,
-  HiDocumentText,
   HiCheckCircle,
   HiArrowPath,
   HiPlus,
@@ -188,39 +181,22 @@ export default function CustomizePage() {
     setIsSaveSuccessOpen(true);
   };
 
-  const navTabs = [
-    { id: "localization", label: "Localization", icon: HiGlobeAlt },
-    { id: "vendor-type", label: "Vendor Type", icon: HiBuildingStorefront },
-    { id: "links", label: "Links", icon: HiLink },
-    { id: "nomenclature", label: "Nomenclature", icon: HiTag },
-    { id: "user-onboarding", label: "User Onboarding", icon: HiUserGroup },
-    {
-      id: "miscellaneous",
-      label: "Miscellaneous",
-      icon: HiAdjustmentsHorizontal,
-    },
-    { id: "policy", label: "Policy", icon: HiDocumentText },
+  const navTabs: { id: CustomizeTab; label: string }[] = [
+    { id: "localization", label: "Localization" },
+    { id: "vendor-type", label: "Vendor Type" },
+    { id: "links", label: "Links" },
+    { id: "nomenclature", label: "Nomenclature" },
+    { id: "user-onboarding", label: "User Onboarding" },
+    { id: "miscellaneous", label: "Miscellaneous" },
+    { id: "policy", label: "Policy" },
   ];
 
   return (
     <div className="flex flex-col gap-6 mx-auto pb-16">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-light-gray pb-5">
-        <div>
-          {/* <h1 className="text-2xl font-semibold text-brand-charcoal tracking-tight">
-            Platform Customization
-          </h1>
-          <p className="text-xs text-faint mt-0.5">
-            Configure system localization, vendor classifications, navigation
-            links, naming terminology, onboarding flows, and legal policies.
-          </p> */}
-        </div>
-      </div>
-
       {/* Tabs Navigation Bar */}
       <TabFilter
         ariaLabel="Customization sections"
-        options={navTabs.map((t) => ({ value: t.id as CustomizeTab, label: t.label, icon: <t.icon /> }))}
+        options={navTabs.map((t) => ({ value: t.id, label: t.label }))}
         activeTab={activeTab}
         onChange={setActiveTab}
       />
