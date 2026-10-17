@@ -11,11 +11,6 @@ import { EmptyState } from "@/app/components/EmptyState";
 export default function ReviewsPage() {
   return (
     <div className="flex flex-col gap-6 pb-12">
-      <div>
-        <h1 className="text-xl font-semibold text-brand-charcoal">Product reviews</h1>
-        <p className="text-xs text-subtle mt-0.5">Ratings and comments buyers leave on products.</p>
-      </div>
-
       <EmptyState
         variant="card"
         illustration="reviews"

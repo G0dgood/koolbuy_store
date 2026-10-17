@@ -137,7 +137,7 @@ export const AdminHeader: React.FC<HeaderProps> = ({
     if (pathname.startsWith("/admin/product-performance"))
       return "Products Performance Report";
     if (pathname.startsWith("/admin/reports")) return "Reports";
-    if (pathname.startsWith("/admin/service-area")) return "Admin Service Area";
+    if (pathname.startsWith("/admin/service-area")) return "Service Area";
     if (pathname.startsWith("/admin/profile")) return "Profile";
     if (pathname.startsWith("/admin/customize")) return "Customize";
     if (pathname.startsWith("/admin/app-styling")) return "App Styling";

@@ -149,14 +149,6 @@ export default function LoyaltyPointsPage() {
 
   return (
     <div className="flex flex-col gap-6 pb-12">
-      {/* Header */}
-      <div>
-        <h1 className="text-xl font-semibold text-brand-charcoal">Loyalty points</h1>
-        <p className="text-xs text-subtle mt-0.5">
-          Points buyers earn from qualifying spend and redeem toward equipment.
-        </p>
-      </div>
-
       {/* Policy */}
       <PolicyStrip
         policy={policy}

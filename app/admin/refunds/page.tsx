@@ -248,14 +248,8 @@ export default function RefundsPage() {
 
   return (
     <div className="flex flex-col gap-6 pb-12">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <h1 className="text-xl font-semibold text-brand-charcoal">Refunds</h1>
-          <p className="text-xs text-subtle mt-0.5">
-            Review buyer refunds and send approved ones back through Paystack.
-          </p>
-        </div>
+      {/* Actions */}
+      <div className="flex justify-end items-center">
         <Button variant="accent" size="md" iconLeft={<HiOutlinePlus size={16} />} onClick={openCreate}>
           New refund
         </Button>

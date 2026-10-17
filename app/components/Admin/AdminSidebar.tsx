@@ -107,7 +107,7 @@ const navSections: NavItemConfig[][] = [
         { name: "Products Performance Report", href: "/admin/product-performance", icon: PieChartIcon },
       ],
     },
-    { name: "Admin Service Area", href: "/admin/service-area", icon: SewingPinIcon },
+    { name: "Service Area", href: "/admin/service-area", icon: SewingPinIcon },
   ],
   [
     { name: "Customize", href: "/admin/customize", icon: MixerHorizontalIcon },

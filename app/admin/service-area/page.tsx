@@ -76,14 +76,7 @@ export default function ServiceAreaPage() {
 
   return (
     <div className="flex flex-col gap-6 pb-12">
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-        <div>
-          <h1 className="text-xl font-semibold text-brand-charcoal">Service areas</h1>
-          <p className="text-xs text-subtle mt-0.5">
-            Regions of states and cities where products can be priced differently. Only a Super Admin can add or change
-            one.
-          </p>
-        </div>
+      <div className="flex justify-end items-center">
         <Button variant="primary" iconLeft={<HiOutlinePlus size={14} aria-hidden />} onClick={() => setEditing("new")}>
           Add region
         </Button>

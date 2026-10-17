@@ -133,18 +133,8 @@ export default function CategoriesPage() {
 
   return (
     <div className="flex flex-col gap-6 mx-auto pb-12">
-      {/* Header Section */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <h1 className="text-xl font-semibold text-brand-charcoal tracking-tight">
-            Categories & Classifications
-          </h1>
-          <p className="text-xs text-faint mt-0.5">
-            Manage product cooling classifications, catalog tax rules, and vendor picklists
-          </p>
-        </div>
-
-        <div className="flex gap-2.5 w-full sm:w-auto">
+      {/* Actions */}
+      <div className="flex justify-end items-center gap-2.5 w-full">
           <Button
             variant="outline"
             shape="rounded-sm"
@@ -178,7 +168,6 @@ export default function CategoriesPage() {
             More Action
           </Button>
         </div>
-      </div>
 
       {/* The 4 Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

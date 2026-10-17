@@ -176,47 +176,25 @@ export default function WebStylingPage() {
   };
 
   const navItems = [
-    { id: "favicon", label: "Favicon", icon: HiGlobeAlt },
-    { id: "auth-images", label: "Sign In/Up Images", icon: HiPhoto },
-    {
-      id: "home-page-style",
-      label: "Home Page Style",
-      icon: HiComputerDesktop,
-    },
-    { id: "contact-us", label: "Contact Us", icon: HiPhone },
-    { id: "payment-icons", label: "Payment Method Icons", icon: HiCreditCard },
-    {
-      id: "delivery-status-icons",
-      label: "Delivery Status Icons",
-      icon: HiTruck,
-    },
+    { id: "favicon", label: "Favicon" },
+    { id: "auth-images", label: "Sign In/Up Images" },
+    { id: "home-page-style", label: "Home Page Style" },
+    { id: "contact-us", label: "Contact Us" },
+    { id: "payment-icons", label: "Payment Method Icons" },
+    { id: "delivery-status-icons", label: "Delivery Status Icons" },
   ];
 
   return (
     <div className="flex flex-col gap-6 mx-auto pb-16">
-      {/* Top Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-light-gray pb-5">
-        <div>
-          {/* <div className="flex items-center gap-2.5">
-            <h1 className="text-2xl font-semibold text-brand-charcoal tracking-tight">Web Styling</h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-orange-soft text-brand-orange-text border border-brand-orange/15">
-              Desktop & Web Storefront
-            </span>
-          </div>
-          <p className="text-xs text-faint mt-1">
-            Customize browser favicon, authentication banner artwork, web homepage layouts, contact page coordinates, payment badges, and fulfillment status indicators.
-          </p> */}
-        </div>
-
-        <div className="flex items-center gap-3">
-          <Button
-            variant="blue"
-            iconLeft={<HiCheckCircle className="w-4 h-4" />}
-            onClick={() => handleSave("Web Storefront Theme")}
-          >
-            Publish Web Styling
-          </Button>
-        </div>
+      {/* Top Action */}
+      <div className="flex justify-end items-center">
+        <Button
+          variant="primary"
+          iconLeft={<HiCheckCircle className="w-4 h-4" />}
+          onClick={() => handleSave("Web Storefront Theme")}
+        >
+          Publish Web Styling
+        </Button>
       </div>
 
       {/* Main Grid: Settings (8 cols) & Live Desktop Browser Preview (4 cols) */}
@@ -226,7 +204,7 @@ export default function WebStylingPage() {
           {/* Section Navigation Tabs */}
           <TabFilter
             ariaLabel="Web styling sections"
-            options={navItems.map((t) => ({ value: t.id as WebStylingTab, label: t.label, icon: <t.icon /> }))}
+            options={navItems.map((t) => ({ value: t.id as WebStylingTab, label: t.label }))}
             activeTab={activeTab}
             onChange={setActiveTab}
           />

@@ -196,39 +196,25 @@ export default function AppStylingPage() {
   };
 
   const navItems = [
-    { id: "fonts", label: "Font Styles", icon: HiPaintBrush },
-    { id: "colors", label: "Color Picker", icon: HiSwatch },
-    { id: "tab-bar", label: "Tab Bar Style", icon: HiSquares2X2 },
-    { id: "tutorial-images", label: "Tutorial Images", icon: HiPhoto },
-    { id: "home-style", label: "Home Page Style", icon: HiDevicePhoneMobile },
-    { id: "home-sections", label: "Home Page Sections", icon: HiBars3 },
+    { id: "fonts", label: "Font Styles" },
+    { id: "colors", label: "Color Picker" },
+    { id: "tab-bar", label: "Tab Bar Style" },
+    { id: "tutorial-images", label: "Tutorial Images" },
+    { id: "home-style", label: "Home Page Style" },
+    { id: "home-sections", label: "Home Page Sections" },
   ];
 
   return (
     <div className="flex flex-col gap-6 mx-auto pb-16">
-      {/* Top Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-light-gray pb-5">
-        <div>
-          {/* <div className="flex items-center gap-2.5">
-            <h1 className="text-2xl font-semibold text-brand-charcoal tracking-tight">App Styling</h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-orange-soft text-brand-charcoal border border-blue-100">
-              Mobile App Theme
-            </span>
-          </div>
-          <p className="text-xs text-faint mt-1">
-            Customize mobile app typography, color palettes, bottom tab navigation, tutorial splash screens, and dynamic home page sections.
-          </p> */}
-        </div>
-
-        <div className="flex items-center gap-3">
-          <Button
-            variant="blue"
-            iconLeft={<HiCheckCircle className="w-4 h-4" />}
-            onClick={() => handleSave("Mobile App Theme")}
-          >
-            Publish App Theme
-          </Button>
-        </div>
+      {/* Top Action */}
+      <div className="flex justify-end items-center">
+        <Button
+          variant="primary"
+          iconLeft={<HiCheckCircle className="w-4 h-4" />}
+          onClick={() => handleSave("Mobile App Theme")}
+        >
+          Publish App Theme
+        </Button>
       </div>
 
       {/* Main Grid: Controls on Left (8 cols), Interactive Device Preview on Right (4 cols) */}
@@ -238,7 +224,7 @@ export default function AppStylingPage() {
           {/* Section Navigation Tabs */}
           <TabFilter
             ariaLabel="App styling sections"
-            options={navItems.map((t) => ({ value: t.id as StylingSection, label: t.label, icon: <t.icon /> }))}
+            options={navItems.map((t) => ({ value: t.id as StylingSection, label: t.label }))}
             activeTab={activeSection}
             onChange={setActiveSection}
           />

@@ -32,6 +32,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   shape?: ButtonShape;
+  icon?: React.ReactNode;
+  iconPosition?: "left" | "right";
   iconLeft?: React.ReactNode;
   iconRight?: React.ReactNode;
   showChevron?: boolean;
@@ -59,9 +61,9 @@ const variants: Record<ButtonVariant, string> = {
 };
 
 const sizes: Record<ButtonSize, string> = {
-  sm: "px-3 py-1 text-[11px] md:text-[12px]",
-  md: "px-3.5 py-1.5 text-[11px] md:text-[12px]",
-  lg: "px-5 py-2.5 text-sm",
+  sm: "px-3 py-2 text-[10px] md:text-[12px]",
+  md: "px-4 py-2 text-[10px] md:text-[12px]",
+  lg: "px-6 py-3 text-base",
 };
 
 const shapes: Record<ButtonShape, string> = {
@@ -77,6 +79,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       variant = "primary",
       size = "md",
       shape = "rounded",
+      icon,
+      iconPosition = "left",
       iconLeft,
       iconRight,
       showChevron,
@@ -90,6 +94,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
+    const leftIcon = iconLeft ?? (icon && iconPosition !== "right" ? icon : null);
+    const rightIcon = iconRight ?? (icon && iconPosition === "right" ? icon : null);
+
     // A bg-/text- colour passed in className replaces the variant's, instead of
     // racing it in the stylesheet.
     const overrides = ["bg", "text"].filter((p) =>
@@ -119,11 +126,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading ? (
           <span className="w-4 h-4 border-2 border-current/20 border-t-current rounded-full animate-spin shrink-0" aria-hidden />
         ) : (
-          iconLeft && <span className="flex items-center justify-center shrink-0">{iconLeft}</span>
+          leftIcon && <span className="flex items-center justify-center shrink-0">{leftIcon}</span>
         )}
         {/* gap: an icon passed inside the children keeps its distance from the text */}
         {children && <span className="flex items-center justify-center gap-2 truncate">{children}</span>}
-        {!isLoading && iconRight && <span className="flex items-center justify-center shrink-0">{iconRight}</span>}
+        {!isLoading && rightIcon && <span className="flex items-center justify-center shrink-0">{rightIcon}</span>}
         {!isLoading && showChevron && (
           <ChevronDownIcon
             className={`w-4 h-4 shrink-0 transition-transform ${props["aria-expanded"] ? "rotate-180" : ""}`}
@@ -163,4 +170,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = "Button";
 
+export default Button;
 export { Button };
+export type { ButtonProps, ButtonVariant, ButtonSize, ButtonShape };

@@ -7,7 +7,8 @@ import { TabFilter } from "@/app/components/Admin/TabFilter";
 import { Pagination } from "@/app/components/Admin/Pagination";
 import { StatusBadge } from "@/app/components/Admin/Orders/StatusBadge";
 import { RowsPerPage } from "@/app/components/rows-per-page";
-import { Input } from "@/app/components/Form/Inputs";
+import { DatePicker } from "@/app/components/Form/DatePicker";
+import { Search } from "@/app/components/ui/Search";
 import { Button } from "@/app/components/Button";
 import { Icon } from "@/app/components/Icon";
 import { EmptyTableRow } from "@/app/components/EmptyState";
@@ -74,11 +75,6 @@ export default function ProductPerformancePage() {
 
   return (
     <div className="flex flex-col gap-6 pb-12">
-      <div>
-        <h1 className="text-xl font-semibold text-brand-charcoal">Product performance</h1>
-        <p className="text-xs text-subtle mt-0.5">What sold best in a period, and which orders were refunded.</p>
-      </div>
-
       <div className="bg-white border border-light-gray rounded-lg flex flex-col overflow-hidden">
         <div className="p-4 sm:px-6 border-b border-light-gray">
           <TabFilter tabs={[...TABS]} activeTab={tab} onChange={(t) => setTab(t as Tab)} />
@@ -129,20 +125,22 @@ function TopPerforming() {
   const activeRange = RANGES.find((r) => from === daysAgo(r.days) && to === ymd(new Date()));
 
   const dateInput = (label: string, value: string, set: (v: string) => void) => (
-    <label className="flex items-center gap-2 text-[12px] text-subtle">
-      {label}
-      <Input
-        type="date"
-        value={value}
-        onChange={(e) => {
-          set(e.target.value);
-          setPage(1);
-        }}
-        aria-label={`Orders placed ${label.toLowerCase()}`}
-        containerClassName="w-40"
-        className="bg-white border-light-gray text-xs font-medium"
-      />
-    </label>
+    <div className="flex items-center gap-1.5">
+      <span className="text-[12px] font-medium text-subtle">{label}</span>
+      <div className="w-36">
+        <DatePicker
+          value={value}
+          onChange={(v) => {
+            set(v ? String(v) : "");
+            setPage(1);
+          }}
+          placeholder={`${label} date`}
+          clearable
+          hideLabel
+          align="left"
+        />
+      </div>
+    </div>
   );
 
   return (
@@ -207,19 +205,16 @@ function TopPerforming() {
       </div>
 
       <div className="p-4 sm:px-6 flex flex-col sm:flex-row gap-3 items-center justify-between border-b border-light-gray">
-        <Input
-          type="search"
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setPage(1);
-          }}
-          placeholder="Search product, category or store"
-          aria-label="Search products"
-          containerClassName="w-full sm:w-80"
-          className="bg-white border-light-gray placeholder:text-faint text-xs font-medium"
-          suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-faint" />}
-        />
+        <div className="w-full sm:w-80">
+          <Search
+            value={search}
+            onChange={(val) => {
+              setSearch(val);
+              setPage(1);
+            }}
+            placeholder="Search product, category or store"
+          />
+        </div>
         <RowsPerPage
           value={pageSize}
           options={PAGE_SIZES}
