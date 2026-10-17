@@ -26,13 +26,7 @@ export default function LoyaltyPage() {
 
   return (
     <div className="flex flex-col gap-6 pb-12">
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-        <div>
-          <h1 className="text-xl font-semibold text-brand-charcoal">Loyalty</h1>
-          <p className="text-xs text-subtle mt-0.5">
-            One points programme for every buyer: points from qualifying spend, redeemed toward equipment.
-          </p>
-        </div>
+      <div className="flex items-center justify-end">
         <Button variant="primary" href="/admin/accounting-loyalty">
           Open points ledger
         </Button>
