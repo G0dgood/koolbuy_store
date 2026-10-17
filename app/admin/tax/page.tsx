@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { toast } from "sonner";
 import { Button } from "@/app/components/Button";
 import { Icon } from "@/app/components/Icon";
@@ -80,14 +79,10 @@ export default function TaxSettingsPage() {
 
   return (
     <div className="flex flex-col gap-6 pb-12">
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-        <div>
-          <h1 className="text-xl font-semibold text-brand-charcoal">Tax</h1>
-          <p className="text-xs text-subtle mt-0.5">The VAT policy and how VAT applies to each product category.</p>
-        </div>
-        <Link href="/admin/taxes" className="text-xs font-semibold text-brand-orange-text hover:underline whitespace-nowrap">
+      <div className="flex items-center justify-end">
+        <Button variant="outline" size="sm" href="/admin/taxes">
           VAT collected
-        </Link>
+        </Button>
       </div>
 
       <PolicyStrip

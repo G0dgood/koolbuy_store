@@ -84,13 +84,7 @@ export default function PaymentOptionsPage() {
 
   return (
     <div className="flex flex-col gap-6 pb-12">
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-        <div>
-          <h1 className="text-xl font-semibold text-brand-charcoal">Payment options</h1>
-          <p className="text-xs text-subtle mt-0.5">
-            The payment methods buyers see on the storefront, in display order. Payments are processed by Paystack.
-          </p>
-        </div>
+      <div className="flex items-center justify-end">
         <Button variant="primary" iconLeft={<HiOutlinePlus size={14} aria-hidden />} onClick={() => setEditing("new")}>
           Add payment method
         </Button>
