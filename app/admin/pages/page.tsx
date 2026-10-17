@@ -254,12 +254,12 @@ export default function CMSPagesManagement() {
   return (
     <div className="flex flex-col gap-6 mx-auto pb-16">
       {/* Header Area */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-100 pb-5">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-light-gray pb-5">
         <div>
-          {/* <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
+          {/* <h1 className="text-2xl font-semibold text-brand-charcoal tracking-tight">
             CMS Pages
           </h1>
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-faint mt-1">
             Edit content, legal disclosures, and customer-facing informational
             landing pages
           </p> */}
@@ -269,7 +269,7 @@ export default function CMSPagesManagement() {
           <Button
             variant="outline"
             shape="rounded-sm"
-            className="flex items-center gap-1.5 text-xs font-semibold text-gray-700 hover:bg-gray-50 cursor-pointer"
+            className="flex items-center gap-1.5 text-xs font-semibold text-subtle hover:bg-off-white cursor-pointer"
             onClick={() => setIsPreviewOpen(true)}
           >
             <HiOutlineEye className="w-4 h-4 text-brand-orange-text" />
@@ -290,9 +290,9 @@ export default function CMSPagesManagement() {
 
       {/* Save Success Alert Banner */}
       {saveToast && (
-        <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-lg flex items-center justify-between text-xs font-semibold animate-in fade-in duration-200">
+        <div className="bg-success-soft border border-success/30 text-success px-4 py-3 rounded-lg flex items-center justify-between text-xs font-semibold animate-in fade-in duration-200">
           <div className="flex items-center gap-2">
-            <HiOutlineSparkles className="w-4 h-4 text-emerald-600" />
+            <HiOutlineSparkles className="w-4 h-4 text-success" />
             <span>
               Changes to <strong>{currentPage.title}</strong> have been saved
               and published successfully.
@@ -300,7 +300,7 @@ export default function CMSPagesManagement() {
           </div>
           <button
             onClick={() => setSaveToast(false)}
-            className="text-emerald-700 hover:text-emerald-900 font-bold"
+            className="text-success hover:text-success/80 font-semibold"
           >
             ✕
           </button>
@@ -308,22 +308,22 @@ export default function CMSPagesManagement() {
       )}
 
       {/* Page Tabs */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-white p-3 rounded-lg border border-gray-100 shadow-2xs">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-white p-3 rounded-lg border border-light-gray">
         <TabFilter
           tabs={tabs}
           activeTab={activeTab}
           onChange={(tab) => setActiveTab(tab as PageTabKey)}
         />
 
-        <div className="flex items-center gap-3 text-xs font-medium text-gray-500">
-          <span className="flex items-center gap-1.5 text-emerald-600 font-semibold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+        <div className="flex items-center gap-3 text-xs font-medium text-faint">
+          <span className="flex items-center gap-1.5 text-success font-semibold bg-success-soft px-2.5 py-1 rounded-full border border-success/30">
+            <span className="w-1.5 h-1.5 rounded-full bg-success"></span>
             {currentPage.status}
           </span>
           <span className="hidden sm:inline">•</span>
-          <span className="text-gray-400">
+          <span className="text-faint">
             Last updated:{" "}
-            <strong className="text-gray-600">{currentPage.lastUpdated}</strong>
+            <strong className="text-subtle">{currentPage.lastUpdated}</strong>
           </span>
         </div>
       </div>
@@ -333,18 +333,18 @@ export default function CMSPagesManagement() {
         {/* Left 2 Columns: Main Page Content */}
         <div className="lg:col-span-2 flex flex-col gap-6">
           {/* Banner & Hero Settings */}
-          <div className="bg-white rounded-lg border border-gray-100 p-5 sm:p-6 shadow-2xs flex flex-col gap-4">
-            <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
+          <div className="bg-white rounded-lg border border-light-gray p-5 sm:p-6 flex flex-col gap-4">
+            <div className="flex items-center gap-2 border-b border-light-gray pb-3">
               <HiOutlineDocumentText className="w-5 h-5 text-brand-orange-text" />
-              <h3 className="text-sm font-bold text-brand-charcoal">
+              <h3 className="text-sm font-semibold text-brand-charcoal">
                 Page Header & Hero Banner
               </h3>
             </div>
 
             <div className="flex flex-col gap-3">
               <div>
-                <label className="block text-[11px] font-bold text-gray-500 uppercase mb-1">
-                  Main Headline
+                <label className="block text-[12px] font-medium text-subtle mb-1">
+                  Main headline
                 </label>
                 <Input
                   value={currentPage.headline}
@@ -352,13 +352,13 @@ export default function CMSPagesManagement() {
                     updateCurrentPage({ headline: e.target.value })
                   }
                   placeholder="Enter page headline..."
-                  className="font-bold text-gray-800"
+                  className="font-semibold text-brand-charcoal"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold text-gray-500 uppercase mb-1">
-                  Subheadline / Summary
+                <label className="block text-[12px] font-medium text-subtle mb-1">
+                  Subheadline / summary
                 </label>
                 <textarea
                   value={currentPage.subheadline}
@@ -366,7 +366,7 @@ export default function CMSPagesManagement() {
                     updateCurrentPage({ subheadline: e.target.value })
                   }
                   rows={2}
-                  className="w-full text-xs p-3 border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-700 leading-relaxed"
+                  className="w-full text-xs p-3 border border-light-gray rounded-lg focus:outline-none focus:border-brand-orange text-subtle leading-relaxed"
                   placeholder="Enter supporting subheadline..."
                 />
               </div>
@@ -374,8 +374,8 @@ export default function CMSPagesManagement() {
           </div>
 
           {/* Sections Editor */}
-          <div className="bg-white rounded-lg border border-gray-100 p-5 sm:p-6 shadow-2xs flex flex-col gap-4">
-            <div className="flex items-center justify-between border-b border-gray-100 pb-3">
+          <div className="bg-white rounded-lg border border-light-gray p-5 sm:p-6 flex flex-col gap-4">
+            <div className="flex items-center justify-between border-b border-light-gray pb-3">
               <div className="flex items-center gap-2">
                 <Icon
                   name="layer"
@@ -383,7 +383,7 @@ export default function CMSPagesManagement() {
                   size="sm"
                   className="text-brand-orange-text"
                 />
-                <h3 className="text-sm font-bold text-brand-charcoal">
+                <h3 className="text-sm font-semibold text-brand-charcoal">
                   Content Sections ({currentPage.sections.length})
                 </h3>
               </div>
@@ -402,17 +402,17 @@ export default function CMSPagesManagement() {
               {currentPage.sections.map((section, idx) => (
                 <div
                   key={section.id}
-                  className="p-4 rounded-lg border border-gray-200 bg-gray-50/40 flex flex-col gap-3 relative group"
+                  className="p-4 rounded-lg border border-light-gray bg-off-white/40 flex flex-col gap-3 relative group"
                 >
                   <div className="flex items-center justify-between gap-3">
-                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                    <span className="text-[12px] font-medium text-faint">
                       Section #{idx + 1}
                     </span>
                     {currentPage.sections.length > 1 && (
                       <button
                         type="button"
                         onClick={() => handleDeleteSection(section.id)}
-                        className="text-gray-400 hover:text-rose-500 transition-colors p-1"
+                        className="text-faint hover:text-error transition-colors p-1"
                         title="Delete section"
                       >
                         <HiOutlineTrash className="w-4 h-4" />
@@ -421,8 +421,8 @@ export default function CMSPagesManagement() {
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-bold text-gray-500 uppercase mb-1">
-                      Section Title
+                    <label className="block text-[12px] font-medium text-subtle mb-1">
+                      Section title
                     </label>
                     <input
                       type="text"
@@ -430,13 +430,13 @@ export default function CMSPagesManagement() {
                       onChange={(e) =>
                         handleUpdateSection(section.id, "title", e.target.value)
                       }
-                      className="w-full text-xs font-bold px-3 py-2 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange"
+                      className="w-full text-xs font-semibold px-3 py-2 bg-white border border-light-gray rounded-md focus:outline-none focus:border-brand-orange"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-bold text-gray-500 uppercase mb-1">
-                      Section Body Content
+                    <label className="block text-[12px] font-medium text-subtle mb-1">
+                      Section body content
                     </label>
                     <textarea
                       value={section.content}
@@ -448,7 +448,7 @@ export default function CMSPagesManagement() {
                         )
                       }
                       rows={4}
-                      className="w-full text-xs p-3 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange text-gray-700 leading-relaxed font-normal"
+                      className="w-full text-xs p-3 bg-white border border-light-gray rounded-md focus:outline-none focus:border-brand-orange text-subtle leading-relaxed font-normal"
                     />
                   </div>
                 </div>
@@ -460,15 +460,15 @@ export default function CMSPagesManagement() {
         {/* Right Column: Page Metadata, SEO & Publish Status */}
         <div className="flex flex-col gap-6">
           {/* Publishing Card */}
-          <div className="bg-white rounded-lg border border-gray-100 p-5 shadow-2xs flex flex-col gap-4">
-            <h3 className="text-sm font-bold text-brand-charcoal border-b border-gray-100 pb-2">
+          <div className="bg-white rounded-lg border border-light-gray p-5 flex flex-col gap-4">
+            <h3 className="text-sm font-semibold text-brand-charcoal border-b border-light-gray pb-2">
               Publishing Controls
             </h3>
 
             <div className="flex flex-col gap-3">
               <div>
-                <label className="block text-[11px] font-bold text-gray-500 uppercase mb-1">
-                  Publication Status
+                <label className="block text-[12px] font-medium text-subtle mb-1">
+                  Publication status
                 </label>
                 <select
                   value={currentPage.status}
@@ -477,7 +477,7 @@ export default function CMSPagesManagement() {
                       status: e.target.value as "Published" | "Draft",
                     })
                   }
-                  className="w-full text-xs font-semibold px-3 py-2 border border-gray-200 rounded-lg bg-white focus:outline-none focus:border-brand-orange"
+                  className="w-full text-xs font-semibold px-3 py-2 border border-light-gray rounded-lg bg-white focus:outline-none focus:border-brand-orange"
                 >
                   <option value="Published">Published (Live to public)</option>
                   <option value="Draft">Draft (Internal review only)</option>
@@ -485,17 +485,17 @@ export default function CMSPagesManagement() {
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold text-gray-500 uppercase mb-1">
-                  Public URL Path
+                <label className="block text-[12px] font-medium text-subtle mb-1">
+                  Public URL path
                 </label>
-                <div className="flex items-center gap-1.5 p-2 bg-gray-50 rounded-lg border border-gray-200 text-xs font-mono text-gray-700">
+                <div className="flex items-center gap-1.5 p-2 bg-off-white rounded-lg border border-light-gray text-xs font-mono text-subtle">
                   <HiOutlineGlobeAlt className="w-4 h-4 text-brand-orange-text shrink-0" />
                   <span className="truncate">{currentPage.slug}</span>
                   <a
                     href={currentPage.slug}
                     target="_blank"
                     rel="noreferrer"
-                    className="ml-auto text-gray-400 hover:text-brand-orange-text"
+                    className="ml-auto text-faint hover:text-brand-orange-text"
                     title="View live page"
                   >
                     <HiOutlineArrowTopRightOnSquare className="w-3.5 h-3.5" />
@@ -506,15 +506,15 @@ export default function CMSPagesManagement() {
           </div>
 
           {/* SEO Metadata Card */}
-          <div className="bg-white rounded-lg border border-gray-100 p-5 shadow-2xs flex flex-col gap-4">
-            <h3 className="text-sm font-bold text-brand-charcoal border-b border-gray-100 pb-2">
+          <div className="bg-white rounded-lg border border-light-gray p-5 flex flex-col gap-4">
+            <h3 className="text-sm font-semibold text-brand-charcoal border-b border-light-gray pb-2">
               Search Engine Optimization (SEO)
             </h3>
 
             <div className="flex flex-col gap-3">
               <div>
-                <label className="block text-[11px] font-bold text-gray-500 uppercase mb-1">
-                  SEO Title
+                <label className="block text-[12px] font-medium text-subtle mb-1">
+                  SEO title
                 </label>
                 <Input
                   value={currentPage.title}
@@ -524,8 +524,8 @@ export default function CMSPagesManagement() {
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold text-gray-500 uppercase mb-1">
-                  Meta Description
+                <label className="block text-[12px] font-medium text-subtle mb-1">
+                  Meta description
                 </label>
                 <textarea
                   value={currentPage.metaDescription}
@@ -533,10 +533,10 @@ export default function CMSPagesManagement() {
                     updateCurrentPage({ metaDescription: e.target.value })
                   }
                   rows={3}
-                  className="w-full text-xs p-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-700 leading-relaxed"
+                  className="w-full text-xs p-2.5 border border-light-gray rounded-lg focus:outline-none focus:border-brand-orange text-subtle leading-relaxed"
                   placeholder="Enter meta description for search engines..."
                 />
-                <span className="text-[11px] text-gray-400">
+                <span className="text-[11px] text-faint">
                   Recommended: 120-160 characters (
                   {currentPage.metaDescription.length} chars)
                 </span>
@@ -546,10 +546,10 @@ export default function CMSPagesManagement() {
 
           {/* Page Info Card */}
           <div className="bg-brand-orange-soft/50 rounded-lg border border-brand-orange/15 p-4 flex flex-col gap-2">
-            <span className="text-xs font-bold text-brand-charcoal">
+            <span className="text-xs font-semibold text-brand-charcoal">
               CMS Information
             </span>
-            <p className="text-[11px] text-gray-600 leading-relaxed">
+            <p className="text-[11px] text-subtle leading-relaxed">
               This page manages the public legal and informational content for{" "}
               <strong>{activeTab}</strong>. All changes are rendered on the
               storefront when set to Published.
@@ -567,12 +567,12 @@ export default function CMSPagesManagement() {
       >
         <ModalBody className="flex flex-col gap-6 py-6 max-h-[70vh] overflow-y-auto">
           {/* Storefront Hero Preview */}
-          <div className="bg-linear-to-br from-brand-charcoal to-[#0d1b2a] text-white p-8 rounded-lg flex flex-col gap-3">
-            <span className="text-[11px] uppercase tracking-wider font-bold text-brand-orange-text">
-              Koolbuy Storefront
+          <div className="bg-brand-charcoal text-white p-8 rounded-lg flex flex-col gap-3">
+            <span className="text-[12px] font-medium text-brand-orange">
+              Koolbuy storefront
             </span>
-            <h1 className="text-2xl font-bold">{currentPage.headline}</h1>
-            <p className="text-xs text-gray-300 leading-relaxed max-w-2xl">
+            <h1 className="text-2xl font-semibold">{currentPage.headline}</h1>
+            <p className="text-xs text-white/70 leading-relaxed max-w-2xl">
               {currentPage.subheadline}
             </p>
           </div>
@@ -582,12 +582,12 @@ export default function CMSPagesManagement() {
             {currentPage.sections.map((section) => (
               <div
                 key={section.id}
-                className="flex flex-col gap-2 border-b border-gray-100 pb-4"
+                className="flex flex-col gap-2 border-b border-light-gray pb-4"
               >
-                <h3 className="text-base font-bold text-brand-charcoal">
+                <h3 className="text-base font-semibold text-brand-charcoal">
                   {section.title}
                 </h3>
-                <p className="text-xs text-gray-600 leading-relaxed whitespace-pre-line">
+                <p className="text-xs text-subtle leading-relaxed whitespace-pre-line">
                   {section.content}
                 </p>
               </div>

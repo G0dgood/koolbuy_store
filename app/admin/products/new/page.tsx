@@ -66,8 +66,8 @@ export default function CreateProduct() {
       type="text"
       placeholder="Search product for add"
       containerClassName="flex-1 xl:w-96"
-      className="bg-white border-gray-100 placeholder:text-gray-400 text-xs font-medium"
-      suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-gray-400" />}
+      className="bg-white border-light-gray placeholder:text-faint text-xs font-medium"
+      suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-faint" />}
      />
 
      <div className="flex gap-2">
@@ -105,48 +105,48 @@ export default function CreateProduct() {
     {/* Left Column (Main Details) */}
     <div className="xl:col-span-2 flex flex-col gap-6">
      {/* Basic Details */}
-     <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8 flex flex-col gap-6">
-      <h3 className="text-base font-bold text-brand-charcoal">Basic Details</h3>
+     <div className="bg-white rounded-lg border border-light-gray p-8 flex flex-col gap-6">
+      <h3 className="text-base font-semibold text-brand-charcoal">Basic Details</h3>
 
       <div className="flex flex-col gap-2.5">
-       <label className="text-xs font-bold text-brand-charcoal">Product Name</label>
+       <label className="text-xs font-semibold text-brand-charcoal">Product Name</label>
        <Input
         type="text"
         defaultValue="iPhone 15"
-        className="bg-gray-50/80 border-gray-50 text-sm font-medium text-gray-700"
+        className="bg-off-white/80 border-light-gray text-sm font-medium text-subtle"
        />
       </div>
 
       <div className="flex flex-col gap-2.5 relative">
-       <label className="text-xs font-bold text-brand-charcoal">Product Description</label>
+       <label className="text-xs font-semibold text-brand-charcoal">Product Description</label>
        <div className="relative group">
         <Textarea
          rows={6}
          defaultValue="The iPhone 15 delivers cutting-edge performance with the A16 Bionic chip, an immersive Super Retina XDR display, advanced dual-camera system, and exceptional battery life, all encased in stunning aerospace-grade aluminum."
-         className="bg-gray-50/80 border-gray-50 text-sm font-medium text-gray-700 resize-none leading-relaxed"
+         className="bg-off-white/80 border-light-gray text-sm font-medium text-subtle resize-none leading-relaxed"
         />
         <div className="absolute bottom-4 right-4 flex gap-1.5 opacity-40 group-hover:opacity-100 transition-opacity">
-         <button className="p-1.5 hover:bg-gray-100 rounded-lg"><Icon name="settings" folder="dashboardIcon" size="xs" /></button>
-         <button className="p-1.5 hover:bg-gray-100 rounded-lg"><Icon name="star" folder="dashboardIcon" size="xs" /></button>
+         <button className="p-1.5 hover:bg-off-white rounded-lg"><Icon name="settings" folder="dashboardIcon" size="xs" /></button>
+         <button className="p-1.5 hover:bg-off-white rounded-lg"><Icon name="star" folder="dashboardIcon" size="xs" /></button>
         </div>
        </div>
       </div>
      </div>
 
      {/* Pricing Section */}
-     <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8 flex flex-col gap-6">
-      <h3 className="text-base font-bold text-brand-charcoal">Pricing</h3>
+     <div className="bg-white rounded-lg border border-light-gray p-8 flex flex-col gap-6">
+      <h3 className="text-base font-semibold text-brand-charcoal">Pricing</h3>
 
       <div className="flex flex-col gap-2.5">
-       <label className="text-xs font-bold text-brand-charcoal">Product Price</label>
+       <label className="text-xs font-semibold text-brand-charcoal">Product Price</label>
        <Input
         type="text"
         defaultValue="$999.89"
-        className="bg-gray-50/80 border-gray-50 text-sm font-bold text-gray-900"
+        className="bg-off-white/80 border-light-gray text-sm font-semibold text-brand-charcoal"
         suffixElement={
-         <div className="flex items-center gap-2 px-3 py-2 bg-white border border-gray-100 rounded-lg cursor-pointer shadow-sm">
+         <div className="flex items-center gap-2 px-3 py-2 bg-white border border-light-gray rounded-lg cursor-pointer">
           <img src="/dashboardIcon/usa.svg" alt="USA" className="w-5 h-3 object-cover rounded-sm" />
-          <Icon name="material-symbols_arrow-downward-rounded" folder="dashboardIcon" size="xs" className="text-gray-400" />
+          <Icon name="material-symbols_arrow-downward-rounded" folder="dashboardIcon" size="xs" className="text-faint" />
          </div>
         }
        />
@@ -154,68 +154,68 @@ export default function CreateProduct() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
        <div className="flex flex-col gap-2.5">
-        <label className="text-xs font-bold text-gray-400">Discounted Price <span className="text-gray-300 font-medium">(Optional)</span></label>
-        <div className="bg-gray-50/80 border border-gray-50 rounded-lg px-4 py-3 flex items-center justify-between">
+        <label className="text-xs font-semibold text-faint">Discounted Price <span className="text-faint font-medium">(Optional)</span></label>
+        <div className="bg-off-white/80 border border-light-gray rounded-lg px-4 py-3 flex items-center justify-between">
          <div className="flex items-center gap-3">
-          <span className="text-sm font-bold text-gray-400">$</span>
-          <span className="text-sm font-bold text-gray-900">99</span>
+          <span className="text-sm font-semibold text-faint">$</span>
+          <span className="text-sm font-semibold text-brand-charcoal">99</span>
          </div>
-         <span className="text-[11px] font-bold text-gray-400 italic">Sale= $900.89</span>
+         <span className="text-[11px] font-semibold text-faint italic">Sale= $900.89</span>
         </div>
        </div>
 
        <div className="flex flex-col gap-2.5">
-        <label className="text-xs font-bold text-brand-charcoal">Tax Included</label>
+        <label className="text-xs font-semibold text-brand-charcoal">Tax Included</label>
         <div className="flex items-center gap-6 py-3">
          <label className="flex items-center gap-2 cursor-pointer group">
           <div className="w-4 h-4 rounded-full border-2 border-brand-charcoal flex items-center justify-center p-0.5">
            <div className="w-full h-full bg-brand-charcoal rounded-full"></div>
           </div>
-          <span className="text-xs font-bold text-brand-charcoal">Yes</span>
+          <span className="text-xs font-semibold text-brand-charcoal">Yes</span>
          </label>
          <label className="flex items-center gap-2 cursor-pointer group">
-          <div className="w-4 h-4 rounded-full border border-gray-200 group-hover:border-gray-300"></div>
-          <span className="text-xs font-bold text-gray-400">No</span>
+          <div className="w-4 h-4 rounded-full border border-light-gray group-hover:border-medium-gray"></div>
+          <span className="text-xs font-semibold text-faint">No</span>
          </label>
         </div>
        </div>
       </div>
 
       <div className="flex flex-col gap-2.5">
-       <label className="text-xs font-bold text-brand-charcoal">Expiration</label>
+       <label className="text-xs font-semibold text-brand-charcoal">Expiration</label>
        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Input
          type="date"
          placeholder="Start"
-         className="bg-gray-50/80 border-gray-50 text-xs font-bold text-gray-400"
-         suffixElement={<HiCalendarDays className="text-gray-300 w-3.5 h-3.5 mr-1" />}
+         className="bg-off-white/80 border-light-gray text-xs font-semibold text-faint"
+         suffixElement={<HiCalendarDays className="text-faint w-3.5 h-3.5 mr-1" />}
         />
         <Input
          type="date"
          placeholder="End"
-         className="bg-gray-50/80 border-gray-50 text-xs font-bold text-gray-400"
-         suffixElement={<HiCalendarDays className="text-gray-300 w-3.5 h-3.5 mr-1" />}
+         className="bg-off-white/80 border-light-gray text-xs font-semibold text-faint"
+         suffixElement={<HiCalendarDays className="text-faint w-3.5 h-3.5 mr-1" />}
         />
        </div>
       </div>
      </div>
 
      {/* Inventory Section */}
-     <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8 flex flex-col gap-6">
-      <h3 className="text-sm font-bold text-brand-charcoal">Inventory</h3>
+     <div className="bg-white rounded-lg border border-light-gray p-8 flex flex-col gap-6">
+      <h3 className="text-sm font-semibold text-brand-charcoal">Inventory</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
        <div className="flex flex-col gap-2.5">
-        <label className="text-xs font-bold text-brand-charcoal">Stock Quantity</label>
+        <label className="text-xs font-semibold text-brand-charcoal">Stock Quantity</label>
         <Input
          type="text"
          defaultValue="Unlimited"
-         className="bg-gray-50/80 border-gray-50 text-sm font-bold text-gray-900"
+         className="bg-off-white/80 border-light-gray text-sm font-semibold text-brand-charcoal"
         />
        </div>
 
        <div className="flex flex-col gap-2.5">
-        <label className="text-xs font-bold text-brand-charcoal">Stock Status</label>
+        <label className="text-xs font-semibold text-brand-charcoal">Stock Status</label>
         <Select
          value={stockStatus}
          onChange={(val) => setStockStatus(val as string)}
@@ -229,7 +229,7 @@ export default function CreateProduct() {
 
       <div className="flex flex-col gap-4 pt-2">
        <div className="flex items-center justify-between w-full max-w-[200px]">
-        <Switch checked={true} readOnly label={<span className="text-xs font-bold text-gray-900">Unlimited</span>} />
+        <Switch checked={true} readOnly label={<span className="text-xs font-semibold text-brand-charcoal">Unlimited</span>} />
        </div>
 
         <Checkbox
@@ -237,14 +237,14 @@ export default function CreateProduct() {
           onChange={setIsFeatured}
           className="w-fit pt-2"
         >
-          <span className="text-xs font-bold text-gray-400 underline underline-offset-4 decoration-gray-200">Highlight this product in a featured section.</span>
+          <span className="text-xs font-semibold text-faint underline underline-offset-4 decoration-gray-200">Highlight this product in a featured section.</span>
         </Checkbox>
       </div>
 
-      <div className="flex gap-3 justify-end mt-4 pt-6 border-t border-gray-50">
+      <div className="flex gap-3 justify-end mt-4 pt-6 border-t border-light-gray">
        <button
         type="button"
-        className="bg-white border border-gray-100 text-brand-charcoal px-6 py-2.5 rounded-lg text-xs font-bold hover:bg-gray-50 transition-all flex items-center gap-2"
+        className="bg-white border border-light-gray text-brand-charcoal px-6 py-2.5 rounded-lg text-xs font-semibold hover:bg-off-white transition-all flex items-center gap-2"
         onClick={() => setIsDraftConfirmOpen(true)}
        >
         <Icon name="ticket" folder="dashboardIcon" size="xs" className="opacity-70" />
@@ -265,22 +265,22 @@ export default function CreateProduct() {
     {/* Right Column (Media & Meta) */}
     <div className="flex flex-col gap-6">
      {/* Upload Media */}
-     <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8 flex flex-col gap-6">
-      <h3 className="text-base font-bold text-brand-charcoal">Upload Product Image</h3>
+     <div className="bg-white rounded-lg border border-light-gray p-8 flex flex-col gap-6">
+      <h3 className="text-base font-semibold text-brand-charcoal">Upload Product Image</h3>
 
       <div className="flex flex-col gap-4">
        <div className="flex items-center justify-between">
-        <label className="text-xs font-bold text-brand-charcoal">Product Image</label>
+        <label className="text-xs font-semibold text-brand-charcoal">Product Image</label>
         {stagedMedia.length > 0 && (
          <button
           onClick={() => removeMedia(0)}
-          className="text-[11px] font-bold text-red-500 hover:underline"
+          className="text-[11px] font-semibold text-error hover:underline"
          >
           Remove Primary
          </button>
         )}
        </div>
-       <div className="relative aspect-square w-full rounded-lg bg-gray-50/50 border border-gray-100 overflow-hidden group">
+       <div className="relative aspect-square w-full rounded-lg bg-off-white/50 border border-light-gray overflow-hidden group">
         {stagedMedia.length > 0 ? (
          stagedMedia[0].file.type.startsWith("video") ? (
           <video
@@ -299,7 +299,7 @@ export default function CreateProduct() {
           />
          )
         ) : (
-         <div className="w-full h-full flex items-center justify-center bg-gray-50/50 text-gray-300">
+         <div className="w-full h-full flex items-center justify-center bg-off-white/50 text-faint">
           <HiPhoto className="w-20 h-20" />
          </div>
         )}
@@ -329,7 +329,7 @@ export default function CreateProduct() {
 
       <div className="grid grid-cols-3 gap-3">
        {stagedMedia.slice(1).map((media, idx) => (
-        <div key={idx + 1} className="relative aspect-square rounded-lg border border-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-100 group/thumb">
+        <div key={idx + 1} className="relative aspect-square rounded-lg border border-light-gray overflow-hidden bg-white ring-1 ring-light-gray group/thumb">
          {media.file.type.startsWith("video") ? (
           <video src={media.url} className="w-full h-full object-cover" />
          ) : (
@@ -337,7 +337,7 @@ export default function CreateProduct() {
          )}
          <button
           onClick={() => removeMedia(idx + 1)}
-          className="absolute top-1 right-1 w-5 h-5 bg-white/90 rounded-full flex items-center justify-center text-gray-400 hover:text-rose-500 transition-colors opacity-0 group-hover/thumb:opacity-100"
+          className="absolute top-1 right-1 w-5 h-5 bg-white/90 rounded-full flex items-center justify-center text-faint hover:text-error transition-colors opacity-0 group-hover/thumb:opacity-100"
          >
           <HiXCircle className="w-4 h-4" />
          </button>
@@ -351,15 +351,15 @@ export default function CreateProduct() {
         <div className="w-6 h-6 bg-brand-orange rounded-full flex items-center justify-center text-white scale-90 group-hover:scale-100 transition-transform">
          <Icon name="circle-plus" folder="dashboardIcon" size="xs" />
         </div>
-        <span className="text-[11px] font-bold text-brand-orange-text">Add More</span>
+        <span className="text-[11px] font-semibold text-brand-orange-text">Add More</span>
        </div>
       </div>
 
-      <div className="h-px bg-gray-50 my-2" />
+      <div className="h-px bg-light-gray my-2" />
 
       <div className="flex flex-col gap-6">
        <div className="flex flex-col gap-2.5">
-        <label className="text-[11px] font-bold text-brand-charcoal">Product Categories</label>
+        <label className="text-[11px] font-semibold text-brand-charcoal">Product Categories</label>
         <Select
          value={category}
          onChange={(val) => setCategory(val as string)}
@@ -372,7 +372,7 @@ export default function CreateProduct() {
        </div>
 
        <div className="flex flex-col gap-2.5">
-        <label className="text-[11px] font-bold text-brand-charcoal">Product Tag</label>
+        <label className="text-[11px] font-semibold text-brand-charcoal">Product Tag</label>
         <Select
          value={tag}
          onChange={(val) => setTag(val as string)}
@@ -386,7 +386,7 @@ export default function CreateProduct() {
 
        <div className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
-         <label className="text-[11px] font-bold text-brand-charcoal">
+         <label className="text-[11px] font-semibold text-brand-charcoal">
           {editingColorIndex !== null ? "Edit selected color" : "Select your color"}
          </label>
          <button
@@ -394,16 +394,16 @@ export default function CreateProduct() {
            setShowColorPicker(!showColorPicker);
            if (showColorPicker) setEditingColorIndex(null);
           }}
-          className="text-[11px] font-bold text-brand-orange-text hover:underline"
+          className="text-[11px] font-semibold text-brand-orange-text hover:underline"
          >
           {showColorPicker ? "Close Picker" : editingColorIndex !== null ? "Change Color" : "Open Custom Picker"}
          </button>
         </div>
 
         {showColorPicker && (
-         <div className="bg-gray-50/50 border border-dashed border-gray-200 rounded-lg p-4 flex flex-col gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
+         <div className="bg-off-white/50 border border-dashed border-light-gray rounded-lg p-4 flex flex-col gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
           <div className="flex flex-col gap-2">
-           <span className="text-[11px] font-medium text-gray-400">Modern Presets</span>
+           <span className="text-[11px] font-medium text-faint">Modern Presets</span>
            <div className="flex flex-wrap gap-2">
             {["#050711", "#457B9D", "#A8DADC", "#2A9D8F", "#E9C46A", "#F4A261", "#E76F51", "#264653"].map((preset) => (
              <button
@@ -425,13 +425,13 @@ export default function CreateProduct() {
           </div>
 
           <div className="flex items-center gap-3">
-           <div className="flex-1 h-px bg-gray-100" />
-           <span className="text-[11px] font-medium text-gray-300 uppercase tracking-wider">or</span>
-           <div className="flex-1 h-px bg-gray-100" />
+           <div className="flex-1 h-px bg-light-gray" />
+           <span className="text-[11px] font-medium text-faint">or</span>
+           <div className="flex-1 h-px bg-light-gray" />
           </div>
 
           <div className="flex items-center gap-3">
-           <span className="text-[11px] font-medium text-gray-400">Custom Hex</span>
+           <span className="text-[11px] font-medium text-faint">Custom Hex</span>
            <div className="flex-1 flex items-center gap-2">
             <div className="relative group">
              <input
@@ -454,7 +454,7 @@ export default function CreateProduct() {
              type="text"
              value={editingColorIndex !== null ? productColors[editingColorIndex] : ""}
              placeholder="#000000"
-             className="flex-1 h-8 bg-white border border-gray-100 rounded-sm px-2 text-[11px] font-mono text-gray-600 focus:outline-none focus:ring-1 focus:ring-brand-orange/15"
+             className="flex-1 h-8 bg-white border border-light-gray rounded-sm px-2 text-[11px] font-mono text-subtle focus:outline-none focus:ring-1 focus:ring-brand-orange/15"
              onChange={(e) => {
               const val = e.target.value;
               if (val.match(/^#[0-9A-F]{6}$/i)) {
@@ -482,7 +482,7 @@ export default function CreateProduct() {
             setEditingColorIndex(i);
             setShowColorPicker(true);
            }}
-           className={`group relative w-10 h-10 rounded-lg shadow-sm border transition-all cursor-pointer overflow-hidden ${editingColorIndex === i ? "ring-2 ring-brand-orange border-transparent ring-offset-2" : "border-black/5 hover:scale-110"
+           className={`group relative w-10 h-10 rounded-lg border transition-all cursor-pointer overflow-hidden ${editingColorIndex === i ? "ring-2 ring-brand-orange border-transparent ring-offset-2" : "border-black/5 hover:scale-110"
             }`}
            style={{ backgroundColor: color }}
           >
@@ -505,7 +505,7 @@ export default function CreateProduct() {
               setProductColors(newColors);
               if (editingColorIndex === i) setEditingColorIndex(null);
              }}
-             className="flex-1 bg-rose-500/90 hover:bg-rose-600 flex items-center justify-center transition-colors border-l border-white/20"
+             className="flex-1 bg-error/90 hover:bg-error flex items-center justify-center transition-colors border-l border-white/20"
              title="Remove color"
             >
              <HiXMark className="text-white w-3.5 h-3.5" />
@@ -520,7 +520,7 @@ export default function CreateProduct() {
           }}
           className={`w-10 h-10 rounded-lg border-2 border-dashed flex items-center justify-center transition-all group ${showColorPicker && editingColorIndex === null
            ? "border-brand-charcoal bg-brand-orange-soft text-brand-orange-text"
-           : "border-gray-200 text-gray-400 hover:border-brand-charcoal hover:text-brand-orange-text hover:bg-brand-orange-soft/50"
+           : "border-light-gray text-faint hover:border-brand-charcoal hover:text-brand-orange-text hover:bg-brand-orange-soft/50"
            }`}
           title={showColorPicker ? "Close Picker" : "Add custom color"}
          >
@@ -584,12 +584,12 @@ export default function CreateProduct() {
     size="md"
    >
     <ModalBody className="flex flex-col items-center text-center py-10 gap-6">
-     <div className="w-20 h-20 rounded-full bg-green-50 flex items-center justify-center text-green-500 shadow-inner">
+     <div className="w-20 h-20 rounded-full bg-success-soft flex items-center justify-center text-success">
       <Icon name="task_alt" folder="icon" size="lg" className="w-10 h-10" />
      </div>
      <div className="flex flex-col gap-2">
-      <h2 className="text-xl font-bold text-brand-charcoal">Product Published!</h2>
-      <p className="text-sm font-medium text-gray-400 max-w-[280px] mx-auto leading-relaxed">
+      <h2 className="text-xl font-semibold text-brand-charcoal">Product Published!</h2>
+      <p className="text-sm font-medium text-faint max-w-[280px] mx-auto leading-relaxed">
        Your new product has been successfully uploaded and is now live on the storefront.
       </p>
      </div>
@@ -597,7 +597,7 @@ export default function CreateProduct() {
     <ModalFooter className="flex flex-col gap-3 pb-8">
      <Button
       variant="primary"
-      className="w-full h-10 text-[11px] font-bold uppercase tracking-wider "
+      className="w-full h-10 text-xs font-semibold"
       onClick={() => {
        setIsPublishSuccessOpen(false);
        router.push("/admin/products");
@@ -607,7 +607,7 @@ export default function CreateProduct() {
      </Button>
      <Button
       variant="ghost"
-      className="w-full h-10 text-[11px] font-bold text-gray-400"
+      className="w-full h-10 text-[11px] font-semibold text-faint"
       onClick={() => setIsPublishSuccessOpen(false)}
      >
       View live product
@@ -622,12 +622,12 @@ export default function CreateProduct() {
     size="md"
    >
     <ModalBody className="flex flex-col items-center text-center py-10 gap-6">
-     <div className="w-20 h-20 rounded-full bg-brand-orange-soft flex items-center justify-center text-brand-orange-text shadow-inner border border-brand-orange/15">
+     <div className="w-20 h-20 rounded-full bg-brand-orange-soft flex items-center justify-center text-brand-orange-text border border-brand-orange/15">
       <Icon name="drafts" folder="icon" size="lg" className="w-10 h-10" />
      </div>
      <div className="flex flex-col gap-2">
-      <h2 className="text-xl font-bold text-brand-charcoal">Saved to Drafts</h2>
-      <p className="text-sm font-medium text-gray-400 max-w-[280px] mx-auto leading-relaxed">
+      <h2 className="text-xl font-semibold text-brand-charcoal">Saved to Drafts</h2>
+      <p className="text-sm font-medium text-faint max-w-[280px] mx-auto leading-relaxed">
        The product has been securely stored. You can find it in the "Draft" tab of the product listing.
       </p>
      </div>
@@ -635,7 +635,7 @@ export default function CreateProduct() {
     <ModalFooter className="flex flex-col gap-3 pb-8">
      <Button
       variant="primary"
-      className="w-full h-10 text-[11px] font-bold uppercase tracking-wider "
+      className="w-full h-10 text-xs font-semibold"
       onClick={() => {
        setIsDraftSuccessOpen(false);
        router.push("/admin/products");
@@ -645,7 +645,7 @@ export default function CreateProduct() {
      </Button>
      <Button
       variant="ghost"
-      className="w-full h-10 text-[11px] font-bold text-gray-400"
+      className="w-full h-10 text-[11px] font-semibold text-faint"
       onClick={() => setIsDraftSuccessOpen(false)}
      >
       Continue editing

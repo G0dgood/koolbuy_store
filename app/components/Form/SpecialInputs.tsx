@@ -37,7 +37,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   className = "",
   ...props 
 }) => {
-  const icon = <HiMagnifyingGlass className="w-4 h-4 text-gray-400" />;
+  const icon = <HiMagnifyingGlass className="w-4 h-4 text-faint" />;
   
   return (
     <Input
@@ -46,8 +46,8 @@ const SearchInput: React.FC<SearchInputProps> = ({
         <div className="flex items-center gap-2">
           {iconPosition === "right" && icon}
           {(showClear || (value && String(value).length > 0)) && (
-            <button onClick={onClear} className="hover:text-gray-600 transition-colors p-1 rounded-full hover:bg-gray-100">
-              <HiXMark className="w-4 h-4 text-gray-400" />
+            <button onClick={onClear} className="hover:text-subtle transition-colors p-1 rounded-full hover:bg-black/[0.06]">
+              <HiXMark className="w-4 h-4 text-faint" />
             </button>
           )}
         </div>
@@ -78,10 +78,10 @@ const NumberInput: React.FC<NumberInputProps> = ({
   className = "",
 }) => {
   return (
-    <div className={`flex items-center border border-gray-200 rounded-md bg-white overflow-hidden w-fit ${className}`}>
+    <div className={`flex items-center border border-light-gray rounded-md bg-white overflow-hidden w-fit ${className}`}>
       <button
         onClick={() => onChange(Math.max(min, value - step))}
-        className="px-4 py-2 text-brand-orange-text hover:bg-gray-50 transition-colors border-r border-gray-100 disabled:opacity-30"
+        className="px-4 py-2 text-brand-orange-text hover:bg-black/[0.04] transition-colors border-r border-black/[0.06] disabled:opacity-30"
         disabled={value <= min}
       >
         <HiMinus className="w-3 h-3" />
@@ -90,11 +90,11 @@ const NumberInput: React.FC<NumberInputProps> = ({
         type="number"
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-16 text-center text-sm font-semibold text-gray-900 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+        className="w-16 text-center text-sm font-semibold text-brand-charcoal focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
       />
       <button
         onClick={() => onChange(Math.min(max, value + step))}
-        className="px-4 py-2 text-brand-orange-text hover:bg-gray-50 transition-colors border-l border-gray-100 disabled:opacity-30"
+        className="px-4 py-2 text-brand-orange-text hover:bg-black/[0.04] transition-colors border-l border-black/[0.06] disabled:opacity-30"
         disabled={value >= max}
       >
         <HiPlus className="w-3 h-3" />
@@ -120,13 +120,13 @@ const RichTextArea: React.FC<RichTextAreaProps> = ({ label, ...props }) => {
   ];
 
   return (
-    <div className="flex flex-col border border-gray-200 rounded-lg overflow-hidden bg-white focus-within:ring-4 focus-within:ring-brand-orange/5 focus-within:border-brand-orange transition-all">
-      <div className="flex items-center gap-1 p-1.5 border-b border-gray-100 bg-gray-50/30">
+    <div className="flex flex-col border border-light-gray rounded-lg overflow-hidden bg-white focus-within:ring-4 focus-within:ring-brand-orange/5 focus-within:border-brand-orange transition-all">
+      <div className="flex items-center gap-1 p-1.5 border-b border-black/[0.06] bg-off-white/30">
         {toolbarIcons.map((item, index) => (
           <button
             key={index}
             type="button"
-            className="p-2 rounded-md text-gray-500 hover:text-brand-orange-text hover:bg-brand-charcoal/10 transition-all"
+            className="p-2 rounded-md text-faint hover:text-brand-orange-text hover:bg-brand-charcoal/10 transition-all"
             title={item.label}
           >
             <item.icon className="w-4 h-4" />

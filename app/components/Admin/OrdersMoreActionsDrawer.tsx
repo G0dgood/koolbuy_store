@@ -30,39 +30,39 @@ export function OrdersMoreActionsDrawer({ isOpen, onClose, onBulkPrint }: Orders
       description: "Change status for multiple orders at once",
       icon: "arrow-refresh-06",
       folder: "dashboardIcon",
-      color: "text-amber-600",
-      bg: "bg-amber-50",
+      color: "text-warning",
+      bg: "bg-warning/10",
     },
     {
       title: "Print Packing Slips",
       description: "Generate and print slips for all pending orders",
       icon: "print",
       folder: "icon",
-      color: "text-emerald-600",
-      bg: "bg-emerald-50",
+      color: "text-success",
+      bg: "bg-success-soft",
     },
     {
       title: "Bulk Archive",
       description: "Move completed orders to archive storage",
       icon: "archive",
       folder: "icon",
-      color: "text-gray-600",
-      bg: "bg-gray-100",
+      color: "text-subtle",
+      bg: "bg-off-white",
     },
     {
       title: "Delete All Cancelled",
       description: "Permanently remove all cancelled orders",
       icon: "Delete",
       folder: "dashboardIcon",
-      color: "text-rose-600",
-      bg: "bg-rose-50",
+      color: "text-error",
+      bg: "bg-error-soft",
     },
   ];
 
   return (
     <Drawer isOpen={isOpen} onClose={onClose} title="More Actions">
       <div className="flex flex-col gap-4">
-        <p className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em] mb-2 px-1">
+        <p className="text-[12px] font-medium text-subtle mb-2 px-1">
           Available Operations
         </p>
         
@@ -81,16 +81,16 @@ export function OrdersMoreActionsDrawer({ isOpen, onClose, onBulkPrint }: Orders
                   onClose();
                 }
               }}
-              className="flex items-start gap-4 p-5 rounded-lg border border-gray-50 hover:border-brand-charcoal/30 hover:bg-brand-charcoal/5 transition-all group text-left"
+              className="flex items-start gap-4 p-5 rounded-lg border border-light-gray hover:border-brand-charcoal/30 hover:bg-brand-charcoal/5 transition-all group text-left"
             >
               <div className={`w-10 h-10 rounded-lg ${action.bg} ${action.color} flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110`}>
                 <Icon name={action.icon} folder={action.folder as any} size="sm" />
               </div>
               <div className="flex flex-col">
-                <span className="text-[13px] font-bold text-brand-charcoal group-hover:text-brand-orange-text transition-colors">
+                <span className="text-[13px] font-semibold text-brand-charcoal group-hover:text-brand-orange-text transition-colors">
                   {action.title}
                 </span>
-                <span className="text-[11px] font-bold text-gray-500 mt-1 leading-relaxed">
+                <span className="text-[11px] font-semibold text-faint mt-1 leading-relaxed">
                   {action.description}
                 </span>
               </div>
@@ -98,9 +98,9 @@ export function OrdersMoreActionsDrawer({ isOpen, onClose, onBulkPrint }: Orders
           ))}
         </div>
 
-        <div className="mt-8 pt-8 border-t border-gray-100">
+        <div className="mt-8 pt-8 border-t border-light-gray">
           <Button 
-            className="w-full h-10 text-[11px] font-bold uppercase tracking-wider border border-gray-200 text-gray-500 hover:bg-gray-50 transition-all rounded-lg"
+            className="w-full h-10 text-[12px] font-semibold border border-light-gray text-faint hover:bg-off-white transition-all rounded-lg"
             onClick={onClose}
           >
             Cancel

@@ -20,7 +20,7 @@ export default function ModalHeader({
 }: ModalHeaderProps) {
   return (
     <div
-      className={`flex items-center justify-between bg-white px-6 py-6 ${hideBorder ? "" : "border-b border-gray-200"
+      className={`flex items-center justify-between bg-white px-6 py-6 ${hideBorder ? "" : "border-b border-black/[0.06]"
         }`}
     >
       <div className="flex items-center gap-3">
@@ -33,7 +33,7 @@ export default function ModalHeader({
       </div>
       <button
         onClick={onClose}
-        className="cursor-pointer text-gray-600 transition-colors hover:text-gray-400"
+        className="cursor-pointer text-subtle transition-colors hover:text-faint"
       >
         <IoIosCloseCircleOutline className={`text-[20px]`} />
       </button>

@@ -32,13 +32,13 @@ export const ActionIcons: React.FC<ActionIconsProps> = ({ onOpenDropdown }) => {
         className={`relative w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
           isActive("/cart")
             ? "text-brand-charcoal bg-black/[0.05]"
-            : "text-gray-700 hover:text-brand-charcoal hover:bg-black/[0.05]"
+            : "text-subtle hover:text-brand-charcoal hover:bg-black/[0.05]"
         }`}
       >
         <div className="relative">
           <Icon name="My_cart" size="md" />
           {cartCount > 0 && (
-            <span className="absolute -top-1.5 -right-2 bg-brand-orange text-white text-[10px] font-semibold min-w-4 h-4 flex items-center justify-center rounded-full px-1 ring-2 ring-white">
+            <span className="absolute -top-1.5 -right-2 bg-brand-orange text-white text-[11px] font-semibold min-w-4 h-4 flex items-center justify-center rounded-full px-1 ring-2 ring-white">
               {cartCount}
             </span>
           )}

@@ -26,20 +26,20 @@ export const RemoveItemModal: React.FC<RemoveItemModalProps> = ({
       title="Remove from Wishlist"
     >
       <div className="flex flex-col items-center text-center gap-6 py-4">
-        <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center text-red-500">
+        <div className="w-16 h-16 bg-error-soft rounded-full flex items-center justify-center text-error">
           <Icon name="delete_outline" size="lg" />
         </div>
         
         <div className="flex flex-col gap-2">
-          <h3 className="text-lg font-bold text-gray-900">Remove this item?</h3>
-          <p className="text-sm text-gray-500 leading-relaxed px-4">
-            Are you sure you want to remove <span className="font-bold text-gray-700">"{productTitle}"</span> from your wishlist?
+          <h3 className="text-lg font-semibold text-brand-charcoal">Remove this item?</h3>
+          <p className="text-sm text-faint leading-relaxed px-4">
+            Are you sure you want to remove <span className="font-semibold text-subtle">"{productTitle}"</span> from your wishlist?
           </p>
         </div>
 
         <div className="flex flex-col w-full gap-3 mt-2">
           <Button 
-            className="w-full h-10 font-bold bg-red-500 hover:bg-red-600 text-white border-transparent" 
+            className="w-full h-10 font-semibold bg-error hover:bg-error/90 text-white border-transparent" 
             onClick={() => {
               onConfirm();
               onClose();
@@ -49,7 +49,7 @@ export const RemoveItemModal: React.FC<RemoveItemModalProps> = ({
           </Button>
           <Button 
             variant="ghost"
-            className="w-full h-9 font-bold text-gray-500 hover:text-gray-700" 
+            className="w-full h-9 font-semibold text-faint hover:text-subtle" 
             onClick={onClose}
           >
             Cancel

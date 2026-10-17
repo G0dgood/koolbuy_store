@@ -28,21 +28,21 @@ export function ReviewReplyDrawer({ isOpen, onClose, review }: ReviewReplyDrawer
     <Drawer isOpen={isOpen} onClose={onClose} title="Reply to Review">
       <div className="flex flex-col h-full gap-8">
         {/* Review Context */}
-        <div className="flex flex-col gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100">
+        <div className="flex flex-col gap-4 p-5 bg-off-white rounded-lg border border-light-gray">
            <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-sm">
                  <img src={review.customer.avatar} alt="" className="w-full h-full object-cover" />
               </div>
               <div className="flex flex-col">
-                 <span className="text-sm font-bold text-brand-charcoal">{review.customer.name}</span>
+                 <span className="text-sm font-semibold text-brand-charcoal">{review.customer.name}</span>
                  <div className="flex items-center gap-0.5">
                     {[1, 2, 3, 4, 5].map((star) => (
-                       <Icon key={star} name="star" folder="dashboardIcon" size="xs" className={star <= review.rating ? "text-amber-400" : "text-gray-200"} />
+                       <Icon key={star} name="star" folder="dashboardIcon" size="xs" className={star <= review.rating ? "text-brand-orange" : "text-medium-gray"} />
                     ))}
                  </div>
               </div>
            </div>
-           <p className="text-[12px] font-bold text-gray-500 italic leading-relaxed">
+           <p className="text-[12px] font-semibold text-faint italic leading-relaxed">
               "{review.comment}"
            </p>
         </div>
@@ -50,7 +50,7 @@ export function ReviewReplyDrawer({ isOpen, onClose, review }: ReviewReplyDrawer
         {/* Reply Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
            <div className="flex flex-col gap-2">
-              <label className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em]">Admin Response</label>
+              <label className="text-[12px] font-medium text-subtle">Admin response</label>
               <Textarea
                 placeholder="Write your response to the customer..."
                 value={reply}
@@ -60,11 +60,11 @@ export function ReviewReplyDrawer({ isOpen, onClose, review }: ReviewReplyDrawer
               />
            </div>
 
-           <div className="mt-auto pt-8 border-t border-gray-50 flex flex-col gap-3">
-              <Button variant="primary" type="submit" className="w-full h-9 sm:h-10 text-[11px] font-bold uppercase tracking-wider ">
-                 Publish Reply
+           <div className="mt-auto pt-8 border-t border-light-gray flex flex-col gap-3">
+              <Button variant="primary" type="submit" className="w-full h-9 sm:h-10 text-[12px] font-semibold">
+                 Publish reply
               </Button>
-              <Button variant="ghost" type="button" onClick={onClose} className="w-full h-9 sm:h-10 text-[11px] font-bold text-gray-400">
+              <Button variant="ghost" type="button" onClick={onClose} className="w-full h-9 sm:h-10 text-[11px] font-semibold text-faint">
                  Cancel
               </Button>
            </div>

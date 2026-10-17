@@ -15,9 +15,9 @@ export const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({ searchQu
     <AnimatePresence>
       {isVisible && searchQuery.length > 0 && (
         <div className="absolute top-full left-0 pt-2 w-full z-100">
-          <DropdownMenu width="100%" className="shadow-md border border-gray-100 rounded-2xl overflow-hidden bg-white">
-            <div className="px-4 py-2 text-xs font-bold text-gray-400 border-b border-gray-50 uppercase tracking-wider">
-              Top Results for "{searchQuery}"
+          <DropdownMenu width="100%" className="shadow-float border border-light-gray rounded-tile overflow-hidden bg-white">
+            <div className="px-4 py-2 text-xs font-medium text-faint border-b border-black/[0.06]">
+              Top results for "{searchQuery}"
             </div>
             <DropdownItem
               label={`${searchQuery} DC Solar Freezers`}

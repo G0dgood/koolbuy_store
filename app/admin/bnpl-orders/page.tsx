@@ -47,7 +47,7 @@ const columns: ListingColumn<FinancingInvoice>[] = [
     header: "Invoice #",
     render: (inv) => (
       <div className="flex flex-col">
-        <span className="font-mono text-sm text-gray-900 whitespace-nowrap">{inv.invoice_number}</span>
+        <span className="font-mono text-sm text-brand-charcoal whitespace-nowrap">{inv.invoice_number}</span>
         {inv.central_order_number && (
           <span className="text-[11px] text-faint whitespace-nowrap">{inv.central_order_number}</span>
         )}
@@ -59,7 +59,7 @@ const columns: ListingColumn<FinancingInvoice>[] = [
     header: "Retailer",
     render: (inv) => (
       <div className="flex flex-col min-w-40">
-        <span className="text-sm text-gray-900">{inv.retailer?.business_name || inv.retailer?.name || "—"}</span>
+        <span className="text-sm text-brand-charcoal">{inv.retailer?.business_name || inv.retailer?.name || "—"}</span>
         {inv.retailer?.business_name && inv.retailer.name && (
           <span className="text-[11px] text-faint">{inv.retailer.name}</span>
         )}
@@ -81,7 +81,7 @@ const columns: ListingColumn<FinancingInvoice>[] = [
     header: "Total payable",
     render: (inv) => (
       <div className="flex flex-col whitespace-nowrap">
-        <span className="font-mono text-sm text-gray-900">{formatMoney(inv.total_payable, inv.currency)}</span>
+        <span className="font-mono text-sm text-brand-charcoal">{formatMoney(inv.total_payable, inv.currency)}</span>
         <span className={`text-[11px] ${inv.balance > 0 ? "text-brand-orange-text" : "text-faint"}`}>
           Balance {formatMoney(inv.balance, inv.currency)}
         </span>
@@ -92,7 +92,7 @@ const columns: ListingColumn<FinancingInvoice>[] = [
     key: "paid",
     header: "Paid so far",
     render: (inv) => (
-      <span className="font-mono text-sm text-gray-700 whitespace-nowrap">{formatMoney(inv.amount_paid, inv.currency)}</span>
+      <span className="font-mono text-sm text-subtle whitespace-nowrap">{formatMoney(inv.amount_paid, inv.currency)}</span>
     ),
   },
   { key: "status", header: "Status", render: (inv) => <StatusBadge status={inv.status} /> },

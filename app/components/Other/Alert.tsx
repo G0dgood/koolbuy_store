@@ -20,25 +20,25 @@ const Alert: React.FC<AlertProps> = ({
 }) => {
   const variants = {
     success: {
-      bg: "bg-brand-orange-soft",
-      border: "border-brand-orange/15",
+      bg: "bg-success-soft",
+      border: "border-success/20",
       icon: "task_alt",
-      iconColor: "text-brand-orange-text",
+      iconColor: "text-success",
       titleColor: "text-brand-charcoal",
     },
     error: {
-      bg: "bg-[#FEE2E2]",
-      border: "border-[#FECACA]",
+      bg: "bg-error-soft",
+      border: "border-error/20",
       icon: "error",
-      iconColor: "text-[#EF4444]",
-      titleColor: "text-[#991B1B]",
+      iconColor: "text-error",
+      titleColor: "text-error",
     },
     warning: {
       bg: "bg-brand-orange-soft",
-      border: "border-[#FFEDD5]",
+      border: "border-warning/20",
       icon: "warning",
-      iconColor: "text-[#F59E0B]",
-      titleColor: "text-[#9A3412]",
+      iconColor: "text-warning",
+      titleColor: "text-brand-charcoal",
     },
   };
 
@@ -52,7 +52,7 @@ const Alert: React.FC<AlertProps> = ({
       <Icon name={style.icon} size="sm" className={`mt-0.5 ${style.iconColor}`} />
 
       <div className="flex-1 min-w-0">
-        <h4 className={`text-sm font-bold ${style.titleColor}`}>{title}</h4>
+        <h4 className={`text-sm font-semibold ${style.titleColor}`}>{title}</h4>
         {description && (
           <p className={`text-xs mt-0.5 font-medium opacity-80 ${style.titleColor}`}>
             {description}

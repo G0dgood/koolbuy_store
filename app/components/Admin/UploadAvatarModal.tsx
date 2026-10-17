@@ -65,19 +65,19 @@ export function UploadAvatarModal({ isOpen, onClose, onUploadSuccess }: UploadAv
             <div className={`w-40 h-40 rounded-full border-2 border-dashed flex flex-col items-center justify-center gap-3 transition-all overflow-hidden ${
               previewUrl 
               ? "border-brand-charcoal/50 bg-white" 
-              : "border-gray-200 bg-gray-50/50 hover:bg-white hover:border-brand-charcoal/30"
-            } hover:shadow-md hover:shadow-brand-charcoal`}>
+              : "border-light-gray bg-off-white/50 hover:bg-white hover:border-brand-charcoal/30"
+            } hover:shadow-lift`}>
                 
                 {previewUrl ? (
                   <img src={previewUrl} alt="Preview" className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-500" />
                 ) : (
                   <>
-                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-gray-400 group-hover:text-brand-orange-text group-hover:scale-110 transition-all shadow-sm">
+                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-faint group-hover:text-brand-orange-text group-hover:scale-110 transition-all">
                         <Icon name="photo_camera" folder="icon" size="sm" />
                     </div>
                     <div className="flex flex-col items-center gap-0.5 text-center px-4">
-                        <span className="text-[11px] font-bold text-brand-charcoal">Pick a photo</span>
-                        <span className="text-[11px] font-medium text-gray-400">PNG, JPG up to 5MB</span>
+                        <span className="text-[11px] font-semibold text-brand-charcoal">Pick a photo</span>
+                        <span className="text-[11px] font-medium text-faint">PNG, JPG up to 5MB</span>
                     </div>
                   </>
                 )}
@@ -93,7 +93,7 @@ export function UploadAvatarModal({ isOpen, onClose, onUploadSuccess }: UploadAv
         </div>
 
         <div className="flex flex-col gap-4 w-full">
-            <div className="flex items-center gap-3 p-4 bg-brand-orange-soft/50 border border-brand-orange/15 rounded-xl">
+            <div className="flex items-center gap-3 p-4 bg-brand-orange-soft/50 border border-brand-orange/15 rounded-lg">
                 <Icon name="verified" folder="icon" size="xs" className="text-brand-orange-text" />
                 <p className="text-[11px] font-medium text-brand-orange-text leading-relaxed">
                     A clear, professional photo helps team members identify you easily. Recommended size: 512x512px.
@@ -102,11 +102,11 @@ export function UploadAvatarModal({ isOpen, onClose, onUploadSuccess }: UploadAv
         </div>
       </ModalBody>
 
-      <ModalFooter className="flex justify-end gap-3 border-t border-gray-50 pt-8">
+      <ModalFooter className="flex justify-end gap-3 border-t border-light-gray pt-8">
         <Button 
           variant="outline" 
           onClick={onClose} 
-          className="px-6 h-10 text-[11px] font-bold"
+          className="px-6 h-10 text-[11px] font-semibold"
         >
           Cancel
         </Button>
@@ -114,9 +114,9 @@ export function UploadAvatarModal({ isOpen, onClose, onUploadSuccess }: UploadAv
           variant="primary" 
           onClick={handleUpload}
           disabled={isUploading || !previewUrl}
-          className="px-6 h-10 text-[11px] font-bold uppercase tracking-wider "
+          className="px-6 h-10 text-[12px] font-semibold"
         >
-          {isUploading ? "Uploading..." : "Save Photo"}
+          {isUploading ? "Uploading..." : "Save photo"}
         </Button>
       </ModalFooter>
     </Modal>

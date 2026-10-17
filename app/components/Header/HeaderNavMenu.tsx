@@ -80,7 +80,7 @@ export const HeaderNavMenu: React.FC<HeaderNavMenuProps> = ({
   ];
 
   return (
-    <div className="flex items-center gap-4 xl:gap-6 text-xs md:text-sm font-medium text-gray-700">
+    <div className="flex items-center gap-4 xl:gap-6 text-xs md:text-sm font-medium text-subtle">
       {/* Language Dropdown */}
       <div className="relative flex items-center" ref={languageRef}>
         <button
@@ -96,14 +96,14 @@ export const HeaderNavMenu: React.FC<HeaderNavMenuProps> = ({
           }}
           className={`flex items-center gap-1 cursor-pointer transition-colors py-1.5 outline-none ${
             isLanguageOpen
-              ? "text-brand-orange-text font-bold"
-              : "text-gray-700 hover:text-brand-orange-text"
+              ? "text-brand-orange-text font-semibold"
+              : "text-subtle hover:text-brand-orange-text"
           }`}
           aria-expanded={isLanguageOpen}
         >
           <span>Language</span>
           <FiChevronDown
-            className={`text-xs text-gray-400 transition-transform duration-200 ${
+            className={`text-xs text-faint transition-transform duration-200 ${
               isLanguageOpen ? "rotate-180 text-brand-orange-text" : ""
             }`}
           />
@@ -114,10 +114,10 @@ export const HeaderNavMenu: React.FC<HeaderNavMenuProps> = ({
             <div className="absolute top-full right-0 pt-2 w-48 z-120">
               <DropdownMenu
                 width="100%"
-                className="shadow-md border border-gray-100 rounded-xl overflow-hidden py-1"
+                className="shadow-float border border-light-gray rounded-xl overflow-hidden py-1"
               >
-                <div className="px-3 py-1.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100">
-                  Select Language
+                <div className="px-3 py-1.5 text-[12px] font-medium text-faint border-b border-black/[0.06]">
+                  Select language
                 </div>
                 {languages.map((lang) => (
                   <DropdownItem
@@ -152,14 +152,14 @@ export const HeaderNavMenu: React.FC<HeaderNavMenuProps> = ({
           }}
           className={`flex items-center gap-1 cursor-pointer transition-colors py-1.5 outline-none ${
             isHelpOpen
-              ? "text-brand-orange-text font-bold"
-              : "text-gray-700 hover:text-brand-orange-text"
+              ? "text-brand-orange-text font-semibold"
+              : "text-subtle hover:text-brand-orange-text"
           }`}
           aria-expanded={isHelpOpen}
         >
           <span>Help</span>
           <FiChevronDown
-            className={`text-xs text-gray-400 transition-transform duration-200 ${
+            className={`text-xs text-faint transition-transform duration-200 ${
               isHelpOpen ? "rotate-180 text-brand-orange-text" : ""
             }`}
           />
@@ -170,7 +170,7 @@ export const HeaderNavMenu: React.FC<HeaderNavMenuProps> = ({
             <div className="absolute top-full right-0 pt-2 w-64 z-120">
               <DropdownMenu
                 width="100%"
-                className="shadow-md border border-gray-100 rounded-xl overflow-hidden"
+                className="shadow-float border border-light-gray rounded-xl overflow-hidden"
               >
                 <div className="flex flex-col py-2">
                   {helpLinks.map((link) => (
@@ -179,13 +179,13 @@ export const HeaderNavMenu: React.FC<HeaderNavMenuProps> = ({
                       label={link.label}
                       href={link.href}
                       onSelect={() => setIsHelpOpen(false)}
-                      className="text-gray-700 hover:text-brand-orange-text font-medium"
+                      className="text-subtle hover:text-brand-orange-text font-medium"
                     />
                   ))}
                 </div>
 
                 {/* Contact Section */}
-                <div className="p-4 border-t border-gray-100 bg-gray-50/50 flex flex-col gap-2.5">
+                <div className="p-4 border-t border-black/[0.06] bg-off-white/50 flex flex-col gap-2.5">
                   <Button
                     className="w-full text-white h-9 active:scale-95 transition-all hover:opacity-90 text-xs"
                     style={{ backgroundColor: "#F57E16" }}
@@ -195,7 +195,7 @@ export const HeaderNavMenu: React.FC<HeaderNavMenuProps> = ({
                   </Button>
                   <Button
                     variant="secondary"
-                    className="w-full h-9 border font-bold active:scale-95 transition-all text-xs"
+                    className="w-full h-9 border font-semibold active:scale-95 transition-all text-xs"
                     style={{ borderColor: "#00B517", color: "#00B517" }}
                     iconLeft={<Icon name="social/whatsapp" size="sm" />}
                   >
@@ -223,14 +223,14 @@ export const HeaderNavMenu: React.FC<HeaderNavMenuProps> = ({
           }}
           className={`flex items-center gap-1 cursor-pointer transition-colors py-1.5 outline-none ${
             isCurrencyOpen
-              ? "text-brand-orange-text font-bold"
-              : "text-gray-700 hover:text-brand-orange-text"
+              ? "text-brand-orange-text font-semibold"
+              : "text-subtle hover:text-brand-orange-text"
           }`}
           aria-expanded={isCurrencyOpen}
         >
           <span>Currency</span>
           <FiChevronDown
-            className={`text-xs text-gray-400 transition-transform duration-200 ${
+            className={`text-xs text-faint transition-transform duration-200 ${
               isCurrencyOpen ? "rotate-180 text-brand-orange-text" : ""
             }`}
           />
@@ -241,10 +241,10 @@ export const HeaderNavMenu: React.FC<HeaderNavMenuProps> = ({
             <div className="absolute top-full right-0 pt-2 w-52 z-120">
               <DropdownMenu
                 width="100%"
-                className="shadow-md border border-gray-100 rounded-xl overflow-hidden py-1"
+                className="shadow-float border border-light-gray rounded-xl overflow-hidden py-1"
               >
-                <div className="px-3 py-1.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100">
-                  Select Currency
+                <div className="px-3 py-1.5 text-[12px] font-medium text-faint border-b border-black/[0.06]">
+                  Select currency
                 </div>
                 {currencies.map((curr) => (
                   <DropdownItem

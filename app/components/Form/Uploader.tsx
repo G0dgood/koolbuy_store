@@ -20,15 +20,15 @@ const Uploader: React.FC<UploaderProps> = ({
       className={`
         w-20 h-20 flex items-center justify-center rounded-lg transition-all duration-200
         ${variant === "dashed" 
-          ? "border-2 border-dashed border-gray-200 bg-white hover:border-brand-charcoal hover:bg-gray-50" 
-          : "bg-gray-100 border border-transparent hover:bg-gray-200"}
+          ? "border-2 border-dashed border-light-gray bg-white hover:border-brand-charcoal hover:bg-black/[0.04]" 
+          : "bg-black/[0.04] border border-transparent hover:bg-black/[0.08]"}
         ${className}
       `}
     >
       <Icon 
         name={icon} 
         size="md" 
-        className={variant === "dashed" ? "text-gray-400 group-hover:text-brand-orange-text" : "text-gray-400"} 
+        className={variant === "dashed" ? "text-faint group-hover:text-brand-orange-text" : "text-faint"} 
       />
     </button>
   );

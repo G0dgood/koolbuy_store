@@ -25,17 +25,17 @@ export function SelectionSummary({
   const selectedItems = items.filter((item) => selectedIds.includes(item[idProp]));
 
   return (
-    <div className="flex flex-col gap-4 p-4 rounded-2xl bg-brand-orange-soft/30 border border-brand-charcoal/10 animate-in fade-in slide-in-from-top-2 duration-300">
+    <div className="flex flex-col gap-4 p-4 rounded-lg bg-brand-orange-soft/30 border border-brand-charcoal/10 animate-in fade-in slide-in-from-top-2 duration-300">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-brand-charcoal text-white flex items-center justify-center font-bold text-xs">
+          <div className="w-8 h-8 rounded-lg bg-brand-charcoal text-white flex items-center justify-center font-semibold text-xs">
             {selectedIds.length}
           </div>
-          <span className="text-[13px] font-bold text-brand-charcoal">{title}</span>
+          <span className="text-[13px] font-semibold text-brand-charcoal">{title}</span>
         </div>
         <button
           onClick={onClear}
-          className="text-[11px] font-bold text-brand-orange-text hover:text-brand-orange-text hover:underline transition-colors"
+          className="text-[11px] font-semibold text-brand-orange-text hover:text-brand-orange-text hover:underline transition-colors"
         >
           Clear Selection
         </button>
@@ -45,10 +45,10 @@ export function SelectionSummary({
         {selectedItems.map((item, idx) => (
           <div
             key={item[idProp] || idx}
-            className="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-white/60 border border-white shadow-sm"
+            className="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-white/60 border border-white"
           >
             <div className="w-1.5 h-1.5 rounded-full bg-brand-charcoal opacity-40"></div>
-            <span className="text-[11px] font-bold text-gray-600 truncate">
+            <span className="text-[11px] font-semibold text-subtle truncate">
               {item[labelProp] || item[idProp]}
             </span>
           </div>

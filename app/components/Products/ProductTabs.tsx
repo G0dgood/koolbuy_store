@@ -1,35 +1,33 @@
+"use client";
 
 import React, { useState } from "react";
 import { ProductReviews } from "./ProductReviews";
 import { ProductDescription } from "./ProductDescription";
+import type { ProductView } from "./productDetailShared";
+import { TabFilter, type TabOption } from "../Tabs";
 
-const ProductTabs = () => {
-  const [activeTab, setActiveTab] = useState("Description");
-  const tabs = ["Description", "Reviews"];
+type Tab = "Description" | "Reviews";
+
+const ProductTabs: React.FC<{ product: ProductView }> = ({ product }) => {
+  const [activeTab, setActiveTab] = useState<Tab>("Description");
+  const tabs: TabOption<Tab>[] = [
+    { value: "Description", label: "Description" },
+    {
+      value: "Reviews",
+      label: "Reviews",
+      count: product.reviewCount !== null && product.reviewCount > 0 ? product.reviewCount.toLocaleString("en-NG") : undefined,
+    },
+  ];
 
   return (
-    <div className="flex-1 w-full min-w-0 bg-white rounded-tile border border-light-gray overflow-hidden flex flex-col min-h-[600px]">
-      {/* Tab headers: pill segmented control */}
+    <div className="flex-1 w-full min-w-0 bg-white rounded-tile border border-light-gray overflow-hidden flex flex-col min-h-[420px]">
       <div className="px-6 md:px-10 pt-6 md:pt-8">
-        <div className="inline-flex items-center gap-1 p-1 rounded-full bg-black/[0.04]">
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`
-                px-5 py-2 rounded-full text-[14px] font-medium transition-colors cursor-pointer
-                ${activeTab === tab ? "bg-brand-charcoal text-white" : "text-subtle hover:text-brand-charcoal"}
-              `}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
+        <TabFilter ariaLabel="Product information" options={tabs} activeTab={activeTab} onChange={setActiveTab} />
       </div>
 
-      <div className="p-6 md:p-10">
-        {activeTab === "Description" && <ProductDescription />}
-        {activeTab === "Reviews" && <ProductReviews />}
+      <div role="tabpanel" className="p-6 md:p-10">
+        {activeTab === "Description" && <ProductDescription product={product} />}
+        {activeTab === "Reviews" && <ProductReviews productId={product.id} rating={product.rating} />}
       </div>
     </div>
   );

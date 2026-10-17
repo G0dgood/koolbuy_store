@@ -3,7 +3,7 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import { Input } from "../Form/Inputs";
-import { AdminNotificationDropdown, unreadNotificationCount } from "./AdminNotificationDropdown";
+import { AdminNotificationDropdown, NotificationList, useUnreadNotificationCount } from "./AdminNotificationDropdown";
 import { getAdminTheme, onAdminThemeChange, setAdminTheme, type AdminTheme } from "./adminTheme";
 import { AdminProfileDropdown } from "./AdminProfileDropdown";
 import { AdminSearchDropdown } from "./AdminSearchDropdown";
@@ -18,7 +18,6 @@ import {
   PersonIcon,
 } from "@radix-ui/react-icons";
 import Modal from "../Modal/Modal";
-import { NotificationList } from "./AdminNotificationDropdown";
 import { motion } from "framer-motion";
 
 /** The Sales CRM's notification bell (public/Icon/Bell_light.svg there), drawn in currentColor. */
@@ -55,6 +54,7 @@ export const AdminHeader: React.FC<HeaderProps> = ({
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const unreadNotificationCount = useUnreadNotificationCount();
 
   const notificationRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
@@ -248,7 +248,7 @@ export const AdminHeader: React.FC<HeaderProps> = ({
             suffixElement={<MagnifyingGlassIcon className="w-4 h-4 text-faint" />}
           />
 
-          {isSearchOpen && <AdminSearchDropdown query={searchQuery} />}
+          {isSearchOpen && <AdminSearchDropdown query={searchQuery} onNavigate={() => setIsSearchOpen(false)} />}
         </div>
 
         <div className="flex items-center gap-3">
@@ -257,7 +257,7 @@ export const AdminHeader: React.FC<HeaderProps> = ({
             {/* Same bell, button and badge as the Sales CRM header (components/ui/NotificationBell.tsx) */}
             <button
               className={`relative w-8 h-8 p-1 flex items-center justify-center rounded-lg transition-colors cursor-pointer
-                ${isNotificationsOpen ? "bg-gray-100 text-gray-800" : "text-gray-600 hover:text-gray-800 hover:bg-gray-100"}
+                ${isNotificationsOpen ? "bg-off-white text-brand-charcoal" : "text-subtle hover:text-brand-charcoal hover:bg-off-white"}
               `}
               onClick={toggleNotifications}
               aria-label={unreadNotificationCount ? `Notifications, ${unreadNotificationCount} unread` : "Notifications"}
@@ -265,13 +265,13 @@ export const AdminHeader: React.FC<HeaderProps> = ({
             >
               <BellLightIcon />
               {unreadNotificationCount > 0 && (
-                <span className="absolute -top-1 -right-1 flex h-4 min-w-4 px-1 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-sm ring-1 ring-white">
+                <span className="absolute -top-1 -right-1 flex h-4 min-w-4 px-1 items-center justify-center rounded-full bg-error text-[11px] font-semibold text-white ring-1 ring-white">
                   {unreadNotificationCount > 99 ? "99+" : unreadNotificationCount}
                 </span>
               )}
             </button>
 
-            {isNotificationsOpen && !isMobile && <AdminNotificationDropdown />}
+            {isNotificationsOpen && !isMobile && <AdminNotificationDropdown onAction={() => setIsNotificationsOpen(false)} />}
 
             {isMobile && (
               <Modal
@@ -299,16 +299,16 @@ export const AdminHeader: React.FC<HeaderProps> = ({
               title={isDark ? "Switch to light mode" : "Switch to dark mode"}
               aria-label="Dark mode"
               className={`relative w-12 h-7 rounded-full border transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50 ${
-                isDark ? "bg-[#334155] border-[#475569]" : "bg-off-white border-light-gray"
+                isDark ? "bg-light-gray border-medium-gray" : "bg-off-white border-light-gray"
               }`}
             >
               <span
                 className={`absolute top-0.5 left-0.5 w-[22px] h-[22px] rounded-full flex items-center justify-center transition-transform duration-200 ${
-                  isDark ? "translate-x-5 bg-[#0F172A]" : "translate-x-0 bg-white shadow-sm"
+                  isDark ? "translate-x-5 bg-off-white" : "translate-x-0 bg-white shadow-sm"
                 }`}
               >
                 {isDark ? (
-                  <MoonIcon className="w-3.5 h-3.5 text-[#F1F5F9]" />
+                  <MoonIcon className="w-3.5 h-3.5 text-brand-charcoal" />
                 ) : (
                   <SunIcon className="w-3.5 h-3.5 text-brand-orange" />
                 )}

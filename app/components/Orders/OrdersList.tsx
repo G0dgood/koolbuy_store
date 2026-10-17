@@ -96,27 +96,27 @@ export const OrdersList: React.FC = () => {
     const s = (status || "processing").toLowerCase();
     if (s.includes("delivered") || s.includes("completed")) {
       return (
-        <span className="inline-flex items-center h-6 px-2.5 rounded-full text-[12px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+        <span className="inline-flex items-center h-6 px-2.5 rounded-full text-[12px] font-medium bg-success-soft text-success border border-success/20">
           Delivered
         </span>
       );
     }
     if (s.includes("shipped") || s.includes("transit")) {
       return (
-        <span className="inline-flex items-center h-6 px-2.5 rounded-full text-[12px] font-medium bg-blue-50 text-blue-700 border border-blue-200">
-          In Transit
+        <span className="inline-flex items-center h-6 px-2.5 rounded-full text-[12px] font-medium bg-brand-orange-soft text-brand-orange-text border border-brand-orange/20">
+          In transit
         </span>
       );
     }
     if (s.includes("cancel")) {
       return (
-        <span className="inline-flex items-center h-6 px-2.5 rounded-full text-[12px] font-medium bg-rose-50 text-rose-700 border border-rose-200">
+        <span className="inline-flex items-center h-6 px-2.5 rounded-full text-[12px] font-medium bg-error-soft text-error border border-error/20">
           Cancelled
         </span>
       );
     }
     return (
-      <span className="inline-flex items-center h-6 px-2.5 rounded-full text-[12px] font-medium bg-amber-50 text-amber-800 border border-amber-200">
+      <span className="inline-flex items-center h-6 px-2.5 rounded-full text-[12px] font-medium bg-brand-orange-soft text-brand-orange-text border border-brand-orange/20">
         Processing
       </span>
     );
@@ -139,15 +139,15 @@ export const OrdersList: React.FC = () => {
   // Not signed in state
   if (!hasToken) {
     return (
-      <div className="bg-white rounded-3xl border border-black/[0.06] p-8 md:p-14 text-center flex flex-col items-center justify-center gap-4 max-w-lg mx-auto shadow-xs">
+      <div className="bg-white rounded-tile border border-light-gray p-8 md:p-14 text-center flex flex-col items-center justify-center gap-4 max-w-lg mx-auto">
         <div className="w-16 h-16 rounded-full bg-brand-orange-soft flex items-center justify-center text-brand-orange-text">
           <Icon name="inventory_2" size="lg" />
         </div>
         <div className="space-y-1">
-          <h2 className="text-xl font-bold text-brand-charcoal tracking-[-0.02em]">
+          <h2 className="text-xl font-semibold text-brand-charcoal tracking-[-0.02em]">
             Sign in to view your orders
           </h2>
-          <p className="text-sm text-gray-500 max-w-sm">
+          <p className="text-sm text-faint max-w-sm">
             Please log in with your customer account to track current shipments and view past equipment purchase history.
           </p>
         </div>
@@ -164,7 +164,7 @@ export const OrdersList: React.FC = () => {
             href="/products"
             variant="secondary"
             shape="pill"
-            className="w-full sm:w-auto px-6 h-9 text-sm bg-black/[0.04] text-gray-700 hover:bg-black/[0.08]"
+            className="w-full sm:w-auto px-6 h-9 text-sm bg-black/[0.04] text-subtle hover:bg-black/[0.08]"
           >
             Browse Products
           </Button>
@@ -175,14 +175,14 @@ export const OrdersList: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="bg-white rounded-3xl border border-black/[0.06] flex flex-col overflow-hidden shadow-xs">
+      <div className="bg-white rounded-tile border border-light-gray flex flex-col overflow-hidden">
         {/* List Toolbar */}
         <div className="px-6 py-5 md:px-8 md:py-6 flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-black/[0.06]">
           <div>
-            <h2 className="text-lg md:text-xl font-bold text-brand-charcoal tracking-[-0.01em] leading-tight">
+            <h2 className="text-lg md:text-xl font-semibold text-brand-charcoal tracking-[-0.01em] leading-tight">
               All Orders
             </h2>
-            <p className="text-xs text-gray-500 mt-0.5">
+            <p className="text-xs text-faint mt-0.5">
               {orders.length} {orders.length === 1 ? "order" : "orders"} on record
             </p>
           </div>
@@ -191,14 +191,14 @@ export const OrdersList: React.FC = () => {
             <Icon
               name="search"
               size="sm"
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-faint"
             />
             <input
               type="text"
               placeholder="Search by order ID or item..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-10 pl-11 pr-4 rounded-full bg-black/[0.04] border border-transparent outline-none transition-colors text-sm text-brand-charcoal placeholder:text-gray-400 focus:bg-white focus:border-brand-orange-text focus:ring-4 focus:ring-brand-orange-text/10"
+              className="w-full h-10 pl-11 pr-4 rounded-full bg-black/[0.04] border border-transparent outline-none transition-colors text-sm text-brand-charcoal placeholder:text-faint focus:bg-white focus:border-brand-orange-text focus:ring-4 focus:ring-brand-orange-text/10"
             />
           </div>
         </div>
@@ -209,15 +209,15 @@ export const OrdersList: React.FC = () => {
             {[1, 2, 3].map((n) => (
               <div
                 key={n}
-                className="animate-pulse flex items-center gap-4 p-4 rounded-2xl bg-black/[0.02]"
+                className="animate-pulse flex items-center gap-4 p-4 rounded-tile bg-black/[0.02]"
               >
-                <div className="w-20 h-20 bg-gray-200 rounded-xl" />
+                <div className="w-20 h-20 bg-light-gray rounded-xl" />
                 <div className="flex-1 space-y-2">
-                  <div className="h-4 bg-gray-200 rounded-md w-1/4" />
-                  <div className="h-3 bg-gray-200 rounded-md w-1/3" />
-                  <div className="h-3 bg-gray-200 rounded-md w-1/5" />
+                  <div className="h-4 bg-light-gray rounded-md w-1/4" />
+                  <div className="h-3 bg-light-gray rounded-md w-1/3" />
+                  <div className="h-3 bg-light-gray rounded-md w-1/5" />
                 </div>
-                <div className="w-24 h-8 bg-gray-200 rounded-full" />
+                <div className="w-24 h-8 bg-light-gray rounded-full" />
               </div>
             ))}
           </div>
@@ -227,16 +227,16 @@ export const OrdersList: React.FC = () => {
         {!isLoading && isError && (
           <div className="py-14 px-6 text-center flex flex-col items-center justify-center gap-3">
             <FailedOrdersIllustration className="w-48 h-36 mb-1" />
-            <p className="text-base font-bold text-brand-charcoal">
+            <p className="text-base font-semibold text-brand-charcoal">
               Failed to load your orders
             </p>
-            <p className="text-xs text-gray-500 max-w-sm">
+            <p className="text-xs text-faint max-w-sm">
               We couldn&rsquo;t retrieve your order history from the server. Please check your network connection and try again.
             </p>
             <button
               type="button"
               onClick={() => refetch()}
-              className="mt-2 inline-flex items-center gap-2 text-xs font-semibold px-5 py-2.5 rounded-full bg-brand-charcoal text-white hover:bg-brand-charcoal/85 transition-colors cursor-pointer shadow-xs"
+              className="mt-2 inline-flex items-center gap-2 text-xs font-semibold px-5 py-2.5 rounded-full bg-brand-charcoal text-white hover:bg-brand-charcoal/85 transition-colors cursor-pointer"
             >
               <Icon name="refresh" size="xs" />
               <span>Retry</span>
@@ -266,7 +266,7 @@ export const OrdersList: React.FC = () => {
                   >
                     <div className="flex items-center gap-4 md:gap-6 flex-1 min-w-0">
                       {/* Thumbnail */}
-                      <div className="w-20 h-20 md:w-24 md:h-24 flex-shrink-0 rounded-2xl bg-off-white p-2.5 flex items-center justify-center border border-black/[0.04]">
+                      <div className="w-20 h-20 md:w-24 md:h-24 flex-shrink-0 rounded-stage bg-off-white p-2.5 flex items-center justify-center border border-black/[0.04]">
                         <div className="relative w-full h-full">
                           <Image
                             src={primaryImage}
@@ -280,13 +280,13 @@ export const OrdersList: React.FC = () => {
 
                       {/* Info */}
                       <div className="flex flex-col flex-1 min-w-0 gap-1">
-                        <span className="text-sm md:text-base font-bold text-brand-charcoal leading-snug tabular-nums">
+                        <span className="text-sm md:text-base font-semibold text-brand-charcoal leading-snug tabular-nums">
                           {orderNumber}
                         </span>
-                        <span className="text-xs text-gray-500">
+                        <span className="text-xs text-faint">
                           Placed on {formatDate(order.created_at)}
                         </span>
-                        <span className="text-xs text-gray-600 font-medium">
+                        <span className="text-xs text-subtle font-medium">
                           Contains {itemCount} {itemCount === 1 ? "item" : "items"}
                           {order.vendor?.name ? ` • Sold by ${order.vendor.name}` : ""}
                         </span>
@@ -295,7 +295,7 @@ export const OrdersList: React.FC = () => {
 
                     {/* Price & Status */}
                     <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-2 md:w-40 lg:w-48">
-                      <span className="text-base md:text-lg font-bold text-brand-charcoal tabular-nums tracking-[-0.01em]">
+                      <span className="text-base md:text-lg font-semibold text-brand-charcoal tabular-nums tracking-[-0.01em]">
                         {totalFormatted}
                       </span>
                       {getStatusBadge(order.status)}
@@ -325,14 +325,14 @@ export const OrdersList: React.FC = () => {
               })
             ) : (
               <div className="py-16 flex flex-col items-center gap-4 text-center">
-                <div className="w-16 h-16 bg-off-white rounded-full flex items-center justify-center text-gray-400">
+                <div className="w-16 h-16 bg-off-white rounded-full flex items-center justify-center text-faint">
                   <Icon name="inventory_2" size="lg" />
                 </div>
                 <div className="space-y-1">
-                  <h3 className="text-base font-bold text-brand-charcoal">
+                  <h3 className="text-base font-semibold text-brand-charcoal">
                     {searchQuery ? "No matching orders found" : "No orders yet"}
                   </h3>
-                  <p className="text-xs text-gray-500 max-w-sm">
+                  <p className="text-xs text-faint max-w-sm">
                     {searchQuery
                       ? `No orders match "${searchQuery}". Try searching with a different order number or term.`
                       : "When you place equipment orders through KoolBuy, they will appear right here with live delivery updates."}
@@ -372,20 +372,20 @@ export const OrdersList: React.FC = () => {
         >
           <div className="space-y-6 pt-2">
             {/* Header info cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 rounded-2xl bg-black/[0.02] border border-black/[0.04] text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 rounded-stage bg-black/[0.02] border border-black/[0.04] text-xs">
               <div>
-                <span className="text-gray-400 block font-medium">Status</span>
+                <span className="text-faint block font-medium">Status</span>
                 <div className="mt-1">{getStatusBadge(selectedOrder.status)}</div>
               </div>
               <div>
-                <span className="text-gray-400 block font-medium">Total Paid</span>
-                <span className="text-sm font-bold text-brand-charcoal block mt-0.5">
+                <span className="text-faint block font-medium">Total Paid</span>
+                <span className="text-sm font-semibold text-brand-charcoal block mt-0.5">
                   ₦{Number(selectedOrder.total_amount || 0).toLocaleString()}
                 </span>
               </div>
               <div>
-                <span className="text-gray-400 block font-medium">Merchant / Vendor</span>
-                <span className="text-gray-800 font-semibold block mt-0.5 truncate">
+                <span className="text-faint block font-medium">Merchant / Vendor</span>
+                <span className="text-brand-charcoal font-semibold block mt-0.5 truncate">
                   {selectedOrder.vendor?.name || "KoolBuy Official"}
                 </span>
               </div>
@@ -393,11 +393,11 @@ export const OrdersList: React.FC = () => {
 
             {/* Delivery address if provided */}
             {selectedOrder.delivery_address && (
-              <div className="p-4 rounded-2xl bg-black/[0.02] border border-black/[0.04]">
-                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">
-                  Delivery Destination
+              <div className="p-4 rounded-stage bg-black/[0.02] border border-black/[0.04]">
+                <h4 className="text-xs font-medium text-faint mb-1">
+                  Delivery destination
                 </h4>
-                <p className="text-xs text-gray-800 leading-relaxed">
+                <p className="text-xs text-brand-charcoal leading-relaxed">
                   {typeof selectedOrder.delivery_address === "string"
                     ? selectedOrder.delivery_address
                     : JSON.stringify(selectedOrder.delivery_address)}
@@ -407,10 +407,10 @@ export const OrdersList: React.FC = () => {
 
             {/* Line Items */}
             <div>
-              <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">
-                Items in Order ({selectedOrder.items?.length || 0})
+              <h4 className="text-xs font-medium text-faint mb-3">
+                Items in order ({selectedOrder.items?.length || 0})
               </h4>
-              <div className="divide-y divide-black/[0.06] border border-black/[0.06] rounded-2xl overflow-hidden">
+              <div className="divide-y divide-black/[0.06] border border-black/[0.06] rounded-tile overflow-hidden">
                 {(selectedOrder.items || []).map((item: OrderItem, idx: number) => {
                   const price = Number(item.price || 0);
                   const qty = Number(item.quantity || 1);
@@ -430,15 +430,15 @@ export const OrdersList: React.FC = () => {
                           />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-xs font-bold text-gray-800 truncate">
+                          <p className="text-xs font-semibold text-brand-charcoal truncate">
                             {item.name || item.title || "Product Item"}
                           </p>
-                          <p className="text-[11px] text-gray-500">
+                          <p className="text-[11px] text-faint">
                             Qty: {qty} • ₦{price.toLocaleString()} each
                           </p>
                         </div>
                       </div>
-                      <span className="text-xs font-bold text-brand-charcoal tabular-nums shrink-0">
+                      <span className="text-xs font-semibold text-brand-charcoal tabular-nums shrink-0">
                         ₦{(price * qty).toLocaleString()}
                       </span>
                     </div>
@@ -453,7 +453,7 @@ export const OrdersList: React.FC = () => {
                 onClick={() => setSelectedOrder(null)}
                 variant="secondary"
                 shape="pill"
-                className="px-5 h-9 text-xs font-medium bg-black/[0.04] text-gray-700 hover:bg-black/[0.08]"
+                className="px-5 h-9 text-xs font-medium bg-black/[0.04] text-subtle hover:bg-black/[0.08]"
               >
                 Close
               </Button>

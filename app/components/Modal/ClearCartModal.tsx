@@ -24,20 +24,20 @@ export const ClearCartModal: React.FC<ClearCartModalProps> = ({
       title="Clear Cart"
     >
       <div className="flex flex-col items-center text-center gap-6 py-4">
-        <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center text-red-500 shadow-sm border border-red-100">
+        <div className="w-16 h-16 bg-error-soft rounded-full flex items-center justify-center text-error border border-error/10">
           <Icon name="delete_outline" size="lg" />
         </div>
         
         <div className="flex flex-col gap-2">
-          <h3 className="text-xl font-bold text-gray-900 leading-tight">Clear your cart?</h3>
-          <p className="text-sm text-gray-500 font-medium leading-relaxed px-4">
+          <h3 className="text-xl font-semibold text-brand-charcoal leading-tight">Clear your cart?</h3>
+          <p className="text-sm text-faint font-medium leading-relaxed px-4">
             Are you sure you want to remove all items from your cart? This action cannot be undone.
           </p>
         </div>
 
         <div className="flex flex-col w-full gap-3 mt-4">
           <Button 
-            className="w-full h-10 font-bold bg-red-500 hover:bg-red-600 text-white border-transparent hover:translate-y-[-1px] transition-all active:scale-95" 
+            className="w-full h-10 font-semibold bg-error hover:bg-error/90 text-white border-transparent transition-colors" 
             onClick={() => {
               onClear();
               onClose();
@@ -47,7 +47,7 @@ export const ClearCartModal: React.FC<ClearCartModalProps> = ({
           </Button>
           <Button 
             variant="ghost"
-            className="w-full h-9 font-bold text-gray-500 hover:text-gray-700 hover:bg-gray-50" 
+            className="w-full h-9 font-semibold text-faint hover:text-subtle hover:bg-black/[0.04]" 
             onClick={onClose}
           >
             Cancel

@@ -21,7 +21,7 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
   return (
     <div className="hidden lg:flex items-center h-full">
       {/* Navigation Buttons Row */}
-      <div className="flex items-center gap-5 xl:gap-7 text-[13px] font-medium text-gray-800 h-full">
+      <div className="flex items-center gap-5 xl:gap-7 text-[13px] font-medium text-brand-charcoal h-full">
         {/* All Categories Trigger */}
         <div
           className="relative h-full flex items-center"
@@ -40,7 +40,7 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
             className={`flex items-center gap-1.5 h-full py-2 transition-colors cursor-pointer outline-none whitespace-nowrap ${
               activeDropdown === "categories"
                 ? "text-brand-orange-text font-semibold"
-                : "text-gray-600 hover:text-brand-charcoal"
+                : "text-subtle hover:text-brand-charcoal"
             }`}
           >
             <span>All categories</span>
@@ -48,7 +48,7 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
               className={`text-xs transition-transform duration-200 ${
                 activeDropdown === "categories"
                   ? "rotate-180 text-brand-orange-text"
-                  : "text-gray-400"
+                  : "text-faint"
               }`}
             />
           </button>
@@ -56,7 +56,7 @@ export const HeaderNavLinks: React.FC<HeaderNavLinksProps> = ({
 
         {/* Marketplace */}
         <div className="relative flex items-center">
-          {/* <Button className="font-bold text-xs xl:text-sm ">
+          {/* <Button className="font-semibold text-xs xl:text-sm ">
             Marketplace
           </Button> */}
           <Button

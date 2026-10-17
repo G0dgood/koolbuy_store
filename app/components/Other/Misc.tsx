@@ -3,7 +3,7 @@ import { Icon } from "../Icon";
 
 // Custom SVG components for payment methods and stores
 const PaymentIcons = () => (
-  <div className="flex items-center gap-4 py-2 px-4 border border-dashed border-purple-200 rounded-xl w-fit">
+  <div className="flex items-center gap-4 py-2 px-4 border border-dashed border-light-gray rounded-xl w-fit">
     <Image src="/payment/amex.png" alt="Amex" width={32} height={20} className="h-5 object-contain" />
     <Image src="/payment/mastercard.png" alt="Mastercard" width={32} height={20} className="h-5 object-contain" />
     <Image src="/payment/pp.png" alt="PayPal" width={32} height={20} className="h-5 object-contain" />
@@ -16,7 +16,7 @@ const StoreButtons = ({ orientation = "horizontal" }: { orientation?: "horizonta
   <div className={`
     flex gap-3 w-fit
     ${orientation === "horizontal" 
-      ? "items-center py-2 px-4 border border-dashed border-purple-200 rounded-xl" 
+      ? "items-center py-2 px-4 border border-dashed border-light-gray rounded-xl" 
       : "flex-col"}
   `}>
     <button className="hover:opacity-80 transition-opacity flex">

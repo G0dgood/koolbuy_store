@@ -1,1509 +1,668 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Icon } from "../../components/Icon";
-import { Button } from "../../components/Button";
+import React, { Suspense, useEffect, useRef, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { toast } from "sonner";
 import {
-  getAdvertConfig,
-  saveAdvertConfig,
-  AdvertConfig,
-  AdvertItem,
-} from "../../utils/advertState";
-import { motion, Reorder } from "framer-motion";
-import { ConfirmationModal } from "../../components/Admin/ConfirmationModal";
-import Modal from "../../components/Modal/Modal";
-import { Input } from "../../components/Form";
-import { Label } from "../../components/Form/Field";
-import Checkbox from "../../components/Checkbox";
-import { TabFilter } from "../../components/Admin/TabFilter";
-import Dropdown from "../../components/Form/Dropdown";
-import { AdvertSkeleton } from "../../components/Skeleton/AdvertSkeleton";
-import { LuPencilLine, LuArrowLeftRight } from "react-icons/lu";
+  HiOutlineArrowDown,
+  HiOutlineArrowUp,
+  HiOutlineCloudArrowUp,
+  HiOutlinePencilSquare,
+  HiOutlinePlus,
+  HiOutlineTrash,
+} from "react-icons/hi2";
+import { Button } from "@/app/components/Button";
+import { Icon } from "@/app/components/Icon";
+import { Input } from "@/app/components/Form/Inputs";
+import { Switch } from "@/app/components/Form/Switch";
+import { TabFilter } from "@/app/components/Admin/TabFilter";
+import { Pagination } from "@/app/components/Admin/Pagination";
+import { ConfirmationModal } from "@/app/components/Admin/ConfirmationModal";
+import Modal from "@/app/components/Modal/Modal";
+import { EmptyState } from "@/app/components/EmptyState";
+import { BannerImage } from "@/app/components/Admin/BannerImage";
+import { apiErrorMessage } from "@/lib/store/base-api";
+import { formatDate, humanize } from "@/lib/store/api/accounting-api";
+import {
+  HERO_ANIMATIONS,
+  IMAGE_TYPES,
+  readAsDataUrl,
+  useCreateHeroBannerMutation,
+  useDeleteHeroBannerMutation,
+  useGetHeroBannersQuery,
+  useGetStoreBannersQuery,
+  useReorderHeroBannersMutation,
+  useUpdateHeroBannerMutation,
+  useUpdateStoreBannerMutation,
+  useUploadFile,
+  type HeroAnimation,
+  type HeroBanner,
+  type StoreBanner,
+} from "@/lib/store/api/catalogue-admin-api";
 
-const availableBackgrounds = [
-  "/images/login-hero.png",
-  "/dashboardImage/Headphones.png",
-  "/dashboardImage/Electronics.png",
-  "/dashboardImage/Fashion.png",
-  "/dashboardImage/Home & Kitchen.png",
-];
+/* Adverts and banners.
+   - Homepage banners: the hero slides on the storefront home page
+     (/admin/hero-banners/: add, edit, switch on/off, reorder, delete). The
+     image is sent with the banner (JPG, PNG, WebP or AVIF under 3MB).
+   - Store banners: the cover image on each retailer's and wholesaler's store
+     page (/admin/store-banners/: replace or remove for them). */
 
-const productsData: AdvertItem[] = [
-  {
-    id: 1,
-    name: "Premium Wireless Headphones",
-    category: "Electronics",
-    price: "₦35,000",
-    image: "/dashboardImage/Headphones.png",
-  },
-  {
-    id: 2,
-    name: "Smart Fitness Watch",
-    category: "Electronics",
-    price: "₦18,500",
-    image: "/dashboardImage/Electronics.png",
-  },
-  {
-    id: 3,
-    name: "Organic Cotton T-Shirt",
-    category: "Fashion",
-    price: "₦4,500",
-    image: "/dashboardImage/T-Shirt.png",
-  },
-  {
-    id: 4,
-    name: "Leather Travel Bag",
-    category: "Fashion",
-    price: "₦25,000",
-    image: "/dashboardImage/Fashion.png",
-  },
-  {
-    id: 5,
-    name: "Minimalist Wall Clock",
-    category: "Home",
-    price: "₦8,900",
-    image: "/dashboardImage/Home & Kitchen.png",
-  },
-  {
-    id: 6,
-    name: "Modern Desk Lamp",
-    category: "Home",
-    price: "₦12,000",
-    image: "/dashboardImage/Bulb.png",
-  },
-  {
-    id: 7,
-    name: "Ergonomic Gaming Mouse",
-    category: "Electronics",
-    price: "₦22,000",
-    image: "/dashboardImage/Accessories.png",
-  },
-  {
-    id: 8,
-    name: "Wireless Charging Pad",
-    category: "Electronics",
-    price: "₦7,500",
-    image: "/dashboardImage/Electronics.png",
-  },
-];
+const TABS = ["Homepage banners", "Store banners"] as const;
+type Tab = (typeof TABS)[number];
+const MAX_HERO_BYTES = 3 * 1024 * 1024;
 
-export default function AdvertManagement() {
-  const [config, setConfig] = useState<AdvertConfig | null>(null);
-  const [isDeployModalOpen, setIsDeployModalOpen] = useState(false);
-  const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
-  const [isRefineModalOpen, setIsRefineModalOpen] = useState(false);
-  const [isStoryModalOpen, setIsStoryModalOpen] = useState(false);
-  const [refiningAssetIndex, setRefiningAssetIndex] = useState<number | null>(
-    null,
+const inputClass =
+  "w-full h-10 px-3 rounded-lg border border-light-gray text-xs focus:outline-none focus:border-brand-orange bg-white";
+
+function ErrorBox({ error, fallback, onRetry }: { error: unknown; fallback: string; onRetry: () => void }) {
+  return (
+    <div className="py-12 flex flex-col items-center gap-2 text-center">
+      <p className="text-[13px] text-error">{apiErrorMessage(error, fallback)}</p>
+      <Button variant="outline" size="sm" onClick={onRetry}>
+        Try again
+      </Button>
+    </div>
   );
-  const [replacingAssetIndex, setReplacingAssetIndex] = useState<number | null>(
-    null,
+}
+
+/** ?tab=homepage | ?tab=store (the sidebar links to each) */
+const TAB_PARAM: Record<Tab, string> = { "Homepage banners": "homepage", "Store banners": "store" };
+const tabFromParam = (v: string | null): Tab => (v === "store" ? "Store banners" : "Homepage banners");
+
+export default function AdvertPage() {
+  return (
+    <Suspense fallback={null}>
+      <AdvertContent />
+    </Suspense>
   );
-  const [editingStoryIndex, setEditingStoryIndex] = useState<number | null>(
-    null,
+}
+
+function AdvertContent() {
+  const params = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const tab = tabFromParam(params.get("tab"));
+  const setTab = (t: Tab) => {
+    const next = new URLSearchParams(params.toString());
+    next.set("tab", TAB_PARAM[t]);
+    next.delete("type");
+    router.replace(`${pathname}?${next.toString()}`, { scroll: false });
+  };
+  return (
+    <div className="flex flex-col gap-6 pb-12">
+      <div>
+        <h1 className="text-xl font-semibold text-brand-charcoal">Adverts and banners</h1>
+        <p className="text-xs text-subtle mt-0.5">The slides on the storefront home page and each store&apos;s banner.</p>
+      </div>
+      <div className="bg-white border border-light-gray rounded-lg flex flex-col overflow-hidden">
+        <div className="p-4 sm:px-6 border-b border-light-gray">
+          <TabFilter tabs={[...TABS]} activeTab={tab} onChange={(t) => setTab(t as Tab)} />
+        </div>
+        {tab === "Homepage banners" ? <HeroBanners /> : <StoreBanners />}
+      </div>
+    </div>
   );
-  const [activeVisualIndex, setActiveVisualIndex] = useState<number | null>(
-    null,
-  ); // null means Global Sequence
-  const [backgroundModalTab, setBackgroundModalTab] = useState<
-    "ambient" | "products" | "url" | "upload"
-  >("ambient");
-  const [customUrl, setCustomUrl] = useState("");
-  const [isDragging, setIsDragging] = useState(false);
-  const fileInputRef = React.useRef<HTMLInputElement>(null);
+}
 
-  useEffect(() => {
-    setConfig(getAdvertConfig());
-  }, []);
+/* ───────────────────────── Homepage (hero) banners ───────────────────────── */
 
-  if (!config) return <AdvertSkeleton />;
+function HeroBanners() {
+  const { data, isLoading, isFetching, isError, error, refetch } = useGetHeroBannersQuery();
+  const [updateBanner] = useUpdateHeroBannerMutation();
+  const [deleteBanner, { isLoading: isDeleting }] = useDeleteHeroBannerMutation();
+  const [reorder, { isLoading: isReordering }] = useReorderHeroBannersMutation();
+  const [editing, setEditing] = useState<HeroBanner | "new" | null>(null);
+  const [toDelete, setToDelete] = useState<HeroBanner | null>(null);
+  const items = data?.items ?? [];
 
-  const handleSave = () => {
-    if (config) {
-      saveAdvertConfig(config);
-      setIsDeployModalOpen(false);
+  const toggle = async (b: HeroBanner) => {
+    try {
+      await updateBanner({ id: b.id, is_active: !b.is_active }).unwrap();
+      toast.success(b.is_active ? "Banner hidden from the home page." : "Banner is live on the home page.");
+    } catch (e) {
+      toast.error(apiErrorMessage(e, "Couldn't update the banner."));
     }
   };
 
-  const toggleBackgroundSelection = (bgUrl: string) => {
-    const isSelected = config.backgroundImages.some((img) => img.url === bgUrl);
-    if (isSelected) {
-      if (config.backgroundImages.length > 1) {
-        const newImages = config.backgroundImages.filter(
-          (img) => img.url !== bgUrl,
-        );
-        setConfig({
-          ...config,
-          backgroundImages: newImages,
-        });
-
-        // Safety: If the active visual was deleted or the index is now out of bounds
-        if (
-          activeVisualIndex !== null &&
-          activeVisualIndex >= newImages.length
-        ) {
-          setActiveVisualIndex(null);
-        }
-      }
-    } else {
-      setConfig({
-        ...config,
-        backgroundImages: [
-          ...config.backgroundImages,
-          { url: bgUrl, positionX: 50, positionY: 50 },
-        ],
-      });
+  const move = async (index: number, dir: -1 | 1) => {
+    const next = [...items];
+    const j = index + dir;
+    if (j < 0 || j >= next.length) return;
+    [next[index], next[j]] = [next[j], next[index]];
+    try {
+      await reorder(next.map((b, i) => ({ id: b.id, sort_order: i }))).unwrap();
+      toast.success("Banner order saved.");
+    } catch (e) {
+      toast.error(apiErrorMessage(e, "Couldn't reorder the banners."));
     }
   };
 
-  const handleUpdateFocalPoint = (index: number, x: number, y: number) => {
-    const newBackgrounds = [...config.backgroundImages];
-    newBackgrounds[index] = {
-      ...newBackgrounds[index],
-      positionX: x,
-      positionY: y,
-    };
-    setConfig({ ...config, backgroundImages: newBackgrounds });
-  };
-
-  const handleReorderBackgrounds = (newBackgrounds: any[]) => {
-    // Focus Protection: Determine where the currently focused image moved to
-    if (activeVisualIndex !== null) {
-      const activeImage = config.backgroundImages[activeVisualIndex];
-      const newIndex = newBackgrounds.findIndex(
-        (img) => img.url === activeImage.url,
-      );
-      if (newIndex !== -1) {
-        setActiveVisualIndex(newIndex);
-      }
-    }
-    setConfig({ ...config, backgroundImages: newBackgrounds });
-  };
-
-  const handleSelectBackground = (bgUrl: string) => {
-    if (replacingAssetIndex !== null && config) {
-      const newBackgrounds = [...config.backgroundImages];
-      newBackgrounds[replacingAssetIndex] = {
-        ...newBackgrounds[replacingAssetIndex],
-        url: bgUrl,
-      };
-      setConfig({ ...config, backgroundImages: newBackgrounds });
-      setReplacingAssetIndex(null);
-      setIsBackgroundModalOpen(false);
-    } else {
-      toggleBackgroundSelection(bgUrl);
+  const confirmDelete = async () => {
+    if (!toDelete) return;
+    try {
+      await deleteBanner(toDelete.id).unwrap();
+      toast.success("Banner deleted.");
+      setToDelete(null);
+    } catch (e) {
+      toast.error(apiErrorMessage(e, "Couldn't delete the banner."));
     }
   };
-
-  const handleFileUpload = (
-    e: React.ChangeEvent<HTMLInputElement> | FileList,
-  ) => {
-    const files = e instanceof FileList ? e : e.target.files;
-    if (!files || files.length === 0) return;
-
-    Array.from(files).forEach((file) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        toggleBackgroundSelection(base64String);
-      };
-      reader.readAsDataURL(file);
-    });
-
-    // Reset input value to allow re-uploading same file if via click
-    if (!(e instanceof FileList) && fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
-  };
-
-  const toggleProductSelection = (product: AdvertItem) => {
-    if (activeVisualIndex === null) {
-      // Global Selection
-      const isSelected = config.featuredItems.some((p) => p.id === product.id);
-      if (isSelected) {
-        setConfig({
-          ...config,
-          featuredItems: config.featuredItems.filter(
-            (p) => p.id !== product.id,
-          ),
-        });
-      } else {
-        setConfig({
-          ...config,
-          featuredItems: [...config.featuredItems, product],
-        });
-      }
-    } else {
-      // Visual Specific Override
-      const newBackgrounds = [...config.backgroundImages];
-      const currentVisual = newBackgrounds[activeVisualIndex];
-      const items = currentVisual.featuredItems || [];
-      const isSelected = items.some((p) => p.id === product.id);
-
-      if (isSelected) {
-        newBackgrounds[activeVisualIndex] = {
-          ...currentVisual,
-          featuredItems: items.filter((p) => p.id !== product.id),
-        };
-      } else {
-        newBackgrounds[activeVisualIndex] = {
-          ...currentVisual,
-          featuredItems: [...items, product],
-        };
-      }
-      setConfig({ ...config, backgroundImages: newBackgrounds });
-    }
-  };
-
-  const activeFeaturedItems =
-    activeVisualIndex === null
-      ? config.featuredItems
-      : config.backgroundImages[activeVisualIndex]?.featuredItems || [];
 
   return (
-    <div className="flex flex-col gap-8 mx-auto pb-20">
-      <div className="flex justify-between items-center ">
-        <div className="flex flex-col gap-1">
-          {/* <h1 className="text-xl font-bold text-brand-charcoal">
-            Advert Control Center
-          </h1>
-          <p className="text-sm text-gray-400 font-medium">
-            Configure and deploy the interactive login marketing experience.
-          </p> */}
-        </div>
-
-        <div className="flex items-center gap-6">
-          <div className="flex flex-col items-end gap-1.5 mr-4">
-            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider leading-none">
-              Layout Architecture
-            </span>
-            <TabFilter
-              id="layout-architecture"
-              tabs={["Login Left", "Login Right"]}
-              activeTab={
-                config.layout === "left-form" ? "Login Left" : "Login Right"
-              }
-              onChange={(tab) =>
-                setConfig({
-                  ...config,
-                  layout: tab === "Login Left" ? "left-form" : "right-form",
-                })
-              }
-            />
-          </div>
-
-          <Button
-            variant="primary"
-            shape="rounded-sm"
-            onClick={() => setIsDeployModalOpen(true)}
-            iconLeft={
-              <Icon
-                name="cloud_upload"
-                folder="icon"
-                size="sm"
-                className="brightness-0 invert"
-              />
-            }
-          >
-            Deploy Changes
-          </Button>
-        </div>
+    <>
+      <div className="p-4 sm:px-6 flex flex-col sm:flex-row gap-3 sm:items-center justify-between border-b border-light-gray">
+        <p className="text-[12px] text-subtle">
+          Live banners play in this order on the home page.
+          {data && ` ${items.filter((b) => b.is_active).length} of ${items.length} live.`}
+        </p>
+        <Button variant="primary" iconLeft={<HiOutlinePlus size={14} aria-hidden />} onClick={() => setEditing("new")}>
+          Add banner
+        </Button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <div className="lg:col-span-12 flex flex-col gap-8">
-          {/* Section 1: Copywriting & Timing */}
-          <section className="bg-white p-8 rounded-lg border border-gray-100 shadow-sm flex flex-col gap-8">
-            <div className="flex justify-between items-center">
-              <h3 className="text-lg font-bold text-brand-charcoal flex items-center gap-2">
-                <span className="w-8 h-8 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center text-xs">
-                  01
-                </span>
-                Feature Copy & Timing
-              </h3>
-              <div className="flex items-center gap-6">
-                <div className="flex flex-col items-end gap-1.5 ">
-                  <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider leading-none italic">
-                    Targeting Atmosphere
-                  </span>
-                  <Dropdown
-                    options={[
-                      { value: "global", label: "Global Defaults (Sequence)" },
-                      ...config.backgroundImages.map((bg, i) => ({
-                        value: i.toString(),
-                        label: `Atmosphere ${i + 1}`,
-                      })),
-                    ]}
-                    value={
-                      activeVisualIndex === null
-                        ? "global"
-                        : activeVisualIndex.toString()
-                    }
-                    onChange={(val) =>
-                      setActiveVisualIndex(
-                        val === "global" ? null : parseInt(val),
-                      )
-                    }
-                    size="sm"
-                    className="min-w-45"
-                  />
-                </div>
-                {activeVisualIndex !== null && (
-                  <Button
-                    variant="outline"
-                    shape="rounded-sm"
-                    className="text-[11px] py-1 h-9 px-4"
-                    onClick={() => {
-                      const newBgs = [...config.backgroundImages];
-                      newBgs[activeVisualIndex] = {
-                        ...newBgs[activeVisualIndex],
-                        title: undefined,
-                        titleHighlight: undefined,
-                        description: undefined,
-                        stats: undefined,
-                        duration: undefined,
-                      };
-                      setConfig({ ...config, backgroundImages: newBgs });
-                    }}
-                  >
-                    Reset Slide
-                  </Button>
-                )}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="flex flex-col gap-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="flex flex-col gap-1">
-                    <div className="flex items-center gap-2">
-                      <Checkbox
-                        checked={config.showTitle}
-                        onChange={(checked) =>
-                          setConfig({ ...config, showTitle: checked })
-                        }
-                        size="md"
-                      />
-                      <Label
-                        className={`mb-0! text-[11px] font-bold uppercase tracking-wider transition-opacity ${!config.showTitle ? "text-gray-300" : "text-brand-orange-text/60"}`}
-                      >
-                        Main Title
-                      </Label>
-                    </div>
-                    <div
-                      className={`transition-opacity duration-300 ${!config.showTitle ? "opacity-20 pointer-events-none" : "opacity-100"}`}
-                    >
-                      <Input
-                        value={
-                          activeVisualIndex === null
-                            ? config.title
-                            : config.backgroundImages[activeVisualIndex]
-                                ?.title || ""
-                        }
-                        onChange={(e) => {
-                          if (activeVisualIndex === null) {
-                            setConfig({ ...config, title: e.target.value });
-                          } else {
-                            const newBgs = [...config.backgroundImages];
-                            newBgs[activeVisualIndex] = {
-                              ...newBgs[activeVisualIndex],
-                              title: e.target.value,
-                            };
-                            setConfig({ ...config, backgroundImages: newBgs });
-                          }
-                        }}
-                        placeholder={
-                          activeVisualIndex === null
-                            ? "e.g. Master Your"
-                            : `Default: ${config.title}`
-                        }
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <div className="flex items-center gap-2">
-                      <Checkbox
-                        checked={config.showHighlight}
-                        onChange={(checked) =>
-                          setConfig({ ...config, showHighlight: checked })
-                        }
-                        size="md"
-                      />
-                      <Label
-                        className={`mb-0! text-[11px] font-bold uppercase tracking-wider transition-opacity ${!config.showHighlight ? "text-gray-300" : "text-brand-orange-text/60"}`}
-                      >
-                        Highlighted Title
-                      </Label>
-                    </div>
-                    <div
-                      className={`transition-opacity duration-300 ${!config.showHighlight ? "opacity-20 pointer-events-none" : "opacity-100"}`}
-                    >
-                      <Input
-                        value={
-                          activeVisualIndex === null
-                            ? config.titleHighlight
-                            : config.backgroundImages[activeVisualIndex]
-                                ?.titleHighlight || ""
-                        }
-                        onChange={(e) => {
-                          if (activeVisualIndex === null) {
-                            setConfig({
-                              ...config,
-                              titleHighlight: e.target.value,
-                            });
-                          } else {
-                            const newBgs = [...config.backgroundImages];
-                            newBgs[activeVisualIndex] = {
-                              ...newBgs[activeVisualIndex],
-                              titleHighlight: e.target.value,
-                            };
-                            setConfig({ ...config, backgroundImages: newBgs });
-                          }
-                        }}
-                        placeholder={
-                          activeVisualIndex === null
-                            ? "e.g. Command."
-                            : `Default: ${config.titleHighlight}`
-                        }
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      checked={config.showDescription}
-                      onChange={(checked) =>
-                        setConfig({ ...config, showDescription: checked })
-                      }
-                      size="md"
-                    />
-                    <Label
-                      className={`mb-0! text-[11px] font-bold uppercase tracking-wider transition-opacity ${!config.showDescription ? "text-gray-300" : "text-brand-orange-text/60"}`}
-                    >
-                      Description Text
-                    </Label>
-                  </div>
-                  <div
-                    className={`transition-opacity duration-300 ${!config.showDescription ? "opacity-20 pointer-events-none" : "opacity-100"}`}
-                  >
-                    <Input
-                      value={
-                        activeVisualIndex === null
-                          ? config.description
-                          : config.backgroundImages[activeVisualIndex]
-                              ?.description || ""
-                      }
-                      onChange={(e) => {
-                        if (activeVisualIndex === null) {
-                          setConfig({ ...config, description: e.target.value });
-                        } else {
-                          const newBgs = [...config.backgroundImages];
-                          newBgs[activeVisualIndex] = {
-                            ...newBgs[activeVisualIndex],
-                            description: e.target.value,
-                          };
-                          setConfig({ ...config, backgroundImages: newBgs });
-                        }
-                      }}
-                      placeholder={
-                        activeVisualIndex === null
-                          ? "Describe your platform brilliance..."
-                          : `Default: ${config.description}`
-                      }
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      checked={config.showStats}
-                      onChange={(checked) =>
-                        setConfig({ ...config, showStats: checked })
-                      }
-                      size="md"
-                    />
-                    <Label
-                      className={`mb-0! text-[11px] font-bold uppercase tracking-wider transition-opacity ${!config.showStats ? "text-gray-300" : "text-brand-orange-text/60"}`}
-                    >
-                      Platform Stats
-                    </Label>
-                  </div>
-                  <div
-                    className={`transition-opacity duration-300 ${!config.showStats ? "opacity-20 pointer-events-none" : "opacity-100"}`}
-                  >
-                    <Input
-                      value={
-                        activeVisualIndex === null
-                          ? config.stats
-                          : config.backgroundImages[activeVisualIndex]?.stats ||
-                            ""
-                      }
-                      onChange={(e) => {
-                        if (activeVisualIndex === null) {
-                          setConfig({ ...config, stats: e.target.value });
-                        } else {
-                          const newBgs = [...config.backgroundImages];
-                          newBgs[activeVisualIndex] = {
-                            ...newBgs[activeVisualIndex],
-                            stats: e.target.value,
-                          };
-                          setConfig({ ...config, backgroundImages: newBgs });
-                        }
-                      }}
-                      placeholder={
-                        activeVisualIndex === null
-                          ? "e.g. Powering 12,400+ stores..."
-                          : `Default: ${config.stats}`
-                      }
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gray-50 p-6 rounded-lg border border-gray-100 flex flex-col gap-6 justify-center">
-                <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-brand-charcoal uppercase tracking-wider">
-                    {activeVisualIndex === null
-                      ? "Global Cycle Duration"
-                      : `Atmosphere ${activeVisualIndex + 1} Timing Override`}
-                  </label>
-                  <p className="text-[11px] text-gray-400 font-medium">
-                    {activeVisualIndex === null
-                      ? "How many seconds should each background image stay before cycling?"
-                      : `Override the global timing for this specific atmosphere.`}
-                  </p>
-                </div>
-                <div className="flex items-center gap-6">
-                  <input
-                    type="range"
-                    min="2"
-                    max="30"
-                    value={
-                      activeVisualIndex === null
-                        ? config.cycleDuration
-                        : config.backgroundImages[activeVisualIndex]
-                            ?.duration || config.cycleDuration
-                    }
-                    onChange={(e) => {
-                      const val = parseInt(e.target.value);
-                      if (activeVisualIndex === null) {
-                        setConfig({ ...config, cycleDuration: val });
-                      } else {
-                        const newBgs = [...config.backgroundImages];
-                        newBgs[activeVisualIndex] = {
-                          ...newBgs[activeVisualIndex],
-                          duration: val,
-                        };
-                        setConfig({ ...config, backgroundImages: newBgs });
-                      }
-                    }}
-                    className="flex-1 accent-brand-orange"
-                  />
-                  <span className="w-16 h-12 bg-white rounded-lg border border-gray-200 flex items-center justify-center font-bold text-brand-orange-text text-lg">
-                    {activeVisualIndex === null
-                      ? config.cycleDuration
-                      : config.backgroundImages[activeVisualIndex]?.duration ||
-                        config.cycleDuration}
-                    s
-                  </span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Section 2: Background Orchestration */}
-          <section className="bg-white p-8 rounded-lg border border-gray-100 shadow-sm flex flex-col gap-6">
-            <div className="flex justify-between items-center">
-              <h3 className="text-lg font-bold text-brand-charcoal flex items-center gap-2">
-                <span className="w-8 h-8 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center text-xs">
-                  02
-                </span>
-                Atmospheric Visuals
-              </h3>
-              <Button
-                variant="outline"
-                shape="rounded-sm"
-                onClick={() => setIsBackgroundModalOpen(true)}
-                iconLeft={
-                  <Icon
-                    name="material-symbols_image-outline"
-                    folder="dashboardIcon"
-                    size="xs"
-                  />
-                }
-                className="text-xs py-2"
-              >
-                Manage Background Library ({config.backgroundImages.length})
-              </Button>
-            </div>
-
-            <div className="flex gap-4 overflow-x-auto pb-6 custom-scrollbar">
-              <Reorder.Group
-                axis="x"
-                values={config.backgroundImages}
-                onReorder={handleReorderBackgrounds}
-                className="flex gap-4"
-              >
-                {config.backgroundImages.map((bg, i) => {
-                  const categories = Array.from(
-                    new Set(productsData.map((p) => p.category)),
-                  );
-                  return (
-                    <Reorder.Item
-                      key={bg.url}
-                      value={bg}
-                      className="flex flex-col gap-3 min-w-60 cursor-grab active:cursor-grabbing"
-                    >
-                      <div className="relative aspect-16/10 rounded-lg overflow-hidden border border-gray-100 shadow-sm group">
-                        <img
-                          src={bg.url}
-                          alt="Visual"
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 pointer-events-none"
-                          style={{
-                            objectPosition: `${bg.positionX}% ${bg.positionY}%`,
-                          }}
-                        />
-
-                        {/* Drag Handle */}
-                        <div className="absolute top-2 left-2 flex items-center gap-1.5 z-20">
-                          <div className="w-6 h-6 bg-brand-charcoal rounded-full flex items-center justify-center text-[11px] font-bold text-white shadow-lg">
-                            {i + 1}
-                          </div>
-                          <div className="w-6 h-6 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-400 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                            <Icon
-                              name="drag_indicator"
-                              folder="icon"
-                              size="xs"
-                            />
-                          </div>
-                        </div>
-
-                        {bg.linkedCategory && (
-                          <div className="absolute top-2 right-2 px-2 py-0.5 bg-emerald-500 rounded-lg text-[8px] font-bold text-white shadow-lg uppercase tracking-wider z-10 animate-in fade-in zoom-in duration-300">
-                            {bg.linkedCategory}
-                          </div>
-                        )}
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 z-10">
-                          <div className="flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                            <button
-                              onClick={() => {
-                                setRefiningAssetIndex(i);
-                                setIsRefineModalOpen(true);
-                              }}
-                              className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-brand-charcoal hover:bg-brand-charcoal hover:text-white transition-all text-lg"
-                              title="Edit Focal Point"
-                            >
-                              <LuPencilLine />
-                            </button>
-                            <button
-                              onClick={() => {
-                                setReplacingAssetIndex(i);
-                                setIsBackgroundModalOpen(true);
-                              }}
-                              className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-brand-charcoal hover:bg-brand-charcoal hover:text-white transition-all text-lg"
-                              title="Replace Image"
-                            >
-                              <LuArrowLeftRight />
-                            </button>
-                            <button
-                              onClick={() => {
-                                setRefiningAssetIndex(i);
-                                setIsRefineModalOpen(true);
-                              }}
-                              className="px-4 py-1.5 bg-white rounded-lg text-[11px] font-bold uppercase tracking-wider text-brand-charcoal hover:bg-brand-charcoal hover:text-white transition-all "
-                            >
-                              Edit Visual
-                            </button>
-                          </div>
-                          <button
-                            onClick={() => toggleBackgroundSelection(bg.url)}
-                            className="text-[11px] font-bold text-white/70 hover:text-rose-400 transition-colors uppercase tracking-wider mt-1"
-                          >
-                            Remove
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* Category Link Selector */}
-                      <div className="flex flex-col gap-1.5 pointer-events-auto">
-                        <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider px-1">
-                          Linked Category
-                        </label>
-                        <Dropdown
-                          options={[
-                            { value: "", label: "All Categories (General)" },
-                            ...categories.map((cat) => ({
-                              value: cat,
-                              label: cat,
-                            })),
-                          ]}
-                          value={bg.linkedCategory || ""}
-                          onChange={(val) => {
-                            const newBackgrounds = [...config.backgroundImages];
-                            newBackgrounds[i] = {
-                              ...newBackgrounds[i],
-                              linkedCategory: val || undefined,
-                            };
-                            setConfig({
-                              ...config,
-                              backgroundImages: newBackgrounds,
-                            });
-                          }}
-                          size="sm"
-                        />
-                      </div>
-                    </Reorder.Item>
-                  );
-                })}
-              </Reorder.Group>
-              <button
-                onClick={() => setIsBackgroundModalOpen(true)}
-                className="min-w-60 h-37.5 aspect-16/10 rounded-lg border-2 border-dashed border-gray-100 flex flex-col items-center justify-center gap-2 hover:border-brand-orange/30 transition-colors bg-brand-orange-soft/10 group mt-0"
-              >
-                <Icon
-                  name="circle-plus"
-                  folder="dashboardIcon"
-                  size="md"
-                  className="text-gray-300 group-hover:text-brand-orange-text transition-colors"
-                />
-                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider group-hover:text-brand-orange-text transition-colors">
-                  Add Visual
-                </span>
-              </button>
-            </div>
-          </section>
-
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-            {/* Section 3: Featured Items Picker */}
-            <section className="bg-white p-8 rounded-lg border border-gray-100 shadow-sm flex flex-col gap-6 xl:col-span-2">
-              <h3 className="text-lg font-bold text-brand-charcoal flex flex-col gap-6">
-                <div className="flex items-center justify-between w-full">
-                  <div className="flex items-center gap-2 text-emerald-500">
-                    <span className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-xs">
-                      03
-                    </span>
-                    Featured Inventory
-                  </div>
-                  <div className="flex items-center gap-6">
-                    <div className="flex flex-col items-end gap-1.5 ">
-                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider leading-none italic">
-                        Targeting Atmosphere
-                      </span>
-                      <Dropdown
-                        options={[
-                          {
-                            value: "global",
-                            label: "Global Sequence (Default)",
-                          },
-                          ...config.backgroundImages.map((bg, i) => ({
-                            value: i.toString(),
-                            label: `Atmosphere ${i + 1}`,
-                          })),
-                        ]}
-                        value={
-                          activeVisualIndex === null
-                            ? "global"
-                            : activeVisualIndex.toString()
-                        }
-                        onChange={(val) =>
-                          setActiveVisualIndex(
-                            val === "global" ? null : parseInt(val),
-                          )
-                        }
-                        size="sm"
-                        className="min-w-45"
-                      />
-                    </div>
-                    <span className="text-[11px] font-bold text-emerald-500 uppercase tracking-wider leading-tight">
-                      {activeFeaturedItems.length} Selected
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
-                      {activeVisualIndex === null
-                        ? "Global Display Preset"
-                        : `Atmosphere ${activeVisualIndex + 1} Layout Override`}
-                    </span>
-                    {activeVisualIndex !== null &&
-                      config.backgroundImages[activeVisualIndex]
-                        .inventoryLayout && (
-                        <span className="text-[11px] font-bold text-light-gray uppercase tracking-wider bg-brand-charcoal/5 px-2 py-0.5 rounded-lg">
-                          Active Override
-                        </span>
-                      )}
-                  </div>
-                  <TabFilter
-                    id="inventory-display-presets"
-                    tabs={
-                      activeVisualIndex === null
-                        ? ["Cinematic List", "Asset Grid", "Scrolling Strip"]
-                        : [
-                            "Default",
-                            "Cinematic List",
-                            "Asset Grid",
-                            "Scrolling Strip",
-                          ]
-                    }
-                    activeTab={
-                      activeVisualIndex === null
-                        ? config.inventoryLayout === "list"
-                          ? "Cinematic List"
-                          : config.inventoryLayout === "grid"
-                            ? "Asset Grid"
-                            : "Scrolling Strip"
-                        : config.backgroundImages[activeVisualIndex]
-                              .inventoryLayout === "list"
-                          ? "Cinematic List"
-                          : config.backgroundImages[activeVisualIndex]
-                                .inventoryLayout === "grid"
-                            ? "Asset Grid"
-                            : config.backgroundImages[activeVisualIndex]
-                                  .inventoryLayout === "strip"
-                              ? "Scrolling Strip"
-                              : "Default"
-                    }
-                    onChange={(tab) => {
-                      const layout =
-                        tab === "Cinematic List"
-                          ? "list"
-                          : tab === "Asset Grid"
-                            ? "grid"
-                            : tab === "Scrolling Strip"
-                              ? "strip"
-                              : undefined;
-                      if (activeVisualIndex === null) {
-                        setConfig({
-                          ...config,
-                          inventoryLayout: layout || "list",
-                        });
-                      } else {
-                        const newBgs = [...config.backgroundImages];
-                        newBgs[activeVisualIndex] = {
-                          ...newBgs[activeVisualIndex],
-                          inventoryLayout: layout,
-                        };
-                        setConfig({ ...config, backgroundImages: newBgs });
-                      }
-                    }}
-                  />
-                </div>
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-h-100 overflow-y-auto pr-2 custom-scrollbar">
-                {productsData.map((product) => {
-                  const isSelected = activeFeaturedItems.some(
-                    (p) => p.id === product.id,
-                  );
-                  return (
-                    <button
-                      key={product.id}
-                      onClick={() => toggleProductSelection(product)}
-                      className={`p-3 rounded-lg border transition-all flex flex-col gap-3 group relative
-                          ${isSelected ? "border-brand-charcoal bg-brand-orange-soft/20" : "border-gray-50 bg-white hover:border-brand-orange/15"}
-                        `}
-                    >
-                      <div className="relative aspect-square rounded-lg bg-white border border-gray-50 flex items-center justify-center overflow-hidden">
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          className="w-full h-full object-contain p-2 group-hover:scale-110 transition-transform"
-                        />
-                        <div className="absolute top-2 right-2 z-10">
-                          <Checkbox
-                            checked={isSelected}
-                            onChange={() => {}}
-                            size="md"
-                          />
-                        </div>
-                      </div>
-                      <div className="flex flex-col text-left">
-                        <span className="text-[11px] font-bold text-brand-charcoal truncate">
-                          {product.name}
-                        </span>
-                        <span className="text-[11px] font-bold text-brand-orange-text uppercase">
-                          {product.category}
-                        </span>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </section>
-
-            {/* Section 4: Item Arrangement */}
-            <section className="bg-white p-8 rounded-lg border border-gray-100 shadow-sm flex flex-col gap-6 xl:col-span-1">
-              <h3 className="text-lg font-bold text-brand-charcoal flex items-center gap-2">
-                <span className="w-8 h-8 rounded-lg bg-brand-orange-soft text-brand-orange-text flex items-center justify-center text-xs">
-                  04
-                </span>
-                Marketing Arrangement
-              </h3>
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-col gap-3">
-                  {config.showTitle && (
-                    <div className="flex flex-col gap-1">
-                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider leading-none">
-                        Main Header
-                      </span>
-                      <div className="p-3 bg-gray-50 border border-gray-100 rounded-lg text-xs font-bold text-brand-orange-text">
-                        {config.title}{" "}
-                        <span className="text-emerald-500">
-                          {config.titleHighlight}
-                        </span>
-                      </div>
-                    </div>
-                  )}
-
-                  {config.showStats && (
-                    <div className="flex flex-col gap-1">
-                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider leading-none">
-                        Global Impact Stats
-                      </span>
-                      <div className="flex bg-gray-50 border border-gray-100 p-4 rounded-lg items-center gap-4">
-                        <Icon
-                          name="verified"
-                          folder="icon"
-                          size="sm"
-                          className="text-emerald-500"
-                        />
-                        <span className="text-[11px] font-bold text-gray-500 leading-relaxed uppercase tracking-wider">
-                          {config.stats}
-                        </span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider leading-none">
-                    {activeVisualIndex === null
-                      ? "Global Inventory Sequence"
-                      : `Atmosphere ${activeVisualIndex + 1} Selection`}
-                  </span>
-                  <Reorder.Group
-                    axis="y"
-                    values={activeFeaturedItems}
-                    onReorder={(newOrder) => {
-                      if (activeVisualIndex === null) {
-                        setConfig({ ...config, featuredItems: newOrder });
-                      } else {
-                        const newBgs = [...config.backgroundImages];
-                        newBgs[activeVisualIndex] = {
-                          ...newBgs[activeVisualIndex],
-                          featuredItems: newOrder,
-                        };
-                        setConfig({ ...config, backgroundImages: newBgs });
-                      }
-                    }}
-                    className="flex flex-col gap-3"
-                  >
-                    {activeFeaturedItems.map((item) => (
-                      <Reorder.Item
-                        key={item.id}
-                        value={item}
-                        className="p-4 bg-white rounded-lg border border-gray-100 shadow-sm cursor-grab active:cursor-grabbing flex items-center justify-between group hover:border-brand-charcoal transition-colors"
-                      >
-                        <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-lg bg-gray-50 p-1">
-                            <img
-                              src={item.image}
-                              alt={item.name}
-                              className="w-full h-full object-contain"
-                            />
-                          </div>
-                          <div className="flex flex-col">
-                            <span className="text-sm font-bold text-brand-charcoal">
-                              {item.name}
-                            </span>
-                          </div>
-                        </div>
-                        <Icon
-                          name="Frame"
-                          folder="dashboardIcon"
-                          size="sm"
-                          className="text-gray-300 group-hover:text-brand-orange-text transition-colors"
-                        />
-                      </Reorder.Item>
-                    ))}
-                  </Reorder.Group>
-                </div>
-              </div>
-            </section>
+      <div className={`p-4 sm:p-6 transition-opacity ${isFetching && !isLoading ? "opacity-60" : ""}`}>
+        {isLoading ? (
+          <div className="flex flex-col gap-3" aria-hidden>
+            {Array.from({ length: 3 }, (_, i) => (
+              <span key={i} className="block h-24 rounded-lg bg-black/[0.06] animate-pulse" />
+            ))}
           </div>
-        </div>
-      </div>
-
-      {/* Background Library Modal */}
-      <Modal
-        isOpen={isBackgroundModalOpen}
-        onClose={() => {
-          setIsBackgroundModalOpen(false);
-          setReplacingAssetIndex(null);
-        }}
-        title={
-          replacingAssetIndex !== null
-            ? "Replace Atmosphere Visual"
-            : "Atmospheric Visual Library"
-        }
-        size="lg"
-      >
-        <div className="flex flex-col gap-6">
-          {/* Tab Navigation */}
-          <TabFilter
-            id="library-source-filter"
-            tabs={[
-              "Ambient Gallery",
-              "Store Products",
-              "Custom URL",
-              "Upload Device",
-            ]}
-            activeTab={
-              backgroundModalTab === "ambient"
-                ? "Ambient Gallery"
-                : backgroundModalTab === "products"
-                  ? "Store Products"
-                  : backgroundModalTab === "url"
-                    ? "Custom URL"
-                    : "Upload Device"
-            }
-            onChange={(tab) =>
-              setBackgroundModalTab(
-                tab === "Ambient Gallery"
-                  ? "ambient"
-                  : tab === "Store Products"
-                    ? "products"
-                    : tab === "Custom URL"
-                      ? "url"
-                      : "upload",
-              )
-            }
-            fullWidth={true}
+        ) : isError ? (
+          <ErrorBox error={error} fallback="Couldn't load the homepage banners." onRetry={refetch} />
+        ) : items.length === 0 ? (
+          <EmptyState
+            illustration="promotions"
+            title="No banners yet"
+            description="Banners you add will play on the storefront home page."
+            action={{ label: "Add banner", onClick: () => setEditing("new") }}
           />
-
-          {/* Tab Content */}
-          <div className="min-h-100 flex flex-col gap-6">
-            {backgroundModalTab === "ambient" && (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {availableBackgrounds.map((bg, i) => {
-                  const isSelected = config.backgroundImages.some(
-                    (img) => img.url === bg,
-                  );
-                  const order =
-                    config.backgroundImages.findIndex((img) => img.url === bg) +
-                    1;
-                  return (
-                    <button
-                      key={i}
-                      onClick={() => handleSelectBackground(bg)}
-                      className={`group relative aspect-16/10 rounded-lg overflow-hidden border-4 transition-all
-                          ${isSelected ? "border-brand-charcoal ring-8 ring-brand-orange/15 scale-[1.02]" : "border-transparent opacity-70 hover:opacity-100 "}
-                        `}
-                    >
-                      <img
-                        src={bg}
-                        alt="Background"
-                        className="w-full h-full object-cover"
-                      />
-                      {isSelected && (
-                        <div className="absolute top-3 right-3 p-1.5 bg-brand-charcoal rounded-lg text-white shadow-md overflow-hidden flex items-center gap-2 px-3">
-                          <Checkbox
-                            checked={true}
-                            onChange={() => {}}
-                            size="md"
-                            className="p-0!"
-                          />
-                          <span className="text-[11px] font-bold uppercase">
-                            {order}
-                          </span>
-                        </div>
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-
-            {backgroundModalTab === "products" && (
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                {productsData.map((product) => {
-                  const isSelected = config.backgroundImages.some(
-                    (img) => img.url === product.image,
-                  );
-                  const order =
-                    config.backgroundImages.findIndex(
-                      (img) => img.url === product.image,
-                    ) + 1;
-                  return (
-                    <button
-                      key={product.id}
-                      onClick={() => handleSelectBackground(product.image)}
-                      className={`group relative aspect-square rounded-lg overflow-hidden border-2 transition-all p-2 flex flex-col gap-2
-                          ${isSelected ? "border-brand-charcoal bg-brand-orange-soft/20 ring-4 ring-brand-orange/15" : "border-gray-100 bg-white hover:border-brand-orange/30 "}
-                        `}
-                    >
-                      <div className="relative flex-1 bg-white rounded-lg overflow-hidden flex items-center justify-center p-2">
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          className="w-full h-full object-contain group-hover:scale-110 transition-transform"
-                        />
-                        {isSelected && (
-                          <div className="absolute top-1 right-1 p-1 bg-brand-charcoal rounded-lg text-white shadow-lg overflow-hidden flex items-center gap-1.5 px-2">
-                            <Checkbox
-                              checked={true}
-                              onChange={() => {}}
-                              size="md"
-                              className="p-0!"
-                            />
-                            <span className="text-[11px] font-bold uppercase">
-                              {order}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex flex-col text-left px-1">
-                        <span className="text-[11px] font-bold text-brand-charcoal truncate">
-                          {product.name}
-                        </span>
-                        <span className="text-[8px] font-bold text-brand-orange-text uppercase">
-                          {product.category}
-                        </span>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-
-            {backgroundModalTab === "url" && (
-              <div className="flex flex-col gap-8 items-center justify-center py-10 px-6">
-                <div className="w-20 h-20 bg-brand-orange-soft rounded-4xl flex items-center justify-center text-brand-orange-text mb-2">
-                  <Icon name="link-external" folder="dashboardIcon" size="lg" />
+        ) : (
+          <ul className="flex flex-col gap-3">
+            {items.map((b, i) => (
+              <li
+                key={b.id}
+                className="flex flex-col md:flex-row md:items-center gap-4 p-3 rounded-lg border border-light-gray"
+              >
+                <div className="w-full md:w-48 aspect-[16/7] rounded-lg bg-off-white overflow-hidden shrink-0">
+                  <BannerImage src={b.image_url} emptyLabel="No image" brokenLabel="Image couldn't load" />
                 </div>
-                <div className="flex flex-col gap-2 text-center max-w-sm">
-                  <h4 className="text-base font-bold text-brand-charcoal">
-                    Import Remote Visual
-                  </h4>
-                  <p className="text-xs text-gray-400 font-medium">
-                    Paste a direct link to a high-resolution image to inject it
-                    into your login sequence.
-                  </p>
-                </div>
-                <div className="w-full flex gap-3">
-                  <Input
-                    placeholder="https://images.unsplash.com/photo-..."
-                    value={customUrl}
-                    onChange={(e) => setCustomUrl(e.target.value)}
-                    containerClassName="flex-1"
-                    className="bg-gray-50 border-gray-100"
-                  />
-                  <Button
-                    variant="primary"
-                    shape="rounded-sm"
-                    onClick={() => {
-                      if (customUrl) {
-                        handleSelectBackground(customUrl);
-                        setCustomUrl("");
-                      }
-                    }}
-                    disabled={!customUrl}
-                  >
-                    Add to Library
-                  </Button>
-                </div>
-
-                {/* Preview of added URLs */}
-                <div className="w-full flex flex-col gap-4 mt-4">
-                  <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
-                    Active URL Sources
+                <div className="flex-1 min-w-0 flex flex-col gap-0.5">
+                  <span className="text-[13px] font-semibold text-brand-charcoal truncate">{b.title || "Untitled banner"}</span>
+                  {b.subtitle && <span className="text-xs text-subtle truncate">{b.subtitle}</span>}
+                  <span className="text-[11px] text-faint truncate">
+                    {humanize(b.animation)} · {Math.round(b.duration / 100) / 10}s
+                    {b.link_url ? ` · links to ${b.link_url}` : " · no link"} · updated {formatDate(b.updated_at)}
                   </span>
-                  <div className="grid grid-cols-2 gap-4">
-                    {config.backgroundImages
-                      .filter((bg) => bg.url.startsWith("http"))
-                      .map((asset, i) => (
-                        <div
-                          key={i}
-                          className="relative aspect-16/6 rounded-lg overflow-hidden border border-gray-100 shadow-sm group"
-                        >
-                          <img
-                            src={asset.url}
-                            alt="Custom"
-                            className="w-full h-full object-cover"
-                          />
-                          <button
-                            onClick={() => toggleBackgroundSelection(asset.url)}
-                            className="absolute inset-0 bg-red-500/80 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"
-                          >
-                            <Icon
-                              name="Delete"
-                              folder="dashboardIcon"
-                              size="xs"
-                              className="text-white"
-                            />
-                          </button>
-                        </div>
-                      ))}
-                  </div>
                 </div>
-              </div>
-            )}
-
-            {backgroundModalTab === "upload" && (
-              <div className="flex flex-col gap-8 items-center justify-center py-10 px-6">
-                <div
-                  onClick={() => fileInputRef.current?.click()}
-                  onDragOver={(e) => {
-                    e.preventDefault();
-                    setIsDragging(true);
-                  }}
-                  onDragLeave={() => setIsDragging(false)}
-                  onDrop={(e) => {
-                    e.preventDefault();
-                    setIsDragging(false);
-                    if (e.dataTransfer.files) {
-                      handleFileUpload(e.dataTransfer.files);
-                    }
-                  }}
-                  className={`w-full border-2 border-dashed rounded-4xl p-12 flex flex-col items-center justify-center gap-4 transition-all cursor-pointer group
-                    ${
-                      isDragging
-                        ? "border-brand-charcoal bg-brand-orange-soft/50 scale-[1.02] shadow-md"
-                        : "border-gray-200 bg-transparent hover:border-brand-charcoal hover:bg-brand-orange-soft/20 shadow-sm"
-                    }
-                  `}
-                >
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    className="hidden"
-                    accept="image/*"
-                    multiple
-                    onChange={handleFileUpload}
+                <div className="flex items-center gap-1 shrink-0">
+                  <Switch
+                    checked={b.is_active}
+                    onChange={() => toggle(b)}
+                    aria-label={b.is_active ? "Hide banner" : "Show banner"}
+                    label={<span className="text-[12px] text-subtle">{b.is_active ? "Live" : "Hidden"}</span>}
+                    className="mr-2"
                   />
-                  <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-400 group-hover:text-brand-orange-text transition-all">
-                    <Icon name="cloud_upload" folder="icon" size="md" />
-                  </div>
-                  <div className="flex flex-col items-center gap-1 text-center">
-                    <span className="text-sm font-bold text-brand-charcoal">
-                      Click or drag to upload from device
-                    </span>
-                    <span className="text-[11px] font-bold text-gray-400 italic">
-                      Max 5MB per image recommended
-                    </span>
-                  </div>
+                  <IconButton label="Move up" onClick={() => move(i, -1)} disabled={i === 0 || isReordering}>
+                    <HiOutlineArrowUp size={14} />
+                  </IconButton>
+                  <IconButton label="Move down" onClick={() => move(i, 1)} disabled={i === items.length - 1 || isReordering}>
+                    <HiOutlineArrowDown size={14} />
+                  </IconButton>
+                  <IconButton label="Edit banner" onClick={() => setEditing(b)}>
+                    <HiOutlinePencilSquare size={14} />
+                  </IconButton>
+                  <IconButton label="Delete banner" onClick={() => setToDelete(b)} danger>
+                    <HiOutlineTrash size={14} />
+                  </IconButton>
                 </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
 
-                {/* Preview of Uploaded Images */}
-                <div className="w-full flex flex-col gap-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
-                      Recent Device Uploads
-                    </span>
-                    <button
-                      onClick={() =>
-                        setConfig({
-                          ...config,
-                          backgroundImages: config.backgroundImages.filter(
-                            (bg) => !bg.url.startsWith("data:"),
-                          ),
-                        })
-                      }
-                      className="text-[11px] font-bold text-rose-500 hover:underline"
-                    >
-                      Clear all uploads
-                    </button>
-                  </div>
-                  <div className="grid grid-cols-4 gap-4">
-                    {config.backgroundImages
-                      .filter((bg) => bg.url.startsWith("data:"))
-                      .map((asset, i) => (
-                        <div
-                          key={i}
-                          className="relative aspect-square rounded-lg overflow-hidden border border-gray-100 group"
-                        >
-                          <img
-                            src={asset.url}
-                            alt="Upload"
-                            className="w-full h-full object-cover"
-                          />
-                          <button
-                            onClick={() => toggleBackgroundSelection(asset.url)}
-                            className="absolute inset-0 bg-red-500/80 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"
-                          >
-                            <Icon
-                              name="Delete"
-                              folder="dashboardIcon"
-                              size="xs"
-                              className="text-white"
-                            />
-                          </button>
-                        </div>
-                      ))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="flex justify-between items-center pt-4 border-t border-gray-50 mt-auto">
-            <button
-              onClick={() =>
-                setConfig({
-                  ...config,
-                  backgroundImages: [
-                    {
-                      url: availableBackgrounds[0],
-                      positionX: 50,
-                      positionY: 50,
-                    },
-                  ],
-                })
-              }
-              className="text-[11px] font-bold text-rose-500 uppercase tracking-wider hover:text-rose-600 transition-colors"
-            >
-              Reset to Default
-            </button>
-            <Button
-              variant="primary"
-              shape="rounded-sm"
-              onClick={() => setIsBackgroundModalOpen(false)}
-            >
-              Confirm Library Selection
-            </Button>
-          </div>
-        </div>
-      </Modal>
+      <HeroBannerModal banner={editing} onClose={() => setEditing(null)} />
 
       <ConfirmationModal
-        isOpen={isDeployModalOpen}
-        onClose={() => setIsDeployModalOpen(false)}
-        onConfirm={handleSave}
-        title="Deploy Advert Policy"
-        message="Are you sure you want to deploy these changes? This will immediately update the login page branding and featured products for all users."
-        confirmText="Yes, deploy configuration"
-        type="success"
+        isOpen={!!toDelete}
+        onClose={() => !isDeleting && setToDelete(null)}
+        onConfirm={confirmDelete}
+        title="Delete this banner?"
+        message={`"${toDelete?.title || "Untitled banner"}" will be removed from the home page. This can't be undone.`}
+        confirmText="Delete"
+        type="danger"
+        isLoading={isDeleting}
+      />
+    </>
+  );
+}
+
+function IconButton({
+  label,
+  onClick,
+  disabled,
+  danger,
+  children,
+}: {
+  label: string;
+  onClick: () => void;
+  disabled?: boolean;
+  danger?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={label}
+      title={label}
+      className={`p-2 rounded-lg text-subtle cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed ${
+        danger ? "hover:text-error hover:bg-error-soft" : "hover:text-brand-charcoal hover:bg-off-white"
+      }`}
+    >
+      {children}
+    </button>
+  );
+}
+
+function HeroBannerModal({ banner, onClose }: { banner: HeroBanner | "new" | null; onClose: () => void }) {
+  const isNew = banner === "new";
+  const current = banner && banner !== "new" ? banner : null;
+  const [title, setTitle] = useState("");
+  const [subtitle, setSubtitle] = useState("");
+  const [link, setLink] = useState("");
+  const [seconds, setSeconds] = useState("5");
+  const [animation, setAnimation] = useState<HeroAnimation>("fade");
+  const [active, setActive] = useState(true);
+  const [image, setImage] = useState<{ dataUrl: string; type: string; name: string } | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [seen, setSeen] = useState<typeof banner>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [create, { isLoading: isCreating }] = useCreateHeroBannerMutation();
+  const [update, { isLoading: isUpdating }] = useUpdateHeroBannerMutation();
+  const saving = isCreating || isUpdating;
+
+  if (banner !== seen) {
+    setSeen(banner);
+    if (banner) {
+      setTitle(current?.title ?? "");
+      setSubtitle(current?.subtitle ?? "");
+      setLink(current?.link_url ?? "");
+      setSeconds(String(current ? current.duration / 1000 : 5));
+      setAnimation(((current?.animation as HeroAnimation) || "fade") as HeroAnimation);
+      setActive(current?.is_active ?? true);
+      setImage(null);
+      setErrors({});
+    }
+  }
+
+  const pickImage = async (file: File | undefined) => {
+    if (!file) return;
+    if (!IMAGE_TYPES.includes(file.type)) {
+      setErrors((e) => ({ ...e, image: "Use a JPG, PNG, WebP or AVIF image." }));
+      return;
+    }
+    if (file.size > MAX_HERO_BYTES) {
+      setErrors((e) => ({ ...e, image: "The image must be under 3MB." }));
+      return;
+    }
+    try {
+      setImage({ dataUrl: await readAsDataUrl(file), type: file.type, name: file.name });
+      setErrors((e) => ({ ...e, image: "" }));
+    } catch (err) {
+      setErrors((e) => ({ ...e, image: (err as Error).message }));
+    }
+  };
+
+  const submit = async () => {
+    const next: Record<string, string> = {};
+    const secs = Number(seconds);
+    if (!Number.isFinite(secs) || secs < 1 || secs > 1200) next.duration = "Between 1 and 1,200 seconds.";
+    if (isNew && !image) next.image = "Choose an image for the banner.";
+    if (title.length > 120) next.title = "Up to 120 characters.";
+    if (subtitle.length > 255) next.subtitle = "Up to 255 characters.";
+    if (link.length > 255) next.link = "Up to 255 characters.";
+    setErrors(next);
+    if (Object.values(next).some(Boolean)) return;
+
+    const body = {
+      title: title.trim(),
+      subtitle: subtitle.trim(),
+      link_url: link.trim(),
+      duration: Math.round(secs * 1000),
+      animation,
+      is_active: active,
+      ...(image ? { image_base64: image.dataUrl, image_content_type: image.type } : {}),
+    };
+    try {
+      if (isNew) {
+        await create({ ...body, image_base64: image!.dataUrl }).unwrap();
+        toast.success("Banner added.");
+      } else if (current) {
+        await update({ id: current.id, ...body }).unwrap();
+        toast.success("Banner saved.");
+      }
+      onClose();
+    } catch (e) {
+      toast.error(apiErrorMessage(e, "Couldn't save the banner."));
+    }
+  };
+
+  const preview = image?.dataUrl || current?.image_url || "";
+  const err = (k: string) => errors[k] && <p className="text-[11px] text-error">{errors[k]}</p>;
+
+  return (
+    <Modal
+      isOpen={!!banner}
+      onClose={() => !saving && onClose()}
+      title={isNew ? "Add banner" : "Edit banner"}
+      footer={
+        <div className="flex justify-end gap-3 w-full">
+          <Button variant="outline" onClick={onClose} disabled={saving}>
+            Cancel
+          </Button>
+          <Button variant="accent" onClick={submit} disabled={saving}>
+            {saving ? "Saving…" : isNew ? "Add banner" : "Save"}
+          </Button>
+        </div>
+      }
+    >
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-1.5">
+          <span className="text-xs font-semibold text-brand-charcoal">Image{isNew ? " *" : ""}</span>
+          <button
+            type="button"
+            onClick={() => fileRef.current?.click()}
+            className="relative w-full aspect-[16/7] rounded-lg border border-dashed border-light-gray bg-off-white overflow-hidden flex items-center justify-center cursor-pointer hover:border-brand-orange"
+          >
+            {preview ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={preview} alt="" className="w-full h-full object-cover" />
+            ) : (
+              <span className="flex flex-col items-center gap-1 text-subtle">
+                <HiOutlineCloudArrowUp size={24} aria-hidden />
+                <span className="text-[12px] font-medium">Choose an image</span>
+              </span>
+            )}
+          </button>
+          <input
+            ref={fileRef}
+            type="file"
+            accept={IMAGE_TYPES.join(",")}
+            className="hidden"
+            onChange={(e) => {
+              pickImage(e.target.files?.[0]);
+              e.target.value = "";
+            }}
+          />
+          {errors.image ? err("image") : <p className="text-[11px] text-faint">JPG, PNG, WebP or AVIF, under 3MB. Wide images work best.</p>}
+        </div>
+
+        <label className="flex flex-col gap-1.5">
+          <span className="text-xs font-semibold text-brand-charcoal">Title</span>
+          <input className={inputClass} value={title} maxLength={120} onChange={(e) => setTitle(e.target.value)} />
+          {err("title")}
+        </label>
+        <label className="flex flex-col gap-1.5">
+          <span className="text-xs font-semibold text-brand-charcoal">Subtitle</span>
+          <input className={inputClass} value={subtitle} maxLength={255} onChange={(e) => setSubtitle(e.target.value)} />
+          {err("subtitle")}
+        </label>
+        <label className="flex flex-col gap-1.5">
+          <span className="text-xs font-semibold text-brand-charcoal">Link</span>
+          <input
+            className={inputClass}
+            value={link}
+            maxLength={255}
+            placeholder="e.g. /products?category=freezers"
+            onChange={(e) => setLink(e.target.value)}
+          />
+          {errors.link ? err("link") : <p className="text-[11px] text-faint">Where the banner goes when tapped. Leave empty for no link.</p>}
+        </label>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <label className="flex flex-col gap-1.5">
+            <span className="text-xs font-semibold text-brand-charcoal">Shown for (seconds)</span>
+            <input
+              className={inputClass}
+              type="number"
+              min={1}
+              max={1200}
+              value={seconds}
+              onChange={(e) => setSeconds(e.target.value)}
+            />
+            {err("duration")}
+          </label>
+          <label className="flex flex-col gap-1.5">
+            <span className="text-xs font-semibold text-brand-charcoal">Transition</span>
+            <select className={inputClass} value={animation} onChange={(e) => setAnimation(e.target.value as HeroAnimation)}>
+              {HERO_ANIMATIONS.map((a) => (
+                <option key={a} value={a}>
+                  {humanize(a.replace("-", "_"))}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <Switch
+          checked={active}
+          onChange={(e) => setActive(e.target.checked)}
+          label={<span className="text-xs text-brand-charcoal">Live on the home page</span>}
+        />
+      </div>
+    </Modal>
+  );
+}
+
+/* ───────────────────────── Store banners ───────────────────────── */
+
+const BANNER_FILTERS = ["All", "With banner", "Without banner"] as const;
+type BannerFilter = (typeof BANNER_FILTERS)[number];
+const ROLE_FILTERS = ["All stores", "Retailers", "Wholesalers"] as const;
+type RoleFilter = (typeof ROLE_FILTERS)[number];
+const STORE_PAGE_SIZE = 24;
+
+function StoreBanners() {
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+  const [bannerFilter, setBannerFilter] = useState<BannerFilter>("All");
+  const [role, setRole] = useState<RoleFilter>("All stores");
+  const [page, setPage] = useState(1);
+  const [toRemove, setToRemove] = useState<StoreBanner | null>(null);
+  const [uploadingId, setUploadingId] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+  const target = useRef<StoreBanner | null>(null);
+  const upload = useUploadFile();
+  const [updateStore, { isLoading: isUpdating }] = useUpdateStoreBannerMutation();
+
+  useEffect(() => {
+    const id = setTimeout(() => setQuery(search.trim()), 300);
+    return () => clearTimeout(id);
+  }, [search]);
+
+  const { data, isLoading, isFetching, isError, error, refetch } = useGetStoreBannersQuery({
+    q: query || undefined,
+    banner: bannerFilter === "With banner" ? "with" : bannerFilter === "Without banner" ? "without" : undefined,
+    role: role === "Retailers" ? "retailer" : role === "Wholesalers" ? "wholesaler" : undefined,
+    page,
+    page_size: STORE_PAGE_SIZE,
+  });
+  const items = data?.items ?? [];
+  const counts = data?.counts;
+  const total = data?.pagination.total ?? 0;
+  const totalPages = total ? Math.max(1, Math.ceil(total / STORE_PAGE_SIZE)) : 1;
+  const filtered = !!query || bannerFilter !== "All" || role !== "All stores";
+
+  const bannerLabel = (f: BannerFilter) => {
+    if (!counts) return f;
+    const n = f === "All" ? counts.all : f === "With banner" ? counts.with : counts.without;
+    return `${f} (${n})`;
+  };
+
+  const startReplace = (s: StoreBanner) => {
+    target.current = s;
+    fileRef.current?.click();
+  };
+
+  const replace = async (file: File | undefined) => {
+    const store = target.current;
+    if (!file || !store) return;
+    if (!IMAGE_TYPES.includes(file.type)) {
+      toast.error("Use a JPG, PNG, WebP or AVIF image.");
+      return;
+    }
+    setUploadingId(store.id);
+    try {
+      const url = await upload(file);
+      await updateStore({ id: store.id, cover_image_url: url }).unwrap();
+      toast.success(`New banner set for ${store.business_name}.`);
+    } catch (e) {
+      toast.error(apiErrorMessage(e, "Couldn't change the banner."));
+    } finally {
+      setUploadingId(null);
+    }
+  };
+
+  const confirmRemove = async () => {
+    if (!toRemove) return;
+    try {
+      await updateStore({ id: toRemove.id, cover_image_url: "" }).unwrap();
+      toast.success(`Banner removed from ${toRemove.business_name}.`);
+      setToRemove(null);
+    } catch (e) {
+      toast.error(apiErrorMessage(e, "Couldn't remove the banner."));
+    }
+  };
+
+  return (
+    <>
+      <div className="p-4 sm:px-6 flex flex-col xl:flex-row gap-3 xl:items-center justify-between border-b border-light-gray">
+        <div className="flex flex-col md:flex-row gap-3 md:items-center">
+          <TabFilter
+            tabs={BANNER_FILTERS.map(bannerLabel)}
+            activeTab={bannerLabel(bannerFilter)}
+            onChange={(t) => {
+              const next = BANNER_FILTERS.find((f) => bannerLabel(f) === t);
+              if (next) {
+                setBannerFilter(next);
+                setPage(1);
+              }
+            }}
+          />
+          <TabFilter
+            tabs={[...ROLE_FILTERS]}
+            activeTab={role}
+            onChange={(t) => {
+              setRole(t as RoleFilter);
+              setPage(1);
+            }}
+          />
+        </div>
+        <Input
+          type="search"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
+          placeholder="Search store name"
+          aria-label="Search stores"
+          containerClassName="w-full xl:w-72"
+          className="bg-white border-light-gray placeholder:text-faint text-xs font-medium"
+          suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-faint" />}
+        />
+      </div>
+
+      <input
+        ref={fileRef}
+        type="file"
+        accept={IMAGE_TYPES.join(",")}
+        className="hidden"
+        onChange={(e) => {
+          replace(e.target.files?.[0]);
+          e.target.value = "";
+        }}
       />
 
-      {/* Cinematic Focal Point Editor Modal */}
-      {isRefineModalOpen && refiningAssetIndex !== null && (
-        <Modal
-          isOpen={isRefineModalOpen}
-          onClose={() => setIsRefineModalOpen(false)}
-          title="Refine Cinematic Focus"
-          size="lg"
-        >
-          <div className="flex flex-col gap-8">
-            <div className="flex flex-col gap-1">
-              <h4 className="text-sm font-bold text-brand-charcoal uppercase tracking-wider">
-                Master Your Framing
-              </h4>
-              <p className="text-xs text-gray-400 font-medium">
-                Drag the visual within the viewfinder below to define its center
-                of attention.
-              </p>
-            </div>
-
-            <div className="relative aspect-video bg-gray-900 rounded-2xl overflow-hidden shadow-md group cursor-move">
-              {/* Mock Browser UI Overlay */}
-              <div className="absolute top-0 inset-x-0 h-8 bg-black/40 backdrop-blur-md z-20 flex items-center px-4 gap-2">
-                <div className="flex gap-1.5">
-                  <div className="w-2 h-2 rounded-full bg-red-400/50" />
-                  <div className="w-2 h-2 rounded-full bg-amber-400/50" />
-                  <div className="w-2 h-2 rounded-full bg-emerald-400/50" />
+      <div className={`p-4 sm:p-6 transition-opacity ${isFetching && !isLoading ? "opacity-60" : ""}`}>
+        {isLoading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4" aria-hidden>
+            {Array.from({ length: 6 }, (_, i) => (
+              <span key={i} className="block h-44 rounded-lg bg-black/[0.06] animate-pulse" />
+            ))}
+          </div>
+        ) : isError ? (
+          <ErrorBox error={error} fallback="Couldn't load store banners." onRetry={refetch} />
+        ) : items.length === 0 ? (
+          filtered ? (
+            <EmptyState
+              illustration="search"
+              title="No matches"
+              description="No stores match these filters."
+              action={{
+                label: "Clear filters",
+                onClick: () => {
+                  setSearch("");
+                  setQuery("");
+                  setBannerFilter("All");
+                  setRole("All stores");
+                  setPage(1);
+                },
+              }}
+            />
+          ) : (
+            <EmptyState illustration="vendors" title="No stores yet" description="Stores will appear here once sellers sign up." />
+          )
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+            {items.map((s) => (
+              <div key={s.id} className="flex flex-col rounded-lg border border-light-gray overflow-hidden">
+                <div className="relative aspect-[16/6] bg-off-white">
+                  <BannerImage src={s.cover_image_url} positionY={s.cover_image_position} />
                 </div>
-                <div className="flex-1 max-w-100 h-4 bg-white/10 rounded-lg mx-auto" />
-              </div>
-
-              <motion.div
-                className="absolute inset-0 z-10 select-none"
-                onPan={(_, info) => {
-                  const bounds = document
-                    .getElementById("focal-viewport")
-                    ?.getBoundingClientRect();
-                  if (!bounds) return;
-
-                  // Speed up dragging response
-                  const sensitivity = 0.5;
-                  const deltaX =
-                    (info.delta.x / bounds.width) * 100 * sensitivity;
-                  const deltaY =
-                    (info.delta.y / bounds.height) * 100 * sensitivity;
-
-                  const currentX =
-                    config.backgroundImages[refiningAssetIndex].positionX;
-                  const currentY =
-                    config.backgroundImages[refiningAssetIndex].positionY;
-
-                  handleUpdateFocalPoint(
-                    refiningAssetIndex,
-                    Math.max(0, Math.min(100, currentX - deltaX)),
-                    Math.max(0, Math.min(100, currentY - deltaY)),
-                  );
-                }}
-                id="focal-viewport"
-              >
-                <img
-                  src={config.backgroundImages[refiningAssetIndex].url}
-                  alt="Preview"
-                  className="w-full h-full object-cover pointer-events-none scale-150"
-                  style={{
-                    objectPosition: `${config.backgroundImages[refiningAssetIndex].positionX}% ${config.backgroundImages[refiningAssetIndex].positionY}%`,
-                  }}
-                />
-
-                {/* Visual focus guides */}
-                <div className="absolute inset-0 pointer-events-none border border-white/20">
-                  <div className="absolute inset-x-0 top-1/3 border-t border-white/10" />
-                  <div className="absolute inset-x-0 top-2/3 border-t border-white/10" />
-                  <div className="absolute inset-y-0 left-1/3 border-l border-white/10" />
-                  <div className="absolute inset-y-0 left-2/3 border-l border-white/10" />
-                </div>
-
-                {/* Focus Crosshair */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-8 h-8 rounded-full border-2 border-brand-charcoal shadow-[0_0_20px_rgba(0,119,255,0.5)] flex items-center justify-center">
-                    <div className="w-1 h-1 bg-brand-charcoal rounded-full" />
+                <div className="p-3 flex items-center justify-between gap-3">
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-xs font-semibold text-brand-charcoal truncate">{s.business_name}</span>
+                    <span className="text-[11px] text-faint">
+                      {humanize(s.role)}
+                      {s.is_verified ? " · verified" : ""}
+                      {s.is_active ? "" : " · inactive"}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1 shrink-0">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => startReplace(s)}
+                      disabled={uploadingId !== null || isUpdating}
+                    >
+                      {uploadingId === s.id ? "Uploading…" : s.cover_image_url ? "Replace" : "Add banner"}
+                    </Button>
+                    {s.cover_image_url && (
+                      <IconButton label="Remove banner" onClick={() => setToRemove(s)} danger disabled={uploadingId !== null}>
+                        <HiOutlineTrash size={14} />
+                      </IconButton>
+                    )}
                   </div>
                 </div>
-              </motion.div>
-
-              <div className="absolute bottom-4 right-4 z-20 flex flex-col items-end gap-2">
-                <span className="px-3 py-1 bg-black/60 backdrop-blur-md rounded-lg text-[11px] font-bold text-white uppercase tracking-wider border border-white/10">
-                  X:{" "}
-                  {Math.round(
-                    config.backgroundImages[refiningAssetIndex].positionX,
-                  )}
-                  % | Y:{" "}
-                  {Math.round(
-                    config.backgroundImages[refiningAssetIndex].positionY,
-                  )}
-                  %
-                </span>
               </div>
-            </div>
-
-            <div className="flex gap-3 justify-end pt-4 border-t border-gray-50">
-              <Button
-                variant="outline"
-                onClick={() =>
-                  handleUpdateFocalPoint(refiningAssetIndex, 50, 50)
-                }
-              >
-                Center Image
-              </Button>
-              <Button
-                variant="primary"
-                onClick={() => setIsRefineModalOpen(false)}
-              >
-                Save Cinematic Framing
-              </Button>
-            </div>
+            ))}
           </div>
-        </Modal>
-      )}
-    </div>
+        )}
+      </div>
+
+      <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
+
+      <ConfirmationModal
+        isOpen={!!toRemove}
+        onClose={() => !isUpdating && setToRemove(null)}
+        onConfirm={confirmRemove}
+        title="Remove this store's banner?"
+        message={`${toRemove?.business_name ?? "The store"}'s page will show without a banner until a new one is added.`}
+        confirmText="Remove"
+        type="danger"
+        isLoading={isUpdating}
+      />
+    </>
   );
 }

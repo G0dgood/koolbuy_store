@@ -152,7 +152,7 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
         }}
         aria-label="Sign in"
         title="Sign in"
-        className="w-9 h-9 flex items-center justify-center rounded-full cursor-pointer text-gray-700 hover:text-brand-charcoal hover:bg-black/[0.05] transition-colors outline-none"
+        className="w-9 h-9 flex items-center justify-center rounded-full cursor-pointer text-subtle hover:text-brand-charcoal hover:bg-black/[0.05] transition-colors outline-none"
       >
         <Icon name="profile" size="md" />
       </button>
@@ -188,7 +188,7 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
         }`}
       >
         <div
-          className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-bold text-white shadow-xs transition-transform ${
+          className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-semibold text-white shadow-xs transition-transform ${
             isSuperAdmin
               ? "bg-gradient-to-tr from-brand-orange to-amber-500 ring-2 ring-brand-orange/40"
               : "bg-brand-charcoal"
@@ -205,7 +205,7 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
           )}
         </div>
         <FiChevronDown
-          className={`w-3.5 h-3.5 text-gray-500 transition-transform duration-200 hidden md:block ${
+          className={`w-3.5 h-3.5 text-faint transition-transform duration-200 hidden md:block ${
             isOpen ? "rotate-180 text-brand-orange" : ""
           }`}
         />
@@ -213,11 +213,11 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 w-72 sm:w-80 bg-white rounded-2xl shadow-2xl border border-black/[0.08] p-2 z-120 animate-in fade-in zoom-in-95 duration-150 origin-top-right">
+        <div className="absolute right-0 top-full mt-2 w-72 sm:w-80 bg-white rounded-tile shadow-float border border-black/[0.08] p-2 z-120 animate-in fade-in zoom-in-95 duration-150 origin-top-right">
           {/* User Details Header */}
-          <div className="p-3 bg-gray-50/80 rounded-xl mb-2 flex items-center gap-3 border border-black/[0.03]">
+          <div className="p-3 bg-off-white/80 rounded-xl mb-2 flex items-center gap-3 border border-black/[0.03]">
             <div
-              className={`w-11 h-11 rounded-full flex items-center justify-center text-[14px] font-bold text-white shrink-0 shadow-xs ${
+              className={`w-11 h-11 rounded-full flex items-center justify-center text-[14px] font-semibold text-white shrink-0 shadow-xs ${
                 isSuperAdmin
                   ? "bg-gradient-to-tr from-brand-orange to-amber-500 ring-2 ring-brand-orange/30"
                   : "bg-brand-charcoal"
@@ -234,24 +234,24 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
               )}
             </div>
             <div className="flex flex-col min-w-0 flex-1">
-              <span className="text-[14px] font-bold text-brand-charcoal truncate">
+              <span className="text-[14px] font-semibold text-brand-charcoal truncate">
                 {displayName}
               </span>
-              <span className="text-[12px] text-gray-500 truncate">
+              <span className="text-[12px] text-faint truncate">
                 {user?.email || "No email available"}
               </span>
               <div className="mt-1">
                 {isSuperAdmin ? (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-md bg-brand-orange text-white">
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-semibold rounded-full bg-brand-orange text-white">
                     <FiShield className="w-2.5 h-2.5" />
-                    Super Admin
+                    Super admin
                   </span>
                 ) : isStaff ? (
-                  <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-md bg-amber-100 text-amber-800">
-                    Staff Member
+                  <span className="inline-flex items-center px-2 py-0.5 text-[11px] font-semibold rounded-full bg-brand-orange-soft text-brand-orange-text">
+                    Staff member
                   </span>
                 ) : (
-                  <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-md bg-gray-200 text-gray-700">
+                  <span className="inline-flex items-center px-2 py-0.5 text-[11px] font-semibold capitalize rounded-full bg-black/[0.04] text-subtle">
                     {user?.role || "Customer"}
                   </span>
                 )}
@@ -265,17 +265,17 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
               <Link
                 href="/admin"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-brand-orange/[0.12] to-amber-500/[0.08] hover:from-brand-orange/[0.18] hover:to-amber-500/[0.14] border border-brand-orange/20 transition-all group"
+                className="flex items-center justify-between p-3 rounded-xl bg-brand-orange-soft hover:bg-brand-orange/[0.14] border border-brand-orange/20 transition-all group"
               >
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-brand-orange text-white flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+                  <div className="w-8 h-8 rounded-lg bg-brand-orange text-white flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                     <FiShield className="w-4 h-4" />
                   </div>
                   <div className="flex flex-col text-left">
-                    <span className="text-[13px] font-bold text-brand-charcoal group-hover:text-brand-orange-text transition-colors">
+                    <span className="text-[13px] font-semibold text-brand-charcoal group-hover:text-brand-orange-text transition-colors">
                       {isSuperAdmin ? "Super Admin Portal" : "Admin Dashboard"}
                     </span>
-                    <span className="text-[11px] text-gray-500">
+                    <span className="text-[11px] text-faint">
                       Access management console
                     </span>
                   </div>
@@ -290,18 +290,18 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
             <Link
               href="/orders"
               onClick={() => setIsOpen(false)}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium text-gray-700 hover:text-brand-charcoal hover:bg-gray-100 transition-colors"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium text-subtle hover:text-brand-charcoal hover:bg-black/[0.06] transition-colors"
             >
-              <FiPackage className="w-4 h-4 text-gray-400" />
+              <FiPackage className="w-4 h-4 text-faint" />
               <span>My Orders</span>
             </Link>
 
             <Link
               href="/profile"
               onClick={() => setIsOpen(false)}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium text-gray-700 hover:text-brand-charcoal hover:bg-gray-100 transition-colors"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium text-subtle hover:text-brand-charcoal hover:bg-black/[0.06] transition-colors"
             >
-              <FiUser className="w-4 h-4 text-gray-400" />
+              <FiUser className="w-4 h-4 text-faint" />
               <span>Account Settings</span>
             </Link>
           </div>
@@ -313,9 +313,9 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
             type="button"
             onClick={handleLogout}
             disabled={isLoggingOut}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer text-left"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium text-error hover:bg-error-soft transition-colors cursor-pointer text-left"
           >
-            <FiLogOut className="w-4 h-4 text-rose-500" />
+            <FiLogOut className="w-4 h-4 text-error" />
             <span>{isLoggingOut ? "Signing out..." : "Sign out"}</span>
           </button>
         </div>

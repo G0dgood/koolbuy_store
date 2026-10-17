@@ -270,7 +270,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
       {label && (
         <label className="dropdown-label flex items-center gap-1">
           <span>{label}</span>
-          {required && <span className="required-asterisk text-red-500">*</span>}
+          {required && <span className="required-asterisk text-error">*</span>}
         </label>
       )}
 
@@ -325,7 +325,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
             <div
               className={`dropdown-menu ${
                 placeUp ? "dropdown-menu-up" : ""
-              } rounded-[var(--radius)] shadow-lg flex flex-col`}
+              } rounded-[var(--radius)] shadow-float flex flex-col`}
               style={{
                 position: "fixed",
                 top: placeUp ? "auto" : `${coords.bottom + 4}px`,
@@ -428,11 +428,11 @@ export const Dropdown: React.FC<DropdownProps> = ({
                     </div>
                   </div>
                 ) : filteredOptions.length === 0 ? (
-                  <div className="p-4 text-center text-xs text-gray-500 dark:text-gray-400">
-                    <p className="font-medium text-gray-700 dark:text-gray-300">
+                  <div className="p-4 text-center text-xs text-faint dark:text-gray-400">
+                    <p className="font-medium text-subtle dark:text-gray-300">
                       No matching options
                     </p>
-                    <p className="mt-0.5 text-[11px] text-gray-400">
+                    <p className="mt-0.5 text-[11px] text-faint">
                       No option matches &quot;{searchQuery}&quot;
                     </p>
                     <button

@@ -176,7 +176,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>(
             onBlur?.(e);
           }}
           disabled={disabled}
-          className={`search-input flex-1 text-[13px] font-normal leading-[150%] dark:text-gray-300 bg-transparent dark:placeholder:text-gray-500 focus:outline-none ${
+          className={`search-input flex-1 text-[13px] font-normal leading-[150%] dark:text-gray-300 bg-transparent dark:placeholder:text-faint focus:outline-none ${
             showClearButton && value ? "pr-1" : ""
           }`}
           style={{
@@ -187,7 +187,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>(
         {showClearButton && Boolean(value) && (
           <button
             onClick={handleClear}
-            className="flex items-center text-gray-400 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-300 transition-colors p-1 rounded-full cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="flex items-center text-faint hover:text-subtle dark:text-gray-500 dark:hover:text-faint transition-colors p-1 rounded-full cursor-pointer hover:bg-black/[0.06] dark:hover:bg-gray-800"
             type="button"
             title="Clear Search"
             aria-label="Clear Search"

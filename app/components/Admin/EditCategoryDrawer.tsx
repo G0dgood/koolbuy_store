@@ -78,26 +78,26 @@ export function EditCategoryDrawer({
       <form onSubmit={handleSubmit} className="flex flex-col h-full gap-6">
         <div className="flex flex-col gap-5 text-xs">
           <div>
-            <label className="text-xs font-semibold text-gray-700 mb-1.5 block">
+            <label className="text-xs font-semibold text-subtle mb-1.5 block">
               Category Name *
             </label>
             <Input
               placeholder="e.g. Solar Freezers"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="h-10 text-xs rounded-lg border-gray-200"
+              className="h-10 text-xs rounded-lg border-light-gray"
               required
               disabled={isLoading}
             />
             {category.slug && (
-              <p className="text-[11px] text-gray-400 mt-1">
-                Slug: <code className="font-mono text-gray-600">{category.slug}</code>
+              <p className="text-[11px] text-faint mt-1">
+                Slug: <code className="font-mono text-subtle">{category.slug}</code>
               </p>
             )}
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-gray-700 mb-1.5 block">
+            <label className="text-xs font-semibold text-subtle mb-1.5 block">
               VAT Treatment
             </label>
             <div className="grid grid-cols-3 gap-2">
@@ -118,8 +118,8 @@ export function EditCategoryDrawer({
                   disabled={isLoading}
                   className={`h-9 px-2 text-xs rounded-lg border text-center transition-all cursor-pointer font-medium ${
                     formData.vatTreatment === vat.value
-                      ? "border-brand-charcoal bg-brand-charcoal text-white shadow-2xs"
-                      : "border-gray-200 bg-white text-gray-700 hover:bg-gray-50"
+                      ? "border-brand-charcoal bg-brand-charcoal text-white"
+                      : "border-light-gray bg-white text-subtle hover:bg-off-white"
                   }`}
                 >
                   {vat.label}
@@ -129,7 +129,7 @@ export function EditCategoryDrawer({
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-gray-700 mb-1.5 block">
+            <label className="text-xs font-semibold text-subtle mb-1.5 block">
               Category Status
             </label>
             <div className="flex gap-2">
@@ -138,8 +138,8 @@ export function EditCategoryDrawer({
                 onClick={() => setFormData({ ...formData, isActive: true })}
                 className={`flex-1 h-9 rounded-lg border text-xs font-medium transition-all ${
                   formData.isActive
-                    ? "border-emerald-500 bg-emerald-50 text-emerald-700 font-semibold"
-                    : "border-gray-200 bg-white text-gray-600 hover:bg-gray-50"
+                    ? "border-success bg-success-soft text-success font-semibold"
+                    : "border-light-gray bg-white text-subtle hover:bg-off-white"
                 }`}
               >
                 Active
@@ -149,20 +149,20 @@ export function EditCategoryDrawer({
                 onClick={() => setFormData({ ...formData, isActive: false })}
                 className={`flex-1 h-9 rounded-lg border text-xs font-medium transition-all ${
                   !formData.isActive
-                    ? "border-rose-500 bg-rose-50 text-rose-700 font-semibold"
-                    : "border-gray-200 bg-white text-gray-600 hover:bg-gray-50"
+                    ? "border-error bg-error-soft text-error font-semibold"
+                    : "border-light-gray bg-white text-subtle hover:bg-off-white"
                 }`}
               >
                 Hidden
               </button>
             </div>
-            <p className="text-[11px] text-gray-400 mt-1">
+            <p className="text-[11px] text-faint mt-1">
               Hidden categories are excluded from vendor and customer selection.
             </p>
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-gray-700 mb-1.5 block">
+            <label className="text-xs font-semibold text-subtle mb-1.5 block">
               Category Image Path (Optional)
             </label>
             <div className="flex gap-2">
@@ -170,12 +170,12 @@ export function EditCategoryDrawer({
                 placeholder="/images/koolboks/items/1.webp"
                 value={formData.image}
                 onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                className="h-10 text-xs rounded-lg border-gray-200 flex-1"
+                className="h-10 text-xs rounded-lg border-light-gray flex-1"
                 disabled={isLoading}
               />
               <button
                 type="button"
-                className="w-10 h-10 p-0 flex items-center justify-center rounded-lg border border-gray-200 bg-gray-50 text-gray-600 hover:bg-gray-100 transition-colors shrink-0 cursor-pointer"
+                className="w-10 h-10 p-0 flex items-center justify-center rounded-lg border border-light-gray bg-off-white text-subtle hover:bg-off-white transition-colors shrink-0 cursor-pointer"
                 title="Browse image"
                 disabled={isLoading}
               >
@@ -185,7 +185,7 @@ export function EditCategoryDrawer({
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-gray-700 mb-1.5 block">
+            <label className="text-xs font-semibold text-subtle mb-1.5 block">
               Description (Optional)
             </label>
             <Textarea
@@ -194,13 +194,13 @@ export function EditCategoryDrawer({
               onChange={(e) =>
                 setFormData({ ...formData, description: e.target.value })
               }
-              className="min-h-[100px] text-xs rounded-lg border-gray-200 p-2.5"
+              className="min-h-[100px] text-xs rounded-lg border-light-gray p-2.5"
               disabled={isLoading}
             />
           </div>
         </div>
 
-        <div className="mt-auto pt-4 border-t border-gray-100 flex gap-2">
+        <div className="mt-auto pt-4 border-t border-light-gray flex gap-2">
           <Button
             variant="outline"
             type="button"

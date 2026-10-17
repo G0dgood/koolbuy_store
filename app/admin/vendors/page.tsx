@@ -235,19 +235,19 @@ export default function VendorsPage() {
       .map(
         (v) => `
         <tr>
-          <td style="padding: 10px 14px; border-bottom: 1px solid #e5e7eb;">
+          <td style="padding: 10px 14px; border-bottom: 1px solid #E9ECEF;">
             <strong>${v.name}</strong><br/>
-            <span style="color:#6b7280; font-size:11px;">${v.code ?? v.id}</span>
+            <span style="color:#6C757D; font-size:11px;">${v.code ?? v.id}</span>
           </td>
-          <td style="padding: 10px 14px; border-bottom: 1px solid #e5e7eb;">${v.owner}</td>
-          <td style="padding: 10px 14px; border-bottom: 1px solid #e5e7eb;">
+          <td style="padding: 10px 14px; border-bottom: 1px solid #E9ECEF;">${v.owner}</td>
+          <td style="padding: 10px 14px; border-bottom: 1px solid #E9ECEF;">
             ${v.email}<br/>
-            <span style="color:#6b7280; font-size:11px;">${v.phone}</span>
+            <span style="color:#6C757D; font-size:11px;">${v.phone}</span>
           </td>
-          <td style="padding: 10px 14px; border-bottom: 1px solid #e5e7eb;">${v.productsCount} products</td>
-          <td style="padding: 10px 14px; border-bottom: 1px solid #e5e7eb; color:#059669; font-weight:700;">${v.totalRevenue}</td>
-          <td style="padding: 10px 14px; border-bottom: 1px solid #e5e7eb;">${v.status}</td>
-          <td style="padding: 10px 14px; border-bottom: 1px solid #e5e7eb;">${v.joinedDate}</td>
+          <td style="padding: 10px 14px; border-bottom: 1px solid #E9ECEF;">${v.productsCount} products</td>
+          <td style="padding: 10px 14px; border-bottom: 1px solid #E9ECEF; color:#6C8B7D; font-weight:600;">${v.totalRevenue}</td>
+          <td style="padding: 10px 14px; border-bottom: 1px solid #E9ECEF;">${v.status}</td>
+          <td style="padding: 10px 14px; border-bottom: 1px solid #E9ECEF;">${v.joinedDate}</td>
         </tr>
       `,
       )
@@ -258,12 +258,13 @@ export default function VendorsPage() {
         <head>
           <title>${title}</title>
           <style>
-            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 32px; color: #111827; }
+            @font-face { font-family: 'Work Sans'; font-weight: 100 900; font-display: swap; src: url('${window.location.origin}/fonts/WorkSans-Variable-latin.woff2') format('woff2'); }
+            body { font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 32px; color: #050711; }
             .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #F57E16; padding-bottom: 16px; margin-bottom: 24px; }
-            h1 { font-size: 22px; font-weight: 800; color: #050711; margin: 0; }
-            p { font-size: 12px; color: #6b7280; margin: 4px 0 0 0; }
+            h1 { font-size: 22px; font-weight: 600; color: #050711; margin: 0; }
+            p { font-size: 12px; color: #6C757D; margin: 4px 0 0 0; }
             table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
-            th { background-color: #F8F9FA; padding: 10px 14px; font-weight: 700; border-bottom: 2px solid #e2e8f0; color: #475569; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+            th { background-color: #F8F9FA; padding: 10px 14px; font-weight: 600; border-bottom: 2px solid #E9ECEF; color: #6C757D; font-size: 12px; }
             @media print {
               body { padding: 0; }
               @page { margin: 1.5cm; }
@@ -313,10 +314,10 @@ export default function VendorsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-gray-900 tracking-tight">
+          <h1 className="text-xl font-semibold text-brand-charcoal tracking-tight">
             Vendors Management
           </h1>
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-faint mt-1">
             Manage verified clean-tech suppliers, merchant accounts, and store approvals.
           </p>
         </div>
@@ -331,7 +332,7 @@ export default function VendorsPage() {
                 className="text-brand-orange-text"
               />
             }
-            className="border-gray-200 text-gray-800 hover:bg-gray-50 px-4 py-2 text-xs sm:text-sm font-semibold"
+            className="border-light-gray text-brand-charcoal hover:bg-off-white px-4 py-2 text-xs sm:text-sm font-semibold"
           >
             Export PDF
           </Button>
@@ -348,43 +349,43 @@ export default function VendorsPage() {
 
       {/* Stats row */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white p-5 rounded-tile border border-light-gray shadow-2xs flex flex-col gap-1">
-          <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
-            Total Vendors
+        <div className="bg-white p-5 rounded-lg border border-light-gray flex flex-col gap-1">
+          <span className="text-[12px] font-medium text-faint">
+            Total vendors
           </span>
-          <span className="text-2xl font-bold text-gray-900">
+          <span className="text-2xl font-semibold text-brand-charcoal">
             {totalVendorsCount}
           </span>
-          <span className="text-[11px] text-emerald-600 font-bold">
+          <span className="text-[11px] text-success font-semibold">
             Live on platform
           </span>
         </div>
-        <div className="bg-white p-5 rounded-tile border border-light-gray shadow-2xs flex flex-col gap-1">
-          <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
-            Active Vendors
+        <div className="bg-white p-5 rounded-lg border border-light-gray flex flex-col gap-1">
+          <span className="text-[12px] font-medium text-faint">
+            Active vendors
           </span>
-          <span className="text-2xl font-bold text-gray-900">
+          <span className="text-2xl font-semibold text-brand-charcoal">
             {activeVendorsCount}
           </span>
-          <span className="text-[11px] text-emerald-600 font-bold">
+          <span className="text-[11px] text-success font-semibold">
             Fully verified
           </span>
         </div>
-        <div className="bg-white p-5 rounded-tile border border-light-gray shadow-2xs flex flex-col gap-1">
-          <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
-            Awaiting Approval
+        <div className="bg-white p-5 rounded-lg border border-light-gray flex flex-col gap-1">
+          <span className="text-[12px] font-medium text-faint">
+            Awaiting approval
           </span>
-          <span className="text-2xl font-bold text-amber-600">
+          <span className="text-2xl font-semibold text-warning">
             {unverifiedCount}
           </span>
-          <span className="text-[11px] text-amber-600 font-bold">
+          <span className="text-[11px] text-warning font-semibold">
             Needs review
           </span>
         </div>
       </div>
 
       {/* Table Card */}
-      <div className="bg-white border border-light-gray rounded-tile shadow-2xs flex flex-col overflow-hidden">
+      <div className="bg-white border border-light-gray rounded-lg flex flex-col overflow-hidden">
         {/* Filter and Search Bar */}
         <div className="p-4 border-b border-light-gray flex flex-col md:flex-row md:items-center justify-between gap-4">
           <TabFilter
@@ -405,12 +406,12 @@ export default function VendorsPage() {
                 setSearchTerm(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full h-10 pl-9 pr-3 rounded-xl bg-gray-50 border border-gray-200 text-xs focus:outline-none focus:border-brand-orange focus:bg-white transition-all"
+              className="w-full h-10 pl-9 pr-3 rounded-lg bg-off-white border border-light-gray text-xs focus:outline-none focus:border-brand-orange focus:bg-white transition-all"
             />
             <Icon
               name="search"
               size="xs"
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-faint pointer-events-none"
             />
           </div>
         </div>
@@ -419,7 +420,7 @@ export default function VendorsPage() {
         <div className="overflow-x-auto min-h-[300px]">
           <table className="w-full text-left border-collapse min-w-[700px]">
             <thead>
-              <tr className="border-b border-light-gray text-[11px] font-bold text-gray-400 uppercase tracking-wider bg-gray-50/50">
+              <tr className="border-b border-light-gray text-[12px] font-semibold text-faint bg-off-white/50">
                 <th className="py-3 px-4 w-10">
                   <Checkbox
                     checked={
@@ -439,10 +440,10 @@ export default function VendorsPage() {
                 <th className="text-right pr-4">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-light-gray text-xs text-gray-600">
+            <tbody className="divide-y divide-light-gray text-xs text-subtle">
               {isLoading ? (
                 <tr>
-                  <td colSpan={9} className="py-16 text-center text-gray-400">
+                  <td colSpan={9} className="py-16 text-center text-faint">
                     <div className="flex flex-col items-center gap-2">
                       <div className="w-6 h-6 border-2 border-brand-orange border-t-transparent rounded-full animate-spin" />
                       <span>Loading vendors from KoolBuy engine...</span>
@@ -451,10 +452,10 @@ export default function VendorsPage() {
                 </tr>
               ) : vendorsList.length === 0 ? (
                 <tr>
-                  <td colSpan={9} className="py-16 text-center text-gray-400">
+                  <td colSpan={9} className="py-16 text-center text-faint">
                     <div className="flex flex-col items-center justify-center gap-2">
-                      <Icon name="search" size="md" className="text-gray-300" />
-                      <p className="font-semibold text-gray-600">
+                      <Icon name="search" size="md" className="text-faint" />
+                      <p className="font-semibold text-subtle">
                         No {activeTab.toLowerCase()} vendors found
                       </p>
                       <p className="text-[11px]">
@@ -471,8 +472,8 @@ export default function VendorsPage() {
                   return (
                     <tr
                       key={vendor.id}
-                      className={`hover:bg-gray-50/60 transition-colors ${
-                        isChecked ? "bg-orange-50/20" : ""
+                      className={`hover:bg-off-white/60 transition-colors ${
+                        isChecked ? "bg-brand-orange-soft/40" : ""
                       }`}
                     >
                       <td className="py-3 px-4">
@@ -481,46 +482,46 @@ export default function VendorsPage() {
                           onChange={() => handleSelectItem(vendor.id)}
                         />
                       </td>
-                      <td className="font-bold text-gray-900">
+                      <td className="font-semibold text-brand-charcoal">
                         <div className="text-xs">{vendor.name}</div>
-                        <div className="text-[10px] text-gray-400 font-normal">
+                        <div className="text-[11px] text-faint font-normal">
                           {vendor.code ?? vendor.id} • Joined {vendor.joinedDate}
                         </div>
                       </td>
-                      <td className="font-medium text-gray-700">
+                      <td className="font-medium text-subtle">
                         {vendor.owner}
                       </td>
                       <td>
                         <div>{vendor.email}</div>
-                        <div className="text-[10px] text-gray-400">
+                        <div className="text-[11px] text-faint">
                           {vendor.phone}
                         </div>
                       </td>
                       <td className="px-3">
                         <span
-                          className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold capitalize ${
+                          className={`inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold capitalize ${
                             vendor.role === "wholesaler"
-                              ? "bg-purple-50 text-purple-700 border border-purple-200"
-                              : "bg-blue-50 text-blue-700 border border-blue-200"
+                              ? "bg-brand-orange-soft text-brand-charcoal border border-brand-orange/20"
+                              : "bg-off-white text-subtle border border-light-gray"
                           }`}
                         >
                           {vendor.role || "retailer"}
                         </span>
                       </td>
-                      <td className="font-semibold text-gray-900">
+                      <td className="font-semibold text-brand-charcoal">
                         {vendor.productsCount}
                       </td>
-                      <td className="text-xs font-bold text-emerald-600">
+                      <td className="text-xs font-semibold text-success">
                         {vendor.totalRevenue}
                       </td>
                       <td>
                         <span
-                          className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold ${
+                          className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold ${
                             vendor.status === "Active"
-                              ? "bg-emerald-50 text-emerald-600"
+                              ? "bg-success-soft text-success"
                               : vendor.status === "Awaiting Approval"
-                                ? "bg-amber-50 text-amber-600"
-                                : "bg-rose-50 text-rose-600"
+                                ? "bg-warning/10 text-warning"
+                                : "bg-error-soft text-error"
                           }`}
                         >
                           {vendor.status}
@@ -530,7 +531,7 @@ export default function VendorsPage() {
                         <button
                           type="button"
                           onClick={() => setActionMenuOpenId(isMenuOpen ? null : vendor.id)}
-                          className="text-gray-400 hover:text-gray-900 p-1.5 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                          className="text-faint hover:text-brand-charcoal p-1.5 rounded-lg hover:bg-off-white transition-colors cursor-pointer"
                           aria-label="Actions"
                         >
                           <Icon name="more_vert" size="sm" />
@@ -538,13 +539,13 @@ export default function VendorsPage() {
 
                         {/* Action Dropdown Menu */}
                         {isMenuOpen && (
-                          <div className="absolute right-4 top-10 w-48 bg-white rounded-xl shadow-lift border border-light-gray py-1.5 z-30 flex flex-col text-left">
+                          <div className="absolute right-4 top-10 w-48 bg-white rounded-lg shadow-float border border-light-gray py-1.5 z-30 flex flex-col text-left">
                             {/* Role Switch Action */}
                             <button
                               type="button"
                               disabled={isUpdating}
                               onClick={() => handleToggleRole(vendor)}
-                              className="px-4 py-2 text-xs font-medium text-purple-700 hover:bg-purple-50 transition-colors text-left flex items-center gap-2 cursor-pointer"
+                              className="px-4 py-2 text-xs font-medium text-brand-charcoal hover:bg-brand-orange-soft transition-colors text-left flex items-center gap-2 cursor-pointer"
                             >
                               <span className="text-sm">⇄</span> Switch to {vendor.role === "wholesaler" ? "Retailer" : "Wholesaler"}
                             </button>
@@ -554,7 +555,7 @@ export default function VendorsPage() {
                                 type="button"
                                 disabled={isUpdating}
                                 onClick={() => handleApprove(vendor)}
-                                className="px-4 py-2 text-xs font-medium text-emerald-600 hover:bg-emerald-50 transition-colors text-left flex items-center gap-2 cursor-pointer border-t border-light-gray"
+                                className="px-4 py-2 text-xs font-medium text-success hover:bg-success-soft transition-colors text-left flex items-center gap-2 cursor-pointer border-t border-light-gray"
                               >
                                 <span>✓</span> Approve Vendor
                               </button>
@@ -567,7 +568,7 @@ export default function VendorsPage() {
                                   setVendorToSuspend(vendor);
                                   setActionMenuOpenId(null);
                                 }}
-                                className="px-4 py-2 text-xs font-medium text-rose-600 hover:bg-rose-50 transition-colors text-left flex items-center gap-2 cursor-pointer border-t border-light-gray"
+                                className="px-4 py-2 text-xs font-medium text-error hover:bg-error-soft transition-colors text-left flex items-center gap-2 cursor-pointer border-t border-light-gray"
                               >
                                 <span>✕</span> Suspend Store
                               </button>
@@ -578,7 +579,7 @@ export default function VendorsPage() {
                                 type="button"
                                 disabled={isReactivating}
                                 onClick={() => handleReactivate(vendor)}
-                                className="px-4 py-2 text-xs font-medium text-blue-600 hover:bg-blue-50 transition-colors text-left flex items-center gap-2 cursor-pointer border-t border-light-gray"
+                                className="px-4 py-2 text-xs font-medium text-brand-charcoal hover:bg-brand-orange-soft transition-colors text-left flex items-center gap-2 cursor-pointer border-t border-light-gray"
                               >
                                 <span>↺</span> Reactivate Store
                               </button>
@@ -635,46 +636,46 @@ export default function VendorsPage() {
       >
         <form onSubmit={handleCreateVendor} className="flex flex-col gap-4 py-2">
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-bold text-gray-700">Business / Store Name *</label>
+            <label className="text-xs font-semibold text-subtle">Business / Store Name *</label>
             <input
               type="text"
               required
               placeholder="e.g. Apex Cold Store Ltd"
               value={newVendorName}
               onChange={(e) => setNewVendorName(e.target.value)}
-              className="h-10 px-3 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-brand-orange"
+              className="h-10 px-3 rounded-lg border border-light-gray text-xs focus:outline-none focus:border-brand-orange"
             />
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-bold text-gray-700">Phone Number *</label>
+            <label className="text-xs font-semibold text-subtle">Phone Number *</label>
             <input
               type="tel"
               required
               placeholder="+234 802 000 0000"
               value={newVendorPhone}
               onChange={(e) => setNewVendorPhone(e.target.value)}
-              className="h-10 px-3 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-brand-orange"
+              className="h-10 px-3 rounded-lg border border-light-gray text-xs focus:outline-none focus:border-brand-orange"
             />
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-bold text-gray-700">Email Address (Optional)</label>
+            <label className="text-xs font-semibold text-subtle">Email Address (Optional)</label>
             <input
               type="email"
               placeholder="vendor@company.com"
               value={newVendorEmail}
               onChange={(e) => setNewVendorEmail(e.target.value)}
-              className="h-10 px-3 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-brand-orange"
+              className="h-10 px-3 rounded-lg border border-light-gray text-xs focus:outline-none focus:border-brand-orange"
             />
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-bold text-gray-700">Business Type</label>
+            <label className="text-xs font-semibold text-subtle">Business Type</label>
             <select
               value={newVendorRole}
               onChange={(e) => setNewVendorRole(e.target.value as "retailer" | "wholesaler")}
-              className="h-10 px-3 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-brand-orange bg-white"
+              className="h-10 px-3 rounded-lg border border-light-gray text-xs focus:outline-none focus:border-brand-orange bg-white"
             >
               <option value="retailer">Retailer Store</option>
               <option value="wholesaler">Wholesale Distributor</option>
@@ -705,7 +706,7 @@ export default function VendorsPage() {
               size="md"
               onClick={handleConfirmSuspend}
               disabled={isSuspending}
-              className="bg-rose-600 hover:bg-rose-700 text-white"
+              className="bg-error hover:bg-error text-white"
             >
               {isSuspending ? "Suspending..." : "Confirm Suspension"}
             </Button>
@@ -722,7 +723,7 @@ export default function VendorsPage() {
             placeholder="Reason for suspension (e.g. policy review, customer warranty dispute)..."
             value={suspensionReason}
             onChange={(e) => setSuspensionReason(e.target.value)}
-            className="w-full p-3 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-brand-orange"
+            className="w-full p-3 rounded-lg border border-light-gray text-xs focus:outline-none focus:border-brand-orange"
           />
         </div>
       </Modal>

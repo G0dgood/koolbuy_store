@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { TabFilter } from "@/app/components/Tabs";
 import Checkbox from "@/app/components/Checkbox";
 import { Icon } from "@/app/components/Icon";
 import { Button } from "@/app/components/Button";
@@ -129,8 +130,8 @@ export default function WebStylingPage() {
       id: "status-1",
       status: "Pending",
       iconName: "Pending",
-      color: "text-amber-500",
-      bg: "bg-amber-50",
+      color: "text-brand-orange-text",
+      bg: "bg-brand-orange-soft",
       description: "Order received, awaiting payment confirmation.",
     },
     {
@@ -153,16 +154,16 @@ export default function WebStylingPage() {
       id: "status-4",
       status: "Delivered",
       iconName: "Delivered",
-      color: "text-emerald-600",
-      bg: "bg-emerald-50",
+      color: "text-success",
+      bg: "bg-success-soft",
       description: "Successfully delivered and confirmed by customer.",
     },
     {
       id: "status-5",
       status: "Cancelled",
       iconName: "Cancelled",
-      color: "text-rose-600",
-      bg: "bg-rose-50",
+      color: "text-error",
+      bg: "bg-error-soft",
       description: "Order cancelled or customer refund issued.",
     },
   ]);
@@ -194,15 +195,15 @@ export default function WebStylingPage() {
   return (
     <div className="flex flex-col gap-6 mx-auto pb-16">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-100 pb-5">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-light-gray pb-5">
         <div>
           {/* <div className="flex items-center gap-2.5">
-            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Web Styling</h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-orange-soft text-brand-orange-text border border-brand-orange/15">
+            <h1 className="text-2xl font-semibold text-brand-charcoal tracking-tight">Web Styling</h1>
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-orange-soft text-brand-orange-text border border-brand-orange/15">
               Desktop & Web Storefront
             </span>
           </div>
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-faint mt-1">
             Customize browser favicon, authentication banner artwork, web homepage layouts, contact page coordinates, payment badges, and fulfillment status indicators.
           </p> */}
         </div>
@@ -223,38 +224,22 @@ export default function WebStylingPage() {
         {/* Left Column: Configuration Forms (8 cols) */}
         <div className="xl:col-span-8 flex flex-col gap-6">
           {/* Section Navigation Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-100 custom-scrollbar">
-            {navItems.map((item) => {
-              const IconComponent = item.icon;
-              const isActive = activeTab === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => setActiveTab(item.id as WebStylingTab)}
-                  className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
-                    isActive
-                      ? "bg-brand-charcoal text-white "
-                      : "bg-white text-gray-600 border border-gray-100 hover:bg-gray-50 hover:text-brand-orange-text"
-                  }`}
-                >
-                  <IconComponent
-                    className={`w-4 h-4 ${isActive ? "text-white" : "text-gray-400"}`}
-                  />
-                  <span>{item.label}</span>
-                </button>
-              );
-            })}
-          </div>
+          <TabFilter
+            ariaLabel="Web styling sections"
+            options={navItems.map((t) => ({ value: t.id as WebStylingTab, label: t.label, icon: <t.icon /> }))}
+            activeTab={activeTab}
+            onChange={setActiveTab}
+          />
 
           {/* 1. FAVICON */}
           {activeTab === "favicon" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-              <div className="flex justify-between items-center border-b border-gray-50 pb-4">
+            <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+              <div className="flex justify-between items-center border-b border-light-gray pb-4">
                 <div>
-                  <h3 className="text-base font-bold text-gray-900">
+                  <h3 className="text-base font-semibold text-brand-charcoal">
                     Browser Favicon & Identity
                   </h3>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-faint mt-0.5">
                     Upload website tab icons, touch icons, and title bar
                     formatting.
                   </p>
@@ -270,8 +255,8 @@ export default function WebStylingPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Standard Favicon URL (.ico / .png)
+                  <label className="text-[12px] font-medium text-subtle">
+                    Standard favicon URL (.ico / .png)
                   </label>
                   <Input
                     value={favicon.url}
@@ -283,8 +268,8 @@ export default function WebStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Apple Touch Bookmark Icon (180x180)
+                  <label className="text-[12px] font-medium text-subtle">
+                    Apple touch bookmark icon (180x180)
                   </label>
                   <Input
                     value={favicon.appleTouchIcon}
@@ -296,8 +281,8 @@ export default function WebStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2 md:col-span-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Browser Tab Title Prefix
+                  <label className="text-[12px] font-medium text-subtle">
+                    Browser tab title prefix
                   </label>
                   <Input
                     value={favicon.tabTitlePrefix}
@@ -310,9 +295,9 @@ export default function WebStylingPage() {
               </div>
 
               {/* Simulated Browser Tab Preview */}
-              <div className="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col gap-2">
-                <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
-                  Live Browser Tab Appearance
+              <div className="bg-off-white p-4 rounded-lg border border-light-gray flex flex-col gap-2">
+                <span className="text-[12px] font-medium text-subtle">
+                  Live browser tab appearance
                 </span>
                 <div className="bg-white rounded-t-xl px-4 py-2 border-b-2 border-brand-charcoal flex items-center gap-2 max-w-xs shadow-xs">
                   <img
@@ -331,13 +316,13 @@ export default function WebStylingPage() {
 
           {/* 2. SIGN IN / UP & ADMIN SIGN IN IMAGES */}
           {activeTab === "auth-images" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-              <div className="flex justify-between items-center border-b border-gray-50 pb-4">
+            <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+              <div className="flex justify-between items-center border-b border-light-gray pb-4">
                 <div>
-                  <h3 className="text-base font-bold text-gray-900">
+                  <h3 className="text-base font-semibold text-brand-charcoal">
                     Authentication Portal Artwork
                   </h3>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-faint mt-0.5">
                     Customize split-screen cover images and welcome headlines
                     for customer sign-in and admin logins.
                   </p>
@@ -352,17 +337,17 @@ export default function WebStylingPage() {
               </div>
 
               {/* Customer Sign In / Up */}
-              <div className="flex flex-col gap-4 p-5 rounded-xl border border-gray-100 bg-gray-50/40">
+              <div className="flex flex-col gap-4 p-5 rounded-lg border border-light-gray bg-off-white">
                 <div className="flex items-center gap-2">
                   <HiPhoto className="w-4 h-4 text-brand-orange-text" />
-                  <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider">
-                    Customer Sign In & Sign Up Split Image
+                  <h4 className="text-xs font-semibold text-brand-charcoal">
+                    Customer sign in & sign up split image
                   </h4>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-2">
-                    <label className="text-xs font-semibold text-gray-600">
-                      Cover Image URL
+                    <label className="text-[12px] font-medium text-subtle">
+                      Cover image URL
                     </label>
                     <Input
                       value={authImages.customerAuthImage}
@@ -373,8 +358,8 @@ export default function WebStylingPage() {
                         })
                       }
                     />
-                    <label className="text-xs font-semibold text-gray-600 mt-2">
-                      Marketing Headline Overlay
+                    <label className="text-[12px] font-medium text-subtle mt-2">
+                      Marketing headline overlay
                     </label>
                     <Input
                       value={authImages.customerHeadline}
@@ -386,7 +371,7 @@ export default function WebStylingPage() {
                       }
                     />
                   </div>
-                  <div className="h-40 rounded-xl overflow-hidden border border-gray-200 relative shadow-inner">
+                  <div className="h-40 rounded-lg overflow-hidden border border-light-gray relative">
                     <img
                       src={authImages.customerAuthImage}
                       alt="Customer Auth"
@@ -402,17 +387,17 @@ export default function WebStylingPage() {
               </div>
 
               {/* Admin Portal Sign In Image */}
-              <div className="flex flex-col gap-4 p-5 rounded-xl border border-gray-100 bg-gray-50/40">
+              <div className="flex flex-col gap-4 p-5 rounded-lg border border-light-gray bg-off-white">
                 <div className="flex items-center gap-2">
                   <HiLockClosed className="w-4 h-4 text-brand-orange-text" />
-                  <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider">
-                    Admin Portal Sign In Artwork
+                  <h4 className="text-xs font-semibold text-brand-charcoal">
+                    Admin portal sign in artwork
                   </h4>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-2">
-                    <label className="text-xs font-semibold text-gray-600">
-                      Admin Image URL
+                    <label className="text-[12px] font-medium text-subtle">
+                      Admin image URL
                     </label>
                     <Input
                       value={authImages.adminAuthImage}
@@ -423,8 +408,8 @@ export default function WebStylingPage() {
                         })
                       }
                     />
-                    <label className="text-xs font-semibold text-gray-600 mt-2">
-                      Admin Security Headline
+                    <label className="text-[12px] font-medium text-subtle mt-2">
+                      Admin security headline
                     </label>
                     <Input
                       value={authImages.adminHeadline}
@@ -436,7 +421,7 @@ export default function WebStylingPage() {
                       }
                     />
                   </div>
-                  <div className="h-40 rounded-xl overflow-hidden border border-gray-200 relative shadow-inner">
+                  <div className="h-40 rounded-lg overflow-hidden border border-light-gray relative">
                     <img
                       src={authImages.adminAuthImage}
                       alt="Admin Auth"
@@ -455,13 +440,13 @@ export default function WebStylingPage() {
 
           {/* 3. HOME PAGE STYLE (WEB) */}
           {activeTab === "home-page-style" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-              <div className="flex justify-between items-center border-b border-gray-50 pb-4">
+            <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+              <div className="flex justify-between items-center border-b border-light-gray pb-4">
                 <div>
-                  <h3 className="text-base font-bold text-gray-900">
+                  <h3 className="text-base font-semibold text-brand-charcoal">
                     Web Storefront Home Page Layout
                   </h3>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-faint mt-0.5">
                     Adjust desktop container widths, top hero banner layouts,
                     product grid density, and header styles.
                   </p>
@@ -477,8 +462,8 @@ export default function WebStylingPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Top Hero Section Style
+                  <label className="text-[12px] font-medium text-subtle">
+                    Top hero section style
                   </label>
                   <Select
                     value={homePageStyle.heroLayout}
@@ -506,8 +491,8 @@ export default function WebStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Storefront Navigation Header
+                  <label className="text-[12px] font-medium text-subtle">
+                    Storefront navigation header
                   </label>
                   <Select
                     value={homePageStyle.headerStyle}
@@ -535,8 +520,8 @@ export default function WebStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Max Container Width
+                  <label className="text-[12px] font-medium text-subtle">
+                    Max container width
                   </label>
                   <Select
                     value={homePageStyle.containerMaxWidth}
@@ -561,8 +546,8 @@ export default function WebStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Product Grid Columns (Desktop)
+                  <label className="text-[12px] font-medium text-subtle">
+                    Product grid columns (desktop)
                   </label>
                   <Select
                     value={homePageStyle.gridColumns}
@@ -591,13 +576,13 @@ export default function WebStylingPage() {
 
           {/* 4. CONTACT US */}
           {activeTab === "contact-us" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-              <div className="flex justify-between items-center border-b border-gray-50 pb-4">
+            <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+              <div className="flex justify-between items-center border-b border-light-gray pb-4">
                 <div>
-                  <h3 className="text-base font-bold text-gray-900">
+                  <h3 className="text-base font-semibold text-brand-charcoal">
                     Contact Us Page Customization
                   </h3>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-faint mt-0.5">
                     Configure customer support inquiry channels, head office
                     addresses, and response commitments.
                   </p>
@@ -613,8 +598,8 @@ export default function WebStylingPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2 md:col-span-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Contact Us Page Hero Banner Image URL
+                  <label className="text-[12px] font-medium text-subtle">
+                    Contact us page hero banner image URL
                   </label>
                   <Input
                     value={contactUs.heroBannerImage}
@@ -628,8 +613,8 @@ export default function WebStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Official Support Email
+                  <label className="text-[12px] font-medium text-subtle">
+                    Official support email
                   </label>
                   <Input
                     value={contactUs.supportEmail}
@@ -643,8 +628,8 @@ export default function WebStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Toll-Free Helpline Phone
+                  <label className="text-[12px] font-medium text-subtle">
+                    Toll-free helpline phone
                   </label>
                   <Input
                     value={contactUs.helplinePhone}
@@ -658,8 +643,8 @@ export default function WebStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    WhatsApp Instant Support Link
+                  <label className="text-[12px] font-medium text-subtle">
+                    WhatsApp instant support link
                   </label>
                   <Input
                     value={contactUs.whatsappLink}
@@ -673,8 +658,8 @@ export default function WebStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Average Support Response Time
+                  <label className="text-[12px] font-medium text-subtle">
+                    Average support response time
                   </label>
                   <Input
                     value={contactUs.averageResponseTime}
@@ -688,8 +673,8 @@ export default function WebStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2 md:col-span-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Registered Physical Office Address
+                  <label className="text-[12px] font-medium text-subtle">
+                    Registered physical office address
                   </label>
                   <Input
                     value={contactUs.officeAddress}
@@ -707,13 +692,13 @@ export default function WebStylingPage() {
 
           {/* 5. PAYMENT METHOD ICONS */}
           {activeTab === "payment-icons" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-              <div className="flex justify-between items-center border-b border-gray-50 pb-4">
+            <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+              <div className="flex justify-between items-center border-b border-light-gray pb-4">
                 <div>
-                  <h3 className="text-base font-bold text-gray-900">
+                  <h3 className="text-base font-semibold text-brand-charcoal">
                     Payment Gateway & Method Icons
                   </h3>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-faint mt-0.5">
                     Toggle visibility and adjust icons displayed across web
                     checkout pages and storefront footers.
                   </p>
@@ -731,17 +716,17 @@ export default function WebStylingPage() {
                 {paymentIcons.map((pay) => (
                   <div
                     key={pay.id}
-                    className="flex items-center justify-between p-4 rounded-xl border border-gray-100 bg-gray-50/40 hover:bg-white transition-all shadow-xs"
+                    className="flex items-center justify-between p-4 rounded-lg border border-light-gray bg-off-white hover:bg-white transition-all"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-8 rounded border border-gray-200 bg-white p-1 flex items-center justify-center shrink-0 shadow-2xs">
+                      <div className="w-12 h-8 rounded border border-light-gray bg-white p-1 flex items-center justify-center shrink-0">
                         <img
                           src={pay.iconUrl}
                           alt={pay.name}
                           className="max-h-full max-w-full object-contain"
                         />
                       </div>
-                      <span className="text-xs font-bold text-gray-800">
+                      <span className="text-xs font-semibold text-brand-charcoal">
                         {pay.name}
                       </span>
                     </div>
@@ -767,13 +752,13 @@ export default function WebStylingPage() {
 
           {/* 6. ORDER DELIVERY STATUS ICONS */}
           {activeTab === "delivery-status-icons" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-              <div className="flex justify-between items-center border-b border-gray-50 pb-4">
+            <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+              <div className="flex justify-between items-center border-b border-light-gray pb-4">
                 <div>
-                  <h3 className="text-base font-bold text-gray-900">
+                  <h3 className="text-base font-semibold text-brand-charcoal">
                     Order & Fulfillment Status Icons
                   </h3>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-faint mt-0.5">
                     Customize icon badges and color identifiers across order
                     tracking timelines and reports.
                   </p>
@@ -791,11 +776,11 @@ export default function WebStylingPage() {
                 {deliveryStatusIcons.map((st) => (
                   <div
                     key={st.id}
-                    className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-xl border border-gray-100 bg-gray-50/40 hover:bg-white transition-all shadow-xs"
+                    className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-lg border border-light-gray bg-off-white hover:bg-white transition-all"
                   >
                     <div className="flex items-center gap-3">
                       <div
-                        className={`w-10 h-10 rounded-xl ${st.bg} ${st.color} flex items-center justify-center shrink-0`}
+                        className={`w-10 h-10 rounded-lg ${st.bg} ${st.color} flex items-center justify-center shrink-0`}
                       >
                         <Icon
                           name={st.iconName as any}
@@ -804,10 +789,10 @@ export default function WebStylingPage() {
                         />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold text-gray-900">
+                        <h4 className="text-xs font-semibold text-brand-charcoal">
                           {st.status}
                         </h4>
-                        <p className="text-xs text-gray-500 mt-0.5">
+                        <p className="text-xs text-faint mt-0.5">
                           {st.description}
                         </p>
                       </div>
@@ -815,7 +800,7 @@ export default function WebStylingPage() {
 
                     <div className="flex items-center gap-3">
                       <span
-                        className={`px-3 py-1 rounded-full text-[11px] font-bold ${st.bg} ${st.color}`}
+                        className={`px-3 py-1 rounded-full text-[11px] font-semibold ${st.bg} ${st.color}`}
                       >
                         {st.status.split(" ")[0]}
                       </span>
@@ -829,13 +814,13 @@ export default function WebStylingPage() {
 
         {/* Right Column: Live Desktop Browser Preview (4 cols) */}
         <div className="xl:col-span-4 sticky top-6">
-          <div className="bg-white rounded-3xl border border-gray-200 shadow-md p-5 flex flex-col items-center">
+          <div className="bg-white rounded-lg border border-light-gray p-5 flex flex-col items-center">
             <div className="w-full flex justify-between items-center mb-3">
-              <span className="text-xs font-bold text-gray-800 flex items-center gap-1.5">
+              <span className="text-xs font-semibold text-brand-charcoal flex items-center gap-1.5">
                 <HiEye className="w-4 h-4 text-brand-orange-text" />
                 Live Web Storefront Preview
               </span>
-              <span className="text-[11px] font-mono font-bold text-gray-400">
+              <span className="text-[11px] font-mono font-semibold text-faint">
                 Desktop Web
               </span>
             </div>

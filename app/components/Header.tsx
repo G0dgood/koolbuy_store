@@ -106,7 +106,7 @@ export const Header: React.FC<{ className?: string }> = ({
       <div className="max-w-360 mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 h-14 md:h-16 flex items-center justify-between gap-3 md:gap-4 lg:gap-6 xl:gap-8">
         {/* Mobile: Hamburger & Logo Group */}
         <div className="flex items-center gap-3 lg:hidden">
-          <button onClick={toggleMenu} className="text-gray-900 p-1">
+          <button onClick={toggleMenu} className="text-brand-charcoal p-1">
             <Icon name="menu" size="md" />
           </button>
           <Link href="/" className="shrink-0 flex items-center">
@@ -150,11 +150,11 @@ export const Header: React.FC<{ className?: string }> = ({
               className="h-full flex items-center gap-1.5 pl-3.5 pr-2.5 hover:bg-black/[0.04] rounded-l-full transition-colors cursor-pointer border-r border-black/[0.08] text-left outline-none"
             >
               <FiMapPin className="text-brand-orange-text text-sm shrink-0" />
-              <span className="text-xs font-medium text-gray-800 max-w-20 xl:max-w-26 truncate">
+              <span className="text-xs font-medium text-brand-charcoal max-w-20 xl:max-w-26 truncate">
                 {selectedLocation}
               </span>
               <FiChevronDown
-                className={`text-gray-400 text-xs shrink-0 transition-transform duration-200 ${
+                className={`text-faint text-xs shrink-0 transition-transform duration-200 ${
                   isLocationOpen ? "rotate-180" : ""
                 }`}
               />
@@ -167,16 +167,16 @@ export const Header: React.FC<{ className?: string }> = ({
                   className="absolute top-full left-0 pt-2 w-72 z-100"
                   onClick={() => setIsLocationOpen(false)}
                 >
-                  <div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] border border-black/[0.06] p-2 flex flex-col gap-1 text-sm">
-                    <div className="px-3 py-1.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider">
-                      Delivery Location
+                  <div className="bg-white/95 backdrop-blur-xl rounded-tile shadow-float border border-black/[0.06] p-2 flex flex-col gap-1 text-sm">
+                    <div className="px-3 py-1.5 text-[12px] font-medium text-faint">
+                      Delivery location
                     </div>
                     {deliveryLocations.map((loc) => (
                       <button
                         key={loc.full}
                         type="button"
                         onClick={() => setSelectedLocation(loc.short)}
-                        className="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-gray-700 hover:bg-brand-orange-soft hover:text-brand-orange-text transition-colors flex items-center gap-2 cursor-pointer"
+                        className="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-subtle hover:bg-brand-orange-soft hover:text-brand-orange-text transition-colors flex items-center gap-2 cursor-pointer"
                       >
                         <FiMapPin className="text-brand-orange-text text-xs shrink-0" />
                         <span className="truncate">{loc.full}</span>
@@ -193,14 +193,14 @@ export const Header: React.FC<{ className?: string }> = ({
             className="flex-1 flex items-center px-3 relative min-w-0"
             ref={searchRef}
           >
-            <FiSearch className="text-gray-500 text-base shrink-0 mr-2" />
+            <FiSearch className="text-faint text-base shrink-0 mr-2" />
             <input
               type="text"
               placeholder="Search freezers, solar kits, batteries"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={() => setIsSearchFocused(true)}
-              className="w-full text-xs xl:text-sm text-gray-800 placeholder-gray-400 bg-transparent outline-none focus:outline-none"
+              className="w-full text-xs xl:text-sm text-brand-charcoal placeholder:text-faint bg-transparent outline-none focus:outline-none"
             />
 
             {/* Search Autocomplete Dropdown */}
@@ -239,7 +239,7 @@ export const Header: React.FC<{ className?: string }> = ({
             />
           </div>
 
-          <div className="hidden 2xl:block w-px h-6 bg-gray-200 shrink-0" />
+          <div className="hidden 2xl:block w-px h-6 bg-light-gray shrink-0" />
 
           {/* Action Icons */}
           <ActionIcons onOpenDropdown={() => setActiveDropdown(null)} />
@@ -252,19 +252,19 @@ export const Header: React.FC<{ className?: string }> = ({
           onSubmit={handleSearchSubmit}
           className="w-full h-10 bg-black/[0.04] rounded-full flex items-center px-4 gap-2.5 border border-transparent focus-within:bg-white focus-within:border-light-gray"
         >
-          <FiSearch className="text-gray-500 text-base shrink-0" />
+          <FiSearch className="text-faint text-base shrink-0" />
           <input
             type="text"
             placeholder="Search KoolBuy"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="bg-transparent text-sm w-full outline-none text-gray-800 placeholder-gray-400"
+            className="bg-transparent text-sm w-full outline-none text-brand-charcoal placeholder:text-faint"
           />
           {searchQuery && (
             <button
               type="button"
               onClick={() => setSearchQuery("")}
-              className="text-gray-400 hover:text-gray-600 text-xs"
+              className="text-faint hover:text-subtle text-xs"
             >
               Clear
             </button>
@@ -316,13 +316,13 @@ export const Header: React.FC<{ className?: string }> = ({
                           <Link
                             href={item.href}
                             onClick={() => setActiveDropdown(null)}
-                            className="group inline-flex items-center gap-2 text-[15px] font-semibold text-gray-800 hover:text-brand-orange-text transition-colors py-0.5 leading-snug tracking-[-0.01em]"
+                            className="group inline-flex items-center gap-2 text-[15px] font-semibold text-brand-charcoal hover:text-brand-orange-text transition-colors py-0.5 leading-snug tracking-[-0.01em]"
                           >
                             <span className="group-hover:translate-x-0.5 transition-transform duration-150">
                               {item.label}
                             </span>
                             {item.badge && (
-                              <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-brand-orange-soft text-brand-orange-text uppercase tracking-wide">
+                              <span className="text-[11px] font-semibold px-1.5 py-0.5 rounded-full bg-brand-orange-soft text-brand-orange-text">
                                 {item.badge}
                               </span>
                             )}
@@ -335,9 +335,9 @@ export const Header: React.FC<{ className?: string }> = ({
               </div>
 
               {/* Bottom Quick Bar */}
-              <div className="mt-8 pt-4 border-t border-black/[0.06] flex items-center justify-between text-xs text-gray-500">
+              <div className="mt-8 pt-4 border-t border-black/[0.06] flex items-center justify-between text-xs text-faint">
                 <div className="flex items-center gap-6">
-                  {/* <span className="text-gray-400 font-medium">
+                  {/* <span className="text-faint font-medium">
                     ⚡ 24/7 Clean Solar Energy • Verified Warranties • Fast
                     Delivery
                   </span> */}
@@ -368,7 +368,7 @@ export const Header: React.FC<{ className?: string }> = ({
         ].map((item, idx) => (
           <span
             key={idx}
-            className="bg-black/[0.04] text-gray-800 text-[13px] px-3 py-1 rounded-full shrink-0 font-medium"
+            className="bg-black/[0.04] text-brand-charcoal text-[13px] px-3 py-1 rounded-full shrink-0 font-medium"
           >
             {item}
           </span>

@@ -53,7 +53,7 @@ const ButtonDropdown: React.FC<ButtonDropdownProps> = ({
       </Button>
 
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-48 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+        <div className="absolute left-0 mt-2 w-48 origin-top-left rounded-xl bg-white shadow-float ring-1 ring-black/[0.08] focus:outline-none z-50">
           <div className="py-1">
             {items.map((item, index) => (
               <button
@@ -62,9 +62,9 @@ const ButtonDropdown: React.FC<ButtonDropdownProps> = ({
                   item.onClick?.();
                   setIsOpen(false);
                 }}
-                className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                className="flex items-center w-full px-4 py-2 text-sm text-subtle hover:bg-black/[0.06] hover:text-brand-charcoal"
               >
-                {item.icon && <Icon name={item.icon} size="sm" className="mr-3 text-gray-400" />}
+                {item.icon && <Icon name={item.icon} size="sm" className="mr-3 text-faint" />}
                 {item.label}
               </button>
             ))}

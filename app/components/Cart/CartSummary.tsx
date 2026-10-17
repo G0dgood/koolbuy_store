@@ -62,7 +62,7 @@ const CartSummary = () => {
                   <button
                      type="button"
                      onClick={handleRemoveCoupon}
-                     className="text-gray-500 hover:text-rose-600 transition-colors cursor-pointer text-[11px]"
+                     className="text-faint hover:text-error transition-colors cursor-pointer text-[11px]"
                   >
                      Remove
                   </button>
@@ -82,7 +82,7 @@ const CartSummary = () => {
                      </Button>
                   </div>
                   {couponError && (
-                     <span className="text-[12px] text-rose-500 px-2">{couponError}</span>
+                     <span className="text-[12px] text-error px-2">{couponError}</span>
                   )}
                </form>
             )}

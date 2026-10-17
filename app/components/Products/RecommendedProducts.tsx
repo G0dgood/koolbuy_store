@@ -1,17 +1,18 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../Button/Button";
 import { useCart } from "@/app/context/CartContext";
 import { toast } from "sonner";
+import { StoreImage } from "../Home/StoreUi";
+import { productHref } from "@/lib/store/api/storefront-api";
 
 interface RecommendedProduct {
   id: string;
   title: string;
   price: string;
-  image: string;
+  image?: string | null;
 }
 
 interface RecommendedProductsProps {
@@ -20,6 +21,7 @@ interface RecommendedProductsProps {
 
 export const RecommendedProducts: React.FC<RecommendedProductsProps> = ({ products }) => {
   const { addToCart } = useCart();
+  if (products.length === 0) return null;
 
   const handleAddToCart = (e: React.MouseEvent, product: RecommendedProduct) => {
     e.preventDefault();
@@ -28,7 +30,7 @@ export const RecommendedProducts: React.FC<RecommendedProductsProps> = ({ produc
       id: product.id,
       title: product.title,
       price: product.price,
-      image: product.image,
+      image: product.image ?? "",
     });
     toast.success("Added to cart");
   };
@@ -41,14 +43,14 @@ export const RecommendedProducts: React.FC<RecommendedProductsProps> = ({ produc
         {products.map((product) => (
           <div 
             key={product.id}
-            className="flex-shrink-0 w-[160px] bg-white rounded-tile overflow-hidden flex flex-col gap-2 transition-shadow duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] relative group cursor-pointer active:scale-[0.98]"
+            className="flex-shrink-0 w-[160px] bg-white rounded-tile overflow-hidden flex flex-col gap-2 transition-shadow duration-300 hover:shadow-lift relative group cursor-pointer active:scale-[0.98]"
           >
-            <Link href={`/products/detail`} className="flex flex-col flex-1">
+            <Link href={productHref(product.id)} className="flex flex-col flex-1">
               <div className="w-full aspect-square relative bg-off-white overflow-hidden">
-                <Image 
-                  src={product.image} 
-                  alt={product.title} 
-                  fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw" 
+                <StoreImage
+                  src={product.image}
+                  alt={product.title}
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw" 
                   className="object-contain mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                 />
               </div>
@@ -61,7 +63,7 @@ export const RecommendedProducts: React.FC<RecommendedProductsProps> = ({ produc
             </Link>
             
             <div className="flex flex-col gap-1.5">
-               <Link href="/products/detail" className="w-full">
+               <Link href={productHref(product.id)} className="w-full">
                   <Button variant="ghost" size="sm" shape="pill" className="w-full h-8 font-medium bg-black/[0.04] hover:bg-black/[0.08]">
                     View details
                   </Button>

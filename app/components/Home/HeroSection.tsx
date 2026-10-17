@@ -4,70 +4,80 @@ import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/app/components/Button";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { useGetHeroBannersQuery } from "@/lib/store/api/storefront-api";
 
-const carouselSlides = [
-  {
-    id: 1,
-    image: "/images/koolboks/KOOLBOKS+538L+PLUS+PANEL+1920x800.png",
-    subtitle: "Latest trending",
-    title: "Koolboks 538L Solar Freezers",
-    highlight: "Solar Powered Cooling & Ice Storage",
-    link: "/products",
-    // buttonText: "Learn more",
-  },
-  {
-    id: 2,
-    image: "/images/koolboks/SCANFROST+-+600L+ALONE+1920+X+800.png",
-    subtitle: "Latest trending",
-    title: "Scanfrost 600L Commercial",
-    highlight: "Heavy-Duty Preservation & Coolers",
-    link: "/products",
-    // buttonText: "Learn more",
-  },
-  {
-    id: 3,
-    image: "/images/koolboks/THERMOCOOL+-+519L+ALONE+1920+x+800.png",
-    subtitle: "Latest trending",
-    title: "Thermocool 519L Deep Freezers",
-    highlight: "Instant Freeze & Energy Efficient",
-    link: "/products",
-    // buttonText: "Learn more",
-  },
+interface Slide {
+  id: string | number;
+  image: string;
+  title: string;
+  link: string;
+  /** ms before moving on */
+  duration: number;
+}
+
+/* Brand marketing banners (no prices or records), shown only when the
+   backend has no active hero banners or can't be reached. */
+const FALLBACK_SLIDES: Slide[] = [
+  { id: 1, image: "/images/koolboks/KOOLBOKS+538L+PLUS+PANEL+1920x800.png", title: "Koolboks 538L Solar Freezers", link: "/products", duration: 5000 },
+  { id: 2, image: "/images/koolboks/SCANFROST+-+600L+ALONE+1920+X+800.png", title: "Scanfrost 600L Commercial", link: "/products", duration: 5000 },
+  { id: 3, image: "/images/koolboks/THERMOCOOL+-+519L+ALONE+1920+x+800.png", title: "Thermocool 519L Deep Freezers", link: "/products", duration: 5000 },
 ];
 
 const HeroSection = () => {
+  const { data: banners, isLoading } = useGetHeroBannersQuery();
+  const carouselSlides: Slide[] =
+    banners && banners.length > 0
+      ? banners.map((b) => ({
+          id: b.id,
+          image: b.image_url,
+          title: b.title || "KoolBuy",
+          link: b.link_url || "",
+          duration: b.duration > 0 ? b.duration : 5000,
+        }))
+      : FALLBACK_SLIDES;
+  const slideCount = carouselSlides.length;
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [direction, setDirection] = useState(1);
 
   const nextSlide = useCallback(() => {
     setDirection(1);
-    setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
-  }, []);
+    setCurrentSlide((prev) => (prev + 1) % slideCount);
+  }, [slideCount]);
 
   const prevSlide = useCallback(() => {
     setDirection(-1);
-    setCurrentSlide(
-      (prev) => (prev - 1 + carouselSlides.length) % carouselSlides.length,
-    );
-  }, []);
+    setCurrentSlide((prev) => (prev - 1 + slideCount) % slideCount);
+  }, [slideCount]);
+
+  // Keep the index valid if the slide list changes size
+  const activeIndex = currentSlide < slideCount ? currentSlide : 0;
+  const activeItem = carouselSlides[activeIndex];
 
   const goToSlide = (idx: number) => {
-    setDirection(idx > currentSlide ? 1 : -1);
+    setDirection(idx > activeIndex ? 1 : -1);
     setCurrentSlide(idx);
   };
 
   useEffect(() => {
-    if (isPaused) return;
-    const timer = setInterval(() => {
-      nextSlide();
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [isPaused, nextSlide]);
+    if (isPaused || isLoading || slideCount < 2) return;
+    const timer = setTimeout(nextSlide, activeItem.duration);
+    return () => clearTimeout(timer);
+  }, [isPaused, isLoading, slideCount, nextSlide, activeItem.duration, activeIndex]);
 
-  const activeItem = carouselSlides[currentSlide];
+  const slideImage = (
+    <Image
+      src={activeItem.image}
+      alt={activeItem.title}
+      fill
+      sizes="100vw"
+      unoptimized={/^https?:\/\//.test(activeItem.image)}
+      className="object-cover object-center"
+      priority
+    />
+  );
 
   return (
     <section
@@ -79,9 +89,12 @@ const HeroSection = () => {
     >
       {/* Full-width hero banner at 12:5 aspect ratio without outer padding */}
       <div className="group/hero relative w-full aspect-[12/5] min-h-[200px] sm:min-h-[280px] md:min-h-[400px] overflow-hidden bg-off-white">
+        {isLoading ? (
+          <div aria-hidden="true" className="absolute inset-0 bg-black/[0.04] animate-pulse" />
+        ) : (
         <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
-            key={currentSlide}
+            key={`${activeItem.id}-${activeIndex}`}
             custom={direction}
             initial={{ opacity: 0, scale: 1.015 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -89,27 +102,19 @@ const HeroSection = () => {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-0 w-full h-full"
           >
-            <Image
-              src={activeItem.image}
-              alt={activeItem.title}
-              fill sizes="100vw"
-              className="object-cover object-center"
-              priority
-            />
-
-            {/* Gradient Overlay for text contrast */}
-            <div className="absolute inset-0 bg-linear-to-r flex flex-col justify-center px-6 sm:px-10 md:px-14">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="max-w-xl flex flex-col gap-2 md:gap-3 text-white bg-linear-to-r to-transparent p-5 sm:p-7"
-              >
-              </motion.div>
-            </div>
+            {activeItem.link ? (
+              <Link href={activeItem.link} aria-label={activeItem.title} className="absolute inset-0 block">
+                {slideImage}
+              </Link>
+            ) : (
+              slideImage
+            )}
           </motion.div>
         </AnimatePresence>
+        )}
 
+        {slideCount > 1 && !isLoading && (
+        <>
         {/* Carousel Navigation Arrows */}
         <button
           onClick={prevSlide}
@@ -134,15 +139,17 @@ const HeroSection = () => {
               key={slide.id}
               onClick={() => goToSlide(idx)}
               aria-label={`Go to slide ${idx + 1}`}
-              aria-current={currentSlide === idx ? "true" : undefined}
+              aria-current={activeIndex === idx ? "true" : undefined}
               className={`h-2 rounded-full transition-all duration-500 cursor-pointer ${
-                currentSlide === idx
+                activeIndex === idx
                   ? "w-6 bg-white"
                   : "w-2 bg-white/50 hover:bg-white/80"
               }`}
             />
           ))}
         </div>
+        </>
+        )}
       </div>
     </section>
   );

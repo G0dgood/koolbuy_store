@@ -91,8 +91,8 @@ export function UploadMediaModal({ isOpen, onClose, onUploadSuccess }: UploadMed
           onDragLeave={() => setIsDragging(false)}
           onDrop={handleDrop}
           className={`
-            border-2 border-dashed rounded-2xl p-12 flex flex-col items-center justify-center gap-4 transition-all cursor-pointer group
-            ${isDragging ? "border-brand-charcoal bg-brand-orange-soft/30" : "border-gray-200 bg-gray-50/50 hover:bg-white hover:border-brand-charcoal/30 hover:shadow-md hover:shadow-brand-charcoal/50"}
+            border-2 border-dashed rounded-lg p-12 flex flex-col items-center justify-center gap-4 transition-all cursor-pointer group
+            ${isDragging ? "border-brand-charcoal bg-brand-orange-soft/30" : "border-light-gray bg-off-white/50 hover:bg-white hover:border-brand-charcoal/30 hover:shadow-lift"}
           `}
         >
           <input
@@ -103,12 +103,12 @@ export function UploadMediaModal({ isOpen, onClose, onUploadSuccess }: UploadMed
             accept=".jpg,.jpeg,.png,.mp4"
             onChange={handleFileSelect}
           />
-          <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-gray-400 group-hover:text-brand-orange-text group-hover:scale-110 transition-all shadow-sm">
+          <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-faint group-hover:text-brand-orange-text group-hover:scale-110 transition-all">
             <Icon name="cloud_upload" folder="icon" size="md" />
           </div>
           <div className="flex flex-col items-center gap-1 text-center">
-            <span className="text-sm font-bold text-brand-charcoal">Click or drag to upload media</span>
-            <span className="text-[11px] font-bold text-gray-400">Support for JPG, PNG, and MP4 up to 50MB</span>
+            <span className="text-sm font-semibold text-brand-charcoal">Click or drag to upload media</span>
+            <span className="text-[11px] font-semibold text-faint">Support for JPG, PNG, and MP4 up to 50MB</span>
           </div>
         </div>
 
@@ -116,24 +116,24 @@ export function UploadMediaModal({ isOpen, onClose, onUploadSuccess }: UploadMed
         {stagedFiles.length > 0 && (
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-brand-charcoal uppercase tracking-wider">Staged Files ({stagedFiles.length})</span>
-              <button onClick={() => setStagedFiles([])} className="text-[11px] font-bold text-red-500 hover:underline">Clear all</button>
+              <span className="text-xs font-semibold text-brand-charcoal">Staged files ({stagedFiles.length})</span>
+              <button onClick={() => setStagedFiles([])} className="text-[11px] font-semibold text-error hover:underline">Clear all</button>
             </div>
             <div className="grid grid-cols-1 gap-2 max-h-[160px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-200">
               {stagedFiles.map((file, idx) => (
-                <div key={idx} className="flex items-center justify-between p-3 bg-white border border-gray-100 rounded-xl group/item">
+                <div key={idx} className="flex items-center justify-between p-3 bg-white border border-light-gray rounded-lg group/item">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400">
+                    <div className="w-8 h-8 rounded-lg bg-off-white flex items-center justify-center text-faint">
                       <Icon name={file.type.startsWith("video") ? "videocam" : "image"} folder="icon" size="xs" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[11px] font-bold text-gray-900 truncate max-w-[200px]">{file.name}</span>
-                      <span className="text-[11px] font-medium text-gray-400">{(file.size / (1024 * 1024)).toFixed(2)} MB</span>
+                      <span className="text-[11px] font-semibold text-brand-charcoal truncate max-w-[200px]">{file.name}</span>
+                      <span className="text-[11px] font-medium text-faint">{(file.size / (1024 * 1024)).toFixed(2)} MB</span>
                     </div>
                   </div>
                   <button
                     onClick={(e) => { e.stopPropagation(); removeFile(idx); }}
-                    className="p-1.5 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded-lg transition-colors"
+                    className="p-1.5 hover:bg-error-soft text-faint hover:text-error rounded-lg transition-colors"
                   >
                     <HiXMark className="w-4 h-4" />
                   </button>
@@ -149,18 +149,18 @@ export function UploadMediaModal({ isOpen, onClose, onUploadSuccess }: UploadMed
             { icon: "verified", label: "Aspect Ratio", text: "Square (1:1) is highly recommended for listing grids." },
             { icon: "verified", label: "Color Space", text: "Use sRGB for consistent color across all browsers." }
           ].map((req, i) => (
-            <div key={i} className="flex items-start gap-3 p-4 bg-white border border-gray-50 rounded-xl">
+            <div key={i} className="flex items-start gap-3 p-4 bg-white border border-light-gray rounded-lg">
               <Icon name={req.icon} folder="icon" size="xs" className="text-brand-orange-text mt-0.5" />
               <div className="flex flex-col gap-0.5">
-                <span className="text-[11px] font-bold text-brand-charcoal">{req.label}</span>
-                <span className="text-[11px] font-bold text-gray-400 leading-tight">{req.text}</span>
+                <span className="text-[11px] font-semibold text-brand-charcoal">{req.label}</span>
+                <span className="text-[11px] font-semibold text-faint leading-tight">{req.text}</span>
               </div>
             </div>
           ))}
         </div>
       </ModalBody>
 
-      <ModalFooter className="flex justify-end gap-3 border-t border-gray-50 pt-8 mt-4">
+      <ModalFooter className="flex justify-end gap-3 border-t border-light-gray pt-8 mt-4">
         <Button
           variant="outline"
           onClick={onClose}

@@ -4,6 +4,8 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
+import { FiImage } from "react-icons/fi";
+import { formatNaira, productHref, type StorefrontProduct } from "@/lib/store/api/storefront-api";
 
 /* Storefront building blocks in an Apple-store style (DESIGN.md §13):
    large tight section titles, soft grey product tiles with big rounded
@@ -43,8 +45,57 @@ export interface StoreProduct {
   name: string;
   vendor?: string;
   price: string;
-  image: string;
+  image?: string | null;
   href?: string;
+}
+
+/** Maps a /koolbuy/products/ item to a store tile */
+export function toStoreProduct(p: StorefrontProduct): StoreProduct {
+  return {
+    id: p.id,
+    name: p.name,
+    vendor: p.vendor?.name,
+    price: formatNaira(p.price),
+    image: p.image,
+  };
+}
+
+/**
+ * A product photo that fills its (relative) parent. Remote images skip the
+ * optimiser so any host the backend stores works; a missing image shows a
+ * quiet placeholder instead of a broken tile.
+ */
+export function StoreImage({
+  src,
+  alt,
+  sizes,
+  className = "",
+  priority,
+}: {
+  src?: string | null;
+  alt: string;
+  sizes: string;
+  className?: string;
+  priority?: boolean;
+}) {
+  if (!src) {
+    return (
+      <div aria-hidden="true" className="absolute inset-0 flex items-center justify-center text-faint">
+        <FiImage size={28} />
+      </div>
+    );
+  }
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      sizes={sizes}
+      priority={priority}
+      unoptimized={/^https?:\/\//.test(src)}
+      className={className}
+    />
+  );
 }
 
 const grid: Variants = { hidden: {}, visible: { transition: { staggerChildren: 0.05 } } };
@@ -57,12 +108,11 @@ const item: Variants = {
 export function StoreProductCard({ product, className = "" }: { product: StoreProduct; className?: string }) {
   return (
     <motion.div variants={item} className={`h-full ${className}`}>
-      <Link href={product.href ?? "/products/detail"} className="group flex flex-col h-full rounded-tile bg-white border border-light-gray overflow-hidden transition-all duration-300 hover:shadow-lift">
+      <Link href={product.href ?? (product.id ? productHref(product.id) : "/products")} className="group flex flex-col h-full rounded-tile bg-white border border-light-gray overflow-hidden transition-all duration-300 hover:shadow-lift">
         <div className="relative w-full aspect-square bg-off-white overflow-hidden">
-          <Image
+          <StoreImage
             src={product.image}
             alt={product.name}
-            fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
             // multiply drops the white backgrounds baked into many product photos onto the grey stage
             className="object-contain mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-[1.04]"
@@ -100,5 +150,23 @@ export function StoreProductGrid({ products, twoRows = false }: { products: Stor
         <StoreProductCard key={p.id ?? `${p.name}-${i}`} product={p} className={twoRows ? twoRowClass(i) : ""} />
       ))}
     </motion.div>
+  );
+}
+
+/** Loading placeholder matching StoreProductGrid's tiles */
+export function StoreProductGridSkeleton({ count = 6 }: { count?: number }) {
+  return (
+    <div aria-hidden="true" className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
+      {Array.from({ length: count }).map((_, i) => (
+        <div key={i} className={`rounded-tile bg-white border border-light-gray overflow-hidden ${twoRowClass(i)}`}>
+          <div className="w-full aspect-square bg-black/[0.04] animate-pulse" />
+          <div className="px-4 pt-3 pb-4 flex flex-col gap-2">
+            <div className="h-3.5 w-4/5 rounded-full bg-black/[0.04] animate-pulse" />
+            <div className="h-3 w-1/2 rounded-full bg-black/[0.04] animate-pulse" />
+            <div className="h-3.5 w-2/5 rounded-full bg-black/[0.04] animate-pulse" />
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }

@@ -27,9 +27,9 @@ export const AnalyticsOverview: React.FC = () => {
   }, [isDropdownOpen]);
 
   return (
-    <div className="bg-white p-6 sm:p-8 rounded-lg border border-gray-100 shadow-sm flex flex-col gap-8">
+    <div className="bg-white p-6 sm:p-8 rounded-lg border border-light-gray flex flex-col gap-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
-        <h3 className="text-[20px] font-bold text-brand-charcoal">Report for this week</h3>
+        <h3 className="text-[20px] font-semibold text-brand-charcoal">Report for this week</h3>
         <div className="flex items-center justify-between w-full sm:w-auto gap-4">
           <TabFilter
             tabs={["This week", "Last week"]}
@@ -38,7 +38,7 @@ export const AnalyticsOverview: React.FC = () => {
           />
           <div className="relative" ref={dropdownRef}>
             <button
-              className={`p-1 rounded-lg transition-all ${isDropdownOpen ? "bg-brand-orange-soft text-brand-orange-text " : "text-gray-400 hover:bg-gray-50"}`}
+              className={`p-1 rounded-lg transition-all ${isDropdownOpen ? "bg-brand-orange-soft text-brand-orange-text " : "text-faint hover:bg-off-white"}`}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               <Icon name="DotsHorizontal" folder="dashboardIcon" size="sm" />
@@ -46,7 +46,7 @@ export const AnalyticsOverview: React.FC = () => {
 
             {isDropdownOpen && (
               <div className="absolute top-full right-0 mt-2 z-50">
-                <DropdownMenu width={240} className="shadow-md border-gray-100">
+                <DropdownMenu width={240} className="shadow-float border-light-gray">
                   <DropdownItem
                     label="Print Detailed Report"
                     subtext="Generate printer-friendly PDF"
@@ -80,9 +80,9 @@ export const AnalyticsOverview: React.FC = () => {
           { label: "Out of Stock", val: "0.5k" },
           { label: "Revenue", val: "250k" },
         ].map((stat) => (
-          <div key={stat.label} className="flex flex-col gap-1 lg:border-gray-100 lg:border-l lg:pl-4 first:border-l-0 first:pl-0">
-            <span className="text-[22px] font-bold text-brand-charcoal leading-none">{stat.val}</span>
-            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{stat.label}</span>
+          <div key={stat.label} className="flex flex-col gap-1 lg:border-light-gray lg:border-l lg:pl-4 first:border-l-0 first:pl-0">
+            <span className="text-[22px] font-semibold text-brand-charcoal leading-none">{stat.val}</span>
+            <span className="text-[12px] font-medium text-subtle">{stat.label}</span>
           </div>
         ))}
       </div>

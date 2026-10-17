@@ -48,19 +48,19 @@ const base =
 const variants: Record<ButtonVariant, string> = {
   primary: "bg-brand-charcoal text-white hover:bg-brand-charcoal/90 active:bg-brand-charcoal/80 border border-transparent",
   accent: "bg-brand-orange text-white hover:bg-brand-orange-hover active:bg-brand-orange-hover border border-transparent",
-  secondary: "bg-gray-100 text-brand-charcoal hover:bg-gray-200 active:bg-gray-300 border border-transparent",
+  secondary: "bg-black/[0.04] text-brand-charcoal hover:bg-black/[0.07] active:bg-black/[0.1] border border-transparent",
   outline: "bg-transparent text-brand-charcoal border border-brand-charcoal hover:bg-brand-charcoal hover:text-white active:bg-brand-charcoal/90",
-  ghost: "bg-transparent text-brand-charcoal hover:bg-[#F1F3F5] active:bg-light-gray border border-transparent",
-  danger: "bg-red-600 text-white hover:bg-red-700 active:bg-red-800 border border-transparent",
+  ghost: "bg-transparent text-brand-charcoal hover:bg-black/[0.04] active:bg-light-gray border border-transparent",
+  danger: "bg-error text-white hover:bg-error/90 active:bg-error/80 border border-transparent",
   link: "bg-transparent text-brand-orange-text hover:underline !p-0 !h-auto border-0",
   blue: "bg-brand-charcoal text-white hover:bg-brand-charcoal/90 active:bg-brand-charcoal/80 border border-transparent",
   emerald: "bg-brand-charcoal text-white hover:bg-brand-charcoal/90 active:bg-brand-charcoal/80 border border-transparent",
-  rose: "bg-error-soft text-error hover:bg-red-600 hover:text-white active:bg-red-700 border border-transparent",
+  rose: "bg-error-soft text-error hover:bg-error hover:text-white active:bg-error/90 border border-transparent",
 };
 
 const sizes: Record<ButtonSize, string> = {
-  sm: "px-3 py-1 text-[10px] md:text-[12px]",
-  md: "px-3.5 py-1.5 text-[10px] md:text-[12px]",
+  sm: "px-3 py-1 text-[11px] md:text-[12px]",
+  md: "px-3.5 py-1.5 text-[11px] md:text-[12px]",
   lg: "px-5 py-2.5 text-sm",
 };
 

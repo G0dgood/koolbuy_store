@@ -1,278 +1,229 @@
 "use client";
 
-import React, { useState } from "react";
-import { Icon } from "../../components/Icon";
-import { Button } from "../../components/Button";
+import React, { useMemo, useState } from "react";
+import Link from "next/link";
+import { CheckIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { Input } from "../../components/Form/Inputs";
-import Checkbox from "@/app/components/Checkbox";
-import { ConfirmationModal } from "@/app/components/Admin/ConfirmationModal";
-import { RowsPerPage } from "@/app/components/rows-per-page";
-import Dropdown from "../../components/Form/Dropdown";
-import { motion, AnimatePresence } from "framer-motion";
-import { HiChevronDown } from "react-icons/hi2";
+import { Select } from "../../components/Form/Select";
+import { EmptyState, EmptyTableRow } from "@/app/components/EmptyState";
+import { apiErrorMessage } from "@/lib/store/base-api";
+import {
+  useGetAdminRolesQuery,
+  useGetPermissionModulesQuery,
+  type ModuleAction,
+  type PermissionModule,
+  type RoleGrant,
+} from "@/lib/store/api/people-api";
 
-const modules = [
- { id: "products", label: "Product Catalog", category: "Inventory" },
- { id: "orders", label: "Order Management", category: "Commerce" },
- { id: "customers", label: "Customer Data", category: "Users" },
- { id: "transactions", label: "Payments & Refunds", category: "Finance" },
- { id: "marketing", label: "Coupons & Deals", category: "Marketing" },
- { id: "support", label: "Support Tickets", category: "System" },
- { id: "settings", label: "Global Config", category: "System" },
-];
+const ALL_SECTIONS = "__all__";
+const ACTION_LABEL: Record<ModuleAction, string> = { view: "view", create: "create", edit: "edit", delete: "delete" };
 
-const roles = [
- { id: "sa", name: "Super Admin", color: "bg-brand-orange", users: 3 },
- { id: "ed", name: "Editor", color: "bg-emerald-500", users: 8 },
- { id: "om", name: "Order Mgr", color: "bg-amber-500", users: 5 },
- { id: "st", name: "Support", color: "bg-rose-500", users: 12 },
-];
+/** "Full", "View", "View, edit" or null when the role has no access. */
+function describe(module: PermissionModule, grant: RoleGrant | undefined): { label: string; full: boolean } | null {
+  if (!grant || !(grant.access || grant.view)) return null;
+  const held = module.actions.filter((a) => (a === "view" ? true : grant[a]));
+  if (held.length === module.actions.length && module.actions.length > 1) return { label: "Full", full: true };
+  const text = held.map((a) => ACTION_LABEL[a]).join(", ");
+  return { label: text.charAt(0).toUpperCase() + text.slice(1), full: held.length === module.actions.length };
+}
 
-const privileges = [
- { id: "view", label: "View" },
- { id: "create", label: "Create" },
- { id: "edit", label: "Edit" },
- { id: "delete", label: "Delete" },
-];
+export default function PermissionsOverview() {
+  const { data: roles = [], isLoading: rolesLoading, isError: rolesError, error: rolesErr, refetch: refetchRoles } =
+    useGetAdminRolesQuery();
+  const {
+    data: modulesData,
+    isLoading: modulesLoading,
+    isError: modulesError,
+    error: modulesErr,
+    refetch: refetchModules,
+  } = useGetPermissionModulesQuery();
+  const modules = useMemo(() => modulesData?.items ?? [], [modulesData]);
 
-export default function PermissionsAccordion() {
- // matrixState[roleId][moduleId][privilegeId] = boolean
- const [matrixState, setMatrixState] = useState<Record<string, Record<string, Record<string, boolean>>>>(() => {
-  const initial: Record<string, Record<string, Record<string, boolean>>> = {};
-  roles.forEach(r => {
-   initial[r.id] = {};
-   modules.forEach(m => {
-    initial[r.id][m.id] = {};
-    privileges.forEach(p => {
-     // SA gets all, others get view only by default
-     initial[r.id][m.id][p.id] = r.id === "sa" || p.id === "view";
-    });
-   });
-  });
-  return initial;
- });
+  const [section, setSection] = useState(ALL_SECTIONS);
+  const [search, setSearch] = useState("");
 
- const [expandedRoleId, setExpandedRoleId] = useState<string | null>("sa");
- const [activeCategory, setActiveCategory] = useState("All sectors");
- const [searchQuery, setSearchQuery] = useState("");
- const [rowsPerPage, setRowsPerPage] = useState(10);
- const [isSyncModalOpen, setIsSyncModalOpen] = useState(false);
+  const sectionNames = useMemo(() => [...new Set(modules.map((m) => m.section))], [modules]);
 
- const togglePermission = (roleId: string, moduleId: string, privId: string) => {
-  setMatrixState(prev => ({
-   ...prev,
-   [roleId]: {
-    ...prev[roleId],
-    [moduleId]: {
-     ...prev[roleId][moduleId],
-     [privId]: !prev[roleId][moduleId][privId]
+  const grouped = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    const out: { section: string; items: PermissionModule[] }[] = [];
+    for (const m of modules) {
+      if (section !== ALL_SECTIONS && m.section !== section) continue;
+      if (q && !m.name.toLowerCase().includes(q) && !m.about.toLowerCase().includes(q)) continue;
+      const g = out.find((x) => x.section === m.section);
+      if (g) g.items.push(m);
+      else out.push({ section: m.section, items: [m] });
     }
-   }
-  }));
- };
+    return out;
+  }, [modules, section, search]);
 
- const toggleModuleRow = (roleId: string, moduleId: string) => {
-  const allOn = privileges.every(p => matrixState[roleId][moduleId][p.id]);
-  setMatrixState(prev => ({
-   ...prev,
-   [roleId]: {
-    ...prev[roleId],
-    [moduleId]: privileges.reduce((acc, p) => ({ ...acc, [p.id]: !allOn }), {} as any)
-   }
-  }));
- };
+  const grantsByRole = useMemo(() => {
+    const out: Record<string, Record<string, RoleGrant>> = {};
+    for (const r of roles) out[r.id] = Object.fromEntries(r.grants.map((g) => [g.module, g]));
+    return out;
+  }, [roles]);
 
- const filteredModules = modules.filter(module => {
-  const matchesCategory = activeCategory === "All sectors" || module.category === activeCategory;
-  const matchesSearch = module.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
-   module.category.toLowerCase().includes(searchQuery.toLowerCase());
-  return matchesCategory && matchesSearch;
- });
-
- return (
-  <div className="flex flex-col gap-6 max-w-[1600px] mx-auto pb-12">
-   {/* Action Bar */}
-   <div className="flex justify-between items-end gap-6 mb-2">
-    <div className="flex flex-col gap-1">
-     <h2 className="text-xl font-bold text-brand-charcoal">Administrative Permissions</h2>
-     <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider leading-none">Role Based Governance</p>
-    </div>
-    <div className="flex gap-3">
-     <Button
-      variant="primary"
-      shape="rounded-sm"
-      iconLeft={<Icon name="verified" folder="icon" size="sm" />}
-      onClick={() => setIsSyncModalOpen(true)}
-     >
-      Deploy All Policies
-     </Button>
-    </div>
-   </div>
-
-   {/* Global Filter Bar */}
-   <div className="bg-white rounded-lg border border-[#1C1C1C1A] p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between">
-    <div className="flex items-center gap-3 w-full lg:w-auto">
-     <Dropdown
-      options={[
-       { value: "All sectors", label: "All Administrative Sectors" },
-       { value: "Inventory", label: "Inventory Sector" },
-       { value: "Commerce", label: "Commerce Sector" },
-       { value: "Users", label: "Users Sector" },
-       { value: "Finance", label: "Finance Sector" },
-       { value: "Marketing", label: "Marketing Sector" },
-       { value: "System", label: "System Sector" },
-      ]}
-      value={activeCategory}
-      onChange={setActiveCategory}
-      className="w-full lg:w-[250px]"
-      size="md"
-      variant="minimal"
-     />
-     <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider whitespace-nowrap hidden xl:block">:Filter Sector</span>
-    </div>
-
-    <div className="flex flex-wrap items-center gap-3 w-full xl:w-auto">
-     <div className="flex-1 xl:w-80 relative group">
-      <Input
-       type="text"
-       placeholder="Search modules or keywords..."
-       value={searchQuery}
-       onChange={(e) => setSearchQuery(e.target.value)}
+  if (rolesError || modulesError) {
+    return (
+      <EmptyState
+        variant="card"
+        illustration="settings"
+        title="Couldn't load permissions"
+        description={apiErrorMessage(rolesErr ?? modulesErr)}
+        action={{
+          label: "Try again",
+          onClick: () => {
+            refetchRoles();
+            refetchModules();
+          },
+        }}
       />
-      <Icon name="search-01" folder="dashboardIcon" size="xs" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-300 group-focus-within:text-brand-orange-text transition-colors" />
-     </div>
-     <RowsPerPage value={rowsPerPage} onChange={setRowsPerPage} />
-    </div>
-   </div>
+    );
+  }
 
-   {/* Role Accordion List */}
-   <div className="flex flex-col gap-4">
-    {roles.map((role) => {
-     const isExpanded = expandedRoleId === role.id;
+  const loading = rolesLoading || modulesLoading;
+  const colSpan = roles.length + 1;
 
-     return (
-      <div key={role.id} className="bg-white rounded-lg border border-[#1C1C1C1A] overflow-hidden flex flex-col transition-all duration-300 hover:shadow-md">
-       {/* Accordion Header */}
-       <button
-        onClick={() => setExpandedRoleId(isExpanded ? null : role.id)}
-        className={`w-full flex items-center justify-between p-5 text-left transition-colors ${isExpanded ? 'bg-gray-50/50 border-b border-gray-100' : 'hover:bg-gray-50/30'}`}
-       >
-        <div className="flex items-center gap-4">
-         <div className={`w-3 h-3 rounded-full ${role.color} shadow-sm`} />
-         <div className="flex flex-col gap-0.5">
-          <span className="text-base font-bold text-brand-charcoal">{role.name}</span>
-          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{role.users} Active Users Assigned</span>
-         </div>
+  return (
+    <div className="flex flex-col gap-6 max-w-[1600px] mx-auto pb-12 w-full">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+        <div className="flex flex-col gap-1">
+          <h2 className="text-[20px] font-semibold text-brand-charcoal">Permissions</h2>
+          <p className="text-[13px] text-faint">
+            What each role can see and do, module by module. To change a role, open it on{" "}
+            <Link href="/admin/roles" className="text-brand-orange-text font-medium hover:underline">
+              Roles
+            </Link>
+            .
+          </p>
         </div>
-        <div className="flex items-center gap-4">
-         <div className="flex -space-x-2 mr-2">
-          {[1, 2, 3].map(i => (
-           <div key={i} className="w-6 h-6 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center">
-            <Icon name="user-profile-circle" folder="dashboardIcon" size="sm" className="text-gray-300" />
-           </div>
-          ))}
-         </div>
-         <HiChevronDown
-          className={`text-gray-400 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}
-          size={20}
-         />
-        </div>
-       </button>
+      </div>
 
-       {/* Accordion Content */}
-       <AnimatePresence>
-        {isExpanded && (
-         <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "auto", opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="overflow-hidden"
-         >
-          <div className="p-0 sm:p-0 overflow-x-auto admin-table-container">
-           <table className="w-full">
+      <div className="bg-white rounded-lg border border-light-gray overflow-hidden flex flex-col">
+        <div className="p-4 sm:p-5 border-b border-light-gray flex flex-col lg:flex-row gap-3 lg:items-center justify-between">
+          <div className="w-full lg:w-64">
+            <Select
+              options={[{ value: ALL_SECTIONS, label: "All sections" }, ...sectionNames.map((s) => ({ value: s, label: s }))]}
+              value={section}
+              onChange={(v) => setSection(v || ALL_SECTIONS)}
+              searchable={false}
+            />
+          </div>
+          <Input
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search modules"
+            aria-label="Search modules"
+            containerClassName="lg:w-72"
+            className="text-[13px]"
+            suffixElement={<MagnifyingGlassIcon className="w-4 h-4 text-faint" />}
+          />
+        </div>
+
+        <div className="admin-table-container">
+          <table className="w-full">
             <thead>
-             <tr className="bg-gray-50/20 border-b border-gray-100">
-              <th className="py-4 pl-8 text-left">
-               <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">System Module</span>
-              </th>
-              {privileges.map(p => (
-               <th key={p.id} className="py-4 text-center">
-                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{p.label}</span>
-               </th>
-              ))}
-              <th className="py-4 pr-8 text-right w-24">
-               <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Toggle All</span>
-              </th>
-             </tr>
+              <tr>
+                <th className="pl-6 min-w-60 sticky left-0 bg-off-white z-1">Module</th>
+                {loading
+                  ? Array.from({ length: 4 }).map((_, i) => (
+                      <th key={i}>
+                        <div className="h-3 w-20 bg-light-gray rounded animate-pulse" />
+                      </th>
+                    ))
+                  : roles.map((r) => (
+                      <th key={r.id} className="text-center whitespace-nowrap">
+                        <Link href={`/admin/roles?role=${encodeURIComponent(r.id)}`} className="hover:text-brand-orange-text hover:underline">
+                          {r.name}
+                        </Link>
+                      </th>
+                    ))}
+              </tr>
             </thead>
             <tbody>
-             {filteredModules.map((module, mIdx) => (
-              <motion.tr
-               key={module.id}
-               initial={{ opacity: 0, x: -5 }}
-               animate={{ opacity: 1, x: 0 }}
-               transition={{ delay: mIdx * 0.02 }}
-               className="border-b border-gray-50 last:border-0 hover:bg-gray-50/30 transition-colors"
-              >
-               <td className="py-4 pl-8">
-                <div className="flex flex-col">
-                 <span className="text-[13px] font-bold text-brand-charcoal">{module.label}</span>
-                 <span className="text-[11px] font-bold text-gray-300 uppercase tracking-wider">{module.category} Sector</span>
-                </div>
-               </td>
-               {privileges.map(p => (
-                <td key={p.id} className="py-4 text-center px-4">
-                 <div className="flex justify-center items-center">
-                  <div className={`p-1.5 rounded-lg transition-all ${matrixState[role.id][module.id][p.id] ? 'bg-emerald-50/40' : 'hover:bg-gray-50'}`}>
-                   <Checkbox
-                    checked={matrixState[role.id][module.id][p.id]}
-                    onChange={() => togglePermission(role.id, module.id, p.id)}
-                   />
-                  </div>
-                 </div>
-                </td>
-               ))}
-               <td className="py-4 pr-8 text-right">
-                <button
-                 onClick={() => toggleModuleRow(role.id, module.id)}
-                 className="w-7 h-7 rounded-lg bg-gray-50 flex items-center justify-center text-gray-300 hover:bg-brand-orange-soft hover:text-brand-orange-text transition-all"
-                >
-                 <Icon name="verified" folder="icon" size="md" />
-                </button>
-               </td>
-              </motion.tr>
-             ))}
+              {loading ? (
+                Array.from({ length: 8 }).map((_, i) => (
+                  <tr key={i} className="animate-pulse">
+                    <td className="pl-6">
+                      <div className="h-4 w-36 bg-light-gray rounded mb-1.5" />
+                      <div className="h-3 w-56 bg-light-gray rounded" />
+                    </td>
+                    {Array.from({ length: 4 }).map((__, j) => (
+                      <td key={j}>
+                        <div className="h-4 w-12 bg-light-gray rounded mx-auto" />
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              ) : roles.length === 0 ? (
+                <EmptyTableRow
+                  colSpan={colSpan}
+                  illustration="settings"
+                  title="No roles yet"
+                  description="Roles and their permissions will appear here once you create one."
+                  action={{ label: "Create a role", href: "/admin/roles" }}
+                />
+              ) : grouped.length === 0 ? (
+                <EmptyTableRow
+                  colSpan={colSpan}
+                  illustration="search"
+                  title="No matching modules"
+                  description="Try a different name or section."
+                  action={{
+                    label: "Clear filters",
+                    onClick: () => {
+                      setSearch("");
+                      setSection(ALL_SECTIONS);
+                    },
+                  }}
+                />
+              ) : (
+                grouped.map(({ section: name, items }) => (
+                  <React.Fragment key={name}>
+                    <tr>
+                      <td colSpan={colSpan} className="pl-6 bg-off-white text-[12px] font-semibold text-faint">
+                        {name}
+                      </td>
+                    </tr>
+                    {items.map((m) => (
+                      <tr key={m.key}>
+                        <td className="pl-6 sticky left-0 bg-white">
+                          <div className="flex flex-col max-w-sm">
+                            <span className="font-medium text-brand-charcoal">{m.name}</span>
+                            <span className="text-[12px] text-faint leading-relaxed">{m.about}</span>
+                          </div>
+                        </td>
+                        {roles.map((r) => {
+                          const d = describe(m, grantsByRole[r.id]?.[m.key]);
+                          return (
+                            <td key={r.id} className="text-center whitespace-nowrap">
+                              {d ? (
+                                <span
+                                  className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[12px] ${
+                                    d.full ? "bg-success-soft text-success" : "bg-brand-orange-soft text-brand-charcoal"
+                                  }`}
+                                >
+                                  {d.full && <CheckIcon className="w-3.5 h-3.5" />}
+                                  {d.label}
+                                </span>
+                              ) : (
+                                <span className="text-faint" aria-label="No access">
+                                  —
+                                </span>
+                              )}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    ))}
+                  </React.Fragment>
+                ))
+              )}
             </tbody>
-           </table>
-
-           {filteredModules.length === 0 && (
-            <div className="flex flex-col items-center justify-center py-20">
-             <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider italic opacity-60">No modules found for current filters</span>
-            </div>
-           )}
-          </div>
-         </motion.div>
-        )}
-       </AnimatePresence>
+          </table>
+        </div>
       </div>
-     );
-    })}
-   </div>
-
-   {/* Global Sync Modal */}
-   <ConfirmationModal
-    isOpen={isSyncModalOpen}
-    onClose={() => setIsSyncModalOpen(false)}
-    onConfirm={() => {
-     console.log("Deploying role-based policies globally...");
-     setIsSyncModalOpen(false);
-    }}
-    title="Deploy Governance Policies"
-    message="Are you sure you want to force synchronize these role-based access rules across all server instances? This will override local permission sets for all active accounts immediately."
-    confirmText="Initialize Sync"
-    type="success"
-   />
-  </div>
- );
+    </div>
+  );
 }

@@ -12,22 +12,22 @@ export const MessageDropdown: React.FC = () => {
       className="absolute top-full right-1/2 translate-x-1/2 pt-4 z-50 cursor-default" 
       onClick={e => e.preventDefault()}
     >
-      <DropdownMenu width={320} className="shadow-md border-gray-200 p-0">
-        <div className="px-4 py-3 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
-          <span className="font-bold text-gray-900 text-sm">Messages</span>
-          <span className="text-[10px] text-brand-orange-text bg-brand-orange-soft px-2 py-0.5 rounded-full font-bold">2 New</span>
+      <DropdownMenu width={320} className="shadow-float border-light-gray p-0">
+        <div className="px-4 py-3 border-b border-black/[0.06] flex justify-between items-center bg-off-white/50">
+          <span className="font-semibold text-brand-charcoal text-sm">Messages</span>
+          <span className="text-[11px] text-brand-orange-text bg-brand-orange-soft px-2 py-0.5 rounded-full font-semibold">2 New</span>
         </div>
 
         <div className="flex flex-col max-h-[320px] overflow-y-auto">
           {/* Notification 1 (Unread) */}
-          <div className="px-4 py-3 hover:bg-gray-50 flex gap-3 cursor-pointer transition-colors border-b border-gray-50 last:border-0 relative">
-            <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border border-gray-100 bg-white">
+          <div className="px-4 py-3 hover:bg-black/[0.04] flex gap-3 cursor-pointer transition-colors border-b border-black/[0.06] last:border-0 relative">
+            <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border border-light-gray bg-white">
               <Image src="/avatars/avatar=pic1.jpg" alt="Avatar" width={40} height={40} className="w-full h-full object-cover" />
             </div>
             <div className="flex-1 flex flex-col min-w-0 pr-4">
               <div className="flex justify-between items-start gap-2">
-                <span className="text-sm font-bold text-gray-900 truncate">Alex (Supplier)</span>
-                <span className="text-[10px] text-gray-400 whitespace-nowrap">2m ago</span>
+                <span className="text-sm font-semibold text-brand-charcoal truncate">Alex (Supplier)</span>
+                <span className="text-[11px] text-faint whitespace-nowrap">2m ago</span>
               </div>
               <p className="text-xs text-brand-orange-text font-medium truncate mt-0.5">Can you confirm all dimensions...</p>
             </div>
@@ -35,14 +35,14 @@ export const MessageDropdown: React.FC = () => {
           </div>
 
           {/* Notification 2 (Unread) */}
-          <div className="px-4 py-3 hover:bg-gray-50 flex gap-3 cursor-pointer transition-colors border-b border-gray-50 last:border-0 relative">
-            <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border border-gray-100 bg-white">
+          <div className="px-4 py-3 hover:bg-black/[0.04] flex gap-3 cursor-pointer transition-colors border-b border-black/[0.06] last:border-0 relative">
+            <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border border-light-gray bg-white">
               <Image src="/avatars/avatar=pic2.png" alt="Avatar" width={40} height={40} className="w-full h-full object-cover" />
             </div>
             <div className="flex-1 flex flex-col min-w-0 pr-4">
               <div className="flex justify-between items-start gap-2">
-                <span className="text-sm font-bold text-gray-900 truncate">TechStore Inc.</span>
-                <span className="text-[10px] text-gray-400 whitespace-nowrap">1h ago</span>
+                <span className="text-sm font-semibold text-brand-charcoal truncate">TechStore Inc.</span>
+                <span className="text-[11px] text-faint whitespace-nowrap">1h ago</span>
               </div>
               <p className="text-xs text-brand-orange-text font-medium truncate mt-0.5">Your tracking number is #9034...</p>
             </div>
@@ -50,16 +50,16 @@ export const MessageDropdown: React.FC = () => {
           </div>
 
           {/* Notification 3 (Read) */}
-          <div className="px-4 py-3 hover:bg-gray-50 flex gap-3 cursor-pointer transition-colors border-b border-gray-50 last:border-0 opacity-75">
-            <div className="w-10 h-10 rounded-full bg-brand-orange-soft flex items-center justify-center flex-shrink-0 text-brand-orange-text shadow-inner">
+          <div className="px-4 py-3 hover:bg-black/[0.04] flex gap-3 cursor-pointer transition-colors border-b border-black/[0.06] last:border-0 opacity-75">
+            <div className="w-10 h-10 rounded-full bg-brand-orange-soft flex items-center justify-center flex-shrink-0 text-brand-orange-text">
               <Icon name="message_header" size="sm" />
             </div>
             <div className="flex-1 flex flex-col min-w-0">
               <div className="flex justify-between items-start gap-2">
-                <span className="text-sm font-bold text-gray-900 truncate">System</span>
-                <span className="text-[10px] text-gray-400 whitespace-nowrap">Yesterday</span>
+                <span className="text-sm font-semibold text-brand-charcoal truncate">System</span>
+                <span className="text-[11px] text-faint whitespace-nowrap">Yesterday</span>
               </div>
-              <p className="text-xs text-gray-500 font-medium truncate mt-0.5">Welcome to the marketplace!</p>
+              <p className="text-xs text-faint font-medium truncate mt-0.5">Welcome to the marketplace!</p>
             </div>
           </div>
         </div>

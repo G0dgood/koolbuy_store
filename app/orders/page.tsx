@@ -17,7 +17,7 @@ export default function OrdersPage() {
         <div className="flex flex-col gap-4">
           <div className="text-[13px] text-faint hidden md:flex items-center gap-1.5">
             <span>Home</span>
-            <span aria-hidden="true" className="text-gray-300">›</span>
+            <span aria-hidden="true" className="text-medium-gray">›</span>
             <span className="text-subtle">My orders</span>
           </div>
 

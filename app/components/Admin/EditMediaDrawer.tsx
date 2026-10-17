@@ -41,27 +41,27 @@ export function EditMediaDrawer({ isOpen, onClose, media }: EditMediaDrawerProps
         <div className="flex flex-col gap-8">
           {/* Asset Preview Header */}
           <div className="flex flex-col gap-4">
-             <div className="relative aspect-video rounded-2xl overflow-hidden bg-gray-50 border border-gray-100 shadow-sm flex items-center justify-center p-6 group">
+             <div className="relative aspect-video rounded-lg overflow-hidden bg-off-white border border-light-gray flex items-center justify-center p-6 group">
                 <img src={media.url} alt="" className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" />
                 {media.type === "video" && (
                    <div className="absolute inset-0 flex items-center justify-center bg-black/5">
-                      <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                      <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-float">
                          <Icon name="play_circle_filled" folder="icon" size="sm" className="text-brand-charcoal" />
                       </div>
                    </div>
                 )}
-                <div className="absolute bottom-4 right-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-lg text-[11px] font-bold text-brand-charcoal shadow-sm uppercase tracking-wider border border-gray-100/50">
+                <div className="absolute bottom-4 right-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-lg text-[11px] font-semibold text-brand-charcoal border border-light-gray/50">
                    {media.type}
                 </div>
              </div>
              <div className="flex items-center justify-between px-1">
                 <div className="flex flex-col gap-0.5">
-                   <h4 className="text-[13px] font-bold text-brand-charcoal truncate max-w-[240px]">{media.name}</h4>
-                   <span className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.1em]">{media.size} • {media.date}</span>
+                   <h4 className="text-[13px] font-semibold text-brand-charcoal truncate max-w-[240px]">{media.name}</h4>
+                   <span className="text-[12px] font-medium text-subtle">{media.size} • {media.date}</span>
                 </div>
                 <button 
                    type="button"
-                   className="p-2 rounded-lg border border-gray-100 text-gray-400 hover:text-brand-orange-text hover:border-brand-charcoal/30 transition-all"
+                   className="p-2 rounded-lg border border-light-gray text-faint hover:text-brand-orange-text hover:border-brand-charcoal/30 transition-all"
                    onClick={() => window.open(media.url, '_blank')}
                    title="View Full Asset"
                 >
@@ -72,71 +72,71 @@ export function EditMediaDrawer({ isOpen, onClose, media }: EditMediaDrawerProps
 
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
-              <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider px-1">Filename Management</label>
+              <label className="text-[12px] font-medium text-subtle px-1">Filename management</label>
               <Input
                 type="text"
                 placeholder="e.g. product_hero_main"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="h-12 border-gray-100 font-bold text-brand-charcoal"
+                className="h-12 border-light-gray font-semibold text-brand-charcoal"
                 required
               />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider px-1">SEO Alternative Text</label>
+              <label className="text-[12px] font-medium text-subtle px-1">SEO alternative text</label>
               <Textarea
                 placeholder="Describe the asset for screen readers and search engines..."
                 value={formData.altText}
                 onChange={(e) => setFormData({ ...formData, altText: e.target.value })}
-                className="min-h-[120px] border-gray-100 text-xs font-medium text-gray-700 leading-relaxed"
+                className="min-h-[120px] border-light-gray text-xs font-medium text-subtle leading-relaxed"
               />
-              <p className="text-[11px] font-bold text-gray-400 mt-1 pl-1">
+              <p className="text-[11px] font-semibold text-faint mt-1 pl-1">
                  Optimization Tip: Use descriptive keywords that relate to the associated product.
               </p>
             </div>
           </div>
 
           {/* Technical Metadata (Read-only) */}
-          <div className="bg-off-white rounded-2xl border border-gray-100 p-6 flex flex-col gap-4">
-             <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Technical Details</span>
+          <div className="bg-off-white rounded-lg border border-light-gray p-6 flex flex-col gap-4">
+             <span className="text-[12px] font-medium text-subtle">Technical details</span>
              <div className="grid grid-cols-2 gap-y-4 gap-x-8">
                 <div className="flex flex-col gap-1">
-                   <span className="text-[11px] font-bold text-gray-400">Resolution</span>
-                   <span className="text-xs font-bold text-brand-charcoal">1920 × 1080 (HD)</span>
+                   <span className="text-[11px] font-semibold text-faint">Resolution</span>
+                   <span className="text-xs font-semibold text-brand-charcoal">1920 × 1080 (HD)</span>
                 </div>
                 <div className="flex flex-col gap-1">
-                   <span className="text-[11px] font-bold text-gray-400">MIME Type</span>
-                   <span className="text-xs font-bold text-brand-charcoal uppercase">{media.type === 'video' ? 'video/mp4' : 'image/png'}</span>
+                   <span className="text-[11px] font-semibold text-faint">MIME Type</span>
+                   <span className="text-xs font-semibold text-brand-charcoal">{media.type === 'video' ? 'video/mp4' : 'image/png'}</span>
                 </div>
                 <div className="flex flex-col gap-1">
-                   <span className="text-[11px] font-bold text-gray-400">Storage Class</span>
-                   <span className="text-xs font-bold text-brand-charcoal">Standard Multi-Regional</span>
+                   <span className="text-[11px] font-semibold text-faint">Storage Class</span>
+                   <span className="text-xs font-semibold text-brand-charcoal">Standard Multi-Regional</span>
                 </div>
                 <div className="flex flex-col gap-1">
-                   <span className="text-[11px] font-bold text-gray-400">Optimized</span>
-                   <div className="flex items-center gap-1.5 text-[#4CAF50]">
+                   <span className="text-[11px] font-semibold text-faint">Optimized</span>
+                   <div className="flex items-center gap-1.5 text-success">
                       <Icon name="verified" folder="icon" size="xs" />
-                      <span className="text-xs font-bold">Passed</span>
+                      <span className="text-xs font-semibold">Passed</span>
                    </div>
                 </div>
              </div>
           </div>
         </div>
 
-        <div className="mt-auto pt-8 border-t border-gray-50 flex flex-col gap-3">
+        <div className="mt-auto pt-8 border-t border-light-gray flex flex-col gap-3">
           <Button 
             variant="primary" 
             type="submit"
-            className="w-full h-10 text-[11px] font-bold uppercase tracking-wider "
+            className="w-full h-10 text-[12px] font-semibold"
           >
-            Update Asset Metadata
+            Update asset metadata
           </Button>
           <Button 
             variant="ghost" 
             type="button" 
             onClick={onClose}
-            className="w-full h-10 text-[11px] font-bold text-gray-400 hover:text-gray-900"
+            className="w-full h-10 text-[11px] font-semibold text-faint hover:text-brand-charcoal"
           >
             Discard Changes
           </Button>

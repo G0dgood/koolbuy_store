@@ -23,7 +23,7 @@ const visiblePages = (current: number, total: number): (number | "...")[] => {
 };
 
 const step =
-  "px-3 py-2 text-[10px] md:text-[12px] font-medium text-gray-500 hover:text-gray-700 rounded-lg transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed";
+  "px-3 py-2 text-[11px] md:text-[12px] font-medium text-faint hover:text-subtle rounded-lg transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed";
 
 export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange, className = "" }) => {
   const total = Math.max(1, totalPages);
@@ -37,7 +37,7 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
       <div className="flex items-center gap-1 overflow-x-auto no-scrollbar">
         {visiblePages(currentPage, total).map((page, i) =>
           page === "..." ? (
-            <span key={`gap-${i}`} className="px-2 text-gray-500" aria-hidden>
+            <span key={`gap-${i}`} className="px-2 text-faint" aria-hidden>
               …
             </span>
           ) : (
@@ -46,10 +46,10 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
               type="button"
               onClick={() => onPageChange(page)}
               aria-current={page === currentPage ? "page" : undefined}
-              className={`px-3 py-1 min-w-8 leading-[150%] text-[10px] md:text-[12px] font-medium rounded-lg transition-colors cursor-pointer ${
+              className={`px-3 py-1 min-w-8 leading-[150%] text-[11px] md:text-[12px] font-medium rounded-lg transition-colors cursor-pointer ${
                 page === currentPage
                   ? "bg-brand-charcoal text-white "
-                  : "text-gray-500 hover:text-gray-700 hover:bg-gray-100"
+                  : "text-faint hover:text-subtle hover:bg-off-white"
               }`}
             >
               {page}

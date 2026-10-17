@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { VerticalMenu, Tabs, Pagination } from "@/app/components/Navigation";
+import { VerticalMenu, Pagination } from "@/app/components/Navigation";
+import { TabFilter, LinkTabs } from "@/app/components/Tabs";
 import { Icon } from "@/app/components/Icon";
 
 export default function NavDemo() {
   const [activeMenu, setActiveMenu] = useState("active");
-  const [activeTabPill, setActiveTabPill] = useState("active");
-  const [activeTabUnderline, setActiveTabUnderline] = useState("tab-active");
+  const [activeTab, setActiveTab] = useState("active");
+  const [activeIconTab, setActiveIconTab] = useState("tab-1");
   const [currentPage, setCurrentPage] = useState(2);
   const [currentPage2, setCurrentPage2] = useState(1);
   const [pageSize, setPageSize] = useState(15);
@@ -20,22 +21,16 @@ export default function NavDemo() {
   ];
 
   const tabItems = [
-    { id: "active", label: "Active" },
-    { id: "first", label: "First" },
-    { id: "second", label: "Second" },
-    { id: "third", label: "Third" },
-  ];
-
-  const underlineTabItems = [
-    { id: "tab-active", label: "Tab active" },
-    { id: "tab-menu-1", label: "Tab menu" },
-    { id: "tab-menu-2", label: "Tab menu" },
+    { value: "active", label: "Active" },
+    { value: "first", label: "First" },
+    { value: "second", label: "Second", count: 12 },
+    { value: "third", label: "Third" },
   ];
 
   const iconTabs = [
-    { id: "tab-1", icon: "grid_view" },
-    { id: "tab-2", label: "Tab" },
-    { id: "tab-3", label: "Tab" },
+    { value: "tab-1", label: "Grid", icon: <Icon name="grid_view" size="sm" /> },
+    { value: "tab-2", label: "Tab" },
+    { value: "tab-3", label: "Tab" },
   ];
 
   return (
@@ -54,28 +49,27 @@ export default function NavDemo() {
             />
           </section>
 
-          {/* Tab Pills Section */}
+          {/* Tabs Section: every tab row in the app uses these */}
           <section>
-            <h2 className="text-xl font-bold mb-8 text-black">Tab pills</h2>
-            <div className="border border-gray-100 rounded-lg p-8 min-h-[250px] bg-white">
-              <Tabs
-                variant="pill"
-                items={tabItems}
-                activeId={activeTabPill}
-                onTabChange={setActiveTabPill}
-              />
+            <h2 className="text-xl font-bold mb-8 text-black">Tabs</h2>
+            <div className="border border-gray-100 rounded-lg p-8 min-h-[250px] bg-white flex flex-col gap-6">
+              <TabFilter ariaLabel="Demo tabs" options={tabItems} activeTab={activeTab} onChange={setActiveTab} />
+              <TabFilter ariaLabel="Demo icon tabs" options={iconTabs} activeTab={activeIconTab} onChange={setActiveIconTab} />
             </div>
           </section>
 
-          {/* Tabs Section */}
+          {/* Link Tabs Section */}
           <section>
-            <h2 className="text-xl font-bold mb-8 text-black">Tabs</h2>
-            <div className="border border-gray-100 rounded-lg p-0 min-h-[250px] bg-white overflow-hidden">
-              <Tabs
-                variant="underline"
-                items={underlineTabItems}
-                activeId={activeTabUnderline}
-                onTabChange={setActiveTabUnderline}
+            <h2 className="text-xl font-bold mb-8 text-black">Link tabs</h2>
+            <div className="border border-gray-100 rounded-lg p-8 min-h-[250px] bg-white">
+              <LinkTabs
+                ariaLabel="Demo link tabs"
+                activeHref="/components/Nav"
+                links={[
+                  { href: "/components/Nav", label: "Nav" },
+                  { href: "/buttons", label: "Buttons" },
+                  { href: "/form", label: "Form" },
+                ]}
               />
             </div>
           </section>
@@ -106,28 +100,6 @@ export default function NavDemo() {
           <h3 className="text-gray-400 font-semibold mb-8 uppercase tracking-wider">Base components</h3>
 
           <div className="flex flex-col gap-12">
-            {/* Base Tabs Variants */}
-            <div className="flex items-center gap-12">
-              <Tabs
-                variant="underline"
-                items={iconTabs.slice(0, 1)}
-                activeId="tab-1"
-                className="w-fit"
-              />
-              <Tabs
-                variant="underline"
-                items={iconTabs.slice(1, 2)}
-                activeId="tab-2"
-                className="w-fit"
-              />
-              <Tabs
-                variant="underline"
-                items={iconTabs.slice(2, 3)}
-                activeId=""
-                className="w-fit border-transparent"
-              />
-            </div>
-
             {/* Base Menu Variants */}
             <div className="flex items-center gap-12">
               <div className="w-48 bg-gray-50 p-2 rounded-md font-medium text-sm text-gray-900">

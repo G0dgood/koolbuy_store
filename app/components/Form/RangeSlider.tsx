@@ -74,7 +74,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
     <div className={`relative w-full h-5 ${className}`}>
       {/* Track and orange fill, centred on the same line as the knobs */}
       <div
-        className="absolute top-1/2 -translate-y-1/2 h-1 rounded-full bg-gray-200"
+        className="absolute top-1/2 -translate-y-1/2 h-1 rounded-full bg-light-gray"
         style={{ left: THUMB / 2, right: THUMB / 2 }}
       />
       <div

@@ -87,7 +87,7 @@ export const QuickAddProduct: React.FC<QuickAddProductProps> = ({
     <motion.div
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="bg-white p-8 rounded-lg border border-[#1C1C1C1A] flex flex-col gap-6 relative overflow-hidden group/card shadow-[0_1px_2px_rgba(0,0,0,0.02)]"
+      className="bg-white p-8 rounded-lg border border-light-gray flex flex-col gap-6 relative overflow-hidden group/card"
     >
       {/* Instrumentation Backdrop Grid */}
       <div
@@ -99,12 +99,12 @@ export const QuickAddProduct: React.FC<QuickAddProductProps> = ({
       />
 
       <div className="flex justify-between items-center relative z-10">
-        <h3 className="text-[14px] font-bold text-brand-charcoal uppercase tracking-wider opacity-80">
+        <h3 className="text-[14px] font-semibold text-brand-charcoal opacity-80">
           Inventory Actions
         </h3>
         <button
           onClick={onAddNew}
-          className="group flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-600 text-[11px] font-bold uppercase tracking-wider hover:bg-emerald-500 hover:text-white transition-all duration-300"
+          className="group flex items-center gap-2 px-3 py-1.5 rounded-lg bg-success-soft text-success text-[12px] font-semibold hover:bg-success hover:text-white transition-all duration-300"
         >
           <Icon
             name="circle-plus"
@@ -117,7 +117,7 @@ export const QuickAddProduct: React.FC<QuickAddProductProps> = ({
       </div>
 
       <div className="flex flex-col gap-3 relative z-10">
-        <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider pl-1 mb-1 opacity-70">
+        <p className="text-[12px] font-medium text-subtle pl-1 mb-1 opacity-70">
           Top Categories
         </p>
         <div className="grid grid-cols-1 gap-3">
@@ -127,14 +127,14 @@ export const QuickAddProduct: React.FC<QuickAddProductProps> = ({
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 * i }}
-              className={`flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-transparent ${cat.bgColor} hover:shadow-lg hover:shadow-gray-100 transition-all duration-300 cursor-pointer group`}
+              className={`flex items-center justify-between p-4 rounded-lg border border-light-gray hover:border-transparent ${cat.bgColor} hover:shadow-lift transition-all duration-300 cursor-pointer group`}
             >
               <div className="flex items-center gap-4 flex-1">
-                <div className="w-10 h-10 rounded-xl bg-white border border-white shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <div className="w-10 h-10 rounded-lg bg-white border border-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   {cat.icon}
                 </div>
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-[13px] font-bold text-brand-charcoal">
+                  <span className="text-[13px] font-semibold text-brand-charcoal">
                     {cat.name}
                   </span>
                   <div className="w-16 h-4 opacity-40 group-hover:opacity-100 transition-opacity">
@@ -150,21 +150,21 @@ export const QuickAddProduct: React.FC<QuickAddProductProps> = ({
               <Icon
                 name="chevron_right"
                 size="xs"
-                className="text-gray-300 group-hover:text-brand-charcoal group-hover:translate-x-1 transition-all"
+                className="text-faint group-hover:text-brand-charcoal group-hover:translate-x-1 transition-all"
               />
             </motion.div>
           ))}
         </div>
         <button
           onClick={onSeeMoreCategories}
-          className="text-[11px] font-bold text-brand-orange-text/40 uppercase mt-2 self-center hover:text-brand-orange-text transition-colors tracking-wider"
+          className="text-[11px] font-semibold text-brand-orange-text/40 mt-2 self-center hover:text-brand-orange-text transition-colors"
         >
           Explore Categories
         </button>
       </div>
 
-      <div className="flex flex-col gap-6 pt-6 border-t border-gray-100 mt-2 relative z-10">
-        <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider pl-1 opacity-70">
+      <div className="flex flex-col gap-6 pt-6 border-t border-light-gray mt-2 relative z-10">
+        <p className="text-[12px] font-medium text-subtle pl-1 opacity-70">
           Frequent Drafts
         </p>
         <div className="flex flex-col gap-4">
@@ -178,7 +178,7 @@ export const QuickAddProduct: React.FC<QuickAddProductProps> = ({
             >
               <div className="flex items-center gap-4 flex-1">
                 <div className="relative">
-                  <div className="w-12 h-10 bg-gray-50 rounded-lg border border-gray-100 overflow-hidden group-hover/row:border-brand-charcoal/20 transition-colors">
+                  <div className="w-12 h-10 bg-off-white rounded-lg border border-light-gray overflow-hidden group-hover/row:border-brand-charcoal/20 transition-colors">
                     <MiniChart
                       type="sparkline"
                       data={p.data}
@@ -188,11 +188,11 @@ export const QuickAddProduct: React.FC<QuickAddProductProps> = ({
                   </div>
                 </div>
                 <div className="flex flex-col min-w-0">
-                  <span className="text-[12px] font-bold text-brand-charcoal leading-tight truncate max-w-35 group-hover/row:text-brand-orange-text transition-all">
+                  <span className="text-[12px] font-semibold text-brand-charcoal leading-tight truncate max-w-35 group-hover/row:text-brand-orange-text transition-all">
                     {p.name}
                   </span>
                   <span
-                    className={`text-[11px] font-bold w-fit px-1.5 py-0.5 rounded mt-1 bg-opacity-10`}
+                    className={`text-[11px] font-semibold w-fit px-1.5 py-0.5 rounded mt-1 bg-opacity-10`}
                     style={{ color: p.color, backgroundColor: `${p.color}15` }}
                   >
                     {p.price}
@@ -201,7 +201,7 @@ export const QuickAddProduct: React.FC<QuickAddProductProps> = ({
               </div>
               <button
                 onClick={() => onAddProduct?.(p.name)}
-                className="flex items-center gap-1.5 px-4 h-9 rounded-xl bg-gray-900 text-white text-[11px] font-bold uppercase hover:bg-brand-charcoal transition-all active:scale-95"
+                className="flex items-center gap-1.5 px-4 h-9 rounded-lg bg-brand-charcoal text-white text-[12px] font-semibold hover:bg-brand-charcoal/90 transition-all active:scale-95"
               >
                 <Icon name="circle-plus" folder="dashboardIcon" size="xs" /> Add
               </button>
@@ -210,7 +210,7 @@ export const QuickAddProduct: React.FC<QuickAddProductProps> = ({
         </div>
         <button
           onClick={onSeeMoreProducts}
-          className="text-[11px] font-bold text-brand-orange-text/40 uppercase mt-1 self-center hover:text-brand-orange-text transition-colors tracking-wider"
+          className="text-[11px] font-semibold text-brand-orange-text/40 mt-1 self-center hover:text-brand-orange-text transition-colors"
         >
           View More Items
         </button>

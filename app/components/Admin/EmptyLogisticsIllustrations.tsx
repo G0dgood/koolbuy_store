@@ -481,7 +481,7 @@ export const EmptyDeliveryRatesIllustration: React.FC<{ className?: string }> = 
           fontSize="22"
           fontWeight="bold"
           fill="#F57E16"
-          fontFamily="system-ui, -apple-system, sans-serif"
+          fontFamily="'Work Sans', sans-serif"
         >
           ₦
         </text>

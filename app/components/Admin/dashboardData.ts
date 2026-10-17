@@ -1,113 +1,92 @@
-/* Sample numbers for the admin dashboard, one set per period. Replace with the
-   API's response when it exists; the shape here is what the page reads. */
+/* Shared bits for the admin dashboard: the period switch, order-status chart
+   colours and money formatting. The numbers come from the API
+   (lib/store/api/dashboard-api.ts). */
 
-export type Range = "today" | "week" | "month";
+import type { AnalyticsPeriod } from "@/lib/store/api/dashboard-api";
 
-export interface DashboardData {
-  /** Points on the time axis (hours, weekdays or days of the month). */
-  labels: string[];
-  revenue: number[];
-  orders: number[];
-  previousRevenue: number[];
-  totals: {
-    revenue: number;
-    orders: number;
-    customers: number;
-    newCustomers: number;
-    avgOrder: number;
-    vendors: number;
-    conversion: number; // percent
-  };
-  /** Change against the previous period, in percent. */
-  change: { revenue: number; orders: number; customers: number; avgOrder: number; vendors: number; conversion: number };
-  ordersByStatus: { label: string; value: number }[];
-  salesByCategory: { label: string; value: number }[];
-  paymentMethods: { label: string; value: number }[];
-  topVendors: { label: string; value: number }[];
-}
+export type Range = AnalyticsPeriod;
 
-const STATUS = ["Delivered", "Shipped", "Processing", "Pending", "Cancelled"];
-const CATEGORIES = ["Chest freezers", "Upright freezers", "Solar kits", "Batteries", "Air conditioners", "Ice makers"];
-const PAYMENTS = ["Card", "Bank transfer", "Pay small small", "USSD", "Wallet"];
-const VENDORS = ["Gworld Electronics", "Solar Best", "Destiny Electro", "MKK Electronics", "Wugobest", "Matt C Ventures"];
+export const RANGES: { value: Range; label: string; days: number }[] = [
+  { value: "7d", label: "7 days", days: 7 },
+  { value: "30d", label: "30 days", days: 30 },
+  { value: "90d", label: "90 days", days: 90 },
+];
 
-const zip = (labels: string[], values: number[]) => labels.map((label, i) => ({ label, value: values[i] }));
-
-export const DASHBOARD: Record<Range, DashboardData> = {
-  today: {
-    labels: ["8am", "10am", "12pm", "2pm", "4pm", "6pm", "8pm"],
-    revenue: [420000, 1180000, 1960000, 1540000, 2310000, 2890000, 1720000],
-    previousRevenue: [380000, 960000, 1710000, 1820000, 1990000, 2240000, 1480000],
-    orders: [3, 8, 14, 11, 16, 21, 12],
-    totals: { revenue: 12020000, orders: 85, customers: 3842, newCustomers: 37, avgOrder: 141412, vendors: 84, conversion: 3.4 },
-    change: { revenue: 13.2, orders: 9.0, customers: 1.0, avgOrder: 3.8, vendors: 0, conversion: 0.4 },
-    ordersByStatus: zip(STATUS, [41, 18, 14, 9, 3]),
-    salesByCategory: zip(CATEGORIES, [4810000, 2240000, 2650000, 1120000, 830000, 370000]),
-    paymentMethods: zip(PAYMENTS, [34, 22, 18, 7, 4]),
-    topVendors: zip(VENDORS, [3120000, 2540000, 1980000, 1610000, 1240000, 980000]),
-  },
-  week: {
-    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    revenue: [6200000, 7800000, 9100000, 8400000, 11300000, 13900000, 9700000],
-    previousRevenue: [5400000, 7100000, 7900000, 8800000, 9600000, 11800000, 8900000],
-    orders: [52, 61, 70, 66, 88, 104, 73],
-    totals: { revenue: 66400000, orders: 514, customers: 3842, newCustomers: 214, avgOrder: 129183, vendors: 84, conversion: 3.1 },
-    change: { revenue: 10.8, orders: 7.5, customers: 5.9, avgOrder: 3.0, vendors: 2.4, conversion: -0.2 },
-    ordersByStatus: zip(STATUS, [268, 104, 71, 52, 19]),
-    salesByCategory: zip(CATEGORIES, [25900000, 12700000, 14100000, 6200000, 5300000, 2200000]),
-    paymentMethods: zip(PAYMENTS, [198, 141, 107, 44, 24]),
-    topVendors: zip(VENDORS, [17400000, 14200000, 11600000, 9300000, 7800000, 6100000]),
-  },
-  month: {
-    labels: ["1", "4", "7", "10", "13", "16", "19", "22", "25", "28"],
-    revenue: [18400000, 22100000, 19800000, 26700000, 31200000, 28900000, 34600000, 30100000, 37800000, 35200000],
-    previousRevenue: [16900000, 19400000, 21200000, 22800000, 25100000, 26400000, 27900000, 29300000, 30800000, 31600000],
-    orders: [142, 168, 151, 201, 236, 219, 262, 228, 287, 266],
-    totals: { revenue: 284800000, orders: 2160, customers: 3842, newCustomers: 868, avgOrder: 131852, vendors: 84, conversion: 3.3 },
-    change: { revenue: 14.8, orders: 8.2, customers: 12.5, avgOrder: 6.1, vendors: 5.0, conversion: 0.3 },
-    ordersByStatus: zip(STATUS, [1294, 352, 241, 189, 84]),
-    salesByCategory: zip(CATEGORIES, [109600000, 52300000, 61800000, 27400000, 23100000, 10600000]),
-    paymentMethods: zip(PAYMENTS, [812, 604, 451, 192, 101]),
-    topVendors: zip(VENDORS, [72100000, 58800000, 47300000, 39600000, 31900000, 25400000]),
-  },
+export const RANGE_TEXT: Record<Range, { now: string; before: string }> = {
+  "7d": { now: "the last 7 days", before: "the 7 days before" },
+  "30d": { now: "the last 30 days", before: "the 30 days before" },
+  "90d": { now: "the last 90 days", before: "the 90 days before" },
 };
 
-/** Status colours: done is green, on the way blue, in progress amber, waiting grey, cancelled red. */
-export const STATUS_COLORS = ["#1baf7a", "#2a78d6", "#eda100", "#94a3b8", "#e34948"];
+const ymd = (d: Date) => d.toISOString().slice(0, 10);
 
-export interface FeedItem {
-  id: string;
-  customer: string;
-  item: string;
-  amount: number;
-  area: string;
-  status: "Paid" | "BNPL approved" | "Delivered" | "Shipped";
+/** The period as YYYY-MM-DD (UTC, inclusive), the same days /admin/analytics/ uses. */
+export function rangeDates(range: Range): { from: string; to: string } {
+  const days = RANGES.find((r) => r.value === range)?.days ?? 30;
+  const now = new Date();
+  const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+  const from = new Date(today.getTime() - (days - 1) * 86_400_000);
+  return { from: ymd(from), to: ymd(today) };
 }
 
-/** Orders the live feed cycles through. */
-export const FEED_POOL: Omit<FeedItem, "id">[] = [
-  { customer: "Adaeze O.", item: "Kool 219L Inverter Solar Freezer", amount: 2155000, area: "Ikeja", status: "Paid" },
-  { customer: "Tunde B.", item: "Scanfrost 60Ah Battery", amount: 1287600, area: "Alimosho", status: "BNPL approved" },
-  { customer: "Chioma E.", item: "Koolboks 600L AC Inverter", amount: 1468000, area: "Lekki", status: "Paid" },
-  { customer: "Ibrahim Y.", item: "230L Hisense Freezer", amount: 430000, area: "Ifo", status: "Delivered" },
-  { customer: "Folake A.", item: "Ice Maker Pro 40kg", amount: 865000, area: "Surulere", status: "Shipped" },
-  { customer: "Emeka N.", item: "Koolboks 538L Refurbished", amount: 1538000, area: "Yaba", status: "Paid" },
-  { customer: "Halima S.", item: "Thermocool 100Ah Battery", amount: 1662370, area: "Ajah", status: "BNPL approved" },
-  { customer: "Segun O.", item: "Solar kit 2 × 600W panels", amount: 940000, area: "Abeokuta", status: "Paid" },
-];
+/** Status colours (chart canvas needs values, not classes): done green, on the way blue,
+    in progress amber, waiting grey, stopped red. */
+const STATUS_COLOR: Record<string, string> = {
+  delivered: "#1baf7a",
+  completed: "#1baf7a",
+  in_transit: "#2a78d6",
+  shipped: "#2a78d6",
+  out_for_delivery: "#2a78d6",
+  confirmed: "#eda100",
+  processing: "#eda100",
+  new: "#94a3b8",
+  pending: "#94a3b8",
+  pending_payment: "#94a3b8",
+  pending_credit_review: "#94a3b8",
+  cancelled: "#e34948",
+  expired: "#e34948",
+  declined: "#e34948",
+  refund_due: "#e34948",
+};
 
-export interface TopProduct {
-  name: string;
-  category: string;
-  sold: number;
-  revenue: number;
-  stock: number;
+export const statusColor = (status: string) => STATUS_COLOR[status] ?? "#94a3b8";
+
+export const MARKET_NAMES: Record<string, string> = { NG: "Nigeria", KE: "Kenya" };
+
+/** An amount in its currency, e.g. ₦85,000, or short (₦1.2M) for axes and tiles. */
+export function money(v: number, currency = "NGN", short = false): string {
+  try {
+    return new Intl.NumberFormat("en-NG", {
+      style: "currency",
+      currency,
+      notation: short && Math.abs(v) >= 1_000 ? "compact" : "standard",
+      maximumFractionDigits: short ? 1 : v % 1 === 0 ? 0 : 2,
+    }).format(v);
+  } catch {
+    return `${currency} ${v.toLocaleString("en-NG")}`;
+  }
 }
 
-export const TOP_PRODUCTS: TopProduct[] = [
-  { name: "Kool 219L Inverter Solar Freezer", category: "Chest freezers", sold: 312, revenue: 672360000, stock: 48 },
-  { name: "Koolboks 600L AC Inverter", category: "Chest freezers", sold: 204, revenue: 299472000, stock: 21 },
-  { name: "Scanfrost 60Ah Battery", category: "Batteries", sold: 188, revenue: 242068800, stock: 7 },
-  { name: "Solar kit 2 × 600W panels", category: "Solar kits", sold: 161, revenue: 151340000, stock: 33 },
-  { name: "230L Hisense Freezer", category: "Upright freezers", sold: 140, revenue: 60200000, stock: 0 },
-];
+/** Change against the previous period in percent, or null when there was nothing before. */
+export function change(value: number, previous: number): number | null {
+  if (!previous) return null;
+  return ((value - previous) / previous) * 100;
+}
+
+/** "2026-10-14" → "14 Oct" */
+export const dayLabel = (iso: string) =>
+  new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
+
+/** "3 min ago", "5 h ago", or a date. */
+export function timeAgo(iso: string): string {
+  const t = new Date(iso).getTime();
+  if (Number.isNaN(t)) return "";
+  const mins = Math.round((Date.now() - t) / 60_000);
+  if (mins < 1) return "Just now";
+  if (mins < 60) return `${mins} min ago`;
+  const hours = Math.round(mins / 60);
+  if (hours < 24) return `${hours} h ago`;
+  const days = Math.round(hours / 24);
+  if (days < 7) return `${days} d ago`;
+  return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}

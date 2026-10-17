@@ -76,7 +76,7 @@ export default function Modal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className={`relative bg-white rounded-2xl text-left overflow-hidden shadow-md ${sizeClasses[size]} w-[100%] md:w-full z-50 max-h-[85vh] flex flex-col`}
+            className={`relative bg-white rounded-tile text-left overflow-hidden shadow-float ${sizeClasses[size]} w-[100%] md:w-full z-50 max-h-[85vh] flex flex-col`}
           >
             {header ? (
               header
@@ -92,7 +92,7 @@ export default function Modal({
             <div className="px-4 sm:px-8 py-6 overflow-y-auto flex-1">{children}</div>
 
             {footer && (
-              <div className="px-4 sm:px-8 py-6 bg-white border-t border-gray-50">
+              <div className="px-4 sm:px-8 py-6 bg-white border-t border-black/[0.06]">
                 {footer}
               </div>
             )}

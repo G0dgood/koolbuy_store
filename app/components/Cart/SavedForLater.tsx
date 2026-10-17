@@ -33,7 +33,7 @@ const SavedForLater = () => {
         <div className="py-6 md:py-10 flex flex-col items-center text-center gap-4">
           <EmptySavedIllustration className="w-48 h-40 md:w-56 md:h-44" />
           <div className="flex flex-col items-center gap-1.5 max-w-sm">
-            <h4 className="text-[18px] md:text-[20px] font-bold text-brand-charcoal tracking-[-0.01em]">
+            <h4 className="text-[18px] md:text-[20px] font-semibold text-brand-charcoal tracking-[-0.01em]">
               No saved items
             </h4>
             <p className="text-[14px] md:text-[15px] text-subtle leading-relaxed">

@@ -5,7 +5,6 @@ import React, { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import { motion } from "framer-motion";
 
 interface Partner {
   id: string;
@@ -155,7 +154,7 @@ export const PartnersCarousel: React.FC = () => {
         <button
           onClick={scrollPrev}
           aria-label="Previous partners"
-          className="absolute -left-2 md:-left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/85 backdrop-blur-xl shadow-[0_4px_16px_rgba(0,0,0,0.12)] flex items-center justify-center text-brand-charcoal hover:bg-white transition-all cursor-pointer opacity-0 group-hover/carousel:opacity-100 focus-visible:opacity-100"
+          className="absolute -left-2 md:-left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/85 backdrop-blur-xl shadow-float flex items-center justify-center text-brand-charcoal hover:bg-white transition-all cursor-pointer opacity-0 group-hover/carousel:opacity-100 focus-visible:opacity-100"
         >
           <FiChevronLeft size={18} />
         </button>
@@ -169,7 +168,7 @@ export const PartnersCarousel: React.FC = () => {
             <Link
               key={partner.id}
               href={partner.link}
-              className="shrink-0 w-40 sm:w-48 md:w-56 h-24 sm:h-28 rounded-stage bg-white px-6 flex items-center justify-center transition-shadow duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] group"
+              className="shrink-0 w-40 sm:w-48 md:w-56 h-24 sm:h-28 rounded-stage bg-white px-6 flex items-center justify-center transition-shadow duration-300 hover:shadow-lift group"
             >
               <div className="relative w-full h-14 flex items-center justify-center">
                 <Image
@@ -187,7 +186,7 @@ export const PartnersCarousel: React.FC = () => {
         <button
           onClick={scrollNext}
           aria-label="Next partners"
-          className="absolute -right-2 md:-right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/85 backdrop-blur-xl shadow-[0_4px_16px_rgba(0,0,0,0.12)] flex items-center justify-center text-brand-charcoal hover:bg-white transition-all cursor-pointer opacity-0 group-hover/carousel:opacity-100 focus-visible:opacity-100"
+          className="absolute -right-2 md:-right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/85 backdrop-blur-xl shadow-float flex items-center justify-center text-brand-charcoal hover:bg-white transition-all cursor-pointer opacity-0 group-hover/carousel:opacity-100 focus-visible:opacity-100"
         >
           <FiChevronRight size={18} />
         </button>

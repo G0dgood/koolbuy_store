@@ -50,42 +50,42 @@ export function EditProductDrawer({ isOpen, onClose, product }: EditProductDrawe
       <form onSubmit={handleSubmit} className="flex flex-col h-full gap-8">
         <div className="flex flex-col gap-6">
           {/* Header Info */}
-          <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
-             <div className="w-12 h-12 rounded-lg bg-white border border-gray-100 p-1">
+          <div className="flex items-center gap-4 p-4 bg-off-white rounded-lg border border-light-gray">
+             <div className="w-12 h-12 rounded-lg bg-white border border-light-gray p-1">
                 <img src={product.image} alt="" className="w-full h-full object-contain" />
              </div>
              <div className="flex flex-col gap-0.5">
-                <span className="text-sm font-bold text-brand-charcoal truncate max-w-[200px]">{product.name}</span>
-                <span className="text-[11px] font-bold text-gray-400">SKU: {product.sku}</span>
+                <span className="text-sm font-semibold text-brand-charcoal truncate max-w-[200px]">{product.name}</span>
+                <span className="text-[11px] font-semibold text-faint">SKU: {product.sku}</span>
              </div>
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em]">Price (₦)</label>
+            <label className="text-[12px] font-medium text-subtle">Price (₦)</label>
             <Input
               type="text"
               placeholder="e.g. 25000"
               value={formData.price}
               onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-              className="h-12 border-gray-100 font-bold"
+              className="h-12 border-light-gray font-semibold"
               required
             />
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em]">Stock Units</label>
+            <label className="text-[12px] font-medium text-subtle">Stock units</label>
             <Input
               type="number"
               placeholder="e.g. 50"
               value={formData.stock}
               onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
-              className="h-12 border-gray-100 font-bold"
+              className="h-12 border-light-gray font-semibold"
               required
             />
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em]">Status</label>
+            <label className="text-[12px] font-medium text-subtle">Status</label>
             <Select
               options={statusOptions}
               value={formData.status}
@@ -94,19 +94,19 @@ export function EditProductDrawer({ isOpen, onClose, product }: EditProductDrawe
           </div>
         </div>
 
-        <div className="mt-auto pt-8 border-t border-gray-50 flex flex-col gap-3">
+        <div className="mt-auto pt-8 border-t border-light-gray flex flex-col gap-3">
           <Button 
             variant="primary" 
             type="submit"
-            className="w-full h-10 text-[11px] font-bold uppercase tracking-wider "
+            className="w-full h-10 text-[12px] font-semibold"
           >
-            Update Catalog
+            Update catalog
           </Button>
           <Button 
             variant="ghost" 
             type="button" 
             onClick={onClose}
-            className="w-full h-10 text-[11px] font-bold text-gray-400 hover:text-gray-900"
+            className="w-full h-10 text-[11px] font-semibold text-faint hover:text-brand-charcoal"
           >
             Cancel
           </Button>

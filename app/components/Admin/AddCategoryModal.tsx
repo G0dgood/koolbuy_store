@@ -100,21 +100,21 @@ export function AddCategoryModal({
         <ModalBody className="space-y-4 py-4 text-xs">
           {/* Category Name */}
           <div>
-            <label className="text-xs font-semibold text-gray-700 mb-1.5 block">
-              Category Name <span className="text-rose-500">*</span>
+            <label className="text-xs font-semibold text-subtle mb-1.5 block">
+              Category Name <span className="text-error">*</span>
             </label>
             <Input
               placeholder="e.g. Solar Freezers, Poultry, Commercial Freezers"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="h-10 text-xs rounded-lg border-gray-200"
+              className="h-10 text-xs rounded-lg border-light-gray"
               required
               disabled={isLoading}
             />
             {previewSlug && (
-              <p className="text-[11px] text-gray-500 mt-1 flex items-center gap-1.5">
+              <p className="text-[11px] text-faint mt-1 flex items-center gap-1.5">
                 <span>Unique slug:</span>
-                <code className="bg-gray-100 text-gray-800 px-1.5 py-0.5 rounded text-[10px] font-mono">
+                <code className="bg-off-white text-brand-charcoal px-1.5 py-0.5 rounded text-[11px] font-mono">
                   {previewSlug}
                 </code>
               </p>
@@ -123,7 +123,7 @@ export function AddCategoryModal({
 
           {/* VAT Treatment */}
           <div>
-            <label className="text-xs font-semibold text-gray-700 mb-1.5 block">
+            <label className="text-xs font-semibold text-subtle mb-1.5 block">
               VAT Treatment
             </label>
             <div className="grid grid-cols-3 gap-2">
@@ -144,22 +144,22 @@ export function AddCategoryModal({
                   disabled={isLoading}
                   className={`h-9 px-2 text-xs rounded-lg border text-center transition-all cursor-pointer font-medium ${
                     formData.vatTreatment === vat.value
-                      ? "border-brand-charcoal bg-brand-charcoal text-white shadow-2xs"
-                      : "border-gray-200 bg-white text-gray-700 hover:bg-gray-50"
+                      ? "border-brand-charcoal bg-brand-charcoal text-white"
+                      : "border-light-gray bg-white text-subtle hover:bg-off-white"
                   }`}
                 >
                   {vat.label}
                 </button>
               ))}
             </div>
-            <p className="text-[11px] text-gray-400 mt-1">
+            <p className="text-[11px] text-faint mt-1">
               Determines tax application on products assigned to this category.
             </p>
           </div>
 
           {/* Category Image Path (Optional) */}
           <div>
-            <label className="text-xs font-semibold text-gray-700 mb-1.5 block">
+            <label className="text-xs font-semibold text-subtle mb-1.5 block">
               Display Image Path (Optional)
             </label>
             <div className="flex gap-2">
@@ -167,26 +167,26 @@ export function AddCategoryModal({
                 placeholder="/images/koolboks/items/1.webp"
                 value={formData.image}
                 onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                className="h-10 text-xs rounded-lg border-gray-200 flex-1"
+                className="h-10 text-xs rounded-lg border-light-gray flex-1"
                 disabled={isLoading}
               />
               <button
                 type="button"
-                className="w-10 h-10 p-0 flex items-center justify-center rounded-lg border border-gray-200 bg-gray-50 text-gray-600 hover:bg-gray-100 transition-colors shrink-0 cursor-pointer"
+                className="w-10 h-10 p-0 flex items-center justify-center rounded-lg border border-light-gray bg-off-white text-subtle hover:bg-off-white transition-colors shrink-0 cursor-pointer"
                 title="Browse image"
                 disabled={isLoading}
               >
                 <Icon name="photo" folder="icon" size="sm" />
               </button>
             </div>
-            <p className="text-[11px] text-gray-400 mt-1">
+            <p className="text-[11px] text-faint mt-1">
               Path to category icon or hero photo in public storage.
             </p>
           </div>
 
           {/* Description */}
           <div>
-            <label className="text-xs font-semibold text-gray-700 mb-1.5 block">
+            <label className="text-xs font-semibold text-subtle mb-1.5 block">
               Description (Optional)
             </label>
             <Textarea
@@ -195,13 +195,13 @@ export function AddCategoryModal({
               onChange={(e) =>
                 setFormData({ ...formData, description: e.target.value })
               }
-              className="min-h-[80px] text-xs rounded-lg border-gray-200 p-2.5"
+              className="min-h-[80px] text-xs rounded-lg border-light-gray p-2.5"
               disabled={isLoading}
             />
           </div>
         </ModalBody>
 
-        <ModalFooter className="flex justify-end gap-2 px-6 py-4 bg-gray-50/70 border-t border-gray-100">
+        <ModalFooter className="flex justify-end gap-2 px-6 py-4 bg-off-white/70 border-t border-light-gray">
           <Button
             variant="outline"
             type="button"

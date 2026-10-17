@@ -1,171 +1,152 @@
 "use client";
 
 import React, { useState } from "react";
+import { toast } from "sonner";
 import Modal from "../Modal/Modal";
 import ModalBody from "../Modal/ModalBody";
 import ModalFooter from "../Modal/ModalFooter";
 import { Input } from "../Form/Inputs";
 import { Select } from "../Form/Select";
 import { Button } from "../Button";
-import { Icon } from "../Icon";
+import { apiErrorMessage } from "@/lib/store/base-api";
+import { useCreateStaffMemberMutation, type AdminRole } from "@/lib/store/api/people-api";
 
 interface AddUserModalProps {
   isOpen: boolean;
   onClose: () => void;
+  roles: AdminRole[];
 }
 
-const roleOptions = [
-  { value: "Super Admin", label: "Super Admin" },
-  { value: "Editor", label: "Editor" },
-  { value: "Order Manager", label: "Order Manager" },
-  { value: "Support", label: "Support" },
-];
+const EMPTY = { first_name: "", last_name: "", email: "", phone_number: "", role_id: "", password: "" };
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const departmentOptions = [
-  { value: "Management", label: "Management" },
-  { value: "Content", label: "Content" },
-  { value: "Logistics", label: "Logistics" },
-  { value: "Support", label: "Support" },
-];
+export const fieldLabel = "text-[12px] font-medium text-brand-charcoal";
 
-const genderOptions = [
-  { value: "Male", label: "Male" },
-  { value: "Female", label: "Female" },
-  { value: "Other", label: "Other" },
-];
+/** Validates the team-member form the same way the API does. */
+export function validateStaffForm(
+  f: typeof EMPTY,
+  { requirePassword, requireRole }: { requirePassword: boolean; requireRole: boolean }
+): Partial<Record<keyof typeof EMPTY, string>> {
+  const errors: Partial<Record<keyof typeof EMPTY, string>> = {};
+  if (!f.first_name.trim()) errors.first_name = "Enter the first name.";
+  if (!f.last_name.trim()) errors.last_name = "Enter the last name.";
+  if (!EMAIL_RE.test(f.email.trim())) errors.email = "Enter a valid email address.";
+  if (f.phone_number.trim().length > 20) errors.phone_number = "Enter a valid phone number.";
+  if (requireRole && !f.role_id) errors.role_id = "Pick a role for this team member.";
+  if (requirePassword ? f.password.length < 8 : f.password.length > 0 && f.password.length < 8) {
+    errors.password = "The password must be at least 8 characters.";
+  }
+  return errors;
+}
 
-export function AddUserModal({ isOpen, onClose }: AddUserModalProps) {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    gender: "Male",
-    dob: "",
-    role: "Support",
-    department: "Support",
-  });
+export function AddUserModal({ isOpen, onClose, roles }: AddUserModalProps) {
+  const [form, setForm] = useState(EMPTY);
+  const [errors, setErrors] = useState<Partial<Record<keyof typeof EMPTY, string>>>({});
+  const [createStaff, { isLoading }] = useCreateStaffMemberMutation();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Onboarding new staff member:", formData);
-    // Simulated success behavior
-    onClose();
-    setFormData({
-      name: "",
-      email: "",
-      gender: "Male",
-      dob: "",
-      role: "Support",
-      department: "Support",
-    });
+  const set = (key: keyof typeof EMPTY, value: string) => {
+    setForm((f) => ({ ...f, [key]: value }));
+    setErrors((e) => ({ ...e, [key]: undefined }));
   };
 
+  const close = () => {
+    if (isLoading) return;
+    setForm(EMPTY);
+    setErrors({});
+    onClose();
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const found = validateStaffForm(form, { requirePassword: true, requireRole: true });
+    setErrors(found);
+    if (Object.keys(found).length) return;
+    try {
+      await createStaff({
+        first_name: form.first_name.trim(),
+        last_name: form.last_name.trim(),
+        email: form.email.trim().toLowerCase(),
+        phone_number: form.phone_number.trim() || null,
+        role_id: form.role_id,
+        password: form.password,
+      }).unwrap();
+      toast.success(`${form.first_name.trim()} ${form.last_name.trim()} was added to the team.`);
+      setForm(EMPTY);
+      setErrors({});
+      onClose();
+    } catch (err) {
+      toast.error(apiErrorMessage(err, "Couldn't add this team member."));
+    }
+  };
+
+  const roleOptions = roles.map((r) => ({ value: r.id, label: r.name }));
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Administrative Onboarding" size="lg">
-      <form onSubmit={handleSubmit}>
-        <ModalBody className="flex flex-col gap-8 py-4">
-          {/* Section Header */}
-          <div className="flex flex-col gap-1 px-1">
-            <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Profile Information</h4>
-            <p className="text-[11px] font-medium text-gray-400">Ensure the staff member's details are accurate for their administrative credentials.</p>
-          </div>
+    <Modal isOpen={isOpen} onClose={close} title="Add team member" size="lg">
+      <form onSubmit={handleSubmit} noValidate>
+        <ModalBody className="flex flex-col gap-5">
+          <p className="text-[13px] text-faint">
+            They sign in with this email and password, and are asked to choose their own password the first time.
+          </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="flex flex-col gap-2">
-              <label className="text-[11px] font-bold text-brand-charcoal uppercase tracking-wider">Full Name</label>
-              <Input
-                placeholder="e.g. Eleanor Pena"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="h-12 border-gray-100 font-bold bg-gray-50/30 focus:bg-white transition-all"
-                required
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label className="text-[11px] font-bold text-brand-charcoal uppercase tracking-wider">Email Address</label>
-              <Input
-                type="email"
-                placeholder="e.g. penna@dealport.com"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="h-12 border-gray-100 font-bold bg-gray-50/30 focus:bg-white transition-all"
-                required
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-            <div className="flex flex-col gap-2">
-              <label className="text-[11px] font-bold text-brand-charcoal uppercase tracking-wider">Gender</label>
-              <Select
-                options={genderOptions}
-                value={formData.gender}
-                onChange={(val) => setFormData({ ...formData, gender: val })}
-                className="h-12"
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label className="text-[11px] font-bold text-brand-charcoal uppercase tracking-wider">Date of Birth</label>
-              <Input
-                type="date"
-                value={formData.dob}
-                onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
-                className="h-12 border-gray-100 font-bold bg-gray-50/30 focus:bg-white transition-all"
-                required
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-            <div className="flex flex-col gap-2">
-              <label className="text-[11px] font-bold text-brand-charcoal uppercase tracking-wider">System Role</label>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <label className="flex flex-col gap-1.5">
+              <span className={fieldLabel}>First name</span>
+              <Input value={form.first_name} onChange={(e) => set("first_name", e.target.value)} error={!!errors.first_name} autoComplete="off" />
+              {errors.first_name && <span className="text-[12px] text-error">{errors.first_name}</span>}
+            </label>
+            <label className="flex flex-col gap-1.5">
+              <span className={fieldLabel}>Last name</span>
+              <Input value={form.last_name} onChange={(e) => set("last_name", e.target.value)} error={!!errors.last_name} autoComplete="off" />
+              {errors.last_name && <span className="text-[12px] text-error">{errors.last_name}</span>}
+            </label>
+            <label className="flex flex-col gap-1.5">
+              <span className={fieldLabel}>Email</span>
+              <Input type="email" value={form.email} onChange={(e) => set("email", e.target.value)} error={!!errors.email} autoComplete="off" />
+              {errors.email && <span className="text-[12px] text-error">{errors.email}</span>}
+            </label>
+            <label className="flex flex-col gap-1.5">
+              <span className={fieldLabel}>
+                Phone number <span className="text-faint font-normal">(optional)</span>
+              </span>
+              <Input type="tel" value={form.phone_number} onChange={(e) => set("phone_number", e.target.value)} error={!!errors.phone_number} autoComplete="off" />
+              {errors.phone_number && <span className="text-[12px] text-error">{errors.phone_number}</span>}
+            </label>
+            <div className="flex flex-col gap-1.5">
+              <span className={fieldLabel}>Role</span>
               <Select
                 options={roleOptions}
-                value={formData.role}
-                onChange={(val) => setFormData({ ...formData, role: val })}
-                className="h-12"
+                value={form.role_id}
+                onChange={(v) => set("role_id", v)}
+                placeholder={roles.length ? "Pick a role" : "No roles yet"}
+                disabled={!roles.length}
+                error={errors.role_id}
               />
             </div>
-
-            <div className="flex flex-col gap-2">
-              <label className="text-[11px] font-bold text-brand-charcoal uppercase tracking-wider">Department</label>
-              <Select
-                options={departmentOptions}
-                value={formData.department}
-                onChange={(val) => setFormData({ ...formData, department: val })}
-                className="h-12"
+            <label className="flex flex-col gap-1.5">
+              <span className={fieldLabel}>Temporary password</span>
+              <Input
+                type="password"
+                value={form.password}
+                onChange={(e) => set("password", e.target.value)}
+                error={!!errors.password}
+                autoComplete="new-password"
               />
-            </div>
-          </div>
-
-          {/* Security Note */}
-          <div className="p-4 bg-emerald-50/50 rounded-2xl border border-emerald-100 flex gap-4 items-center mt-2">
-            <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
-              <Icon name="verified" folder="icon" size="sm" />
-            </div>
-            <div className="flex flex-col gap-0.5">
-              <span className="text-[12px] font-bold text-emerald-800">Automated Invitation</span>
-              <p className="text-[11px] font-medium text-emerald-600 leading-relaxed">
-                A secure invitation link will be sent to the email provided, allowing the user to set their password and verify their identity.
-              </p>
-            </div>
+              {errors.password ? (
+                <span className="text-[12px] text-error">{errors.password}</span>
+              ) : (
+                <span className="text-[12px] text-faint">At least 8 characters.</span>
+              )}
+            </label>
           </div>
         </ModalBody>
 
-        <ModalFooter className="flex justify-end gap-3 border-t border-gray-50 pt-8 mt-4">
-          <Button
-            variant="outline"
-            type="button"
-            onClick={onClose}
-          >
-            Discard
+        <ModalFooter className="py-4">
+          <Button variant="outline" type="button" onClick={close} disabled={isLoading}>
+            Cancel
           </Button>
-          <Button
-            variant="primary"
-            type="submit"
-          >
-            Quick Onboard
+          <Button variant="primary" type="submit" isLoading={isLoading} disabled={isLoading}>
+            Add team member
           </Button>
         </ModalFooter>
       </form>

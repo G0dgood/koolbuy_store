@@ -17,7 +17,7 @@ const InlineField: React.FC<InlineFieldProps> = ({
   return (
     <div className={`flex items-center ${className}`}>
       <div className="flex justify-end pr-4 shrink-0" style={{ width: labelWidth }}>
-        <Label className="mb-0 text-sm font-medium text-gray-500 whitespace-nowrap">
+        <Label className="mb-0 text-sm font-medium text-faint whitespace-nowrap">
           {label}:
         </Label>
       </div>

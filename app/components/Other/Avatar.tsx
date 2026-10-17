@@ -27,7 +27,7 @@ const Avatar: React.FC<AvatarProps> = ({
 
   return (
     <div className={`
-      relative rounded-full overflow-hidden flex items-center justify-center bg-gray-100 border-2 border-white  shrink-0
+      relative rounded-full overflow-hidden flex items-center justify-center bg-light-gray border-2 border-white  shrink-0
       ${selectedSize.class} ${className}
     `}>
       {src ? (
@@ -39,7 +39,7 @@ const Avatar: React.FC<AvatarProps> = ({
           className="w-full h-full object-cover"
         />
       ) : initials ? (
-        <span className="text-gray-500 font-bold text-sm">{initials}</span>
+        <span className="text-faint font-semibold text-sm">{initials}</span>
       ) : (
         <div className="w-full h-full bg-brand-orange-soft flex items-center justify-center text-white">
           <Icon name="person" size={size === "lg" ? "lg" : "md"} />

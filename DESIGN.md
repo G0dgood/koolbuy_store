@@ -55,7 +55,7 @@ never a hard-coded hex.
 
 - **Orange on white** is 2.7:1: use it for fills, borders, icons and rings, never for text. Orange text is
   `brand-orange-text`. On a charcoal band, orange text is the bright `brand-orange` (6.7:1).
-- **How much orange:** on the storefront, orange is the primary, so main buttons, active chips, selected
+- **How much orange:** on the storefront, orange is the primary, so main buttons, selected
   options and the current carousel dot are orange. Keep it to actions and marks; surfaces stay white and grey.
   In the admin, orange is only an accent (about 10% of a screen) and buttons are charcoal.
 - Never orange body text on `brand-orange-soft`; use charcoal there.
@@ -181,8 +181,12 @@ stretch, shadow or place it on orange; on dark backgrounds it sits on a small wh
   `ring-2 ring-brand-orange`.
 - **Links:** orange text (`brand-orange-text`), 500 weight, underline on hover. Storefront "See all ›",
   "Shop now ›", "Join now ›".
-- **Tabs:** storefront category chips and pill switches (selected orange); admin tabs are `TabFilter` (the
-  CRM's segmented control: joined, bordered, selected orange-soft with an orange underline).
+- **Tabs:** every tab row, storefront and admin, uses the Sales CRM tabs: `TabFilter` (buttons that switch
+  state) or `LinkTabs` (links that change the URL), both from `app/components/Tabs`. The tabs sit joined in one
+  white strip with a 1px `light-gray` border and `rounded-lg` corners; the selected tab is `brand-orange-soft`
+  with charcoal text and a 3px inset orange underline, the others white with `text-subtle`; an optional count
+  sits in a small round badge, and the strip scrolls sideways on narrow screens. No hand-built chips, pills
+  or underline tabs for switching views.
 - **Prices:** charcoal, tabular figures, 600 for the main price. A sale price or BNPL "₦…/month" line may use
   `brand-orange-text`.
 - **Icons:** Radix Icons (`@radix-ui/react-icons`) for new UI, `w-4 h-4` inline and `w-5 h-5` in nav;
@@ -213,11 +217,11 @@ stretch, shadow or place it on orange; on dark backgrounds it sits on a small wh
   rounded stage.
 - **Feature tiles:** full-bleed photo tiles with the text and a white frosted "Shop now" pill at the top;
   eyebrow 13px semibold in sentence case; title 24–28px semibold.
-- **Products page:** white rounded filter panel with hairline sections; pill sort and view controls; pill
-  category chips; product tiles as above (list view uses the same language).
+- **Products page:** white rounded filter panel with hairline sections; pill sort and view controls; category
+  tabs (`TabFilter`) on mobile; product tiles as above (list view uses the same language).
 - **Product detail:** gallery on an off-white stage with rounded thumbnails (active ring orange); big tight
   product name; price above the BNPL box; quantity as a soft pill; **Add to cart** as the orange pill; specs as
-  hairline label/value rows; pill tabs; calm review cards.
+  hairline label/value rows; Description / Reviews as `TabFilter` tabs; calm review cards.
 - **Cart and checkout:** big tight page title; white `rounded-tile` blocks; hairline-separated line items with
   off-white image stages; Remove / Save for later as quiet orange text links; summary with a hairline above a
   22px total; one orange pill for **Checkout** / **Complete order**; form fields as soft grey `rounded-xl`
@@ -245,7 +249,7 @@ stretch, shadow or place it on orange; on dark backgrounds it sits on a small wh
   arrow (→), not an eye.
 - **Pagination** (`Admin/Pagination.tsx`, the CRM's): text Previous / Next, small grey numbers, current page as
   a charcoal button; no border of its own.
-- **Dashboard** (`app/admin/page.tsx`, `DashboardUi.tsx`): period switch (`Segmented`), `StatCard` tiles (label,
+- **Dashboard** (`app/admin/page.tsx`, `DashboardUi.tsx`): period, market and measure switches (`TabFilter`), `StatCard` tiles (label,
   change pill, 26px value, hint, orange sparkline; no icons or menus), `ChartCard`s with a working chart-type
   picker, donuts with a centre total, the Mapbox revenue map, recent orders and top products. Static sample data
   with a "Sample data" tag; `AnimatedNumber` counts tiles up on period change.
@@ -289,7 +293,7 @@ Storefront code written before the tokens existed uses arbitrary values such as 
 **Storefront**
 - [ ] Large tight headline with a subtitle; generous section spacing.
 - [ ] White cards `rounded-tile` with the 1px `light-gray` CRM border (photo tiles and the hero without); card photos edge to edge (no padding) with `mix-blend-multiply`.
-- [ ] Pill buttons; main action orange; text links "… ›" in orange.
+- [ ] Pill buttons; main action orange; text links "… ›" in orange; tab rows are `TabFilter` / `LinkTabs`.
 - [ ] Frosted bars and arrows; `ease-apple` motion; respects reduced motion.
 
 **Admin**

@@ -14,19 +14,19 @@ const Badge: React.FC<BadgeProps> = ({
   const isDot = variant === "dot";
 
   const variants = {
-    default: "bg-gray-100 text-gray-400",
+    default: "bg-black/[0.04] text-faint",
     success: "bg-success-soft text-success",
-    warning: "bg-brand-orange-soft text-[#F59E0B]",
-    error: "bg-[#FEE2E2] text-[#EF4444]",
+    warning: "bg-brand-orange-soft text-warning",
+    error: "bg-error-soft text-error",
     info: "bg-brand-orange-soft text-brand-orange-text",
-    neutral: "bg-gray-100 text-gray-400",
-    dot: "bg-[#EF4444] text-white",
+    neutral: "bg-black/[0.04] text-faint",
+    dot: "bg-error text-white",
   };
 
   return (
     <span className={`
-      inline-flex items-center justify-center font-bold uppercase tracking-wider
-      ${isDot ? "w-5 h-5 rounded-full text-[11px] p-0" : "px-3 py-1 rounded-full text-[10px]"}
+      inline-flex items-center justify-center font-semibold
+      ${isDot ? "w-5 h-5 rounded-full text-[11px] p-0" : "px-3 py-1 rounded-full text-[11px]"}
       ${variants[variant]} 
       ${className}
     `}>

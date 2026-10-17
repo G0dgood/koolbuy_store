@@ -136,10 +136,10 @@ export default function CategoriesPage() {
       {/* Header Section */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-xl font-bold text-gray-900 tracking-tight">
+          <h1 className="text-xl font-semibold text-brand-charcoal tracking-tight">
             Categories & Classifications
           </h1>
-          <p className="text-xs text-gray-500 mt-0.5">
+          <p className="text-xs text-faint mt-0.5">
             Manage product cooling classifications, catalog tax rules, and vendor picklists
           </p>
         </div>
@@ -221,7 +221,7 @@ export default function CategoriesPage() {
       {/* Categories Horizontal Scroll */}
       <div className="relative group">
         <button
-          className="absolute -left-4 top-1/2 -translate-y-1/2 w-9 h-9 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-900 z-10 opacity-0 group-hover:opacity-100 transition-opacity shadow-sm cursor-pointer"
+          className="absolute -left-4 top-1/2 -translate-y-1/2 w-9 h-9 bg-white border border-light-gray rounded-full flex items-center justify-center text-faint hover:text-brand-charcoal z-10 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
           onClick={() => scroll("left")}
           type="button"
         >
@@ -236,17 +236,17 @@ export default function CategoriesPage() {
             Array.from({ length: 6 }).map((_, i) => (
               <div
                 key={i}
-                className="shrink-0 w-52 bg-white p-3 rounded-lg border border-gray-100 flex items-center gap-3 animate-pulse"
+                className="shrink-0 w-52 bg-white p-3 rounded-lg border border-light-gray flex items-center gap-3 animate-pulse"
               >
-                <div className="w-11 h-11 rounded-lg bg-gray-100 shrink-0" />
+                <div className="w-11 h-11 rounded-lg bg-light-gray shrink-0" />
                 <div className="flex-1 space-y-1.5">
-                  <div className="h-3 bg-gray-100 rounded w-3/4" />
-                  <div className="h-2.5 bg-gray-50 rounded w-1/2" />
+                  <div className="h-3 bg-light-gray rounded w-3/4" />
+                  <div className="h-2.5 bg-light-gray rounded w-1/2" />
                 </div>
               </div>
             ))
           ) : allItems.length === 0 ? (
-            <div className="w-full text-center py-6 text-xs text-gray-400 bg-white rounded-lg border border-dashed border-gray-200">
+            <div className="w-full text-center py-6 text-xs text-faint bg-white rounded-lg border border-dashed border-light-gray">
               No categories configured yet. Click "Add Category" to create one.
             </div>
           ) : (
@@ -260,9 +260,9 @@ export default function CategoriesPage() {
                     setCategoryToEdit(cat);
                     setIsEditDrawerOpen(true);
                   }}
-                  className="shrink-0 w-56 bg-white p-2.5 rounded-lg flex items-center gap-3 hover:shadow-sm transition-all cursor-pointer hover:border-brand-charcoal/40 border border-gray-200/80 group/item"
+                  className="shrink-0 w-56 bg-white p-2.5 rounded-lg flex items-center gap-3 hover:shadow-lift transition-all cursor-pointer hover:border-brand-charcoal/40 border border-light-gray/80 group/item"
                 >
-                  <div className="w-11 h-11 rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center p-1 border border-gray-100 group-hover/item:border-brand-charcoal/30 transition-colors shrink-0">
+                  <div className="w-11 h-11 rounded-lg overflow-hidden bg-off-white flex items-center justify-center p-1 border border-light-gray group-hover/item:border-brand-charcoal/30 transition-colors shrink-0">
                     <img
                       src={image}
                       alt={cat.label}
@@ -270,10 +270,10 @@ export default function CategoriesPage() {
                     />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <span className="text-xs font-semibold text-gray-900 group-hover/item:text-brand-charcoal truncate block leading-tight">
+                    <span className="text-xs font-semibold text-brand-charcoal group-hover/item:text-brand-charcoal truncate block leading-tight">
                       {cat.label}
                     </span>
-                    <span className="text-[11px] text-gray-400 mt-0.5 block">
+                    <span className="text-[11px] text-faint mt-0.5 block">
                       {cat.usage_count} {cat.usage_count === 1 ? "product" : "products"}
                     </span>
                   </div>
@@ -284,7 +284,7 @@ export default function CategoriesPage() {
         </div>
 
         <button
-          className="absolute -right-4 top-1/2 -translate-y-1/2 w-9 h-9 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-900 z-10 opacity-0 group-hover:opacity-100 transition-opacity shadow-sm cursor-pointer"
+          className="absolute -right-4 top-1/2 -translate-y-1/2 w-9 h-9 bg-white border border-light-gray rounded-full flex items-center justify-center text-faint hover:text-brand-charcoal z-10 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
           onClick={() => scroll("right")}
           type="button"
         >
@@ -293,7 +293,7 @@ export default function CategoriesPage() {
       </div>
 
       {/* Main Table Container */}
-      <div className="bg-white flex flex-col pt-4 border border-gray-200/80 rounded-xl shadow-2xs">
+      <div className="bg-white flex flex-col pt-4 border border-light-gray/80 rounded-lg">
         {/* Fill Tabs & Controls */}
         <div className="px-6 flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
           <TabFilter
@@ -323,13 +323,13 @@ export default function CategoriesPage() {
                 setCurrentPage(1);
               }}
               containerClassName="flex-1 md:w-80"
-              className="bg-white border-gray-200 placeholder:text-gray-400 text-xs font-medium h-9"
+              className="bg-white border-light-gray placeholder:text-faint text-xs font-medium h-9"
               suffixElement={
                 <Icon
                   name="search-01"
                   folder="dashboardIcon"
                   size="sm"
-                  className="text-gray-400"
+                  className="text-faint"
                 />
               }
             />
@@ -364,19 +364,19 @@ export default function CategoriesPage() {
               {isLoading ? (
                 Array.from({ length: 5 }).map((_, idx) => (
                   <tr key={idx} className="animate-pulse">
-                    <td className="pl-6"><div className="w-4 h-4 bg-gray-100 rounded" /></td>
-                    <td className="px-4"><div className="w-4 h-3 bg-gray-100 rounded" /></td>
-                    <td><div className="w-36 h-4 bg-gray-100 rounded" /></td>
-                    <td><div className="w-24 h-3 bg-gray-100 rounded" /></td>
-                    <td><div className="w-16 h-4 bg-gray-100 rounded" /></td>
-                    <td><div className="w-8 h-4 mx-auto bg-gray-100 rounded" /></td>
-                    <td><div className="w-14 h-4 bg-gray-100 rounded" /></td>
-                    <td className="pr-6"><div className="w-16 h-6 ml-auto bg-gray-100 rounded" /></td>
+                    <td className="pl-6"><div className="w-4 h-4 bg-light-gray rounded" /></td>
+                    <td className="px-4"><div className="w-4 h-3 bg-light-gray rounded" /></td>
+                    <td><div className="w-36 h-4 bg-light-gray rounded" /></td>
+                    <td><div className="w-24 h-3 bg-light-gray rounded" /></td>
+                    <td><div className="w-16 h-4 bg-light-gray rounded" /></td>
+                    <td><div className="w-8 h-4 mx-auto bg-light-gray rounded" /></td>
+                    <td><div className="w-14 h-4 bg-light-gray rounded" /></td>
+                    <td className="pr-6"><div className="w-16 h-6 ml-auto bg-light-gray rounded" /></td>
                   </tr>
                 ))
               ) : paginatedItems.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="text-center py-12 text-xs text-gray-400">
+                  <td colSpan={8} className="text-center py-12 text-xs text-faint">
                     No categories found matching your criteria.
                   </td>
                 </tr>
@@ -386,7 +386,7 @@ export default function CategoriesPage() {
                   const image =
                     FALLBACK_CATEGORY_IMAGES[idx % FALLBACK_CATEGORY_IMAGES.length];
                   return (
-                    <tr key={cat.slug} className="group hover:bg-gray-50/50">
+                    <tr key={cat.slug} className="group hover:bg-off-white/50">
                       <td className="pl-6">
                         <Checkbox
                           checked={selectedSlugs.includes(cat.slug)}
@@ -394,13 +394,13 @@ export default function CategoriesPage() {
                         />
                       </td>
                       <td className="px-4">
-                        <span className="text-xs font-semibold text-gray-500">
+                        <span className="text-xs font-semibold text-faint">
                           {globalIdx}
                         </span>
                       </td>
                       <td>
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-lg overflow-hidden bg-gray-50 border border-gray-100 p-1 shrink-0">
+                          <div className="w-9 h-9 rounded-lg overflow-hidden bg-off-white border border-light-gray p-1 shrink-0">
                             <img
                               src={image}
                               alt={cat.label}
@@ -408,11 +408,11 @@ export default function CategoriesPage() {
                             />
                           </div>
                           <div>
-                            <span className="text-xs font-semibold text-gray-900 leading-tight block">
+                            <span className="text-xs font-semibold text-brand-charcoal leading-tight block">
                               {cat.label}
                             </span>
                             {cat.is_catch_all && (
-                              <span className="text-[10px] text-amber-600 font-medium">
+                              <span className="text-[11px] text-warning font-medium">
                                 Catch-all fallback
                               </span>
                             )}
@@ -420,12 +420,12 @@ export default function CategoriesPage() {
                         </div>
                       </td>
                       <td>
-                        <code className="text-[11px] font-mono text-gray-600 bg-gray-100 px-1.5 py-0.5 rounded">
+                        <code className="text-[11px] font-mono text-subtle bg-off-white px-1.5 py-0.5 rounded">
                           {cat.slug}
                         </code>
                       </td>
                       <td>
-                        <span className="text-xs font-medium text-gray-700 capitalize">
+                        <span className="text-xs font-medium text-subtle capitalize">
                           {cat.vat_treatment === "exempt"
                             ? "Exempt"
                             : cat.vat_treatment === "zero_rated"
@@ -434,7 +434,7 @@ export default function CategoriesPage() {
                         </span>
                       </td>
                       <td className="text-center">
-                        <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-700">
+                        <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-semibold bg-off-white text-subtle">
                           {cat.usage_count}
                         </span>
                       </td>
@@ -442,8 +442,8 @@ export default function CategoriesPage() {
                         <span
                           className={`inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium ${
                             cat.is_active
-                              ? "bg-emerald-50 text-emerald-700 border border-emerald-200/60"
-                              : "bg-gray-100 text-gray-600 border border-gray-200"
+                              ? "bg-success-soft text-success border border-success/30"
+                              : "bg-off-white text-subtle border border-light-gray"
                           }`}
                         >
                           {cat.is_active ? "Active" : "Hidden"}
@@ -454,7 +454,7 @@ export default function CategoriesPage() {
                           <Button
                             variant="outline"
                             shape="rounded-sm"
-                            className="p-1.5 text-gray-500 hover:text-gray-900 hover:border-gray-300"
+                            className="p-1.5 text-faint hover:text-brand-charcoal hover:border-medium-gray"
                             title="Edit Category"
                             onClick={() => {
                               setCategoryToEdit(cat);
@@ -466,7 +466,7 @@ export default function CategoriesPage() {
                           <Button
                             variant="outline"
                             shape="rounded-sm"
-                            className="p-1.5 text-gray-400 hover:text-rose-600 hover:border-rose-200 hover:bg-rose-50"
+                            className="p-1.5 text-faint hover:text-error hover:border-error/30 hover:bg-error-soft"
                             title="Delete Category"
                             onClick={() => {
                               setCategoryToDelete(cat);
@@ -589,19 +589,19 @@ export default function CategoriesPage() {
             <div className="space-y-3">
               <p>
                 Are you sure you want to remove{" "}
-                <strong className="text-gray-900 font-semibold">
+                <strong className="text-brand-charcoal font-semibold">
                   "{categoryToDelete.label}"
                 </strong>
                 ? This action cannot be undone.
               </p>
-              <div className="p-2.5 bg-gray-50 rounded-lg border border-gray-150 flex items-center justify-between text-[11px]">
-                <span className="text-gray-500">Unique Slug:</span>
-                <code className="font-mono text-gray-800 bg-white px-1.5 py-0.5 rounded border border-gray-200">
+              <div className="p-2.5 bg-off-white rounded-lg border border-light-gray flex items-center justify-between text-[11px]">
+                <span className="text-faint">Unique Slug:</span>
+                <code className="font-mono text-brand-charcoal bg-white px-1.5 py-0.5 rounded border border-light-gray">
                   {categoryToDelete.slug}
                 </code>
               </div>
               {categoryToDelete.usage_count > 0 && (
-                <div className="p-2.5 bg-amber-50/80 rounded-lg border border-amber-200/70 text-[11px] text-amber-900 flex items-start gap-2">
+                <div className="p-2.5 bg-warning/10 rounded-lg border border-warning/30 text-[11px] text-brand-charcoal flex items-start gap-2">
                   <span className="font-semibold shrink-0">Notice:</span>
                   <span>
                     This category has{" "}

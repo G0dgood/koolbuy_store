@@ -60,16 +60,16 @@ export default function Drawer({
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className={`relative bg-white h-full shadow-md z-50 flex flex-col ${width} w-full`}
+            className={`relative bg-white h-full shadow-float z-50 flex flex-col ${width} w-full`}
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-8 py-6 border-b border-gray-100 flex-shrink-0">
-              <h3 className="text-[18px] font-bold text-brand-charcoal">{title}</h3>
+            <div className="flex items-center justify-between px-8 py-6 border-b border-black/[0.06] flex-shrink-0">
+              <h3 className="text-[18px] font-semibold text-brand-charcoal">{title}</h3>
               <div className="flex items-center gap-3">
                 {rightElement && rightElement}
                 <button
                   onClick={onClose}
-                  className="p-2 -mr-2 rounded-full hover:bg-gray-50 text-gray-400 hover:text-gray-600 transition-all active:scale-95"
+                  className="p-2 -mr-2 rounded-full hover:bg-black/[0.04] text-faint hover:text-subtle transition-all active:scale-95"
                 >
                   <IoMdClose size={24} />
                 </button>

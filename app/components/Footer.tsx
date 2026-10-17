@@ -10,10 +10,10 @@ import { Newsletter } from "./Home/Newsletter";
 
 // const QrCodeBox = ({ label }: { label: string }) => (
 //   <div className="flex flex-col items-center gap-1.5">
-//     <div className="w-16 h-16 bg-white border border-gray-200 rounded-lg p-1 shadow-xs flex items-center justify-center">
+//     <div className="w-16 h-16 bg-white border border-light-gray rounded-lg p-1 shadow-xs flex items-center justify-center">
 //       <svg
 //         viewBox="0 0 100 100"
-//         className="w-full h-full text-gray-900 fill-current"
+//         className="w-full h-full text-brand-charcoal fill-current"
 //         xmlns="http://www.w3.org/2000/svg"
 //       >
 //         {/* Top-Left Corner Box */}
@@ -57,7 +57,7 @@ import { Newsletter } from "./Home/Newsletter";
 //         <rect x="84" y="84" width="6" height="6" fill="currentColor" />
 //       </svg>
 //     </div>
-//     <span className="text-[10px] text-gray-500 font-medium">{label}</span>
+//     <span className="text-[10px] text-faint font-medium">{label}</span>
 //   </div>
 // );
 
@@ -84,7 +84,7 @@ const Footer = () => {
                   <span
                     key={name}
                     aria-label={name}
-                    className="w-8 h-8 rounded-full bg-black/[0.04] flex items-center justify-center text-gray-600 hover:bg-brand-charcoal hover:text-white transition-colors cursor-pointer"
+                    className="w-8 h-8 rounded-full bg-black/[0.04] flex items-center justify-center text-subtle hover:bg-brand-charcoal hover:text-white transition-colors cursor-pointer"
                   >
                     <Icon name={`social/${name}`} size="sm" />
                   </span>

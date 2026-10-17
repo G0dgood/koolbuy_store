@@ -42,8 +42,8 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
       onClick={!isDisabled && !href ? handleClick : undefined}
       className={`
         flex items-center gap-3 px-4 py-2.5 transition-all cursor-pointer w-full
-        ${isDisabled ? "opacity-40 cursor-not-allowed" : "hover:bg-gray-50"}
-        ${isActive ? "bg-brand-orange-soft text-brand-orange-text" : "text-gray-700"}
+        ${isDisabled ? "opacity-40 cursor-not-allowed" : "hover:bg-black/[0.04]"}
+        ${isActive ? "bg-brand-orange-soft text-brand-orange-text" : "text-subtle"}
         ${className}
       `}
     >
@@ -63,28 +63,28 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
           <Icon
             name={icon}
             size="sm"
-            className={isActive ? "text-brand-orange-text" : "text-gray-400"}
+            className={isActive ? "text-brand-orange-text" : "text-faint"}
           />
         ) : (
-          <div className={`text-base flex items-center justify-center shrink-0 w-5 h-5 ${isActive ? "text-brand-orange-text" : "text-gray-400"}`}>
+          <div className={`text-base flex items-center justify-center shrink-0 w-5 h-5 ${isActive ? "text-brand-orange-text" : "text-faint"}`}>
             {icon}
           </div>
         )
       )}
 
       <div className="flex-1 flex flex-col min-w-0">
-        <span className={`text-sm ${isActive ? "font-bold" : "font-medium"} truncate`}>
+        <span className={`text-sm ${isActive ? "font-semibold" : "font-medium"} truncate`}>
           {label}
         </span>
         {subtext && (
-          <span className="text-[10px] text-gray-400 font-medium truncate">
+          <span className="text-[11px] text-faint font-medium truncate">
             {subtext}
           </span>
         )}
       </div>
 
       {hasSubmenu && (
-        <Icon name="chevron_right" size="xs" className="text-gray-400 ml-2" />
+        <Icon name="chevron_right" size="xs" className="text-faint ml-2" />
       )}
     </div>
   );
@@ -148,7 +148,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
       animate="visible"
       exit="exit"
       variants={dropdownVariants}
-      className={`bg-white border border-gray-100 rounded-lg shadow-md overflow-hidden py-1 ${className}`}
+      className={`bg-white border border-light-gray rounded-lg shadow-float overflow-hidden py-1 ${className}`}
       style={{ width }}
     >
       {children}
@@ -172,20 +172,20 @@ const DropdownSearch: React.FC<DropdownSearchProps> = ({
   className = "",
 }) => {
   return (
-    <div className={`p-2 border-b border-gray-100 ${className}`}>
+    <div className={`p-2 border-b border-black/[0.06] ${className}`}>
       <div className="relative flex items-center">
-        <Icon name="search" size="xs" className="absolute left-3 text-gray-400" />
+        <Icon name="search" size="xs" className="absolute left-3 text-faint" />
         <input
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
-          className="w-full bg-white border border-gray-100 rounded py-2 pl-9 pr-3 text-sm placeholder:text-gray-400 outline-none focus:border-brand-orange transition-colors"
+          className="w-full bg-white border border-light-gray rounded py-2 pl-9 pr-3 text-sm placeholder:text-faint outline-none focus:border-brand-orange transition-colors"
         />
         {value && onClear && (
           <button
             onClick={onClear}
-            className="absolute right-3 p-0.5 hover:bg-gray-100 rounded text-gray-400"
+            className="absolute right-3 p-0.5 hover:bg-black/[0.06] rounded text-faint"
           >
             <Icon name="clear" size="xs" />
           </button>
@@ -211,7 +211,7 @@ const DropdownFooterAction: React.FC<DropdownFooterActionProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 w-full px-4 py-3 text-sm font-bold text-brand-orange-text bg-gray-50/50 border-t border-gray-100 hover:bg-gray-100 transition-all ${className}`}
+      className={`flex items-center gap-2 w-full px-4 py-3 text-sm font-semibold text-brand-orange-text bg-off-white/50 border-t border-black/[0.06] hover:bg-black/[0.06] transition-all ${className}`}
     >
       <Icon name={icon} size="xs" />
       {label}
@@ -222,7 +222,7 @@ const DropdownFooterAction: React.FC<DropdownFooterActionProps> = ({
 const DropdownEmptyState: React.FC<{ message?: string }> = ({
   message = "Not found"
 }) => (
-  <div className="px-4 py-4 text-sm text-gray-400 font-medium">
+  <div className="px-4 py-4 text-sm text-faint font-medium">
     {message}
   </div>
 );

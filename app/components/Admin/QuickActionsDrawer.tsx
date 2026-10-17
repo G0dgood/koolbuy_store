@@ -29,7 +29,7 @@ export function QuickActionsDrawer({
   return (
     <Drawer isOpen={isOpen} onClose={onClose} title={title} width="max-w-md">
       <div className="flex flex-col gap-2 pb-8">
-        <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider px-1 mb-2">Available Actions</p>
+        <p className="text-[12px] font-medium text-subtle px-1 mb-2">Available actions</p>
         
         <div className="flex flex-col gap-1">
           {actions.map((action) => (
@@ -39,26 +39,26 @@ export function QuickActionsDrawer({
                 action.onClick();
                 onClose();
               }}
-              className={`flex items-center gap-4 p-4 rounded-xl transition-all group hover:bg-gray-50 text-left border border-transparent hover:border-gray-100 ${
-                action.variant === "danger" ? "hover:bg-rose-50/50 hover:border-rose-100" : ""
+              className={`flex items-center gap-4 p-4 rounded-lg transition-all group hover:bg-off-white text-left border border-transparent hover:border-light-gray ${
+                action.variant === "danger" ? "hover:bg-error-soft/50 hover:border-error/20" : ""
               }`}
             >
               <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
                 action.variant === "danger" 
-                  ? "bg-rose-50 text-rose-500 group-hover:bg-rose-500 group-hover:text-white" 
+                  ? "bg-error-soft text-error group-hover:bg-error group-hover:text-white" 
                   : "bg-brand-orange-soft text-brand-orange-text group-hover:bg-brand-charcoal group-hover:text-white"
               }`}>
                 <Icon name={action.icon as any} size="sm" />
               </div>
               
               <div className="flex flex-col gap-0.5">
-                <span className={`text-[13px] font-bold tracking-tight ${
-                  action.variant === "danger" ? "text-rose-600" : "text-brand-charcoal"
+                <span className={`text-[13px] font-semibold tracking-tight ${
+                  action.variant === "danger" ? "text-error" : "text-brand-charcoal"
                 }`}>
                   {action.label}
                 </span>
                 {action.description && (
-                  <span className="text-[11px] font-bold text-gray-400 group-hover:text-gray-500 transition-colors">
+                  <span className="text-[11px] font-semibold text-faint group-hover:text-faint transition-colors">
                     {action.description}
                   </span>
                 )}
@@ -68,7 +68,7 @@ export function QuickActionsDrawer({
                 name="chevron_right" 
                 size="xs" 
                 className={`ml-auto opacity-0 group-hover:opacity-40 transition-all -translate-x-2 group-hover:translate-x-0 ${
-                  action.variant === "danger" ? "text-rose-400" : "text-brand-orange-text"
+                  action.variant === "danger" ? "text-error" : "text-brand-orange-text"
                 }`} 
               />
             </button>
@@ -76,12 +76,12 @@ export function QuickActionsDrawer({
         </div>
         
         {/* Help Tip */}
-        <div className="mt-6 p-4 rounded-xl bg-gray-50/50 border border-dashed border-gray-200">
+        <div className="mt-6 p-4 rounded-lg bg-off-white/50 border border-dashed border-light-gray">
           <div className="flex gap-3">
-             <div className="w-8 h-8 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-400">
+             <div className="w-8 h-8 rounded-full bg-white border border-light-gray flex items-center justify-center text-faint">
                 <Icon name="help_outline" size="xs" />
              </div>
-             <p className="text-[11px] font-bold text-gray-500 leading-relaxed italic">
+             <p className="text-[11px] font-semibold text-faint leading-relaxed italic">
                 These actions are contextual to the active view. Exports are processed in background and notified once ready.
              </p>
           </div>

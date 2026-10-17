@@ -9,19 +9,19 @@ const ServiceBadges = () => {
       title: "Secure payment", 
       desc: "Have you ever finally just", 
       icon: "lock",
-      color: "bg-gray-100" 
+      color: "bg-black/[0.04]" 
     },
     { 
       title: "Customer support", 
       desc: "Have you ever finally just", 
       icon: "chat",
-      color: "bg-gray-100" 
+      color: "bg-black/[0.04]" 
     },
     { 
       title: "Free delivery", 
       desc: "Have you ever finally just", 
       icon: "van",
-      color: "bg-gray-100" 
+      color: "bg-black/[0.04]" 
     },
   ];
 

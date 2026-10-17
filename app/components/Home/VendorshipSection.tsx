@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import { Icon } from "@/app/components/Icon";
 import { FiBox, FiExternalLink, FiNavigation } from "react-icons/fi";
 
 export const VendorshipSection = () => {
@@ -59,13 +58,13 @@ export const VendorshipSection = () => {
           />
 
           {/* Floating Location Card Overlay */}
-          <div className="absolute top-4 left-4 bg-white/85 backdrop-blur-xl rounded-2xl p-3 sm:p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)] max-w-70 sm:max-w-xs z-10">
+          <div className="absolute top-4 left-4 bg-white/85 backdrop-blur-xl rounded-tile p-3 sm:p-4 shadow-float max-w-70 sm:max-w-xs z-10">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <h4 className="text-[13px] sm:text-sm font-semibold text-brand-charcoal">
                   28a Adeola Raji Ave
                 </h4>
-                <p className="text-[11px] text-gray-500 mt-0.5 leading-tight">
+                <p className="text-[11px] text-faint mt-0.5 leading-tight">
                   28a Adeola Raji Ave, Araromi, Lagos 105102, Lagos
                 </p>
               </div>
@@ -75,7 +74,7 @@ export const VendorshipSection = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Open in Google Maps"
-                  className="p-1.5 hover:bg-gray-100 rounded-full transition-colors text-gray-600"
+                  className="p-1.5 hover:bg-black/[0.06] rounded-full transition-colors text-subtle"
                 >
                   <FiExternalLink className="text-sm" />
                 </a>

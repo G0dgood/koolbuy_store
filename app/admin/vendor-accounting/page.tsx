@@ -10,6 +10,7 @@ import { RowsPerPage } from "@/app/components/rows-per-page";
 import { Input } from "@/app/components/Form/Inputs";
 import { DatePicker } from "@/app/components/Form/DatePicker";
 import { Button } from "@/app/components/Button";
+import { TabFilter } from "@/app/components/Tabs";
 import { EmptyTableRow } from "@/app/components/EmptyState";
 import { Icon } from "@/app/components/Icon";
 import Drawer from "@/app/components/Drawer/Drawer";
@@ -146,20 +147,14 @@ export default function VendorAccountingPage() {
     <div className="flex flex-col gap-6 pb-12">
       {/* Currency switch (totals are never summed across currencies) */}
       {totals.length > 1 && (
-        <div className="flex items-center gap-2" role="group" aria-label="Totals currency">
+        <div className="flex items-center gap-2">
           <span className="text-xs text-faint">Totals in</span>
-          {totals.map((t) => (
-            <Button
-              key={t.currency}
-              size="sm"
-              variant={t.currency === currency ? "blue" : "outline"}
-              shape="rounded-sm"
-              onClick={() => setCurrencyPick(t.currency)}
-              aria-pressed={t.currency === currency}
-            >
-              {t.currency}
-            </Button>
-          ))}
+          <TabFilter
+            ariaLabel="Totals currency"
+            tabs={totals.map((t) => t.currency)}
+            activeTab={currency}
+            onChange={setCurrencyPick}
+          />
         </div>
       )}
 

@@ -35,12 +35,12 @@ const FloatingInput = React.forwardRef<HTMLInputElement, FloatingInputProps>(
             }}
             placeholder=" "
             className={`
-              peer w-full bg-white border border-gray-200 rounded-md py-3 px-4 text-sm text-gray-900 
+              peer w-full bg-white border border-light-gray rounded-md py-3 px-4 text-sm text-brand-charcoal 
               focus:outline-none focus:ring-2 focus:ring-brand-orange/20 focus:border-brand-orange
               placeholder:opacity-0 focus:placeholder:opacity-100 transition-all duration-200
               ${prefixElement ? "pl-11" : ""}
               ${suffixElement ? "pr-11" : ""}
-              ${error ? "border-red-500 focus:ring-red-500/20 focus:border-red-500" : ""}
+              ${error ? "border-error focus:ring-error/20 focus:border-error" : ""}
               ${className}
             `}
             value={value}
@@ -49,10 +49,10 @@ const FloatingInput = React.forwardRef<HTMLInputElement, FloatingInputProps>(
           />
           <label
             className={`
-              absolute left-3 -top-2 px-1.5 bg-white text-[11px] font-bold transition-all duration-200 pointer-events-none
-              ${(isFocused || hasValue) ? "text-gray-400 translate-y-0" : "text-transparent translate-y-5 text-sm"}
-              peer-placeholder-shown:translate-y-5 peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400
-              peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-gray-400 peer-focus:font-bold
+              absolute left-3 -top-2 px-1.5 bg-white text-[11px] font-semibold transition-all duration-200 pointer-events-none
+              ${(isFocused || hasValue) ? "text-faint translate-y-0" : "text-transparent translate-y-5 text-sm"}
+              peer-placeholder-shown:translate-y-5 peer-placeholder-shown:text-sm peer-placeholder-shown:text-faint
+              peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-faint peer-focus:font-semibold
             `}
           >
             {label}
@@ -94,10 +94,10 @@ const FloatingTextarea = React.forwardRef<HTMLTextAreaElement, FloatingTextareaP
           }}
           placeholder=" "
           className={`
-            peer w-full bg-white border border-gray-200 rounded-md py-3 px-4 text-sm text-gray-900 
+            peer w-full bg-white border border-light-gray rounded-md py-3 px-4 text-sm text-brand-charcoal 
             focus:outline-none focus:ring-2 focus:ring-brand-orange/20 focus:border-brand-orange
             placeholder:opacity-0 focus:placeholder:opacity-100 transition-all duration-200 min-h-[100px] resize-y
-            ${error ? "border-red-500 focus:ring-red-500/20 focus:border-red-500" : ""}
+            ${error ? "border-error focus:ring-error/20 focus:border-error" : ""}
             ${className}
           `}
           value={value}
@@ -106,10 +106,10 @@ const FloatingTextarea = React.forwardRef<HTMLTextAreaElement, FloatingTextareaP
         />
         <label
           className={`
-            absolute left-3 -top-2 px-1.5 bg-white text-[11px] font-bold transition-all duration-200 pointer-events-none
-            ${(isFocused || hasValue) ? "text-gray-400 translate-y-0" : "text-transparent translate-y-5 text-sm"}
-            peer-placeholder-shown:translate-y-5 peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400
-            peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-gray-400 peer-focus:font-bold
+            absolute left-3 -top-2 px-1.5 bg-white text-[11px] font-semibold transition-all duration-200 pointer-events-none
+            ${(isFocused || hasValue) ? "text-faint translate-y-0" : "text-transparent translate-y-5 text-sm"}
+            peer-placeholder-shown:translate-y-5 peer-placeholder-shown:text-sm peer-placeholder-shown:text-faint
+            peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-faint peer-focus:font-semibold
           `}
         >
           {label}

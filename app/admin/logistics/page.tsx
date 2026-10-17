@@ -6,7 +6,7 @@ import { Icon } from "@/app/components/Icon";
 import { Button } from "@/app/components/Button";
 import { Input } from "@/app/components/Form/Inputs";
 import { Search, Dropdown } from "@/app/components/Form";
-import { Tabs } from "@/app/components/ui/Tabs";
+import { TabFilter } from "@/app/components/Tabs";
 import { Pagination } from "@/app/components/Admin/Pagination";
 import { RowsPerPage } from "@/app/components/rows-per-page";
 import Modal from "@/app/components/Modal/Modal";
@@ -500,29 +500,27 @@ export default function KoolLogisticsPage() {
       {/* Tabs Switcher: Dropping Orders Management, Vendor addresses, delivery prices per lga */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex-1 min-w-0">
-          <Tabs
-            variant="segmented"
-            tabs={[
+          <TabFilter<ActiveTabType>
+            ariaLabel="Logistics sections"
+            options={[
               {
-                id: "dropping-orders",
+                value: "dropping-orders",
                 label: "Dropping Orders Management",
                 count: droppingOrders.length,
               },
               {
-                id: "vendor-addresses",
+                value: "vendor-addresses",
                 label: "Vendor addresses",
                 count: vendorAddresses.length,
               },
               {
-                id: "delivery-prices",
+                value: "delivery-prices",
                 label: "delivery prices per lga",
                 count: lgaPrices.length,
               },
             ]}
             activeTab={activeTab}
-            onTabChange={(id) => handleTabChange(id as "dropping-orders" | "vendor-addresses" | "delivery-prices")}
-            layoutId="logisticsTabsUnderline"
-            className="border-b-0"
+            onChange={handleTabChange}
           />
         </div>
 
@@ -530,7 +528,7 @@ export default function KoolLogisticsPage() {
           {activeTab === "dropping-orders" && (
             <button
               onClick={() => setIsCreateDropModalOpen(true)}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 transition-all flex items-center gap-1.5 cursor-pointer"
+              className="px-3.5 py-2 rounded-lg text-xs font-semibold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <Icon name="plus" className="w-3.5 h-3.5" />
               <span>New Dropping Order</span>
@@ -540,7 +538,7 @@ export default function KoolLogisticsPage() {
           {activeTab === "vendor-addresses" && (
             <button
               onClick={() => setIsAddVendorModalOpen(true)}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 transition-all flex items-center gap-1.5 cursor-pointer"
+              className="px-3.5 py-2 rounded-lg text-xs font-semibold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <Icon name="plus" className="w-3.5 h-3.5" />
               <span>Add Vendor Address</span>
@@ -550,7 +548,7 @@ export default function KoolLogisticsPage() {
           {activeTab === "delivery-prices" && (
             <button
               onClick={openAddLgaModal}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 transition-all flex items-center gap-1.5 cursor-pointer"
+              className="px-3.5 py-2 rounded-lg text-xs font-semibold bg-brand-charcoal text-white hover:bg-brand-charcoal/90 transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <Icon name="plus" className="w-3.5 h-3.5" />
               <span>Add LGA Price</span>
@@ -565,7 +563,7 @@ export default function KoolLogisticsPage() {
       {activeTab === "dropping-orders" && (
         <div className="space-y-4">
           {/* Filters Bar */}
-          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
+          <div className="bg-white border border-light-gray rounded-lg p-4 space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="lg:col-span-2">
                 <Search
@@ -629,13 +627,13 @@ export default function KoolLogisticsPage() {
           </div>
 
           {/* Table */}
-          <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
-            <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+          <div className="bg-white border border-light-gray rounded-lg overflow-hidden">
+            <div className="p-4 border-b border-light-gray flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <h3 className="font-bold text-gray-900 text-sm">
+                <h3 className="font-semibold text-brand-charcoal text-sm">
                   Dropping Orders Queue
                 </h3>
-                <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 text-xs font-bold">
+                <span className="px-2 py-0.5 rounded-full bg-off-white text-subtle text-xs font-semibold">
                   {filteredDroppingOrders.length} records
                 </span>
               </div>
@@ -650,32 +648,32 @@ export default function KoolLogisticsPage() {
             </div>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-gray-700">
-                <thead className="bg-gray-50/75 border-b border-gray-200 text-gray-500 uppercase tracking-wider font-semibold">
+              <table className="w-full text-left text-xs text-subtle">
+                <thead className="bg-off-white border-b border-light-gray text-faint text-[12px] font-semibold">
                   <tr>
-                    <th className="py-3.5 px-4">Drop ID & Order</th>
-                    <th className="py-3.5 px-4">Customer & Phone</th>
+                    <th className="py-3.5 px-4">Drop ID & order</th>
+                    <th className="py-3.5 px-4">Customer & phone</th>
                     <th className="py-3.5 px-4">Destination & LGA</th>
-                    <th className="py-3.5 px-4">Carrier & Driver</th>
-                    <th className="py-3.5 px-4">Items / Payload</th>
-                    <th className="py-3.5 px-4">Scheduled Drop</th>
-                    <th className="py-3.5 px-4 whitespace-nowrap">Drop Status</th>
+                    <th className="py-3.5 px-4">Carrier & driver</th>
+                    <th className="py-3.5 px-4">Items / payload</th>
+                    <th className="py-3.5 px-4">Scheduled drop</th>
+                    <th className="py-3.5 px-4 whitespace-nowrap">Drop status</th>
                     <th className="py-3.5 px-4 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-light-gray">
                   {filteredDroppingOrders.length === 0 ? (
                     <tr>
                       <td colSpan={8} className="py-14 text-center">
                         <div className="max-w-md mx-auto space-y-3">
                           <EmptyDroppingOrdersIllustration className="w-52 h-40 mx-auto" />
                           <div className="space-y-1">
-                            <p className="font-bold text-gray-800 text-sm">
+                            <p className="font-semibold text-brand-charcoal text-sm">
                               {dropSearch || dropStatusFilter !== "all" || dropHubFilter !== "all"
                                 ? "No matching dropping orders found"
                                 : "No dropping orders in the dispatch queue"}
                             </p>
-                            <p className="text-xs text-gray-500 leading-relaxed max-w-sm mx-auto">
+                            <p className="text-xs text-faint leading-relaxed max-w-sm mx-auto">
                               {dropSearch || dropStatusFilter !== "all" || dropHubFilter !== "all"
                                 ? "Try resetting your search query or clear the status and hub filters to view all orders."
                                 : "Create your first dropping order to start dispatching shipments across regional hubs."}
@@ -691,7 +689,7 @@ export default function KoolLogisticsPage() {
                                   setDropHubFilter("all");
                                   setCurrentPage(1);
                                 }}
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors cursor-pointer"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-off-white hover:bg-light-gray text-subtle transition-colors cursor-pointer"
                               >
                                 Reset filters
                               </button>
@@ -716,7 +714,7 @@ export default function KoolLogisticsPage() {
                         onClick={() => setSelectedDropOrder(order)}
                       >
                         <td className="py-3.5 px-4">
-                          <div className="font-mono font-bold text-gray-900">
+                          <div className="font-mono font-semibold text-brand-charcoal">
                             {order.id}
                           </div>
                           <div className="text-[11px] text-brand-orange-text font-medium">
@@ -725,76 +723,76 @@ export default function KoolLogisticsPage() {
                         </td>
 
                         <td className="py-3.5 px-4">
-                          <div className="font-bold text-gray-900">
+                          <div className="font-semibold text-brand-charcoal">
                             {order.customerName}
                           </div>
-                          <div className="text-[11px] text-gray-500 font-mono">
+                          <div className="text-[11px] text-faint font-mono">
                             {order.customerPhone}
                           </div>
                         </td>
 
                         <td className="py-3.5 px-4">
                           <div
-                            className="text-gray-900 font-medium line-clamp-1 max-w-xs"
+                            className="text-brand-charcoal font-medium line-clamp-1 max-w-xs"
                             title={order.destinationAddress}
                           >
                             {order.destinationAddress}
                           </div>
-                          <div className="text-[11px] text-gray-500">
+                          <div className="text-[11px] text-faint">
                             {order.lga}, {order.state}
                           </div>
                         </td>
 
                         <td className="py-3.5 px-4">
-                          <div className="font-medium text-gray-900">
+                          <div className="font-medium text-brand-charcoal">
                             {order.carrier}
                           </div>
-                          <div className="text-[11px] text-gray-500">
+                          <div className="text-[11px] text-faint">
                             Driver: {order.driverName}
                           </div>
                         </td>
 
                         <td className="py-3.5 px-4">
-                          <div className="font-medium text-gray-900">
+                          <div className="font-medium text-brand-charcoal">
                             {order.itemsSummary}
                           </div>
-                          <span className="inline-block mt-0.5 text-[11px] font-semibold bg-gray-100 px-1.5 py-0.2 rounded text-gray-600">
+                          <span className="inline-block mt-0.5 text-[11px] font-semibold bg-off-white px-1.5 py-0.2 rounded text-subtle">
                             {order.itemType}
                           </span>
                         </td>
 
                         <td className="py-3.5 px-4">
-                          <div className="text-gray-900 font-medium">
+                          <div className="text-brand-charcoal font-medium">
                             {order.dropDate}
                           </div>
-                          <div className="text-[11px] text-gray-400">
+                          <div className="text-[11px] text-faint">
                             {order.estimatedDelivery.split(" ")[1]}
                           </div>
                         </td>
 
                         <td className="py-3.5 px-4 whitespace-nowrap">
                           {order.dropStatus === "Ready for Drop" && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800 border border-amber-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-warning/15 text-brand-charcoal border border-warning/30">
                               READY FOR DROP
                             </span>
                           )}
                           {order.dropStatus === "Dispatched" && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-brand-orange-soft text-brand-charcoal border border-brand-orange/30">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-brand-orange-soft text-brand-charcoal border border-brand-orange/30">
                               DISPATCHED
                             </span>
                           )}
                           {order.dropStatus === "In Transit" && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-purple-100 text-purple-800 border border-purple-200 animate-pulse">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-brand-orange-soft text-brand-charcoal border border-brand-orange/30 animate-pulse">
                               IN TRANSIT
                             </span>
                           )}
                           {order.dropStatus === "Dropped Off" && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-success-soft text-success border border-success/30">
                               DROPPED OFF
                             </span>
                           )}
                           {order.dropStatus === "Failed Handover" && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-error-soft text-error border border-error/30">
                               FAILED
                             </span>
                           )}
@@ -807,7 +805,7 @@ export default function KoolLogisticsPage() {
                           >
                             <button
                               onClick={() => setSelectedDropOrder(order)}
-                              className="px-2.5 py-1 rounded-lg text-xs font-bold text-brand-orange-text hover:text-brand-charcoal hover:bg-brand-orange-soft transition-colors"
+                              className="px-2.5 py-1 rounded-lg text-xs font-semibold text-brand-orange-text hover:text-brand-charcoal hover:bg-brand-orange-soft transition-colors"
                             >
                               Details
                             </button>
@@ -829,7 +827,7 @@ export default function KoolLogisticsPage() {
       {activeTab === "vendor-addresses" && (
         <div className="space-y-4">
           {/* Filters Bar */}
-          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
+          <div className="bg-white border border-light-gray rounded-lg p-4 space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="lg:col-span-3">
                 <Search
@@ -863,13 +861,13 @@ export default function KoolLogisticsPage() {
           </div>
 
           {/* Table */}
-          <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
-            <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+          <div className="bg-white border border-light-gray rounded-lg overflow-hidden">
+            <div className="p-4 border-b border-light-gray flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <h3 className="font-bold text-gray-900 text-sm">
+                <h3 className="font-semibold text-brand-charcoal text-sm">
                   Vendor Pickup Locations
                 </h3>
-                <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 text-xs font-bold">
+                <span className="px-2 py-0.5 rounded-full bg-off-white text-subtle text-xs font-semibold">
                   {filteredVendors.length} warehouses
                 </span>
               </div>
@@ -884,31 +882,31 @@ export default function KoolLogisticsPage() {
             </div>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-gray-700">
-                <thead className="bg-gray-50/75 border-b border-gray-200 text-gray-500 uppercase tracking-wider font-semibold">
+              <table className="w-full text-left text-xs text-subtle">
+                <thead className="bg-off-white border-b border-light-gray text-faint text-[12px] font-semibold">
                   <tr>
-                    <th className="py-3.5 px-4">Vendor & Code</th>
-                    <th className="py-3.5 px-4">Contact Person</th>
-                    <th className="py-3.5 px-4">Warehouse Address & LGA</th>
-                    <th className="py-3.5 px-4">Operating Hours</th>
-                    <th className="py-3.5 px-4">Dock & Access Notes</th>
+                    <th className="py-3.5 px-4">Vendor & code</th>
+                    <th className="py-3.5 px-4">Contact person</th>
+                    <th className="py-3.5 px-4">Warehouse address & LGA</th>
+                    <th className="py-3.5 px-4">Operating hours</th>
+                    <th className="py-3.5 px-4">Dock & access notes</th>
                     <th className="py-3.5 px-4">Status</th>
                     <th className="py-3.5 px-4 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-light-gray">
                   {filteredVendors.length === 0 ? (
                     <tr>
                       <td colSpan={7} className="py-14 text-center">
                         <div className="max-w-md mx-auto space-y-3">
                           <EmptyVendorWarehouseIllustration className="w-52 h-40 mx-auto" />
                           <div className="space-y-1">
-                            <p className="font-bold text-gray-800 text-sm">
+                            <p className="font-semibold text-brand-charcoal text-sm">
                               {vendorSearch || vendorStateFilter !== "all"
                                 ? "No matching vendor addresses found"
                                 : "No vendor pickup locations registered"}
                             </p>
-                            <p className="text-xs text-gray-500 leading-relaxed max-w-sm mx-auto">
+                            <p className="text-xs text-faint leading-relaxed max-w-sm mx-auto">
                               {vendorSearch || vendorStateFilter !== "all"
                                 ? "No vendor depots match your search criteria. Try clearing the state filter or search query."
                                 : "Add authorized vendor warehouses and depot locations for collection and stocking."}
@@ -923,7 +921,7 @@ export default function KoolLogisticsPage() {
                                   setVendorStateFilter("all");
                                   setCurrentPage(1);
                                 }}
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors cursor-pointer"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-off-white hover:bg-light-gray text-subtle transition-colors cursor-pointer"
                               >
                                 Reset filters
                               </button>
@@ -939,49 +937,49 @@ export default function KoolLogisticsPage() {
                         className="hover:bg-brand-orange-soft/20 transition-colors"
                       >
                         <td className="py-3.5 px-4">
-                          <div className="font-bold text-gray-900">
+                          <div className="font-semibold text-brand-charcoal">
                             {ven.vendorName}
                           </div>
-                          <div className="text-[11px] font-mono text-gray-400">
+                          <div className="text-[11px] font-mono text-faint">
                             {ven.vendorCode}
                           </div>
                         </td>
 
                         <td className="py-3.5 px-4">
-                          <div className="font-medium text-gray-900">
+                          <div className="font-medium text-brand-charcoal">
                             {ven.contactPerson}
                           </div>
-                          <div className="text-[11px] text-gray-500 font-mono">
+                          <div className="text-[11px] text-faint font-mono">
                             {ven.contactPhone}
                           </div>
                         </td>
 
                         <td className="py-3.5 px-4">
-                          <div className="text-gray-900 font-medium line-clamp-1 max-w-xs">
+                          <div className="text-brand-charcoal font-medium line-clamp-1 max-w-xs">
                             {ven.warehouseAddress}
                           </div>
-                          <div className="text-[11px] text-gray-500">
+                          <div className="text-[11px] text-faint">
                             {ven.lga}, {ven.state}
                           </div>
                         </td>
 
-                        <td className="py-3.5 px-4 font-medium text-gray-800">
+                        <td className="py-3.5 px-4 font-medium text-brand-charcoal">
                           {ven.operatingHours}
                         </td>
 
                         <td className="py-3.5 px-4">
-                          <div className="text-gray-700 text-[11px] line-clamp-2 max-w-xs">
+                          <div className="text-subtle text-[11px] line-clamp-2 max-w-xs">
                             {ven.dockAccess}
                           </div>
                         </td>
 
                         <td className="py-3.5 px-4">
                           {ven.verificationStatus === "Verified" ? (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-success-soft text-success border border-success/30">
                               Verified
                             </span>
                           ) : (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-warning/10 text-warning border border-warning/30">
                               Pending Audit
                             </span>
                           )}
@@ -994,7 +992,7 @@ export default function KoolLogisticsPage() {
                                 `Address: ${ven.warehouseAddress}, ${ven.lga}, ${ven.state}\nContact: ${ven.contactPerson} (${ven.contactPhone})`,
                               )
                             }
-                            className="px-2.5 py-1 rounded-lg text-xs font-bold text-brand-orange-text hover:text-brand-charcoal hover:bg-brand-orange-soft transition-colors"
+                            className="px-2.5 py-1 rounded-lg text-xs font-semibold text-brand-orange-text hover:text-brand-charcoal hover:bg-brand-orange-soft transition-colors"
                           >
                             View Card
                           </button>
@@ -1015,7 +1013,7 @@ export default function KoolLogisticsPage() {
       {activeTab === "delivery-prices" && (
         <div className="space-y-4">
           {/* Filters Bar */}
-          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm space-y-4">
+          <div className="bg-white border border-light-gray rounded-lg p-4 space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="lg:col-span-2">
                 <Search
@@ -1071,13 +1069,13 @@ export default function KoolLogisticsPage() {
           </div>
 
           {/* Table */}
-          <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
-            <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+          <div className="bg-white border border-light-gray rounded-lg overflow-hidden">
+            <div className="p-4 border-b border-light-gray flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <h3 className="font-bold text-gray-900 text-sm">
+                <h3 className="font-semibold text-brand-charcoal text-sm">
                   LGA Delivery Pricing Tariff
                 </h3>
-                <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 text-xs font-bold">
+                <span className="px-2 py-0.5 rounded-full bg-off-white text-subtle text-xs font-semibold">
                   {filteredLgaPrices.length} LGAs
                 </span>
               </div>
@@ -1092,32 +1090,32 @@ export default function KoolLogisticsPage() {
             </div>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-gray-700">
-                <thead className="bg-gray-50/75 border-b border-gray-200 text-gray-500 uppercase tracking-wider font-semibold">
+              <table className="w-full text-left text-xs text-subtle">
+                <thead className="bg-off-white border-b border-light-gray text-faint text-[12px] font-semibold">
                   <tr>
-                    <th className="py-3.5 px-4">Local Government Area (LGA)</th>
-                    <th className="py-3.5 px-4">State & Zone</th>
-                    <th className="py-3.5 px-4">Standard Delivery</th>
-                    <th className="py-3.5 px-4">Heavy Solar Appliance</th>
-                    <th className="py-3.5 px-4">Estimated Transit SLA</th>
-                    <th className="py-3.5 px-4">Assigned Dispatch Hub</th>
-                    <th className="py-3.5 px-4">Service Status</th>
+                    <th className="py-3.5 px-4">Local government area (LGA)</th>
+                    <th className="py-3.5 px-4">State & zone</th>
+                    <th className="py-3.5 px-4">Standard delivery</th>
+                    <th className="py-3.5 px-4">Heavy solar appliance</th>
+                    <th className="py-3.5 px-4">Estimated transit SLA</th>
+                    <th className="py-3.5 px-4">Assigned dispatch hub</th>
+                    <th className="py-3.5 px-4">Service status</th>
                     <th className="py-3.5 px-4 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-light-gray">
                   {filteredLgaPrices.length === 0 ? (
                     <tr>
                       <td colSpan={8} className="py-14 text-center">
                         <div className="max-w-md mx-auto space-y-3">
                           <EmptyDeliveryRatesIllustration className="w-52 h-40 mx-auto" />
                           <div className="space-y-1">
-                            <p className="font-bold text-gray-800 text-sm">
+                            <p className="font-semibold text-brand-charcoal text-sm">
                               {lgaSearch || lgaStateFilter !== "all" || lgaZoneFilter !== "all"
                                 ? "No matching delivery rates found"
                                 : "No LGA delivery pricing configured"}
                             </p>
-                            <p className="text-xs text-gray-500 leading-relaxed max-w-sm mx-auto">
+                            <p className="text-xs text-faint leading-relaxed max-w-sm mx-auto">
                               {lgaSearch || lgaStateFilter !== "all" || lgaZoneFilter !== "all"
                                 ? "Try resetting your search query or clear the state and logistics zone filters."
                                 : "Configure delivery tariffs and transit time by Local Government Area across hubs."}
@@ -1133,7 +1131,7 @@ export default function KoolLogisticsPage() {
                                   setLgaZoneFilter("all");
                                   setCurrentPage(1);
                                 }}
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors cursor-pointer"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-off-white hover:bg-light-gray text-subtle transition-colors cursor-pointer"
                               >
                                 Reset filters
                               </button>
@@ -1149,46 +1147,46 @@ export default function KoolLogisticsPage() {
                         className="hover:bg-brand-orange-soft/20 transition-colors"
                       >
                         <td className="py-3.5 px-4">
-                          <div className="font-bold text-gray-900 text-[13px]">
+                          <div className="font-semibold text-brand-charcoal text-[13px]">
                             {lga.lgaName}
                           </div>
-                          <div className="text-[11px] text-gray-400">
+                          <div className="text-[11px] text-faint">
                             {lga.id}
                           </div>
                         </td>
 
                         <td className="py-3.5 px-4">
-                          <div className="font-medium text-gray-900">
+                          <div className="font-medium text-brand-charcoal">
                             {lga.state}
                           </div>
-                          <span className="inline-block mt-0.5 text-[11px] font-semibold bg-slate-100 px-1.5 py-0.2 rounded text-slate-700">
+                          <span className="inline-block mt-0.5 text-[11px] font-semibold bg-off-white px-1.5 py-0.2 rounded text-subtle">
                             {lga.zone}
                           </span>
                         </td>
 
-                        <td className="py-3.5 px-4 font-mono font-bold text-gray-900">
+                        <td className="py-3.5 px-4 font-mono font-semibold text-brand-charcoal">
                           ₦{lga.standardDeliveryFee.toLocaleString()}
                         </td>
 
-                        <td className="py-3.5 px-4 font-mono font-bold text-brand-orange-text">
+                        <td className="py-3.5 px-4 font-mono font-semibold text-brand-orange-text">
                           ₦{lga.heavyApplianceFee.toLocaleString()}
                         </td>
 
-                        <td className="py-3.5 px-4 font-medium text-gray-700">
+                        <td className="py-3.5 px-4 font-medium text-subtle">
                           {lga.estimatedTransitTime}
                         </td>
 
-                        <td className="py-3.5 px-4 text-gray-700">
+                        <td className="py-3.5 px-4 text-subtle">
                           {lga.hubAssigned}
                         </td>
 
                         <td className="py-3.5 px-4">
                           {lga.status === "Active" ? (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-success-soft text-success border border-success/30">
                               Active
                             </span>
                           ) : (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-warning/10 text-warning border border-warning/30">
                               Restricted
                             </span>
                           )}
@@ -1197,7 +1195,7 @@ export default function KoolLogisticsPage() {
                         <td className="py-3.5 px-4 text-right">
                           <button
                             onClick={() => openEditLgaModal(lga)}
-                            className="px-2.5 py-1 rounded-lg text-xs font-bold text-brand-orange-text hover:text-brand-charcoal hover:bg-brand-orange-soft transition-colors"
+                            className="px-2.5 py-1 rounded-lg text-xs font-semibold text-brand-orange-text hover:text-brand-charcoal hover:bg-brand-orange-soft transition-colors"
                           >
                             Edit Rate
                           </button>
@@ -1223,31 +1221,31 @@ export default function KoolLogisticsPage() {
           width="max-w-xl"
         >
           <div className="space-y-6">
-            <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 space-y-3">
+            <div className="bg-off-white rounded-lg p-4 border border-light-gray space-y-3">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-sm font-bold text-gray-900">
+                <span className="font-mono text-sm font-semibold text-brand-charcoal">
                   {selectedDropOrder.id}
                 </span>
-                <span className="text-xs font-bold text-brand-orange-text">
+                <span className="text-xs font-semibold text-brand-orange-text">
                   Order Ref: {selectedDropOrder.orderRef}
                 </span>
               </div>
-              <div className="text-xs text-gray-600 pt-2 border-t border-gray-200 space-y-1">
+              <div className="text-xs text-subtle pt-2 border-t border-light-gray space-y-1">
                 <div>
                   Customer:{" "}
-                  <span className="font-bold text-gray-900">
+                  <span className="font-semibold text-brand-charcoal">
                     {selectedDropOrder.customerName}
                   </span>
                 </div>
                 <div>
                   Phone:{" "}
-                  <span className="font-mono text-gray-900">
+                  <span className="font-mono text-brand-charcoal">
                     {selectedDropOrder.customerPhone}
                   </span>
                 </div>
                 <div>
                   Destination:{" "}
-                  <span className="font-medium text-gray-900">
+                  <span className="font-medium text-brand-charcoal">
                     {selectedDropOrder.destinationAddress},{" "}
                     {selectedDropOrder.lga}, {selectedDropOrder.state}
                   </span>
@@ -1256,8 +1254,8 @@ export default function KoolLogisticsPage() {
             </div>
 
             <div className="space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400">
-                Update Fulfillment Status
+              <h4 className="text-[12px] font-medium text-subtle">
+                Update fulfillment status
               </h4>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {(
@@ -1274,9 +1272,9 @@ export default function KoolLogisticsPage() {
                     onClick={() =>
                       handleUpdateDropStatus(selectedDropOrder.id, st)
                     }
-                    className={`p-2.5 rounded-xl border text-xs font-bold transition-all text-center ${selectedDropOrder.dropStatus === st
+                    className={`p-2.5 rounded-lg border text-xs font-semibold transition-all text-center ${selectedDropOrder.dropStatus === st
                         ? "border-brand-orange bg-brand-orange-soft text-brand-charcoal "
-                        : "border-gray-200 text-gray-600 hover:bg-gray-50"
+                        : "border-light-gray text-subtle hover:bg-off-white"
                       }`}
                   >
                     {st}
@@ -1285,51 +1283,51 @@ export default function KoolLogisticsPage() {
               </div>
             </div>
 
-            <div className="bg-white p-4 rounded-xl border border-gray-200 text-xs space-y-2">
+            <div className="bg-white p-4 rounded-lg border border-light-gray text-xs space-y-2">
               <div className="flex justify-between">
-                <span className="text-gray-500">Dispatch Hub:</span>
-                <span className="font-bold text-gray-800">
+                <span className="text-faint">Dispatch Hub:</span>
+                <span className="font-semibold text-brand-charcoal">
                   {selectedDropOrder.dispatchHub}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-500">Assigned Carrier:</span>
-                <span className="font-bold text-gray-800">
+                <span className="text-faint">Assigned Carrier:</span>
+                <span className="font-semibold text-brand-charcoal">
                   {selectedDropOrder.carrier}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-500">Courier Driver:</span>
-                <span className="font-bold text-gray-800">
+                <span className="text-faint">Courier Driver:</span>
+                <span className="font-semibold text-brand-charcoal">
                   {selectedDropOrder.driverName} (
                   {selectedDropOrder.driverPhone})
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-500">Package Payload:</span>
-                <span className="font-bold text-gray-800">
+                <span className="text-faint">Package Payload:</span>
+                <span className="font-semibold text-brand-charcoal">
                   {selectedDropOrder.itemsSummary}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-500">Estimated Delivery:</span>
-                <span className="font-bold text-gray-800">
+                <span className="text-faint">Estimated Delivery:</span>
+                <span className="font-semibold text-brand-charcoal">
                   {selectedDropOrder.estimatedDelivery}
                 </span>
               </div>
               {selectedDropOrder.notes && (
-                <div className="pt-2 border-t border-gray-100 text-gray-500 italic">
+                <div className="pt-2 border-t border-light-gray text-faint italic">
                   Note: {selectedDropOrder.notes}
                 </div>
               )}
             </div>
 
-            <div className="pt-4 border-t border-gray-200 flex items-center justify-between">
+            <div className="pt-4 border-t border-light-gray flex items-center justify-between">
               <button
                 onClick={() =>
                   alert(`Waybill slip generated for ${selectedDropOrder.id}`)
                 }
-                className="text-xs font-bold text-brand-orange-text hover:text-brand-charcoal"
+                className="text-xs font-semibold text-brand-orange-text hover:text-brand-charcoal"
               >
                 Print Waybill Slip
               </button>
@@ -1358,10 +1356,10 @@ export default function KoolLogisticsPage() {
               <Icon name="plus" className="w-6 h-6" />
             </div>
             <div className="text-center">
-              <h3 className="text-lg font-bold text-gray-900">
+              <h3 className="text-lg font-semibold text-brand-charcoal">
                 Create Dropping Order
               </h3>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-faint mt-1">
                 Dispatch an order payload through the Kool Logistics dropping
                 hub network.
               </p>
@@ -1369,7 +1367,7 @@ export default function KoolLogisticsPage() {
 
             <div className="space-y-3 pt-2">
               <div>
-                <label className="text-xs font-bold text-gray-700 block mb-1">
+                <label className="text-xs font-semibold text-subtle block mb-1">
                   Order Reference
                 </label>
                 <Input
@@ -1383,7 +1381,7 @@ export default function KoolLogisticsPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-bold text-gray-700 block mb-1">
+                  <label className="text-xs font-semibold text-subtle block mb-1">
                     Customer Name
                   </label>
                   <Input
@@ -1395,7 +1393,7 @@ export default function KoolLogisticsPage() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-gray-700 block mb-1">
+                  <label className="text-xs font-semibold text-subtle block mb-1">
                     Customer Phone
                   </label>
                   <Input
@@ -1409,7 +1407,7 @@ export default function KoolLogisticsPage() {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-700 block mb-1">
+                <label className="text-xs font-semibold text-subtle block mb-1">
                   Destination Address
                 </label>
                 <Input
@@ -1423,7 +1421,7 @@ export default function KoolLogisticsPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-bold text-gray-700 block mb-1">
+                  <label className="text-xs font-semibold text-subtle block mb-1">
                     State
                   </label>
                   <Dropdown
@@ -1442,7 +1440,7 @@ export default function KoolLogisticsPage() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-gray-700 block mb-1">
+                  <label className="text-xs font-semibold text-subtle block mb-1">
                     LGA
                   </label>
                   <Input
@@ -1456,7 +1454,7 @@ export default function KoolLogisticsPage() {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-700 block mb-1">
+                <label className="text-xs font-semibold text-subtle block mb-1">
                   Item Details
                 </label>
                 <Input
@@ -1469,7 +1467,7 @@ export default function KoolLogisticsPage() {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-700 block mb-1">
+                <label className="text-xs font-semibold text-subtle block mb-1">
                   Carrier Fleet
                 </label>
                 <Dropdown
@@ -1527,10 +1525,10 @@ export default function KoolLogisticsPage() {
               <Icon name="plus" className="w-6 h-6" />
             </div>
             <div className="text-center">
-              <h3 className="text-lg font-bold text-gray-900">
+              <h3 className="text-lg font-semibold text-brand-charcoal">
                 Add Vendor Pickup Address
               </h3>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-faint mt-1">
                 Register a verified merchant warehouse location for pickup
                 routing.
               </p>
@@ -1539,7 +1537,7 @@ export default function KoolLogisticsPage() {
             <div className="space-y-3 pt-2">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-bold text-gray-700 block mb-1">
+                  <label className="text-xs font-semibold text-subtle block mb-1">
                     Vendor Name
                   </label>
                   <Input
@@ -1551,7 +1549,7 @@ export default function KoolLogisticsPage() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-gray-700 block mb-1">
+                  <label className="text-xs font-semibold text-subtle block mb-1">
                     Vendor Code
                   </label>
                   <Input
@@ -1566,7 +1564,7 @@ export default function KoolLogisticsPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-bold text-gray-700 block mb-1">
+                  <label className="text-xs font-semibold text-subtle block mb-1">
                     Contact Person
                   </label>
                   <Input
@@ -1578,7 +1576,7 @@ export default function KoolLogisticsPage() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-gray-700 block mb-1">
+                  <label className="text-xs font-semibold text-subtle block mb-1">
                     Contact Phone
                   </label>
                   <Input
@@ -1592,7 +1590,7 @@ export default function KoolLogisticsPage() {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-700 block mb-1">
+                <label className="text-xs font-semibold text-subtle block mb-1">
                   Warehouse Address
                 </label>
                 <Input
@@ -1606,7 +1604,7 @@ export default function KoolLogisticsPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-bold text-gray-700 block mb-1">
+                  <label className="text-xs font-semibold text-subtle block mb-1">
                     State
                   </label>
                   <Dropdown
@@ -1625,7 +1623,7 @@ export default function KoolLogisticsPage() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-gray-700 block mb-1">
+                  <label className="text-xs font-semibold text-subtle block mb-1">
                     LGA
                   </label>
                   <Input
@@ -1639,7 +1637,7 @@ export default function KoolLogisticsPage() {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-700 block mb-1">
+                <label className="text-xs font-semibold text-subtle block mb-1">
                   Dock Access & Forklift Specs
                 </label>
                 <Input
@@ -1682,12 +1680,12 @@ export default function KoolLogisticsPage() {
               <Icon name="settings" className="w-6 h-6" />
             </div>
             <div className="text-center">
-              <h3 className="text-lg font-bold text-gray-900">
+              <h3 className="text-lg font-semibold text-brand-charcoal">
                 {editingLga
                   ? `Edit LGA Delivery Rate: ${editingLga.lgaName}`
                   : "Add LGA Delivery Pricing Rate"}
               </h3>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-faint mt-1">
                 Configure standard and heavy solar appliance tariffs by Local
                 Government Area.
               </p>
@@ -1696,7 +1694,7 @@ export default function KoolLogisticsPage() {
             <div className="space-y-3 pt-2">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-bold text-gray-700 block mb-1">
+                  <label className="text-xs font-semibold text-subtle block mb-1">
                     LGA Name
                   </label>
                   <Input
@@ -1708,7 +1706,7 @@ export default function KoolLogisticsPage() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-gray-700 block mb-1">
+                  <label className="text-xs font-semibold text-subtle block mb-1">
                     State
                   </label>
                   <Dropdown
@@ -1729,7 +1727,7 @@ export default function KoolLogisticsPage() {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-700 block mb-1">
+                <label className="text-xs font-semibold text-subtle block mb-1">
                   Logistics Zone
                 </label>
                 <Dropdown
@@ -1754,7 +1752,7 @@ export default function KoolLogisticsPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-bold text-gray-700 block mb-1">
+                  <label className="text-xs font-semibold text-subtle block mb-1">
                     Standard Item Fee (₦)
                   </label>
                   <Input
@@ -1766,7 +1764,7 @@ export default function KoolLogisticsPage() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-gray-700 block mb-1">
+                  <label className="text-xs font-semibold text-subtle block mb-1">
                     Heavy Freezer Fee (₦)
                   </label>
                   <Input
@@ -1780,7 +1778,7 @@ export default function KoolLogisticsPage() {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-700 block mb-1">
+                <label className="text-xs font-semibold text-subtle block mb-1">
                   Estimated Transit SLA
                 </label>
                 <Input
@@ -1793,7 +1791,7 @@ export default function KoolLogisticsPage() {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-700 block mb-1">
+                <label className="text-xs font-semibold text-subtle block mb-1">
                   Assigned Dispatch Hub
                 </label>
                 <Input

@@ -5,68 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/app/components/Header";
 import { Footer } from "@/app/components/Footer";
-import {
-  HiChevronRight,
-  HiStar,
-  HiSparkles,
-  HiBeaker,
-  HiShoppingBag,
-  HiShieldCheck,
-} from "react-icons/hi2";
+import { EmptyState } from "@/app/components/EmptyState";
 import { motion } from "framer-motion";
 
 const BrandsPage = () => {
-  const brands = [
-    {
-      title: "Koolbuy Store Signature",
-      description:
-        "Our flagship house, masterfully balancing midnight bloom with rare oud for an unforgettable sensory trajectory.",
-      image: "/brandImage/signature_oud.webp",
-      icon: <HiSparkles className="text-brand-orange-text" size={22} />,
-      link: "/products?brand=Bloom+%26+Mist",
-    },
-    {
-      title: "Prada",
-      description:
-        "Reinventing classic elegance through avant-garde scented sensations and timeless ambery signatures.",
-      image: "/brandImage/product_2.png",
-      icon: <HiStar className="text-brand-orange-text" size={22} />,
-      link: "/products?brand=Prada",
-    },
-    {
-      title: "Versace",
-      description:
-        "Powerful, passionate compositions that blend noble ingredients into vibrant, high-fidelity fragrances.",
-      image: "/brandImage/product_4.png",
-      icon: <HiShieldCheck className="text-brand-orange-text" size={22} />,
-      link: "/products?brand=Versace",
-    },
-    {
-      title: "Gucci",
-      description:
-        "Eclectic and contemporary structures that remain unchanged from the first application to the skin.",
-      image: "/brandImage/gucci_guilty.png",
-      icon: <HiBeaker className="text-brand-orange-text" size={22} />,
-      link: "/products?brand=Gucci",
-    },
-    {
-      title: "Dior",
-      description:
-        "Absolute luxury distilled into intense floral and woody orchestrations for the modern connoisseur.",
-      image: "/brandImage/product_6.png",
-      icon: <HiShoppingBag className="text-brand-orange-text" size={22} />,
-      link: "/products?brand=Dior",
-    },
-    {
-      title: "Lancôme",
-      description:
-        "Sophisticated beauty rituals designed to materialize absolute radiance and timeless femininity.",
-      image: "/brandImage/product_13.png",
-      icon: <HiSparkles className="text-brand-orange-text" size={22} />,
-      link: "/products?brand=Lancôme",
-    },
-  ];
-
   const ease = [0.16, 1, 0.3, 1] as const;
 
   return (
@@ -96,53 +38,14 @@ const BrandsPage = () => {
           </motion.div>
         </section>
 
-        {/* Brands grid: photo edge to edge, text below */}
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4">
-          {brands.map((brand, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (i % 2) * 0.08, ease }}
-              className="bg-white rounded-tile md:rounded-hero overflow-hidden flex flex-col cursor-pointer group transition-shadow duration-300 hover:shadow-lift"
-            >
-              <div className="relative aspect-16/10 bg-off-white overflow-hidden">
-                <Image
-                  src={brand.image}
-                  alt={brand.title}
-                  fill sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-700 ease-apple group-hover:scale-[1.03]"
-                />
-              </div>
-
-              <div className="flex flex-col gap-4 px-6 pt-5 pb-6 md:px-8 md:pt-6 md:pb-8 flex-1">
-                <div className="flex items-center justify-between">
-                  <div className="w-11 h-11 bg-brand-orange-soft rounded-stage flex items-center justify-center">
-                    {brand.icon}
-                  </div>
-                  <span className="text-[13px] text-faint">
-                    Signature house
-                  </span>
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <h3 className="text-[24px] md:text-[28px] font-semibold text-brand-charcoal tracking-[-0.02em] leading-[1.1]">
-                    {brand.title}
-                  </h3>
-                  <p className="text-[15px] text-subtle leading-normal max-w-md">
-                    {brand.description}
-                  </p>
-                </div>
-                <Link
-                  href={brand.link}
-                  className="mt-auto inline-flex items-center gap-0.5 w-fit text-[15px] font-medium text-brand-orange-text hover:underline"
-                >
-                  Discover collection <HiChevronRight size={16} />
-                </Link>
-              </div>
-            </motion.div>
-          ))}
-        </section>
+        {/* Brands: no brand catalogue in the backend yet */}
+        <EmptyState
+          variant="card"
+          illustration="vendors"
+          title="No brands yet"
+          description="Brands will appear here once they're added to the store."
+          action={{ label: "Browse products", href: "/products" }}
+        />
 
         {/* Brands concierge: a charcoal band tile (dark band rules) */}
         <section className="bg-brand-charcoal rounded-tile md:rounded-hero py-16 md:py-24 relative overflow-hidden">

@@ -51,19 +51,19 @@ export function BulkActionsDrawer({
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="pointer-events-auto relative bg-white h-full shadow-[-20px_0_50px_-12px_rgba(0,0,0,0.12)] z-50 flex flex-col max-w-sm w-full border-l border-gray-100"
+            className="pointer-events-auto relative bg-white h-full shadow-float z-50 flex flex-col max-w-sm w-full border-l border-light-gray"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 flex-shrink-0 bg-gray-50/50">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-light-gray flex-shrink-0 bg-off-white/50">
               <div className="flex flex-col">
-                <h3 className="text-[16px] font-bold text-brand-charcoal">{title}</h3>
-                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mt-0.5">
-                  Batch Management
+                <h3 className="text-[16px] font-semibold text-brand-charcoal">{title}</h3>
+                <span className="text-[12px] font-medium text-subtle mt-0.5">
+                  Batch management
                 </span>
               </div>
               <button
                 onClick={onClose}
-                className="p-2 -mr-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-all active:scale-95"
+                className="p-2 -mr-2 rounded-full hover:bg-off-white text-faint hover:text-subtle transition-all active:scale-95"
               >
                 <IoMdClose size={20} />
               </button>
@@ -82,28 +82,28 @@ export function BulkActionsDrawer({
 
               {actions.length > 0 && (
                 <div className="flex flex-col gap-3">
-                  <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider px-1">
-                    Available Actions
+                  <p className="text-[12px] font-medium text-subtle px-1">
+                    Available actions
                   </p>
                   <div className="flex flex-col gap-2">
                     {actions.map((action) => (
                       <button
                         key={action.id}
                         onClick={action.onClick}
-                        className={`flex items-center gap-4 p-3.5 rounded-2xl transition-all text-left border border-transparent
+                        className={`flex items-center gap-4 p-3.5 rounded-lg transition-all text-left border border-transparent
                           ${action.variant === "danger"
-                            ? "hover:bg-rose-50 hover:border-rose-100 text-rose-600"
+                            ? "hover:bg-error-soft hover:border-error/20 text-error"
                             : "hover:bg-brand-orange-soft hover:border-brand-charcoal/10 text-brand-charcoal"}
                         `}
                       >
-                        <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0
+                        <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0
                           ${action.variant === "danger"
-                            ? "bg-rose-50 text-rose-500 shadow-sm shadow-rose-100"
-                            : "bg-white text-brand-orange-text shadow-sm border border-gray-50"}
+                            ? "bg-error-soft text-error"
+                            : "bg-white text-brand-orange-text border border-light-gray"}
                         `}>
                           <Icon name={action.icon} folder={action.folder} size="xs" />
                         </div>
-                        <span className="text-[12px] font-bold">{action.title}</span>
+                        <span className="text-[12px] font-semibold">{action.title}</span>
                         <div className="ml-auto opacity-40">
                           <Icon name="arrow_forward" folder="icon" size="xs" />
                         </div>
@@ -114,13 +114,13 @@ export function BulkActionsDrawer({
               )}
 
               {/* Pro Tip Card */}
-              <div className="mt-auto p-4 bg-gray-900 rounded-2xl relative overflow-hidden group">
+              <div className="mt-auto p-4 bg-brand-charcoal rounded-lg relative overflow-hidden group">
                 <div className="absolute top-0 right-0 p-3 opacity-10 rotate-12 transition-transform group-hover:rotate-45 duration-500">
                   <Icon name="verified" folder="icon" size="lg" className="text-white w-14 h-14" />
                 </div>
                 <div className="relative z-10 flex flex-col gap-2">
-                  <span className="text-[12px] font-bold text-white">Efficiency Tip</span>
-                  <p className="text-[11px] font-medium text-gray-400 leading-relaxed">
+                  <span className="text-[12px] font-semibold text-white">Efficiency Tip</span>
+                  <p className="text-[11px] font-medium text-medium-gray leading-relaxed">
                     Batch actions apply instantly to all items in your selection list. Always double-check before confirming bulk deletions.
                   </p>
                 </div>

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   DashboardIcon,
@@ -110,7 +110,6 @@ const navSections: NavItemConfig[][] = [
     { name: "Admin Service Area", href: "/admin/service-area", icon: SewingPinIcon },
   ],
   [
-    { name: "Profile", href: "/admin/profile", icon: AvatarIcon },
     { name: "Customize", href: "/admin/customize", icon: MixerHorizontalIcon },
     {
       name: "Styling",
@@ -156,8 +155,8 @@ const navSections: NavItemConfig[][] = [
       href: "/admin/advert",
       icon: ImageIcon,
       subItems: [
-        { name: "Web Banners", href: "/admin/advert?type=web", icon: DesktopIcon },
-        { name: "Mobile Banners", href: "/admin/advert?type=mobile", icon: MobileIcon },
+        { name: "Homepage Banners", href: "/admin/advert?tab=homepage", icon: DesktopIcon },
+        { name: "Store Banners", href: "/admin/advert?tab=store", icon: ImageIcon },
       ],
     },
     { name: "Promocode", href: "/admin/coupons", icon: TokensIcon },
@@ -168,6 +167,7 @@ const navSections: NavItemConfig[][] = [
     { name: "Errors & Health", href: "/admin/health", icon: ActivityLogIcon },
     { name: "Tools", href: "/admin/tools", icon: HobbyKnifeIcon },
     { name: "Kool Logistics", href: "/admin/logistics", icon: GlobeIcon },
+    { name: "Profile", href: "/admin/profile", icon: AvatarIcon },
     { name: "Audit Logs", href: "/admin/audit-logs", icon: ClockIcon },
   ],
 ];
@@ -177,6 +177,33 @@ const COLLAPSED_KEY = "admin-sidenav-collapsed";
 const matches = (pathname: string, href: string) => {
   const clean = href.split("?")[0];
   return pathname === clean || pathname.startsWith(clean + "/");
+};
+
+/**
+ * Sub-items that share a page and differ only by query (e.g. ?tab=homepage /
+ * ?tab=store) must not all light up together: a sub-item is active when the
+ * path matches and every query param in its href matches the current URL. When
+ * none of its siblings' queries match (no ?tab yet), the first sibling on that
+ * path is the active one, as that's what the page shows by default.
+ */
+const isSubActive = (
+  pathname: string,
+  search: URLSearchParams,
+  sub: { href: string },
+  siblings: { href: string }[],
+) => {
+  const [path, query = ""] = sub.href.split("?");
+  if (pathname !== path) return false;
+  const queryMatches = (q: string) =>
+    [...new URLSearchParams(q).entries()].every(([k, v]) => search.get(k) === v);
+  if (!query) return true;
+  if (queryMatches(query)) return true;
+  const samePath = siblings.filter((s) => s.href.split("?")[0] === path);
+  const anyMatches = samePath.some((s) => {
+    const q = s.href.split("?")[1];
+    return q ? queryMatches(q) : false;
+  });
+  return !anyMatches && samePath[0]?.href === sub.href;
 };
 
 const isItemActive = (pathname: string, item: NavItemConfig) => {
@@ -205,6 +232,7 @@ interface SidenavProps {
 
 export const AdminSidebar: React.FC<SidenavProps> = ({ isOpen, onClose }) => {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const router = useRouter();
   const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -291,7 +319,7 @@ export const AdminSidebar: React.FC<SidenavProps> = ({ isOpen, onClose }) => {
       <aside
         id="sidenav"
         className={`${collapsed ? "w-[70px] min-w-[70px]" : "w-[250px] min-w-[250px] 2xl:w-[260px] 2xl:min-w-[260px]"} h-full shrink-0 flex flex-col bg-white border-r border-light-gray transition-all duration-300 ${
-          isOpen ? "fixed inset-y-0 left-0 z-50 flex shadow-md" : "hidden sm:flex"
+          isOpen ? "fixed inset-y-0 left-0 z-50 flex shadow-float" : "hidden sm:flex"
         }`}
       >
         {/* 70px logo bar, level with the header */}
@@ -375,7 +403,7 @@ export const AdminSidebar: React.FC<SidenavProps> = ({ isOpen, onClose }) => {
                           >
                             {item.subItems!.map((sub) => {
                               const SubIcon = sub.icon;
-                              const subActive = pathname === sub.href.split("?")[0];
+                              const subActive = isSubActive(pathname, searchParams, sub, item.subItems ?? []);
                               return (
                                 <Link
                                   key={sub.name}
@@ -419,7 +447,7 @@ export const AdminSidebar: React.FC<SidenavProps> = ({ isOpen, onClose }) => {
       {collapsed && tooltip && (
         <div
           role="tooltip"
-          className="fixed z-[60] -translate-y-1/2 px-2.5 py-1.5 rounded-md bg-brand-charcoal text-white text-xs font-medium shadow-md pointer-events-none whitespace-nowrap"
+          className="fixed z-[60] -translate-y-1/2 px-2.5 py-1.5 rounded-md bg-brand-charcoal text-white text-xs font-medium shadow-float pointer-events-none whitespace-nowrap"
           style={{ top: tooltip.top, left: tooltip.left }}
         >
           {tooltip.label}
@@ -430,7 +458,7 @@ export const AdminSidebar: React.FC<SidenavProps> = ({ isOpen, onClose }) => {
       {collapsed && flyout && (
         <div
           data-nav-flyout
-          className="fixed z-[60] w-56 py-1 bg-white border border-light-gray rounded-lg shadow-lg"
+          className="fixed z-[60] w-56 py-1 bg-white border border-light-gray rounded-lg shadow-float"
           style={{ top: flyout.top, left: flyout.left }}
         >
           {flyout.item.subItems!.map((sub) => {

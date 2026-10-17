@@ -80,20 +80,20 @@ export default function ErrorAndHealthPage() {
     <div className="flex flex-col gap-6 pb-12">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 right-8 z-50 bg-brand-charcoal text-white text-xs px-4 py-3 rounded-lg shadow-md flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="fixed top-20 right-8 z-50 bg-brand-charcoal text-white text-xs px-4 py-3 rounded-lg shadow-float flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
           <HiOutlineCheckCircle className="w-4 h-4 text-brand-orange" />
           <span>{toastMessage}</span>
         </div>
       )}
 
       {/* Main Container */}
-      <div className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-lg border border-light-gray overflow-hidden">
         {/* Header section matching exact text */}
-        <div className="p-6 border-b border-gray-100">
-          <h1 className="text-xl font-bold text-gray-900 tracking-tight">
+        <div className="p-6 border-b border-light-gray">
+          <h1 className="text-xl font-semibold text-brand-charcoal tracking-tight">
             Diagnostic Results
           </h1>
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-faint mt-1">
             The following table lists potential issues detected in the system
             configuration, database, or environment.
           </p>
@@ -104,15 +104,15 @@ export default function ErrorAndHealthPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-212.5">
             <thead>
-              <tr className="border-b border-gray-100 bg-gray-50/50 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+              <tr className="border-b border-light-gray bg-off-white/50 text-[12px] font-semibold text-faint">
                 <th className="py-4 px-6 w-32">Severity</th>
                 <th className="py-4 px-6">Issue</th>
-                <th className="py-4 px-6">Suggested Fix</th>
+                <th className="py-4 px-6">Suggested fix</th>
                 <th className="py-4 px-6">Department</th>
                 <th className="py-4 px-6 text-right w-44">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100 text-xs text-gray-700">
+            <tbody className="divide-y divide-light-gray text-xs text-subtle">
               {issues.length > 0 ? (
                 issues.map((item) => {
                   const isCritical = item.severity === "Critical";
@@ -120,39 +120,39 @@ export default function ErrorAndHealthPage() {
                   return (
                     <tr
                       key={item.id}
-                      className="hover:bg-gray-50/60 transition-colors"
+                      className="hover:bg-off-white/60 transition-colors"
                     >
                       {/* 1. Severity */}
                       <td className="py-4 px-6 whitespace-nowrap">
                         <span
-                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-bold border ${
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-semibold border ${
                             isCritical
-                              ? "bg-rose-50 text-rose-700 border-rose-200"
-                              : "bg-amber-50 text-amber-700 border-amber-200"
+                              ? "bg-error-soft text-error border-error/30"
+                              : "bg-warning/10 text-warning border-warning/30"
                           }`}
                         >
                           {isCritical ? (
-                            <HiOutlineExclamationCircle className="w-3.5 h-3.5 text-rose-600 shrink-0" />
+                            <HiOutlineExclamationCircle className="w-3.5 h-3.5 text-error shrink-0" />
                           ) : (
-                            <HiOutlineExclamationTriangle className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                            <HiOutlineExclamationTriangle className="w-3.5 h-3.5 text-warning shrink-0" />
                           )}
                           <span>{item.severity}</span>
                         </span>
                       </td>
 
                       {/* 2. Issue */}
-                      <td className="py-4 px-6 font-bold text-gray-900 whitespace-nowrap">
+                      <td className="py-4 px-6 font-semibold text-brand-charcoal whitespace-nowrap">
                         {item.issue}
                       </td>
 
                       {/* 3. Suggested Fix */}
-                      <td className="py-4 px-6 text-gray-600 max-w-md leading-relaxed">
+                      <td className="py-4 px-6 text-subtle max-w-md leading-relaxed">
                         {item.suggestedFix}
                       </td>
 
                       {/* 4. Department */}
-                      <td className="py-4 px-6 font-semibold text-gray-800 whitespace-nowrap">
-                        <span className="px-2.5 py-1 rounded-md bg-gray-100 text-gray-700 text-[11px] font-bold">
+                      <td className="py-4 px-6 font-semibold text-brand-charcoal whitespace-nowrap">
+                        <span className="px-2.5 py-1 rounded-md bg-off-white text-subtle text-[11px] font-semibold">
                           {item.department}
                         </span>
                       </td>
@@ -162,7 +162,7 @@ export default function ErrorAndHealthPage() {
                         <div className="flex items-center justify-end gap-2">
                           <Link
                             href={item.actionHref}
-                            className="inline-flex items-center gap-1 text-xs font-bold text-brand-orange-text hover:text-brand-orange-text px-2.5 py-1.5 rounded-lg hover:bg-brand-orange-soft/40 transition-colors"
+                            className="inline-flex items-center gap-1 text-xs font-semibold text-brand-orange-text hover:text-brand-orange-text px-2.5 py-1.5 rounded-lg hover:bg-brand-orange-soft/40 transition-colors"
                           >
                             <span>{item.actionText}</span>
                             <HiOutlineArrowTopRightOnSquare className="w-3.5 h-3.5" />
@@ -170,7 +170,7 @@ export default function ErrorAndHealthPage() {
                           <Button
                             size="sm"
                             variant="outline"
-                            className="h-8 px-3 text-xs font-semibold border-gray-200 text-gray-700 hover:bg-gray-50 rounded-lg cursor-pointer"
+                            className="h-8 px-3 text-xs font-semibold border-light-gray text-subtle hover:bg-off-white rounded-lg cursor-pointer"
                             onClick={() => setSelectedIssue(item)}
                           >
                             Resolve
@@ -184,14 +184,14 @@ export default function ErrorAndHealthPage() {
                 <tr>
                   <td
                     colSpan={5}
-                    className="py-12 text-center text-gray-400 text-xs"
+                    className="py-12 text-center text-faint text-xs"
                   >
                     <div className="flex flex-col items-center justify-center gap-2">
-                      <HiOutlineCheckCircle className="w-8 h-8 text-emerald-500" />
-                      <p className="font-bold text-gray-700">
+                      <HiOutlineCheckCircle className="w-8 h-8 text-success" />
+                      <p className="font-semibold text-subtle">
                         All Diagnostics Clear
                       </p>
-                      <p className="text-gray-400 text-[11px]">
+                      <p className="text-faint text-[11px]">
                         No configuration, database, or environment anomalies
                         detected.
                       </p>
@@ -209,13 +209,13 @@ export default function ErrorAndHealthPage() {
         <Modal isOpen={!!selectedIssue} onClose={() => setSelectedIssue(null)}>
           <ModalBody>
             <div className="space-y-4 pt-1">
-              <div className="flex items-center justify-between border-b border-gray-100 pb-3">
+              <div className="flex items-center justify-between border-b border-light-gray pb-3">
                 <div className="flex items-center gap-2.5">
                   <div
                     className={`w-9 h-9 rounded-lg flex items-center justify-center ${
                       selectedIssue.severity === "Critical"
-                        ? "bg-rose-50 text-rose-600"
-                        : "bg-amber-50 text-amber-600"
+                        ? "bg-error-soft text-error"
+                        : "bg-warning/10 text-warning"
                     }`}
                   >
                     {selectedIssue.severity === "Critical" ? (
@@ -225,10 +225,10 @@ export default function ErrorAndHealthPage() {
                     )}
                   </div>
                   <div>
-                    <h3 className="font-bold text-gray-900 text-sm">
+                    <h3 className="font-semibold text-brand-charcoal text-sm">
                       {selectedIssue.issue}
                     </h3>
-                    <p className="text-[11px] text-gray-400">
+                    <p className="text-[11px] text-faint">
                       Severity: {selectedIssue.severity} • Assigned:{" "}
                       {selectedIssue.department}
                     </p>
@@ -237,22 +237,22 @@ export default function ErrorAndHealthPage() {
                 <button
                   type="button"
                   onClick={() => setSelectedIssue(null)}
-                  className="p-1 text-gray-400 hover:text-gray-600 rounded-md cursor-pointer"
+                  className="p-1 text-faint hover:text-subtle rounded-md cursor-pointer"
                 >
                   <HiOutlineXMark className="w-4 h-4" />
                 </button>
               </div>
 
-              <div className="p-3.5 bg-gray-50 rounded-lg border border-gray-100 text-xs">
-                <span className="font-bold text-gray-700 block mb-1">
+              <div className="p-3.5 bg-off-white rounded-lg border border-light-gray text-xs">
+                <span className="font-semibold text-subtle block mb-1">
                   Suggested Fix
                 </span>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-subtle leading-relaxed">
                   {selectedIssue.suggestedFix}
                 </p>
               </div>
 
-              <div className="flex items-center justify-end gap-2.5 pt-2 border-t border-gray-100">
+              <div className="flex items-center justify-end gap-2.5 pt-2 border-t border-light-gray">
                 <Button
                   variant="outline"
                   size="sm"
@@ -270,7 +270,7 @@ export default function ErrorAndHealthPage() {
                 </Link>
                 <Button
                   size="sm"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold"
+                  className="bg-success hover:bg-success/90 text-white rounded-lg text-xs font-semibold"
                   onClick={() => handleResolve(selectedIssue.id)}
                 >
                   Mark as Resolved

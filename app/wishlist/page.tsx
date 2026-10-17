@@ -45,7 +45,7 @@ const WishlistPage = () => {
           <Link href="/" className="hover:text-brand-charcoal transition-colors duration-200">
             Home
           </Link>
-          <span aria-hidden="true" className="text-gray-300">›</span>
+          <span aria-hidden="true" className="text-medium-gray">›</span>
           <span className="text-subtle">Wishlist</span>
         </div>
 

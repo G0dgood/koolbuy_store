@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { TabFilter } from "@/app/components/Tabs";
 import Checkbox from "@/app/components/Checkbox";
 import { Icon } from "@/app/components/Icon";
 import { Button } from "@/app/components/Button";
@@ -206,15 +207,15 @@ export default function AppStylingPage() {
   return (
     <div className="flex flex-col gap-6 mx-auto pb-16">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-100 pb-5">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-light-gray pb-5">
         <div>
           {/* <div className="flex items-center gap-2.5">
-            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">App Styling</h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-50 text-brand-blue border border-blue-100">
+            <h1 className="text-2xl font-semibold text-brand-charcoal tracking-tight">App Styling</h1>
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-orange-soft text-brand-charcoal border border-blue-100">
               Mobile App Theme
             </span>
           </div>
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-faint mt-1">
             Customize mobile app typography, color palettes, bottom tab navigation, tutorial splash screens, and dynamic home page sections.
           </p> */}
         </div>
@@ -235,38 +236,22 @@ export default function AppStylingPage() {
         {/* Left Column: Configuration Controls (8 cols) */}
         <div className="xl:col-span-8 flex flex-col gap-6">
           {/* Section Navigation Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-100 custom-scrollbar">
-            {navItems.map((item) => {
-              const IconComponent = item.icon;
-              const isActive = activeSection === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => setActiveSection(item.id as StylingSection)}
-                  className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
-                    isActive
-                      ? "bg-brand-blue text-white "
-                      : "bg-white text-gray-600 border border-gray-100 hover:bg-gray-50 hover:text-brand-blue"
-                  }`}
-                >
-                  <IconComponent
-                    className={`w-4 h-4 ${isActive ? "text-white" : "text-gray-400"}`}
-                  />
-                  <span>{item.label}</span>
-                </button>
-              );
-            })}
-          </div>
+          <TabFilter
+            ariaLabel="App styling sections"
+            options={navItems.map((t) => ({ value: t.id as StylingSection, label: t.label, icon: <t.icon /> }))}
+            activeTab={activeSection}
+            onChange={setActiveSection}
+          />
 
           {/* 1. FONT STYLES */}
           {activeSection === "fonts" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-              <div className="flex justify-between items-center border-b border-gray-50 pb-4">
+            <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+              <div className="flex justify-between items-center border-b border-light-gray pb-4">
                 <div>
-                  <h3 className="text-base font-bold text-gray-900">
+                  <h3 className="text-base font-semibold text-brand-charcoal">
                     Mobile Typography & Fonts
                   </h3>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-faint mt-0.5">
                     Define primary typefaces, font weights, and text scales
                     across the mobile app.
                   </p>
@@ -282,8 +267,8 @@ export default function AppStylingPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Primary App Font Family
+                  <label className="text-[12px] font-medium text-subtle">
+                    Primary app font family
                   </label>
                   <Select
                     value={fonts.fontFamily}
@@ -316,8 +301,8 @@ export default function AppStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Base Font Size
+                  <label className="text-[12px] font-medium text-subtle">
+                    Base font size
                   </label>
                   <Select
                     value={fonts.baseFontSize}
@@ -334,8 +319,8 @@ export default function AppStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Heading Font Weight
+                  <label className="text-[12px] font-medium text-subtle">
+                    Heading font weight
                   </label>
                   <Select
                     value={fonts.headingWeight}
@@ -351,8 +336,8 @@ export default function AppStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Heading Size Scale
+                  <label className="text-[12px] font-medium text-subtle">
+                    Heading size scale
                   </label>
                   <Select
                     value={fonts.headingScale}
@@ -378,9 +363,9 @@ export default function AppStylingPage() {
               </div>
 
               {/* Font Preview Card */}
-              <div className="bg-gray-50/70 rounded-xl p-5 border border-gray-100 flex flex-col gap-2">
-                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
-                  Live Typography Sample ({fonts.fontFamily.split(",")[0]})
+              <div className="bg-off-white rounded-lg p-5 border border-light-gray flex flex-col gap-2">
+                <span className="text-[12px] font-medium text-subtle">
+                  Live typography sample ({fonts.fontFamily.split(",")[0]})
                 </span>
                 <p
                   className="text-2xl font-bold text-gray-900"
@@ -401,13 +386,13 @@ export default function AppStylingPage() {
 
           {/* 2. COLOR PICKER */}
           {activeSection === "colors" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-              <div className="flex justify-between items-center border-b border-gray-50 pb-4">
+            <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+              <div className="flex justify-between items-center border-b border-light-gray pb-4">
                 <div>
-                  <h3 className="text-base font-bold text-gray-900">
+                  <h3 className="text-base font-semibold text-brand-charcoal">
                     App Color Palette & Themes
                   </h3>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-faint mt-0.5">
                     Configure primary brand tones, accents, card backgrounds,
                     and button colors.
                   </p>
@@ -423,8 +408,8 @@ export default function AppStylingPage() {
 
               {/* Preset Palettes */}
               <div className="flex flex-col gap-2">
-                <span className="text-xs font-bold text-gray-600 uppercase">
-                  Quick Brand Presets
+                <span className="text-[12px] font-medium text-subtle">
+                  Quick brand presets
                 </span>
                 <div className="flex flex-wrap gap-3">
                   <button
@@ -437,7 +422,7 @@ export default function AppStylingPage() {
                         accent: "#F59E0B",
                       })
                     }
-                    className="flex items-center gap-2 px-3 py-2 rounded-xl border border-gray-200 bg-white hover:border-brand-blue text-xs font-semibold cursor-pointer"
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg border border-light-gray bg-white hover:border-brand-blue text-xs font-semibold cursor-pointer"
                   >
                     <span className="w-4 h-4 rounded-full bg-[#2196F3]" />
                     <span>Kool Ocean Blue (Default)</span>
@@ -452,7 +437,7 @@ export default function AppStylingPage() {
                         accent: "#F59E0B",
                       })
                     }
-                    className="flex items-center gap-2 px-3 py-2 rounded-xl border border-gray-200 bg-white hover:border-teal-600 text-xs font-semibold cursor-pointer"
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg border border-light-gray bg-white hover:border-teal-600 text-xs font-semibold cursor-pointer"
                   >
                     <span className="w-4 h-4 rounded-full bg-[#0D9488]" />
                     <span>Clean Energy Teal</span>
@@ -467,7 +452,7 @@ export default function AppStylingPage() {
                         accent: "#EC4899",
                       })
                     }
-                    className="flex items-center gap-2 px-3 py-2 rounded-xl border border-gray-200 bg-white hover:border-indigo-600 text-xs font-semibold cursor-pointer"
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg border border-light-gray bg-white hover:border-indigo-600 text-xs font-semibold cursor-pointer"
                   >
                     <span className="w-4 h-4 rounded-full bg-[#6366F1]" />
                     <span>Electric Indigo</span>
@@ -477,9 +462,9 @@ export default function AppStylingPage() {
 
               {/* Color Inputs Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 pt-2">
-                <div className="flex flex-col gap-2 p-3 bg-gray-50/60 rounded-xl border border-gray-100">
-                  <label className="text-xs font-bold text-gray-700">
-                    Primary Brand
+                <div className="flex flex-col gap-2 p-3 bg-off-white rounded-lg border border-light-gray">
+                  <label className="text-[12px] font-medium text-subtle">
+                    Primary brand
                   </label>
                   <div className="flex items-center gap-3">
                     <input
@@ -500,9 +485,9 @@ export default function AppStylingPage() {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-2 p-3 bg-gray-50/60 rounded-xl border border-gray-100">
-                  <label className="text-xs font-bold text-gray-700">
-                    Secondary Accent
+                <div className="flex flex-col gap-2 p-3 bg-off-white rounded-lg border border-light-gray">
+                  <label className="text-[12px] font-medium text-subtle">
+                    Secondary accent
                   </label>
                   <div className="flex items-center gap-3">
                     <input
@@ -523,9 +508,9 @@ export default function AppStylingPage() {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-2 p-3 bg-gray-50/60 rounded-xl border border-gray-100">
-                  <label className="text-xs font-bold text-gray-700">
-                    Deals & Highlight Accent
+                <div className="flex flex-col gap-2 p-3 bg-off-white rounded-lg border border-light-gray">
+                  <label className="text-[12px] font-medium text-subtle">
+                    Deals & highlight accent
                   </label>
                   <div className="flex items-center gap-3">
                     <input
@@ -546,9 +531,9 @@ export default function AppStylingPage() {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-2 p-3 bg-gray-50/60 rounded-xl border border-gray-100">
-                  <label className="text-xs font-bold text-gray-700">
-                    App Background
+                <div className="flex flex-col gap-2 p-3 bg-off-white rounded-lg border border-light-gray">
+                  <label className="text-[12px] font-medium text-subtle">
+                    App background
                   </label>
                   <div className="flex items-center gap-3">
                     <input
@@ -569,9 +554,9 @@ export default function AppStylingPage() {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-2 p-3 bg-gray-50/60 rounded-xl border border-gray-100">
-                  <label className="text-xs font-bold text-gray-700">
-                    Card Surface Background
+                <div className="flex flex-col gap-2 p-3 bg-off-white rounded-lg border border-light-gray">
+                  <label className="text-[12px] font-medium text-subtle">
+                    Card surface background
                   </label>
                   <div className="flex items-center gap-3">
                     <input
@@ -592,9 +577,9 @@ export default function AppStylingPage() {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-2 p-3 bg-gray-50/60 rounded-xl border border-gray-100">
-                  <label className="text-xs font-bold text-gray-700">
-                    Primary Text Color
+                <div className="flex flex-col gap-2 p-3 bg-off-white rounded-lg border border-light-gray">
+                  <label className="text-[12px] font-medium text-subtle">
+                    Primary text color
                   </label>
                   <div className="flex items-center gap-3">
                     <input
@@ -620,13 +605,13 @@ export default function AppStylingPage() {
 
           {/* 3. TAB BAR STYLE */}
           {activeSection === "tab-bar" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-              <div className="flex justify-between items-center border-b border-gray-50 pb-4">
+            <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+              <div className="flex justify-between items-center border-b border-light-gray pb-4">
                 <div>
-                  <h3 className="text-base font-bold text-gray-900">
+                  <h3 className="text-base font-semibold text-brand-charcoal">
                     Bottom Navigation Bar Style
                   </h3>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-faint mt-0.5">
                     Customize the floating shape, active tab indicator, and
                     center action buttons.
                   </p>
@@ -642,8 +627,8 @@ export default function AppStylingPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Tab Bar Shape & Position
+                  <label className="text-[12px] font-medium text-subtle">
+                    Tab bar shape & position
                   </label>
                   <Select
                     value={tabBarStyle.layout}
@@ -668,8 +653,8 @@ export default function AppStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Material / Background Texture
+                  <label className="text-[12px] font-medium text-subtle">
+                    Material / background texture
                   </label>
                   <Select
                     value={tabBarStyle.backgroundType}
@@ -691,8 +676,8 @@ export default function AppStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Active Tab Highlight Color
+                  <label className="text-[12px] font-medium text-subtle">
+                    Active tab highlight color
                   </label>
                   <div className="flex items-center gap-3">
                     <input
@@ -720,8 +705,8 @@ export default function AppStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Inactive Tab Color
+                  <label className="text-[12px] font-medium text-subtle">
+                    Inactive tab color
                   </label>
                   <div className="flex items-center gap-3">
                     <input
@@ -749,13 +734,13 @@ export default function AppStylingPage() {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-4 pt-2 border-t border-gray-50">
+              <div className="flex flex-col gap-4 pt-2 border-t border-light-gray">
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="text-xs font-bold text-gray-900 block">
+                    <span className="text-xs font-semibold text-brand-charcoal block">
                       Show Text Labels Under Icons
                     </span>
-                    <span className="text-xs text-gray-400">
+                    <span className="text-xs text-faint">
                       Display "Home", "Categories", "BNPL", "Account".
                     </span>
                   </div>
@@ -773,10 +758,10 @@ export default function AppStylingPage() {
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="text-xs font-bold text-gray-900 block">
+                    <span className="text-xs font-semibold text-brand-charcoal block">
                       Elevated Center Action Button
                     </span>
-                    <span className="text-xs text-gray-400">
+                    <span className="text-xs text-faint">
                       Prominent raised button in the middle for instant cart or
                       scan.
                     </span>
@@ -798,13 +783,13 @@ export default function AppStylingPage() {
 
           {/* 4. TUTORIAL IMAGES (ONBOARDING SLIDES) */}
           {activeSection === "tutorial-images" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-              <div className="flex justify-between items-center border-b border-gray-50 pb-4">
+            <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+              <div className="flex justify-between items-center border-b border-light-gray pb-4">
                 <div>
-                  <h3 className="text-base font-bold text-gray-900">
+                  <h3 className="text-base font-semibold text-brand-charcoal">
                     Tutorial & Onboarding Carousel Slides
                   </h3>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-faint mt-0.5">
                     Configure the introductory walk-through screens shown when a
                     customer launches the app.
                   </p>
@@ -823,9 +808,9 @@ export default function AppStylingPage() {
                 {tutorialSlides.map((slide, idx) => (
                   <div
                     key={slide.id}
-                    className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white transition-all shadow-xs"
+                    className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 rounded-lg border border-light-gray bg-off-white hover:bg-white transition-all"
                   >
-                    <div className="w-16 h-16 rounded-xl border border-gray-200 bg-white p-1 overflow-hidden shrink-0 flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-lg border border-light-gray bg-white p-1 overflow-hidden shrink-0 flex items-center justify-center">
                       <img
                         src={slide.image}
                         alt={slide.title}
@@ -835,20 +820,20 @@ export default function AppStylingPage() {
 
                     <div className="flex-1 flex flex-col min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="text-[11px] font-bold text-brand-blue bg-blue-50 px-2 py-0.5 rounded">
+                        <span className="text-[11px] font-semibold text-brand-charcoal bg-brand-orange-soft px-2 py-0.5 rounded">
                           Slide #{idx + 1}
                         </span>
-                        <h4 className="text-xs font-bold text-gray-900 truncate">
+                        <h4 className="text-xs font-semibold text-brand-charcoal truncate">
                           {slide.title}
                         </h4>
                       </div>
-                      <p className="text-xs text-gray-500 mt-1 line-clamp-1">
+                      <p className="text-xs text-faint mt-1 line-clamp-1">
                         {slide.description}
                       </p>
                     </div>
 
                     <div className="flex items-center gap-3 ml-auto">
-                      <label className="flex items-center gap-2 text-xs font-semibold text-gray-600 cursor-pointer">
+                      <label className="flex items-center gap-2 text-xs font-semibold text-subtle cursor-pointer">
                         <Checkbox
                           size="small"
                           checked={slide.active}
@@ -867,7 +852,7 @@ export default function AppStylingPage() {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="p-1.5! text-gray-400 hover:text-rose-500"
+                        className="p-1.5! text-faint hover:text-error"
                         onClick={() =>
                           setTutorialSlides((prev) =>
                             prev.filter((s) => s.id !== slide.id),
@@ -882,9 +867,9 @@ export default function AppStylingPage() {
               </div>
 
               {/* Add New Slide Form */}
-              <div className="bg-gray-50/70 rounded-xl p-5 border border-gray-100 flex flex-col gap-4">
-                <h4 className="text-xs font-bold text-gray-800 uppercase tracking-wider">
-                  Add New Walkthrough Slide
+              <div className="bg-off-white rounded-lg p-5 border border-light-gray flex flex-col gap-4">
+                <h4 className="text-xs font-semibold text-brand-charcoal">
+                  Add new walkthrough slide
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <Input
@@ -932,13 +917,13 @@ export default function AppStylingPage() {
 
           {/* 5. HOME PAGE STYLE */}
           {activeSection === "home-style" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-              <div className="flex justify-between items-center border-b border-gray-50 pb-4">
+            <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+              <div className="flex justify-between items-center border-b border-light-gray pb-4">
                 <div>
-                  <h3 className="text-base font-bold text-gray-900">
+                  <h3 className="text-base font-semibold text-brand-charcoal">
                     Home Page Visual Layout
                   </h3>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-faint mt-0.5">
                     Adjust mobile top app bar style, card corner radius, banner
                     animations, and product feed grids.
                   </p>
@@ -954,8 +939,8 @@ export default function AppStylingPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    App Top Bar Style
+                  <label className="text-[12px] font-medium text-subtle">
+                    App top bar style
                   </label>
                   <Select
                     value={homeStyle.headerStyle}
@@ -977,8 +962,8 @@ export default function AppStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Banner Transition Effect
+                  <label className="text-[12px] font-medium text-subtle">
+                    Banner transition effect
                   </label>
                   <Select
                     value={homeStyle.bannerAnimation}
@@ -1000,8 +985,8 @@ export default function AppStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Card Corner Radius
+                  <label className="text-[12px] font-medium text-subtle">
+                    Card corner radius
                   </label>
                   <Select
                     value={homeStyle.cardCornerRadius}
@@ -1024,8 +1009,8 @@ export default function AppStylingPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-gray-600 uppercase">
-                    Product Feed Grid Format
+                  <label className="text-[12px] font-medium text-subtle">
+                    Product feed grid format
                   </label>
                   <Select
                     value={homeStyle.productCardStyle}
@@ -1054,13 +1039,13 @@ export default function AppStylingPage() {
 
           {/* 6. HOME PAGE SECTIONS */}
           {activeSection === "home-sections" && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-              <div className="flex justify-between items-center border-b border-gray-50 pb-4">
+            <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+              <div className="flex justify-between items-center border-b border-light-gray pb-4">
                 <div>
-                  <h3 className="text-base font-bold text-gray-900">
+                  <h3 className="text-base font-semibold text-brand-charcoal">
                     Home Page Sections Manager
                   </h3>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-faint mt-0.5">
                     Enable, disable, and format sections displayed on the mobile
                     storefront home screen.
                   </p>
@@ -1078,20 +1063,20 @@ export default function AppStylingPage() {
                 {homeSections.map((sec, idx) => (
                   <div
                     key={sec.id}
-                    className="flex items-center justify-between p-4 rounded-xl border border-gray-100 bg-gray-50/40 hover:bg-white transition-all shadow-xs"
+                    className="flex items-center justify-between p-4 rounded-lg border border-light-gray bg-off-white hover:bg-white transition-all"
                   >
                     <div className="flex items-center gap-3">
-                      <span className="cursor-grab text-gray-400 hover:text-gray-600">
+                      <span className="cursor-grab text-faint hover:text-subtle">
                         <HiBars3 className="w-5 h-5" />
                       </span>
-                      <span className="w-6 h-6 rounded-full bg-blue-50 text-brand-blue font-bold text-xs flex items-center justify-center">
+                      <span className="w-6 h-6 rounded-full bg-brand-orange-soft text-brand-charcoal font-semibold text-xs flex items-center justify-center">
                         {idx + 1}
                       </span>
                       <div>
-                        <h4 className="text-xs font-bold text-gray-900">
+                        <h4 className="text-xs font-semibold text-brand-charcoal">
                           {sec.name}
                         </h4>
-                        <span className="text-[11px] text-gray-400 capitalize">
+                        <span className="text-[11px] text-faint capitalize">
                           Layout: {sec.layout}
                         </span>
                       </div>
@@ -1138,13 +1123,13 @@ export default function AppStylingPage() {
 
         {/* Right Column: Live Mobile Mockup Preview (4 cols) */}
         <div className="xl:col-span-4 sticky top-6">
-          <div className="bg-white rounded-3xl border border-gray-200 shadow-xl p-5 flex flex-col items-center">
+          <div className="bg-white rounded-lg border border-light-gray p-5 flex flex-col items-center">
             <div className="w-full flex justify-between items-center mb-3">
-              <span className="text-xs font-bold text-gray-800 flex items-center gap-1.5">
-                <HiEye className="w-4 h-4 text-brand-blue" />
+              <span className="text-xs font-semibold text-brand-charcoal flex items-center gap-1.5">
+                <HiEye className="w-4 h-4 text-brand-orange" />
                 Live Mobile Theme Preview
               </span>
-              <span className="text-[11px] font-mono font-bold text-gray-400">
+              <span className="text-[11px] font-mono font-semibold text-faint">
                 iOS / Android
               </span>
             </div>

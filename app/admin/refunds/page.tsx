@@ -95,9 +95,9 @@ function requesterLabel(requestedBy: string | null | undefined): string {
 }
 
 const inputClass =
-  "w-full h-10 px-3 rounded-xl border border-light-gray text-xs focus:outline-none focus:border-brand-orange bg-white";
+  "w-full h-10 px-3 rounded-lg border border-light-gray text-xs focus:outline-none focus:border-brand-orange bg-white";
 const textareaClass =
-  "w-full min-h-20 px-3 py-2 rounded-xl border border-light-gray text-xs focus:outline-none focus:border-brand-orange bg-white resize-y";
+  "w-full min-h-20 px-3 py-2 rounded-lg border border-light-gray text-xs focus:outline-none focus:border-brand-orange bg-white resize-y";
 
 export default function RefundsPage() {
   const [activeTab, setActiveTab] = useState<TabKey>("all");
@@ -290,7 +290,7 @@ export default function RefundsPage() {
       </div>
 
       {/* Table card */}
-      <div className="bg-white border border-light-gray rounded-lg shadow-2xs flex flex-col overflow-hidden">
+      <div className="bg-white border border-light-gray rounded-lg flex flex-col overflow-hidden">
         <div className="p-4 border-b border-light-gray flex flex-col md:flex-row md:items-center justify-between gap-4">
           <TabFilter tabs={visibleTabs.map(tabLabel)} activeTab={tabLabel(activeDef)} onChange={changeTab} />
           {isFetching && !isLoading && <span className="text-[11px] text-faint">Refreshing…</span>}

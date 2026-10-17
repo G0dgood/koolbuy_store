@@ -22,7 +22,7 @@ const VerticalMenu: React.FC<VerticalMenuProps> = ({
   className = "",
 }) => {
   return (
-    <nav className={`w-full max-w-xs bg-white rounded-lg border border-gray-100  overflow-hidden ${className}`}>
+    <nav className={`w-full max-w-xs bg-white rounded-lg border border-light-gray  overflow-hidden ${className}`}>
       <ul className="flex flex-col">
         {items.map((item) => {
           const isActive = item.id === activeId;
@@ -32,19 +32,19 @@ const VerticalMenu: React.FC<VerticalMenuProps> = ({
                 onClick={() => onItemClick?.(item.id)}
                 className={`flex items-center w-full px-4 py-3 text-sm font-medium transition-colors border-l-4 ${isActive
                   ? "bg-brand-orange-soft text-brand-orange-text border-brand-charcoal"
-                  : "text-gray-600 border-transparent hover:bg-gray-50 hover:text-gray-900"
+                  : "text-subtle border-transparent hover:bg-black/[0.04] hover:text-brand-charcoal"
                   }`}
               >
                 {item.icon && (
                   <Icon
                     name={item.icon}
                     size="sm"
-                    className={`mr-3 ${isActive ? "text-brand-orange-text" : "text-gray-400"}`}
+                    className={`mr-3 ${isActive ? "text-brand-orange-text" : "text-faint"}`}
                   />
                 )}
                 <span className="flex-1 text-left">{item.label}</span>
                 {item.count !== undefined && (
-                  <span className={`ml-2 px-2 py-0.5 rounded-full text-xs ${isActive ? "bg-brand-charcoal text-white" : "bg-gray-100 text-gray-500"
+                  <span className={`ml-2 px-2 py-0.5 rounded-full text-xs ${isActive ? "bg-brand-charcoal text-white" : "bg-black/[0.04] text-faint"
                     }`}>
                     {item.count}
                   </span>

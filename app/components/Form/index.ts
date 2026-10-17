@@ -14,4 +14,3 @@ export * from "./Layouts";
 export * from "./FloatingInputs";
 export * from "./Search";
 export * from "./Dropdown";
-export * from "./Segmented";

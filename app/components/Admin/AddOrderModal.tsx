@@ -48,7 +48,7 @@ export function AddOrderModal({ isOpen, onClose }: AddOrderModalProps) {
         <ModalBody className="flex flex-col gap-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Customer Name</label>
+              <label className="text-[12px] font-medium text-subtle">Customer name</label>
               <Input
                 placeholder="Enter customer name"
                 value={formData.customer}
@@ -57,7 +57,7 @@ export function AddOrderModal({ isOpen, onClose }: AddOrderModalProps) {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Product Name</label>
+              <label className="text-[12px] font-medium text-subtle">Product name</label>
               <Input
                 placeholder="Enter product name"
                 value={formData.product}
@@ -69,7 +69,7 @@ export function AddOrderModal({ isOpen, onClose }: AddOrderModalProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Quantity</label>
+              <label className="text-[12px] font-medium text-subtle">Quantity</label>
               <Input
                 type="number"
                 min="1"
@@ -80,7 +80,7 @@ export function AddOrderModal({ isOpen, onClose }: AddOrderModalProps) {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Price (₦)</label>
+              <label className="text-[12px] font-medium text-subtle">Price (₦)</label>
               <Input
                 type="text"
                 placeholder="49.99"
@@ -90,7 +90,7 @@ export function AddOrderModal({ isOpen, onClose }: AddOrderModalProps) {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Status</label>
+              <label className="text-[12px] font-medium text-subtle">Status</label>
               <Select
                 options={statusOptions}
                 value={formData.status}
@@ -100,7 +100,7 @@ export function AddOrderModal({ isOpen, onClose }: AddOrderModalProps) {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Payment Status</label>
+            <label className="text-[12px] font-medium text-subtle">Payment status</label>
             <Select
               options={paymentOptions}
               value={formData.payment}
@@ -109,7 +109,7 @@ export function AddOrderModal({ isOpen, onClose }: AddOrderModalProps) {
           </div>
         </ModalBody>
 
-        <ModalFooter className="flex justify-end gap-3 border-t border-gray-50 pt-6">
+        <ModalFooter className="flex justify-end gap-3 border-t border-light-gray pt-6">
           <Button variant="outline" type="button" onClick={onClose} shape="rounded-sm" className="px-6 flex-1 md:flex-none">
             Cancel
           </Button>

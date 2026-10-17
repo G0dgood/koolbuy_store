@@ -118,45 +118,6 @@ export function ChartCard({
   );
 }
 
-/** Tabs joined in one bordered strip; the selected one is orange-soft with an orange underline. */
-export function Segmented<T extends string>({
-  options,
-  value,
-  onChange,
-  label,
-}: {
-  options: { value: T; label: string }[];
-  value: T;
-  onChange: (v: T) => void;
-  label: string;
-}) {
-  return (
-    <div className="max-w-full overflow-x-auto no-scrollbar">
-      <div role="tablist" aria-label={label} className="inline-flex rounded-lg border border-light-gray overflow-hidden">
-        {options.map((o) => {
-          const selected = o.value === value;
-          return (
-            <button
-              key={o.value}
-              type="button"
-              role="tab"
-              aria-selected={selected}
-              onClick={() => onChange(o.value)}
-              className={`h-9 px-3.5 min-w-16 shrink-0 text-[13px] font-medium border-r border-light-gray last:border-r-0 transition-colors cursor-pointer ${
-                selected
-                  ? "bg-brand-orange-soft text-brand-charcoal "
-                  : "bg-white text-subtle hover:text-brand-charcoal"
-              }`}
-            >
-              {o.label}
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
 /** Shared chart.js look: Work Sans, grey ticks, light grid, charcoal tooltip. */
 export const chartBaseOptions = {
   responsive: true,

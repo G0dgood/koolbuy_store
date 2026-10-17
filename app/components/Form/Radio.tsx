@@ -30,7 +30,7 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
                 {...props}
               />
               <div
-                className="w-5 h-5 rounded-full border-1 transition-all duration-200 flex items-center justify-center bg-white group-hover:border-gray-400"
+                className="w-5 h-5 rounded-full border-1 transition-all duration-200 flex items-center justify-center bg-white group-hover:border-faint"
                 style={circleStyles}
               >
                 {checked && (
@@ -42,7 +42,7 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
               </div>
             </div>
             {label && (
-              <div className={`ml-2.5 text-sm font-medium transition-colors selection-none ${checked ? "text-gray-900" : "text-gray-700 group-hover:text-gray-900"}`}>
+              <div className={`ml-2.5 text-sm font-medium transition-colors selection-none ${checked ? "text-brand-charcoal" : "text-subtle group-hover:text-brand-charcoal"}`}>
                 {label}
               </div>
             )}

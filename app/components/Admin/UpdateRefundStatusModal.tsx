@@ -36,13 +36,13 @@ export const UpdateRefundStatusModal: React.FC<UpdateStatusModalProps> = ({
     >
       <div className="flex flex-col gap-8 py-4">
         {/* Target Info */}
-        <div className="bg-gray-50 border border-gray-100 rounded-2xl p-5 flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-brand-orange-text shadow-sm">
+        <div className="bg-off-white border border-light-gray rounded-lg p-5 flex items-center gap-4">
+          <div className="w-12 h-12 rounded-lg bg-white border border-light-gray flex items-center justify-center text-brand-orange-text">
             <Icon name={isBulk ? "users" : "cached"} folder={isBulk ? "dashboardIcon" : "icon"} size="md" />
           </div>
           <div className="flex flex-col">
-            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Target Selection</span>
-            <span className="text-sm font-bold text-brand-charcoal">
+            <span className="text-[12px] font-medium text-subtle">Target selection</span>
+            <span className="text-sm font-semibold text-brand-charcoal">
               {isBulk ? `${target.count} Refund Requests` : `Refund for ${target.name}`}
             </span>
           </div>
@@ -50,16 +50,16 @@ export const UpdateRefundStatusModal: React.FC<UpdateStatusModalProps> = ({
 
         {/* Status Selection */}
         <div className="flex flex-col gap-4">
-          <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider px-1">Select New Status</label>
+          <label className="text-[12px] font-medium text-subtle px-1">Select new status</label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div
               onClick={() => setSelectedStatus("Completed")}
-              className={`w-full p-4 rounded-2xl border-2 transition-all cursor-pointer flex flex-col gap-3
-                 ${selectedStatus === "Completed" ? "border-emerald-500 bg-emerald-50/30" : "border-gray-100 bg-white hover:border-gray-200"}
+              className={`w-full p-4 rounded-lg border-2 transition-all cursor-pointer flex flex-col gap-3
+                 ${selectedStatus === "Completed" ? "border-success bg-success-soft/30" : "border-light-gray bg-white hover:border-light-gray"}
                `}
             >
               <div className="w-full flex  items-center justify-between">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${selectedStatus === "Completed" ? "bg-emerald-500 text-white" : "bg-gray-100 text-gray-400"}`}>
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${selectedStatus === "Completed" ? "bg-success text-white" : "bg-off-white text-faint"}`}>
                   <Icon name="verified" folder="icon" size="xs" />
                 </div>
                 <Radio
@@ -70,19 +70,19 @@ export const UpdateRefundStatusModal: React.FC<UpdateStatusModalProps> = ({
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-xs font-bold text-brand-charcoal">Approve</span>
-                <p className="text-[11px] font-medium text-gray-500">Refund funds to customer</p>
+                <span className="text-xs font-semibold text-brand-charcoal">Approve</span>
+                <p className="text-[11px] font-medium text-faint">Refund funds to customer</p>
               </div>
             </div>
 
             <div
               onClick={() => setSelectedStatus("Canceled")}
-              className={`w-full p-4 rounded-2xl border-2 transition-all cursor-pointer flex flex-col gap-3
-                 ${selectedStatus === "Canceled" ? "border-rose-500 bg-rose-50/30" : "border-gray-100 bg-white hover:border-gray-200"}
+              className={`w-full p-4 rounded-lg border-2 transition-all cursor-pointer flex flex-col gap-3
+                 ${selectedStatus === "Canceled" ? "border-error bg-error-soft/30" : "border-light-gray bg-white hover:border-light-gray"}
                `}
             >
               <div className="w-full flex items-center justify-between">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${selectedStatus === "Canceled" ? "bg-rose-500 text-white" : "bg-gray-100 text-gray-400"}`}>
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${selectedStatus === "Canceled" ? "bg-error text-white" : "bg-off-white text-faint"}`}>
                   <Icon name="Delete" folder="dashboardIcon" size="xs" />
                 </div>
                 <Radio
@@ -93,8 +93,8 @@ export const UpdateRefundStatusModal: React.FC<UpdateStatusModalProps> = ({
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-xs font-bold text-brand-charcoal">Reject</span>
-                <p className="text-[11px] font-medium text-gray-500">Deny refund request</p>
+                <span className="text-xs font-semibold text-brand-charcoal">Reject</span>
+                <p className="text-[11px] font-medium text-faint">Deny refund request</p>
               </div>
             </div>
           </div>
@@ -102,34 +102,34 @@ export const UpdateRefundStatusModal: React.FC<UpdateStatusModalProps> = ({
 
         {/* Feedback Reason */}
         <div className="flex flex-col gap-4">
-          <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider px-1">Internal Feedback (Optional)</label>
+          <label className="text-[12px] font-medium text-subtle px-1">Internal feedback (optional)</label>
           <Textarea
             value={reason}
             onChange={(e) => setReason(e.target.value)}
             placeholder="Provide a reason for this status update..."
-            className="!rounded-2xl !bg-gray-50 !border-gray-100 placeholder:text-gray-400 text-sm font-medium"
+            className="!rounded-lg !bg-off-white !border-light-gray placeholder:text-faint text-sm font-medium"
             style={{ minHeight: '96px' }}
           />
         </div>
 
         {/* Actions */}
-        <div className="flex gap-3 pt-6 border-t border-gray-50">
+        <div className="flex gap-3 pt-6 border-t border-light-gray">
           <Button
             variant="ghost"
-            className="flex-1 h-9 text-[11px] font-bold uppercase tracking-wider text-gray-400"
+            className="flex-1 h-9 text-[12px] font-semibold text-faint"
             onClick={onClose}
           >
             Cancel
           </Button>
           <Button
             variant="primary"
-            className="flex-2 h-9 text-[11px] font-bold uppercase tracking-wider "
+            className="flex-2 h-9 text-[12px] font-semibold"
             onClick={() => {
               onConfirm(selectedStatus, reason);
               onClose();
             }}
           >
-            Confirm Status Update
+            Confirm status update
           </Button>
         </div>
       </div>

@@ -1,540 +1,395 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
-import { Icon } from "../../components/Icon";
-import { Button } from "../../components/Button";
-import { Input } from "../../components/Form/Inputs";
-import { StatCard } from "../../components/Admin/StatCard";
-import { TabFilter } from "../../components/Admin/TabFilter";
-import { Pagination } from "../../components/Admin/Pagination";
+import React, { useMemo, useState } from "react";
+import Link from "next/link";
+import { StatCard } from "@/app/components/Admin/StatCard";
+import { TabFilter } from "@/app/components/Admin/TabFilter";
+import { Pagination } from "@/app/components/Admin/Pagination";
+import { StatusBadge } from "@/app/components/Admin/Orders/StatusBadge";
 import { RowsPerPage } from "@/app/components/rows-per-page";
-import {
-  HiOutlineDocumentArrowDown,
-} from "react-icons/hi2";
+import { Input } from "@/app/components/Form/Inputs";
+import { Button } from "@/app/components/Button";
+import { Icon } from "@/app/components/Icon";
+import { EmptyTableRow } from "@/app/components/EmptyState";
+import { apiErrorMessage } from "@/lib/store/base-api";
+import { formatDate, formatMoney, useGetAdminRefundsQuery } from "@/lib/store/api/accounting-api";
+import { useGetSalesReportQuery } from "@/lib/store/api/catalogue-admin-api";
 
-// Top Performing Products data
-const topPerformingData = [
-  {
-    id: 1,
-    name: "Kool - Scanfrost 600L Inverter Chest Freezer",
-    sku: "KB-SF-600",
-    category: "Chest Freezers",
-    price: "₦1,406,000",
-    unitsSold: 342,
-    totalRevenue: "₦480,852,000",
-    growth: "+24.5%",
-    image: "/images/koolboks/items/5.webp",
-  },
-  {
-    id: 2,
-    name: "Kool Bruhm 100ah Solar Pedestal Freezer",
-    sku: "KB-BR-100",
-    category: "Solar Freezers",
-    price: "₦1,662,370",
-    unitsSold: 284,
-    totalRevenue: "₦472,113,080",
-    growth: "+19.2%",
-    image: "/images/koolboks/items/4.webp",
-  },
-  {
-    id: 3,
-    name: "Kool-242L Somotex Glass Door Display Freezer",
-    sku: "KB-SM-242",
-    category: "Commercial Freezers",
-    price: "₦2,100,000",
-    unitsSold: 195,
-    totalRevenue: "₦409,500,000",
-    growth: "+15.8%",
-    image: "/images/koolboks/items/3.webp",
-  },
-  {
-    id: 4,
-    name: "Commercial Solar Deep Freezer 500L",
-    sku: "KB-CS-500",
-    category: "Solar Freezers",
-    price: "₦2,350,000",
-    unitsSold: 112,
-    totalRevenue: "₦263,200,000",
-    growth: "+8.7%",
-    image: "/images/koolboks/items/3.webp",
-  },
-  {
-    id: 5,
-    name: "Kool Scanfrost 60ah Single Door Chest Freezer",
-    sku: "KB-SF-060",
-    category: "Single Door Chest Freezers",
-    price: "₦1,287,600",
-    unitsSold: 168,
-    totalRevenue: "₦216,316,800",
-    growth: "+11.4%",
-    image: "/images/koolboks/items/1.webp",
-  },
-  {
-    id: 6,
-    name: "230L Hisense High-Efficiency Deep Freezer",
-    sku: "KB-HS-230",
-    category: "Chest Freezers",
-    price: "₦430,000",
-    unitsSold: 245,
-    totalRevenue: "₦105,350,000",
-    growth: "+22.1%",
-    image: "/images/koolboks/items/6.webp",
-  },
-];
+/* Product performance.
+   - Top performing: the backend "Sales by product" report (quantity and
+     revenue per product and store; cancelled and unpaid orders left out).
+     The report returns up to 200 rows, sorted by revenue.
+   - Refunds: refunds are recorded per order, not per product, so this lists
+     the refunded orders.
+   There is no wishlist report in the admin API, so that section was removed. */
 
-// Most Wishlist Products data
-const mostWishlistData = [
-  {
-    id: 1,
-    name: "Kool Bruhm 100ah Solar Pedestal Freezer",
-    sku: "KB-BR-100",
-    category: "Solar Freezers",
-    price: "₦1,662,370",
-    totalWishlists: 342,
-    stockStatus: "In Stock",
-    addedThisMonth: 68,
-    image: "/images/koolboks/items/4.webp",
-  },
-  {
-    id: 2,
-    name: "Kool - Scanfrost 600L Inverter Chest Freezer",
-    sku: "KB-SF-600",
-    category: "Chest Freezers",
-    price: "₦1,406,000",
-    totalWishlists: 285,
-    stockStatus: "In Stock",
-    addedThisMonth: 52,
-    image: "/images/koolboks/items/5.webp",
-  },
-  {
-    id: 3,
-    name: "Commercial Solar Deep Freezer 500L",
-    sku: "KB-CS-500",
-    category: "Solar Freezers",
-    price: "₦2,350,000",
-    totalWishlists: 240,
-    stockStatus: "In Stock",
-    addedThisMonth: 45,
-    image: "/images/koolboks/items/3.webp",
-  },
-  {
-    id: 4,
-    name: "Double Door Chest Freezer 400L",
-    sku: "KB-DD-400",
-    category: "Double Door Freezers",
-    price: "₦1,120,000",
-    totalWishlists: 198,
-    stockStatus: "Low Stock",
-    addedThisMonth: 38,
-    image: "/images/koolboks/items/2.webp",
-  },
-  {
-    id: 5,
-    name: "Kool-242L Somotex Glass Door Display Freezer",
-    sku: "KB-SM-242",
-    category: "Commercial Freezers",
-    price: "₦2,100,000",
-    totalWishlists: 174,
-    stockStatus: "Out of Stock",
-    addedThisMonth: 29,
-    image: "/images/koolboks/items/3.webp",
-  },
-  {
-    id: 6,
-    name: "Kool Scanfrost 60ah Single Door Chest Freezer",
-    sku: "KB-SF-060",
-    category: "Single Door Chest Freezers",
-    price: "₦1,287,600",
-    totalWishlists: 152,
-    stockStatus: "In Stock",
-    addedThisMonth: 24,
-    image: "/images/koolboks/items/1.webp",
-  },
-];
+const PAGE_SIZES = [10, 20, 50];
+const TABS = ["Top performing", "Refunded orders"] as const;
+type Tab = (typeof TABS)[number];
+const MARKETS = ["All", "NG", "KE"] as const;
+type Market = (typeof MARKETS)[number];
+const RANGES = [
+  { label: "Last 7 days", days: 7 },
+  { label: "Last 30 days", days: 30 },
+  { label: "Last 90 days", days: 90 },
+  { label: "Last 12 months", days: 365 },
+] as const;
 
-// Most Refunded Products data
-const mostRefundedData = [
-  {
-    id: 1,
-    name: "200L AC Inverter Deep Freezer",
-    sku: "KB-AC-200",
-    category: "Inverter Freezers",
-    price: "₦2,420,000",
-    unitsRefunded: 6,
-    refundRate: "2.8%",
-    primaryReason: "Delivery transit damage",
-    image: "/images/koolboks/items/2.webp",
-  },
-  {
-    id: 2,
-    name: "Kool Bruhm 60ah Pedestal Solar Freezer",
-    sku: "KB-BR-060",
-    category: "Solar Freezers",
-    price: "₦1,287,600",
-    unitsRefunded: 4,
-    refundRate: "2.1%",
-    primaryReason: "Customer ordered wrong voltage",
-    image: "/images/koolboks/items/1.webp",
-  },
-  {
-    id: 3,
-    name: "Double Door Chest Freezer 400L",
-    sku: "KB-DD-400",
-    category: "Double Door Freezers",
-    price: "₦1,120,000",
-    unitsRefunded: 3,
-    refundRate: "1.6%",
-    primaryReason: "Size incompatible with space",
-    image: "/images/koolboks/items/2.webp",
-  },
-  {
-    id: 4,
-    name: "Kool Thermocool 100ah Solar Inverter Freezer",
-    sku: "KB-TC-100",
-    category: "Solar Freezers",
-    price: "₦1,662,370",
-    unitsRefunded: 2,
-    refundRate: "1.2%",
-    primaryReason: "Delayed installation dispatch",
-    image: "/images/koolboks/items/4.webp",
-  },
-  {
-    id: 5,
-    name: "Kool Scanfrost 60ah Single Door Chest Freezer",
-    sku: "KB-SF-060",
-    category: "Single Door Chest Freezers",
-    price: "₦1,287,600",
-    unitsRefunded: 2,
-    refundRate: "0.9%",
-    primaryReason: "Duplicate order placed",
-    image: "/images/koolboks/items/1.webp",
-  },
-];
+const ymd = (d: Date) => d.toISOString().slice(0, 10);
+const daysAgo = (n: number) => ymd(new Date(Date.now() - n * 86_400_000));
 
-export default function ProductPerformancePage() {
-  const [activeTab, setActiveTab] = useState("Top Performing Products");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const tabs = [
-    "Top Performing Products",
-    "Most Wishlist Products",
-    "Most Refunded Products",
-  ];
-
-  // Pick dataset based on tab
-  const activeDataset = useMemo(() => {
-    switch (activeTab) {
-      case "Top Performing Products":
-        return topPerformingData;
-      case "Most Wishlist Products":
-        return mostWishlistData;
-      case "Most Refunded Products":
-        return mostRefundedData;
-      default:
-        return topPerformingData;
-    }
-  }, [activeTab]);
-
-  // Filter dataset by search
-  const filteredData = useMemo(() => {
-    const q = searchQuery.toLowerCase().trim();
-    if (!q) return activeDataset;
-    return activeDataset.filter(
-      (item) =>
-        item.name.toLowerCase().includes(q) ||
-        item.sku.toLowerCase().includes(q) ||
-        item.category.toLowerCase().includes(q),
-    );
-  }, [activeDataset, searchQuery]);
-
-  const totalPages = Math.ceil(filteredData.length / rowsPerPage) || 1;
-  const paginatedData = useMemo(() => {
-    const start = (currentPage - 1) * rowsPerPage;
-    return filteredData.slice(start, start + rowsPerPage);
-  }, [filteredData, currentPage, rowsPerPage]);
-
+function SkeletonRows({ rows, cols }: { rows: number; cols: number }) {
   return (
-    <div className="flex flex-col gap-6 mx-auto pb-12">
-      {/* Header Area */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          {/* <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
-            Products Performance Report
-          </h1>
-          <p className="text-sm text-gray-500">
-            Comprehensive sales, wishlist demand, and refund analytics across
-            all products.
-          </p> */}
-        </div>
-        <div className="flex items-center gap-3">
-          <Button
-            variant="primary"
-            shape="rounded-sm"
-            className="flex items-center gap-2 bg-brand-charcoal hover:bg-brand-charcoal/90 text-white text-xs font-semibold px-4 py-2 cursor-pointer "
-            onClick={() => alert("Exporting Product Performance Report...")}
-          >
-            <HiOutlineDocumentArrowDown className="w-4 h-4" />
-            <span>Export Report</span>
+    <>
+      {Array.from({ length: Math.min(rows, 8) }, (_, i) => (
+        <tr key={i} aria-hidden>
+          {Array.from({ length: cols }, (_, j) => (
+            <td key={j}>
+              <span className="block h-3 w-20 rounded bg-black/[0.06] animate-pulse" />
+            </td>
+          ))}
+        </tr>
+      ))}
+    </>
+  );
+}
+
+function ErrorRow({ cols, error, fallback, onRetry }: { cols: number; error: unknown; fallback: string; onRetry: () => void }) {
+  return (
+    <tr>
+      <td colSpan={cols} className="py-16 text-center">
+        <div className="flex flex-col items-center gap-1 max-w-md mx-auto">
+          <p className="text-[13px] text-error">{apiErrorMessage(error, fallback)}</p>
+          <Button variant="outline" size="sm" className="mt-2" onClick={onRetry}>
+            Try again
           </Button>
         </div>
+      </td>
+    </tr>
+  );
+}
+
+export default function ProductPerformancePage() {
+  const [tab, setTab] = useState<Tab>("Top performing");
+
+  return (
+    <div className="flex flex-col gap-6 pb-12">
+      <div>
+        <h1 className="text-xl font-semibold text-brand-charcoal">Product performance</h1>
+        <p className="text-xs text-subtle mt-0.5">What sold best in a period, and which orders were refunded.</p>
       </div>
 
-      {/* 3 Summary Cards with requested headers */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <StatCard
-          size="sm"
-          title="Top Performing Products"
-          value="148"
-          trendValue="18.4%"
-          trendIsUp={true}
-          subtitle="Best seller: Scanfrost 600L Inverter"
-        />
-        <StatCard
-          size="sm"
-          title="Most Wishlist Products"
-          value="86"
-          trendValue="24.2%"
-          trendIsUp={true}
-          subtitle="Top wishlisted: Bruhm 100ah Solar"
-        />
-        <StatCard
-          size="sm"
-          title="Most Refunded Products"
-          value="12"
-          trendValue="1.8%"
-          trendIsUp={false}
-          subtitle="Lowest return rate across catalog"
-        />
-      </div>
-
-      {/* Main Table Card */}
-      <div className="bg-white overflow-hidden flex flex-col border border-[#1C1C1C1A] rounded-lg shadow-2xs">
-        {/* Filter Controls Bar */}
-        <div className="p-4 sm:p-5 flex flex-col lg:flex-row gap-4 items-center justify-between border-b border-gray-100">
-          <TabFilter
-            tabs={tabs}
-            activeTab={activeTab}
-            onChange={(tab) => {
-              setActiveTab(tab);
-              setCurrentPage(1);
-            }}
-          />
-
-          <div className="flex items-center gap-3 w-full lg:w-auto justify-end">
-            <div className="relative w-full sm:w-72">
-              <Input
-                type="text"
-                placeholder="Search product, SKU..."
-                value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  setCurrentPage(1);
-                }}
-                containerClassName="w-full"
-                className="bg-white border-gray-200 placeholder:text-gray-400 text-xs font-medium"
-                suffixElement={
-                  <Icon
-                    name="search-01"
-                    folder="dashboardIcon"
-                    size="sm"
-                    className="text-gray-400"
-                  />
-                }
-              />
-            </div>
-            <RowsPerPage value={rowsPerPage} onChange={setRowsPerPage} />
-          </div>
+      <div className="bg-white border border-light-gray rounded-lg flex flex-col overflow-hidden">
+        <div className="p-4 sm:px-6 border-b border-light-gray">
+          <TabFilter tabs={[...TABS]} activeTab={tab} onChange={(t) => setTab(t as Tab)} />
         </div>
-
-        {/* Table Content Dynamic per Tab */}
-        <div className="admin-table-container">
-          <table>
-            <thead>
-              {activeTab === "Top Performing Products" && (
-                <tr>
-                  <th className="w-14 text-center">Rank</th>
-                  <th>Product Name</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th className="text-center">Units Sold</th>
-                  <th>Total Revenue</th>
-                  <th className="text-right pr-6">Growth</th>
-                </tr>
-              )}
-
-              {activeTab === "Most Wishlist Products" && (
-                <tr>
-                  <th className="w-14 text-center">Rank</th>
-                  <th>Product Name</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th className="text-center">Total Wishlists</th>
-                  <th>Stock Status</th>
-                  <th className="text-right pr-6">Added This Month</th>
-                </tr>
-              )}
-
-              {activeTab === "Most Refunded Products" && (
-                <tr>
-                  <th className="w-14 text-center">Rank</th>
-                  <th>Product Name</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th className="text-center">Units Refunded</th>
-                  <th>Refund Rate</th>
-                  <th className="text-right pr-6">Primary Reason</th>
-                </tr>
-              )}
-            </thead>
-
-            <tbody>
-              {paginatedData.length > 0 ? (
-                paginatedData.map((item: any, idx: number) => {
-                  const rank = (currentPage - 1) * rowsPerPage + idx + 1;
-                  return (
-                    <tr
-                      key={item.id}
-                      className="hover:bg-gray-50/50 transition-colors"
-                    >
-                      {/* Rank */}
-                      <td className="text-center font-bold text-gray-500 text-xs">
-                        #{rank}
-                      </td>
-
-                      {/* Product Name */}
-                      <td>
-                        <div className="flex items-center gap-3 min-w-55">
-                          <div className="w-12 h-12 rounded-lg border border-gray-100 bg-white p-1 overflow-hidden shrink-0 flex items-center justify-center shadow-2xs">
-                            <img
-                              src={item.image}
-                              alt={item.name}
-                              className="w-full h-full object-contain"
-                            />
-                          </div>
-                          <div className="flex flex-col">
-                            <span className="text-sm font-bold text-gray-900 leading-tight">
-                              {item.name}
-                            </span>
-                            <span className="text-[11px] font-medium text-gray-400 mt-0.5">
-                              SKU: {item.sku}
-                            </span>
-                          </div>
-                        </div>
-                      </td>
-
-                      {/* Category */}
-                      <td>
-                        <span className="text-xs font-semibold text-gray-600">
-                          {item.category}
-                        </span>
-                      </td>
-
-                      {/* Price */}
-                      <td>
-                        <span className="text-xs font-bold text-gray-900">
-                          {item.price}
-                        </span>
-                      </td>
-
-                      {/* Tab-Specific Columns */}
-                      {activeTab === "Top Performing Products" && (
-                        <>
-                          <td className="text-center">
-                            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-brand-orange-soft text-brand-orange-text">
-                              {item.unitsSold} units
-                            </span>
-                          </td>
-                          <td>
-                            <span className="text-sm font-bold text-gray-900">
-                              {item.totalRevenue}
-                            </span>
-                          </td>
-                          <td className="text-right pr-6">
-                            <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
-                              {item.growth}
-                            </span>
-                          </td>
-                        </>
-                      )}
-
-                      {activeTab === "Most Wishlist Products" && (
-                        <>
-                          <td className="text-center">
-                            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-600">
-                              {item.totalWishlists} wishlists
-                            </span>
-                          </td>
-                          <td>
-                            <span
-                              className={`text-xs font-semibold px-2 py-0.5 rounded ${
-                                item.stockStatus === "In Stock"
-                                  ? "bg-emerald-50 text-emerald-600"
-                                  : item.stockStatus === "Low Stock"
-                                    ? "bg-amber-50 text-amber-600"
-                                    : "bg-rose-50 text-rose-600"
-                              }`}
-                            >
-                              {item.stockStatus}
-                            </span>
-                          </td>
-                          <td className="text-right pr-6">
-                            <span className="text-xs font-bold text-gray-700">
-                              +{item.addedThisMonth} this month
-                            </span>
-                          </td>
-                        </>
-                      )}
-
-                      {activeTab === "Most Refunded Products" && (
-                        <>
-                          <td className="text-center">
-                            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700">
-                              {item.unitsRefunded} units
-                            </span>
-                          </td>
-                          <td>
-                            <span className="text-xs font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded">
-                              {item.refundRate}
-                            </span>
-                          </td>
-                          <td className="text-right pr-6">
-                            <span className="text-xs font-medium text-gray-600">
-                              {item.primaryReason}
-                            </span>
-                          </td>
-                        </>
-                      )}
-                    </tr>
-                  );
-                })
-              ) : (
-                <tr>
-                  <td
-                    colSpan={7}
-                    className="text-center py-12 text-gray-400 text-sm"
-                  >
-                    No products found matching your search.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Pagination Footer */}
-        <div className="p-4 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <span className="text-xs text-gray-400 font-medium">
-            Showing {paginatedData.length} of {filteredData.length} products
-          </span>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
-          />
-        </div>
+        {tab === "Top performing" ? <TopPerforming /> : <RefundedOrders />}
       </div>
     </div>
+  );
+}
+
+/* ───────────────────────── Top performing ───────────────────────── */
+
+function TopPerforming() {
+  const [from, setFrom] = useState(() => daysAgo(30));
+  const [to, setTo] = useState(() => ymd(new Date()));
+  const [market, setMarket] = useState<Market>("All");
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+
+  const badRange = !!from && !!to && from > to;
+  const { data, isLoading, isFetching, isError, error, refetch } = useGetSalesReportQuery(
+    { date_from: from || undefined, date_to: to || undefined, market: market === "All" ? undefined : market },
+    { skip: badRange },
+  );
+
+  const rows = useMemo(() => {
+    const all = badRange ? [] : (data?.rows ?? []);
+    const term = search.trim().toLowerCase();
+    if (!term) return all;
+    return all.filter((r) =>
+      [r.product, r.category, r.store].some((v) => (v ?? "").toLowerCase().includes(term)),
+    );
+  }, [data, search, badRange]);
+  const shown = rows.slice((page - 1) * pageSize, page * pageSize);
+  const totalPages = Math.max(1, Math.ceil(rows.length / pageSize));
+  const totals = data?.totals ?? [];
+  const COLS = 7;
+
+  const stat = (v: React.ReactNode) =>
+    isLoading ? <span className="inline-block h-7 w-20 rounded bg-black/[0.06] animate-pulse align-middle" /> : isError ? "—" : v;
+
+  const setRange = (days: number) => {
+    setFrom(daysAgo(days));
+    setTo(ymd(new Date()));
+    setPage(1);
+  };
+  const activeRange = RANGES.find((r) => from === daysAgo(r.days) && to === ymd(new Date()));
+
+  const dateInput = (label: string, value: string, set: (v: string) => void) => (
+    <label className="flex items-center gap-2 text-[12px] text-subtle">
+      {label}
+      <Input
+        type="date"
+        value={value}
+        onChange={(e) => {
+          set(e.target.value);
+          setPage(1);
+        }}
+        aria-label={`Orders placed ${label.toLowerCase()}`}
+        containerClassName="w-40"
+        className="bg-white border-light-gray text-xs font-medium"
+      />
+    </label>
+  );
+
+  return (
+    <>
+      <div className="p-4 sm:px-6 flex flex-col gap-3 border-b border-light-gray">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+          <TabFilter
+            ariaLabel="Date range"
+            options={RANGES.map((r) => ({ value: String(r.days), label: r.label }))}
+            activeTab={activeRange ? String(activeRange.days) : ""}
+            onChange={(days) => setRange(Number(days))}
+          />
+          <TabFilter
+            tabs={[...MARKETS]}
+            activeTab={market}
+            onChange={(t) => {
+              setMarket(t as Market);
+              setPage(1);
+            }}
+          />
+        </div>
+        <div className="flex flex-wrap items-center gap-3">
+          {dateInput("From", from, setFrom)}
+          {dateInput("To", to, setTo)}
+        </div>
+        {badRange && <p className="text-[12px] text-error">The start date is after the end date.</p>}
+      </div>
+
+      <div className="p-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 border-b border-light-gray">
+        <StatCard
+          size="sm"
+          title="Products sold"
+          value={stat((data?.rows.length ?? 0).toLocaleString() + (data?.truncated ? "+" : ""))}
+          periodLabel="Product and store pairs with sales"
+        />
+        {totals.length === 0 ? (
+          <StatCard size="sm" title="Revenue" value={stat(formatMoney(0))} periodLabel="At the customer price" />
+        ) : (
+          totals.map((t) => (
+            <React.Fragment key={t.currency ?? "none"}>
+              <StatCard
+                size="sm"
+                title={`Revenue${totals.length > 1 && t.currency ? ` (${t.currency})` : ""}`}
+                value={stat(formatMoney(t.values.revenue ?? 0, t.currency || "NGN"))}
+                periodLabel="At the customer price"
+              />
+              <StatCard
+                size="sm"
+                title={`Units sold${totals.length > 1 && t.currency ? ` (${t.currency})` : ""}`}
+                value={stat((t.values.quantity ?? 0).toLocaleString())}
+                periodLabel="Across all products"
+              />
+            </React.Fragment>
+          ))
+        )}
+        {data?.truncated && (
+          <p className="sm:col-span-2 lg:col-span-4 text-[11px] text-faint">
+            Showing the top 200 products by revenue. Totals are hidden because the list is cut short; narrow the dates
+            to see them.
+          </p>
+        )}
+      </div>
+
+      <div className="p-4 sm:px-6 flex flex-col sm:flex-row gap-3 items-center justify-between border-b border-light-gray">
+        <Input
+          type="search"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
+          placeholder="Search product, category or store"
+          aria-label="Search products"
+          containerClassName="w-full sm:w-80"
+          className="bg-white border-light-gray placeholder:text-faint text-xs font-medium"
+          suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-faint" />}
+        />
+        <RowsPerPage
+          value={pageSize}
+          options={PAGE_SIZES}
+          onChange={(n) => {
+            setPageSize(n);
+            setPage(1);
+          }}
+        />
+      </div>
+
+      <div className={`admin-table-container transition-opacity ${isFetching && !isLoading ? "opacity-60" : ""}`}>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Product</th>
+              <th>Store</th>
+              <th>Orders</th>
+              <th>Units</th>
+              <th>Average price</th>
+              <th>Revenue</th>
+            </tr>
+          </thead>
+          <tbody>
+            {isLoading && !badRange ? (
+              <SkeletonRows rows={pageSize} cols={COLS} />
+            ) : isError && !badRange ? (
+              <ErrorRow cols={COLS} error={error} fallback="Couldn't load the sales report." onRetry={refetch} />
+            ) : shown.length === 0 ? (
+              search.trim() ? (
+                <EmptyTableRow
+                  colSpan={COLS}
+                  illustration="search"
+                  title="No matches"
+                  description={`No products match "${search.trim()}".`}
+                  action={{ label: "Clear search", onClick: () => setSearch("") }}
+                />
+              ) : (
+                <EmptyTableRow
+                  colSpan={COLS}
+                  illustration="chart"
+                  title="No sales in this period"
+                  description="Products will appear here once paid orders come in. Try a longer date range."
+                />
+              )
+            ) : (
+              shown.map((r, i) => (
+                <tr key={`${r.product}-${r.store}-${r.market}`}>
+                  <td className="text-xs text-faint tabular-nums">{(page - 1) * pageSize + i + 1}</td>
+                  <td>
+                    <div className="flex flex-col">
+                      <span className="text-xs font-semibold text-brand-charcoal">{r.product}</span>
+                      <span className="text-[11px] text-faint">{r.category || "Uncategorised"}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="flex flex-col">
+                      <span className="text-xs text-subtle">{r.store}</span>
+                      <span className="text-[11px] text-faint">{r.market}</span>
+                    </div>
+                  </td>
+                  <td className="text-xs text-subtle tabular-nums">{r.orders.toLocaleString()}</td>
+                  <td className="text-xs text-subtle tabular-nums">{r.quantity.toLocaleString()}</td>
+                  <td className="text-xs text-subtle tabular-nums whitespace-nowrap">{formatMoney(r.avg_price, r.currency)}</td>
+                  <td className="text-xs font-semibold text-brand-charcoal tabular-nums whitespace-nowrap">
+                    {formatMoney(r.revenue, r.currency)}
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
+    </>
+  );
+}
+
+/* ───────────────────────── Refunded orders ───────────────────────── */
+
+function RefundedOrders() {
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const { data, isLoading, isFetching, isError, error, refetch } = useGetAdminRefundsQuery({ page, page_size: pageSize });
+  const items = data?.items ?? [];
+  const total = data?.pagination.total ?? 0;
+  const totalPages = total ? Math.max(1, Math.ceil(total / pageSize)) : 1;
+  const COLS = 6;
+
+  return (
+    <>
+      <div className="p-4 sm:px-6 flex flex-col sm:flex-row gap-3 sm:items-center justify-between border-b border-light-gray">
+        <p className="text-[12px] text-subtle">
+          Refunds are recorded per order. Approve or reject them on{" "}
+          <Link href="/admin/refunds" className="font-semibold text-brand-orange-text hover:underline">
+            Refunds
+          </Link>
+          .
+        </p>
+        <RowsPerPage
+          value={pageSize}
+          options={PAGE_SIZES}
+          onChange={(n) => {
+            setPageSize(n);
+            setPage(1);
+          }}
+        />
+      </div>
+
+      <div className={`admin-table-container transition-opacity ${isFetching && !isLoading ? "opacity-60" : ""}`}>
+        <table>
+          <thead>
+            <tr>
+              <th>Order</th>
+              <th>Buyer</th>
+              <th>Amount</th>
+              <th>Reason</th>
+              <th>Status</th>
+              <th>Requested</th>
+            </tr>
+          </thead>
+          <tbody>
+            {isLoading ? (
+              <SkeletonRows rows={pageSize} cols={COLS} />
+            ) : isError ? (
+              <ErrorRow cols={COLS} error={error} fallback="Couldn't load refunds." onRetry={refetch} />
+            ) : items.length === 0 ? (
+              <EmptyTableRow
+                colSpan={COLS}
+                illustration="refunds"
+                title="No refunds yet"
+                description="Refunded orders will appear here."
+              />
+            ) : (
+              items.map((r) => (
+                <tr key={r.id}>
+                  <td className="text-xs font-semibold whitespace-nowrap">
+                    {r.order ? (
+                      <Link href={`/admin/orders/${r.order.id}`} className="text-brand-orange-text hover:underline">
+                        {r.order.order_number}
+                      </Link>
+                    ) : (
+                      <span className="text-subtle">—</span>
+                    )}
+                  </td>
+                  <td>
+                    <div className="flex flex-col">
+                      <span className="text-xs text-brand-charcoal">{r.buyer?.name || "—"}</span>
+                      {r.buyer?.email && <span className="text-[11px] text-faint">{r.buyer.email}</span>}
+                    </div>
+                  </td>
+                  <td className="text-xs font-semibold text-brand-charcoal tabular-nums whitespace-nowrap">
+                    {formatMoney(r.amount, r.currency)}
+                  </td>
+                  <td className="text-xs text-subtle max-w-64 truncate" title={r.reason}>
+                    {r.reason || "—"}
+                  </td>
+                  <td>
+                    <StatusBadge status={r.status} />
+                  </td>
+                  <td className="text-xs text-subtle whitespace-nowrap">{formatDate(r.created_at)}</td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
+    </>
   );
 }

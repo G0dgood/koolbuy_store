@@ -97,8 +97,8 @@ export default function FAQManagementPage() {
       </div>
 
       {/* Table Section */}
-      <div className="bg-white overflow-hidden mb-8 border border-[#1C1C1C1A] rounded-lg">
-        <div className="px-8 py-6 border-b border-gray-50 flex flex-col lg:flex-row lg:items-center justify-between gap-6 ">
+      <div className="bg-white overflow-hidden mb-8 border border-light-gray rounded-lg">
+        <div className="px-8 py-6 border-b border-light-gray flex flex-col lg:flex-row lg:items-center justify-between gap-6 ">
           <div className="flex flex-col sm:flex-row items-center gap-6">
             <TabFilter
               tabs={categories}
@@ -113,9 +113,9 @@ export default function FAQManagementPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               containerClassName="w-full lg:w-80 xl:w-96"
-              className="bg-white border-gray-100 placeholder:text-gray-400 text-xs font-medium"
+              className="bg-white border-light-gray placeholder:text-faint text-xs font-medium"
               suffixElement={
-                <HiMagnifyingGlass size={18} className="text-gray-400" />
+                <HiMagnifyingGlass size={18} className="text-faint" />
               }
             />
             <div className="flex items-center gap-3 w-full sm:w-auto">
@@ -141,7 +141,7 @@ export default function FAQManagementPage() {
                 <th className="text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-50">
+            <tbody className="divide-y divide-light-gray">
               {filteredFAQs.map((faq) => (
                 <tr key={faq.id} className="group hover:bg-brand-orange-soft/30 transition-colors">
                   <td className="w-10 pl-8">
@@ -152,29 +152,29 @@ export default function FAQManagementPage() {
                   </td>
                   <td className="py-5">
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-brand-orange-text group-hover:bg-brand-charcoal/10 transition-colors">
+                      <div className="w-10 h-10 rounded-lg bg-off-white flex items-center justify-center text-brand-orange-text group-hover:bg-brand-charcoal/10 transition-colors">
                         <HiOutlineQuestionMarkCircle size={20} />
                       </div>
-                      <span className="text-xs font-bold text-brand-charcoal line-clamp-1 max-w-[300px]">{faq.question}</span>
+                      <span className="text-xs font-semibold text-brand-charcoal line-clamp-1 max-w-[300px]">{faq.question}</span>
                     </div>
                   </td>
                   <td>
-                    <span className="text-xs font-bold text-gray-500">{faq.category}</span>
+                    <span className="text-xs font-semibold text-faint">{faq.category}</span>
                   </td>
                   <td className="text-center">
-                    <span className="px-3 py-1 bg-emerald-50 text-emerald-500 text-[11px] font-bold rounded-full uppercase">
+                    <span className="px-3 py-1 bg-success-soft text-success text-[11px] font-semibold rounded-full">
                       {faq.status}
                     </span>
                   </td>
                   <td>
-                    <span className="text-[11px] font-bold text-gray-400">{faq.lastUpdated}</span>
+                    <span className="text-[11px] font-semibold text-faint">{faq.lastUpdated}</span>
                   </td>
                   <td className="pr-8 py-5 text-right">
                     <div className="flex justify-end items-center gap-2">
                       <Button
                         variant="outline"
                         shape="rounded-sm"
-                        className="!p-1.5 text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft transition-all"
+                        className="!p-1.5 text-faint hover:text-brand-orange-text hover:bg-brand-orange-soft transition-all"
                         onClick={() => {
                           setSelectedFAQ(faq);
                           setIsModalOpen(true);
@@ -185,7 +185,7 @@ export default function FAQManagementPage() {
                       <Button
                         variant="outline"
                         shape="rounded-sm"
-                        className="!p-1.5 text-gray-400 hover:text-rose-500 hover:bg-rose-50 transition-all"
+                        className="!p-1.5 text-faint hover:text-error hover:bg-error-soft transition-all"
                         onClick={() => {
                           setSelectedFAQ(faq);
                           setIsDeleteModalOpen(true);
@@ -200,15 +200,15 @@ export default function FAQManagementPage() {
             </tbody>
           </table>
           {filteredFAQs.length === 0 && (
-            <div className="py-20 text-center flex flex-col items-center gap-4 bg-gray-50/20">
-              <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-gray-200 shadow-inner">
+            <div className="py-20 text-center flex flex-col items-center gap-4 bg-off-white/20">
+              <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-medium-gray">
                 <HiMagnifyingGlass size={32} />
               </div>
-              <p className="text-sm font-bold text-gray-400 uppercase tracking-wider">No FAQs found matching your criteria</p>
+              <p className="text-sm font-medium text-faint">No FAQs found matching your criteria</p>
             </div>
           )}
         </div>
-        <div className="p-4 bg-gray-50/30 border-t border-gray-50">
+        <div className="p-4 bg-off-white/30 border-t border-light-gray">
           <Pagination
             currentPage={currentPage}
             totalPages={Math.ceil(filteredFAQs.length / rowsPerPage) || 1}

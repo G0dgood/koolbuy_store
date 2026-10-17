@@ -77,7 +77,7 @@ export default function CartPage() {
             <EmptyCartIllustration className="w-44 h-36 sm:w-52 sm:h-44" />
 
             <div className="flex flex-col items-center gap-2 max-w-md">
-              <h2 className="text-[18px] md:text-[20px] font-bold text-brand-charcoal tracking-[-0.02em]">
+              <h2 className="text-[18px] md:text-[20px] font-semibold text-brand-charcoal tracking-[-0.02em]">
                 Your cart is empty
               </h2>
               <p className="text-[15px] text-subtle leading-relaxed">

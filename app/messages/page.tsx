@@ -5,7 +5,7 @@ import { MessageFeed } from "../components/Messages/MessageFeed";
 
 export const metadata = {
   title: "Messages | Storefront",
-  description: "View and manage your conversations",
+  description: "Your conversations with vendors and KoolBuy",
 };
 
 export default function MessagesPage() {
@@ -17,13 +17,13 @@ export default function MessagesPage() {
         <div className="flex flex-col gap-4">
           <div className="text-[13px] text-faint hidden md:flex items-center gap-1.5">
             <span>Home</span>
-            <span aria-hidden="true" className="text-gray-300">›</span>
+            <span aria-hidden="true" className="text-medium-gray">›</span>
             <span className="text-subtle">Messages</span>
           </div>
 
           <div>
             <h1 className="text-[20px] md:text-[22px] font-semibold text-brand-charcoal tracking-[-0.025em] leading-tight">My messages</h1>
-            <p className="mt-1 text-[14px] md:text-[15px] text-subtle">View and manage your conversations.</p>
+            <p className="mt-1 text-[14px] md:text-[15px] text-subtle">Conversations with vendors and KoolBuy.</p>
           </div>
         </div>
 

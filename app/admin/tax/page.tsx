@@ -1,1031 +1,295 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { toast } from "sonner";
 import { Button } from "@/app/components/Button";
-import { ConfirmationModal } from "@/app/components/Admin/ConfirmationModal";
-import Dropdown from "@/app/components/Form/Dropdown";
+import { Icon } from "@/app/components/Icon";
+import { Input } from "@/app/components/Form/Inputs";
+import { TabFilter } from "@/app/components/Admin/TabFilter";
+import { EmptyTableRow } from "@/app/components/EmptyState";
+import { apiErrorMessage } from "@/lib/store/base-api";
+import { useGetTaxesQuery, humanize, type TaxesResponse } from "@/lib/store/api/accounting-api";
 import {
-  HiOutlineReceiptPercent,
-  HiOutlineTag,
-  HiOutlinePlus,
-  HiOutlinePencilSquare,
-  HiOutlineTrash,
-  HiOutlineCheckCircle,
-  HiOutlineXMark,
-  HiOutlineInformationCircle,
-  HiOutlineMagnifyingGlass,
-  HiOutlineCheck,
-} from "react-icons/hi2";
+  useGetAdminCategoriesQuery,
+  useUpdateCategoryMutation,
+  type CategoryItem,
+  type VatTreatment,
+} from "@/lib/store/api/categories-api";
 
-/* =========================================================================
-   TYPES
-   ========================================================================= */
+/* Tax settings.
+   - VAT policy (rate, what it applies to, whether delivery is VAT-able) comes
+     from the finance policy on the backend; it is read-only here.
+   - Each product category carries a VAT treatment (standard, zero-rated or
+     exempt). It is the one tax setting staff can change here
+     (PATCH /admin/categories/:slug/). Financing invoices don't read it yet;
+     they apply the policy rate.
+   There are no withholding-tax or custom tax-rate tables in the backend, so
+   the old sample rates were removed. VAT collected is on Accounting → Taxes. */
 
-interface TaxCategory {
-  id: string;
-  name: string;
-  code: string;
-  description: string;
-  status: "Active" | "Inactive";
-  itemCount: number;
-}
-
-interface TaxRate {
-  id: string;
-  name: string;
-  categoryName: string;
-  rate: number;
-  type: "Percentage" | "Fixed";
-  priority: number;
-  status: "Active" | "Inactive";
-}
-
-/* =========================================================================
-   INITIAL DATA
-   ========================================================================= */
-
-const initialCategories: TaxCategory[] = [
-  {
-    id: "tc-1",
-    name: "Standard Solar Equipment",
-    code: "TAX-SOLAR-STD",
-    description: "Standard domestic solar chest and upright freezers",
-    status: "Active",
-    itemCount: 42,
-  },
-  {
-    id: "tc-2",
-    name: "Clean Energy Zero-Rated",
-    code: "TAX-CLEAN-ZERO",
-    description: "Off-grid certified panels, inverters & battery packs",
-    status: "Active",
-    itemCount: 18,
-  },
-  {
-    id: "tc-3",
-    name: "Commercial Refrigeration",
-    code: "TAX-COMM-REF",
-    description: "Heavy-duty commercial glass door freezers & cold rooms",
-    status: "Active",
-    itemCount: 26,
-  },
-  {
-    id: "tc-4",
-    name: "Accessories & Spare Parts",
-    code: "TAX-PARTS",
-    description: "Replacement compressors, thermostats & cabling",
-    status: "Active",
-    itemCount: 54,
-  },
-  {
-    id: "tc-5",
-    name: "Installation & Services",
-    code: "TAX-SRV",
-    description: "Professional solar cold chain installation and auditing",
-    status: "Active",
-    itemCount: 9,
-  },
+const TREATMENTS: { value: VatTreatment; label: string; hint: string }[] = [
+  { value: "standard", label: "Standard", hint: "Taxed at the standard VAT rate" },
+  { value: "zero_rated", label: "Zero-rated", hint: "Taxable, at 0%" },
+  { value: "exempt", label: "Exempt", hint: "Not subject to VAT" },
 ];
+const FILTERS = ["All", "Standard", "Zero-rated", "Exempt"] as const;
+type Filter = (typeof FILTERS)[number];
+const COLS = 5;
 
-const initialRates: TaxRate[] = [
-  {
-    id: "tr-1",
-    name: "Standard VAT (Nigeria)",
-    categoryName: "Standard Solar Equipment",
-    rate: 7.5,
-    type: "Percentage",
-    priority: 1,
-    status: "Active",
-  },
-  {
-    id: "tr-2",
-    name: "Withholding Tax (WHT)",
-    categoryName: "Installation & Services",
-    rate: 5.0,
-    type: "Percentage",
-    priority: 2,
-    status: "Active",
-  },
-  {
-    id: "tr-3",
-    name: "Clean Energy Exemption",
-    categoryName: "Clean Energy Zero-Rated",
-    rate: 0.0,
-    type: "Percentage",
-    priority: 1,
-    status: "Active",
-  },
-  {
-    id: "tr-4",
-    name: "Commercial Cold Chain VAT",
-    categoryName: "Commercial Refrigeration",
-    rate: 7.5,
-    type: "Percentage",
-    priority: 1,
-    status: "Active",
-  },
-  {
-    id: "tr-5",
-    name: "Interstate Transit Surcharge",
-    categoryName: "Accessories & Spare Parts",
-    rate: 2.5,
-    type: "Percentage",
-    priority: 3,
-    status: "Active",
-  },
-];
+const treatmentOf = (c: CategoryItem): VatTreatment =>
+  (TREATMENTS.some((t) => t.value === c.vat_treatment) ? c.vat_treatment : "standard") as VatTreatment;
 
-export default function TaxPage() {
-  // 1. Toggle: Price Inclusive of Tax
-  const [priceInclusiveOfTax, setPriceInclusiveOfTax] = useState(true);
+const selectClass =
+  "h-8 px-2 rounded-lg border border-light-gray bg-white text-[12px] text-brand-charcoal focus:outline-none focus:border-brand-orange disabled:opacity-50";
 
-  // 2. State for Categories & Rates
-  const [categories, setCategories] =
-    useState<TaxCategory[]>(initialCategories);
-  const [rates, setRates] = useState<TaxRate[]>(initialRates);
+export default function TaxSettingsPage() {
+  const policyQuery = useGetTaxesQuery({ page: 1, page_size: 1 });
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+  const [filter, setFilter] = useState<Filter>("All");
+  const [savingSlug, setSavingSlug] = useState<string | null>(null);
 
-  // Search queries
-  const [categorySearch, setCategorySearch] = useState("");
-  const [rateSearch, setRateSearch] = useState("");
+  useEffect(() => {
+    const id = setTimeout(() => setQuery(search.trim()), 300);
+    return () => clearTimeout(id);
+  }, [search]);
 
-  // Toast feedback
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const { data, isLoading, isFetching, isError, error, refetch } = useGetAdminCategoriesQuery({ q: query || undefined });
+  const [updateCategory] = useUpdateCategoryMutation();
 
-  // Modals for Tax Category
-  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
-  const [categoryToEdit, setCategoryToEdit] = useState<TaxCategory | null>(
-    null,
-  );
-  const [categoryForm, setCategoryForm] = useState({
-    name: "",
-    code: "",
-    description: "",
-    status: "Active" as "Active" | "Inactive",
-  });
+  const all = data?.items ?? [];
+  const countOf = (f: Filter) =>
+    f === "All" ? all.length : all.filter((c) => TREATMENTS.find((t) => t.value === treatmentOf(c))?.label === f).length;
+  const label = (f: Filter) => (data ? `${f} (${countOf(f)})` : f);
+  const items = filter === "All" ? all : all.filter((c) => TREATMENTS.find((t) => t.value === treatmentOf(c))?.label === filter);
 
-  // Modals for Tax Rate
-  const [isRateModalOpen, setIsRateModalOpen] = useState(false);
-  const [rateToEdit, setRateToEdit] = useState<TaxRate | null>(null);
-  const [rateForm, setRateForm] = useState({
-    name: "",
-    categoryName: "Standard Solar Equipment",
-    rate: "7.5",
-    type: "Percentage" as "Percentage" | "Fixed",
-    priority: "1",
-    status: "Active" as "Active" | "Inactive",
-  });
-
-  // Delete modal state
-  const [deleteConfirmation, setDeleteConfirmation] = useState<{
-    type: "category" | "rate";
-    id: string;
-    name: string;
-  } | null>(null);
-
-  const showToast = (msg: string) => {
-    setToastMessage(msg);
-    setTimeout(() => setToastMessage(null), 3000);
-  };
-
-  const handleToggleInclusive = (checked: boolean) => {
-    setPriceInclusiveOfTax(checked);
-    showToast(
-      checked
-        ? "Price Inclusive of Tax enabled — catalog prices now show tax included"
-        : "Price Inclusive of Tax disabled — tax will be added separately at checkout",
-    );
-  };
-
-  /* =========================================================================
-     TAX CATEGORY ACTIONS
-     ========================================================================= */
-
-  const handleOpenAddCategory = () => {
-    setCategoryToEdit(null);
-    setCategoryForm({
-      name: "",
-      code: `TAX-${Date.now().toString().slice(-4)}`,
-      description: "",
-      status: "Active",
-    });
-    setIsCategoryModalOpen(true);
-  };
-
-  const handleOpenEditCategory = (cat: TaxCategory) => {
-    setCategoryToEdit(cat);
-    setCategoryForm({
-      name: cat.name,
-      code: cat.code,
-      description: cat.description,
-      status: cat.status,
-    });
-    setIsCategoryModalOpen(true);
-  };
-
-  const handleSaveCategory = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!categoryForm.name.trim()) return;
-
-    if (categoryToEdit) {
-      setCategories((prev) =>
-        prev.map((c) =>
-          c.id === categoryToEdit.id ? { ...c, ...categoryForm } : c,
-        ),
-      );
-      showToast(`Updated tax category: ${categoryForm.name}`);
-    } else {
-      const newCat: TaxCategory = {
-        id: `tc-${Date.now()}`,
-        name: categoryForm.name,
-        code: categoryForm.code || `TAX-${Date.now().toString().slice(-4)}`,
-        description: categoryForm.description,
-        status: categoryForm.status,
-        itemCount: 0,
-      };
-      setCategories((prev) => [...prev, newCat]);
-      showToast(`Created tax category: ${categoryForm.name}`);
+  const change = async (c: CategoryItem, next: VatTreatment) => {
+    if (next === treatmentOf(c)) return;
+    setSavingSlug(c.slug);
+    try {
+      await updateCategory({ slug: c.slug, vat_treatment: next }).unwrap();
+      toast.success(`${c.label} is now ${TREATMENTS.find((t) => t.value === next)?.label.toLowerCase()} for VAT.`);
+    } catch (e) {
+      toast.error(apiErrorMessage(e, "Couldn't change the VAT treatment."));
+    } finally {
+      setSavingSlug(null);
     }
-    setIsCategoryModalOpen(false);
   };
-
-  const toggleCategoryStatus = (id: string) => {
-    setCategories((prev) =>
-      prev.map((c) =>
-        c.id === id
-          ? { ...c, status: c.status === "Active" ? "Inactive" : "Active" }
-          : c,
-      ),
-    );
-    showToast("Category status updated!");
-  };
-
-  /* =========================================================================
-     TAX RATE ACTIONS
-     ========================================================================= */
-
-  const handleOpenAddRate = () => {
-    setRateToEdit(null);
-    setRateForm({
-      name: "",
-      categoryName: categories[0]?.name || "Standard Solar Equipment",
-      rate: "7.5",
-      type: "Percentage",
-      priority: "1",
-      status: "Active",
-    });
-    setIsRateModalOpen(true);
-  };
-
-  const handleOpenEditRate = (rate: TaxRate) => {
-    setRateToEdit(rate);
-    setRateForm({
-      name: rate.name,
-      categoryName: rate.categoryName,
-      rate: rate.rate.toString(),
-      type: rate.type,
-      priority: rate.priority.toString(),
-      status: rate.status,
-    });
-    setIsRateModalOpen(true);
-  };
-
-  const handleSaveRate = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!rateForm.name.trim()) return;
-
-    const parsedRate = parseFloat(rateForm.rate) || 0;
-    const parsedPriority = parseInt(rateForm.priority, 10) || 1;
-
-    if (rateToEdit) {
-      setRates((prev) =>
-        prev.map((r) =>
-          r.id === rateToEdit.id
-            ? {
-                ...r,
-                name: rateForm.name,
-                categoryName: rateForm.categoryName,
-                rate: parsedRate,
-                type: rateForm.type,
-                priority: parsedPriority,
-                status: rateForm.status,
-              }
-            : r,
-        ),
-      );
-      showToast(`Updated tax rate: ${rateForm.name}`);
-    } else {
-      const newRate: TaxRate = {
-        id: `tr-${Date.now()}`,
-        name: rateForm.name,
-        categoryName: rateForm.categoryName,
-        rate: parsedRate,
-        type: rateForm.type,
-        priority: parsedPriority,
-        status: rateForm.status,
-      };
-      setRates((prev) => [...prev, newRate]);
-      showToast(`Created tax rate: ${rateForm.name}`);
-    }
-    setIsRateModalOpen(false);
-  };
-
-  const toggleRateStatus = (id: string) => {
-    setRates((prev) =>
-      prev.map((r) =>
-        r.id === id
-          ? { ...r, status: r.status === "Active" ? "Inactive" : "Active" }
-          : r,
-      ),
-    );
-    showToast("Tax rate status updated!");
-  };
-
-  /* =========================================================================
-     DELETE CONFIRMATION
-     ========================================================================= */
-
-  const confirmDelete = () => {
-    if (!deleteConfirmation) return;
-    if (deleteConfirmation.type === "category") {
-      setCategories((prev) =>
-        prev.filter((c) => c.id !== deleteConfirmation.id),
-      );
-      showToast(`Deleted category: ${deleteConfirmation.name}`);
-    } else {
-      setRates((prev) => prev.filter((r) => r.id !== deleteConfirmation.id));
-      showToast(`Deleted tax rate: ${deleteConfirmation.name}`);
-    }
-    setDeleteConfirmation(null);
-  };
-
-  // Filtered views
-  const filteredCategories = categories.filter(
-    (c) =>
-      c.name.toLowerCase().includes(categorySearch.toLowerCase()) ||
-      c.code.toLowerCase().includes(categorySearch.toLowerCase()) ||
-      c.description.toLowerCase().includes(categorySearch.toLowerCase()),
-  );
-
-  const filteredRates = rates.filter(
-    (r) =>
-      r.name.toLowerCase().includes(rateSearch.toLowerCase()) ||
-      r.categoryName.toLowerCase().includes(rateSearch.toLowerCase()),
-  );
 
   return (
-    <div className="flex flex-col gap-6 mx-auto pb-16">
-      {/* Toast Notification */}
-      {toastMessage && (
-        <div className="fixed top-20 right-8 z-50 bg-brand-charcoal text-white text-xs px-4 py-3 rounded-lg shadow-md flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
-          <HiOutlineCheckCircle className="w-4 h-4 text-brand-orange" />
-          <span>{toastMessage}</span>
-        </div>
-      )}
-
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-100 pb-5">
+    <div className="flex flex-col gap-6 pb-12">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
         <div>
-          {/* <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
-              Tax Configuration
-            </h1>
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-orange-soft text-brand-orange-text border border-brand-orange/20">
-              Tax Policies
-            </span>
-          </div>
-          <p className="text-xs text-gray-500 mt-1">
-            Configure price tax inclusions, product tax categories, and
-            applicable regional VAT/WHT rates
-          </p> */}
+          <h1 className="text-xl font-semibold text-brand-charcoal">Tax</h1>
+          <p className="text-xs text-subtle mt-0.5">The VAT policy and how VAT applies to each product category.</p>
         </div>
+        <Link href="/admin/taxes" className="text-xs font-semibold text-brand-orange-text hover:underline whitespace-nowrap">
+          VAT collected
+        </Link>
       </div>
 
-      {/* =========================================================================
-          PROMINENT TOGGLE: PRICE INCLUSIVE OF TAX
-          ========================================================================= */}
-      <div className="bg-white rounded-lg border border-gray-100 p-5 shadow-2xs">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex items-start gap-3.5">
-            <div
-              className={`w-11 h-11 rounded-lg flex items-center justify-center shrink-0 border ${
-                priceInclusiveOfTax
-                  ? "bg-brand-orange-soft border-brand-orange/20 text-brand-orange-text"
-                  : "bg-gray-100 border-gray-200 text-gray-400"
-              }`}
-            >
-              <HiOutlineReceiptPercent className="w-6 h-6" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2.5">
-                <h3 className="text-sm font-bold text-gray-900">
-                  Price Inclusive of Tax
-                </h3>
-                <span
-                  className={`inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-md ${
-                    priceInclusiveOfTax
-                      ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                      : "bg-gray-100 text-gray-600 border border-gray-200"
-                  }`}
-                >
-                  {priceInclusiveOfTax ? (
-                    <>
-                      <HiOutlineCheck className="w-3 h-3 text-emerald-600" />
-                      <span>Enabled (Tax included in item prices)</span>
-                    </>
-                  ) : (
-                    <span>Disabled (Tax calculated at checkout)</span>
-                  )}
-                </span>
-              </div>
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed">
-                When enabled, product prices displayed across catalog, search,
-                and product details already include tax amounts. When disabled,
-                tax is calculated as a separate line item at checkout.
-              </p>
-            </div>
-          </div>
+      <PolicyStrip
+        policy={policyQuery.data?.policy ?? null}
+        isLoading={policyQuery.isLoading}
+        isError={policyQuery.isError}
+        error={policyQuery.error}
+        onRetry={policyQuery.refetch}
+      />
 
-          {/* Toggle Switch */}
-          <label className="relative inline-flex items-center cursor-pointer shrink-0 sm:self-center">
-            <input
-              type="checkbox"
-              checked={priceInclusiveOfTax}
-              onChange={(e) => handleToggleInclusive(e.target.checked)}
-              className="sr-only peer"
-            />
-            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-orange" />
-          </label>
+      <div className="bg-white border border-light-gray rounded-lg flex flex-col overflow-hidden">
+        <div className="p-4 sm:px-6 flex flex-col gap-1 border-b border-light-gray">
+          <h2 className="text-[14px] font-semibold text-brand-charcoal">VAT by category</h2>
+          <p className="text-[12px] text-subtle">
+            How each category is classed for VAT. Invoices currently work out VAT from the policy above.
+          </p>
+        </div>
+        <div className="p-4 sm:px-6 flex flex-col lg:flex-row gap-3 lg:items-center justify-between border-b border-light-gray">
+          <TabFilter
+            tabs={FILTERS.map(label)}
+            activeTab={label(filter)}
+            onChange={(t) => {
+              const next = FILTERS.find((f) => label(f) === t);
+              if (next) setFilter(next);
+            }}
+          />
+          <Input
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search categories"
+            aria-label="Search categories"
+            containerClassName="w-full lg:w-72"
+            className="bg-white border-light-gray placeholder:text-faint text-xs font-medium"
+            suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-faint" />}
+          />
         </div>
 
-        {/* Pricing Calculation Preview */}
-        <div className="mt-4 pt-3 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between text-[11px] text-gray-500 gap-2 bg-gray-50/50 p-2.5 rounded-lg">
-          <div className="flex items-center gap-1.5">
-            <HiOutlineInformationCircle className="w-4 h-4 text-brand-orange-text shrink-0" />
-            <span>
-              <strong>Customer Display Mode:</strong>{" "}
-              {priceInclusiveOfTax
-                ? "Items list gross retail prices (e.g. ₦100,000 includes ₦6,977 VAT breakdown on receipt)"
-                : "Items list net base price (e.g. ₦100,000 + ₦7,500 VAT added on checkout summary)"}
-            </span>
-          </div>
-          <span className="font-mono text-gray-400">
-            Rule:{" "}
-            {priceInclusiveOfTax ? "GROSS_TAX_INCLUDED" : "NET_TAX_EXCLUDED"}
-          </span>
+        <div className={`admin-table-container transition-opacity ${isFetching && !isLoading ? "opacity-60" : ""}`}>
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Products</th>
+                <th>VAT treatment</th>
+                <th>What it means</th>
+              </tr>
+            </thead>
+            <tbody>
+              {isLoading ? (
+                Array.from({ length: 6 }, (_, i) => (
+                  <tr key={i} aria-hidden>
+                    {Array.from({ length: COLS }, (_, j) => (
+                      <td key={j}>
+                        <span className="block h-3 w-20 rounded bg-black/[0.06] animate-pulse" />
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              ) : isError ? (
+                <tr>
+                  <td colSpan={COLS} className="py-16 text-center">
+                    <div className="flex flex-col items-center gap-1 max-w-md mx-auto">
+                      <p className="text-[13px] text-error">{apiErrorMessage(error, "Couldn't load categories.")}</p>
+                      <Button variant="outline" size="sm" className="mt-2" onClick={() => refetch()}>
+                        Try again
+                      </Button>
+                    </div>
+                  </td>
+                </tr>
+              ) : items.length === 0 ? (
+                query || filter !== "All" ? (
+                  <EmptyTableRow
+                    colSpan={COLS}
+                    illustration="search"
+                    title="No matches"
+                    description="No categories match this search or filter."
+                    action={{
+                      label: "Clear filters",
+                      onClick: () => {
+                        setSearch("");
+                        setQuery("");
+                        setFilter("All");
+                      },
+                    }}
+                  />
+                ) : (
+                  <EmptyTableRow
+                    colSpan={COLS}
+                    illustration="invoices"
+                    title="No categories yet"
+                    description="Categories you add will appear here with their VAT treatment."
+                    action={{ label: "Go to categories", href: "/admin/categories" }}
+                  />
+                )
+              ) : (
+                items.map((c) => {
+                  const t = treatmentOf(c);
+                  return (
+                    <tr key={c.slug}>
+                      <td>
+                        <div className="flex flex-col">
+                          <span className="text-xs font-semibold text-brand-charcoal">{c.label}</span>
+                          <span className="text-[11px] text-faint">{c.slug}</span>
+                        </div>
+                      </td>
+                      <td>
+                        <span
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${
+                            c.is_active ? "bg-success-soft text-success" : "bg-off-white text-subtle"
+                          }`}
+                        >
+                          {c.is_active ? "Active" : "Hidden"}
+                        </span>
+                      </td>
+                      <td className="text-xs text-subtle tabular-nums">{c.usage_count.toLocaleString()}</td>
+                      <td>
+                        <select
+                          value={t}
+                          onChange={(e) => change(c, e.target.value as VatTreatment)}
+                          disabled={savingSlug === c.slug}
+                          aria-label={`VAT treatment for ${c.label}`}
+                          className={selectClass}
+                        >
+                          {TREATMENTS.map((o) => (
+                            <option key={o.value} value={o.value}>
+                              {o.label}
+                            </option>
+                          ))}
+                        </select>
+                      </td>
+                      <td className="text-xs text-subtle">{TREATMENTS.find((o) => o.value === t)?.hint}</td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
+    </div>
+  );
+}
 
-      {/* =========================================================================
-          THE TWO CARDS: TAX CATEGORY AND TAX RATE
-          ========================================================================= */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-        {/* =====================================================================
-            CARD 1: TAX CATEGORY
-            ===================================================================== */}
-        <div className="bg-white rounded-lg border border-gray-100 shadow-2xs overflow-hidden flex flex-col">
-          {/* Header */}
-          <div className="p-4 sm:p-5 border-b border-gray-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-gray-50/50">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-brand-orange-soft border border-brand-orange/20 text-brand-orange-text flex items-center justify-center shrink-0">
-                <HiOutlineTag className="w-4 h-4" />
-              </div>
-              <div>
-                <h2 className="text-sm font-bold text-brand-charcoal uppercase tracking-wider">
-                  Tax Category
-                </h2>
-                <span className="text-[11px] text-gray-400 font-medium">
-                  {categories.length} product classifications
-                </span>
-              </div>
-            </div>
-
-            <Button
-              variant="primary"
-              shape="rounded-sm"
-              className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white flex items-center gap-1 text-xs font-semibold px-3 py-1.5 cursor-pointer "
-              onClick={handleOpenAddCategory}
-            >
-              <HiOutlinePlus className="w-3.5 h-3.5" />
-              <span>Add Category</span>
-            </Button>
+function PolicyStrip({
+  policy,
+  isLoading,
+  isError,
+  error,
+  onRetry,
+}: {
+  policy: TaxesResponse["policy"];
+  isLoading: boolean;
+  isError: boolean;
+  error: unknown;
+  onRetry: () => void;
+}) {
+  const box = "bg-white border border-light-gray rounded-lg p-4 sm:px-6";
+  if (isLoading) {
+    return (
+      <div className={`${box} grid grid-cols-2 md:grid-cols-4 gap-4`} aria-hidden>
+        {Array.from({ length: 4 }, (_, i) => (
+          <div key={i} className="flex flex-col gap-2">
+            <span className="block h-2.5 w-16 rounded bg-black/[0.06] animate-pulse" />
+            <span className="block h-3.5 w-24 rounded bg-black/[0.06] animate-pulse" />
           </div>
-
-          {/* Quick Search */}
-          <div className="p-3 border-b border-gray-100 bg-white">
-            <div className="relative w-full">
-              <input
-                type="text"
-                placeholder="Search tax category name or code..."
-                value={categorySearch}
-                onChange={(e) => setCategorySearch(e.target.value)}
-                className="w-full text-xs pl-8 pr-3 py-1.5 bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange text-gray-800"
-              />
-              <HiOutlineMagnifyingGlass className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
-            </div>
-          </div>
-
-          {/* Categories List / Table */}
-          <div className="divide-y divide-gray-100 max-h-140 overflow-y-auto">
-            {filteredCategories.map((cat) => (
-              <div
-                key={cat.id}
-                className="p-4 flex items-start justify-between gap-3 hover:bg-gray-50/60 transition-colors"
-              >
-                <div className="flex flex-col gap-1 min-w-0 pr-2">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <h4 className="text-xs font-bold text-gray-900">
-                      {cat.name}
-                    </h4>
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-gray-100 text-gray-600 border border-gray-200">
-                      {cat.code}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => toggleCategoryStatus(cat.id)}
-                      className={`text-[11px] font-bold px-2 py-0.2 rounded cursor-pointer transition-colors ${
-                        cat.status === "Active"
-                          ? "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100"
-                          : "bg-gray-100 text-gray-500 border border-gray-200 hover:bg-gray-200"
-                      }`}
-                      title="Click to toggle status"
-                    >
-                      {cat.status}
-                    </button>
-                  </div>
-                  <p className="text-xs text-gray-500 leading-relaxed">
-                    {cat.description}
-                  </p>
-                  <span className="text-[11px] text-gray-400 mt-0.5 font-medium">
-                    Applied to {cat.itemCount} catalog items
-                  </span>
-                </div>
-
-                {/* Actions */}
-                <div className="flex items-center gap-1 shrink-0">
-                  <button
-                    type="button"
-                    onClick={() => handleOpenEditCategory(cat)}
-                    className="p-1.5 text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft/50 rounded-lg transition-colors cursor-pointer"
-                    title="Edit Category"
-                  >
-                    <HiOutlinePencilSquare className="w-4 h-4" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setDeleteConfirmation({
-                        type: "category",
-                        id: cat.id,
-                        name: cat.name,
-                      })
-                    }
-                    className="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer"
-                    title="Delete Category"
-                  >
-                    <HiOutlineTrash className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            ))}
-
-            {filteredCategories.length === 0 && (
-              <div className="p-8 text-center text-gray-400 text-xs">
-                No tax categories match your search.
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* =====================================================================
-            CARD 2: TAX RATE
-            ===================================================================== */}
-        <div className="bg-white rounded-lg border border-gray-100 shadow-2xs overflow-hidden flex flex-col">
-          {/* Header */}
-          <div className="p-4 sm:p-5 border-b border-gray-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-gray-50/50">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-brand-orange-soft border border-brand-orange/20 text-brand-orange-text flex items-center justify-center shrink-0">
-                <HiOutlineReceiptPercent className="w-4 h-4" />
-              </div>
-              <div>
-                <h2 className="text-sm font-bold text-brand-charcoal uppercase tracking-wider">
-                  Tax Rate
-                </h2>
-                <span className="text-[11px] text-gray-400 font-medium">
-                  {rates.length} configured rates
-                </span>
-              </div>
-            </div>
-
-            <Button
-              variant="primary"
-              shape="rounded-sm"
-              className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white flex items-center gap-1 text-xs font-semibold px-3 py-1.5 cursor-pointer "
-              onClick={handleOpenAddRate}
-            >
-              <HiOutlinePlus className="w-3.5 h-3.5" />
-              <span>Add Tax Rate</span>
-            </Button>
-          </div>
-
-          {/* Quick Search */}
-          <div className="p-3 border-b border-gray-100 bg-white">
-            <div className="relative w-full">
-              <input
-                type="text"
-                placeholder="Search tax rate or category..."
-                value={rateSearch}
-                onChange={(e) => setRateSearch(e.target.value)}
-                className="w-full text-xs pl-8 pr-3 py-1.5 bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:border-brand-orange text-gray-800"
-              />
-              <HiOutlineMagnifyingGlass className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
-            </div>
-          </div>
-
-          {/* Tax Rates List / Table */}
-          <div className="divide-y divide-gray-100 max-h-140 overflow-y-auto">
-            {filteredRates.map((rate) => (
-              <div
-                key={rate.id}
-                className="p-4 flex items-center justify-between gap-3 hover:bg-gray-50/60 transition-colors"
-              >
-                <div className="flex flex-col gap-1 min-w-0 pr-2">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <h4 className="text-xs font-bold text-gray-900">
-                      {rate.name}
-                    </h4>
-                    <span className="text-xs font-bold text-brand-orange-text bg-brand-orange-soft/60 px-2 py-0.5 rounded-md border border-brand-orange/20 font-mono">
-                      {rate.rate}%
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => toggleRateStatus(rate.id)}
-                      className={`text-[11px] font-bold px-2 py-0.2 rounded cursor-pointer transition-colors ${
-                        rate.status === "Active"
-                          ? "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100"
-                          : "bg-gray-100 text-gray-500 border border-gray-200 hover:bg-gray-200"
-                      }`}
-                      title="Click to toggle status"
-                    >
-                      {rate.status}
-                    </button>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-gray-500 mt-0.5">
-                    <span className="truncate">Category:</span>
-                    <span className="font-semibold text-gray-700 truncate">
-                      {rate.categoryName}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-3 text-[11px] text-gray-400 mt-0.5">
-                    <span>Type: {rate.type}</span>
-                    <span>•</span>
-                    <span>Priority: {rate.priority}</span>
-                  </div>
-                </div>
-
-                {/* Actions */}
-                <div className="flex items-center gap-1 shrink-0">
-                  <button
-                    type="button"
-                    onClick={() => handleOpenEditRate(rate)}
-                    className="p-1.5 text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft/50 rounded-lg transition-colors cursor-pointer"
-                    title="Edit Tax Rate"
-                  >
-                    <HiOutlinePencilSquare className="w-4 h-4" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setDeleteConfirmation({
-                        type: "rate",
-                        id: rate.id,
-                        name: rate.name,
-                      })
-                    }
-                    className="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer"
-                    title="Delete Tax Rate"
-                  >
-                    <HiOutlineTrash className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            ))}
-
-            {filteredRates.length === 0 && (
-              <div className="p-8 text-center text-gray-400 text-xs">
-                No tax rates match your search.
-              </div>
-            )}
-          </div>
-        </div>
+        ))}
       </div>
-
-      {/* =========================================================================
-          MODAL: ADD / EDIT TAX CATEGORY
-          ========================================================================= */}
-      {isCategoryModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4 animate-in fade-in duration-150">
-          <div className="bg-white rounded-lg border border-gray-100 shadow-md w-full max-w-md overflow-hidden flex flex-col">
-            <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
-              <h3 className="text-sm font-bold text-gray-900">
-                {categoryToEdit ? "Edit Tax Category" : "Add Tax Category"}
-              </h3>
-              <button
-                type="button"
-                onClick={() => setIsCategoryModalOpen(false)}
-                className="w-7 h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors cursor-pointer"
-              >
-                <HiOutlineXMark className="w-4 h-4" />
-              </button>
-            </div>
-
-            <form
-              onSubmit={handleSaveCategory}
-              className="p-5 flex flex-col gap-4"
-            >
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
-                  Category Name *
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Commercial Cold Storage"
-                  value={categoryForm.name}
-                  onChange={(e) =>
-                    setCategoryForm((prev) => ({
-                      ...prev,
-                      name: e.target.value,
-                    }))
-                  }
-                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
-                />
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
-                  Tax Code
-                </label>
-                <input
-                  type="text"
-                  placeholder="e.g. TAX-COMM-COLD"
-                  value={categoryForm.code}
-                  onChange={(e) =>
-                    setCategoryForm((prev) => ({
-                      ...prev,
-                      code: e.target.value,
-                    }))
-                  }
-                  className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
-                />
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
-                  Description
-                </label>
-                <textarea
-                  rows={3}
-                  placeholder="Brief description of products in this category..."
-                  value={categoryForm.description}
-                  onChange={(e) =>
-                    setCategoryForm((prev) => ({
-                      ...prev,
-                      description: e.target.value,
-                    }))
-                  }
-                  className="w-full text-xs p-3 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800 leading-relaxed"
-                />
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
-                  Status
-                </label>
-                <Dropdown
-                  options={[
-                    { value: "Active", label: "Active" },
-                    { value: "Inactive", label: "Inactive" },
-                  ]}
-                  value={categoryForm.status}
-                  onChange={(val) =>
-                    setCategoryForm((prev) => ({
-                      ...prev,
-                      status: val as "Active" | "Inactive",
-                    }))
-                  }
-                  searchable={false}
-                  size="sm"
-                  placeholder="Select status"
-                />
-              </div>
-
-              <div className="pt-2 border-t border-gray-100 flex items-center justify-end gap-2">
-                <Button
-                  type="button"
-                  variant="outline"
-                  shape="rounded-sm"
-                  className="text-xs font-semibold px-3 py-1.5 border-gray-200 cursor-pointer"
-                  onClick={() => setIsCategoryModalOpen(false)}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="submit"
-                  variant="primary"
-                  shape="rounded-sm"
-                  className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white text-xs font-semibold px-4 py-1.5 cursor-pointer "
-                >
-                  {categoryToEdit ? "Update Category" : "Create Category"}
-                </Button>
-              </div>
-            </form>
-          </div>
+    );
+  }
+  if (isError) {
+    return (
+      <div className={`${box} flex flex-col sm:flex-row sm:items-center justify-between gap-3`}>
+        <p className="text-[13px] text-error">{apiErrorMessage(error, "Couldn't load the VAT policy.")}</p>
+        <Button variant="outline" size="sm" onClick={onRetry}>
+          Try again
+        </Button>
+      </div>
+    );
+  }
+  if (!policy) {
+    return (
+      <div className={box}>
+        <p className="text-[13px] font-medium text-brand-charcoal">No VAT policy is set up</p>
+        <p className="text-[12px] text-faint mt-0.5">VAT isn&apos;t charged until a finance policy with a VAT rate exists.</p>
+      </div>
+    );
+  }
+  const items = [
+    { label: "VAT rate", value: `${Math.round(policy.vat_rate * 10000) / 100}%` },
+    { label: "Applies to", value: humanize(policy.vat_applies_to) },
+    { label: "Delivery fee", value: policy.delivery_fee_vatable ? "VAT-able" : "Not VAT-able" },
+    { label: "Market", value: policy.market, hint: `Policy version ${policy.version}` },
+  ];
+  return (
+    <div className={`${box} grid grid-cols-2 md:grid-cols-4 gap-4`}>
+      {items.map((it) => (
+        <div key={it.label} className="flex flex-col gap-1 min-w-0">
+          <span className="text-[11px] text-faint">{it.label}</span>
+          <span className="text-[13px] font-semibold text-brand-charcoal">{it.value}</span>
+          {it.hint && <span className="text-[11px] text-faint">{it.hint}</span>}
         </div>
-      )}
-
-      {/* =========================================================================
-          MODAL: ADD / EDIT TAX RATE
-          ========================================================================= */}
-      {isRateModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4 animate-in fade-in duration-150">
-          <div className="bg-white rounded-lg border border-gray-100 shadow-md w-full max-w-md overflow-hidden flex flex-col">
-            <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
-              <h3 className="text-sm font-bold text-gray-900">
-                {rateToEdit ? "Edit Tax Rate" : "Add Tax Rate"}
-              </h3>
-              <button
-                type="button"
-                onClick={() => setIsRateModalOpen(false)}
-                className="w-7 h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors cursor-pointer"
-              >
-                <HiOutlineXMark className="w-4 h-4" />
-              </button>
-            </div>
-
-            <form onSubmit={handleSaveRate} className="p-5 flex flex-col gap-4">
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
-                  Rate Name *
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Standard VAT (7.5%)"
-                  value={rateForm.name}
-                  onChange={(e) =>
-                    setRateForm((prev) => ({ ...prev, name: e.target.value }))
-                  }
-                  className="w-full text-xs font-semibold px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
-                />
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
-                  Tax Category *
-                </label>
-                <Dropdown
-                  options={categories.map((c) => ({
-                    value: c.name,
-                    label: `${c.name} (${c.code})`,
-                  }))}
-                  value={rateForm.categoryName}
-                  onChange={(val) =>
-                    setRateForm((prev) => ({
-                      ...prev,
-                      categoryName: val as string,
-                    }))
-                  }
-                  searchable={true}
-                  searchPlaceholder="Search category..."
-                  placeholder="Select tax category"
-                  size="sm"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
-                    Rate Value (%) *
-                  </label>
-                  <input
-                    type="number"
-                    step="0.1"
-                    min="0"
-                    max="100"
-                    required
-                    placeholder="7.5"
-                    value={rateForm.rate}
-                    onChange={(e) =>
-                      setRateForm((prev) => ({ ...prev, rate: e.target.value }))
-                    }
-                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
-                    Rate Type
-                  </label>
-                  <Dropdown
-                    options={[
-                      { value: "Percentage", label: "Percentage (%)" },
-                      { value: "Fixed", label: "Fixed Amount" },
-                    ]}
-                    value={rateForm.type}
-                    onChange={(val) =>
-                      setRateForm((prev) => ({
-                        ...prev,
-                        type: val as "Percentage" | "Fixed",
-                      }))
-                    }
-                    searchable={false}
-                    size="sm"
-                    placeholder="Select rate type"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
-                    Priority
-                  </label>
-                  <input
-                    type="number"
-                    min="1"
-                    value={rateForm.priority}
-                    onChange={(e) =>
-                      setRateForm((prev) => ({
-                        ...prev,
-                        priority: e.target.value,
-                      }))
-                    }
-                    className="w-full text-xs font-mono px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
-                    Status
-                  </label>
-                  <Dropdown
-                    options={[
-                      { value: "Active", label: "Active" },
-                      { value: "Inactive", label: "Inactive" },
-                    ]}
-                    value={rateForm.status}
-                    onChange={(val) =>
-                      setRateForm((prev) => ({
-                        ...prev,
-                        status: val as "Active" | "Inactive",
-                      }))
-                    }
-                    searchable={false}
-                    size="sm"
-                    placeholder="Select status"
-                  />
-                </div>
-              </div>
-
-              <div className="pt-2 border-t border-gray-100 flex items-center justify-end gap-2">
-                <Button
-                  type="button"
-                  variant="outline"
-                  shape="rounded-sm"
-                  className="text-xs font-semibold px-3 py-1.5 border-gray-200 cursor-pointer"
-                  onClick={() => setIsRateModalOpen(false)}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="submit"
-                  variant="primary"
-                  shape="rounded-sm"
-                  className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white text-xs font-semibold px-4 py-1.5 cursor-pointer "
-                >
-                  {rateToEdit ? "Update Tax Rate" : "Create Tax Rate"}
-                </Button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* Confirmation Modal */}
-      {deleteConfirmation && (
-        <ConfirmationModal
-          isOpen={true}
-          onClose={() => setDeleteConfirmation(null)}
-          onConfirm={confirmDelete}
-          title={`Delete ${
-            deleteConfirmation.type === "category" ? "Tax Category" : "Tax Rate"
-          }`}
-          message={`Are you sure you want to delete "${deleteConfirmation.name}"? This action cannot be undone.`}
-          confirmText="Yes, Delete"
-          cancelText="Cancel"
-          type="danger"
-        />
-      )}
+      ))}
     </div>
   );
 }

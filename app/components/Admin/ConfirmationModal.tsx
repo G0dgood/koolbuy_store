@@ -32,30 +32,30 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     danger: {
       icon: "Delete",
       iconFolder: "dashboardIcon" as const,
-      iconBg: "bg-rose-50 border-rose-100 text-rose-600",
+      iconBg: "bg-error-soft border-error/20 text-error",
       buttonClass:
-        "bg-rose-600 hover:bg-rose-700 text-white font-semibold shadow-xs focus:ring-rose-500",
+        "bg-error hover:bg-error/90 text-white font-semibold focus:ring-error",
     },
     warning: {
       icon: "warning_amber",
       iconFolder: "icon" as const,
-      iconBg: "bg-amber-50 border-amber-100 text-amber-600",
+      iconBg: "bg-warning/10 border-warning/20 text-warning",
       buttonClass:
-        "bg-amber-600 hover:bg-amber-700 text-white font-semibold shadow-xs focus:ring-amber-500",
+        "bg-warning hover:bg-warning/90 text-white font-semibold focus:ring-warning",
     },
     success: {
       icon: "verified",
       iconFolder: "icon" as const,
-      iconBg: "bg-emerald-50 border-emerald-100 text-emerald-600",
+      iconBg: "bg-success-soft border-success/20 text-success",
       buttonClass:
-        "bg-brand-charcoal hover:bg-brand-charcoal/90 text-white font-semibold shadow-xs",
+        "bg-brand-charcoal hover:bg-brand-charcoal/90 text-white font-semibold",
     },
     info: {
       icon: "help_outline",
       iconFolder: "icon" as const,
-      iconBg: "bg-sky-50 border-sky-100 text-sky-600",
+      iconBg: "bg-off-white border-light-gray text-faint",
       buttonClass:
-        "bg-brand-charcoal hover:bg-brand-charcoal/90 text-white font-semibold shadow-xs",
+        "bg-brand-charcoal hover:bg-brand-charcoal/90 text-white font-semibold",
     },
   };
 
@@ -71,7 +71,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
       <div className="p-6">
         <div className="flex items-start gap-4">
           <div
-            className={`w-11 h-11 rounded-xl border flex items-center justify-center shrink-0 ${config.iconBg}`}
+            className={`w-11 h-11 rounded-lg border flex items-center justify-center shrink-0 ${config.iconBg}`}
           >
             <Icon
               name={config.icon}
@@ -82,20 +82,20 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
           </div>
 
           <div className="flex-1 min-w-0">
-            <h2 className="text-base font-semibold text-gray-900 leading-tight">
+            <h2 className="text-base font-semibold text-brand-charcoal leading-tight">
               {title}
             </h2>
-            <div className="mt-2 text-xs text-gray-500 leading-relaxed font-normal">
+            <div className="mt-2 text-xs text-faint leading-relaxed font-normal">
               {message}
             </div>
           </div>
         </div>
 
-        <div className="flex items-center justify-end gap-2.5 mt-6 pt-4 border-t border-gray-100">
+        <div className="flex items-center justify-end gap-2.5 mt-6 pt-4 border-t border-light-gray">
           <Button
             variant="outline"
             type="button"
-            className="px-4 h-9 text-xs font-medium rounded-lg text-gray-600 hover:text-gray-900"
+            className="px-4 h-9 text-xs font-medium rounded-lg text-subtle hover:text-brand-charcoal"
             onClick={onClose}
             disabled={isLoading}
           >

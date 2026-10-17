@@ -82,7 +82,7 @@ export function Modal({
     <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-[#050711]/40 backdrop-blur-[2px] transition-opacity"
+        className="fixed inset-0 bg-brand-charcoal/40 backdrop-blur-[2px] transition-opacity"
         onClick={closeOnBackdrop ? onClose : undefined}
         aria-hidden
       />
@@ -95,16 +95,16 @@ export function Modal({
         aria-labelledby={labelledBy}
         aria-describedby={describedBy}
         tabIndex={-1}
-        className={`relative w-full rounded-2xl bg-white shadow-2xl outline-none flex flex-col max-h-[90vh] overflow-hidden border border-gray-200 z-10 ${widthClass} ${className}`}
+        className={`relative w-full rounded-tile bg-white shadow-float outline-none flex flex-col max-h-[90vh] overflow-hidden border border-light-gray z-10 ${widthClass} ${className}`}
       >
         {header ? (
           header
         ) : title ? (
-          <div className="flex items-start justify-between px-6 pt-6 pb-4 border-b border-gray-100">
+          <div className="flex items-start justify-between px-6 pt-6 pb-4 border-b border-black/[0.06]">
             <div>
-              <h2 className="text-base font-semibold text-gray-900">{title}</h2>
+              <h2 className="text-base font-semibold text-brand-charcoal">{title}</h2>
               {description && (
-                <p className="mt-1 text-xs text-gray-500 leading-relaxed">{description}</p>
+                <p className="mt-1 text-xs text-faint leading-relaxed">{description}</p>
               )}
             </div>
             {showClose && (
@@ -112,7 +112,7 @@ export function Modal({
                 type="button"
                 onClick={onClose}
                 aria-label="Close"
-                className="cursor-pointer ml-3 -mr-1 -mt-1 flex size-7 items-center justify-center rounded-lg bg-gray-50 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-900"
+                className="cursor-pointer ml-3 -mr-1 -mt-1 flex size-7 items-center justify-center rounded-lg bg-off-white text-faint transition-colors hover:bg-black/[0.06] hover:text-brand-charcoal"
               >
                 <svg
                   className="w-4 h-4"
@@ -134,7 +134,7 @@ export function Modal({
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="absolute right-4 top-4 z-10 flex size-7 items-center justify-center rounded-lg bg-gray-50 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-900"
+            className="absolute right-4 top-4 z-10 flex size-7 items-center justify-center rounded-lg bg-off-white text-faint transition-colors hover:bg-black/[0.06] hover:text-brand-charcoal"
           >
             <svg
               className="w-4 h-4"
@@ -154,7 +154,7 @@ export function Modal({
         <div className="overflow-y-auto flex-1">{children}</div>
 
         {footer && (
-          <div className="px-6 py-4 bg-gray-50/70 border-t border-gray-100 flex items-center justify-end gap-2">
+          <div className="px-6 py-4 bg-off-white/70 border-t border-black/[0.06] flex items-center justify-end gap-2">
             {footer}
           </div>
         )}
@@ -176,17 +176,17 @@ export function ModalHeader({
   className?: string;
 }) {
   return (
-    <div className={`flex items-start justify-between px-6 pt-6 pb-4 border-b border-gray-100 ${className}`}>
+    <div className={`flex items-start justify-between px-6 pt-6 pb-4 border-b border-black/[0.06] ${className}`}>
       <div>
-        <h2 className="text-base font-semibold text-gray-900">{title}</h2>
-        {description && <p className="mt-1 text-xs text-gray-500 leading-relaxed">{description}</p>}
+        <h2 className="text-base font-semibold text-brand-charcoal">{title}</h2>
+        {description && <p className="mt-1 text-xs text-faint leading-relaxed">{description}</p>}
       </div>
       {onClose && (
         <button
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="cursor-pointer ml-3 -mr-1 -mt-1 flex size-7 items-center justify-center rounded-lg bg-gray-50 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-900"
+          className="cursor-pointer ml-3 -mr-1 -mt-1 flex size-7 items-center justify-center rounded-lg bg-off-white text-faint transition-colors hover:bg-black/[0.06] hover:text-brand-charcoal"
         >
           <svg
             className="w-4 h-4"
@@ -224,7 +224,7 @@ export function ModalFooter({
   className?: string;
 }) {
   return (
-    <div className={`px-6 py-4 bg-gray-50/70 border-t border-gray-100 flex items-center justify-end gap-2 ${className}`}>
+    <div className={`px-6 py-4 bg-off-white/70 border-t border-black/[0.06] flex items-center justify-end gap-2 ${className}`}>
       {children}
     </div>
   );

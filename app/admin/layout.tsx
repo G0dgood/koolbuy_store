@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import "./admin.css";
 import { AdminSidebar } from "../components/Admin/AdminSidebar";
 import { AdminHeader } from "../components/Admin/AdminHeader";
@@ -38,10 +38,13 @@ export default function AdminLayout({
         <AdminHeader onOpenMenu={() => setMobileMenuOpen((prev) => !prev)}
           isOpen={mobileMenuOpen}
         />
-        <AdminSidebar
-          isOpen={mobileMenuOpen}
-          onClose={() => setMobileMenuOpen(false)}
-        />
+        {/* The sidebar reads ?tab= to highlight query-based sub-items */}
+        <Suspense fallback={null}>
+          <AdminSidebar
+            isOpen={mobileMenuOpen}
+            onClose={() => setMobileMenuOpen(false)}
+          />
+        </Suspense>
         <main>
           {children}
         </main>

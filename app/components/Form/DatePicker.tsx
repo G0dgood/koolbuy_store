@@ -266,7 +266,7 @@ export function DatePicker({
             type="button"
             onClick={handleClear}
             aria-label={`Clear ${label}`}
-            className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full cursor-pointer hover:bg-gray-100 transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full cursor-pointer hover:bg-black/[0.06] transition-colors"
             style={{ color: "var(--text-tertiary)" }}
           >
             <Cross2Icon className="w-4 h-4" aria-hidden />
@@ -281,7 +281,7 @@ export function DatePicker({
             ref={panel}
             role="dialog"
             aria-label={label}
-            className="fixed z-[1000] p-3 rounded-[var(--radius)] border shadow-xl animate-in fade-in zoom-in-95 duration-100"
+            className="fixed z-[1000] p-3 rounded-[var(--radius)] border shadow-float animate-in fade-in zoom-in-95 duration-100"
             style={{
               ...(pos ?? { top: -9999, left: -9999, width: 300 }),
               backgroundColor: "var(--accent-white)",
@@ -323,7 +323,7 @@ export function DatePicker({
                 type="button"
                 onClick={() => shift(-1)}
                 aria-label="Previous month"
-                className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-[var(--bg-primary)] cursor-pointer text-gray-700 transition-colors"
+                className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-[var(--bg-primary)] cursor-pointer text-subtle transition-colors"
               >
                 <ChevronLeftIcon className="w-4 h-4" aria-hidden />
               </button>
@@ -340,7 +340,7 @@ export function DatePicker({
                 type="button"
                 onClick={() => shift(1)}
                 aria-label="Next month"
-                className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-[var(--bg-primary)] cursor-pointer text-gray-700 transition-colors"
+                className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-[var(--bg-primary)] cursor-pointer text-subtle transition-colors"
               >
                 <ChevronRightIcon className="w-4 h-4" aria-hidden />
               </button>
@@ -399,7 +399,7 @@ export function DatePicker({
               <button
                 type="button"
                 onClick={() => pick(today)}
-                className="flex-1 py-1.5 text-xs font-bold rounded-md border transition-colors cursor-pointer"
+                className="flex-1 py-1.5 text-xs font-semibold rounded-md border transition-colors cursor-pointer"
                 style={{
                   borderColor: "var(--brand-orange)",
                   backgroundColor: "var(--brand-orange-soft)",

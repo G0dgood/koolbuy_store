@@ -44,7 +44,7 @@ function InfoRow({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex justify-between gap-4 text-xs">
       <span className="text-faint">{label}</span>
-      <span className="text-gray-900 text-right break-words">{value || "—"}</span>
+      <span className="text-brand-charcoal text-right break-words">{value || "—"}</span>
     </div>
   );
 }
@@ -52,7 +52,7 @@ function InfoRow({ label, value }: { label: string; value: React.ReactNode }) {
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="bg-white rounded-lg border border-light-gray p-6 flex flex-col gap-4">
-      <h3 className="text-base font-semibold text-gray-900">{title}</h3>
+      <h3 className="text-base font-semibold text-brand-charcoal">{title}</h3>
       {children}
     </section>
   );
@@ -163,7 +163,7 @@ function RecordRepaymentModal({
     >
       <form onSubmit={submit} className="flex flex-col gap-4 py-2" noValidate>
         <label className="flex flex-col gap-1.5">
-          <span className="flex items-center justify-between text-xs font-semibold text-gray-700">
+          <span className="flex items-center justify-between text-xs font-semibold text-subtle">
             Amount ({invoice.currency})
             <button
               type="button"
@@ -188,7 +188,7 @@ function RecordRepaymentModal({
         </label>
 
         <div className="flex flex-col gap-1.5">
-          <span className="text-xs font-semibold text-gray-700">Source</span>
+          <span className="text-xs font-semibold text-subtle">Source</span>
           <Select
             value={form.source}
             onChange={(v: string) => set("source", v as RepaymentForm["source"])}
@@ -197,7 +197,7 @@ function RecordRepaymentModal({
         </div>
 
         <label className="flex flex-col gap-1.5">
-          <span className="text-xs font-semibold text-gray-700">Reference</span>
+          <span className="text-xs font-semibold text-subtle">Reference</span>
           <Input
             type="text"
             value={form.reference}
@@ -210,7 +210,7 @@ function RecordRepaymentModal({
         </label>
 
         <label className="flex flex-col gap-1.5">
-          <span className="text-xs font-semibold text-gray-700">Reason</span>
+          <span className="text-xs font-semibold text-subtle">Reason</span>
           <Textarea
             rows={3}
             value={form.reason}
@@ -251,7 +251,7 @@ export default function BnplOrderDetails() {
           />
         ) : (
           <div className="bg-white rounded-lg border border-light-gray p-10 flex flex-col items-center gap-3 text-center">
-            <p className="text-base font-semibold text-gray-900">Couldn&apos;t load this invoice</p>
+            <p className="text-base font-semibold text-brand-charcoal">Couldn&apos;t load this invoice</p>
             <p className="text-xs text-subtle max-w-sm">
               {apiErrorMessage(error, "Something went wrong loading the invoice.")}
             </p>
@@ -280,7 +280,7 @@ export default function BnplOrderDetails() {
         <Breadcrumbs items={[{ label: "BNPL Orders", href: "/admin/bnpl-orders" }, { label: invoice.invoice_number }]} />
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-mono text-2xl font-semibold text-gray-900 tracking-tight">{invoice.invoice_number}</h1>
+            <h1 className="font-mono text-2xl font-semibold text-brand-charcoal tracking-tight">{invoice.invoice_number}</h1>
             <StatusBadge status={invoice.status} />
             {invoice.application_status && (
               <span className="text-xs text-faint">Application: {statusLabel(invoice.application_status)}</span>
@@ -299,7 +299,7 @@ export default function BnplOrderDetails() {
       <section className="bg-white rounded-lg border border-light-gray p-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className="flex flex-col gap-1">
           <span className="text-xs text-faint">Total payable</span>
-          <span className="font-mono text-lg font-semibold text-gray-900">{formatMoney(invoice.total_payable, cur)}</span>
+          <span className="font-mono text-lg font-semibold text-brand-charcoal">{formatMoney(invoice.total_payable, cur)}</span>
         </div>
         <div className="flex flex-col gap-1">
           <span className="text-xs text-faint">Paid so far</span>
@@ -307,13 +307,13 @@ export default function BnplOrderDetails() {
         </div>
         <div className="flex flex-col gap-1">
           <span className="text-xs text-faint">Balance</span>
-          <span className={`font-mono text-lg font-semibold ${invoice.balance > 0 ? "text-brand-orange-text" : "text-gray-900"}`}>
+          <span className={`font-mono text-lg font-semibold ${invoice.balance > 0 ? "text-brand-orange-text" : "text-brand-charcoal"}`}>
             {formatMoney(invoice.balance, cur)}
           </span>
         </div>
         <div className="flex flex-col gap-1">
           <span className="text-xs text-faint">Due date</span>
-          <span className={`text-lg font-semibold ${invoice.status === "overdue" ? "text-error" : "text-gray-900"}`}>
+          <span className={`text-lg font-semibold ${invoice.status === "overdue" ? "text-error" : "text-brand-charcoal"}`}>
             {formatDate(invoice.due_date)}
           </span>
         </div>
@@ -325,7 +325,7 @@ export default function BnplOrderDetails() {
           {/* Repayments */}
           <section className="bg-white rounded-lg border border-light-gray overflow-hidden">
             <div className="p-6 border-b border-light-gray flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <h3 className="text-base font-semibold text-gray-900">Repayments</h3>
+              <h3 className="text-base font-semibold text-brand-charcoal">Repayments</h3>
               <span className="text-xs text-faint">
                 Due {formatDate(invoice.due_date)} · {invoice.tenor_days}-day tenor ·{" "}
                 {(invoice.fee_rate * 100).toLocaleString(undefined, { maximumFractionDigits: 2 })}% fee
@@ -355,11 +355,11 @@ export default function BnplOrderDetails() {
                     invoice.repayments.map((r) => (
                       <tr key={r.id}>
                         <td className="text-sm text-subtle whitespace-nowrap">{formatDateTime(r.received_at)}</td>
-                        <td className="font-mono text-sm text-gray-900 whitespace-nowrap">{formatMoney(r.amount, cur)}</td>
+                        <td className="font-mono text-sm text-brand-charcoal whitespace-nowrap">{formatMoney(r.amount, cur)}</td>
                         <td className="font-mono text-xs text-subtle whitespace-nowrap">
                           {formatMoney(r.fee_portion, cur)} / {formatMoney(r.principal_portion, cur)}
                         </td>
-                        <td className="text-sm text-gray-700">{humanize(r.source)}</td>
+                        <td className="text-sm text-subtle">{humanize(r.source)}</td>
                         <td className="font-mono text-xs text-subtle">{r.reference || "—"}</td>
                       </tr>
                     ))
@@ -372,7 +372,7 @@ export default function BnplOrderDetails() {
           {/* Items */}
           <section className="bg-white rounded-lg border border-light-gray overflow-hidden">
             <div className="p-6 border-b border-light-gray flex items-center justify-between">
-              <h3 className="text-base font-semibold text-gray-900">Financed items</h3>
+              <h3 className="text-base font-semibold text-brand-charcoal">Financed items</h3>
               <span className="text-xs text-faint">
                 {invoice.items.length} {invoice.items.length === 1 ? "item" : "items"}
               </span>
@@ -402,7 +402,7 @@ export default function BnplOrderDetails() {
                       <tr key={item.id}>
                         <td>
                           <div className="flex flex-col">
-                            <span className="text-sm text-gray-900">{item.product_name}</span>
+                            <span className="text-sm text-brand-charcoal">{item.product_name}</span>
                             {item.unit && <span className="text-[11px] text-faint">{item.unit}</span>}
                           </div>
                         </td>
@@ -415,9 +415,9 @@ export default function BnplOrderDetails() {
                             item.order_number || "—"
                           )}
                         </td>
-                        <td className="font-mono text-sm text-gray-700 whitespace-nowrap">{formatMoney(item.unit_price, cur)}</td>
-                        <td className="text-sm text-gray-700">{item.quantity}</td>
-                        <td className="font-mono text-sm text-gray-900 text-right whitespace-nowrap">
+                        <td className="font-mono text-sm text-subtle whitespace-nowrap">{formatMoney(item.unit_price, cur)}</td>
+                        <td className="text-sm text-subtle">{item.quantity}</td>
+                        <td className="font-mono text-sm text-brand-charcoal text-right whitespace-nowrap">
                           {formatMoney(item.line_total, cur)}
                         </td>
                       </tr>

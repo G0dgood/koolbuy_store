@@ -1,411 +1,295 @@
 "use client";
 
-import React, { useState } from "react";
-import { Icon } from "../../components/Icon";
+import React, { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { toast } from "sonner";
+import { MagnifyingGlassIcon, Pencil1Icon, PlusIcon, ReloadIcon, TrashIcon } from "@radix-ui/react-icons";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Form/Inputs";
-import { TabFilter } from "../../components/Admin/TabFilter";
+import { Select } from "../../components/Form/Select";
 import { Pagination } from "../../components/Admin/Pagination";
 import { RowsPerPage } from "@/app/components/rows-per-page";
-import Checkbox from "@/app/components/Checkbox";
 import { ConfirmationModal } from "@/app/components/Admin/ConfirmationModal";
-import { motion, AnimatePresence } from "framer-motion";
-import { BulkActionsDrawer } from "../../components/Admin/BulkActionsDrawer";
-import { UsersMoreActionsDrawer } from "../../components/Admin/UsersMoreActionsDrawer";
-import { StaffDetailDrawer } from "../../components/Admin/StaffDetailDrawer";
 import { AddUserModal } from "../../components/Admin/AddUserModal";
 import { EditUserModal } from "../../components/Admin/EditUserModal";
-import { FiEdit3 } from "react-icons/fi";
+import { EmptyState, EmptyTableRow } from "@/app/components/EmptyState";
+import { apiErrorMessage } from "@/lib/store/base-api";
+import {
+  useDeleteStaffMemberMutation,
+  useGetAdminRolesQuery,
+  useGetStaffMembersQuery,
+  type StaffMember,
+} from "@/lib/store/api/people-api";
 
-const staffData = [
-  {
-    id: 1,
-    name: "Wade Warren",
-    email: "wade.warren@example.com",
-    gender: "Male",
-    dob: "1988-05-12",
-    role: "Super Admin",
-    lastActive: "Now",
-    status: "Active",
-    avatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
-    department: "Management",
-  },
-  {
-    id: 2,
-    name: "Esther Howard",
-    email: "esther.h@example.com",
-    gender: "Female",
-    dob: "1994-11-20",
-    role: "Editor",
-    lastActive: "12 mins ago",
-    status: "Active",
-    avatar:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
-    department: "Content",
-  },
-  {
-    id: 3,
-    name: "Cameron Williamson",
-    email: "cameron.w@example.com",
-    gender: "Male",
-    dob: "1991-03-25",
-    role: "Order Manager",
-    lastActive: "2 days ago",
-    status: "Inactive",
-    avatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
-    department: "Logistics",
-  },
-  {
-    id: 4,
-    name: "Jenny Wilson",
-    email: "jenny.w@example.com",
-    gender: "Female",
-    dob: "1996-08-14",
-    role: "Support",
-    lastActive: "5 hours ago",
-    status: "Active",
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
-    department: "Support",
-  },
-  {
-    id: 5,
-    name: "Robert Fox",
-    email: "robert.f@example.com",
-    gender: "Male",
-    dob: "1990-12-04",
-    role: "Editor",
-    lastActive: "1 day ago",
-    status: "Active",
-    avatar:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
-    department: "Content",
-  },
-];
+const ALL_ROLES = "__all__";
 
-const roleColors = {
-  "Super Admin": "text-brand-charcoal bg-gray-100",
-  Editor: "text-brand-orange-text bg-brand-orange-soft",
-  "Order Manager": "text-emerald-500 bg-emerald-50",
-  Support: "text-amber-500 bg-amber-50",
-};
+function lastSeen(iso: string | null): string {
+  if (!iso) return "Never";
+  const d = new Date(iso);
+  const mins = Math.round((Date.now() - d.getTime()) / 60000);
+  if (mins < 1) return "Just now";
+  if (mins < 60) return `${mins} min ago`;
+  const hours = Math.round(mins / 60);
+  if (hours < 24) return `${hours} h ago`;
+  const days = Math.round(hours / 24);
+  if (days < 7) return `${days} day${days === 1 ? "" : "s"} ago`;
+  return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}
 
-const statusStyles = {
-  Active: "text-emerald-500 bg-emerald-50",
-  Inactive: "text-gray-400 bg-gray-50",
-};
+const iconBtn =
+  "w-8 h-8 rounded-lg border border-light-gray flex items-center justify-center text-faint hover:text-brand-charcoal hover:bg-brand-orange-soft transition-colors disabled:opacity-40 disabled:pointer-events-none";
 
 export default function UsersManagement() {
-  const [activeTab, setActiveTab] = useState("All staff");
+  const [searchInput, setSearchInput] = useState("");
+  const [search, setSearch] = useState("");
+  const [roleFilter, setRoleFilter] = useState(ALL_ROLES);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [userToDelete, setUserToDelete] = useState<any>(null);
-  const [isMoreActionsOpen, setIsMoreActionsOpen] = useState(false);
-  const [isStaffDetailOpen, setIsStaffDetailOpen] = useState(false);
-  const [selectedStaff, setSelectedStaff] = useState<any>(null);
-  const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [userToEdit, setUserToEdit] = useState<any>(null);
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [toEdit, setToEdit] = useState<StaffMember | null>(null);
+  const [toRemove, setToRemove] = useState<StaffMember | null>(null);
 
-  const toggleAll = () => {
-    if (selectedIds.length === staffData.length) {
-      setSelectedIds([]);
-    } else {
-      setSelectedIds(staffData.map((s) => s.id));
+  useEffect(() => {
+    const t = setTimeout(() => {
+      setSearch(searchInput.trim());
+      setCurrentPage(1);
+    }, 350);
+    return () => clearTimeout(t);
+  }, [searchInput]);
+
+  const { data: staff = [], isLoading, isFetching, isError, error, refetch } = useGetStaffMembersQuery({
+    q: search || undefined,
+    role: roleFilter === ALL_ROLES ? undefined : roleFilter,
+  });
+  const { data: roles = [] } = useGetAdminRolesQuery();
+  const [deleteStaff, { isLoading: isRemoving }] = useDeleteStaffMemberMutation();
+
+  const totalPages = Math.max(1, Math.ceil(staff.length / rowsPerPage));
+  const page = Math.min(currentPage, totalPages);
+  const pageRows = useMemo(
+    () => staff.slice((page - 1) * rowsPerPage, page * rowsPerPage),
+    [staff, page, rowsPerPage]
+  );
+  const hasFilters = !!search || roleFilter !== ALL_ROLES;
+
+  const confirmRemove = async () => {
+    if (!toRemove) return;
+    try {
+      await deleteStaff(toRemove.id).unwrap();
+      toast.success(`${toRemove.name || "Team member"} no longer has access.`);
+      setToRemove(null);
+    } catch (err) {
+      toast.error(apiErrorMessage(err, "Couldn't remove this team member."));
     }
   };
 
-  const toggleItem = (id: number) => {
-    setSelectedIds((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
-    );
-  };
-
-  const filteredStaff = staffData.filter((user) => {
-    if (activeTab === "All staff") return true;
-    return user.role === activeTab || user.status === activeTab;
-  });
-
   return (
-    <div className="flex flex-col gap-6 max-w-400 mx-auto pb-12">
-      <div className="flex justify-end gap-3 w-full sm:w-auto">
+    <div className="flex flex-col gap-6 max-w-400 mx-auto pb-12 w-full">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <p className="text-[13px] text-faint">
+          Staff who can sign in to the admin, and the role each one holds.{" "}
+          <Link href="/admin/roles" className="text-brand-orange-text font-medium hover:underline">
+            Manage roles
+          </Link>
+        </p>
         <Button
           variant="primary"
-          shape="rounded-sm"
-          iconLeft={
-            <Icon name="circle-plus" folder="dashboardIcon" size="sm" />
-          }
-          className=" h-9 px-4 text-[11px] font-bold uppercase tracking-wider whitespace-nowrap"
-          onClick={() => setIsAddUserModalOpen(true)}
+          iconLeft={<PlusIcon className="w-4 h-4" />}
+          onClick={() => setIsAddOpen(true)}
+          disabled={!roles.length}
+          title={roles.length ? undefined : "Create a role first"}
         >
-          Add User
+          Add team member
         </Button>
       </div>
-      <div className="bg-white rounded-lg border border-[#1C1C1C1A] overflow-hidden flex flex-col min-h-150">
-        {/* Filter Controls Bar */}
-        <div className="p-4 sm:p-6 flex flex-col lg:flex-row gap-6 items-center justify-between border-b border-gray-50">
-          <TabFilter
-            tabs={["All staff", "Super Admin", "Editor", "Support"]}
-            activeTab={activeTab}
-            onChange={setActiveTab}
-            id={""}
-          />
 
-          <div className="flex flex-wrap items-center gap-3 w-full xl:w-auto">
-            <Input
-              type="text"
-              placeholder="Search by name, email or role..."
-              containerClassName="flex-1 xl:w-80"
-              className="bg-gray-50/50 border-gray-100 placeholder:text-gray-400 text-xs font-medium"
-              suffixElement={
-                <Icon
-                  name="search-01"
-                  folder="dashboardIcon"
-                  size="sm"
-                  className="text-gray-400"
-                />
-              }
+      <div className="bg-white rounded-lg border border-light-gray overflow-hidden flex flex-col">
+        <div className="p-4 sm:p-5 flex flex-col lg:flex-row gap-3 lg:items-center justify-between border-b border-light-gray">
+          <div className="w-full lg:w-56">
+            <Select
+              options={[{ value: ALL_ROLES, label: "All roles" }, ...roles.map((r) => ({ value: r.id, label: r.name }))]}
+              value={roleFilter}
+              onChange={(v) => {
+                setRoleFilter(v || ALL_ROLES);
+                setCurrentPage(1);
+              }}
+              searchable={false}
             />
-            <RowsPerPage value={rowsPerPage} onChange={setRowsPerPage} />
+          </div>
 
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                shape="rounded-sm"
-                className="p-2.5! text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft border-gray-100 transition-all"
-              >
-                <Icon name="filter" folder="dashboardIcon" size="sm" />
-              </Button>
-              <Button
-                variant="outline"
-                shape="rounded-sm"
-                className="p-2.5! text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft border-gray-100 transition-all"
-                onClick={() => setIsMoreActionsOpen(true)}
-              >
-                <Icon name="DotsHorizontal" folder="dashboardIcon" size="sm" />
-              </Button>
-            </div>
+          <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+            <Input
+              type="search"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              placeholder="Search name, email or phone"
+              aria-label="Search team members"
+              containerClassName="flex-1 lg:w-72"
+              className="text-[13px]"
+              suffixElement={<MagnifyingGlassIcon className="w-4 h-4 text-faint" />}
+            />
+            <RowsPerPage
+              value={rowsPerPage}
+              onChange={(v) => {
+                setRowsPerPage(v);
+                setCurrentPage(1);
+              }}
+              options={[10, 20, 50, 100]}
+            />
+            <button type="button" onClick={() => refetch()} aria-label="Refresh team members" title="Refresh" className={iconBtn}>
+              <ReloadIcon className={`w-4 h-4 ${isFetching ? "animate-spin" : ""}`} />
+            </button>
           </div>
         </div>
 
-        {/* Users Table */}
-        <div className="admin-table-container flex-1">
-          <table className="w-full">
-            <thead>
-              <tr>
-                <th className="w-10 pl-6">
-                  <Checkbox
-                    checked={
-                      selectedIds.length === staffData.length &&
-                      staffData.length > 0
-                    }
-                    onChange={toggleAll}
-                  />
-                </th>
-                <th>Full Name</th>
-                <th>User Role</th>
-                <th>Department</th>
-                <th>Last Active</th>
-                <th>Status</th>
-                <th className="text-right pr-6">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredStaff.map((user, i) => (
-                <tr key={user.id} className="group">
-                  <td className="w-10 pl-6">
-                    <Checkbox
-                      checked={selectedIds.includes(user.id)}
-                      onChange={() => toggleItem(user.id)}
-                    />
-                  </td>
-                  <td>
-                    <div className="flex items-center gap-4 py-2">
-                      <div className="w-10 h-10 rounded-full border-2 border-white shadow-sm overflow-hidden bg-gray-100 shrink-0 group-hover:scale-110 transition-transform duration-500">
-                        <img
-                          src={user.avatar}
-                          alt={user.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="flex flex-col min-w-0">
-                        <span className="text-sm font-bold text-brand-charcoal group-hover:text-brand-orange-text transition-colors truncate">
-                          {user.name}
-                        </span>
-                        <span className="text-[11px] font-medium text-gray-400 truncate tracking-tight">
-                          {user.email}
-                        </span>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <span
-                      className={`px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-wider ${roleColors[user.role as keyof typeof roleColors]}`}
-                    >
-                      {user.role}
-                    </span>
-                  </td>
-                  <td>
-                    <span className="text-xs font-bold text-gray-500 tracking-tight">
-                      {user.department}
-                    </span>
-                  </td>
-                  <td>
-                    <div className="flex flex-col gap-0.5">
-                      <span className="text-xs font-bold text-brand-charcoal">
-                        {user.lastActive}
-                      </span>
-                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-tighter opacity-70">
-                        Synchronized
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`w-1.5 h-1.5 rounded-full ${user.status === "Active" ? "bg-emerald-500 animate-pulse" : "bg-gray-300"}`}
-                      />
-                      <span
-                        className={`px-2.5 py-1 rounded-lg text-[11px] font-bold ${statusStyles[user.status as keyof typeof statusStyles]}`}
-                      >
-                        {user.status}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="text-right">
-                    <div className="flex justify-end gap-3 transition-all duration-300">
-                      <Button
-                        variant="outline"
-                        shape="rounded-sm"
-                        className="p-1.5! text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft border-gray-100 transition-all"
-                        onClick={() => {
-                          setSelectedStaff(user);
-                          setIsStaffDetailOpen(true);
-                        }}
-                      >
-                        <Icon
-                          name="settings"
-                          folder="dashboardIcon"
-                          size="sm"
-                        />
-                      </Button>
-                      <Button
-                        variant="outline"
-                        shape="rounded-sm"
-                        className="p-1.5! text-gray-400 hover:text-brand-orange-text hover:bg-brand-orange-soft border-gray-100 transition-all"
-                        onClick={() => {
-                          setUserToEdit(user);
-                          setIsEditModalOpen(true);
-                        }}
-                      >
-                        <FiEdit3 size={14} />
-                      </Button>
-                      <Button
-                        variant="outline"
-                        shape="rounded-sm"
-                        className="p-1.5! text-gray-400 hover:text-rose-500 hover:bg-rose-50 border-gray-100 transition-all"
-                        onClick={() => {
-                          setUserToDelete(user);
-                          setIsDeleteModalOpen(true);
-                        }}
-                      >
-                        <Icon name="Delete" folder="dashboardIcon" size="sm" />
-                      </Button>
-                    </div>
-                  </td>
+        {isError ? (
+          <div className="p-6">
+            <EmptyState
+              illustration="customers"
+              title="Couldn't load the team"
+              description={apiErrorMessage(error)}
+              action={{ label: "Try again", onClick: () => refetch() }}
+            />
+          </div>
+        ) : (
+          <div className="admin-table-container">
+            <table className="w-full">
+              <thead>
+                <tr>
+                  <th className="pl-6">Team member</th>
+                  <th>Role</th>
+                  <th>Phone</th>
+                  <th>Last sign-in</th>
+                  <th>Status</th>
+                  <th className="text-right pr-6">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {isLoading ? (
+                  Array.from({ length: 5 }).map((_, i) => (
+                    <tr key={i} className="animate-pulse">
+                      <td className="pl-6">
+                        <div className="h-4 bg-light-gray rounded w-36 mb-1.5" />
+                        <div className="h-3 bg-light-gray rounded w-44" />
+                      </td>
+                      <td>
+                        <div className="h-5 bg-light-gray rounded-full w-24" />
+                      </td>
+                      <td>
+                        <div className="h-4 bg-light-gray rounded w-24" />
+                      </td>
+                      <td>
+                        <div className="h-4 bg-light-gray rounded w-20" />
+                      </td>
+                      <td>
+                        <div className="h-4 bg-light-gray rounded w-14" />
+                      </td>
+                      <td>
+                        <div className="h-8 bg-light-gray rounded w-20 ml-auto" />
+                      </td>
+                    </tr>
+                  ))
+                ) : pageRows.length > 0 ? (
+                  pageRows.map((user) => (
+                    <tr key={user.id}>
+                      <td className="pl-6">
+                        <div className="flex flex-col min-w-0">
+                          <span className="font-medium text-brand-charcoal truncate">{user.name || "Unnamed"}</span>
+                          <span className="text-[12px] text-faint truncate">{user.email || "No email"}</span>
+                        </div>
+                      </td>
+                      <td>
+                        {user.is_super_admin ? (
+                          <span className="px-2 py-0.5 rounded-full text-[12px] bg-brand-charcoal text-white">Super Admin</span>
+                        ) : user.role ? (
+                          <span className="px-2 py-0.5 rounded-full text-[12px] bg-brand-orange-soft text-brand-charcoal">
+                            {user.role.name}
+                          </span>
+                        ) : (
+                          <span className="text-faint">No role</span>
+                        )}
+                      </td>
+                      <td className="whitespace-nowrap">{user.phone_number || "—"}</td>
+                      <td className="whitespace-nowrap" title={user.last_login ?? undefined}>
+                        {lastSeen(user.last_login)}
+                      </td>
+                      <td>
+                        <span
+                          className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[12px] ${
+                            user.is_active ? "bg-success-soft text-success" : "bg-error-soft text-error"
+                          }`}
+                        >
+                          <span className={`w-1.5 h-1.5 rounded-full ${user.is_active ? "bg-success" : "bg-error"}`} />
+                          {user.is_active ? "Active" : "Inactive"}
+                        </span>
+                      </td>
+                      <td className="text-right pr-6">
+                        <div className="flex justify-end gap-2">
+                          <button type="button" className={iconBtn} onClick={() => setToEdit(user)} aria-label={`Edit ${user.name}`} title="Edit">
+                            <Pencil1Icon className="w-4 h-4" />
+                          </button>
+                          <button
+                            type="button"
+                            className={`${iconBtn} hover:text-error hover:bg-error-soft`}
+                            onClick={() => setToRemove(user)}
+                            disabled={user.is_super_admin}
+                            aria-label={`Remove ${user.name}`}
+                            title={user.is_super_admin ? "A Super Admin can't be removed here" : "Remove access"}
+                          >
+                            <TrashIcon className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                ) : hasFilters ? (
+                  <EmptyTableRow
+                    colSpan={6}
+                    illustration="search"
+                    title="No matching team members"
+                    description="Try a different name, email or role."
+                    action={{
+                      label: "Clear filters",
+                      onClick: () => {
+                        setSearchInput("");
+                        setSearch("");
+                        setRoleFilter(ALL_ROLES);
+                      },
+                    }}
+                  />
+                ) : (
+                  <EmptyTableRow
+                    colSpan={6}
+                    illustration="customers"
+                    title="No team members yet"
+                    description="Staff will appear here once you add them."
+                  />
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
 
-        {/* Pagination Footer */}
-        <div className="p-4 bg-gray-50/30 border-t border-gray-50 mt-auto">
-          <Pagination
-            currentPage={currentPage}
-            totalPages={1}
-            onPageChange={setCurrentPage}
-          />
-        </div>
+        {!isError && staff.length > rowsPerPage && (
+          <div className="border-t border-light-gray">
+            <Pagination currentPage={page} totalPages={totalPages} onPageChange={setCurrentPage} />
+          </div>
+        )}
       </div>
 
       <ConfirmationModal
-        isOpen={isDeleteModalOpen}
-        onClose={() => setIsDeleteModalOpen(false)}
-        onConfirm={() => {
-          console.log(`Removing user ${userToDelete?.name}...`);
-          setIsDeleteModalOpen(false);
-        }}
-        title="Revoke Administrative Access"
-        message={`Are you sure you want to remove ${userToDelete?.name} from the administrative system? This action will immediately terminate their active session and revoke all permissions.`}
-        confirmText="Yes, Revoke Access"
+        isOpen={!!toRemove}
+        onClose={() => setToRemove(null)}
+        onConfirm={confirmRemove}
+        isLoading={isRemoving}
+        title="Remove team member"
+        message={`${toRemove?.name || "This person"} loses their role and their account is deactivated, so they can no longer sign in. Their history stays.`}
+        confirmText="Remove access"
         type="danger"
       />
 
-      <UsersMoreActionsDrawer
-        isOpen={isMoreActionsOpen}
-        onClose={() => setIsMoreActionsOpen(false)}
-      />
-
-      <BulkActionsDrawer
-        isOpen={selectedIds.length > 0}
-        onClose={() => setSelectedIds([])}
-        selectedIds={selectedIds}
-        items={staffData}
-        onClearSelection={() => setSelectedIds([])}
-        title="Staff Selected"
-        actions={[
-          {
-            id: "export",
-            title: "Export Selection",
-            icon: "cloud_download",
-            folder: "icon",
-            onClick: () => {
-              console.log("Exporting selected staff data...");
-              setSelectedIds([]);
-            },
-          },
-          {
-            id: "deactivate",
-            title: "Deactivate Selected",
-            icon: "block",
-            folder: "icon",
-            onClick: () => {
-              console.log("Deactivating selected staff...");
-              setSelectedIds([]);
-            },
-          },
-          {
-            id: "delete",
-            title: "Revoke Access (Bulk)",
-            icon: "Delete",
-            folder: "dashboardIcon",
-            variant: "danger",
-            onClick: () => setIsDeleteModalOpen(true),
-          },
-        ]}
-      />
-
-      <StaffDetailDrawer
-        isOpen={isStaffDetailOpen}
-        onClose={() => setIsStaffDetailOpen(false)}
-        staff={selectedStaff}
-      />
-
-      <AddUserModal
-        isOpen={isAddUserModalOpen}
-        onClose={() => setIsAddUserModalOpen(false)}
-      />
-
-      <EditUserModal
-        isOpen={isEditModalOpen}
-        onClose={() => setIsEditModalOpen(false)}
-        staff={userToEdit}
-      />
+      <AddUserModal isOpen={isAddOpen} onClose={() => setIsAddOpen(false)} roles={roles} />
+      <EditUserModal staff={toEdit} onClose={() => setToEdit(null)} roles={roles} />
     </div>
   );
 }

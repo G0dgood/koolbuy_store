@@ -7,78 +7,29 @@ import Link from "next/link";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useGetVendorsQuery } from "@/lib/store";
+import { apiErrorMessage } from "@/lib/store/base-api";
+import { EmptyState } from "@/app/components/EmptyState";
 
 interface VendorDisplay {
   id: string;
   name: string;
-  image: string;
+  image: string | null;
   link: string;
 }
-
-const FALLBACK_VENDORS: VendorDisplay[] = [
-  {
-    id: "v1",
-    name: "Koolbuy - Lighthouse Electronics",
-    image: "/images/koolboks/vendors/12.webp",
-    link: "/products?vendor=lighthouse",
-  },
-  {
-    id: "v2",
-    name: "Koolbuy - Adobe Electronics",
-    image: "/images/koolboks/vendors/13.webp",
-    link: "/products?vendor=biizinilah",
-  },
-  {
-    id: "v3",
-    name: "Koolbuy - Modus Ideal Electronics",
-    image: "/images/koolboks/vendors/14.webp",
-    link: "/products?vendor=modus",
-  },
-  {
-    id: "v4",
-    name: "Koolbuy - Don Vic LTD",
-    image: "/images/koolboks/vendors/17.webp",
-    link: "/products?vendor=donvic",
-  },
-  {
-    id: "v5",
-    name: "Koolbuy - Cash N Carry (Allen)",
-    image: "/images/koolboks/vendors/11.webp",
-    link: "/products?vendor=cashncarry",
-  },
-  {
-    id: "v6",
-    name: "Koolbuy - Ajah Store",
-    image: "/images/koolboks/vendors/15.webp",
-    link: "/products?vendor=ajah",
-  },
-  {
-    id: "v7",
-    name: "Koolbuy - Albertina Nig LTD",
-    image: "/images/koolboks/vendors/16.webp",
-    link: "/products?vendor=albertina",
-  },
-];
 
 export const RecommendedVendors: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
 
-  const { data: vendorsData } = useGetVendorsQuery({ page_size: 10 });
+  const { data: vendorsData, isLoading, isError, error, refetch } = useGetVendorsQuery({ page_size: 10 });
 
-  const vendors: VendorDisplay[] =
-    vendorsData?.items && vendorsData.items.length > 0
-      ? vendorsData.items.map((item, idx) => ({
-          id: item.id,
-          name: item.name,
-          image:
-            item.cover_image_url ||
-            item.image_url ||
-            FALLBACK_VENDORS[idx % FALLBACK_VENDORS.length]?.image ||
-            "/images/koolboks/vendors/12.webp",
-          link: `/products?vendor=${encodeURIComponent(item.id)}`,
-        }))
-      : FALLBACK_VENDORS;
+  const vendors: VendorDisplay[] = (vendorsData?.items ?? []).map((item) => ({
+    id: item.id,
+    name: item.name,
+    image: item.cover_image_url || item.image_url || null,
+    link: `/products?vendor=${encodeURIComponent(item.id)}`,
+  }));
+  const hasVendors = vendors.length > 0;
 
   const scrollNext = useCallback(() => {
     if (scrollRef.current) {
@@ -104,14 +55,14 @@ export const RecommendedVendors: React.FC = () => {
 
   // Auto-movement interval timer
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || !hasVendors) return;
 
     const interval = setInterval(() => {
       scrollNext();
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [isPaused, scrollNext]);
+  }, [isPaused, hasVendors, scrollNext]);
 
   return (
     <section
@@ -124,16 +75,47 @@ export const RecommendedVendors: React.FC = () => {
       <StoreSectionHeader
         title="Recommended vendors"
         subtitle="Verified sellers with great cooling service."
-        href="/products"
+        href={hasVendors ? "/products" : undefined}
       />
 
-      {/* Relative container with arrows */}
+      {isLoading ? (
+        <div aria-hidden="true" className="flex gap-3 md:gap-4 overflow-hidden py-1">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="w-60 sm:w-65 md:w-[calc(25%-12px)] shrink-0 rounded-tile bg-white border border-light-gray overflow-hidden">
+              <div className="w-full aspect-square bg-black/[0.04] animate-pulse" />
+              <div className="px-4 pt-3 pb-4 flex flex-col gap-2">
+                <div className="h-3.5 w-3/4 rounded-full bg-black/[0.04] animate-pulse" />
+                <div className="h-3 w-1/3 rounded-full bg-black/[0.04] animate-pulse" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : isError ? (
+        <div role="alert" className="bg-white rounded-tile border border-light-gray py-10 px-6 flex flex-col items-center gap-3 text-center">
+          <p className="text-[14px] text-subtle">{apiErrorMessage(error, "We couldn't load vendors.")}</p>
+          <button
+            type="button"
+            onClick={() => refetch()}
+            className="inline-flex items-center justify-center h-9 px-4 rounded-full bg-black/[0.04] text-brand-charcoal text-[13px] font-medium hover:bg-black/[0.08] transition-colors"
+          >
+            Try again
+          </button>
+        </div>
+      ) : !hasVendors ? (
+        <EmptyState
+          variant="card"
+          illustration="vendors"
+          title="No vendors yet"
+          description="Vendors will appear here once they're verified."
+        />
+      ) : (
+      /* Relative container with arrows */
       <div className="relative group/carousel">
         {/* Left Arrow Button */}
         <button
           onClick={scrollPrev}
           aria-label="Previous vendors"
-          className="absolute -left-2 md:-left-4 top-[40%] -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/85 backdrop-blur-xl shadow-[0_4px_16px_rgba(0,0,0,0.12)] flex items-center justify-center text-brand-charcoal hover:bg-white transition-all cursor-pointer opacity-0 group-hover/carousel:opacity-100 focus-visible:opacity-100"
+          className="absolute -left-2 md:-left-4 top-[40%] -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/85 backdrop-blur-xl shadow-float flex items-center justify-center text-brand-charcoal hover:bg-white transition-all cursor-pointer opacity-0 group-hover/carousel:opacity-100 focus-visible:opacity-100"
         >
           <FiChevronLeft size={18} />
         </button>
@@ -154,14 +136,23 @@ export const RecommendedVendors: React.FC = () => {
                 >
                   {/* Vendor Image Banner */}
                   <div className="w-full aspect-square relative overflow-hidden bg-off-white">
-                    <Image
-                      src={vendor.image}
-                      alt={vendor.name}
-                      fill
-                      unoptimized={vendor.image.startsWith("http")}
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                    />
+                    {vendor.image ? (
+                      <Image
+                        src={vendor.image}
+                        alt={vendor.name}
+                        fill
+                        unoptimized={vendor.image.startsWith("http")}
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                      />
+                    ) : (
+                      // No store photo yet: show the vendor's initial
+                      <div aria-hidden="true" className="absolute inset-0 flex items-center justify-center">
+                        <span className="w-20 h-20 rounded-full bg-white border border-light-gray flex items-center justify-center text-[28px] font-semibold text-brand-charcoal">
+                          {vendor.name.trim().charAt(0).toUpperCase() || "?"}
+                        </span>
+                      </div>
+                    )}
                   </div>
 
                   {/* Bottom Info */}
@@ -183,11 +174,12 @@ export const RecommendedVendors: React.FC = () => {
         <button
           onClick={scrollNext}
           aria-label="Next vendors"
-          className="absolute -right-2 md:-right-4 top-[40%] -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/85 backdrop-blur-xl shadow-[0_4px_16px_rgba(0,0,0,0.12)] flex items-center justify-center text-brand-charcoal hover:bg-white transition-all cursor-pointer opacity-0 group-hover/carousel:opacity-100 focus-visible:opacity-100"
+          className="absolute -right-2 md:-right-4 top-[40%] -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/85 backdrop-blur-xl shadow-float flex items-center justify-center text-brand-charcoal hover:bg-white transition-all cursor-pointer opacity-0 group-hover/carousel:opacity-100 focus-visible:opacity-100"
         >
           <FiChevronRight size={18} />
         </button>
       </div>
+      )}
     </section>
   );
 };

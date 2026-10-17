@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { motion, Variants } from "framer-motion";
 import { Header } from "@/app/components/Header";
 import { Footer } from "@/app/components/Footer";
@@ -9,6 +8,10 @@ import { Button } from "@/app/components/Button";
 import { Input } from "@/app/components/Form";
 import { Icon } from "@/app/components/Icon";
 import { ProfileSidebar } from "@/app/components/Profile/ProfileSidebar";
+import { ProfileStats } from "@/app/components/Profile/ProfileStats";
+import { EmptyState } from "@/app/components/EmptyState";
+import { useAuthModal } from "@/app/context/AuthModalContext";
+import { apiErrorMessage } from "@/lib/store/base-api";
 import { Breadcrumbs } from "@/app/components/Breadcrumbs";
 import {
   useGetProfileQuery,
@@ -44,8 +47,9 @@ const FIELD =
   "h-11! rounded-xl! bg-black/[0.04]! border! border-transparent! px-4! py-0! text-[15px]! text-brand-charcoal placeholder:text-faint! outline-none shadow-none transition-colors focus:bg-white! focus:border-brand-orange! focus:ring-4! focus:ring-brand-orange/15!";
 
 export default function ProfilePage() {
-  const router = useRouter();
-  const [hasToken, setHasToken] = useState<boolean>(true);
+  const { openLogin } = useAuthModal();
+  // null until the stored session has been read on the client
+  const [hasToken, setHasToken] = useState<boolean | null>(null);
   const [cachedUser, setCachedUser] = useState<UserProfile | null>(null);
 
   useEffect(() => {
@@ -53,11 +57,7 @@ export default function ProfilePage() {
       const tokens = readStoredTokens();
       const tokenExists = Boolean(tokens?.access);
       setHasToken(tokenExists);
-      if (!tokenExists) {
-        window.location.href = "/";
-      } else {
-        setCachedUser(readStoredUser<UserProfile>());
-      }
+      setCachedUser(tokenExists ? readStoredUser<UserProfile>() : null);
     };
     syncSession();
     window.addEventListener(AUTH_CHANGED_EVENT, syncSession);
@@ -68,7 +68,13 @@ export default function ProfilePage() {
     };
   }, []);
 
-  const { data: profile, isLoading } = useGetProfileQuery(undefined, {
+  const {
+    data: profile,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useGetProfileQuery(undefined, {
     skip: !hasToken,
   });
 
@@ -76,43 +82,34 @@ export default function ProfilePage() {
 
   const user = profile || cachedUser;
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-
-  useEffect(() => {
-    if (user) {
-      setFirstName(user.first_name || user.name?.split(" ")[0] || "");
-      setLastName(
-        user.last_name || user.name?.split(" ").slice(1).join(" ") || ""
-      );
-      setEmail(user.email || "");
-      setPhone(user.phone_number || "");
-    }
-  }, [user]);
+  // Name edits are kept as a draft over the saved profile; null = untouched
+  const [draftFirst, setFirstName] = useState<string | null>(null);
+  const [draftLast, setLastName] = useState<string | null>(null);
+  const savedFirst = user?.first_name || user?.name?.split(" ")[0] || "";
+  const savedLast =
+    user?.last_name || user?.name?.split(" ").slice(1).join(" ") || "";
+  const firstName = draftFirst ?? savedFirst;
+  const lastName = draftLast ?? savedLast;
+  const email = user?.email || "";
+  const phone = user?.phone_number || "";
 
   const handleDiscard = () => {
-    if (user) {
-      setFirstName(user.first_name || user.name?.split(" ")[0] || "");
-      setLastName(
-        user.last_name || user.name?.split(" ").slice(1).join(" ") || ""
-      );
-      setEmail(user.email || "");
-      setPhone(user.phone_number || "");
-    }
+    setFirstName(null);
+    setLastName(null);
   };
 
   const handleSave = async () => {
     try {
+      // PATCH /users/me/profile/ saves name only; email and phone are
+      // sign-in identifiers and can't be changed here.
       await updateProfile({
-        first_name: firstName,
-        last_name: lastName,
-        phone_number: phone,
+        first_name: firstName.trim(),
+        last_name: lastName.trim(),
       }).unwrap();
-      toast.success("Profile updated successfully");
-    } catch {
-      toast.error("Failed to update profile. Please try again.");
+      toast.success("Profile saved");
+      handleDiscard();
+    } catch (err) {
+      toast.error(apiErrorMessage(err, "Couldn't save your profile. Please try again."));
     }
   };
 
@@ -141,6 +138,22 @@ export default function ProfilePage() {
             animate="visible"
             className="flex-1 w-full flex flex-col gap-6 md:gap-8"
           >
+            {hasToken === false ? (
+              <motion.div variants={itemVariants}>
+                <EmptyState
+                  variant="card"
+                  illustration="customers"
+                  title="Sign in to view your profile"
+                  description="Your personal details, orders and rewards will appear here once you sign in."
+                  action={{ label: "Sign in", onClick: openLogin }}
+                />
+              </motion.div>
+            ) : (
+            <>
+            <motion.div variants={itemVariants}>
+              <ProfileStats signedIn={hasToken === true} />
+            </motion.div>
+
             {/* Forms Section */}
             <motion.div
               variants={itemVariants}
@@ -151,16 +164,34 @@ export default function ProfilePage() {
                   Personal information
                 </h1>
                 <p className="text-[14px] md:text-[15px] text-subtle">
-                  Update your basic account details and contact information.
+                  Update your name. Email and phone are used to sign in and can&apos;t be changed here.
                 </p>
               </div>
 
               <div className="bg-white rounded-tile overflow-hidden">
                 <div className="p-6 md:p-8">
-                  {isLoading && !user ? (
-                    <div className="py-12 text-center text-subtle">
-                      Loading your profile details...
+                  {(hasToken === null || isLoading) && !user ? (
+                    <div
+                      aria-label="Loading your profile"
+                      className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-5 animate-pulse"
+                    >
+                      {[0, 1, 2, 3, 4].map((i) => (
+                        <div
+                          key={i}
+                          className={`flex flex-col gap-1.5 ${i === 2 ? "md:col-span-2" : ""}`}
+                        >
+                          <div className="h-4 w-24 rounded-full bg-black/[0.06]" />
+                          <div className="h-11 rounded-xl bg-black/[0.04]" />
+                        </div>
+                      ))}
                     </div>
+                  ) : isError && !user ? (
+                    <EmptyState
+                      illustration="customers"
+                      title="Couldn't load your profile"
+                      description={apiErrorMessage(error)}
+                      action={{ label: "Try again", onClick: () => refetch() }}
+                    />
                   ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-5">
                       <div className="flex flex-col gap-1.5">
@@ -196,8 +227,8 @@ export default function ProfilePage() {
                         <Input
                           placeholder="Phone number"
                           value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
-                          className={`${FIELD} tabular-nums`}
+                          disabled
+                          className={`${FIELD} tabular-nums opacity-70 cursor-not-allowed`}
                         />
                       </div>
                       <div className="flex flex-col gap-1.5">
@@ -235,7 +266,7 @@ export default function ProfilePage() {
                       variant="accent"
                       shape="pill"
                       onClick={handleSave}
-                      disabled={isUpdating}
+                      disabled={isUpdating || !user || !firstName.trim()}
                       className="h-9 px-7 text-[13px]!"
                     >
                       {isUpdating ? "Saving..." : "Save profile"}
@@ -245,29 +276,8 @@ export default function ProfilePage() {
               </div>
             </motion.div>
 
-            {/* Newsletter Section */}
-            <motion.div
-              variants={itemVariants}
-              className="bg-brand-charcoal p-6 md:p-8 rounded-tile flex flex-col md:flex-row items-center justify-between gap-6 text-white"
-            >
-              <div className="text-center md:text-left">
-                <h3 className="text-[22px] md:text-[24px] font-semibold tracking-[-0.02em] leading-tight">
-                  Stay updated on new deals!
-                </h3>
-                <p className="mt-1 text-[15px] text-white/60">
-                  Subscribe to get the latest news on products and discounts.
-                </p>
-              </div>
-              <div className="flex w-full md:w-auto gap-2">
-                <input
-                  placeholder="Email address"
-                  className="h-11 bg-white/10 border border-transparent rounded-full px-5 text-[15px] text-white placeholder:text-white/50 outline-none focus:bg-white/15 focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/25 transition-colors flex-1 min-w-0 md:w-64"
-                />
-                <button className="h-11 bg-brand-orange hover:bg-brand-orange-hover text-white text-[15px] font-semibold px-6 rounded-full transition-colors duration-200 cursor-pointer">
-                  Join
-                </button>
-              </div>
-            </motion.div>
+            </>
+            )}
           </motion.div>
         </div>
       </div>

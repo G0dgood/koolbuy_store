@@ -15,10 +15,10 @@ export const AdminProfileDropdown: React.FC = () => {
     <div className="absolute top-full right-0 pt-4 z-50 cursor-default">
       <DropdownMenu
         width={280}
-        className="shadow-md border-gray-100 p-0 overflow-hidden"
+        className="shadow-float border-light-gray p-0 overflow-hidden"
       >
         {/* User Summary */}
-        <div className="px-6 py-5 bg-gray-50/50 border-b border-gray-50 flex items-center gap-3">
+        <div className="px-6 py-5 bg-off-white/50 border-b border-light-gray flex items-center gap-3">
           <div className="w-12 h-12 rounded-full border-2 border-white shadow-sm overflow-hidden shrink-0 bg-white flex items-center justify-center">
             {userImage ? (
               <img
@@ -31,11 +31,11 @@ export const AdminProfileDropdown: React.FC = () => {
             )}
           </div>
           <div className="flex flex-col min-w-0">
-            <span className="text-sm font-bold text-brand-charcoal truncate leading-tight">
+            <span className="text-sm font-semibold text-brand-charcoal truncate leading-tight">
               Koolbuy Store Admin
             </span>
-            <span className="text-[11px] font-bold text-gray-400 truncate uppercase tracking-wider mt-0.5">
-              Super Administrator
+            <span className="text-[12px] font-medium text-subtle truncate mt-0.5">
+              Super administrator
             </span>
           </div>
         </div>
@@ -47,9 +47,9 @@ export const AdminProfileDropdown: React.FC = () => {
               name="user-profile-circle"
               folder="dashboardIcon"
               size="sm"
-              className="text-gray-400 group-hover:text-brand-orange-text"
+              className="text-faint group-hover:text-brand-orange-text"
             />
-            <span className="text-[13px] font-bold">View Profile</span>
+            <span className="text-[13px] font-semibold">View Profile</span>
           </button>
 
           <button className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-orange-soft hover:text-brand-orange-text transition-all group text-brand-charcoal">
@@ -57,9 +57,9 @@ export const AdminProfileDropdown: React.FC = () => {
               name="settings"
               folder="dashboardIcon"
               size="sm"
-              className="text-gray-400 group-hover:text-brand-orange-text"
+              className="text-faint group-hover:text-brand-orange-text"
             />
-            <span className="text-[13px] font-bold">Account Settings</span>
+            <span className="text-[13px] font-semibold">Account Settings</span>
           </button>
 
           <button className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-orange-soft hover:text-brand-orange-text transition-all group text-brand-charcoal">
@@ -67,21 +67,21 @@ export const AdminProfileDropdown: React.FC = () => {
               name="security"
               folder="icon"
               size="sm"
-              className="text-gray-400 group-hover:text-brand-orange-text"
+              className="text-faint group-hover:text-brand-orange-text"
             />
-            <span className="text-[13px] font-bold">Security & Audit</span>
+            <span className="text-[13px] font-semibold">Security & Audit</span>
           </button>
 
-          <div className="h-px bg-gray-50 my-2 mx-4"></div>
+          <div className="h-px bg-off-white my-2 mx-4"></div>
 
           <button className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-orange-soft hover:text-brand-orange-text transition-all group text-brand-charcoal">
             <Icon
               name="info-circle"
               folder="dashboardIcon"
               size="sm"
-              className="text-gray-400 group-hover:text-brand-orange-text"
+              className="text-faint group-hover:text-brand-orange-text"
             />
-            <span className="text-[13px] font-bold">Help & Support</span>
+            <span className="text-[13px] font-semibold">Help & Support</span>
           </button>
         </div>
 
@@ -90,7 +90,7 @@ export const AdminProfileDropdown: React.FC = () => {
           label="Logout Session"
           onClick={() => setIsLogoutModalOpen(true)}
           icon="ic_round-logout"
-          className="h-14 py-0 text-rose-500 hover:bg-rose-50"
+          className="h-14 py-0 text-error hover:bg-error-soft"
         />
       </DropdownMenu>
 

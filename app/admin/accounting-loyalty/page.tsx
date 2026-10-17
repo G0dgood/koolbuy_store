@@ -392,7 +392,7 @@ function MembersTab({ policy, onOpenMember }: { policy: Policy | null; onOpenMem
               ) : (
                 <EmptyRow
                   cols={COLS}
-                  illustration="loyalty"
+                  illustration="customers"
                   title="No members yet"
                   hint={`Members will appear here once buyers earn their first points. ${earningHint(policy)}`}
                 />
@@ -569,7 +569,7 @@ function LedgerTab({
               ) : (
                 <EmptyRow
                   cols={COLS}
-                  illustration="customers"
+                  illustration="loyalty"
                   title="No points credited yet"
                   hint={`Earnings will appear here once buyers earn points on paid orders. ${earningHint(policy)}`}
                 />

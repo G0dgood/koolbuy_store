@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { FAQAccordion } from "../components/ui/FAQAccordion";
+import { TabFilter } from "../components/Tabs";
 import { HiOutlineChatBubbleLeftRight, HiOutlineEnvelope } from "react-icons/hi2";
 import { motion } from "framer-motion";
 import { HiOutlineSearch } from "react-icons/hi";
@@ -110,28 +111,8 @@ export default function FAQPage() {
       {/* Main Content */}
       <section className="max-w-250 mx-auto px-4 sm:px-6 py-12 md:py-20">
         {!searchQuery && (
-          <div className="mb-10 md:mb-12 max-w-full overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <div role="tablist" className="flex items-center justify-start md:justify-center min-w-max mx-auto gap-2 py-1">
-              {categories.map((tab) => {
-                const selected = activeTab === tab;
-                return (
-                  <button
-                    key={tab}
-                    type="button"
-                    role="tab"
-                    aria-selected={selected}
-                    onClick={() => setActiveTab(tab)}
-                    className={`px-4 py-2 rounded-full text-[14px] font-medium whitespace-nowrap transition-colors duration-200 cursor-pointer ${
-                      selected
-                        ? "bg-brand-orange text-white"
-                        : "bg-black/[0.04] text-subtle hover:bg-black/[0.08] hover:text-brand-charcoal"
-                    }`}
-                  >
-                    {tab}
-                  </button>
-                );
-              })}
-            </div>
+          <div className="mb-10 md:mb-12 flex justify-center">
+            <TabFilter ariaLabel="Question topics" tabs={categories} activeTab={activeTab} onChange={setActiveTab} />
           </div>
         )}
 

@@ -29,7 +29,7 @@ const TableHeader: React.FC<React.HTMLAttributes<HTMLTableSectionElement>> = ({
   ...props 
 }) => (
   <thead 
-    className={`border-b border-gray-200 ${className}`}
+    className={`border-b border-black/[0.06] ${className}`}
     {...props}
   >
     {children}
@@ -62,8 +62,8 @@ const TableRow: React.FC<TableRowProps> = ({
 }) => (
   <tr 
     className={`
-      border-b border-gray-100 transition-colors
-      ${isSelected ? "bg-brand-orange-soft/50" : "hover:bg-gray-50/50"}
+      border-b border-black/[0.06] transition-colors
+      ${isSelected ? "bg-brand-orange-soft/50" : "hover:bg-off-white/50"}
       ${className}
     `}
     {...props}
@@ -96,7 +96,7 @@ const TableCell: React.FC<TableCellProps> = ({
     <Tag 
       className={`
         py-4 px-4 text-sm 
-        ${isHeader ? "font-bold text-gray-500 uppercase tracking-tight" : "text-gray-700 font-medium"}
+        ${isHeader ? "font-semibold text-faint" : "text-subtle font-medium"}
         ${alignment[align]}
         ${className}
       `}

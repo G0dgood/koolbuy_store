@@ -19,7 +19,7 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
           />
           <div className={`
             w-11 h-6 rounded-full transition-all duration-200
-            bg-gray-200 group-hover:bg-gray-300
+            bg-medium-gray group-hover:bg-faint/40
             peer-checked:bg-brand-charcoal peer-focus:ring-2 peer-focus:ring-brand-orange/20
             peer-disabled:opacity-50
           `} />
@@ -28,7 +28,7 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
             peer-checked:translate-x-5 shadow-sm
           `} />
         </div>
-        {label && <div className="ml-3 text-sm font-medium text-gray-700 selection-none">{label}</div>}
+        {label && <div className="ml-3 text-sm font-medium text-subtle selection-none">{label}</div>}
       </label>
     );
   }

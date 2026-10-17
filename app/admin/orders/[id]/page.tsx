@@ -56,7 +56,7 @@ function InfoRow({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex justify-between gap-4 text-xs">
       <span className="text-faint">{label}</span>
-      <span className="text-gray-900 text-right break-words">{value || "—"}</span>
+      <span className="text-brand-charcoal text-right break-words">{value || "—"}</span>
     </div>
   );
 }
@@ -65,7 +65,7 @@ function Card({ title, children, action }: { title: string; children: React.Reac
   return (
     <section className="bg-white rounded-lg border border-light-gray p-6 flex flex-col gap-4">
       <div className="flex items-center justify-between gap-3">
-        <h3 className="text-base font-semibold text-gray-900">{title}</h3>
+        <h3 className="text-base font-semibold text-brand-charcoal">{title}</h3>
         {action}
       </div>
       {children}
@@ -113,7 +113,7 @@ export default function OrderDetails() {
           />
         ) : (
           <div className="bg-white rounded-lg border border-light-gray p-10 flex flex-col items-center gap-3 text-center">
-            <p className="text-base font-semibold text-gray-900">Couldn&apos;t load this order</p>
+            <p className="text-base font-semibold text-brand-charcoal">Couldn&apos;t load this order</p>
             <p className="text-xs text-subtle max-w-sm">
               {apiErrorMessage(error, "Something went wrong loading the order.")}
             </p>
@@ -158,7 +158,7 @@ export default function OrderDetails() {
         <Breadcrumbs items={[{ label: "Orders", href: "/admin/orders" }, { label: order.order_number }]} />
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-mono text-2xl font-semibold text-gray-900 tracking-tight">{order.order_number}</h1>
+            <h1 className="font-mono text-2xl font-semibold text-brand-charcoal tracking-tight">{order.order_number}</h1>
             <StatusBadge status={order.status} />
             {order.on_hold && (
               <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-error-soft text-error">On hold</span>
@@ -178,7 +178,7 @@ export default function OrderDetails() {
         <div className="lg:col-span-2 flex flex-col gap-8">
           <section className="bg-white rounded-lg border border-light-gray overflow-hidden">
             <div className="p-6 border-b border-light-gray flex items-center justify-between">
-              <h3 className="text-base font-semibold text-gray-900">Items</h3>
+              <h3 className="text-base font-semibold text-brand-charcoal">Items</h3>
               <span className="text-xs text-faint">
                 {order.items.length} {order.items.length === 1 ? "item" : "items"}
               </span>
@@ -208,19 +208,19 @@ export default function OrderDetails() {
                       <tr key={item.id}>
                         <td>
                           <div className="flex flex-col">
-                            <span className="text-sm text-gray-900">{item.product_name}</span>
+                            <span className="text-sm text-brand-charcoal">{item.product_name}</span>
                             {item.unit && <span className="text-[11px] text-faint">{item.unit}</span>}
                           </div>
                         </td>
-                        <td className="font-mono text-sm text-gray-700 whitespace-nowrap">{formatMoney(item.unit_price)}</td>
+                        <td className="font-mono text-sm text-subtle whitespace-nowrap">{formatMoney(item.unit_price)}</td>
                         <td className="font-mono text-sm text-subtle whitespace-nowrap">
                           {item.vendor_unit_price != null ? formatMoney(item.vendor_unit_price) : "—"}
                           {item.markup_percent ? (
                             <span className="block text-[11px] text-faint">+{item.markup_percent}% markup</span>
                           ) : null}
                         </td>
-                        <td className="text-sm text-gray-700">{item.quantity}</td>
-                        <td className="font-mono text-sm text-gray-900 text-right whitespace-nowrap">
+                        <td className="text-sm text-subtle">{item.quantity}</td>
+                        <td className="font-mono text-sm text-brand-charcoal text-right whitespace-nowrap">
                           {formatMoney(item.unit_price * item.quantity)}
                         </td>
                       </tr>
@@ -240,7 +240,7 @@ export default function OrderDetails() {
                   <span className="font-mono">{formatMoney(order.delivery_fee ?? 0)}</span>
                 </div>
                 <div className="h-px bg-light-gray" />
-                <div className="flex justify-between text-base font-semibold text-gray-900">
+                <div className="flex justify-between text-base font-semibold text-brand-charcoal">
                   <span>Order total</span>
                   <span className="font-mono">{formatMoney(order.total_amount)}</span>
                 </div>
@@ -254,7 +254,7 @@ export default function OrderDetails() {
                 {issues.map((issue) => (
                   <li key={issue.id} className="py-3 first:pt-0 last:pb-0 flex flex-col gap-1">
                     <div className="flex items-center justify-between gap-3">
-                      <span className="text-sm text-gray-900">
+                      <span className="text-sm text-brand-charcoal">
                         {issue.item?.name ?? "Item"} · {humanize(issue.issue_type)}
                       </span>
                       <StatusBadge status={issue.status} />
@@ -344,7 +344,7 @@ export default function OrderDetails() {
               is opened for Finance. This can&apos;t be undone.
             </p>
             <label className="flex flex-col gap-1.5">
-              <span className="text-xs font-semibold text-gray-700">Reason (optional)</span>
+              <span className="text-xs font-semibold text-subtle">Reason (optional)</span>
               <Textarea
                 rows={3}
                 maxLength={500}

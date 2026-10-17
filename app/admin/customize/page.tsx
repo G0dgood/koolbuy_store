@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { TabFilter } from "@/app/components/Tabs";
 import Checkbox from "@/app/components/Checkbox";
 import { Icon } from "@/app/components/Icon";
 import { Button } from "@/app/components/Button";
@@ -204,12 +205,12 @@ export default function CustomizePage() {
   return (
     <div className="flex flex-col gap-6 mx-auto pb-16">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-100 pb-5">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-light-gray pb-5">
         <div>
-          {/* <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
+          {/* <h1 className="text-2xl font-semibold text-brand-charcoal tracking-tight">
             Platform Customization
           </h1>
-          <p className="text-xs text-gray-500 mt-0.5">
+          <p className="text-xs text-faint mt-0.5">
             Configure system localization, vendor classifications, navigation
             links, naming terminology, onboarding flows, and legal policies.
           </p> */}
@@ -217,38 +218,22 @@ export default function CustomizePage() {
       </div>
 
       {/* Tabs Navigation Bar */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-100 custom-scrollbar">
-        {navTabs.map((tab) => {
-          const IconComponent = tab.icon;
-          const isActive = activeTab === tab.id;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as CustomizeTab)}
-              className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
-                isActive
-                  ? "bg-brand-charcoal text-white "
-                  : "bg-white text-gray-600 border border-gray-100 hover:bg-gray-50 hover:text-brand-orange-text"
-              }`}
-            >
-              <IconComponent
-                className={`w-4 h-4 ${isActive ? "text-white" : "text-gray-400"}`}
-              />
-              <span>{tab.label}</span>
-            </button>
-          );
-        })}
-      </div>
+      <TabFilter
+        ariaLabel="Customization sections"
+        options={navTabs.map((t) => ({ value: t.id as CustomizeTab, label: t.label, icon: <t.icon /> }))}
+        activeTab={activeTab}
+        onChange={setActiveTab}
+      />
 
       {/* TAB 1: LOCALIZATION */}
       {activeTab === "localization" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-          <div className="flex justify-between items-center border-b border-gray-50 pb-4">
+        <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+          <div className="flex justify-between items-center border-b border-light-gray pb-4">
             <div>
-              <h3 className="text-base font-bold text-gray-900">
+              <h3 className="text-base font-semibold text-brand-charcoal">
                 Localization Settings
               </h3>
-              <p className="text-xs text-gray-500 mt-0.5">
+              <p className="text-xs text-faint mt-0.5">
                 Manage global language defaults, active currencies, time zones,
                 and numeric formats.
               </p>
@@ -264,8 +249,8 @@ export default function CustomizePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
-                Default Language
+              <label className="text-[12px] font-medium text-subtle">
+                Default language
               </label>
               <Select
                 value={localization.defaultLanguage}
@@ -287,8 +272,8 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
-                Primary Currency
+              <label className="text-[12px] font-medium text-subtle">
+                Primary currency
               </label>
               <Select
                 value={localization.primaryCurrency}
@@ -309,8 +294,8 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
-                Secondary Supported Currencies
+              <label className="text-[12px] font-medium text-subtle">
+                Secondary supported currencies
               </label>
               <Input
                 value={localization.secondaryCurrencies}
@@ -325,8 +310,8 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
-                System Timezone
+              <label className="text-[12px] font-medium text-subtle">
+                System timezone
               </label>
               <Select
                 value={localization.timezone}
@@ -355,8 +340,8 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
-                Date Display Format
+              <label className="text-[12px] font-medium text-subtle">
+                Date display format
               </label>
               <Select
                 value={localization.dateFormat}
@@ -388,8 +373,8 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
-                Number & Decimal Format
+              <label className="text-[12px] font-medium text-subtle">
+                Number & decimal format
               </label>
               <Select
                 value={localization.numberFormat}
@@ -422,13 +407,13 @@ export default function CustomizePage() {
       {/* TAB 2: VENDOR TYPE */}
       {activeTab === "vendor-type" && (
         <div className="flex flex-col gap-6">
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-50 pb-4">
+          <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-light-gray pb-4">
               <div>
-                <h3 className="text-base font-bold text-gray-900">
+                <h3 className="text-base font-semibold text-brand-charcoal">
                   Vendor Classification & Types
                 </h3>
-                <p className="text-xs text-gray-500 mt-0.5">
+                <p className="text-xs text-faint mt-0.5">
                   Define merchant categories, default commission percentages,
                   and auto-publishing rules.
                 </p>
@@ -460,26 +445,26 @@ export default function CustomizePage() {
                   {vendorTypes.map((vt) => (
                     <tr
                       key={vt.id}
-                      className="hover:bg-gray-50/50 transition-colors"
+                      className="hover:bg-off-white transition-colors"
                     >
-                      <td className="font-bold text-gray-900 text-xs">
+                      <td className="font-medium text-brand-charcoal text-xs">
                         {vt.name}
                       </td>
-                      <td className="font-mono text-gray-600 text-xs">
+                      <td className="font-mono text-subtle text-xs">
                         {vt.code}
                       </td>
-                      <td className="font-bold text-brand-orange-text text-xs">
+                      <td className="font-medium text-brand-orange-text text-xs">
                         {vt.commission}
                       </td>
-                      <td className="text-xs text-gray-600 font-medium">
+                      <td className="text-xs text-subtle font-medium">
                         {vt.maxProducts}
                       </td>
                       <td>
                         <span
-                          className={`px-2.5 py-1 rounded-md text-[11px] font-bold ${
+                          className={`px-2.5 py-1 rounded-md text-[11px] font-semibold ${
                             vt.autoApproveProducts
-                              ? "bg-emerald-50 text-emerald-600 border border-emerald-100"
-                              : "bg-gray-100 text-gray-600"
+                              ? "bg-success-soft text-success"
+                              : "bg-off-white text-subtle"
                           }`}
                         >
                           {vt.autoApproveProducts
@@ -488,14 +473,14 @@ export default function CustomizePage() {
                         </span>
                       </td>
                       <td>
-                        <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-brand-orange-soft text-brand-orange-text">
+                        <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-brand-orange-soft text-brand-orange-text">
                           {vt.status}
                         </span>
                       </td>
                       <td className="text-right">
                         <Button
                           variant="outline"
-                          className="p-1.5! text-gray-400 hover:text-rose-500 hover:bg-rose-50"
+                          className="p-1.5! text-faint hover:text-error hover:bg-error-soft"
                           onClick={() =>
                             setVendorTypes((prev) =>
                               prev.filter((v) => v.id !== vt.id),
@@ -513,9 +498,9 @@ export default function CustomizePage() {
             </div>
 
             {/* Add New Vendor Type Form */}
-            <div className="bg-gray-50/60 rounded-xl p-5 border border-gray-100 flex flex-col gap-4">
-              <h4 className="text-xs font-bold text-gray-800 uppercase tracking-wider">
-                Create New Vendor Classification
+            <div className="bg-off-white rounded-lg p-5 border border-light-gray flex flex-col gap-4">
+              <h4 className="text-xs font-semibold text-brand-charcoal">
+                Create new vendor classification
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                 <Input
@@ -578,13 +563,13 @@ export default function CustomizePage() {
 
       {/* TAB 3: LINKS */}
       {activeTab === "links" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-50 pb-4">
+        <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-light-gray pb-4">
             <div>
-              <h3 className="text-base font-bold text-gray-900">
+              <h3 className="text-base font-semibold text-brand-charcoal">
                 System & External Links
               </h3>
-              <p className="text-xs text-gray-500 mt-0.5">
+              <p className="text-xs text-faint mt-0.5">
                 Configure navigation links, customer helpline shortcuts, mobile
                 app links, and API portals.
               </p>
@@ -612,13 +597,13 @@ export default function CustomizePage() {
                 {links.map((lk) => (
                   <tr
                     key={lk.id}
-                    className="hover:bg-gray-50/50 transition-colors"
+                    className="hover:bg-off-white transition-colors"
                   >
-                    <td className="font-bold text-gray-900 text-xs">
+                    <td className="font-medium text-brand-charcoal text-xs">
                       {lk.label}
                     </td>
                     <td>
-                      <span className="text-xs bg-gray-100 text-gray-700 px-2.5 py-1 rounded-md font-medium">
+                      <span className="text-xs bg-off-white text-subtle px-2.5 py-1 rounded-md font-medium">
                         {lk.category}
                       </span>
                     </td>
@@ -635,7 +620,7 @@ export default function CustomizePage() {
                     <td className="text-right">
                       <Button
                         variant="outline"
-                        className="p-1.5! text-gray-400 hover:text-rose-500 hover:bg-rose-50"
+                        className="p-1.5! text-faint hover:text-error hover:bg-error-soft"
                         onClick={() =>
                           setLinks((prev) => prev.filter((l) => l.id !== lk.id))
                         }
@@ -650,9 +635,9 @@ export default function CustomizePage() {
           </div>
 
           {/* Add Link */}
-          <div className="bg-gray-50/60 rounded-xl p-5 border border-gray-100 flex flex-col gap-4">
-            <h4 className="text-xs font-bold text-gray-800 uppercase tracking-wider">
-              Add New External / System Link
+          <div className="bg-off-white rounded-lg p-5 border border-light-gray flex flex-col gap-4">
+            <h4 className="text-xs font-semibold text-brand-charcoal">
+              Add new external / system link
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <Input
@@ -698,13 +683,13 @@ export default function CustomizePage() {
 
       {/* TAB 4: NOMENCLATURE */}
       {activeTab === "nomenclature" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-          <div className="flex justify-between items-center border-b border-gray-50 pb-4">
+        <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+          <div className="flex justify-between items-center border-b border-light-gray pb-4">
             <div>
-              <h3 className="text-base font-bold text-gray-900">
+              <h3 className="text-base font-semibold text-brand-charcoal">
                 Custom Terminology & Nomenclature
               </h3>
-              <p className="text-xs text-gray-500 mt-0.5">
+              <p className="text-xs text-faint mt-0.5">
                 Customize labels and terms across storefront cards, checkout
                 buttons, and admin menus.
               </p>
@@ -720,8 +705,8 @@ export default function CustomizePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
-                Vendor Term (Singular / Plural)
+              <label className="text-[12px] font-medium text-subtle">
+                Vendor term (singular / plural)
               </label>
               <div className="grid grid-cols-2 gap-3">
                 <Input
@@ -748,8 +733,8 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
-                Customer Term (Singular / Plural)
+              <label className="text-[12px] font-medium text-subtle">
+                Customer term (singular / plural)
               </label>
               <div className="grid grid-cols-2 gap-3">
                 <Input
@@ -776,8 +761,8 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
-                Order Term (Singular / Plural)
+              <label className="text-[12px] font-medium text-subtle">
+                Order term (singular / plural)
               </label>
               <div className="grid grid-cols-2 gap-3">
                 <Input
@@ -804,8 +789,8 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
-                BNPL Terminology
+              <label className="text-[12px] font-medium text-subtle">
+                BNPL terminology
               </label>
               <Input
                 value={nomenclature.bnplTerm}
@@ -817,8 +802,8 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
-                Installment Payment Milestone Term
+              <label className="text-[12px] font-medium text-subtle">
+                Installment payment milestone term
               </label>
               <Input
                 value={nomenclature.installmentTerm}
@@ -833,8 +818,8 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-600 uppercase">
-                Loyalty Reward Points Term
+              <label className="text-[12px] font-medium text-subtle">
+                Loyalty reward points term
               </label>
               <Input
                 value={nomenclature.loyaltyPointsTerm}
@@ -853,13 +838,13 @@ export default function CustomizePage() {
 
       {/* TAB 5: USER ONBOARDING */}
       {activeTab === "user-onboarding" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-          <div className="flex justify-between items-center border-b border-gray-50 pb-4">
+        <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+          <div className="flex justify-between items-center border-b border-light-gray pb-4">
             <div>
-              <h3 className="text-base font-bold text-gray-900">
+              <h3 className="text-base font-semibold text-brand-charcoal">
                 User Onboarding & Verification
               </h3>
-              <p className="text-xs text-gray-500 mt-0.5">
+              <p className="text-xs text-faint mt-0.5">
                 Set account creation requirements, identity verification rules,
                 and welcome incentives.
               </p>
@@ -873,14 +858,14 @@ export default function CustomizePage() {
             </Button>
           </div>
 
-          <div className="flex flex-col gap-5 divide-y divide-gray-50">
+          <div className="flex flex-col gap-5 divide-y divide-light-gray">
             {/* BVN Verification Toggle */}
             <div className="flex items-center justify-between pt-3">
               <div>
-                <span className="text-xs font-bold text-gray-900 block">
+                <span className="text-xs font-semibold text-brand-charcoal block">
                   Require Bank Verification Number (BVN) for BNPL Applications
                 </span>
-                <span className="text-xs text-gray-400">
+                <span className="text-xs text-faint">
                   Ensures creditworthiness and fraud protection before approving
                   installment contracts.
                 </span>
@@ -900,10 +885,10 @@ export default function CustomizePage() {
             {/* Phone OTP Toggle */}
             <div className="flex items-center justify-between pt-4">
               <div>
-                <span className="text-xs font-bold text-gray-900 block">
+                <span className="text-xs font-semibold text-brand-charcoal block">
                   Enforce SMS OTP Verification on Registration
                 </span>
-                <span className="text-xs text-gray-400">
+                <span className="text-xs text-faint">
                   Sends automated one-time passcodes to Nigerian phone numbers
                   via SMS.
                 </span>
@@ -923,10 +908,10 @@ export default function CustomizePage() {
             {/* Guest Checkout */}
             <div className="flex items-center justify-between pt-4">
               <div>
-                <span className="text-xs font-bold text-gray-900 block">
+                <span className="text-xs font-semibold text-brand-charcoal block">
                   Allow Guest Checkout for Full Payments
                 </span>
-                <span className="text-xs text-gray-400">
+                <span className="text-xs text-faint">
                   Permits immediate card or bank transfer checkout without
                   creating a permanent account.
                 </span>
@@ -945,8 +930,8 @@ export default function CustomizePage() {
 
             {/* Welcome Message */}
             <div className="flex flex-col gap-2 pt-4">
-              <label className="text-xs font-bold text-gray-600 uppercase">
-                Welcome Notification / Splash Text
+              <label className="text-[12px] font-medium text-subtle">
+                Welcome notification / splash text
               </label>
               <Textarea
                 rows={2}
@@ -965,13 +950,13 @@ export default function CustomizePage() {
 
       {/* TAB 6: MISCELLANEOUS */}
       {activeTab === "miscellaneous" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-          <div className="flex justify-between items-center border-b border-gray-50 pb-4">
+        <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+          <div className="flex justify-between items-center border-b border-light-gray pb-4">
             <div>
-              <h3 className="text-base font-bold text-gray-900">
+              <h3 className="text-base font-semibold text-brand-charcoal">
                 Miscellaneous System Controls
               </h3>
-              <p className="text-xs text-gray-500 mt-0.5">
+              <p className="text-xs text-faint mt-0.5">
                 Maintenance mode, site banners, automated inventory thresholds,
                 and review approval triggers.
               </p>
@@ -985,14 +970,14 @@ export default function CustomizePage() {
             </Button>
           </div>
 
-          <div className="flex flex-col gap-6 divide-y divide-gray-50">
+          <div className="flex flex-col gap-6 divide-y divide-light-gray">
             {/* Maintenance Mode */}
             <div className="flex items-center justify-between pt-3">
               <div>
-                <span className="text-xs font-bold text-gray-900 block">
+                <span className="text-xs font-semibold text-brand-charcoal block">
                   Storefront Maintenance Mode
                 </span>
-                <span className="text-xs text-gray-400">
+                <span className="text-xs text-faint">
                   Temporarily disable public storefront checkout while keeping
                   admin access live.
                 </span>
@@ -1010,10 +995,10 @@ export default function CustomizePage() {
             <div className="flex flex-col gap-3 pt-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <span className="text-xs font-bold text-gray-900 block">
+                  <span className="text-xs font-semibold text-brand-charcoal block">
                     Global Header Announcement Banner
                   </span>
-                  <span className="text-xs text-gray-400">
+                  <span className="text-xs text-faint">
                     Display top promotional notification strip.
                   </span>
                 </div>
@@ -1042,8 +1027,8 @@ export default function CustomizePage() {
             {/* Thresholds */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-600 uppercase">
-                  Low Stock Inventory Threshold (Units)
+                <label className="text-[12px] font-medium text-subtle">
+                  Low stock inventory threshold (units)
                 </label>
                 <Input
                   type="number"
@@ -1055,8 +1040,8 @@ export default function CustomizePage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-600 uppercase">
-                  Auto-Cancel Unpaid Orders After (Hours)
+                <label className="text-[12px] font-medium text-subtle">
+                  Auto-cancel unpaid orders after (hours)
                 </label>
                 <Input
                   type="number"
@@ -1073,13 +1058,13 @@ export default function CustomizePage() {
 
       {/* TAB 7: POLICY */}
       {activeTab === "policy" && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col gap-6">
-          <div className="flex justify-between items-center border-b border-gray-50 pb-4">
+        <div className="bg-white rounded-lg border border-light-gray p-6 sm:p-8 flex flex-col gap-6">
+          <div className="flex justify-between items-center border-b border-light-gray pb-4">
             <div>
-              <h3 className="text-base font-bold text-gray-900">
+              <h3 className="text-base font-semibold text-brand-charcoal">
                 Legal Policies & Operational Charters
               </h3>
-              <p className="text-xs text-gray-500 mt-0.5">
+              <p className="text-xs text-faint mt-0.5">
                 Maintain published customer agreements, BNPL repayment charters,
                 and privacy terms.
               </p>
@@ -1095,8 +1080,8 @@ export default function CustomizePage() {
 
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
-                Terms & Conditions
+              <label className="text-[12px] font-medium text-subtle">
+                Terms & conditions
               </label>
               <Textarea
                 rows={4}
@@ -1109,8 +1094,8 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
-                Privacy & Data Protection Policy (NDPR Compliant)
+              <label className="text-[12px] font-medium text-subtle">
+                Privacy & data protection policy (NDPR compliant)
               </label>
               <Textarea
                 rows={4}
@@ -1123,8 +1108,8 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
-                Returns, Exchanges & Warranty Policy
+              <label className="text-[12px] font-medium text-subtle">
+                Returns, exchanges & warranty policy
               </label>
               <Textarea
                 rows={4}
@@ -1137,8 +1122,8 @@ export default function CustomizePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
-                BNPL Credit & Repossession Charter
+              <label className="text-[12px] font-medium text-subtle">
+                BNPL credit & repossession charter
               </label>
               <Textarea
                 rows={4}

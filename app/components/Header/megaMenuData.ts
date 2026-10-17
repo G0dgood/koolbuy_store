@@ -48,7 +48,7 @@ export const megaMenuContent: MegaMenuData = {
           {
             label: "Refurbished Freezers",
             href: "/products?sort=refurbished",
-            badge: "HOT",
+            badge: "Hot",
           },
         ],
       },
@@ -139,12 +139,12 @@ export const megaMenuContent: MegaMenuData = {
           {
             label: "Fish & Seafood",
             href: "/products?category=Fish+%26+Seafood",
-            badge: "FRESH",
+            badge: "Fresh",
           },
           {
             label: "Ice Blocks & Storage",
             href: "/products?category=Ice+Blocks",
-            badge: "COLD",
+            badge: "Cold",
           },
           {
             label: "Pure Sine Wave Inverters",
@@ -163,7 +163,7 @@ export const megaMenuContent: MegaMenuData = {
           {
             label: "On Sale Freezers",
             href: "/products?sort=sale",
-            badge: "SALE",
+            badge: "Sale",
           },
           { label: "New Arrivals 2026", href: "/products?sort=newest" },
           { label: "Best Selling Units", href: "/products?sort=bestsellers" },
@@ -231,7 +231,7 @@ export const megaMenuContent: MegaMenuData = {
           { label: "Hisense Appliances", href: "/products?search=Hisense" },
           { label: "Bruhm Electronics", href: "/products?search=Bruhm" },
           { label: "Samsung & LG Cooling", href: "/brands" },
-          { label: "View All 20+ Brands", href: "/brands", badge: "ALL" },
+          { label: "View All 20+ Brands", href: "/brands", badge: "All" },
         ],
       },
       {
@@ -240,7 +240,7 @@ export const megaMenuContent: MegaMenuData = {
           {
             label: "Flash Sale Discounts",
             href: "/products?sort=sale",
-            badge: "SAVE",
+            badge: "Save",
           },
           { label: "Pay As Low As ₦20,000/mo", href: "/help/payment" },
           { label: "Wholesale & Bulk Enquiries", href: "/help" },
@@ -255,7 +255,7 @@ export const megaMenuContent: MegaMenuData = {
       {
         title: "POPULAR DESTINATIONS",
         items: [
-          { label: "Hot Deals & Offers", href: "/products", badge: "HOT" },
+          { label: "Hot Deals & Offers", href: "/products", badge: "Hot" },
           { label: "New Arrivals 2026", href: "/products?sort=newest" },
           { label: "Brands Directory", href: "/brands" },
           { label: "Gift Boxes & Bundles", href: "/gift-boxes" },
@@ -278,7 +278,7 @@ export const megaMenuContent: MegaMenuData = {
           {
             label: "Become A Verified Vendor",
             href: "/register",
-            badge: "JOIN",
+            badge: "Join",
           },
           { label: "Vendor Benefits & Perks", href: "/register" },
           { label: "Store Locations in Lagos", href: "/#vendor" },

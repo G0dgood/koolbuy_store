@@ -1,509 +1,468 @@
 "use client";
 
-import React, { useState } from "react";
-import Checkbox from "@/app/components/Checkbox";
-import { Icon } from "../../components/Icon";
-import { Button } from "../../components/Button";
-import { Input } from "../../components/Form/Inputs";
-import { Search } from "@/app/components/Form";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { toast } from "sonner";
+import { HiOutlineArrowPath } from "react-icons/hi2";
+import { StatCard } from "@/app/components/Admin/StatCard";
+import { Pagination } from "@/app/components/Admin/Pagination";
+import { RowsPerPage } from "@/app/components/rows-per-page";
+import { Input } from "@/app/components/Form/Inputs";
+import { Button } from "@/app/components/Button";
+import { Icon } from "@/app/components/Icon";
+import Modal from "@/app/components/Modal/Modal";
+import { EmptyTableRow } from "@/app/components/EmptyState";
+import { apiErrorMessage } from "@/lib/store/base-api";
+import { humanize } from "@/lib/store/api/accounting-api";
 import {
-  HiOutlineBell,
-  HiOutlineCheck,
-  HiOutlineClipboardDocument,
-  HiOutlineMagnifyingGlass,
-  HiOutlineSparkles,
-} from "react-icons/hi2";
+  DELIVERY_CHANNELS,
+  DELIVERY_STATUSES,
+  useGetNotificationLogQuery,
+  useGetNotificationStatsQuery,
+  useRetryNotificationMutation,
+  type NotificationDelivery,
+} from "@/lib/store/api/catalogue-admin-api";
 
-interface NotificationTemplate {
-  id: string;
-  name: string;
-  subject: string;
-  content: string;
-  enabled: boolean;
+/* Notifications: the delivery log of every notification the platform sent
+   (in-app, email, SMS, push) with its status, attempts and last error, from
+   /admin/notifications/ and /stats/. Failed, dead and not-configured
+   deliveries can be retried. Email bodies are never shown (some carry
+   delivery codes). There is no editable template model on the backend, so the
+   old sample templates were removed. */
+
+const PAGE_SIZES = [20, 50, 100];
+const COLS = 7;
+
+const STATUS_FILTERS: { value: string; label: string }[] = [
+  { value: "", label: "All statuses" },
+  { value: "problem", label: "Problems (failed, dead, not configured)" },
+  { value: "pending", label: "Waiting (pending, processing)" },
+  ...DELIVERY_STATUSES.map((s) => ({ value: s, label: statusLabel(s) })),
+];
+
+function statusLabel(s: string) {
+  if (s === "skipped_unconfigured") return "Not configured";
+  if (s === "skipped_preference") return "Skipped (opted out)";
+  if (s === "skipped_no_address") return "Skipped (no address)";
+  if (s === "dead") return "Gave up";
+  return humanize(s);
 }
 
-const initialNotifications: NotificationTemplate[] = [
-  {
-    id: "new_order",
-    name: "New Order",
-    subject: "New Order Placed Successfully",
-    content:
-      "Dear {customer_name}, your order #{order_id} has been placed successfully. Total amount: {amount}. Track your order status in your dashboard.",
-    enabled: true,
-  },
-  {
-    id: "order_status_update",
-    name: "Order Status Update",
-    subject: "Order Status Update - #{order_id}",
-    content:
-      "Hello {customer_name}, your order #{order_id} status has been updated to: {status}. Visit {website} for tracking details.",
-    enabled: true,
-  },
-  {
-    id: "refund_status_update",
-    name: "Refund Status Update",
-    subject: "Refund Status Update - Order #{order_id}",
-    content:
-      "Dear {customer_name}, your refund request for order #{order_id} ({amount}) has been processed. Funds will reflect in your account according to your bank's schedule.",
-    enabled: true,
-  },
-  {
-    id: "new_order_received_owner",
-    name: "New Order Received (Owner)",
-    subject: "New Order Received - Order #{order_id}",
-    content:
-      "Attention {vendor_name}, you have received a new customer order #{order_id} for {amount}. Please confirm availability and prepare for dispatch.",
-    enabled: true,
-  },
-  {
-    id: "order_accepted_customer",
-    name: "Order Accepted (Customer)",
-    subject: "Your Order Has Been Accepted",
-    content:
-      "Great news {customer_name}! Vendor {vendor_name} has accepted your order #{order_id} and packaging has commenced.",
-    enabled: true,
-  },
-  {
-    id: "order_rejected_customer",
-    name: "Order Rejected (Customer)",
-    subject: "Order #{order_id} Could Not Be Accepted",
-    content:
-      "Dear {customer_name}, unfortunately vendor {vendor_name} was unable to fulfill order #{order_id}. A full refund of {amount} has been initiated.",
-    enabled: true,
-  },
-  {
-    id: "order_processing_customer",
-    name: "Order Processing (Customer)",
-    subject: "Your Equipment is Being Prepared",
-    content:
-      "Hello {customer_name}, order #{order_id} is currently being tested, inspected, and packaged for transit at the regional hub.",
-    enabled: true,
-  },
-  {
-    id: "out_of_delivery_customer",
-    name: "Out of delivery (Customer)",
-    subject: "Your Order is Out for Delivery!",
-    content:
-      "Hello {customer_name}, order #{order_id} is out for delivery with our courier driver to {delivery_address}. Please be available to receive it.",
-    enabled: true,
-  },
-  {
-    id: "order_delivered_customer",
-    name: "Order Delivered (Customer)",
-    subject: "Order Delivered Successfully",
-    content:
-      "Your order #{order_id} has been delivered to {delivery_address}. Thank you for choosing Koolbuy clean refrigeration! Please leave a review.",
-    enabled: true,
-  },
-  {
-    id: "place_order_reminder_customer",
-    name: "Place Order Reminder (Customer)",
-    subject: "Complete Your Order - Items Waiting in Your Cart",
-    content:
-      "Hi {customer_name}, you left cooling equipment in your cart! Complete your purchase now on {website} to lock in today's promotional rate.",
-    enabled: true,
-  },
-  {
-    id: "place_bid_request_customer",
-    name: "Place Bid Request (Customer)",
-    subject: "Commercial Quotation Request Received",
-    content:
-      "Dear {customer_name}, we have received your custom pricing bid request for {description}. Our commercial sales desk will respond within 24 hours.",
-    enabled: true,
-  },
-  {
-    id: "order_modified_customer",
-    name: "Order Modified (Customer)",
-    subject: "Modifications Applied to Order #{order_id}",
-    content:
-      "Hello {customer_name}, your order #{order_id} has been modified as requested. Check your updated invoice details in your user dashboard.",
-    enabled: true,
-  },
-  {
-    id: "order_delayed_customer",
-    name: "Order Delayed (Customer)",
-    subject: "Delivery Schedule Notice - Order #{order_id}",
-    content:
-      "Dear {customer_name}, your delivery for order #{order_id} is experiencing a slight logistics delay. Our driver is en route. Contact {phone_no} for assistance.",
-    enabled: true,
-  },
-  {
-    id: "pickup_delivery_reminder",
-    name: "Pickup Delivery Reminder",
-    subject: "Reminder: Your Equipment is Ready for Pickup",
-    content:
-      "Hello {customer_name}, order #{order_id} is ready for collection at {address}. Please bring your government ID and pickup verification code.",
-    enabled: true,
-  },
-  {
-    id: "reached_vendor_location",
-    name: "Reached Vendor Location",
-    subject: "Logistics Driver Reached Vendor Facility",
-    content:
-      "Courier driver has arrived at {vendor_name} location for equipment collection of order #{order_id}.",
-    enabled: true,
-  },
-  {
-    id: "out_of_takeaway_delivery_customer",
-    name: "Out of takeaway-delivery (Customer)",
-    subject: "Takeaway Order Dispatched to Hub",
-    content:
-      "Hello {customer_name}, your takeaway package for order #{order_id} is in transit to your selected local collection center.",
-    enabled: true,
-  },
-  {
-    id: "order_cancelled",
-    name: "Order Cancelled",
-    subject: "Order Cancellation Notice",
-    content:
-      "Order #{order_id} has been cancelled. Any pre-authorized charges have been released. Contact {phone_no} for questions.",
-    enabled: true,
-  },
-  {
-    id: "product_out_of_stock_vendor",
-    name: "Product Out Of Stock (Vendor)",
-    subject: "Inventory Notice: Product Out of Stock",
-    content:
-      "Attention {vendor_name}, your product listing {title} has run out of stock. Please update your inventory quantity on the vendor portal.",
-    enabled: true,
-  },
-  {
-    id: "order_cancelled_vendor",
-    name: "Order Cancelled (Vendor)",
-    subject: "Order Cancelled by Buyer - #{order_id}",
-    content:
-      "Vendor alert: Order #{order_id} has been cancelled by the customer. Please return the item to stock and do not dispatch.",
-    enabled: true,
-  },
-  {
-    id: "bnpl_approved_customer",
-    name: "BNPL Approved (Customer)",
-    subject: "Congratulations! Your BNPL Installment Plan is Approved",
-    content:
-      "Great news {customer_name}! Your Buy Now Pay Later installment application for order #{order_id} has been approved. Pay your initial deposit on {website} to release equipment delivery.",
-    enabled: true,
-  },
-  {
-    id: "bnpl_rejected_customer",
-    name: "BNPL Rejected (Customer)",
-    subject: "BNPL Financing Application Decision",
-    content:
-      "Dear {customer_name}, we are unable to approve your BNPL financing application for order #{order_id} at this time. You may complete your purchase using full direct payment.",
-    enabled: true,
-  },
-];
+const channelLabel = (c: string) => (c === "in_app" ? "In-app" : c === "sms" ? "SMS" : humanize(c));
 
-const availableTags = [
-  "{customer_name}",
-  "{vendor_name}",
-  "{order_id}",
-  "{amount}",
-  "{status}",
-  "{title}",
-  "{description}",
-  "{delivery_address}",
-  "{phone_no}",
-  "{website}",
-];
+function statusTone(s: string) {
+  if (s === "sent" || s === "simulated") return "bg-success-soft text-success";
+  if (s === "failed" || s === "dead" || s === "skipped_unconfigured") return "bg-error-soft text-error";
+  if (s === "pending" || s === "processing") return "bg-brand-orange-soft text-brand-orange-text";
+  return "bg-off-white text-subtle";
+}
 
-export default function NotificationsManagementPage() {
-  const [notifications, setNotifications] =
-    useState<NotificationTemplate[]>(initialNotifications);
-  const [selectedId, setSelectedId] = useState<string>(
-    initialNotifications[0].id,
+function StatusPill({ status }: { status: string }) {
+  return (
+    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold whitespace-nowrap ${statusTone(status)}`}>
+      {statusLabel(status)}
+    </span>
   );
-  const [searchQuery, setSearchQuery] = useState("");
-  const [copiedTag, setCopiedTag] = useState<string | null>(null);
-  const [saveSuccess, setSaveSuccess] = useState(false);
+}
 
-  const currentNotification =
-    notifications.find((n) => n.id === selectedId) || notifications[0];
+function formatDateTime(iso: string | null | undefined) {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime())
+    ? "—"
+    : d.toLocaleString("en-GB", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+}
 
-  const filteredList = notifications.filter((n) =>
-    n.name.toLowerCase().includes(searchQuery.toLowerCase().trim()),
+const selectClass =
+  "h-9 px-2 rounded-lg border border-light-gray bg-white text-[12px] text-brand-charcoal focus:outline-none focus:border-brand-orange";
+
+export default function NotificationsLogPage() {
+  const [status, setStatus] = useState("");
+  const [channel, setChannel] = useState("");
+  const [kind, setKind] = useState("");
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(20);
+  const [selected, setSelected] = useState<NotificationDelivery | null>(null);
+  const [retryingId, setRetryingId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const id = setTimeout(() => setQuery(search.trim()), 300);
+    return () => clearTimeout(id);
+  }, [search]);
+
+  const badRange = !!from && !!to && from > to;
+  const stats = useGetNotificationStatsQuery();
+  const { data, isLoading, isFetching, isError, error, refetch } = useGetNotificationLogQuery(
+    {
+      status: status || undefined,
+      channel: channel || undefined,
+      kind: kind || undefined,
+      date_from: from || undefined,
+      date_to: to || undefined,
+      q: query || undefined,
+      page,
+      page_size: pageSize,
+    },
+    { skip: badRange },
   );
+  const [retry] = useRetryNotificationMutation();
 
-  const handleUpdateCurrent = (updates: Partial<NotificationTemplate>) => {
-    setNotifications((prev) =>
-      prev.map((n) =>
-        n.id === currentNotification.id ? { ...n, ...updates } : n,
-      ),
+  const items = badRange ? [] : (data?.items ?? []);
+  const kinds = data?.kinds ?? [];
+  const total = data?.pagination.total ?? 0;
+  const totalPages = total && !badRange ? Math.max(1, Math.ceil(total / pageSize)) : 1;
+  const filtered = !!(status || channel || kind || from || to || query);
+
+  const reset = () => {
+    setStatus("");
+    setChannel("");
+    setKind("");
+    setFrom("");
+    setTo("");
+    setSearch("");
+    setQuery("");
+    setPage(1);
+  };
+
+  const doRetry = async (d: NotificationDelivery) => {
+    setRetryingId(d.id);
+    try {
+      const res = await retry(d.id).unwrap();
+      toast.success(`Retried: now ${statusLabel(res.delivery.status).toLowerCase()}.`);
+      if (selected?.id === d.id) setSelected(res.delivery);
+    } catch (e) {
+      toast.error(apiErrorMessage(e, "Couldn't retry this notification."));
+    } finally {
+      setRetryingId(null);
+    }
+  };
+
+  const by = stats.data?.by_status ?? {};
+  const stat = (v: number) =>
+    stats.isLoading ? (
+      <span className="inline-block h-7 w-16 rounded bg-black/[0.06] animate-pulse align-middle" />
+    ) : stats.isError ? (
+      "—"
+    ) : (
+      v.toLocaleString()
     );
-  };
 
-  const handleCopyTag = (tag: string) => {
-    navigator.clipboard.writeText(tag);
-    setCopiedTag(tag);
-    setTimeout(() => setCopiedTag(null), 2000);
-  };
-
-  const handleInsertTag = (tag: string) => {
-    handleUpdateCurrent({
-      content: currentNotification.content + " " + tag,
-    });
-  };
-
-  const handleSave = () => {
-    setSaveSuccess(true);
-    setTimeout(() => setSaveSuccess(false), 3000);
+  const filterChange = <T,>(set: (v: T) => void) => (v: T) => {
+    set(v);
+    setPage(1);
   };
 
   return (
-    <div className="flex flex-col gap-6 mx-auto pb-16">
-      {/* Page Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-100 pb-5">
+    <div className="flex flex-col gap-6 pb-12">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
         <div>
-          {/* <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
-            Notifications Configuration
-          </h1>
-          <p className="text-xs text-gray-500 mt-1">
-            Configure system push and transactional notifications across orders,
-            delivery, vendor alerts, and BNPL workflows
-          </p> */}
+          <h1 className="text-xl font-semibold text-brand-charcoal">Notifications</h1>
+          <p className="text-xs text-subtle mt-0.5">
+            Every notification sent to buyers, sellers and staff, and whether it arrived.
+          </p>
         </div>
-
-        <div className="flex items-center gap-3 w-full sm:w-auto">
-          <Button
-            variant="primary"
-            shape="rounded-sm"
-            className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer "
-            onClick={handleSave}
-          >
-            <HiOutlineCheck className="w-4 h-4" />
-            <span>Save Notification</span>
-          </Button>
+        <div className="flex items-center gap-4 text-xs font-semibold">
+          <Link href="/admin/emails" className="text-brand-orange-text hover:underline">
+            Emails
+          </Link>
+          <Link href="/admin/sms" className="text-brand-orange-text hover:underline">
+            SMS
+          </Link>
         </div>
       </div>
 
-      {/* Save Success Banner */}
-      {saveSuccess && (
-        <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-lg flex items-center justify-between text-xs font-semibold animate-in fade-in duration-200">
-          <div className="flex items-center gap-2">
-            <HiOutlineSparkles className="w-4 h-4 text-emerald-600" />
-            <span>
-              Notification <strong>{currentNotification.name}</strong> saved
-              successfully!
-            </span>
-          </div>
-          <button onClick={() => setSaveSuccess(false)} className="font-bold">
-            ✕
-          </button>
+      {stats.isError ? (
+        <div className="bg-white border border-light-gray rounded-lg p-4 sm:px-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <p className="text-[13px] text-error">{apiErrorMessage(stats.error, "Couldn't load delivery counts.")}</p>
+          <Button variant="outline" size="sm" onClick={() => stats.refetch()}>
+            Try again
+          </Button>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <StatCard size="sm" title="Sent" value={stat((by.sent ?? 0) + (by.simulated ?? 0))} periodLabel="Last 30 days" />
+          <StatCard
+            size="sm"
+            title="Problems"
+            value={stat(stats.data?.problems ?? 0)}
+            periodLabel="Failed, gave up or not configured"
+            onViewDetails={() => {
+              setStatus("problem");
+              setPage(1);
+            }}
+          />
+          <StatCard
+            size="sm"
+            title="Waiting"
+            value={stat((by.pending ?? 0) + (by.processing ?? 0))}
+            periodLabel="Queued or sending"
+          />
+          <StatCard
+            size="sm"
+            title="Skipped"
+            value={stat((by.skipped_preference ?? 0) + (by.skipped_no_address ?? 0))}
+            periodLabel="Opted out or no address"
+          />
         </div>
       )}
 
-      {/* The Two Cards: List and Subjects */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* Card 1: List (Notification Name) */}
-        <div className="lg:col-span-4 bg-white rounded-lg border border-gray-100 shadow-2xs overflow-hidden flex flex-col">
-          {/* Header */}
-          <div className="p-4 border-b border-gray-100 flex flex-col gap-3 bg-gray-50/50">
-            <div className="flex items-center justify-between">
-              <h2 className="text-sm font-bold text-brand-charcoal uppercase tracking-wider">
-                List
-              </h2>
-              <span className="text-xs font-medium text-gray-400">
-                {notifications.length} Notifications
-              </span>
-            </div>
-
-            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
-              Notification Name
-            </span>
-
-            {/* Search Box */}
-            <div className="w-full">
-              <Search
-                placeholder="Search notification name..."
-                value={searchQuery}
-                onChange={setSearchQuery}
-                maxWidth="100%"
-                className="w-full"
-                showClearButton
-              />
-            </div>
+      <div className="bg-white border border-light-gray rounded-lg flex flex-col overflow-hidden">
+        <div className="p-4 sm:px-6 flex flex-col gap-3 border-b border-light-gray">
+          <div className="flex flex-col lg:flex-row gap-3 lg:items-center justify-between">
+            <Input
+              type="search"
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setPage(1);
+              }}
+              placeholder="Search recipient, subject or user"
+              aria-label="Search notifications"
+              containerClassName="w-full lg:w-80"
+              className="bg-white border-light-gray placeholder:text-faint text-xs font-medium"
+              suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-faint" />}
+            />
+            <RowsPerPage value={pageSize} options={PAGE_SIZES} onChange={filterChange(setPageSize)} />
           </div>
-
-          {/* List Items */}
-          <div className="flex flex-col divide-y divide-gray-50 max-h-160 overflow-y-auto">
-            {filteredList.map((item) => {
-              const isSelected = item.id === currentNotification.id;
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => setSelectedId(item.id)}
-                  className={`flex items-center justify-between p-3.5 text-left transition-all cursor-pointer ${
-                    isSelected
-                      ? "bg-brand-orange-soft/60 border-l-4 border-l-brand-orange text-brand-orange-text font-bold"
-                      : "hover:bg-gray-50 text-gray-700 font-medium"
-                  }`}
-                >
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <HiOutlineBell
-                      className={`w-4 h-4 shrink-0 ${
-                        isSelected ? "text-brand-orange-text" : "text-gray-400"
-                      }`}
-                    />
-                    <span className="text-xs truncate">{item.name}</span>
-                  </div>
-
-                  <span
-                    className={`text-[11px] font-semibold px-2 py-0.5 rounded-full shrink-0 ml-2 ${
-                      item.enabled
-                        ? "bg-emerald-50 text-emerald-600"
-                        : "bg-gray-100 text-gray-400"
-                    }`}
-                  >
-                    {item.enabled ? "Active" : "Disabled"}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Card 2: Subjects (Notification Editor) */}
-        <div className="lg:col-span-8 bg-white rounded-lg border border-gray-100 shadow-2xs overflow-hidden flex flex-col">
-          {/* Header */}
-          <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
-            <div>
-              <h2 className="text-sm font-bold text-brand-charcoal uppercase tracking-wider">
-                Subjects
-              </h2>
-              <span className="text-xs text-gray-400 font-medium">
-                Editing:{" "}
-                <strong className="text-gray-700">
-                  {currentNotification.name}
-                </strong>
-              </span>
-            </div>
-
-            {/* Enabled Toggle */}
-            <label className="flex items-center gap-2 cursor-pointer select-none">
-              <Checkbox
-                size="small"
-                checked={currentNotification.enabled}
-                onChange={(checked) =>
-                  handleUpdateCurrent({ enabled: checked })
-                }
+          <div className="flex flex-wrap items-center gap-3">
+            <select value={status} onChange={(e) => filterChange(setStatus)(e.target.value)} aria-label="Status" className={selectClass}>
+              {STATUS_FILTERS.map((s) => (
+                <option key={s.value} value={s.value}>
+                  {s.label}
+                </option>
+              ))}
+            </select>
+            <select value={channel} onChange={(e) => filterChange(setChannel)(e.target.value)} aria-label="Channel" className={selectClass}>
+              <option value="">All channels</option>
+              {DELIVERY_CHANNELS.map((c) => (
+                <option key={c} value={c}>
+                  {channelLabel(c)}
+                </option>
+              ))}
+            </select>
+            <select
+              value={kind}
+              onChange={(e) => filterChange(setKind)(e.target.value)}
+              aria-label="Notification type"
+              className={`${selectClass} max-w-64`}
+            >
+              <option value="">All types</option>
+              {kinds.map((k) => (
+                <option key={k.kind} value={k.kind}>
+                  {k.label}
+                </option>
+              ))}
+            </select>
+            <label className="flex items-center gap-2 text-[12px] text-subtle">
+              From
+              <Input
+                type="date"
+                value={from}
+                onChange={(e) => filterChange(setFrom)(e.target.value)}
+                aria-label="Created from"
+                containerClassName="w-40"
+                className="bg-white border-light-gray text-xs font-medium"
               />
-              <span className="text-xs font-bold text-gray-700">Enabled</span>
             </label>
-          </div>
-
-          {/* Editor Form */}
-          <div className="p-5 sm:p-6 flex flex-col gap-5">
-            {/* Subject Input */}
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
-                Subject
-              </label>
-              <input
-                type="text"
-                value={currentNotification.subject}
-                onChange={(e) =>
-                  handleUpdateCurrent({ subject: e.target.value })
-                }
-                placeholder="Enter notification subject / title..."
-                className="w-full text-xs font-semibold px-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800"
+            <label className="flex items-center gap-2 text-[12px] text-subtle">
+              To
+              <Input
+                type="date"
+                value={to}
+                onChange={(e) => filterChange(setTo)(e.target.value)}
+                aria-label="Created to"
+                containerClassName="w-40"
+                className="bg-white border-light-gray text-xs font-medium"
               />
-            </div>
-
-            {/* Content Textarea */}
-            <div className="flex flex-col gap-1.5">
-              <div className="flex items-center justify-between">
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">
-                  Content
-                </label>
-                <span className="text-[11px] text-gray-400">
-                  Plain text & dynamic tags supported
-                </span>
-              </div>
-              <textarea
-                rows={10}
-                value={currentNotification.content}
-                onChange={(e) =>
-                  handleUpdateCurrent({ content: e.target.value })
-                }
-                placeholder="Write notification message content..."
-                className="w-full text-xs font-mono p-3 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-orange text-gray-800 leading-relaxed"
-              />
-            </div>
-
-            {/* Enabled Checkbox & Tags Section */}
-            <div className="flex flex-col gap-3 pt-2 border-t border-gray-100">
-              <div className="flex items-center gap-2">
-                <Checkbox
-                  size="small"
-                  checked={currentNotification.enabled}
-                  onChange={(checked) =>
-                    handleUpdateCurrent({ enabled: checked })
-                  }
-                  id="notif-enabled-checkbox"
-                />
-                <label
-                  htmlFor="notif-enabled-checkbox"
-                  className="text-xs font-bold text-gray-700 cursor-pointer"
-                >
-                  Enabled
-                </label>
-              </div>
-
-              {/* Tags Section */}
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-gray-600">
-                    Tags:-
-                  </span>
-                  <span className="text-[11px] text-gray-400">
-                    Click tag to insert into content
-                  </span>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-2">
-                  {availableTags.map((tag) => (
-                    <button
-                      key={tag}
-                      type="button"
-                      onClick={() => handleInsertTag(tag)}
-                      title={`Click to insert ${tag}`}
-                      className="group inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-mono bg-gray-100 hover:bg-brand-orange/10 hover:text-brand-orange-text border border-gray-200 transition-colors cursor-pointer text-gray-700"
-                    >
-                      <span>{tag}</span>
-                      <HiOutlineClipboardDocument
-                        className="w-3 h-3 text-gray-400 group-hover:text-brand-orange-text"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleCopyTag(tag);
-                        }}
-                      />
-                    </button>
-                  ))}
-                </div>
-
-                {copiedTag && (
-                  <span className="text-[11px] font-semibold text-emerald-600 animate-in fade-in duration-150">
-                    Copied {copiedTag} to clipboard!
-                  </span>
-                )}
-              </div>
-            </div>
-
-            {/* Footer Buttons */}
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-100">
-              <Button
-                variant="primary"
-                shape="rounded-sm"
-                className="bg-brand-charcoal hover:bg-brand-charcoal/90 text-white flex items-center gap-1.5 text-xs font-semibold px-4 py-2 cursor-pointer "
-                onClick={handleSave}
-              >
-                <HiOutlineCheck className="w-4 h-4" />
-                <span>Save Changes</span>
+            </label>
+            {filtered && (
+              <Button variant="outline" size="sm" onClick={reset}>
+                Clear filters
               </Button>
-            </div>
+            )}
           </div>
+          {badRange && <p className="text-[12px] text-error">The start date is after the end date.</p>}
         </div>
+
+        <div className={`admin-table-container transition-opacity ${isFetching && !isLoading ? "opacity-60" : ""}`}>
+          <table>
+            <thead>
+              <tr>
+                <th>Notification</th>
+                <th>Recipient</th>
+                <th>Channel</th>
+                <th>Status</th>
+                <th>Attempts</th>
+                <th>Created</th>
+                <th aria-label="Actions" />
+              </tr>
+            </thead>
+            <tbody>
+              {isLoading && !badRange ? (
+                Array.from({ length: 8 }, (_, i) => (
+                  <tr key={i} aria-hidden>
+                    {Array.from({ length: COLS }, (_, j) => (
+                      <td key={j}>
+                        <span className="block h-3 w-20 rounded bg-black/[0.06] animate-pulse" />
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              ) : isError && !badRange ? (
+                <tr>
+                  <td colSpan={COLS} className="py-16 text-center">
+                    <div className="flex flex-col items-center gap-1 max-w-md mx-auto">
+                      <p className="text-[13px] text-error">{apiErrorMessage(error, "Couldn't load the notification log.")}</p>
+                      <Button variant="outline" size="sm" className="mt-2" onClick={() => refetch()}>
+                        Try again
+                      </Button>
+                    </div>
+                  </td>
+                </tr>
+              ) : items.length === 0 ? (
+                filtered ? (
+                  <EmptyTableRow
+                    colSpan={COLS}
+                    illustration="search"
+                    title="No matches"
+                    description="No notifications match these filters."
+                    action={{ label: "Clear filters", onClick: reset }}
+                  />
+                ) : (
+                  <EmptyTableRow
+                    colSpan={COLS}
+                    illustration="notifications"
+                    title="No notifications yet"
+                    description="Notifications will appear here as they're sent."
+                  />
+                )
+              ) : (
+                items.map((d) => (
+                  <tr key={d.id} className="cursor-pointer" onClick={() => setSelected(d)}>
+                    <td>
+                      <div className="flex flex-col max-w-72">
+                        <span className="text-xs font-semibold text-brand-charcoal truncate" title={d.subject || d.notification?.title || d.kind_label}>
+                          {d.subject || d.notification?.title || d.kind_label}
+                        </span>
+                        <span className="text-[11px] text-faint">
+                          {d.kind_label}
+                          {d.critical ? " · critical" : ""}
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="flex flex-col max-w-56">
+                        <span className="text-xs text-brand-charcoal truncate">{d.user?.name || d.recipient || "—"}</span>
+                        {d.recipient && d.user?.name && <span className="text-[11px] text-faint truncate">{d.recipient}</span>}
+                      </div>
+                    </td>
+                    <td className="text-xs text-subtle whitespace-nowrap">{channelLabel(d.channel)}</td>
+                    <td>
+                      <StatusPill status={d.status} />
+                    </td>
+                    <td className="text-xs text-subtle tabular-nums">
+                      {d.attempts}/{d.max_attempts}
+                    </td>
+                    <td className="text-xs text-subtle whitespace-nowrap">{formatDateTime(d.created_at)}</td>
+                    <td className="text-right">
+                      {d.retryable && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          iconLeft={<HiOutlineArrowPath size={12} aria-hidden />}
+                          disabled={retryingId === d.id}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            doRetry(d);
+                          }}
+                        >
+                          {retryingId === d.id ? "Retrying…" : "Retry"}
+                        </Button>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
       </div>
+
+      <Modal isOpen={!!selected} onClose={() => setSelected(null)} title="Notification details">
+        {selected && (
+          <div className="flex flex-col gap-4">
+            <div className="flex items-start justify-between gap-3 border-b border-light-gray pb-3">
+              <div className="min-w-0">
+                <p className="text-[14px] font-semibold text-brand-charcoal break-words">
+                  {selected.subject || selected.notification?.title || selected.kind_label}
+                </p>
+                <p className="text-xs text-faint">
+                  {selected.kind_label} · {channelLabel(selected.channel)}
+                  {selected.provider ? ` via ${selected.provider}` : ""}
+                </p>
+              </div>
+              <StatusPill status={selected.status} />
+            </div>
+            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <Detail label="Recipient">{selected.recipient || "—"}</Detail>
+              <Detail label="User">
+                {selected.user ? `${selected.user.name || selected.user.email || "—"} (${humanize(selected.user.role)})` : "—"}
+              </Detail>
+              <Detail label="Attempts">
+                {selected.attempts} of {selected.max_attempts}
+              </Detail>
+              <Detail label="Queued">{formatDateTime(selected.queued_at)}</Detail>
+              <Detail label="Sent">{formatDateTime(selected.sent_at)}</Detail>
+              <Detail label={selected.failed_at ? "Failed" : "Next attempt"}>
+                {formatDateTime(selected.failed_at ?? selected.next_attempt_at)}
+              </Detail>
+              {selected.notification && (
+                <Detail label="In-app notice" wide>
+                  {selected.notification.title}
+                  {selected.notification.is_read ? ` · read ${formatDateTime(selected.notification.read_at)}` : " · unread"}
+                </Detail>
+              )}
+              {selected.last_error && (
+                <Detail label="Last error" wide tone="error">
+                  {selected.last_error}
+                </Detail>
+              )}
+            </dl>
+            <p className="text-[11px] text-faint">Message bodies aren&apos;t shown because some carry delivery codes.</p>
+            {selected.retryable && (
+              <div className="flex justify-end">
+                <Button
+                  variant="accent"
+                  iconLeft={<HiOutlineArrowPath size={14} aria-hidden />}
+                  disabled={retryingId === selected.id}
+                  onClick={() => doRetry(selected)}
+                >
+                  {retryingId === selected.id ? "Retrying…" : "Retry delivery"}
+                </Button>
+              </div>
+            )}
+          </div>
+        )}
+      </Modal>
+    </div>
+  );
+}
+
+function Detail({ label, children, wide, tone }: { label: string; children: React.ReactNode; wide?: boolean; tone?: "error" }) {
+  return (
+    <div
+      className={`p-3 rounded-lg border ${tone === "error" ? "bg-error-soft border-error/20" : "bg-off-white border-light-gray"} ${
+        wide ? "sm:col-span-2" : ""
+      }`}
+    >
+      <dt className="text-faint">{label}</dt>
+      <dd className={`mt-0.5 font-semibold break-words ${tone === "error" ? "text-error" : "text-brand-charcoal"}`}>{children}</dd>
     </div>
   );
 }

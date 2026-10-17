@@ -35,10 +35,10 @@ const columns: ListingColumn<AdminOrderListItem>[] = [
   {
     key: "order",
     header: "Order #",
-    render: (o) => <span className="font-mono text-sm text-gray-900 whitespace-nowrap">{o.order_number}</span>,
+    render: (o) => <span className="font-mono text-sm text-brand-charcoal whitespace-nowrap">{o.order_number}</span>,
   },
-  { key: "buyer", header: "Buyer", render: (o) => <span className="text-sm text-gray-700">{o.buyer_name || "—"}</span> },
-  { key: "seller", header: "Seller", render: (o) => <span className="text-sm text-gray-700">{o.seller_name || "—"}</span> },
+  { key: "buyer", header: "Buyer", render: (o) => <span className="text-sm text-subtle">{o.buyer_name || "—"}</span> },
+  { key: "seller", header: "Seller", render: (o) => <span className="text-sm text-subtle">{o.seller_name || "—"}</span> },
   {
     key: "date",
     header: "Date",
@@ -47,7 +47,7 @@ const columns: ListingColumn<AdminOrderListItem>[] = [
   {
     key: "total",
     header: "Total",
-    render: (o) => <span className="font-mono text-sm text-gray-900 whitespace-nowrap">{formatMoney(o.total_amount)}</span>,
+    render: (o) => <span className="font-mono text-sm text-brand-charcoal whitespace-nowrap">{formatMoney(o.total_amount)}</span>,
   },
   { key: "status", header: "Status", render: (o) => <StatusBadge status={o.status} /> },
 ];

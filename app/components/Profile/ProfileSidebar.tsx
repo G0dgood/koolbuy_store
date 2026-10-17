@@ -71,31 +71,43 @@ export const ProfileSidebar: React.FC = () => {
 
   const displayRole = user?.role
     ? user.role.charAt(0).toUpperCase() + user.role.slice(1)
-    : "Verified user";
+    : null;
+
+  const initials =
+    displayName
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((part) => part.charAt(0).toUpperCase())
+      .join("") || "?";
+  const avatarUrl = user?.profile_image_url || user?.avatar_url;
 
   const navItems: NavItem[] = [
     { label: "Personal info", href: "/profile", icon: "profile" },
+    { label: "My orders", href: "/orders", icon: "local_shipping" },
     { label: "My wishlist", href: "/wishlist", icon: "favorite" },
-    { label: "Settings", href: "/settings", icon: "Settings" },
+    { label: "Messages", href: "/messages", icon: "message_header" },
   ];
 
   return (
     <aside className="w-full lg:w-72 shrink-0 bg-white rounded-tile overflow-hidden lg:sticky lg:top-24">
       {/* User Header */}
       <div className="px-6 pt-8 pb-6 flex flex-col items-center text-center">
-        <div className="relative group cursor-pointer mb-4">
-          <div className="w-20 h-20 rounded-full overflow-hidden bg-off-white">
+        <div className="mb-4 w-20 h-20 rounded-full overflow-hidden bg-brand-orange-soft flex items-center justify-center">
+          {avatarUrl ? (
             <Image
-              src={user?.profile_image_url || "/avatars/avatar=pic1.jpg"}
-              alt="User Avatar"
+              src={avatarUrl}
+              alt={displayName}
               width={96}
               height={96}
-              className="w-full h-full object-cover transition-transform duration-500 ease-apple group-hover:scale-[1.04]"
+              unoptimized={/^https?:\/\//.test(avatarUrl)}
+              className="w-full h-full object-cover"
             />
-          </div>
-          <div className="absolute -bottom-0.5 -right-0.5 w-7 h-7 rounded-full bg-white ring-1 ring-black/[0.08] text-brand-charcoal flex items-center justify-center transition-colors group-hover:text-brand-orange-text">
-            <Icon name="edit" size="xs" />
-          </div>
+          ) : (
+            <span className="text-[24px] font-semibold text-brand-orange-text" aria-hidden>
+              {initials}
+            </span>
+          )}
         </div>
         <h3 className="text-[19px] font-semibold text-brand-charcoal tracking-[-0.01em] leading-tight">
           {displayName}
@@ -103,9 +115,11 @@ export const ProfileSidebar: React.FC = () => {
         <p className="mt-0.5 text-[13px] text-subtle">
           {user?.email || "Account overview"}
         </p>
-        <span className="mt-3 px-2.5 py-0.5 bg-brand-orange-soft text-brand-charcoal text-[12px] font-medium rounded-full">
-          {displayRole}
-        </span>
+        {displayRole && (
+          <span className="mt-3 px-2.5 py-0.5 bg-brand-orange-soft text-brand-charcoal text-[12px] font-medium rounded-full">
+            {displayRole}
+          </span>
+        )}
       </div>
 
       {/* Navigation */}
@@ -149,6 +163,7 @@ export const ProfileSidebar: React.FC = () => {
       </nav>
 
       {/* Footer Action */}
+      {hasToken && (
       <div className="p-3 border-t border-black/[0.06]">
         <button
           type="button"
@@ -159,6 +174,7 @@ export const ProfileSidebar: React.FC = () => {
           Log out
         </button>
       </div>
+      )}
     </aside>
   );
 };

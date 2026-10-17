@@ -39,7 +39,7 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
     <motion.div
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="bg-white p-8 border border-[#1C1C1C1A] rounded-lg relative overflow-hidden group"
+      className="bg-white p-8 border border-light-gray rounded-lg relative overflow-hidden group"
     >
       {/* Instrumentation Backdrop Grid */}
       <div
@@ -61,24 +61,24 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-orange shadow-[0_0_8px_rgba(245,126,22,0.8)]"></span>
             </span>
-            <span className="text-[11px] font-bold text-brand-orange-text uppercase tracking-wider">
+            <span className="text-[11px] font-semibold text-brand-orange-text">
               Realtime Monitor
             </span>
           </div>
 
-          <h3 className="text-5xl font-bold text-brand-charcoal tracking-[-0.04em] mt-3 tabular-nums drop-shadow-sm">
+          <h3 className="text-5xl font-semibold text-brand-charcoal tracking-[-0.04em] mt-3 tabular-nums">
             21,540
           </h3>
-          <p className="text-[11px] font-bold text-gray-400 mt-2 flex items-center gap-2 uppercase tracking-wider opacity-80">
-            <span className="w-4 h-px bg-gray-200"></span>
+          <p className="text-[12px] font-medium text-subtle mt-2 flex items-center gap-2 opacity-80">
+            <span className="w-4 h-px bg-light-gray"></span>
             Active Users Now
-            <span className="w-4 h-px bg-gray-200"></span>
+            <span className="w-4 h-px bg-light-gray"></span>
           </p>
         </div>
 
         <div className="relative" ref={dropdownRef}>
           <button
-            className={`p-2 rounded-xl transition-all duration-300 ${isDropdownOpen ? "bg-brand-charcoal text-white " : "text-gray-400 hover:bg-gray-50 border border-transparent hover:border-gray-100"}`}
+            className={`p-2 rounded-lg transition-all duration-300 ${isDropdownOpen ? "bg-brand-charcoal text-white " : "text-faint hover:bg-off-white border border-transparent hover:border-light-gray"}`}
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
             <Icon name="DotsHorizontal" folder="dashboardIcon" size="sm" />
@@ -94,7 +94,7 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
               >
                 <DropdownMenu
                   width={220}
-                  className="shadow-md border border-gray-100 rounded-2xl overflow-hidden backdrop-blur-xl bg-white/90"
+                  className="shadow-float border border-light-gray rounded-lg overflow-hidden backdrop-blur-xl bg-white/90"
                 >
                   <DropdownItem
                     label="Force Refresh"
@@ -132,7 +132,7 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
 
       <div className="relative mt-4 group/chart">
         {/* Chart Monitor Glass Effect */}
-        <div className="absolute inset-0 bg-linear-to-b from-gray-50/50 to-transparent rounded-2xl opacity-0 group-hover/chart:opacity-100 transition-opacity duration-500 pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-b from-off-white/50 to-transparent rounded-lg opacity-0 group-hover/chart:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
         <div className="h-28 w-full">
           <AdminChart
@@ -176,11 +176,11 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
       </div>
 
       <div className="flex flex-col gap-6 pt-6 mt-2 relative z-10">
-        <div className="flex justify-between items-center bg-gray-50/50 p-2 rounded-lg border border-gray-100/50">
-          <h4 className="text-[12px] font-bold text-brand-charcoal uppercase tracking-wider pl-1">
+        <div className="flex justify-between items-center bg-off-white/50 p-2 rounded-lg border border-light-gray/50">
+          <h4 className="text-[12px] font-semibold text-brand-charcoal pl-1">
             Global Distribution
           </h4>
-          <span className="text-[11px] font-bold text-brand-orange-text bg-white px-2 py-0.5 rounded border border-gray-100 shadow-sm">
+          <span className="text-[11px] font-semibold text-brand-orange-text bg-white px-2 py-0.5 rounded border border-light-gray">
             ACTIVE
           </span>
         </div>
@@ -214,20 +214,20 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
           <div key={c.country} className="flex flex-col gap-3">
             <div className="flex justify-between items-center group/row">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-white border border-gray-100 shadow-sm flex items-center justify-center text-xl grayscale group-hover/row:grayscale-0 transition-all duration-500 group-hover/row:scale-110 group-hover/row:rotate-3">
+                <div className="w-10 h-10 rounded-lg bg-white border border-light-gray flex items-center justify-center text-xl grayscale group-hover/row:grayscale-0 transition-all duration-500 group-hover/row:scale-110 group-hover/row:rotate-3">
                   {c.flag}
                 </div>
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-[11px] font-bold text-brand-charcoal tracking-tight">
+                  <span className="text-[11px] font-semibold text-brand-charcoal tracking-tight">
                     {c.val}
                   </span>
-                  <span className="text-[11px] font-bold text-gray-400 uppercase tracking-tighter opacity-70">
+                  <span className="text-[12px] font-medium text-subtle opacity-70">
                     {c.country}
                   </span>
                 </div>
               </div>
               <div
-                className={`flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-lg border shadow-sm transition-all duration-300 ${c.isUp ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-rose-50 text-rose-500 border-rose-100"}`}
+                className={`flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1 rounded-lg border transition-all duration-300 ${c.isUp ? "bg-success-soft text-success border-success/20" : "bg-error-soft text-error border-error/20"}`}
               >
                 <Icon
                   name={c.isUp ? "arrow_upward" : "arrow_downward"}
@@ -238,7 +238,7 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
             </div>
 
             {/* Segmented Glowing Progress Bar */}
-            <div className="h-2 w-full bg-gray-50/80 rounded-full overflow-hidden flex gap-0.5 p-px border border-gray-100">
+            <div className="h-2 w-full bg-off-white/80 rounded-full overflow-hidden flex gap-0.5 p-px border border-light-gray">
               {Array.from({ length: 20 }).map((_, idx) => {
                 const isActive = (idx / 20) * 100 < c.perc;
                 return (
@@ -247,7 +247,7 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: isActive ? 1 : 0.1 }}
                     transition={{ delay: 0.5 + idx * 0.02 + i * 0.1 }}
-                    className={`h-full flex-1 rounded-sm ${isActive ? "bg-linear-to-b from-brand-orange to-brand-charcoal shadow-[0_0_5px_rgba(245,126,22,0.3)]" : "bg-gray-200"}`}
+                    className={`h-full flex-1 rounded-sm ${isActive ? "bg-linear-to-b from-brand-orange to-brand-charcoal shadow-[0_0_5px_rgba(245,126,22,0.3)]" : "bg-light-gray"}`}
                   />
                 );
               })}
@@ -264,7 +264,7 @@ export const RealtimeUsers: React.FC<RealtimeUsersProps> = ({
         <div className="absolute inset-0 bg-brand-charcoal group-hover:bg-brand-charcoal/90 transition-colors" />
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-linear-to-r from-transparent via-white/10 to-transparent skew-x-12 translate-x-full group-hover:translate-x-[-200%] duration-1000" />
 
-        <span className="relative z-10 text-[11px] font-bold text-white uppercase tracking-wider flex items-center gap-3">
+        <span className="relative z-10 text-[11px] font-semibold text-white flex items-center gap-3">
           Deep Analysis
           <Icon
             name="arrow_forward"

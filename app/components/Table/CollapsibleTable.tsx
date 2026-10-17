@@ -36,7 +36,7 @@ const CollapsibleTable: React.FC<CollapsibleTableProps> = ({
     <Table className={className}>
       {columns && (
         <TableHeader>
-          <TableRow className="bg-gray-50/50">
+          <TableRow className="bg-off-white/50">
              {columns.map((col, idx) => (
                 <TableCell key={idx} isHeader align={idx === columns.length - 1 ? "right" : "left"}>
                   {col}
@@ -50,7 +50,7 @@ const CollapsibleTable: React.FC<CollapsibleTableProps> = ({
           <React.Fragment key={group.id}>
             {/* Group Header */}
             <TableRow 
-              className="bg-brand-orange-soft/10 cursor-pointer select-none border-b border-gray-100"
+              className="bg-brand-orange-soft/10 cursor-pointer select-none border-b border-black/[0.06]"
               onClick={() => toggleGroup(group.id)}
             >
               <TableCell colSpan={columns ? columns.length - 1 : 1} className="py-3">
@@ -60,11 +60,11 @@ const CollapsibleTable: React.FC<CollapsibleTableProps> = ({
                     size="sm" 
                     className={`text-brand-orange-text transition-transform duration-200 ${expandedGroups[group.id] ? "" : "-rotate-90"}`} 
                   />
-                  <span className="text-sm font-bold text-brand-orange-text">{group.heading}</span>
+                  <span className="text-sm font-semibold text-brand-orange-text">{group.heading}</span>
                 </div>
               </TableCell>
               <TableCell align="right" className="py-3">
-                <span className="text-sm font-medium text-gray-500">{group.count}</span>
+                <span className="text-sm font-medium text-faint">{group.count}</span>
               </TableCell>
             </TableRow>
 

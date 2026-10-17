@@ -56,7 +56,7 @@ const megaMenuContent: MegaMenuData = {
           {
             label: "Refurbished Freezers",
             href: "/products?sort=refurbished",
-            badge: "HOT",
+            badge: "Hot",
           },
         ],
       },
@@ -165,7 +165,7 @@ const megaMenuContent: MegaMenuData = {
           {
             label: "On Sale Freezers",
             href: "/products?sort=sale",
-            badge: "SALE",
+            badge: "Sale",
           },
           { label: "New Arrivals 2026", href: "/products?sort=newest" },
           { label: "Best Selling Units", href: "/products?sort=bestsellers" },
@@ -233,7 +233,7 @@ const megaMenuContent: MegaMenuData = {
           { label: "Hisense Appliances", href: "/products?search=Hisense" },
           { label: "Bruhm Electronics", href: "/products?search=Bruhm" },
           { label: "Samsung & LG Cooling", href: "/brands" },
-          { label: "View All 20+ Brands", href: "/brands", badge: "ALL" },
+          { label: "View All 20+ Brands", href: "/brands", badge: "All" },
         ],
       },
       {
@@ -242,7 +242,7 @@ const megaMenuContent: MegaMenuData = {
           {
             label: "Flash Sale Discounts",
             href: "/products?sort=sale",
-            badge: "SAVE",
+            badge: "Save",
           },
           { label: "Pay As Low As ₦20,000/mo", href: "/help/payment" },
           { label: "Wholesale & Bulk Enquiries", href: "/help" },
@@ -257,7 +257,7 @@ const megaMenuContent: MegaMenuData = {
       {
         title: "POPULAR DESTINATIONS",
         items: [
-          { label: "Hot Deals & Offers", href: "/products", badge: "HOT" },
+          { label: "Hot Deals & Offers", href: "/products", badge: "Hot" },
           { label: "New Arrivals 2026", href: "/products?sort=newest" },
           { label: "Brands Directory", href: "/brands" },
           { label: "Gift Boxes & Bundles", href: "/gift-boxes" },
@@ -280,7 +280,7 @@ const megaMenuContent: MegaMenuData = {
           {
             label: "Become A Verified Vendor",
             href: "/register",
-            badge: "JOIN",
+            badge: "Join",
           },
           { label: "Vendor Benefits & Perks", href: "/register" },
           { label: "Store Locations in Lagos", href: "/#vendor" },
@@ -324,7 +324,7 @@ export const SecondaryNavbar: React.FC = () => {
 
   return (
     <div
-      className="w-full bg-white border-t border-gray-100 hidden lg:block relative z-70"
+      className="w-full bg-white border-t border-black/[0.06] hidden lg:block relative z-70"
       onMouseLeave={handleMouseLeave}
     >
       <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-16 h-11 flex items-center justify-between">
@@ -341,10 +341,10 @@ export const SecondaryNavbar: React.FC = () => {
                   prev === "categories" ? null : "categories",
                 )
               }
-              className={`flex items-center gap-2 h-full font-bold text-sm border-r border-gray-200 pr-6 transition-colors cursor-pointer outline-none ${
+              className={`flex items-center gap-2 h-full font-semibold text-sm border-r border-black/[0.06] pr-6 transition-colors cursor-pointer outline-none ${
                 activeDropdown === "categories"
                   ? "text-brand-orange-text"
-                  : "text-gray-900 hover:text-brand-orange-text"
+                  : "text-brand-charcoal hover:text-brand-orange-text"
               }`}
             >
               <span>All categories</span>
@@ -352,21 +352,21 @@ export const SecondaryNavbar: React.FC = () => {
                 className={`text-xs transition-transform duration-200 ${
                   activeDropdown === "categories"
                     ? "rotate-180 text-brand-orange-text"
-                    : "text-gray-400"
+                    : "text-faint"
                 }`}
               />
             </button>
           </div>
 
           {/* Navigation Links with Hover Mega Menus */}
-          <div className="flex items-center gap-7 text-sm font-medium text-gray-900 h-full">
+          <div className="flex items-center gap-7 text-sm font-medium text-brand-charcoal h-full">
             {/* Home */}
             <Link
               href="/"
               className={`transition-colors py-2 ${
                 isActive("/")
-                  ? "text-brand-orange-text font-bold"
-                  : "text-gray-900 hover:text-brand-orange-text"
+                  ? "text-brand-orange-text font-semibold"
+                  : "text-brand-charcoal hover:text-brand-orange-text"
               }`}
             >
               Home
@@ -381,8 +381,8 @@ export const SecondaryNavbar: React.FC = () => {
                 href="/products"
                 className={`flex items-center gap-1.5 transition-colors py-2 ${
                   isActive("/products") || activeDropdown === "marketplace"
-                    ? "text-brand-orange-text font-bold"
-                    : "text-gray-900 hover:text-brand-orange-text"
+                    ? "text-brand-orange-text font-semibold"
+                    : "text-brand-charcoal hover:text-brand-orange-text"
                 }`}
               >
                 <span>Marketplace</span>
@@ -390,7 +390,7 @@ export const SecondaryNavbar: React.FC = () => {
                   className={`text-xs transition-transform duration-200 ${
                     activeDropdown === "marketplace"
                       ? "rotate-180 text-brand-orange-text"
-                      : "text-gray-400"
+                      : "text-faint"
                   }`}
                 />
               </Link>
@@ -410,8 +410,8 @@ export const SecondaryNavbar: React.FC = () => {
                 }
                 className={`flex items-center gap-1.5 transition-colors cursor-pointer py-2 outline-none ${
                   activeDropdown === "quickLinks"
-                    ? "text-brand-orange-text font-bold"
-                    : "text-gray-900 hover:text-brand-orange-text"
+                    ? "text-brand-orange-text font-semibold"
+                    : "text-brand-charcoal hover:text-brand-orange-text"
                 }`}
               >
                 <span>Quick Links</span>
@@ -419,7 +419,7 @@ export const SecondaryNavbar: React.FC = () => {
                   className={`text-xs transition-transform duration-200 ${
                     activeDropdown === "quickLinks"
                       ? "rotate-180 text-brand-orange-text"
-                      : "text-gray-400"
+                      : "text-faint"
                   }`}
                 />
               </button>
@@ -440,7 +440,7 @@ export const SecondaryNavbar: React.FC = () => {
               if (timeoutRef.current) clearTimeout(timeoutRef.current);
             }}
             onMouseLeave={handleMouseLeave}
-            className="absolute top-full left-0 w-full bg-white border-t border-b border-gray-100 shadow-md z-100"
+            className="absolute top-full left-0 w-full bg-white/80 backdrop-blur-xl backdrop-saturate-150 border-t border-b border-black/[0.06] shadow-float z-100"
           >
             <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-16 py-8 md:py-10">
               {/* Columns Grid */}
@@ -456,7 +456,7 @@ export const SecondaryNavbar: React.FC = () => {
                 {megaMenuContent[activeDropdown].columns.map((col, colIdx) => (
                   <div key={colIdx} className="flex flex-col gap-3">
                     {/* Column Header */}
-                    <h4 className="text-[12px] font-bold text-gray-900 tracking-wider uppercase pb-2 border-b border-gray-100 flex items-center justify-between">
+                    <h4 className="text-[12px] font-medium text-faint pb-2 border-b border-black/[0.06] flex items-center justify-between">
                       <span>{col.title}</span>
                     </h4>
 
@@ -467,13 +467,13 @@ export const SecondaryNavbar: React.FC = () => {
                           <Link
                             href={item.href}
                             onClick={() => setActiveDropdown(null)}
-                            className="group inline-flex items-center gap-2 text-[13px] text-gray-600 hover:text-brand-orange-text transition-colors py-0.5 leading-snug"
+                            className="group inline-flex items-center gap-2 text-[13px] text-subtle hover:text-brand-orange-text transition-colors py-0.5 leading-snug"
                           >
                             <span className="group-hover:translate-x-0.5 transition-transform duration-150">
                               {item.label}
                             </span>
                             {item.badge && (
-                              <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-brand-orange-soft text-brand-orange-text uppercase tracking-wide">
+                              <span className="text-[11px] font-semibold px-1.5 py-0.5 rounded-full bg-brand-orange-soft text-brand-orange-text">
                                 {item.badge}
                               </span>
                             )}
@@ -486,9 +486,9 @@ export const SecondaryNavbar: React.FC = () => {
               </div>
 
               {/* Bottom Quick Bar */}
-              <div className="mt-8 pt-4 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
+              <div className="mt-8 pt-4 border-t border-black/[0.06] flex items-center justify-between text-xs text-faint">
                 <div className="flex items-center gap-6">
-                  {/* <span className="text-gray-400 font-medium">
+                  {/* <span className="text-faint font-medium">
                     ⚡ 24/7 Clean Solar Energy • Verified Warranties • Fast
                     Delivery
                   </span> */}
@@ -497,7 +497,7 @@ export const SecondaryNavbar: React.FC = () => {
                 <Link
                   href="/products"
                   onClick={() => setActiveDropdown(null)}
-                  className="inline-flex items-center gap-1.5 font-bold text-brand-orange-text hover:underline"
+                  className="inline-flex items-center gap-1.5 font-semibold text-brand-orange-text hover:underline"
                 >
                   <span>Browse All Products in Catalog</span>
                   <FiArrowRight size={13} />

@@ -165,7 +165,7 @@ const CookiePreferencesPage = () => {
                               cookie.id as keyof typeof preferences,
                             )
                           }
-                          className={`relative w-14 h-8 rounded-full transition-colors duration-300 ease-apple cursor-pointer ${preferences[cookie.id as keyof typeof preferences] ? "bg-brand-orange" : "bg-gray-200"}`}
+                          className={`relative w-14 h-8 rounded-full transition-colors duration-300 ease-apple cursor-pointer ${preferences[cookie.id as keyof typeof preferences] ? "bg-brand-orange" : "bg-light-gray"}`}
                         >
                           <motion.div
                             animate={{

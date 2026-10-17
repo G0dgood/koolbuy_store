@@ -6,7 +6,7 @@ interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
 
 const Label: React.FC<LabelProps> = ({ children, className = "", ...props }) => (
   <label
-    className={`block text-sm font-semibold text-gray-900 mb-1.5 ${className}`}
+    className={`block text-sm font-semibold text-brand-charcoal mb-1.5 ${className}`}
     {...props}
   >
     {children}
@@ -21,8 +21,8 @@ interface HintProps extends React.HTMLAttributes<HTMLParagraphElement> {
 const Hint: React.FC<HintProps> = ({ children, variant = "default", className = "", ...props }) => {
   const variants = {
     default: "text-brand-orange-text", // Matching the design's orange hint text
-    error: "text-red-500",
-    warning: "text-amber-500",
+    error: "text-error",
+    warning: "text-warning",
   };
 
   return (
