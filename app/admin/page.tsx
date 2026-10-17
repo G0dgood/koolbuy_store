@@ -8,7 +8,7 @@ import { StatCard } from "../components/Admin/StatCard";
 import { RevenueByMarket } from "../components/Admin/RevenueByLocation";
 import { StatusBadge, statusLabel } from "../components/Admin/Orders/StatusBadge";
 import { Button } from "../components/Button";
-import { EmptyState, EmptyTableRow, type IllustrationName } from "../components/EmptyState";
+import { EmptyState, EmptyTableRow, EmptyIllustration, type IllustrationName } from "../components/EmptyState";
 import { AnimatedNumber, BRAND, ChartCard, ChartKind, SERIES, SmartChart } from "../components/Admin/DashboardUi";
 import { TabFilter } from "../components/Tabs";
 import {
@@ -415,9 +415,11 @@ function Empty({ height, ...props }: { height: number; illustration: Illustratio
 }
 
 function ErrorInline({ error, onRetry }: { error: unknown; onRetry: () => void }) {
+  const msg = apiErrorMessage(error, "We couldn't load this.");
   return (
-    <div role="alert" className="flex flex-col items-center justify-center gap-3 py-8 text-center">
-      <p className="text-[13px] text-subtle max-w-xs">{apiErrorMessage(error, "We couldn't load this.")}</p>
+    <div role="alert" className="flex flex-col items-center justify-center gap-3 py-8 px-4 text-center">
+      <EmptyIllustration name="server" className="w-[140px] h-[112px]" />
+      <p className="text-[13px] text-subtle max-w-xs">{msg}</p>
       <Button variant="outline" size="sm" onClick={onRetry}>
         Try again
       </Button>
@@ -427,7 +429,7 @@ function ErrorInline({ error, onRetry }: { error: unknown; onRetry: () => void }
 
 function ErrorPanel({ error, onRetry }: { error: unknown; onRetry: () => void }) {
   return (
-    <div className="bg-white border border-light-gray rounded-lg">
+    <div className="bg-white border border-light-gray rounded-lg p-6">
       <ErrorInline error={error} onRetry={onRetry} />
     </div>
   );

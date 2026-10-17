@@ -32,7 +32,9 @@ export type IllustrationName =
   | "chart"
   | "revenue"
   | "categories"
-  | "location";
+  | "location"
+  | "server"
+  | "connection";
 
 const BG = "var(--brand-orange-soft)";
 const S = "var(--accent-white)";
@@ -390,6 +392,124 @@ const scenes: Record<IllustrationName, React.ReactNode> = {
       />
       <circle cx="100" cy="66" r="7" fill={S} />
       <circle cx="100" cy="66" r="3" fill={A} />
+    </>
+  ),
+  server: (
+    <>
+      {/* Top Server Unit */}
+      <rect x="52" y="50" width="96" height="28" rx="6" fill={S} {...ink} />
+      <circle cx="66" cy="64" r="3" fill={A} />
+      <circle cx="76" cy="64" r="3" fill={M} />
+      <circle cx="86" cy="64" r="3" fill={M} />
+      <path d="M102 60h32M102 68h32" {...line(2)} />
+
+      {/* Bottom Server Unit */}
+      <rect x="52" y="86" width="96" height="28" rx="6" fill={S} {...ink} />
+      <circle cx="66" cy="100" r="3" fill={M} />
+      <circle cx="76" cy="100" r="3" fill={A} />
+      <circle cx="86" cy="100" r="3" fill={M} />
+      <path d="M102 96h32M102 104h32" {...line(2)} />
+
+      {/* Feet / Rack Mount */}
+      <rect x="62" y="114" width="10" height="5" rx="1.5" fill={K} />
+      <rect x="128" y="114" width="10" height="5" rx="1.5" fill={K} />
+
+      {/* Disconnected Cable with Plug on Floor */}
+      <rect x="132" y="97" width="8" height="6" rx="1.5" fill={A} />
+      <path
+        d="M140 100 Q156 102 152 118 T128 134"
+        stroke={K}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <rect x="118" y="130" width="10" height="7" rx="2" fill={A} {...ink} />
+      <path d="M115 132v3" stroke={K} strokeWidth="2" strokeLinecap="round" />
+
+      {/* Small disconnect sparks */}
+      <path d="M142 124l3-3M148 130l4 1" stroke={A} strokeWidth="2" strokeLinecap="round" />
+
+      {/* Signal / Antenna waves with disconnect slash on top left */}
+      <path
+        d="M62 40a18 18 0 0 1 24 0"
+        stroke={M}
+        strokeWidth="2"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <path
+        d="M68 45a10 10 0 0 1 12 0"
+        stroke={A}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <circle cx="74" cy="50" r="2" fill={A} />
+      <path d="M58 50l32-18" stroke={K} strokeWidth="2" strokeLinecap="round" />
+
+      {/* Floating Offline Alert Badge */}
+      <circle cx="140" cy="42" r="15" fill={S} {...ink} />
+      <path d="M140 33v10" stroke={A} strokeWidth="3" strokeLinecap="round" />
+      <circle cx="140" cy="48" r="1.8" fill={A} />
+    </>
+  ),
+  connection: (
+    <>
+      {/* Top Server Unit */}
+      <rect x="52" y="50" width="96" height="28" rx="6" fill={S} {...ink} />
+      <circle cx="66" cy="64" r="3" fill={A} />
+      <circle cx="76" cy="64" r="3" fill={M} />
+      <circle cx="86" cy="64" r="3" fill={M} />
+      <path d="M102 60h32M102 68h32" {...line(2)} />
+
+      {/* Bottom Server Unit */}
+      <rect x="52" y="86" width="96" height="28" rx="6" fill={S} {...ink} />
+      <circle cx="66" cy="100" r="3" fill={M} />
+      <circle cx="76" cy="100" r="3" fill={A} />
+      <circle cx="86" cy="100" r="3" fill={M} />
+      <path d="M102 96h32M102 104h32" {...line(2)} />
+
+      {/* Feet / Rack Mount */}
+      <rect x="62" y="114" width="10" height="5" rx="1.5" fill={K} />
+      <rect x="128" y="114" width="10" height="5" rx="1.5" fill={K} />
+
+      {/* Disconnected Cable with Plug on Floor */}
+      <rect x="132" y="97" width="8" height="6" rx="1.5" fill={A} />
+      <path
+        d="M140 100 Q156 102 152 118 T128 134"
+        stroke={K}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <rect x="118" y="130" width="10" height="7" rx="2" fill={A} {...ink} />
+      <path d="M115 132v3" stroke={K} strokeWidth="2" strokeLinecap="round" />
+
+      {/* Small disconnect sparks */}
+      <path d="M142 124l3-3M148 130l4 1" stroke={A} strokeWidth="2" strokeLinecap="round" />
+
+      {/* Signal / Antenna waves with disconnect slash on top left */}
+      <path
+        d="M62 40a18 18 0 0 1 24 0"
+        stroke={M}
+        strokeWidth="2"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <path
+        d="M68 45a10 10 0 0 1 12 0"
+        stroke={A}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <circle cx="74" cy="50" r="2" fill={A} />
+      <path d="M58 50l32-18" stroke={K} strokeWidth="2" strokeLinecap="round" />
+
+      {/* Floating Offline Alert Badge */}
+      <circle cx="140" cy="42" r="15" fill={S} {...ink} />
+      <path d="M140 33v10" stroke={A} strokeWidth="3" strokeLinecap="round" />
+      <circle cx="140" cy="48" r="1.8" fill={A} />
     </>
   ),
 };

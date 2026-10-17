@@ -351,16 +351,13 @@ export default function TaxesReportPage() {
                   </tr>
                 ))
               ) : isError ? (
-                <tr>
-                  <td colSpan={COLUMNS} className="py-16 text-center">
-                    <div className="flex flex-col items-center gap-3">
-                      <p className="text-[13px] text-error">{apiErrorMessage(error, "Couldn't load VAT invoices.")}</p>
-                      <Button variant="outline" size="sm" onClick={() => refetch()}>
-                        Try again
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
+                <EmptyTableRow
+                  colSpan={COLUMNS}
+                  illustration="server"
+                  title="Couldn't load VAT invoices"
+                  description={apiErrorMessage(error, "Couldn't load VAT invoices.")}
+                  action={{ label: "Try again", onClick: () => refetch() }}
+                />
               ) : items.length === 0 ? (
                 vatOnly && !on ? (
                   <EmptyTableRow

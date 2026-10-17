@@ -275,16 +275,13 @@ const ProductsContent: React.FC = () => {
                 )}
               </div>
             ) : isError ? (
-              <div role="alert" className="bg-white rounded-tile border border-light-gray py-12 px-6 flex flex-col items-center gap-3 text-center">
-                <p className="text-[14px] text-subtle">{apiErrorMessage(error, "We couldn't load products.")}</p>
-                <button
-                  type="button"
-                  onClick={() => refetch()}
-                  className="inline-flex items-center justify-center h-9 px-4 rounded-full bg-black/[0.04] text-brand-charcoal text-[13px] font-medium hover:bg-black/[0.08] transition-colors"
-                >
-                  Try again
-                </button>
-              </div>
+              <EmptyState
+                variant="card"
+                illustration="server"
+                title="Couldn't load products"
+                description={apiErrorMessage(error, "We couldn't load products.")}
+                action={{ label: "Try again", onClick: () => refetch() }}
+              />
             ) : products.length === 0 ? (
               hasFilters ? (
                 <EmptyState

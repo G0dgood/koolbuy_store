@@ -146,16 +146,13 @@ export default function TaxSettingsPage() {
                   </tr>
                 ))
               ) : isError ? (
-                <tr>
-                  <td colSpan={COLS} className="py-16 text-center">
-                    <div className="flex flex-col items-center gap-1 max-w-md mx-auto">
-                      <p className="text-[13px] text-error">{apiErrorMessage(error, "Couldn't load categories.")}</p>
-                      <Button variant="outline" size="sm" className="mt-2" onClick={() => refetch()}>
-                        Try again
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
+                <EmptyTableRow
+                  colSpan={COLS}
+                  illustration="server"
+                  title="Couldn't load categories"
+                  description={apiErrorMessage(error, "Couldn't load categories.")}
+                  action={{ label: "Try again", onClick: () => refetch() }}
+                />
               ) : items.length === 0 ? (
                 query || filter !== "All" ? (
                   <EmptyTableRow

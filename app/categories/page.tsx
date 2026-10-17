@@ -117,7 +117,7 @@ const CategoriesPage = () => {
         ) : isError ? (
           <EmptyState
             variant="card"
-            illustration="products"
+            illustration="server"
             title="Couldn't load categories"
             description={apiErrorMessage(categoriesError)}
             action={{ label: "Try again", onClick: retry }}
