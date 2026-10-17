@@ -29,7 +29,7 @@ import {
   readAsDataUrl,
   useCreateHeroBannerMutation,
   useDeleteHeroBannerMutation,
-  useGetHeroBannersQuery,
+  useGetAdminHeroBannersQuery,
   useGetStoreBannersQuery,
   useReorderHeroBannersMutation,
   useUpdateHeroBannerMutation,
@@ -107,7 +107,7 @@ function AdvertContent() {
 /* ───────────────────────── Homepage (hero) banners ───────────────────────── */
 
 function HeroBanners() {
-  const { data, isLoading, isFetching, isError, error, refetch } = useGetHeroBannersQuery();
+  const { data, isLoading, isFetching, isError, error, refetch } = useGetAdminHeroBannersQuery();
   const [updateBanner] = useUpdateHeroBannerMutation();
   const [deleteBanner, { isLoading: isDeleting }] = useDeleteHeroBannerMutation();
   const [reorder, { isLoading: isReordering }] = useReorderHeroBannersMutation();

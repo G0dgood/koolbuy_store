@@ -89,7 +89,7 @@ export const storefrontApi = baseApi.injectEndpoints({
       providesTags: [{ type: "Store", id: "HERO_BANNERS" }],
     }),
   }),
-  overrideExisting: false,
+  overrideExisting: true,
 });
 
 export const { useGetStorefrontProductsQuery, useGetHeroBannersQuery } = storefrontApi;

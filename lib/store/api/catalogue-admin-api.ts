@@ -399,7 +399,7 @@ export const catalogueAdminApi = baseApi.injectEndpoints({
     }),
 
     /* Hero banners */
-    getHeroBanners: builder.query<{ success: boolean; items: HeroBanner[] }, void>({
+    getAdminHeroBanners: builder.query<{ success: boolean; items: HeroBanner[] }, void>({
       query: () => `/admin/hero-banners/`,
       providesTags: [tag("HERO_BANNERS")],
     }),
@@ -517,7 +517,7 @@ export const catalogueAdminApi = baseApi.injectEndpoints({
       invalidatesTags: [tag("CHECKOUT_MINIMUMS"), tag("BUSINESS_RULES")],
     }),
   }),
-  overrideExisting: false,
+  overrideExisting: true,
 });
 
 export const {
@@ -528,7 +528,7 @@ export const {
   useUpdateMediaItemMutation,
   useDeleteMediaItemMutation,
   useGetSalesReportQuery,
-  useGetHeroBannersQuery,
+  useGetAdminHeroBannersQuery,
   useCreateHeroBannerMutation,
   useUpdateHeroBannerMutation,
   useDeleteHeroBannerMutation,
@@ -552,6 +552,9 @@ export const {
   useGetCheckoutMinimumsQuery,
   useSaveCheckoutMinimumMutation,
 } = catalogueAdminApi;
+
+/** Alias for backwards compatibility */
+export const useGetHeroBannersQuery = useGetAdminHeroBannersQuery;
 
 /* ───────────────────────── Uploads ───────────────────────── */
 
