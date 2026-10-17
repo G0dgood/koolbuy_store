@@ -6,6 +6,7 @@ import { TabFilter } from "../../components/Admin/TabFilter";
 import { Pagination } from "../../components/Admin/Pagination";
 import { StatCard } from "../../components/Admin/StatCard";
 import { Button } from "@/app/components/Button";
+import Search from "@/app/components/ui/Search";
 import { Input } from "../../components/Form/Inputs";
 import { AddCategoryModal } from "../../components/Admin/AddCategoryModal";
 import { CategoriesMoreActionsDrawer } from "../../components/Admin/CategoriesMoreActionsDrawer";
@@ -303,24 +304,16 @@ export default function CategoriesPage() {
           />
 
           <div className="flex items-center gap-2.5 w-full md:w-auto">
-            <Input
-              type="text"
+            <Search
               placeholder="Search category name or slug..."
               value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
+              onChange={(val) => {
+                const s = typeof val === "string" ? val : (val as any).target?.value ?? "";
+                setSearchQuery(s);
                 setCurrentPage(1);
               }}
-              containerClassName="flex-1 md:w-80"
-              className="bg-white border-light-gray placeholder:text-faint text-xs font-medium h-9"
-              suffixElement={
-                <Icon
-                  name="search-01"
-                  folder="dashboardIcon"
-                  size="sm"
-                  className="text-faint"
-                />
-              }
+              className="flex-1 md:!w-80"
+              maxWidth="max-w-none"
             />
             <RowsPerPage value={rowsPerPage} onChange={setRowsPerPage} />
           </div>

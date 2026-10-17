@@ -7,12 +7,11 @@ import { StatCard } from "@/app/components/Admin/StatCard";
 import { Pagination } from "@/app/components/Admin/Pagination";
 import { StatusBadge } from "@/app/components/Admin/Orders/StatusBadge";
 import { RowsPerPage } from "@/app/components/rows-per-page";
-import { Input } from "@/app/components/Form/Inputs";
 import { DatePicker } from "@/app/components/Form/DatePicker";
 import { Button } from "@/app/components/Button";
 import { TabFilter } from "@/app/components/Tabs";
 import { EmptyTableRow } from "@/app/components/EmptyState";
-import { Icon } from "@/app/components/Icon";
+import Search from "@/app/components/ui/Search";
 import Drawer from "@/app/components/Drawer/Drawer";
 import {
   apiErrorMessage,
@@ -238,18 +237,15 @@ export default function VendorAccountingPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center gap-3 w-full xl:w-auto">
-            <Input
-              type="search"
+            <Search
               value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
+              onChange={(val) => {
+                setSearch(typeof val === "string" ? val : (val as any).target?.value ?? "");
                 resetPage();
               }}
               placeholder="Search vendor name"
-              aria-label="Search vendors"
-              containerClassName="w-full sm:w-72"
-              className="bg-white border-light-gray placeholder:text-faint text-xs font-medium"
-              suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-faint" />}
+              className="w-full sm:!w-72"
+              maxWidth="max-w-none"
             />
             <div className="flex items-center gap-3">
               <RowsPerPage

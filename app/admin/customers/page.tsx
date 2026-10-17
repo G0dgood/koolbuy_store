@@ -9,6 +9,7 @@ import { StatCard } from "../../components/Admin/StatCard";
 import { TabFilter } from "../../components/Admin/TabFilter";
 import { Pagination } from "../../components/Admin/Pagination";
 import { Input } from "../../components/Form/Inputs";
+import Search from "@/app/components/ui/Search";
 import { CustomerSideCard } from "../../components/Admin/CustomerSideCard";
 import { ConfirmationModal } from "@/app/components/Admin/ConfirmationModal";
 import { BulkActionsDrawer } from "../../components/Admin/BulkActionsDrawer";
@@ -300,15 +301,12 @@ export default function CustomersListing() {
                 )}
               </div>
 
-              <Input
-                type="search"
+              <Search
                 value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
+                onChange={(val) => setSearchInput(typeof val === "string" ? val : (val as any).target?.value ?? "")}
                 placeholder="Search name, email or phone"
-                aria-label="Search customers"
-                containerClassName="flex-1 min-w-[200px] lg:w-64"
-                className="text-[13px]"
-                suffixElement={<MagnifyingGlassIcon className="w-4 h-4 text-faint" />}
+                className="flex-1 min-w-[200px] lg:!w-64"
+                maxWidth="max-w-none"
               />
               <RowsPerPage
                 value={rowsPerPage}

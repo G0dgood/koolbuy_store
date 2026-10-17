@@ -6,6 +6,7 @@ import { HiOutlinePencilSquare, HiOutlinePlus } from "react-icons/hi2";
 import { Button } from "@/app/components/Button";
 import { Switch } from "@/app/components/Form/Switch";
 import Modal from "@/app/components/Modal/Modal";
+import Search from "@/app/components/ui/Search";
 import { EmptyState, EmptyTableRow } from "@/app/components/EmptyState";
 import { apiErrorMessage } from "@/lib/store/base-api";
 import { formatDate, formatMoney, humanize } from "@/lib/store/api/accounting-api";
@@ -77,10 +78,6 @@ function SkeletonFields({ n }: { n: number }) {
 export default function ConfigurationsPage() {
   return (
     <div className="flex flex-col gap-6 pb-12">
-      <div>
-        <h1 className="text-xl font-semibold text-brand-charcoal">Configurations</h1>
-        <p className="text-xs text-subtle mt-0.5">Platform settings and the business rules they drive.</p>
-      </div>
       <SiteSettingsCard />
       <CheckoutMinimumsCard />
       <BusinessRulesCard />
@@ -483,12 +480,36 @@ function MinimumModal({
 
 function BusinessRulesCard() {
   const { data, isLoading, isError, error, refetch } = useGetBusinessRulesQuery();
+  const [search, setSearch] = useState("");
   const sections = data?.sections ?? [];
+
+  const filtered = search.trim()
+    ? sections.filter((s) => {
+        const q = search.toLowerCase();
+        return (
+          s.title?.toLowerCase().includes(q) ||
+          s.about?.toLowerCase().includes(q) ||
+          s.limits?.toLowerCase().includes(q) ||
+          s.values?.some((v) => v.label.toLowerCase().includes(q) || String(v.value).toLowerCase().includes(q))
+        );
+      })
+    : sections;
+
   return (
     <section className={box}>
       <SectionHeader
         title="Business rules"
         hint="Every configurable rule and its current value. Each is changed in its own place; this is an overview."
+        action={
+          <div className="w-full sm:w-72">
+            <Search
+              value={search}
+              onChange={(val) => setSearch(typeof val === "string" ? val : (val as any).target?.value ?? "")}
+              placeholder="Search business rules..."
+              maxWidth="max-w-none"
+            />
+          </div>
+        }
       />
       {isLoading ? (
         <SkeletonFields n={4} />
@@ -496,9 +517,13 @@ function BusinessRulesCard() {
         <ErrorBox error={error} fallback="Couldn't load the business rules." onRetry={refetch} />
       ) : sections.length === 0 ? (
         <EmptyState illustration="settings" title="No rules to show" description="Rules your role can see will appear here." size="sm" />
+      ) : filtered.length === 0 ? (
+        <div className="p-6">
+          <EmptyState illustration="search" title="No matching rules" description="Try a different search term." size="sm" />
+        </div>
       ) : (
         <div className="p-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {sections.map((s) => (
+          {filtered.map((s) => (
             <RuleSection key={s.key} section={s} />
           ))}
         </div>

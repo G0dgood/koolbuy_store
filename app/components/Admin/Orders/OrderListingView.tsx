@@ -3,9 +3,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
-import { Icon } from "@/app/components/Icon";
 import { Button } from "@/app/components/Button";
-import { Input } from "@/app/components/Form/Inputs";
+import Search from "@/app/components/ui/Search";
 import { StatCard } from "@/app/components/Admin/StatCard";
 import { TabFilter } from "@/app/components/Admin/TabFilter";
 import { Pagination } from "@/app/components/Admin/Pagination";
@@ -162,15 +161,12 @@ export function OrderListingView<T>({
           <TabFilter tabs={tabs} activeTab={activeTab} onChange={onTabChange} />
 
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
-            <Input
-              type="search"
-              placeholder={searchPlaceholder}
-              aria-label={searchPlaceholder}
+            <Search
               value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-              containerClassName="w-full lg:w-72 xl:w-80"
-              className="bg-white placeholder:text-faint text-xs font-medium"
-              suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-faint" />}
+              onChange={(val) => setSearchInput(typeof val === "string" ? val : (val as any).target?.value ?? "")}
+              placeholder={searchPlaceholder}
+              className="w-full lg:!w-72 xl:!w-80"
+              maxWidth="max-w-none"
             />
             <RowsPerPage value={pageSize} onChange={onPageSizeChange} options={pageSizeOptions} />
           </div>

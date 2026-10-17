@@ -9,7 +9,7 @@ import { StatusBadge } from "@/app/components/Admin/Orders/StatusBadge";
 import { RowsPerPage } from "@/app/components/rows-per-page";
 import { Input } from "@/app/components/Form/Inputs";
 import { Button } from "@/app/components/Button";
-import { Icon } from "@/app/components/Icon";
+import Search from "@/app/components/ui/Search";
 import { EmptyTableRow, type IllustrationName } from "@/app/components/EmptyState";
 import {
   apiErrorMessage,
@@ -326,18 +326,15 @@ function MembersTab({ policy, onOpenMember }: { policy: Policy | null; onOpenMem
   return (
     <>
       <div className="p-4 sm:px-6 flex flex-col sm:flex-row gap-3 items-center justify-between border-b border-light-gray">
-        <Input
-          type="search"
+        <Search
           value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
+          onChange={(val) => {
+            setSearch(typeof val === "string" ? val : (val as any).target?.value ?? "");
             setPage(1);
           }}
           placeholder="Search name or email"
-          aria-label="Search members"
-          containerClassName="w-full sm:w-80"
-          className="bg-white border-light-gray placeholder:text-faint text-xs font-medium"
-          suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-faint" />}
+          className="w-full sm:!w-80"
+          maxWidth="max-w-none"
         />
         <RowsPerPage
           value={pageSize}

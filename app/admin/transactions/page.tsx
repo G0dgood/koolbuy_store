@@ -4,9 +4,8 @@ import React, { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { HiOutlineArrowDownTray, HiOutlineDocumentText } from "react-icons/hi2";
-import { Icon } from "../../components/Icon";
 import { Button } from "../../components/Button";
-import { Input } from "../../components/Form/Inputs";
+import Search from "@/app/components/ui/Search";
 import { StatCard } from "../../components/Admin/StatCard";
 import { TabFilter } from "../../components/Admin/TabFilter";
 import { Pagination } from "../../components/Admin/Pagination";
@@ -184,18 +183,15 @@ function TransactionsView() {
           />
 
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
-            <Input
-              type="search"
+            <Search
               value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
+              onChange={(val) => {
+                setSearch(typeof val === "string" ? val : (val as any).target?.value ?? "");
                 setCurrentPage(1);
               }}
               placeholder="Search reference, order or customer"
-              aria-label="Search transactions"
-              containerClassName="w-full lg:w-80 xl:w-96"
-              className="bg-white border-light-gray placeholder:text-faint text-xs font-medium"
-              suffixElement={<Icon name="search-01" folder="dashboardIcon" size="sm" className="text-faint" />}
+              className="w-full lg:!w-80 xl:!w-96"
+              maxWidth="max-w-none"
             />
 
             <div className="flex items-center gap-3 w-full sm:w-auto">

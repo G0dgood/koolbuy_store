@@ -13,6 +13,7 @@ import { TabFilter } from "@/app/components/Admin/TabFilter";
 import { Pagination } from "@/app/components/Admin/Pagination";
 import { RowsPerPage } from "@/app/components/rows-per-page";
 import { Button } from "@/app/components/Button";
+import Search from "@/app/components/ui/Search";
 import { EmptyTableRow } from "@/app/components/EmptyState";
 import { Modal, ModalBody } from "@/app/components/Modal";
 import {
@@ -118,6 +119,7 @@ export default function RefundsPage() {
   const [createAmount, setCreateAmount] = useState("");
   const [createReason, setCreateReason] = useState("");
   const [createErrors, setCreateErrors] = useState<Record<string, string>>({});
+  const [search, setSearch] = useState("");
 
   const { data, isLoading, isFetching, isError, error, refetch } = useGetAdminRefundsQuery({
     status: activeTab,
@@ -129,7 +131,17 @@ export default function RefundsPage() {
   const [rejectRefund, { isLoading: isRejecting }] = useRejectAdminRefundMutation();
   const isMutating = isApproving || isRejecting;
 
-  const refunds = data?.items ?? [];
+  const rawRefunds = data?.items ?? [];
+  const refunds = search.trim()
+    ? rawRefunds.filter((r) => {
+        const q = search.toLowerCase();
+        const orderNum = r.order?.order_number?.toLowerCase() ?? "";
+        const buyer = `${r.buyer?.name ?? ""} ${r.buyer?.email ?? ""}`.toLowerCase();
+        const reason = r.reason?.toLowerCase() ?? "";
+        const requestedBy = r.requested_by?.toLowerCase() ?? "";
+        return orderNum.includes(q) || buyer.includes(q) || reason.includes(q) || requestedBy.includes(q);
+      })
+    : rawRefunds;
   const counts = data?.counts;
   const total = data?.pagination.total ?? 0;
   const totalPages = Math.max(1, Math.ceil(total / rowsPerPage));
@@ -287,7 +299,19 @@ export default function RefundsPage() {
       <div className="bg-white border border-light-gray rounded-lg flex flex-col overflow-hidden">
         <div className="p-4 border-b border-light-gray flex flex-col md:flex-row md:items-center justify-between gap-4">
           <TabFilter tabs={visibleTabs.map(tabLabel)} activeTab={tabLabel(activeDef)} onChange={changeTab} />
-          {isFetching && !isLoading && <span className="text-[11px] text-faint">Refreshing…</span>}
+          <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+            <Search
+              value={search}
+              onChange={(val) => {
+                setSearch(typeof val === "string" ? val : (val as any).target?.value ?? "");
+                setCurrentPage(1);
+              }}
+              placeholder="Search order #, buyer or reason"
+              className="w-full sm:!w-72"
+              maxWidth="max-w-none"
+            />
+            {isFetching && !isLoading && <span className="text-[11px] text-faint whitespace-nowrap">Refreshing…</span>}
+          </div>
         </div>
 
         <div className="admin-table-container">
@@ -329,7 +353,18 @@ export default function RefundsPage() {
                   </td>
                 </tr>
               ) : refunds.length === 0 ? (
-                activeTab === "all" ? (
+                search.trim() ? (
+                  <EmptyTableRow
+                    colSpan={8}
+                    illustration="search"
+                    title="No matching refunds"
+                    description={`No refunds match "${search.trim()}". Try a different search term.`}
+                    action={{
+                      label: "Clear search",
+                      onClick: () => setSearch(""),
+                    }}
+                  />
+                ) : activeTab === "all" ? (
                   <EmptyTableRow
                     colSpan={8}
                     illustration="refunds"
