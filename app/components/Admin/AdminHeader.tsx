@@ -229,15 +229,6 @@ export const AdminHeader: React.FC<HeaderProps> = ({
         </motion.h1>
       </div>
 
-      {/* Search backdrop */}
-      {isSearchOpen && (
-        <div
-          className="fixed inset-0 top-[70px] bg-black/20 backdrop-blur-[1px] z-20 transition-opacity duration-150"
-          onClick={() => setIsSearchOpen(false)}
-          aria-hidden
-        />
-      )}
-
       {/* Right Actions Area */}
       <div className="flex-1 flex items-center justify-end gap-5 h-full">
         {/* Search Pill */}
