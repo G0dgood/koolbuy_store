@@ -234,7 +234,7 @@ export default function AdminDashboard() {
               {!a ? (
                 <Skeleton height={290} />
               ) : !series.some((s) => (measure === "revenue" ? s.gmv : s.orders) > 0) ? (
-                <Empty height={290} illustration="chart" title={measure === "revenue" ? "No sales yet" : "No orders yet"} description={measure === "revenue" ? "Sales will appear here once orders are paid." : "Orders will appear here once customers check out."} />
+                <Empty height={290} illustration="revenue" title={measure === "revenue" ? "No sales yet" : "No orders yet"} description={measure === "revenue" ? "Sales will appear here once orders are paid." : "Orders will appear here once customers check out."} />
               ) : (
                 <SmartChart
                   kind={trendKind}
@@ -289,7 +289,7 @@ export default function AdminDashboard() {
               ) : !sales.data ? (
                 <Skeleton height={260} />
               ) : !categoryTotal ? (
-                <Empty height={260} illustration="chart" title="No sales yet" description="Sales will appear here once orders are paid." />
+                <Empty height={260} illustration="categories" title="No sales yet" description="Sales will appear here once orders are paid." />
               ) : (
                 <SmartChart
                   kind={categoryKind}
@@ -321,7 +321,7 @@ export default function AdminDashboard() {
               ) : !payments.data ? (
                 <Skeleton height={260} />
               ) : !methods.length ? (
-                <Empty height={260} illustration="chart" title="No payments yet" description="Payment methods will appear here once orders are paid." />
+                <Empty height={260} illustration="payments" title="No payments yet" description="Payment methods will appear here once orders are paid." />
               ) : (
                 <SmartChart
                   kind={paymentKind}
@@ -368,7 +368,7 @@ export default function AdminDashboard() {
               {!a ? (
                 <Skeleton height={330} />
               ) : !topSellers.length ? (
-                <Empty height={330} illustration="chart" title="No sales yet" description="Your best-selling vendors will appear here once orders are paid." />
+                <Empty height={330} illustration="vendors" title="No sales yet" description="Your best-selling vendors will appear here once orders are paid." />
               ) : (
                 <SmartChart
                   kind={vendorKind}

@@ -10,7 +10,7 @@ import { MARKET_NAMES, money } from "./dashboardData";
    never added together or drawn on one scale. */
 export const RevenueByMarket: React.FC<{ rows: AdminAnalytics["revenue_by_market"]; selected?: string }> = ({ rows, selected }) => {
   if (!rows.some((r) => r.total > 0)) {
-    return <EmptyState illustration="chart" size="sm" title="No sales yet" description="Revenue will appear here once orders are paid." />;
+    return <EmptyState illustration="location" size="sm" title="No sales yet" description="Revenue will appear here once orders are paid." />;
   }
   return (
     <ul className="-mx-4 md:-mx-5 divide-y divide-light-gray">

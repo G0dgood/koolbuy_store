@@ -29,7 +29,10 @@ export type IllustrationName =
   | "promotions"
   | "documents"
   | "settings"
-  | "chart";
+  | "chart"
+  | "revenue"
+  | "categories"
+  | "location";
 
 const BG = "var(--brand-orange-soft)";
 const S = "var(--accent-white)";
@@ -219,14 +222,17 @@ const scenes: Record<IllustrationName, React.ReactNode> = {
   ),
   vendors: (
     <>
-      <rect x="54" y="66" width="92" height="60" rx="4" fill={S} {...ink} />
-      <path d="M50 66l10-26h80l10 26z" fill={S} {...ink} />
-      {[50, 70, 90, 110, 130].map((x, i) => (
-        <path key={x} d={`M${x} 66q10 14 20 0`} fill={i % 2 ? S : A} {...ink} />
+      <rect x="52" y="64" width="96" height="62" rx="5" fill={S} {...ink} />
+      <path d="M48 64l10-26h84l10 26z" fill={S} {...ink} />
+      {[48, 68, 88, 108, 128].map((x, i) => (
+        <path key={x} d={`M${x} 64q10 14 20 0`} fill={i % 2 ? S : A} {...ink} />
       ))}
-      <rect x="66" y="88" width="26" height="38" rx="3" fill={BG} {...ink} />
-      <rect x="104" y="86" width="30" height="20" rx="3" fill={S} {...ink} />
-      <path d="M110 96h18" {...line(2.5)} />
+      <rect x="64" y="86" width="28" height="40" rx="3" fill={BG} {...ink} />
+      <circle cx="86" cy="106" r="2" fill={A} />
+      <rect x="102" y="86" width="34" height="22" rx="3" fill={S} {...ink} />
+      <path d="M108 97h22" {...line(2.5)} />
+      <circle cx="148" cy="46" r="14" fill={S} {...ink} />
+      <path d="M148 37l2.5 5.2 5.7.8-4.1 4 1 5.7-5.1-2.7-5.1 2.7 1-5.7-4.1-4 5.7-.8z" fill={A} />
     </>
   ),
   delivery: (
@@ -303,6 +309,87 @@ const scenes: Record<IllustrationName, React.ReactNode> = {
           strokeDasharray={i === 3 ? undefined : "3 2"}
         />
       ))}
+    </>
+  ),
+  revenue: (
+    <>
+      <rect x="42" y="36" width="116" height="90" rx="10" fill={S} {...ink} />
+      <path d="M42 56h116" stroke={K} strokeWidth="2.5" />
+      <circle cx="54" cy="46" r="3" fill={A} />
+      <circle cx="64" cy="46" r="3" fill={M} />
+      <path d="M78 46h36" {...line(2)} />
+      <path d="M54 74h92M54 94h92" stroke={M} strokeWidth="1.5" strokeDasharray="3 3" opacity="0.4" />
+      <path d="M76 64v48M102 64v48M128 64v48" stroke={M} strokeWidth="1.5" strokeDasharray="3 3" opacity="0.4" />
+      <path d="M52 112h96" stroke={K} strokeWidth="2" strokeLinecap="round" />
+      <path
+        d="M56 104 Q78 98 94 82 T124 72 T144 54 L144 112 L56 112 Z"
+        fill={A}
+        fillOpacity="0.15"
+      />
+      <path
+        d="M56 104 Q78 98 94 82 T124 72 T144 54"
+        stroke={A}
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <circle cx="56" cy="104" r="3" fill={S} {...ink} />
+      <circle cx="94" cy="82" r="3" fill={S} {...ink} />
+      <circle cx="124" cy="72" r="3" fill={S} {...ink} />
+      <circle cx="144" cy="54" r="4.5" fill={A} {...ink} />
+      <rect x="126" y="24" width="42" height="22" rx="11" fill={S} {...ink} />
+      <path d="M136 37l6-6 4 4 8-8M148 27h6v6" stroke={A} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </>
+  ),
+  categories: (
+    <>
+      <path
+        d="M100 44 A34 34 0 0 1 134 78 L120 78 A20 20 0 0 0 100 58 Z"
+        fill={A}
+        {...ink}
+      />
+      <path
+        d="M134 78 A34 34 0 0 1 100 112 L100 98 A20 20 0 0 0 120 78 Z"
+        fill={S}
+        {...ink}
+      />
+      <path
+        d="M100 112 A34 34 0 0 1 76 102 L86 90 A20 20 0 0 0 100 98 Z"
+        fill={BG}
+        {...ink}
+      />
+      <path
+        d="M76 102 A34 34 0 0 1 100 44 L100 58 A20 20 0 0 0 86 90 Z"
+        fill={K}
+        {...ink}
+      />
+      <circle cx="100" cy="78" r="16" fill={S} {...ink} />
+      <circle cx="100" cy="78" r="5" fill={A} />
+      <rect x="34" y="52" width="46" height="34" rx="6" fill={S} {...ink} />
+      <rect x="42" y="60" width="12" height="8" rx="2" fill={A} />
+      <path d="M58 64h14M42 74h28" {...line(2)} />
+      <rect x="122" y="88" width="50" height="24" rx="6" fill={S} {...ink} />
+      <circle cx="134" cy="100" r="4" fill={A} />
+      <path d="M144 100h20" {...line(2.5)} />
+      <path d="M140 40h22l6 8-6 8h-22a4 4 0 0 1-4-4v-8a4 4 0 0 1 4-4z" fill={S} {...ink} />
+      <circle cx="147" cy="48" r="2.5" fill={A} />
+    </>
+  ),
+  location: (
+    <>
+      <path d="M46 56l34-10 38 10 34-10v64l-34 10-38-10-34 10z" fill={S} {...ink} />
+      <path d="M80 46v64M118 56v64" stroke={M} strokeWidth="2" strokeDasharray="3 3" />
+      <path d="M56 82q24-14 48 4t42-8" stroke={A} strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.6" strokeDasharray="4 3" />
+      <circle cx="62" cy="80" r="3.5" fill={M} />
+      <circle cx="140" cy="76" r="3.5" fill={M} />
+      <ellipse cx="100" cy="104" rx="10" ry="3.5" fill={K} opacity="0.2" />
+      <path
+        d="M100 46c-11 0-20 9-20 20 0 15 20 34 20 34s20-19 20-34c0-11-9-20-20-20z"
+        fill={A}
+        {...ink}
+      />
+      <circle cx="100" cy="66" r="7" fill={S} />
+      <circle cx="100" cy="66" r="3" fill={A} />
     </>
   ),
 };
