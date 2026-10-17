@@ -208,13 +208,16 @@ export default function FAQManagementPage() {
             </div>
           )}
         </div>
-        <div className="p-4 bg-off-white/30 border-t border-light-gray">
-          <Pagination
-            currentPage={currentPage}
-            totalPages={Math.ceil(filteredFAQs.length / rowsPerPage) || 1}
-            onPageChange={setCurrentPage}
-          />
-        </div>
+
+        {Math.ceil(filteredFAQs.length / rowsPerPage) > 1 && (
+          <div className="p-4 bg-off-white/30 border-t border-light-gray">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={Math.ceil(filteredFAQs.length / rowsPerPage)}
+              onPageChange={setCurrentPage}
+            />
+          </div>
+        )}
       </div>
 
       <CreateFAQModal

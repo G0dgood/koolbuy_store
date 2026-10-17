@@ -402,21 +402,17 @@ export default function VendorAccountingPage() {
           </table>
         </div>
 
-        <div className="admin-pagination-footer">
-          <p className="text-xs text-faint">
-            {total === 0 ? (
-              "No entries"
-            ) : (
-              <>
-                Showing{" "}
-                <span className="font-semibold text-brand-charcoal">{(currentPage - 1) * rowsPerPage + 1}</span> to{" "}
-                <span className="font-semibold text-brand-charcoal">{Math.min(currentPage * rowsPerPage, total)}</span>{" "}
-                of <span className="font-semibold text-brand-charcoal">{total}</span> entries
-              </>
-            )}
-          </p>
-          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-        </div>
+        {total > 0 && totalPages > 1 && (
+          <div className="admin-pagination-footer">
+            <p className="text-xs text-faint">
+              Showing{" "}
+              <span className="font-semibold text-brand-charcoal">{(currentPage - 1) * rowsPerPage + 1}</span> to{" "}
+              <span className="font-semibold text-brand-charcoal">{Math.min(currentPage * rowsPerPage, total)}</span>{" "}
+              of <span className="font-semibold text-brand-charcoal">{total}</span> entries
+            </p>
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+          </div>
+        )}
       </div>
 
       <VendorOrdersDrawer vendor={selected} from={range.from} to={range.to} onClose={() => setSelected(null)} />
@@ -574,17 +570,19 @@ function VendorOrdersDrawer({
             </table>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-            <RowsPerPage
-              value={pageSize}
-              options={[10, 20, 50, 100]}
-              onChange={(n) => {
-                setPageSize(n);
-                setPage(1);
-              }}
-            />
-            <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
-          </div>
+          {totalPages > 1 && (
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+              <RowsPerPage
+                value={pageSize}
+                options={[10, 20, 50, 100]}
+                onChange={(n) => {
+                  setPageSize(n);
+                  setPage(1);
+                }}
+              />
+              <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
+            </div>
+          )}
         </div>
       )}
     </Drawer>

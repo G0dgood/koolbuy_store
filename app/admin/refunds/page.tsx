@@ -435,28 +435,30 @@ export default function RefundsPage() {
           </table>
         </div>
 
-        <div className="admin-pagination-footer">
-          <div className="flex items-center gap-4">
-            <RowsPerPage
-              value={rowsPerPage}
-              options={PAGE_SIZE_OPTIONS}
-              onChange={(val) => {
-                setRowsPerPage(val);
-                setCurrentPage(1);
-              }}
-            />
-            <p className="text-xs text-faint">
-              Showing{" "}
-              <span className="font-semibold text-brand-charcoal">
-                {total === 0 ? 0 : (currentPage - 1) * rowsPerPage + 1}
-              </span>{" "}
-              to{" "}
-              <span className="font-semibold text-brand-charcoal">{Math.min(currentPage * rowsPerPage, total)}</span>{" "}
-              of <span className="font-semibold text-brand-charcoal">{total}</span>
-            </p>
+        {total > 0 && totalPages > 1 && (
+          <div className="admin-pagination-footer">
+            <div className="flex items-center gap-4">
+              <RowsPerPage
+                value={rowsPerPage}
+                options={PAGE_SIZE_OPTIONS}
+                onChange={(val) => {
+                  setRowsPerPage(val);
+                  setCurrentPage(1);
+                }}
+              />
+              <p className="text-xs text-faint">
+                Showing{" "}
+                <span className="font-semibold text-brand-charcoal">
+                  {(currentPage - 1) * rowsPerPage + 1}
+                </span>{" "}
+                to{" "}
+                <span className="font-semibold text-brand-charcoal">{Math.min(currentPage * rowsPerPage, total)}</span>{" "}
+                of <span className="font-semibold text-brand-charcoal">{total}</span>
+              </p>
+            </div>
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
           </div>
-          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-        </div>
+        )}
       </div>
 
       {/* Details */}

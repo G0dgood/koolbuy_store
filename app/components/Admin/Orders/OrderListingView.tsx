@@ -261,9 +261,11 @@ export function OrderListingView<T>({
           </table>
         </div>
 
-        <div className="border-t border-light-gray flex items-center justify-end">
-          <Pagination currentPage={page} totalPages={totalPages} onPageChange={onPageChange} />
-        </div>
+        {totalPages > 1 && (
+          <div className="border-t border-light-gray flex items-center justify-end">
+            <Pagination currentPage={page} totalPages={totalPages} onPageChange={onPageChange} />
+          </div>
+        )}
       </div>
     </div>
   );

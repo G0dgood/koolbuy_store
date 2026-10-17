@@ -837,26 +837,28 @@ export default function DBAuditLogsPage() {
         </div>
 
         {/* Footer / Pagination */}
-        <div className="p-4 border-t border-light-gray flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-xs text-faint font-medium">
-            Showing{" "}
-            <span className="font-semibold text-brand-charcoal">
-              {totalEvents === 0 ? 0 : (currentPage - 1) * pageSize + 1}
-            </span>{" "}
-            to{" "}
-            <span className="font-semibold text-brand-charcoal">
-              {Math.min(currentPage * pageSize, totalEvents)}
-            </span>{" "}
-            of{" "}
-            <span className="font-semibold text-brand-charcoal">{totalEvents}</span> events
-          </div>
+        {totalEvents > 0 && totalPages > 1 && (
+          <div className="p-4 border-t border-light-gray flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-xs text-faint font-medium">
+              Showing{" "}
+              <span className="font-semibold text-brand-charcoal">
+                {(currentPage - 1) * pageSize + 1}
+              </span>{" "}
+              to{" "}
+              <span className="font-semibold text-brand-charcoal">
+                {Math.min(currentPage * pageSize, totalEvents)}
+              </span>{" "}
+              of{" "}
+              <span className="font-semibold text-brand-charcoal">{totalEvents}</span> events
+            </div>
 
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={(page) => setCurrentPage(page)}
-          />
-        </div>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
+          </div>
+        )}
       </div>
 
       {/* Improved Side Drawer: Audit Event Details & Diff Inspector */}

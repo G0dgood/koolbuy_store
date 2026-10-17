@@ -22,6 +22,7 @@ const Pagination: React.FC<PaginationProps> = ({
   onPageSizeChange,
   className = "",
 }) => {
+  if (!totalPages || totalPages <= 1) return null;
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (

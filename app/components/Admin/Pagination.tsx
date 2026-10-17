@@ -26,7 +26,8 @@ const step =
   "px-3 py-2 text-[11px] md:text-[12px] font-medium text-faint hover:text-subtle rounded-lg transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed";
 
 export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange, className = "" }) => {
-  const total = Math.max(1, totalPages);
+  if (!totalPages || totalPages <= 1) return null;
+  const total = totalPages;
 
   return (
     <nav aria-label="Pagination" className={`k-pagination flex items-center justify-between gap-3 px-4 sm:px-6 py-4 ${className}`}>

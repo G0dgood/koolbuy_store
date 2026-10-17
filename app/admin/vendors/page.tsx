@@ -596,14 +596,16 @@ export default function VendorsPage() {
         </div>
 
         {/* Footer with RowsPerPage & Pagination */}
-        <div className="p-4 border-t border-light-gray flex flex-col sm:flex-row items-center justify-between gap-3">
-          <RowsPerPage value={rowsPerPage} onChange={setRowsPerPage} />
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
-          />
-        </div>
+        {totalPages > 1 && (
+          <div className="p-4 border-t border-light-gray flex flex-col sm:flex-row items-center justify-between gap-3">
+            <RowsPerPage value={rowsPerPage} onChange={setRowsPerPage} />
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
+          </div>
+        )}
       </div>
 
       {/* Add New Vendor Modal */}
