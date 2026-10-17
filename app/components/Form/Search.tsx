@@ -111,7 +111,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>(
     return (
       <div
         onClick={handleClick}
-        className={`search-container box-border flex flex-row items-center px-[12px] py-[8px] gap-2.5 ${defaultWidth} ${defaultHeight} border relative ${maxWidth} rounded-[var(--radius)] transition-all duration-200 cursor-text ${
+        className={`search-container box-border flex flex-row items-center px-[12px] py-[8px] gap-2.5 ${defaultWidth} ${defaultHeight} border relative ${maxWidth} rounded-[var(--radius)] transition-[border-color,box-shadow,background-color] duration-200 cursor-text ${
           isActive ? "active search-active is-active" : ""
         } ${disabled ? "opacity-60 cursor-not-allowed" : ""} ${className}`}
         style={{

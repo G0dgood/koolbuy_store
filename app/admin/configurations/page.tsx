@@ -23,6 +23,7 @@ import {
   type SiteSettings,
   type SiteSettingsPatch,
 } from "@/lib/store/api/catalogue-admin-api";
+import { CardPlaceholdersCard } from "./CardPlaceholdersCard";
 
 /* Configurations: the platform settings the backend actually stores.
    - Site settings (/admin/site-settings/): contact email and phone, the
@@ -32,21 +33,24 @@ import {
      market and buyer type, every change needs a reason.
    - Business rules (/admin/business-rules/): a read-only overview of every
      configurable rule and its current value, following the caller's role.
+   - Card image placeholders (/koolbuy/admin/storefront-settings/card-placeholders/,
+     CardPlaceholdersCard.tsx): what store product / vendor cards show while
+     their photo loads or when they have none, with a live preview.
    The old sample config cards and custom modules had no backend and were
    removed. */
 
 const inputClass =
   "w-full h-10 px-3 rounded-lg border border-light-gray text-xs focus:outline-none focus:border-brand-orange bg-white disabled:bg-off-white";
-const box = "bg-white border border-light-gray rounded-lg";
+const box = "bg-white border border-light-gray rounded-lg overflow-hidden";
 
 function SectionHeader({ title, hint, action }: { title: string; hint: string; action?: React.ReactNode }) {
   return (
-    <div className="p-4 sm:px-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-light-gray">
-      <div>
+    <div className="p-4 sm:px-6 flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-light-gray">
+      <div className="min-w-0 flex-1">
         <h2 className="text-[14px] font-semibold text-brand-charcoal">{title}</h2>
         <p className="text-[12px] text-subtle mt-0.5">{hint}</p>
       </div>
-      {action}
+      {action && <div className="shrink-0 w-full md:w-auto">{action}</div>}
     </div>
   );
 }
@@ -79,6 +83,7 @@ export default function ConfigurationsPage() {
   return (
     <div className="flex flex-col gap-6 pb-12">
       <SiteSettingsCard />
+      <CardPlaceholdersCard />
       <CheckoutMinimumsCard />
       <BusinessRulesCard />
     </div>
@@ -501,33 +506,36 @@ function BusinessRulesCard() {
         title="Business rules"
         hint="Every configurable rule and its current value. Each is changed in its own place; this is an overview."
         action={
-          <div className="w-full sm:w-72">
+          <div className="w-full sm:w-64 md:w-72">
             <Search
               value={search}
-              onChange={(val) => setSearch(typeof val === "string" ? val : (val as any).target?.value ?? "")}
+              onChange={(val) => setSearch(typeof val === "string" ? val : (val as { target?: { value?: string } }).target?.value ?? "")}
               placeholder="Search business rules..."
+              className="w-full sm:!w-64 md:!w-72"
               maxWidth="max-w-none"
             />
           </div>
         }
       />
-      {isLoading ? (
-        <SkeletonFields n={4} />
-      ) : isError ? (
-        <ErrorBox error={error} fallback="Couldn't load the business rules." onRetry={refetch} />
-      ) : sections.length === 0 ? (
-        <EmptyState illustration="settings" title="No rules to show" description="Rules your role can see will appear here." size="sm" />
-      ) : filtered.length === 0 ? (
-        <div className="p-6">
-          <EmptyState illustration="search" title="No matching rules" description="Try a different search term." size="sm" />
-        </div>
-      ) : (
-        <div className="p-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {filtered.map((s) => (
-            <RuleSection key={s.key} section={s} />
-          ))}
-        </div>
-      )}
+      <div className="min-h-[360px]">
+        {isLoading ? (
+          <SkeletonFields n={4} />
+        ) : isError ? (
+          <ErrorBox error={error} fallback="Couldn't load the business rules." onRetry={refetch} />
+        ) : sections.length === 0 ? (
+          <EmptyState illustration="settings" title="No rules to show" description="Rules your role can see will appear here." size="sm" />
+        ) : filtered.length === 0 ? (
+          <div className="p-8 flex items-center justify-center min-h-[300px]">
+            <EmptyState illustration="search" title="No matching rules" description="Try a different search term." size="sm" />
+          </div>
+        ) : (
+          <div className="p-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
+            {filtered.map((s) => (
+              <RuleSection key={s.key} section={s} />
+            ))}
+          </div>
+        )}
+      </div>
     </section>
   );
 }
