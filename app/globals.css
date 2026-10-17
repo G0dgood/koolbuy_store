@@ -949,3 +949,61 @@ html:not(:has(#page-wrapper)) body :is(div, section, article, aside, form, li, a
   color: var(--text-secondary, #64748B);
   margin: 0;
 }
+
+/* ==========================================================================
+   Shopping Cart Loader Animations
+   ========================================================================== */
+@keyframes trackRun {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -52;
+  }
+}
+
+@keyframes wheelSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cartBob {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-2px) rotate(-0.5deg);
+  }
+  75% {
+    transform: translateY(1.5px) rotate(0.5deg);
+  }
+}
+
+@keyframes boxDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-28px) scale(0.85);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+  28% {
+    transform: translateY(-6px) scale(1.02);
+  }
+  36% {
+    transform: translateY(0px) scale(1);
+  }
+  85% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.95);
+  }
+}
